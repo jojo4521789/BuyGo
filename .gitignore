@@ -15,4 +15,8 @@ buildNumber.properties
 .project
 # JDT-specific (Eclipse Java Development Tools)
 .classpath
+/.metadata/
+BuyGo/.settings/
+Servers/.settings/
 .settings/
+src/main/java/Test_DataSource.java
