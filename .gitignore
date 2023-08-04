@@ -18,3 +18,5 @@ buildNumber.properties
 /.metadata/
 BuyGo/.settings/
 Servers/.settings/
+.settings/
+src/main/java/Test_DataSource.java
