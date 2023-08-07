@@ -3,7 +3,7 @@ package web.back_end.opa.coupon.dao.impl;
 import java.util.List;
 
 import web.back_end.opa.coupon.dao.CouponDao;
-import web.back_end.opa.coupon.pojo.Coupon;
+import web.back_end.opa.coupon.entity.Coupon;
 
 public class CouponDaoImpl implements CouponDao{
 
