@@ -49,8 +49,8 @@ public class CouponDaoImpl implements CouponDao{
 	}
 
 	@Override
-	public Coupon selectById(Integer id) {
-		return getSession().get(Coupon.class, id);
+	public Coupon selectById(Integer opaCouponNo) {
+		return getSession().get(Coupon.class, opaCouponNo);
 	}
 
 	@Override
