@@ -7,7 +7,7 @@ import org.hibernate.Session;
 import web.back_end.opa.prod.dao.PrcatsDao;
 import web.back_end.opa.prod.entity.Prcats;
 
-public class PrcatsImpl implements PrcatsDao{
+public class PrcatsDaoImpl implements PrcatsDao{
 
 	@Override
 	public int insert(Prcats prcats) {
