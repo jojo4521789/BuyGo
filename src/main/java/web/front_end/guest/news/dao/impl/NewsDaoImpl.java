@@ -40,7 +40,7 @@ public class NewsDaoImpl implements NewsDao{
 		 if(newsTime != null) {
 			 oldNews.setNewsTime(newsTime);
 		 }
-		return 0;
+		return 1;
 	}
 
 	@Override
