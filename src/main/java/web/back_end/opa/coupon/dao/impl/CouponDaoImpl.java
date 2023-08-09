@@ -61,7 +61,7 @@ public class CouponDaoImpl implements CouponDao{
 
 	@Override
 	public Coupon selectByOpaCouponName(String opaCouponName) {
-		Query<Coupon> query = getSession().createQuery("FROM Coupon WHERE opaCouponName=" + opaCouponName, Coupon.class);
+		Query<Coupon> query = getSession().createQuery("FROM Coupon WHERE opaCouponName= :oCN", Coupon.class).setParameter("oCN", opaCouponName);
 		return query.getSingleResult();
 	}
 

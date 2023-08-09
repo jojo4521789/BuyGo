@@ -3,6 +3,7 @@ package web.back_end.opa.prod.dao.impl;
 import java.util.List;
 
 import org.hibernate.Session;
+import org.hibernate.query.Query;
 
 import web.back_end.opa.prod.dao.PrpicsDao;
 import web.back_end.opa.prod.entity.Prpics;
@@ -51,8 +52,8 @@ public class PrpicsDaoImpl implements PrpicsDao{
 
 	@Override
 	public List<Prpics> SelectByOpaProdNo(Integer opaProdNo) {
-		final String hql = "FROM Prpics WHERE opaProdNo=" + opaProdNo;
-		return getSession().createQuery(hql, Prpics.class).getResultList();
+		Query<Prpics> query = getSession().createQuery("FROM Prpics WHERE opaProdNo = : oPN", Prpics.class).setParameter("oPN", opaProdNo);
+		return query.getResultList();
 	}
 	
 }

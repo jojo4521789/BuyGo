@@ -58,8 +58,8 @@ public class ProdDaoImpl implements ProdDao{
 
 	@Override
 	public List<Prod> SelectByOpaProdName(String opaProdName) {
-		final String hql = "FROM Prod WHERE opaProdName=" + opaProdName;
-		return getSession().createQuery(hql, Prod.class).getResultList();
+		Query<Prod> query = getSession().createQuery("FROM Prod WHERE opaProdName = : oPN", Prod.class).setParameter("oPN", opaProdName);
+		return query.getResultList();
 	}
 
 }

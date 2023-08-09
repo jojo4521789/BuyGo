@@ -3,6 +3,7 @@ package web.back_end.opa.prod.dao.impl;
 import java.util.List;
 
 import org.hibernate.Session;
+import org.hibernate.query.Query;
 
 import web.back_end.opa.prod.dao.PrcatsDao;
 import web.back_end.opa.prod.entity.Prcats;
@@ -47,8 +48,8 @@ public class PrcatsDaoImpl implements PrcatsDao{
 
 	@Override
 	public Prcats SelectByOpaPrcatsName(String opaPrcatsName) {
-		final String hql = "FROM Prcats WHERE opaPrcatsName=" + opaPrcatsName;
-		return getSession().createQuery(hql, Prcats.class).getSingleResult();
+		Query<Prcats> query = getSession().createQuery("FROM Prcats WHERE opaPrcatsName = :oPN", Prcats.class).setParameter("oPN", opaPrcatsName);
+		return query.getSingleResult();
 	}
 	
 }
