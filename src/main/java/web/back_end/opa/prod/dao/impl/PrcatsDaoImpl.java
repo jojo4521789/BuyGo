@@ -2,6 +2,8 @@ package web.back_end.opa.prod.dao.impl;
 
 import java.util.List;
 
+import javax.persistence.NoResultException;
+
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 
@@ -48,8 +50,13 @@ public class PrcatsDaoImpl implements PrcatsDao{
 
 	@Override
 	public Prcats SelectByOpaPrcatsName(String opaPrcatsName) {
-		Query<Prcats> query = getSession().createQuery("FROM Prcats WHERE opaPrcatsName = :oPN", Prcats.class).setParameter("oPN", opaPrcatsName);
-		return query.getSingleResult();
+		try {
+			Query<Prcats> query = getSession().createQuery("FROM Prcats WHERE opaPrcatsName = :opaPrcatsName", Prcats.class).setParameter("opaPrcatsName", opaPrcatsName);
+			return query.getSingleResult();
+		} catch (NoResultException e) {
+//			e.printStackTrace();
+			return null;
+		}
 	}
 	
 }

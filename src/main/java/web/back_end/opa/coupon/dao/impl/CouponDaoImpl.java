@@ -3,6 +3,8 @@ package web.back_end.opa.coupon.dao.impl;
 import java.sql.Timestamp;
 import java.util.List;
 
+import javax.persistence.NoResultException;
+
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 
@@ -61,8 +63,13 @@ public class CouponDaoImpl implements CouponDao{
 
 	@Override
 	public Coupon selectByOpaCouponName(String opaCouponName) {
-		Query<Coupon> query = getSession().createQuery("FROM Coupon WHERE opaCouponName= :oCN", Coupon.class).setParameter("oCN", opaCouponName);
-		return query.getSingleResult();
+		try {
+			Query<Coupon> query = getSession().createQuery("FROM Coupon WHERE opaCouponName = :opaCouponName", Coupon.class).setParameter("opaCouponName", opaCouponName);
+			return query.getSingleResult();
+		} catch (NoResultException e) {
+//			e.printStackTrace();
+			return null;
+		}
 	}
 
 }

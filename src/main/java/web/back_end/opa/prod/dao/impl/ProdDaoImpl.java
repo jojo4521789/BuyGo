@@ -2,6 +2,8 @@ package web.back_end.opa.prod.dao.impl;
 
 import java.util.List;
 
+import javax.persistence.NoResultException;
+
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 
@@ -58,8 +60,13 @@ public class ProdDaoImpl implements ProdDao{
 
 	@Override
 	public List<Prod> SelectByOpaProdName(String opaProdName) {
-		Query<Prod> query = getSession().createQuery("FROM Prod WHERE opaProdName = : oPN", Prod.class).setParameter("oPN", opaProdName);
-		return query.getResultList();
+		try {
+			Query<Prod> query = getSession().createQuery("FROM Prod WHERE opaProdName = :opaProdName", Prod.class).setParameter("opaProdName", opaProdName);
+			return query.getResultList();
+		} catch (NoResultException e) {
+//			e.printStackTrace();
+			return null;
+		}
 	}
 
 }
