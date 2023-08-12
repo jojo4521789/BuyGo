@@ -1,42 +1,107 @@
 package web.back_end.opa.req.entity; 
 
-import java.sql.Timestamp;
 
+import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
+import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
-import core.entity.Core;
-import lombok.Data;
-
-@Data
 @Entity
-@Table(name = "OPA_REQUEST") // 表格名稱
-public class OpaRequest extends Core  {
+@Table(name = "opa_request", catalog = "buygo")
+public class OpaRequest implements java.io.Serializable {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "OPA_REQUEST_NO") // 平臺委託單編號
-    private Integer opaRequestNo;
+	private static final long serialVersionUID = 5432766975786253889L;
+	private Integer opaRequestNo;
+	private int memberNo;
+	private String opaRequestProductsName;
+	private String opaRequestProductsUrl;
+	private String opaRequestProductsContent;
+	private byte opaRequestStatus;
+	private Date opaRequestStartdate;
 
-    @Column(name = "MEMBER_NO") // 會員編號
-    private Integer memberNo;
+	public OpaRequest() {
+	}
 
-    @Column(name = "OPA_REQUEST_PRODUCTS_NAME") // 平臺委託商品名稱
-    private String opaRequestProductsName;
+	public OpaRequest(int memberNo, String opaRequestProductsName, String opaRequestProductsUrl,
+			String opaRequestProductsContent, byte opaRequestStatus, Date opaRequestStartdate) {
+		this.memberNo = memberNo;
+		this.opaRequestProductsName = opaRequestProductsName;
+		this.opaRequestProductsUrl = opaRequestProductsUrl;
+		this.opaRequestProductsContent = opaRequestProductsContent;
+		this.opaRequestStatus = opaRequestStatus;
+		this.opaRequestStartdate = opaRequestStartdate;
+	}
 
-    @Column(name = "OPA_REQUEST_PRODUCTS_URL") // 平臺委託商品網址
-    private String opaRequestProductsUrl;
+	@Id
+	@GeneratedValue(strategy = IDENTITY)
 
-    @Column(name = "OPA_REQUEST_PRODUCTS_CONTENT") // 平臺委託商品內容
-    private String opaRequestProductsContent;
+	@Column(name = "OPA_REQUEST_NO", unique = true, nullable = false)
+	public Integer getOpaRequestNo() {
+		return this.opaRequestNo;
+	}
 
-    @Column(name = "OPA_REQUEST_STATUS") // 平臺委託單審核狀態
-    private Integer opaRequestStatus;
+	public void setOpaRequestNo(Integer opaRequestNo) {
+		this.opaRequestNo = opaRequestNo;
+	}
 
-    @Column(name = "OPA_REQUEST_STARTDATE") // 平臺委託單建立日期
-    private Timestamp opaRequestStartDate;
+	@Column(name = "MEMBER_NO", nullable = false)
+	public int getMemberNo() {
+		return this.memberNo;
+	}
+
+	public void setMemberNo(int memberNo) {
+		this.memberNo = memberNo;
+	}
+
+	@Column(name = "OPA_REQUEST_PRODUCTS_NAME", nullable = false, length = 40)
+	public String getOpaRequestProductsName() {
+		return this.opaRequestProductsName;
+	}
+
+	public void setOpaRequestProductsName(String opaRequestProductsName) {
+		this.opaRequestProductsName = opaRequestProductsName;
+	}
+
+	@Column(name = "OPA_REQUEST_PRODUCTS_URL", nullable = false, length = 65535)
+	public String getOpaRequestProductsUrl() {
+		return this.opaRequestProductsUrl;
+	}
+
+	public void setOpaRequestProductsUrl(String opaRequestProductsUrl) {
+		this.opaRequestProductsUrl = opaRequestProductsUrl;
+	}
+
+	@Column(name = "OPA_REQUEST_PRODUCTS_CONTENT", nullable = false, length = 65535)
+	public String getOpaRequestProductsContent() {
+		return this.opaRequestProductsContent;
+	}
+
+	public void setOpaRequestProductsContent(String opaRequestProductsContent) {
+		this.opaRequestProductsContent = opaRequestProductsContent;
+	}
+
+	@Column(name = "OPA_REQUEST_STATUS", nullable = false)
+	public byte getOpaRequestStatus() {
+		return this.opaRequestStatus;
+	}
+
+	public void setOpaRequestStatus(byte opaRequestStatus) {
+		this.opaRequestStatus = opaRequestStatus;
+	}
+
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "OPA_REQUEST_STARTDATE", nullable = false, length = 19)
+	public Date getOpaRequestStartdate() {
+		return this.opaRequestStartdate;
+	}
+
+	public void setOpaRequestStartdate(Date opaRequestStartdate) {
+		this.opaRequestStartdate = opaRequestStartdate;
+	}
+
 }

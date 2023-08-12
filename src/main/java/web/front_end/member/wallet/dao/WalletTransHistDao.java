@@ -5,16 +5,9 @@ import core.dao.CoreDao;
 import web.front_end.member.wallet.entity.WalletTransHist;
 
 public interface WalletTransHistDao extends CoreDao<WalletTransHist, Integer> {
-    WalletTransHist getById(Integer id);
 
-    List<WalletTransHist> getAll();
+    List<WalletTransHist> getByMemberNo(Integer memberNo);
 
-    void saveWalletTransHist(WalletTransHist walletTransHist);
+    List<WalletTransHist> getByWalletStatus(Integer walletStatus);
 
-    void updateWalletTransHist(WalletTransHist walletTransHist);
-
-    void deleteWalletTransHist(WalletTransHist walletTransHist);
-    
-
-     
 }
