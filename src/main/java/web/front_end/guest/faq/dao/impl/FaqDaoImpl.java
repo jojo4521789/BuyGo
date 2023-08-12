@@ -3,6 +3,7 @@ package web.front_end.guest.faq.dao.impl;
 import java.util.List;
 
 import org.hibernate.Session;
+import org.hibernate.query.Query;
 
 import web.front_end.guest.faq.dao.FaqDao;
 import web.front_end.guest.faq.entity.Faq;
@@ -50,9 +51,17 @@ public class FaqDaoImpl implements FaqDao {
 	}
 
 	@Override
-	public Faq selectByFaqTitle(String faqTitle) {
-		
-		return null;
+	public List<Faq> selectByInput(String input) {
+		Session session = getSession();
+		final String hql = "FROM Faq WHERE FAQ_TITLE LIKE :input";
+		Query<Faq> query = session.createQuery(hql,Faq.class);
+		query.setParameter("input","%" + input + "%");
+		return getSession().createQuery(hql,Faq.class).getResultList();
 	}
 
+	
+
+
 }
+
+

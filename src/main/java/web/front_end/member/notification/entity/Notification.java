@@ -34,4 +34,8 @@ public class Notification extends Core {
 	private Timestamp notifiTime;
 	@Column(name = "NOTIFI_STATUS")
 	private Integer notifiStatus;
+	
+	public Notification (Integer notifiStatus) {
+		this.notifiStatus = notifiStatus;
+	}
 }
