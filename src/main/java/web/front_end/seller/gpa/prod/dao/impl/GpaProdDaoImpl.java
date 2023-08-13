@@ -83,7 +83,11 @@ public class GpaProdDaoImpl implements GpaProdDao{
 //		Session session = gpaProdDaoImpl.getSession();
 //		
 //		Transaction transaction = session.beginTransaction(); // 開始交易
-//		System.out.println(gpaProdDaoImpl.selectById(3));
+//		GpaProd gpaProd = gpaProdDaoImpl.selectById(3);
+//		System.out.println("getGpaProdNo:" + gpaProd.getGpaProdNo());
+//		System.out.println("getMemberNo:" + gpaProd.getMemberNo());
+//		System.out.println("getGpaProdName:" + gpaProd.getGpaProdName());
+//		System.out.println("getGpaFirstPrice:" + gpaProd.getGpaFirstPrice());
 //		transaction.commit(); // 送交，同時會結束交易
 		
 		// 查詢selectAll
@@ -112,17 +116,17 @@ public class GpaProdDaoImpl implements GpaProdDao{
 //		transaction.commit(); // 送交，同時會結束交易
 		
 		// 查詢selectByProdName
-		Session session = gpaProdDaoImpl.getSession();
-		
-		Transaction transaction = session.beginTransaction(); // 開始交易
-		List<GpaProd> GpaProdList = gpaProdDaoImpl.selectByProdName("短傘");
-		for (GpaProd gpaProd : GpaProdList) {
-			System.out.print("gpaProdNo:" + gpaProd.getGpaProdNo() + ",");
-			System.out.print("memberNo:" + gpaProd.getMemberNo() + ",");
-			System.out.print("gpaProdName:" + gpaProd.getGpaProdName() + ",");
-			System.out.println("gpaPreProd:" + gpaProd.getGpaPreProd());
-		}
-		transaction.commit(); // 送交，同時會結束交易
+//		Session session = gpaProdDaoImpl.getSession();
+//		
+//		Transaction transaction = session.beginTransaction(); // 開始交易
+//		List<GpaProd> GpaProdList = gpaProdDaoImpl.selectByProdName("短傘");
+//		for (GpaProd gpaProd : GpaProdList) {
+//			System.out.print("gpaProdNo:" + gpaProd.getGpaProdNo() + ",");
+//			System.out.print("memberNo:" + gpaProd.getMemberNo() + ",");
+//			System.out.print("gpaProdName:" + gpaProd.getGpaProdName() + ",");
+//			System.out.println("gpaPreProd:" + gpaProd.getGpaPreProd());
+//		}
+//		transaction.commit(); // 送交，同時會結束交易
 	}
 
 	@Override

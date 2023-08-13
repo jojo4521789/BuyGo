@@ -15,7 +15,7 @@ public class SHA256EncoderUtil {
         if (strText != null && strText.length() > 0) {
             try {
                 // SHA 加密開始
-                // 創建加密对象 並傳入加密類型
+                // 創建加密對象 並傳入加密類型
                 MessageDigest messageDigest = MessageDigest.getInstance(strType);
                 // 傳入要加密的字符串
                 messageDigest.update(strText.getBytes());

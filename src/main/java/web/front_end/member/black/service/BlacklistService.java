@@ -6,7 +6,7 @@ import core.service.CoreService;
 import web.front_end.member.black.entity.Blacklist;
 
 public interface BlacklistService extends CoreService{
-	boolean addBlack(Blacklist blacklist);
+	Blacklist addBlack(Blacklist blacklist);
 	List<Blacklist> loadBlacklistByMemberNo(Integer memberNo);
 	boolean deleteBlacklistByMemberNoAndMemberNoBlack(Integer memberNo, Integer memberNoBlack);
 }

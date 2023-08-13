@@ -95,10 +95,23 @@ public class BlacklistDaoImpl implements BlacklistDao{
 //		transaction.commit(); // 送交，同時會結束交易
 		
 		// 刪除deleteByMemberNoAndMemberNoBlack
+//		Session session = blacklistDaoImpl.getSession();
+//		
+//		Transaction transaction = session.beginTransaction(); // 開始交易
+//		System.out.println(blacklistDaoImpl.deleteByMemberNoAndMemberNoBlack(5,2));
+//		transaction.commit(); // 送交，同時會結束交易
+		
+		// 查詢selectByMemberNoAndMemberNoBlack
 		Session session = blacklistDaoImpl.getSession();
 		
 		Transaction transaction = session.beginTransaction(); // 開始交易
-		System.out.println(blacklistDaoImpl.deleteByMemberNoAndMemberNoBlack(5,2));
+		List<Blacklist> blacklistList = blacklistDaoImpl.selectByMemberNoAndMemberNoBlack(1, 9);
+		for (Blacklist blacklist : blacklistList) {
+			System.out.print("BlackNo:" + blacklist.getBlackNo() + ",");
+			System.out.print("MemberNo:" + blacklist.getMemberNo() + ",");
+			System.out.println("MemberNoBlack:" + blacklist.getMemberNoBlack());
+		}
+		System.out.println("blacklistList.size:" + blacklistList.size());
 		transaction.commit(); // 送交，同時會結束交易
 	}
 	
@@ -186,5 +199,15 @@ public class BlacklistDaoImpl implements BlacklistDao{
 		.setParameter("memberNoBlack", memberNoBlack)
 		.executeUpdate();
 		return 1;
+	}
+	
+	@Override
+	public List<Blacklist> selectByMemberNoAndMemberNoBlack(Integer memberNo, Integer memberNoBlack) {
+		final String hql = "FROM Blacklist WHERE memberNo = :memberNo AND memberNoBlack = :memberNoBlack ORDER BY blackNo";
+		return getSession()
+				.createQuery(hql, Blacklist.class)
+				.setParameter("memberNo", memberNo)
+				.setParameter("memberNoBlack", memberNoBlack)
+				.getResultList();
 	}
 }
