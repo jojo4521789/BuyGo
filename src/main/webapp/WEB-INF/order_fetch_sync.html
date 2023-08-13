@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>訂單資料</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<link rel="stylesheet" href="order_fetch.css">
+</head>
+<body>
+
+<!-- --------------------導覽列面版(start)-----------------	 --> 
+<div id="navBar">
+	<!-- 將篩選條件放入選單中 -->
+	<select id='selectOptions'>
+	</select>
+
+	<button id="btnShowOrderPanel" type="button"><img src="btn_add.png" width="30" title="新增訂單資料"></button>
+</div>
+<!-- --------------------訂單清單面版(start)-----------------	 -->
+<table id="ordersTable" align="center" width="1000">
+	<thead>
+		<tr>
+			<th>訂單編號</th>
+			<th>訂單時間</th>
+			<th>訂單總金額</th>
+      <th>已付訂金</th>
+			<th>待付金額</th>
+			<th>訂單詳情</th>
+		</tr>
+	</thead>
+	<tbody id="showPanel">
+		
+	</tbody>
+</table>
+
+<!-- --------------------訂單資料面版(start)-----------------	 -->
+<div id="orderPanel" class="hide">
+  <table align="center" align="center" cellspacing="0">
+  <caption style="">創建新訂單</caption>  
+  <tr>
+    <th>員</th>
+    <td> <input type="text" name="EMPNO" id="EMPNO" value="1001"></td>
+  </tr>
+
+  <tr>
+    <th>姓名</th>
+    <td> <input type="text" name="ENAME" id="ENAME" value="Ann"></td>
+  </tr>  
+
+  <tr>
+    <th>職稱</th>
+    <td> 
+    	<!-- <input type="text" name="JOB" id="JOB" value="ANALYST"> -->
+    	<select name="JOB" id="JOB">
+    		<option value="0">請選擇</option>
+    		<option value="CLERK">CLERK</option>
+    		<option value="SALESMAN">SALESMAN</option>
+    		<option value="ANALYST">ANALYST</option>
+    		<option value="MANAGER">MANAGER</option>
+    	</select>
+    </td>
+  </tr>
+
+  <tr>
+    <th>經理</th>
+    <td> <input type="text" name="MGR" id="MGR" value="7782"></td>
+  </tr>
+
+  <tr>
+    <th>到職日</th>
+    <td> 
+      <input type="text" name="HIREDATE" id="HIREDATE" value="2010-01-01">
+    </td>
+  </tr>
+
+  <tr>
+    <th>薪資</th>
+    <td> <input type="text" name="SAL" id="SAL" value="6000"></td>
+  </tr>
+
+  <tr>
+    <th>COMM</th> 
+    <td> <input type="text" name="COMM" id="COMM" value="500"></td>
+  </tr>  
+
+  <tr>
+    <th>部門代號</th>
+    <td> <input type="text" name="DEPTNO" id="DEPTNO" value="30"></td>
+  </tr>
+
+  <tr>
+    <td colspan="2" align="center">
+    <button type="button" id="btnAddOrderToDb">確定加入</button>
+    <button type="reset" id="btnReset">重設</button>
+    <button type="button" id="btnCloseEmpPanel">關閉</button></td>
+  </tr>
+  </table>	
+</div>
+<!-- --------------------訂單資料面版(end)------------------- -->
+<!-- <script src="emps_management_fetch.js"></script> -->
+
+<script src="order_fetch_sync.js"></script>
+</body>
+</html>
