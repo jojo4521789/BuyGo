@@ -56,12 +56,7 @@ public class CouponServiceImpl implements CouponService{
 	}
 
 	@Override
-	public Coupon edit(Coupon coupon) {
-		if(dao.selectByOpaCouponName(coupon.getOpaCouponName()) != null) {
-			coupon.setMessage("優惠券名稱重複");
-			coupon.setSuccessful(false);
-			return coupon;
-		}
+	public Coupon update(Coupon coupon) {
 		final int resultCount = dao.update(coupon);
 		coupon.setMessage(resultCount > 0 ? "修改成功" : "修改失敗");
 		coupon.setSuccessful(resultCount > 0);
@@ -77,10 +72,4 @@ public class CouponServiceImpl implements CouponService{
 	public boolean remove(Integer opaCouponNo) {
 		return dao.deleteById(opaCouponNo) > 0;
 	}
-
-	@Override
-	public boolean save(Coupon coupon) {
-		return dao.update(coupon) > 0;
-	}
-	
 }
