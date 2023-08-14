@@ -59,9 +59,6 @@ public class FaqDaoImpl implements FaqDao {
 		return getSession().createQuery(hql,Faq.class).getResultList();
 	}
 
-	
-
-
 }
 
 

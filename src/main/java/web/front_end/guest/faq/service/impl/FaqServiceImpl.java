@@ -33,13 +33,13 @@ public class FaqServiceImpl implements FaqService{
 
 	@Override
 	public Faq update(Faq faq) {
-		
-		return null;
-	}
-
-	@Override
-	public Faq show(Faq faq) {
-		return null;
+		final Faq oldFaq  =dao.selectById(faq.getFaqNo()); 
+		faq.setFaqTitle(oldFaq.getFaqTitle());
+		faq.setFaqContent(oldFaq.getFaqContent());
+		final int resultCount = dao.update(faq);
+		faq.setSuccessful(resultCount > 0);
+		faq.setMessage(resultCount > 0 ? "修改成功" : "修改失敗");
+		return faq;
 	}
 
 	@Override
@@ -57,5 +57,9 @@ public class FaqServiceImpl implements FaqService{
 		return dao.deleteById(faq) > 0;
 	}
 
+	@Override
+	public List<Faq> show(String input) {
+		return dao.selectByInput(input);
+	}
 
 }
