@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    memberNo:<input type="text" id="text1">
+    <br>
+    memberNoBlack:<input type="text" id="text2">
+    <br>
+    <button type="button" id="btn1">發送黑名單設定請求</button>
+    <p id="p1">尚無資料</p>
+    <p id="p2">尚無資料</p>
+    <p id="p3">尚無資料</p>
+    <p id="p4">尚無資料</p>
+    <script>
+        const text1_el = document.getElementById('text1');
+        const text2_el = document.getElementById('text2');
+        const p1_el = document.getElementById('p1');
+        const p2_el = document.getElementById('p2');
+        const p3_el = document.getElementById('p3');
+        const p4_el = document.getElementById('p4');
+
+        document.getElementById('btn1').addEventListener('click', () => {
+            fetch('../member/black/addBlacklist', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json;charset:utf-8' },
+                body: JSON.stringify({
+                    memberNo: text1_el.value,
+                    memberNoBlack: text2_el.value
+                })
+            })
+                .then(resp => resp.json())
+                .then(body => {
+                    const { memberNo, memberNoBlack, successful, message} = body;
+                    p1_el.innerHTML = 'memberNo:' + memberNo;
+                    p2_el.innerHTML = 'memberNoBlack:' + memberNoBlack;
+                    p3_el.innerHTML = 'successful:' + successful;
+                    p4_el.innerHTML = 'message:' + message;
+                });
+        });
+    </script>
+</body>
+
+</html>
