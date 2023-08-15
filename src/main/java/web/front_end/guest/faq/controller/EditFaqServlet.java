@@ -24,4 +24,3 @@ public class EditFaqServlet extends HttpServlet{
 	}
 	
 }
-s
