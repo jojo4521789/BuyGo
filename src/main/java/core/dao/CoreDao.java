@@ -11,7 +11,7 @@ public interface CoreDao<E, I> {
 
 	int deleteById(I id);
 
-//	int update(E entity);
+	int update(E entity);
 
 	E selectById(I id);
 
