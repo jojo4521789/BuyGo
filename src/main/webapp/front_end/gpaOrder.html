@@ -715,7 +715,10 @@
 				.then(resp => resp.json())
 				.then(body => {
 					body.forEach(gpaSo => {
-						const { gpaSoNo, gpaProdNo, memberNo, gpaBuyName } = gpaSo;
+						const { gpaProdCount, gpaProdTotal, gpaProd} = gpaSo;
+						const {gpaProdName, gpaEndDate, member, gpaProdPics} = gpaProd;
+						const {memberName} = member;
+						let {gpaProdPicToBase64} = gpaProdPics[0]; // 只取每項訂單商品查詢到的第一張圖
 						// 刪除按鈕回傳memberNoBlack來記錄每個按鈕創建時的memberNoBlack，以便後續deleteBlack取值
 
 						// 已完成的取值方法
@@ -723,16 +726,16 @@
 						<div class="tab-content" style="position:relative;width:770px;height:190px;margin-bottom:20px;display:flex; flex-direction:column">
 							<a href="#" class="orderDetail" onclick="testA()" style="position:absolute;left:0px; top:0px;width:100%;height:120px;">
 								<div class="col-xs-12 col-sm-12" style="width:100%;height:120px;">
-									<img src="images/men/shoes/000312-2259_1.jpg" style="width:80px;height:80px;border:1.5px solid LightGray;position:absolute;left:20px; top:20px;" alt="GFashion - Responsive e-commerce HTML Template">
-									<h4 style="position:absolute;left:120px; top:20px;">鞋子</h4>
-									<span style="position:absolute;left:120px; top:80px;">x1</span>
-									<span style="position:absolute;right:10px; top:10px;">賣家名稱：Alan</span>
-									<div style="position:absolute;right:10px; top:90px;">揪團截止時間：2023-01-01 16:00:00</div>
+									<img src="data:image/jpeg;base64,${gpaProdPicToBase64}" style="width:80px;height:80px;border:1.5px solid LightGray;position:absolute;left:20px; top:20px;" alt="GFashion - Responsive e-commerce HTML Template">
+									<h4 style="position:absolute;left:120px; top:20px;">${gpaProdName}</h4>
+									<span style="position:absolute;left:120px; top:80px;">x${gpaProdCount}</span>
+									<span style="position:absolute;right:10px; top:10px;">賣家名稱：${memberName}</span>
+									<div style="position:absolute;right:10px; top:90px;">揪團截止時間：${gpaEndDate}</div>
 								</div>
 								<hr style="margin:0px;border:1px solid lightgray">
 							</a>
 							<div class="col-xs-12 col-sm-12 orderPrice" style="width:770px;height:69px;position:absolute;left:0px; top:121px;">
-									<h4 style="position:absolute;right:10px; top:20px;">訂單金額：$1200</h4>
+									<h4 style="position:absolute;right:10px; top:20px;">訂單金額：$${gpaProdTotal}</h4>
 							</div>
 						</div>
 						`);
