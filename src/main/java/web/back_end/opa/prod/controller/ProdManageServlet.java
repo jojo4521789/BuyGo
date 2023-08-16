@@ -13,7 +13,7 @@ import web.back_end.opa.prod.entity.Prod;
 import static core.util.CommonUtil.writePojo2Json;
 import static web.back_end.opa.prod.util.ProdConstants.SERVICE;
 
-@WebServlet("/prod/manage")
+@WebServlet("/opa/prod/manage")
 public class ProdManageServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 

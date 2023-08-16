@@ -14,10 +14,7 @@ import javax.servlet.http.HttpSession;
 import web.back_end.opa.coupon.entity.Coupon;
 import static web.back_end.opa.coupon.util.CouponConstants.SERVICE;
 
-/**
- * Servlet implementation class EditServlet
- */
-@WebServlet("/coupon/update")
+@WebServlet("/opa/coupon/update")
 public class UpdateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     

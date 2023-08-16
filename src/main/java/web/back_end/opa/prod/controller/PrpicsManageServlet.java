@@ -14,7 +14,7 @@ import static core.util.CommonUtil.json2Pojo;
 import static core.util.CommonUtil.writePojo2Json;
 import static web.back_end.opa.prod.util.PrpicsConstants.SERVICE;
 
-@WebServlet("/prpics/manage")
+@WebServlet("/opa/prpics/manage")
 public class PrpicsManageServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -27,6 +27,7 @@ public class PrpicsManageServlet extends HttpServlet {
 		final Integer opaProdNo = json2Pojo(request, Prpics.class).getOpaProdNo();
 		
 		List<Prpics> prpicsList = SERVICE.SelectByProdId(opaProdNo);
+		writePojo2Json(response, prpicsList);
 	}
 
 }
