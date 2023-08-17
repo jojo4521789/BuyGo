@@ -63,7 +63,7 @@
 .owl-theme .owl-controls .owl-page{
 	display: inline-block;
 	zoom: 1;
-	*display: inline;/*IE7 life-saver */
+	/*display: inline;/*IE7 life-saver */
 }
 .owl-theme .owl-controls .owl-page span{
 	display: block;
@@ -101,8 +101,8 @@
 .owl-item.loading, 
 .owl-item.loading .product .entry-media {
 	min-height: 150px;
-	background: url(../img/AjaxLoader2.gif) no-repeat center center
+	background: url(../../img/common/AjaxLoader2.gif) no-repeat center center
 }
 .owl-item.loading .product .entry-media {
-	background: #CCC url(../img/AjaxLoader2.gif) no-repeat center center
+	background: #CCC url(../../img/common/AjaxLoader2.gif) no-repeat center center
 }

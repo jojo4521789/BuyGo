@@ -145,7 +145,7 @@
 }
 .mix-item.loading .product .entry-media {
 	min-height: 150px;
-	background: #ccc url(../img/AjaxLoader2.gif) no-repeat center center
+	background: #ccc url(../../img/common/AjaxLoader2.gif) no-repeat center center
 }
 .products-layout {
 	margin-left: -15px;
