@@ -19,5 +19,8 @@
         <property name="hibernate.format_sql">true</property>
         <property name="hibernate.highlight_sql">true</property>
         
+        <mapping class="web.back_end.lpa.order.entity.Lpa_Prod" />
+        <mapping class="web.back_end.lpa.order.entity.Lpa_SO" />
+        
     </session-factory>
 </hibernate-configuration>
