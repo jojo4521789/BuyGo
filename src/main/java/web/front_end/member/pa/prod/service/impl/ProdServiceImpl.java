@@ -2,7 +2,6 @@ package web.front_end.member.pa.prod.service.impl;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import web.front_end.member.pa.prod.dao.ProdDAO;
@@ -11,7 +10,7 @@ import web.front_end.member.pa.prod.entity.Prod;
 import web.front_end.member.pa.prod.service.ProdService;
 @Service
 public class ProdServiceImpl implements ProdService {
-	@Autowired
+
 	private ProdDAO dao;
 	
 	public ProdServiceImpl() {
@@ -20,8 +19,17 @@ public class ProdServiceImpl implements ProdService {
 	
 	@Override
 	public Prod add(Prod prod) {
-		return null;
-	}
+		if(prod.getPaProdNo( )== null) {
+			prod.setMessage("商品編號未輸入");
+			prod.setSuccessful(false);
+			return prod;
+		}
+		
+		
+		
+		
+		return prod;
+	} 
 
 	@Override
 	public Prod updata(Prod prod) {

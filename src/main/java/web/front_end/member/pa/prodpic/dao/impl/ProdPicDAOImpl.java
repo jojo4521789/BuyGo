@@ -37,8 +37,9 @@ public class ProdPicDAOImpl implements ProdPicDAO{
 		return null;
 	}
 
+
 	@Override
-	public ProdPic selectByPicNo(String picno) {
+	public ProdPic selectByPicNo(Integer prodpicno) {
 		// TODO Auto-generated method stub
 		return null;
 	}
