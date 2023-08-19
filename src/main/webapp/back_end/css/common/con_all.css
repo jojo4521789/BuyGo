@@ -25,7 +25,7 @@ input{
 	border-radius:2px;}
 
 .table { border:1px solid #5BA8DE; margin-top:5px;}
-.top { background:url(../image/right_table_bg.jpg) repeat-x; height:26px; border-bottom:1px solid #5BA8DE; }
+.top { background:url(../image/common/right_table_bg.jpg) repeat-x; height:26px; border-bottom:1px solid #5BA8DE; }
 
 
 .top_body { font:12px "����"; color:#FFF;}
