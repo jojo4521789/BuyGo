@@ -42,9 +42,10 @@ public class FaqServiceImpl implements FaqService{
 
 	@Override
 	public Faq update(Faq faq) {
-		final Faq oldFaq = dao.selectById(faq.getFaqNo()); 
-		faq.setFaqTitle(oldFaq.getFaqTitle());
-		faq.setFaqContent(oldFaq.getFaqContent());
+//		final Faq oldFaq = dao.selectById(faq.getFaqNo()); 
+//		faq.setFaqTitle(oldFaq.getFaqTitle());
+//		faq.setFaqContent(oldFaq.getFaqContent());
+		System.out.println(faq);
 		final int resultCount = dao.update(faq);
 		faq.setSuccessful(resultCount > 0);
 		faq.setMessage(resultCount > 0 ? "修改成功" : "修改失敗");
