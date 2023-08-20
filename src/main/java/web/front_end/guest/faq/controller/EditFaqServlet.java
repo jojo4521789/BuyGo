@@ -24,10 +24,9 @@ public class EditFaqServlet extends HttpServlet{
 		resp.setCharacterEncoding("UTF-8");
 		resp.setContentType("text/html:charset=utf-8");
 		Faq faq = json2Pojo(req,Faq.class);
-//		if(SERVICE.update(faq.getFaqNo()){
-			
-//		}
-	
+		writePojo2Json(resp, SERVICE.update(faq));
+//		System.out.println(resp+"111");
+		System.out.println(faq.getMessage());
 	}
 	
 }

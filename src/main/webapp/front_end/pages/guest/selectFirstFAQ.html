@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        ul.list {
+            margin: 24px 0 0 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        ul.list>li {
+            margin-bottom: 30px;
+        }
+
+        ul.list>li:last-child {
+            margin-bottom: 0;
+        }
+
+        ul.list>li>a.link_title {
+            display: block;
+            width: 100%;
+            color: white;
+            background-color: #dd2836;
+            box-shadow: 2px 2px 8px 0 rgba(56, 55, 53, 0.33);
+            border-radius: 26px;
+            padding: 8px 40px;
+            text-decoration: none;
+            font-size: 24px;
+            font-weight: normal;
+        }
+
+        ul.list>li>a.link_title::after {
+            content: "";
+            display: block;
+            clear: both;
+        }
+
+        ul.list>li>a.link_title button.switch_btn {
+            float: right;
+            display: inline-block;
+            background: none;
+            border: 0;
+            outline: none;
+            color: white;
+            font-size: 24px;
+        }
+
+        ul.list>li>a.link_title button.switch_btn span.-minus {
+            display: none;
+        }
+
+        ul.list>li>div.inner_block {
+            font-size: 18px;
+            color: #4a4a4a;
+            margin-top: 8px;
+            padding: 0 40px;
+            line-height: 1.6;
+            display: none;
+        }
+
+        ul.list>li.-on>a.link_title button.switch_btn span.-plus {
+            display: none;
+        }
+
+        ul.list>li.-on>a.link_title button.switch_btn span.-minus {
+            display: inline-block
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 前台顯示搜尋 -->
+    <a>搜尋FAQ:</a><input type="text" id="select" placeholder="請輸入關鍵字..."><br>
+    <button type="button" id="selectall">搜尋</button>
+    <ul class="list" id="faqList">
+        <li id="li">
+            <a class="link_title" href="#" id="a1">
+                <button type="button" class="switch_btn">
+                    <span class="-plus">+</span><span class="-minus">-</span>
+                </button>
+                <div id="FAQlist">
+                    尚無資料
+                </div>
+            </a>
+            <div class="inner_block" id="div1">
+                尚無內容
+            </div>
+        </li>
+    </ul>
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <script>
+        $("a.link_title").on("click", function (e) {
+            e.preventDefault();
+            $(this).closest("li").toggleClass("-on");
+            $(this).closest("li").find("div.inner_block").slideToggle(100);
+        });
+
+        const select_el = document.getElementById("select");
+        const faqList = document.getElementById("faqList");
+
+        document.getElementById("selectall").addEventListener("click", () => {
+            faqList.innerHTML = "";
+            fetch("/BuyGo/front_end/guest/faq/SelectById", {
+                method: "POST",
+                headers: { "Content-Type": "application/json;charset=utf-8" },
+                body: JSON.stringify({
+                    faqTitle: select_el.value
+                })
+            })
+                .then(resp => resp.json())
+                .then(body => {
+                    if (body.length == 0) {
+                        alert("查無資料");
+                    } else {
+                        body.forEach(element => {
+
+                            const li = document.createElement("li");
+                            const a = document.createElement("a");
+                            const switchButton = document.createElement("button");
+                            const FAQlist = document.createElement("div");
+                            const innerBlock = document.createElement("div");
+
+                            // Set content for the elements
+                            a.className = "link_title";
+                            switchButton.className = "switch_btn";
+                            FAQlist.textContent = element.faqTitle;
+                            innerBlock.textContent = element.faqContent;
+                            innerBlock.classList.add("inner_block");
+                            a.onclick = function (e) {
+                                e.preventDefault();
+                                $(this).closest("li").toggleClass("-on");
+                                $(this).closest("li").find(".inner_block").slideToggle(100);
+                            };
+                            
+                            a.appendChild(switchButton);
+                            a.appendChild(FAQlist);
+                            li.appendChild(a);
+                            li.appendChild(innerBlock);
+                            faqList.appendChild(li);
+                            
+                        });
+                    }
+                    
+                });
+            });
+
+    </script>
+</body>
+
+</html>
