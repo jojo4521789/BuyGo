@@ -4,10 +4,12 @@ import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.query.Query;
+import org.springframework.stereotype.Repository;
 
 import web.front_end.guest.faq.dao.FaqDao;
 import web.front_end.guest.faq.entity.Faq;
 
+@Repository
 public class FaqDaoImpl implements FaqDao {
 
 	@Override
@@ -52,11 +54,13 @@ public class FaqDaoImpl implements FaqDao {
 
 	@Override
 	public List<Faq> selectByInput(String input) {
-		Session session = getSession();
-		final String hql = "FROM Faq WHERE FAQ_TITLE LIKE :input";
-		Query<Faq> query = session.createQuery(hql,Faq.class);
-		query.setParameter("input","%" + input + "%");
-		return getSession().createQuery(hql,Faq.class).getResultList();
+//		Session session = getSession();
+		final String hql = "FROM Faq WHERE str(faqTitle) LIKE :input";
+//		Query<Faq> query = session.createQuery(hql,Faq.class);
+//		query.setParameter("input","%" + input +"%");
+//		System.out.println(input);
+
+		return getSession().createQuery(hql,Faq.class).setParameter("input","%" + input +"%").getResultList();
 	}
 
 }
