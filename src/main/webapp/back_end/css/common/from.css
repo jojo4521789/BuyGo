@@ -184,7 +184,7 @@ input{
 	height: 8px;
 	position: relative;
 	display: inline-block;
-	background-image: url("../img/start.png");
+	background-image: url("../../img/common/start.png");
 
 	margin-right: 5px;
 }
