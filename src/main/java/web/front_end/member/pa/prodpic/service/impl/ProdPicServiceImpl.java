@@ -48,7 +48,7 @@ public class ProdPicServiceImpl implements ProdPicService {
 
 	@Override
 	public List<ProdPic> SelectByProdId(Integer prodpicno) {
-		return dao.selectByPicNo(prodpicno);
+		return null;
 	}
 
 	@Override

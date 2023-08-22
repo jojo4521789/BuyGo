@@ -25,16 +25,17 @@ public class ProdServiceImpl implements ProdService {
 			return prod;
 		}
 		
-		
-		
-		
+		prod.setMessage("新增商品成功!");
+		prod.setSuccessful(true);
 		return prod;
 	} 
 
 	@Override
 	public Prod updata(Prod prod) {
-
-		return null;
+		final int resultCount = dao.update(prod);
+		prod.setMessage(resultCount > 0 ? "修改成功" : "修改失敗");
+		prod.setSuccessful(resultCount > 0);
+		return prod;
 	}
 
 	@Override
