@@ -20,7 +20,6 @@ public class UpdateServlet extends HttpServlet {
     
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html;charset=utf-8");
-		final HttpSession session = request.getSession();
 		Coupon coupon = json2Pojo(request, Coupon.class);
 		
 		writePojo2Json(response, SERVICE.update(coupon));
