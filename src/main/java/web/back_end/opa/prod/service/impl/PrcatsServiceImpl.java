@@ -58,4 +58,10 @@ public class PrcatsServiceImpl implements PrcatsService{
 		return dao.deleteById(opaPrcatsNo) > 0;
 	}
 
+	@Override
+	public List<Prcats> findPart(String input) {
+		return dao.SelectByOpaPrcatsNameList(input);
+	}
+	
+	
 }

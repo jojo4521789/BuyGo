@@ -58,5 +58,15 @@ public class PrcatsDaoImpl implements PrcatsDao{
 			return null;
 		}
 	}
-	
+
+	@Override
+	public List<Prcats> SelectByOpaPrcatsNameList(String opaPrcatsName) {
+		try {
+			Query<Prcats> query = getSession().createQuery("FROM Prcats WHERE opaPrcatsName like :opaPrcatsName", Prcats.class).setParameter("opaPrcatsName", "%" + opaPrcatsName + "%" );
+			return query.getResultList();
+		} catch (NoResultException e) {
+//			e.printStackTrace();
+			return null;
+		}
+	}
 }
