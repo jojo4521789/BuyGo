@@ -42,6 +42,52 @@
 	<link rel="stylesheet" href="../../css/common/owl.theme.css">
 	<!-- // PARTICULAR PAGES CSS FILES -->
 	<link rel="stylesheet" href="../../css/common/responsive.css">
+	<style>
+		/*-----------------評價 & 燈箱css開始-----------------*/
+		div.overlay {
+			position: fixed;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100vh;
+			background-color: hsla(0, 0%, 90%, .5);
+
+			display: none;
+		}
+
+		/* 元素 article 置中及基本樣式 */
+		div.overlay>article {
+			background-color: white;
+			width: 90%;
+			max-width: 300px;
+			border-radius: 10px;
+			box-shadow: 0 0 10px #ddd;
+			padding: 10px;
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+		}
+
+		/* 燈箱的評價星星 */
+		div.star_block {
+			display: inline-block;
+		}
+
+		div.star_block>span.star {
+			cursor: pointer;
+			display: inline-block;
+			margin-right: 3px;
+			height: 30px;
+			width: 30px;
+		}
+
+		div.star_block>span.star.-on {
+			color: yellow;
+		}
+
+		/*-----------------評價 & 燈箱css結束-----------------*/
+	</style>
 </head>
 
 <body>
@@ -199,36 +245,51 @@
 											<div class="col-md-3">
 												<h4 class="menu-title">Clothing</h4>
 												<ul class="mega-sub">
-													<li><a href="../../pages/guest/products.html">Casual Wear</a></li>
-													<li><a href="../../pages/guest/products.html">Evening Wear</a></li>
-													<li><a href="../../pages/guest/products.html">Formal Attire</a></li>
-													<li><a href="../../pages/guest/products.html">Womens Jeans</a></li>
+													<li><a href="../../pages/guest/products.html">Casual Wear</a>
+													</li>
+													<li><a href="../../pages/guest/products.html">Evening Wear</a>
+													</li>
+													<li><a href="../../pages/guest/products.html">Formal Attire</a>
+													</li>
+													<li><a href="../../pages/guest/products.html">Womens Jeans</a>
+													</li>
 													<li><a href="../../pages/guest/products.html">Mens Jeans</a></li>
-													<li><a href="../../pages/guest/products.html">Fall Styles</a></li>
+													<li><a href="../../pages/guest/products.html">Fall Styles</a>
+													</li>
 												</ul>
 											</div>
 
 											<div class="col-md-3">
 												<h4 class="menu-title">Accessories</h4>
 												<ul class="mega-sub">
-													<li><a href="../../pages/guest/products.html">Casual Wear</a></li>
-													<li><a href="../../pages/guest/products.html">Evening Wear</a></li>
-													<li><a href="../../pages/guest/products.html">Formal Attire</a></li>
-													<li><a href="../../pages/guest/products.html">Womens Jeans</a></li>
+													<li><a href="../../pages/guest/products.html">Casual Wear</a>
+													</li>
+													<li><a href="../../pages/guest/products.html">Evening Wear</a>
+													</li>
+													<li><a href="../../pages/guest/products.html">Formal Attire</a>
+													</li>
+													<li><a href="../../pages/guest/products.html">Womens Jeans</a>
+													</li>
 													<li><a href="../../pages/guest/products.html">Mens Jeans</a></li>
-													<li><a href="../../pages/guest/products.html">Fall Styles</a></li>
+													<li><a href="../../pages/guest/products.html">Fall Styles</a>
+													</li>
 												</ul>
 											</div>
 
 											<div class="col-md-3">
 												<h4 class="menu-title">Brands</h4>
 												<ul class="mega-sub">
-													<li><a href="../../pages/guest/products.html">Casual Wear</a></li>
-													<li><a href="../../pages/guest/products.html">Evening Wear</a></li>
-													<li><a href="../../pages/guest/products.html">Formal Attire</a></li>
-													<li><a href="../../pages/guest/products.html">Womens Jeans</a></li>
+													<li><a href="../../pages/guest/products.html">Casual Wear</a>
+													</li>
+													<li><a href="../../pages/guest/products.html">Evening Wear</a>
+													</li>
+													<li><a href="../../pages/guest/products.html">Formal Attire</a>
+													</li>
+													<li><a href="../../pages/guest/products.html">Womens Jeans</a>
+													</li>
 													<li><a href="../../pages/guest/products.html">Mens Jeans</a></li>
-													<li><a href="../../pages/guest/products.html">Fall Styles</a></li>
+													<li><a href="../../pages/guest/products.html">Fall Styles</a>
+													</li>
 												</ul>
 											</div>
 
@@ -287,34 +348,49 @@
 											<li>
 												<a href="../../pages/guest/products.html">Clothing</a>
 												<ul class="dl-submenu">
-													<li><a href="../../pages/guest/products.html">Casual Wear</a></li>
-													<li><a href="../../pages/guest/products.html">Evening Wear</a></li>
-													<li><a href="../../pages/guest/products.html">Formal Attire</a></li>
-													<li><a href="../../pages/guest/products.html">Womens Jeans</a></li>
+													<li><a href="../../pages/guest/products.html">Casual Wear</a>
+													</li>
+													<li><a href="../../pages/guest/products.html">Evening Wear</a>
+													</li>
+													<li><a href="../../pages/guest/products.html">Formal Attire</a>
+													</li>
+													<li><a href="../../pages/guest/products.html">Womens Jeans</a>
+													</li>
 													<li><a href="../../pages/guest/products.html">Mens Jeans</a></li>
-													<li><a href="../../pages/guest/products.html">Fall Styles</a></li>
+													<li><a href="../../pages/guest/products.html">Fall Styles</a>
+													</li>
 												</ul>
 											</li>
 											<li>
 												<a href="../../pages/guest/products.html">Accessories</a>
 												<ul class="dl-submenu">
-													<li><a href="../../pages/guest/products.html">Casual Wear</a></li>
-													<li><a href="../../pages/guest/products.html">Evening Wear</a></li>
-													<li><a href="../../pages/guest/products.html">Formal Attire</a></li>
-													<li><a href="../../pages/guest/products.html">Womens Jeans</a></li>
+													<li><a href="../../pages/guest/products.html">Casual Wear</a>
+													</li>
+													<li><a href="../../pages/guest/products.html">Evening Wear</a>
+													</li>
+													<li><a href="../../pages/guest/products.html">Formal Attire</a>
+													</li>
+													<li><a href="../../pages/guest/products.html">Womens Jeans</a>
+													</li>
 													<li><a href="../../pages/guest/products.html">Mens Jeans</a></li>
-													<li><a href="../../pages/guest/products.html">Fall Styles</a></li>
+													<li><a href="../../pages/guest/products.html">Fall Styles</a>
+													</li>
 												</ul>
 											</li>
 											<li>
 												<a href="../../pages/guest/products.html">Brands</a>
 												<ul class="dl-submenu">
-													<li><a href="../../pages/guest/products.html">Casual Wear</a></li>
-													<li><a href="../../pages/guest/products.html">Evening Wear</a></li>
-													<li><a href="../../pages/guest/products.html">Formal Attire</a></li>
-													<li><a href="../../pages/guest/products.html">Womens Jeans</a></li>
+													<li><a href="../../pages/guest/products.html">Casual Wear</a>
+													</li>
+													<li><a href="../../pages/guest/products.html">Evening Wear</a>
+													</li>
+													<li><a href="../../pages/guest/products.html">Formal Attire</a>
+													</li>
+													<li><a href="../../pages/guest/products.html">Womens Jeans</a>
+													</li>
 													<li><a href="../../pages/guest/products.html">Mens Jeans</a></li>
-													<li><a href="../../pages/guest/products.html">Fall Styles</a></li>
+													<li><a href="../../pages/guest/products.html">Fall Styles</a>
+													</li>
 												</ul>
 											</li>
 										</ul>
@@ -337,8 +413,9 @@
 			<div class="container">
 				<div class="relative">
 					<ul class="bc unstyled clearfix">
-						<li><a href="#">Home</a></li>
-						<li class="active">MY ACCOUNT</li>
+						<li><a href="../../index.html">Home</a></li>
+						<li><a href="myaccount.html">MY ACCOUNT</a></li>
+						<li class="active">MY SHOP</li>
 					</ul>
 				</div>
 			</div>
@@ -355,20 +432,13 @@
 						<!-- SIDEBAR -->
 						<aside class="col-xs-12 col-sm-4 col-md-3">
 							<section class="side-section">
-								<h3 class="uppercase text-bold"><span class="text-xs">MyAccount Pages</span></h3>
+								<h3 class="uppercase text-bold"><span class="text-xs">MYSHOP PAGES</span></h3>
 
 								<ul class="nav nav-tabs nav-stacked">
-									<li><a href="#">個人資料</a></li>
-									<li><a href="#">最新消息</a></li>
-									<li><a href="../../pages/member/gpa/gpaOrder.html">訂單追蹤</a></li>
-									<li><a href="#">我的委託單</a></li>
-									<li><a href="#">已收藏的揪團</a></li>
-									<li><a href="#">優惠券</a></li>
-									<li><a href="#">平台錢包</a></li>
-									<li><a href="#">聊天室</a></li>
-									<li><a href="../../pages/member/blacklist.html">黑名單</a></li>
-									<br>
-									<li><a href="../../pages/member/myShop.html">我的賣場</a></li>
+									<li><a href="../../pages/member/myEvaluate.html">我的評價</a></li>
+									<li><a href="#">商品管理</a></li>
+									<li><a href="#">訂單管理</a></li>
+									<li><a href="#">委託單管理</a></li>
 								</ul>
 							</section>
 
@@ -391,23 +461,70 @@
 
 						<div class="m-t-lg clearfix">
 							<div class="row">
-								<div class="col-xs-12 col-sm-6">
-									<h3 class="uppercase text-bold"><span class="text-xs">黑名單</span></h3>
-									<!--黑名單列表-->
-									<ul class="store-list unstyled" id="blacklist">
-										<!-- <li>
-											<h4 class="entry-title">
-												<div>#1</div>
-											</h4>
-											<div class="row">
-												<dl class="col-xs-7 col-sm-7">
-													<dt>黑名單會員編號</dt>
-													<dd>Lower Ground Suite 7<br>32a Oxford Street</dd>
-												</dl>
+								<div class="col-xs-12 col-sm-8">
+									<h3 class="uppercase text-bold"><span class="text-xs">我的評價</span></h3>
+									<!-- 我的評價的賣場選擇 -->
+									<button type="button" id="paBtn" class="btn btn-success"
+										onclick="paProdEva()">一般代購</button>
+									<!-- <button type="button" class="btn btn-primary"
+										onclick="window.location.href='#'">限時連線代購</button> -->
+									<button type="button" id="gpaBtn" class="btn btn-primary"
+										onclick="gpaProdEva()">揪團</button>
+									<hr>
+									<input type="text" id="search" class="form-control" style="margin-bottom: 20px;"
+										placeholder="以商品名稱或訂單編號搜尋">
+									<div id="showOrderArea">
+										<!-- 假資料開始 -->
+										<!-- <div class="tab-content" id="orderId1" style="position:relative;width:770px;height:190px;margin-bottom:20px;display:flex; flex-direction:column">
+											<a href="#" class="orderDetail" style="position:absolute;left:0px; top:0px;width:100%;height:120px;">
+												<div class="col-xs-12 col-sm-12" style="width:100%;height:120px;">
+													<img src="#" style="width:80px;height:80px;border:1.5px solid LightGray;position:absolute;left:20px; top:20px;" alt="GFashion - Responsive e-commerce HTML Template">
+													<h4 class="prodName" style="position:absolute;left:120px; top:20px;">雨傘</h4>
+													<span style="position:absolute;left:120px; top:80px;">x3</span>
+													<span style="position:absolute;right:10px; top:10px;">賣家名稱：雨傘王</span>
+													<span class="soNo" style="position:absolute;right:10px; top:35px;">訂單編號：1000</span>
+													<div style="position:absolute;right:10px; top:90px;">揪團截止時間：2023-08-19</div>
+												</div>
+												<hr style="margin:0px;border:1px solid lightgray">
+											</a>
+											<div class="col-xs-12 col-sm-12 orderPrice" style="width:770px;height:69px;position:absolute;left:0px; top:121px;">
+													<h4 style="position:absolute;right:10px; top:20px;">訂單金額：$900</h4>
 											</div>
-											<button type="submit" class="btn btn-primary uppercase m-r-sm" onclick="this.closest('li').remove();">移除黑名單</button>
-										</li> -->
-									</ul>
+										</div>
+										<div class="tab-content" id="orderId2" style="position:relative;width:770px;height:190px;margin-bottom:20px;display:flex; flex-direction:column">
+											<a href="#" class="orderDetail" style="position:absolute;left:0px; top:0px;width:100%;height:120px;">
+												<div class="col-xs-12 col-sm-12" style="width:100%;height:120px;">
+													<img src="#" style="width:80px;height:80px;border:1.5px solid LightGray;position:absolute;left:20px; top:20px;" alt="GFashion - Responsive e-commerce HTML Template">
+													<h4 class="prodName" style="position:absolute;left:120px; top:20px;">小雨傘</h4>
+													<span style="position:absolute;left:120px; top:80px;">x6</span>
+													<span style="position:absolute;right:10px; top:10px;">賣家名稱：David</span>
+													<span class="soNo" style="position:absolute;right:10px; top:35px;">訂單編號：16</span>
+													<div style="position:absolute;right:10px; top:90px;">揪團截止時間：2023-08-19</div>
+												</div>
+												<hr style="margin:0px;border:1px solid lightgray">
+											</a>
+											<div class="col-xs-12 col-sm-12 orderPrice" style="width:770px;height:69px;position:absolute;left:0px; top:121px;">
+													<h4 style="position:absolute;right:10px; top:20px;">訂單金額：$1200</h4>
+											</div>
+										</div>
+										<div class="tab-content" id="orderId3" style="position:relative;width:770px;height:190px;margin-bottom:20px;display:flex; flex-direction:column">
+											<a href="#" class="orderDetail" style="position:absolute;left:0px; top:0px;width:100%;height:120px;">
+												<div class="col-xs-12 col-sm-12" style="width:100%;height:120px;">
+													<img src="#" style="width:80px;height:80px;border:1.5px solid LightGray;position:absolute;left:20px; top:20px;" alt="GFashion - Responsive e-commerce HTML Template">
+													<h4 class="prodName" style="position:absolute;left:120px; top:20px;">沐浴乳</h4>
+													<span style="position:absolute;left:120px; top:80px;">x1</span>
+													<span style="position:absolute;right:10px; top:10px;">賣家名稱：雨傘王</span>
+													<span class="soNo" style="position:absolute;right:10px; top:35px;">訂單編號：15</span>
+													<div style="position:absolute;right:10px; top:90px;">揪團截止時間：2023-08-19</div>
+												</div>
+												<hr style="margin:0px;border:1px solid lightgray">
+											</a>
+											<div class="col-xs-12 col-sm-12 orderPrice" style="width:770px;height:69px;position:absolute;left:0px; top:121px;">
+													<h4 style="position:absolute;right:10px; top:20px;">訂單金額：$100</h4>
+											</div>
+										</div> -->
+										<!-- 假資料結束 -->
+									</div>
 								</div>
 							</div>
 						</div>
@@ -620,24 +737,34 @@
 	<script src="../../js/common/owl.carousel.js"></script>
 	<script src="../../js/common/contact.js"></script>
 	<!--<script src="http://maps.googleapis.com/maps/api/js?sensor=false" type="text/javascript"></script>-->
-	<!-- <script src="../../js/common/gmap3.min.js"></script> -->
+	<!-- <script src="js/gmap3.min.js"></script> -->
 	<!-- // Particular Page Javascripts -->
 	<script src="../../js/login.js"></script>
 	<script>
 		checkLoginStatusShowMemberAcct(); // 檢查客戶帳號是否登入，修改頁面右上方Log In/Log Out按鈕，顯示登入者帳號名稱
 
-		loadBlacklist(); // 測試時先以memberNo=1來做測試，記得回來改
+		const showOrderArea_el = $("#showOrderArea");
+		function paProdEva() {
+			$("button#paBtn").addClass("btn-success"); // 修改按鈕樣式
+			$("button#gpaBtn").removeClass("btn-success"); // 修改按鈕樣式
+			$("button#gpaBtn").addClass("btn-primary"); // 修改按鈕樣式
 
-		// 載入該頁面時讀取黑名單名單並顯示於頁面上
-		function loadBlacklist() {
-			const blacklist_el = $("#blacklist");
-			let count = 0;
+			// 依序印出評價項目
+			$("#showOrderArea").children().remove(); // 清空showOrderArea下的所有子元素
+			$("#search").val(""); // 清空搜尋框
+		}
+		function gpaProdEva() {
+			$("button#gpaBtn").addClass("btn-success"); // 修改按鈕樣式
+			$("button#paBtn").removeClass("btn-success"); // 修改按鈕樣式
+			$("button#paBtn").addClass("btn-primary"); // 修改按鈕樣式
 
-			blacklist_el.children().remove(); // 清空showOrderArea下的所有子元素
-
-			fetch('/BuyGo/needLoginApi/front_end/loadBlacklist', {
-				method: 'POST',
-				headers: { 'Content-Type': 'application/json;charset:utf-8' },
+			// 依序印出評價項目
+			$("#showOrderArea").children().remove(); // 清空showOrderArea下的所有子元素
+			$("#search").val(""); // 清空搜尋框
+			let orderCount = 0; // 計數生成的訂單數，將此數字用於div的id
+			fetch('/BuyGo/needLoginApi/front_end/loadGpaProdEva', {
+				method: 'Post',
+				headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset:utf-8' },
 			})
 				.then(response => {
 					if (response.status === 401) {
@@ -647,52 +774,63 @@
 					} else if (response.ok) {
 						// 請求成功
 						return response.json();
-					} else{
-						alert("錯誤狀態:" + response.status);
+					} else {
+						// alert("錯誤狀態" + response.status);
 						return;
 					}
 				})
 				.then(body => {
+					body.forEach(gpaProdEvaDTO => {
+						let { gpaProdName, gpaEndDate, gpaSoNo, gpaProdCount, gpaProdTotal, gpaEvaSeller, memberAcct, gpaProdPics } = gpaProdEvaDTO;
 
-					body.forEach(black => {
-						count++;
-						const { memberNoBlack } = black;
-						// 刪除按鈕回傳memberNoBlack來記錄每個按鈕創建時的memberNoBlack，以便後續deleteBlack取值
-						blacklist_el.append(`
-						<li style="cursor: default;">
-							<h4 class="entry-title">
-								<div>#${count}</div>
-							</h4>
-							<div class="row">
-								<dl class="col-xs-7 col-sm-7">
-									<dt>黑名單會員編號</dt>
-									<dd>${memberNoBlack}</dd>
-								</dl>
+						orderCount++; // 生成的訂單數+1
+						// console.log('gpaProdName:' + gpaProdName);
+						// console.log('gpaEndDate:' + gpaEndDate);
+						for (let i = 0; i < gpaSoNo.length; i++) {
+							// console.log('gpaSoNo:' + gpaSoNo[i]);
+							// console.log('gpaProdCount:' + gpaProdCount[i]);
+							// console.log('gpaProdTotal:' + gpaProdTotal[i]);
+							// console.log('gpaEvaSeller:' + gpaEvaSeller[i]);
+							// console.log('memberAcct:' + memberAcct[i]);
+
+							showOrderArea_el.append(`
+						<div class="tab-content" id="orderId${orderCount}" style="position:relative;width:770px;height:190px;margin-bottom:20px;display:flex; flex-direction:column">
+							<a href="#" class="orderDetail" onclick="testA()" style="position:absolute;left:0px; top:0px;width:100%;height:120px;">
+								<div class="col-xs-12 col-sm-12" style="width:100%;height:120px;">
+									<img src="data:image/jpeg;base64,${gpaProdPics[0]}" style="width:80px;height:80px;border:1.5px solid LightGray;position:absolute;left:20px; top:20px;" alt="GFashion - Responsive e-commerce HTML Template">
+									<h4 class="prodName" style="position:absolute;left:120px; top:20px;">${gpaProdName}</h4>
+									<span style="position:absolute;left:120px; top:80px;">x${gpaProdCount[i]}</span>
+									<span style="position:absolute;right:10px; top:10px;">買家名稱：${memberAcct[i]}</span>
+									<span class="soNo" style="position:absolute;right:10px; top:35px;">訂單編號：${gpaSoNo[i]}</span>
+									<div style="position:absolute;right:10px; top:90px;">揪團截止時間：${gpaEndDate}</div>
+								</div>
+								<hr style="margin:0px;border:1px solid lightgray">
+							</a>
+							<div class="col-xs-12 col-sm-12 orderPrice" style="width:770px;height:69px;position:absolute;left:0px; top:121px;">
+									<h4 style="position:absolute;right:10px; top:20px;">訂單金額：$${gpaProdTotal[i]}</h4>
+									<h5 class="pastEval" style="position: absolute; left: 110px; top: 25px; visibility: visible;">買家評價：${gpaEvaSeller[i] === 0 ? '尚未評價' : gpaEvaSeller[i] + '★'}</h5>
 							</div>
-							<button type="submit" class="btn btn-primary uppercase m-r-sm" onclick="deleteBlack(${memberNoBlack});">移除黑名單</button>
-						</li>
+						</div>
 						`);
+						}
 					});
-				});
-		}
-
-		// 刪除黑名單
-		function deleteBlack(e) {
-			const memberNoBlack = e; //動態生成的項次將memberNoBlack回傳
-
-			fetch('/BuyGo/needLoginApi/front_end/deleteBlacklist', {
-				method: 'POST',
-				headers: { 'Content-Type': 'application/json;charset:utf-8' },
-				body: JSON.stringify({
-					memberNoBlack: e //刪除項目自帶的memberNoBlack
-				})
-			})
-				.then(resp => resp.json())
-				.then(body => {
-					loadBlacklist(); // 呼叫函式loadBlacklist，將當前畫面動態刷新
 				})
 		}
-
+		//-----------------搜尋框開始-----------------
+		$('#search').on('keyup', function () {
+			let numberOfOrder = $("#showOrderArea").children("div.tab-content").length; // 取得當前訂單數量
+			for (let i = 0; i < numberOfOrder; i++) { // 遍歷所有訂單
+				orderProdName = $("#showOrderArea").children("div.tab-content").eq(i).find("h4.prodName").text(); // 取得一個訂單的產品名稱
+				orderSoNo = $("#showOrderArea").children("div.tab-content").eq(i).find("span.soNo").text(); // 取得一個訂單的訂單編號
+				if (orderProdName.includes($("#search").val()) || orderSoNo.substr(5, orderSoNo.length).includes($("#search").val())) { // 如果搜尋框文字被產品名稱和訂單編號包含
+					$("#showOrderArea").children("div.tab-content").eq(i).show(); // 將符合條件的訂單顯示出來
+				}
+				else {
+					$("#showOrderArea").children("div.tab-content").eq(i).hide(); // 將不符合條件的訂單隱藏起來
+				}
+			}
+		});
+		//-----------------搜尋框結束-----------------
 	</script>
 
 </body>
