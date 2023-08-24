@@ -18,23 +18,23 @@ public class BlacklistDaoImpl implements BlacklistDao{
 		
 		// 測試
 		// 新增insert
-//		Session session = blacklistDaoImpl.getSession();
-//		
-//		Blacklist blacklist = new Blacklist();
-//		blacklist.setMemberNo(5);
-//		blacklist.setMemberNoBlack(3);
-//		
-//		try {
-//			Transaction transaction = session.beginTransaction(); // 開始交易
-//			blacklistDaoImpl.insert(blacklist); // 新增
-//			transaction.commit(); // 送交，同時會結束交易
-//			System.out.println("成功");
-//		}
-//		catch (Exception e) {
-//			e.printStackTrace();
-//			session.getTransaction().rollback(); // 還原，同時會結束交易
-//			System.out.println("失敗");
-//		}
+		Session session = blacklistDaoImpl.getSession();
+		
+		Blacklist blacklist = new Blacklist();
+		blacklist.setMemberNo(5);
+		blacklist.setMemberNoBlack(3);
+		
+		try {
+			Transaction transaction = session.beginTransaction(); // 開始交易
+			blacklistDaoImpl.insert(blacklist); // 新增
+			transaction.commit(); // 送交，同時會結束交易
+			System.out.println("成功");
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			session.getTransaction().rollback(); // 還原，同時會結束交易
+			System.out.println("失敗");
+		}
 		
 		//刪除deleteById
 //		Session session = blacklistDaoImpl.getSession();
@@ -102,17 +102,17 @@ public class BlacklistDaoImpl implements BlacklistDao{
 //		transaction.commit(); // 送交，同時會結束交易
 		
 		// 查詢selectByMemberNoAndMemberNoBlack
-		Session session = blacklistDaoImpl.getSession();
-		
-		Transaction transaction = session.beginTransaction(); // 開始交易
-		List<Blacklist> blacklistList = blacklistDaoImpl.selectByMemberNoAndMemberNoBlack(1, 9);
-		for (Blacklist blacklist : blacklistList) {
-			System.out.print("BlackNo:" + blacklist.getBlackNo() + ",");
-			System.out.print("MemberNo:" + blacklist.getMemberNo() + ",");
-			System.out.println("MemberNoBlack:" + blacklist.getMemberNoBlack());
-		}
-		System.out.println("blacklistList.size:" + blacklistList.size());
-		transaction.commit(); // 送交，同時會結束交易
+//		Session session = blacklistDaoImpl.getSession();
+//		
+//		Transaction transaction = session.beginTransaction(); // 開始交易
+//		List<Blacklist> blacklistList = blacklistDaoImpl.selectByMemberNoAndMemberNoBlack(1, 9);
+//		for (Blacklist blacklist : blacklistList) {
+//			System.out.print("BlackNo:" + blacklist.getBlackNo() + ",");
+//			System.out.print("MemberNo:" + blacklist.getMemberNo() + ",");
+//			System.out.println("MemberNoBlack:" + blacklist.getMemberNoBlack());
+//		}
+//		System.out.println("blacklistList.size:" + blacklistList.size());
+//		transaction.commit(); // 送交，同時會結束交易
 	}
 	
 	@Override

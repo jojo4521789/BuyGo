@@ -13,9 +13,14 @@ public class GpaSoServiceImpl implements GpaSoService{
 	public GpaSoServiceImpl(){
 		dao = new GpaSoDaoImpl();
 	}
+	
+	@Override
+	public List<GpaSo> loadSoByMemberNoAndSoStat(Integer memberNo, Integer soStat) {
+		return dao.selectByMemberNoAndSoStat(memberNo, soStat);
+	}
 
 	@Override
-	public List<GpaSo> loadBySoStat(Integer soStat) {
-		return dao.selectBySoStat(soStat);
+	public boolean updateGpaEvaSellerByGpaSoNo(Integer gpaSoNo, Integer gpaEvaSeller) {
+		return dao.updateGpaEvaSellerByGpaSoNo(gpaSoNo, gpaEvaSeller);
 	}
 }
