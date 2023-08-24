@@ -337,8 +337,11 @@
 			<div class="container">
 				<div class="relative">
 					<ul class="bc unstyled clearfix">
-						<li><a href="#">Home</a></li>
-						<li class="active">MY ACCOUNT</li>
+						<ul class="bc unstyled clearfix">
+							<li><a href="../../index.html">Home</a></li>
+							<li><a href="myaccount.html">MY ACCOUNT</a></li>
+							<li class="active">MY SHOP</li>
+						</ul>
 					</ul>
 				</div>
 			</div>
@@ -355,20 +358,13 @@
 						<!-- SIDEBAR -->
 						<aside class="col-xs-12 col-sm-4 col-md-3">
 							<section class="side-section">
-								<h3 class="uppercase text-bold"><span class="text-xs">MyAccount Pages</span></h3>
+								<h3 class="uppercase text-bold"><span class="text-xs">MyShop Pages</span></h3>
 
 								<ul class="nav nav-tabs nav-stacked">
-									<li><a href="#">個人資料</a></li>
-									<li><a href="#">最新消息</a></li>
-									<li><a href="../../pages/member/gpa/gpaOrder.html">訂單追蹤</a></li>
-									<li><a href="#">我的委託單</a></li>
-									<li><a href="#">已收藏的揪團</a></li>
-									<li><a href="#">優惠券</a></li>
-									<li><a href="#">平台錢包</a></li>
-									<li><a href="#">聊天室</a></li>
-									<li><a href="../../pages/member/blacklist.html">黑名單</a></li>
-									<br>
-									<li><a href="../../pages/member/myShop.html">我的賣場</a></li>
+									<li><a href="../../pages/member/myEvaluate.html">我的評價</a></li>
+									<li><a href="#">商品管理</a></li>
+									<li><a href="#">訂單管理</a></li>
+									<li><a href="#">委託單管理</a></li>
 								</ul>
 							</section>
 
@@ -392,20 +388,9 @@
 						<div class="m-t-lg clearfix">
 							<div class="row">
 								<div class="col-xs-12 col-sm-6">
-									<h3 class="uppercase text-bold"><span class="text-xs">黑名單</span></h3>
-									<!--黑名單列表-->
+									<h3 class="uppercase text-bold"><span class="text-xs">我的賣場</span></h3>
 									<ul class="store-list unstyled" id="blacklist">
 										<!-- <li>
-											<h4 class="entry-title">
-												<div>#1</div>
-											</h4>
-											<div class="row">
-												<dl class="col-xs-7 col-sm-7">
-													<dt>黑名單會員編號</dt>
-													<dd>Lower Ground Suite 7<br>32a Oxford Street</dd>
-												</dl>
-											</div>
-											<button type="submit" class="btn btn-primary uppercase m-r-sm" onclick="this.closest('li').remove();">移除黑名單</button>
 										</li> -->
 									</ul>
 								</div>
@@ -625,74 +610,6 @@
 	<script src="../../js/login.js"></script>
 	<script>
 		checkLoginStatusShowMemberAcct(); // 檢查客戶帳號是否登入，修改頁面右上方Log In/Log Out按鈕，顯示登入者帳號名稱
-
-		loadBlacklist(); // 測試時先以memberNo=1來做測試，記得回來改
-
-		// 載入該頁面時讀取黑名單名單並顯示於頁面上
-		function loadBlacklist() {
-			const blacklist_el = $("#blacklist");
-			let count = 0;
-
-			blacklist_el.children().remove(); // 清空showOrderArea下的所有子元素
-
-			fetch('/BuyGo/needLoginApi/front_end/loadBlacklist', {
-				method: 'POST',
-				headers: { 'Content-Type': 'application/json;charset:utf-8' },
-			})
-				.then(response => {
-					if (response.status === 401) {
-						// 客戶未登入，執行頁面重定向到登入頁
-						alert('帳號未登入，將導轉至登入頁面');
-						window.location.href = '/BuyGo/front_end/pages/member/login.html'; // 登入頁面url
-					} else if (response.ok) {
-						// 請求成功
-						return response.json();
-					} else{
-						alert("錯誤狀態:" + response.status);
-						return;
-					}
-				})
-				.then(body => {
-
-					body.forEach(black => {
-						count++;
-						const { memberNoBlack } = black;
-						// 刪除按鈕回傳memberNoBlack來記錄每個按鈕創建時的memberNoBlack，以便後續deleteBlack取值
-						blacklist_el.append(`
-						<li style="cursor: default;">
-							<h4 class="entry-title">
-								<div>#${count}</div>
-							</h4>
-							<div class="row">
-								<dl class="col-xs-7 col-sm-7">
-									<dt>黑名單會員編號</dt>
-									<dd>${memberNoBlack}</dd>
-								</dl>
-							</div>
-							<button type="submit" class="btn btn-primary uppercase m-r-sm" onclick="deleteBlack(${memberNoBlack});">移除黑名單</button>
-						</li>
-						`);
-					});
-				});
-		}
-
-		// 刪除黑名單
-		function deleteBlack(e) {
-			const memberNoBlack = e; //動態生成的項次將memberNoBlack回傳
-
-			fetch('/BuyGo/needLoginApi/front_end/deleteBlacklist', {
-				method: 'POST',
-				headers: { 'Content-Type': 'application/json;charset:utf-8' },
-				body: JSON.stringify({
-					memberNoBlack: e //刪除項目自帶的memberNoBlack
-				})
-			})
-				.then(resp => resp.json())
-				.then(body => {
-					loadBlacklist(); // 呼叫函式loadBlacklist，將當前畫面動態刷新
-				})
-		}
-
 	</script>
 
 </body>
