@@ -21,6 +21,8 @@ public class ProdPicAddServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		ProdPic prodpic = json2Pojo(request, ProdPic.class);
 		
+		System.out.println(prodpic);
+		
 		if(prodpic == null) {
 			prodpic = new ProdPic();
 			prodpic.setMessage("無商品資訊");

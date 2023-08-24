@@ -2,46 +2,66 @@ package web.front_end.member.pa.prodpic.dao.impl;
 
 import java.util.List;
 
+import javax.persistence.NoResultException;
+
+import org.hibernate.Session;
+import org.hibernate.query.Query;
+
 import web.front_end.member.pa.prodpic.dao.ProdPicDAO;
 import web.front_end.member.pa.prodpic.entity.ProdPic;
 
 public class ProdPicDAOImpl implements ProdPicDAO{
 
 	@Override
-	public int insert(ProdPic entity) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int insert(ProdPic prodPic) {
+		getSession().persist(prodPic);
+		return 1;
 	}
 
 	@Override
-	public int deleteById(Integer id) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int deleteById(Integer paProdNo) {
+		Session session = getSession();
+		ProdPic prodPic = session.get(ProdPic.class, paProdNo);
+		session.remove(prodPic);
+		return 1;
 	}
 
 	@Override
-	public int update(ProdPic entity) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int update(ProdPic prodPic) {
+		Session session = getSession();
+		ProdPic oldProdPic = session.get(ProdPic.class, prodPic.getPaProdNo());
+		final Integer paProdNo = prodPic.getPaProdNo();
+		if(paProdNo != null) {
+			oldProdPic.setPaProdNo(paProdNo);
+		}
+		final byte[] paProdPicture = prodPic.getPaProdPic();
+		if(paProdPicture != null) {
+			oldProdPic.setPaProdPic(paProdPicture);
+		}
+		return 1;
 	}
 
 	@Override
-	public ProdPic selectById(Integer id) {
-		// TODO Auto-generated method stub
-		return null;
+	public ProdPic selectById(Integer paProdPicNo) {
+		return getSession().get(ProdPic.class, paProdPicNo);
 	}
 
 	@Override
 	public List<ProdPic> selectAll() {
-		// TODO Auto-generated method stub
-		return null;
+		final String hql = "FROM ProdPic ORDER BY paProdPicNo";
+		return getSession().createQuery(hql, ProdPic.class).getResultList();
 	}
 
 
 	@Override
-	public ProdPic selectByPicNo(Integer prodpicno) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<ProdPic> selectByPicNo(Integer prodPicNo) {
+		try {
+			Query<ProdPic> query = getSession().createQuery("FROM Prpics WHERE paProdNo = :paProdNo", ProdPic.class).setParameter("paProdNo", prodPicNo);
+			return query.getResultList();
+		} catch (NoResultException e) {
+//			e.printStackTrace();
+			return null;
+		}
 	}
 
 }

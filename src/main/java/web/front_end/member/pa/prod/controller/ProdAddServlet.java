@@ -17,13 +17,18 @@ import web.front_end.member.pa.prod.entity.Prod;
 @WebServlet("/front_end/member/pa/prod/ProdAddServlet")
 public class ProdAddServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
+	
+	@Override
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		doPost(request, response);
+	}
+	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Prod prod = json2Pojo(request, Prod.class);
 		
 		if(prod == null) {
 			prod = new Prod();
-			prod.setMessage("無商品資訊");
+			prod.setMessage("請輸入事項");
 			prod.setSuccessful(false);
 			writePojo2Json(response, prod);
 		}

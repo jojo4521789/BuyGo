@@ -27,5 +27,5 @@ public class ProdPic extends Core {
 	@Column(name = "PA_PROD_NO")
 	private Integer paProdNo;
 	@Column(name = "PA_PROD_PIC")
-	private Byte[] paProdPic;
+	private byte[] paProdPic;
 }
