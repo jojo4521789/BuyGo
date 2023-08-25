@@ -520,7 +520,7 @@
 												<th>訂單總金額</th>
 												<!-- <th>已付訂金</th>
 												<th>待付金額</th> -->
-												<th>訂單操作</th>
+												<th>訂單詳情</th>
 											</tr>
 										</thead>
 										<tbody id="showOrderArea">
@@ -773,15 +773,15 @@
 		// 載入頁面時即觸發點即按鈕事件，以觸發撈取資料庫的動作
 		$("#orderPageBtn1").click();
 		let orders;
-		let order;
 
 		// 點擊訂單狀態切換按鈕的觸發事件，依點擊按鈕的不同有不同的selectPage值
 		function changePage(selectPage) {
 			fetch('/BuyGo/needLoginApi/loadLpaBuyerOrder?page=' + selectPage, {
 				method: "Get",
 				headers: {
-					'Content-Type': 'application/x-www-form-urlencoded ; charset=utf-8',
+					'Content-Type': 'application/x-www-form-urlencoded ; charset:utf-8',
 				},
+				// body: JSON.stringify(orderSeqData)
 			})
 				.then(function (response) {
 					console.log(response);
@@ -791,16 +791,15 @@
 					orders = data;
 					console.log(orders); // 印出傳入的JSON物件
 					$('#ordersTable').DataTable().destroy(); // 先销毁之前的 DataTable 实例，然后再进行初始化
-					showOrders(selectPage);
+					showOrders();
 				})
 				.catch(function (error) {
 					console.log(error);
 				})
 		}
 
-
 		// 依照訂單狀態分類 顯示訂單
-		function showOrders(selectPage) {
+		function showOrders() {
 			const items = [];
 
 			for (let i = 0; i < orders.length; i++) {
@@ -823,7 +822,7 @@
 				items.push(item);
 			}
 
-			// 如果訂單狀態是"追加中", 就
+			// console.log(items);
 
 			const dataTable = $('#ordersTable').DataTable({
 				language: {
@@ -838,30 +837,21 @@
 					// { data: "lpaDownPayment" },
 					// { data: "lpaFinalPayment" },
 					{
-						data: null, title: "訂單操作",
+						data: null, title: "訂單詳情",
 						render: function (data, type, row, meta) {
 							// 将行数据转换为 JSON 字符串并存储在按钮的 data-row 属性中
 							var rowData = JSON.stringify(row);
-
-
-							if (selectPage == 0) {
-								return `<button type="button" class="btn btn-warning btn-sm" data-row=${rowData} onclick="editOrder(${meta.row})">查看詳情</button>` 
-								// + `<button type="button" class="btn btn-warning btn-sm" data-row=${rowData} onclick="deliverProd(${meta.row})">出貨</button>`;
-								
-							} else {
-								// return '<button type="button" class="btn btn-danger btn-sm" data-row=\'' + rowData + '\' onclick="showOrderDetails(' + meta.row + ')">查看詳情</button>'
-								return `<button type="button" class="btn btn-warning btn-sm" onclick="showOrderDetails(${meta.rowIndex})">查看詳情</button>`
-							}
+							// 传递行索引作为参数给 showOrderDetails
+							return '<button type="button" class="btn-checkOrderDetails" data-row=\'' + rowData + '\' onclick="showOrderDetails(' + meta.row + ')">查看</button>';
 						}
-					}
+					},
 				]
-			})
-		}
-
+			});
+		};
 
 		// 點擊詳情出現訂單詳情燈箱
 		function showOrderDetails(rowIndex) {
-			order = orders[rowIndex];
+			var order = orders[rowIndex];
 
 			// Generate the products HTML
 			productsHTML = '';
@@ -871,15 +861,8 @@
 				productsHTML += `<div>商品名稱: <span>${details.lpaProd.lpaProdName}</span></div>`;
 				productsHTML += `<div>商品單價: <span>${details.lpaProdPrice}</span></div>`;
 				productsHTML += `<div>商品數量: <span>${details.lpaOrdQty}</span></div>`;
-				productsHTML += `<div class="prodStats">商品狀態: <span>${orderDetailsStatus(details.status)}</span></div>`;
-
-				// 创建一个新的 <select> 元素，并为每个商品添加不同的唯一 id
-				let newSelector = $("<select>").attr("id", "selector_" + i)
-					.append($("<option>").val("option1").text("追加完成"))
-					.append($("<option>").val("option2").text("追加失敗"));
-
-				// 将新的 <select> 元素添加到当前商品的 div.prodStats 中
-				$(".prodStats:eq(" + i + ")").append(newSelector);
+				productsHTML += `<div>商品狀態: <span>${orderDetailsStatus(details.status)}</span></div>`;
+				// Add other product information fields as needed
 			}
 
 			// Update the lightbox content using jQuery
@@ -904,14 +887,6 @@
 			});
 		}
 
-		// 進入訂單詳情頁面&編輯追加狀況
-		function editOrder(rowIndex) {
-			lpaSoSeq = orders[rowIndex].lpaSoSeq;
-			console.log(lpaSoSeq);
-			localStorage.setItem("myData", lpaSoSeq);
-			window.location.href = "Seller_Edit.html"
-		}
-
 		// 將整筆訂單狀態(數字)轉成中文
 		function orderStatus(status) {
 			switch (status) {
@@ -932,7 +907,7 @@
 		function orderDetailsStatus(status) {
 			switch (status) {
 				case 0:
-					return "追加中";
+					return "備貨中";
 				case 1:
 					return "追加完成";
 				case 2:
@@ -942,12 +917,9 @@
 			}
 		}
 
-		$(window).on('pageshow', function (event) {
-			// 页面重新显示时触发的操作
-			if (event.originalEvent.persisted) { // event.persisted是一个boolean，指示页面是否来自缓存
-				$("#orderPageBtn1").click();
-			}
-		});
+		function printOrder() {
+			window.print();
+		}
 	</script>
 
 </body>
