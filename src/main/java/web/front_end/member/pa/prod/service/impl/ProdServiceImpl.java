@@ -18,9 +18,41 @@ public class ProdServiceImpl implements ProdService {
 	}
 	
 	@Override
-	public Prod add(Prod prod) {
-		if(prod.getPaProdNo( )== null) {
-			prod.setMessage("商品編號未輸入");
+	public Prod insert(Prod prod) {
+//		if(prod.getPaProdNo( )== null) {
+//			prod.setMessage("商品編號未輸入");
+//			prod.setSuccessful(false);
+//			return prod;
+//		}
+		if(prod.getPaProdObjNo() == null) {
+			prod.setMessage("商品類別未輸入");
+			prod.setSuccessful(false);
+			return prod;
+		}
+		if(prod.getPaProdStockQty() == null) {
+			prod.setMessage("商品庫存數量未輸入");
+			prod.setSuccessful(false);
+			return prod;
+		}
+		if(prod.getPaProdPrice() == null) {
+			prod.setMessage("商品價格未輸入");
+			prod.setSuccessful(false);
+			return prod;
+		}
+		if(prod.getPaProdContent() == null) {
+			prod.setMessage("商品內容未輸入");
+			prod.setSuccessful(false);
+			return prod;
+		}
+		if(prod.getPaProdName() == null) {
+			prod.setMessage("商品名稱未輸入");
+			prod.setSuccessful(false);
+			return prod;
+		}
+		
+		final int resultCount = dao.insert(prod);
+		if(resultCount < 1) {
+			prod.setMessage("新增商品錯誤，請聯絡管理員!");
 			prod.setSuccessful(false);
 			return prod;
 		}
@@ -39,13 +71,13 @@ public class ProdServiceImpl implements ProdService {
 	}
 
 	@Override
-	public List<Prod> findAll() {
+	public List<Prod> findAll(Integer paprodno) {
 		return dao.selectAll();
 	}
 
 	@Override
-	public boolean remove(Integer prodno) {
-		return dao.deleteById(prodno) > 0;
+	public boolean remove(Integer paprodno) {
+		return dao.deleteById(paprodno) > 0;
 	}
 
 }

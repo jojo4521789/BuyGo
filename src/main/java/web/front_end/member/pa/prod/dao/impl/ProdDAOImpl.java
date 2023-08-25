@@ -14,7 +14,7 @@ public class ProdDAOImpl implements ProdDAO {
 
 	@Override
 	public int insert(Prod prod) {
-		getSession().persist(prod);
+		getSession().save(prod);
 		return 1;
 	}
 
@@ -29,13 +29,14 @@ public class ProdDAOImpl implements ProdDAO {
 	@Override
 	public int update(Prod prod) {
 		final StringBuilder hql = new StringBuilder().append("UPDATE Prod SET ");
-		hql.append("paPrcatsNo= :paPrcatsNo")
+		hql.append("paProdNo= :paProdNo")
 			.append("paProdName= :paProdName")
 			.append("paProdStockQty= :paProdStockQty")
 			.append("paProdShipQty= :paProdShipQty")
 			.append("paProdPrice= :paProdPrice")
-			.append("paProdUrl= :paProdUrl")
-			.append("paProdStatus= :paProdStatus");
+			.append("paProdContent= :paProdContent")
+			.append("paProdStatus= :paProdStatus")
+			.append("paProdObjNo= :paProdObjNo");
 		Query<?> query = getSession().createQuery(hql.toString());
 		return query.setParameter("paProdNo", prod.getPaProdNo())
 				.setParameter("paProdName", prod.getPaProdName())
@@ -44,6 +45,7 @@ public class ProdDAOImpl implements ProdDAO {
 				.setParameter("paProdPrice", prod.getPaProdPrice())
 				.setParameter("paProdContent", prod.getPaProdContent())
 				.setParameter("paProdStatus", prod.getPaProdStatus())
+				.setParameter("paProdObjNo", prod.getPaProdObjNo())
 				.executeUpdate();
 	}
 
@@ -59,9 +61,9 @@ public class ProdDAOImpl implements ProdDAO {
 	}
 
 	@Override
-	public List<Prod> selectByProdNo(String paProdname) {
+	public List<Prod> selectByProdNo(String paProdNo) {
 		try {
-			Query<Prod> query = getSession().createQuery("FROM Prod WHERE paProdName = :paProdName", Prod.class).setParameter("paProdName", paProdname);
+			Query<Prod> query = getSession().createQuery("FROM Prod WHERE paProdNo = :paProdNo", Prod.class).setParameter("paProdNo", paProdNo);
 			return query.getResultList();
 		} catch (NoResultException e) {
 //			e.printStackTrace();

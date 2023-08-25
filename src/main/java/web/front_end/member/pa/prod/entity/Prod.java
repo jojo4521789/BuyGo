@@ -18,7 +18,7 @@ import lombok.Setter;
 @Entity
 @Setter
 @Getter
-@Table(name = "PA_PROD", catalog = "buygo")
+@Table(name = "PA_PROD")
 @NoArgsConstructor
 @AllArgsConstructor
 public class Prod extends Core{
@@ -27,7 +27,7 @@ public class Prod extends Core{
  
  @Id
  @GeneratedValue(strategy = GenerationType.IDENTITY)
- @Column(name = "PA_PROD_NO")
+ @Column(name = "PA_PROD_NO", insertable = false)
  private Integer paProdNo;
  @Column(name = "MEMBER_NO")
  private Integer memberNo;
@@ -45,7 +45,7 @@ public class Prod extends Core{
  private Timestamp paProdUpdate;
  @Column(name = "PA_PROD_CONTENT")
  private String paProdContent;
- @Column(name = "PA_PROD_STATUS")
+ @Column(name = "PA_PROD_STATUS", insertable = false)
  private Integer paProdStatus;
 
 }

@@ -4,9 +4,6 @@ import static core.util.CommonUtil.json2Pojo;
 import static core.util.CommonUtil.writePojo2Json;
 import static web.front_end.member.pa.prod.util.ProdConstants.SERVICE;
 
-import java.io.IOException;
-
-import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -19,21 +16,24 @@ public class ProdAddServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	@Override
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) {
 		doPost(request, response);
 	}
 	@Override
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Prod prod = json2Pojo(request, Prod.class);
-		
-		if(prod == null) {
-			prod = new Prod();
-			prod.setMessage("請輸入事項");
-			prod.setSuccessful(false);
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) {
+	    response.setCharacterEncoding("UTF-8");
+	    Prod prod = json2Pojo(request, Prod.class);
+
+		SERVICE.insert(prod);
+		//successful
+		System.out.println("prod.isSuccessful():" + prod.isSuccessful());
+		if(prod.isSuccessful()) {
+			System.out.println("修改成功");
+			writePojo2Json(response, prod);
+		}else {
+			System.out.println("修改失敗");
 			writePojo2Json(response, prod);
 		}
 		
-		prod = SERVICE.add(prod);
-		writePojo2Json(response, prod);
 	}
 }

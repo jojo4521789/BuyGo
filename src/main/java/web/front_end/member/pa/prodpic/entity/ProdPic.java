@@ -22,9 +22,9 @@ public class ProdPic extends Core {
 	private static final long serialVersionUID = 8042542712391581786L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "PA_PROD_PIC_NO")
+	@Column(name = "PA_PROD_PIC_NO", insertable = false)
 	private Integer paProdPicNo;
-	@Column(name = "PA_PROD_NO")
+	@Column(name = "PA_PROD_NO", insertable = false)
 	private Integer paProdNo;
 	@Column(name = "PA_PROD_PIC")
 	private byte[] paProdPic;

@@ -7,11 +7,11 @@ import web.front_end.member.pa.prod.entity.Prod;
 
 public interface ProdService extends CoreService {
 
-	Prod add (Prod prod);
+	Prod insert (Prod prod);
 	
 	Prod updata (Prod prod);
 	
-	List<Prod> findAll();
+	List<Prod> findAll(Integer paprodno);
 
-	boolean remove (Integer prodno);
+	boolean remove (Integer paprodno);
 }
