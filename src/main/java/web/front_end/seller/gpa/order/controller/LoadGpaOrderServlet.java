@@ -4,7 +4,6 @@ import static core.util.Base64Util.Base64EncoderByByte;
 import static core.util.CommonUtil.writePojo2Json;
 import static web.front_end.seller.gpa.order.util.GpaSoConstants.SERVICE;
 
-import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -15,7 +14,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import web.front_end.seller.gpa.order.dto.GpaOrderDTO;
-import web.front_end.seller.gpa.order.dto.GpaOrderDTO2;
 import web.front_end.seller.gpa.order.entity.GpaSo;
 
 @WebServlet("/needLoginApi/front_end/loadGpaOrder")
