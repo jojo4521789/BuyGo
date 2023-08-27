@@ -4,10 +4,12 @@ import java.sql.Timestamp;
 import java.util.List;
 
 import org.hibernate.Session;
+import org.springframework.stereotype.Repository;
 
+import web.front_end.guest.faq.entity.Faq;
 import web.front_end.guest.news.dao.NewsDao;
 import web.front_end.guest.news.entity.News;
-
+@Repository
 public class NewsDaoImpl implements NewsDao{
 
 	@Override
@@ -52,6 +54,12 @@ public class NewsDaoImpl implements NewsDao{
 	public List<News> selectAll() {
 		final String hql = "FROM News ORDER BY NEWS_NO";
 		return getSession().createQuery(hql,News.class).getResultList();
+	}
+
+	@Override
+	public List<News> selectByInput(String input) {
+		final String hql = "FROM News WHERE str(newsTitle) LIKE :input";
+	 return getSession().createQuery(hql,News.class).setParameter("input","%" + input +"%").getResultList();
 	}
 
 }

@@ -21,7 +21,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Member extends Core{
+public class Member extends Core {
 	private static final long serialVersionUID = 1457755989409740329L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -44,7 +44,7 @@ public class Member extends Core{
 	@Column(name = "MEMBER_GENDER")
 	private Integer memberGender;
 	@Column(name = "MEMBER_BIRTHDAY")
-	private Date memberBirthday;
+	private String memberBirthday;
 	@Column(name = "MEMBER_ID")
 	private String memberId;
 	@Column(name = "MEMBER_EVA_STAR", insertable = false)
@@ -57,5 +57,5 @@ public class Member extends Core{
 	private Integer sellerEvaCount;
 
 	
-}
 
+}

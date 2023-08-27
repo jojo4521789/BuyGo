@@ -1,5 +1,6 @@
 package web.front_end.guest.news.entity;
 
+import java.sql.Blob;
 import java.sql.Timestamp;
 
 import javax.persistence.Column;
@@ -30,4 +31,6 @@ public class News extends Core {
 	private String newsContent;
 	@Column(name = "NEWS_TIME")
 	private Timestamp newsTime;
+	@Column(name = "NEWS_PICTURE")
+	private String newsPicture;
 }
