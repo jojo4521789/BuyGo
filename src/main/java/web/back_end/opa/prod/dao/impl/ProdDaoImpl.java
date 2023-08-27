@@ -10,7 +10,7 @@ import org.hibernate.query.Query;
 import web.back_end.opa.prod.dao.ProdDao;
 import web.back_end.opa.prod.entity.Prod;
 
-public class ProdDaoImpl implements ProdDao{
+public class ProdDaoImpl implements ProdDao {
 
 	@Override
 	public int insert(Prod prod) {
@@ -28,22 +28,28 @@ public class ProdDaoImpl implements ProdDao{
 
 	@Override
 	public int update(Prod prod) {
+		System.out.println("Name= " + prod.getOpaProdName());
+		System.out.println(prod);
 		final StringBuilder hql = new StringBuilder().append("UPDATE Prod SET ");
-		hql.append("opaPrcatsNo= :opaPrcatsNo")
-			.append("opaProdName= :opaProdName")
-			.append("opaProdStockQty= :opaProdStockQty")
-			.append("opaProdShipQty= :opaProdShipQty")
-			.append("opaProdPrice= :opaProdPrice")
-			.append("opaProdUrl= :opaProdUrl")
-			.append("opaProdStatus= :opaProdStatus");
+		hql.append("opaPrcatsNo= :opaPrcatsNo, ")
+			.append("opaProdName= :opaProdName, ")
+			.append("opaProdStockQty= :opaProdStockQty, ")
+			.append("opaProdShipQty= :opaProdShipQty, ")
+			.append("opaProdPrice= :opaProdPrice, ")
+			.append("opaProdContent= :opaProdContent, ")
+			.append("opaProdUrl= :opaProdUrl, ")
+			.append("opaProdStatus= :opaProdStatus ")
+			.append("WHERE opaProdNo= :opaProdNo");
 		Query<?> query = getSession().createQuery(hql.toString());
 		return query.setParameter("opaPrcatsNo", prod.getOpaPrcatsNo())
 				.setParameter("opaProdName", prod.getOpaProdName())
 				.setParameter("opaProdStockQty", prod.getOpaProdStockQty())
 				.setParameter("opaProdShipQty", prod.getOpaProdShipQty())
 				.setParameter("opaProdPrice", prod.getOpaProdPrice())
+				.setParameter("opaProdContent", prod.getOpaProdContent())
 				.setParameter("opaProdUrl", prod.getOpaProdUrl())
 				.setParameter("opaProdStatus", prod.getOpaProdStatus())
+				.setParameter("opaProdNo", prod.getOpaProdNo())
 				.executeUpdate();
 	}
 
@@ -61,7 +67,20 @@ public class ProdDaoImpl implements ProdDao{
 	@Override
 	public List<Prod> SelectByOpaProdName(String opaProdName) {
 		try {
-			Query<Prod> query = getSession().createQuery("FROM Prod WHERE opaProdName = :opaProdName", Prod.class).setParameter("opaProdName", opaProdName);
+			Query<Prod> query = getSession().createQuery("FROM Prod WHERE opaProdName = :opaProdName", Prod.class)
+					.setParameter("opaProdName", opaProdName);
+			return query.getResultList();
+		} catch (NoResultException e) {
+//			e.printStackTrace();
+			return null;
+		}
+	}
+
+	@Override
+	public List<Prod> SelectByOpaProdNameList(String opaProdName) {
+		try {
+			Query<Prod> query = getSession().createQuery("FROM Prod WHERE opaProdName LIKE :opaProdName", Prod.class)
+					.setParameter("opaProdName", "%" + opaProdName + "%");
 			return query.getResultList();
 		} catch (NoResultException e) {
 //			e.printStackTrace();

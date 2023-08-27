@@ -69,6 +69,11 @@ public class ProdServiceImpl implements ProdService{
 	}
 
 	@Override
+	public Prod prodSelectById(Integer opaProdNo) {
+		return dao.selectById(opaProdNo);
+	}
+	
+	@Override
 	public List<Prod> findAll() {
 		return dao.selectAll();
 	}
@@ -77,5 +82,11 @@ public class ProdServiceImpl implements ProdService{
 	public boolean remove(Integer opaProdNo) {
 		return dao.deleteById(opaProdNo) > 0;
 	}
+
+	@Override
+	public List<Prod> findPart(String input) {
+		return dao.SelectByOpaProdNameList(input);
+	}
+
 
 }

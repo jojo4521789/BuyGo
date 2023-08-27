@@ -1,6 +1,7 @@
-package web.back_end.opa.prod.controller;
+package web.back_end.opa.coupon.controller;
 
 import java.io.IOException;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -9,25 +10,24 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import web.back_end.opa.prod.entity.Prpics;
+import web.back_end.opa.coupon.entity.Coupon;
+
 import static core.util.CommonUtil.json2Pojo;
 import static core.util.CommonUtil.writePojo2Json;
-import static web.back_end.opa.prod.util.PrpicsConstants.SERVICE;
+import static web.back_end.opa.coupon.util.CouponConstants.SERVICE;
 
-@WebServlet("/opa/prpics/manage")
-public class PrpicsManageServlet extends HttpServlet {
+@WebServlet("/opa/coupon/search")
+public class SelectServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	}
-
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html;charset=utf-8");
-		
-		final Integer opaProdNo = json2Pojo(request, Prpics.class).getOpaProdNo();
-		
-		List<Prpics> prpicsList = SERVICE.SelectByProdId(opaProdNo);
-		writePojo2Json(response, prpicsList);
+		Coupon coupon = json2Pojo(request, Coupon.class);
+		String input = coupon.getOpaCouponName();
+		List<Coupon> couponList = SERVICE.findPart(input);
+//		for (Coupon coupon2 : couponList) {
+//			System.out.println(coupon2.getOpaCouponName());
+//		}
+		writePojo2Json(response, couponList);
 	}
-
 }

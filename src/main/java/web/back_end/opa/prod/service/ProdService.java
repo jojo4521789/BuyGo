@@ -10,7 +10,11 @@ public interface ProdService extends CoreService{
 	
 	Prod update(Prod prod);
 	
+	Prod prodSelectById(Integer opaProdNo);
+	
 	List<Prod> findAll();
+	
+	List<Prod> findPart(String input);
 	
 	boolean remove(Integer opaProdNo);
 }
