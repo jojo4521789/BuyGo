@@ -12,8 +12,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.alibaba.fastjson.JSONObject;
-
 import web.front_end.member.acc.entity.Member;
 
 @WebServlet("/front_end/guest/register/MemberRegister")
