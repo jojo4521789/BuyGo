@@ -7,4 +7,6 @@ import web.back_end.opa.prod.entity.Prod;
 
 public interface ProdDao extends CoreDao<Prod, Integer>{
 	List<Prod> SelectByOpaProdName(String opaProdName);
+	
+	List<Prod> SelectByOpaProdNameList(String opaProdName);
 }

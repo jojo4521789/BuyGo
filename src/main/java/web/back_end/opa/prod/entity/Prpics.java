@@ -22,5 +22,5 @@ public class Prpics extends Core{
 	@Column(name = "OPA_PROD_NO")
 	private Integer opaProdNo;
 	@Column(name = "OPA_PROD_PICTURE")
-	private byte[] opaProdPicture;
+	private String opaProdPicture;
 }

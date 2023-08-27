@@ -14,10 +14,7 @@ import static core.util.CommonUtil.json2Pojo;
 import static core.util.CommonUtil.writePojo2Json;
 import static web.back_end.opa.coupon.util.CouponConstants.SERVICE;
 
-/**
- * Servlet implementation class AddServlet
- */
-@WebServlet("/coupon/add")
+@WebServlet("/opa/coupon/add")
 public class AddServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	

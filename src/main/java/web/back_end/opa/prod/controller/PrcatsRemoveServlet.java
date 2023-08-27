@@ -14,7 +14,7 @@ import static web.back_end.opa.prod.util.PrcatsConstants.SERVICE;
 import static core.util.CommonUtil.json2Pojo;
 import static core.util.CommonUtil.writePojo2Json;
 
-@WebServlet("/prcats/remove")
+@WebServlet("/opa/prcats/remove")
 public class PrcatsRemoveServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

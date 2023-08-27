@@ -13,11 +13,12 @@ import static web.back_end.opa.prod.util.PrcatsConstants.SERVICE;
 import static core.util.CommonUtil.json2Pojo;
 import static core.util.CommonUtil.writePojo2Json;
 
-@WebServlet("/prcats/add")
+@WebServlet("/opa/prcats/add")
 public class PrcatsAddServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		response.setContentType("text/html;charset=utf-8");
 		Prcats prcats = json2Pojo(request, Prcats.class);
 		
 		if(prcats == null) {

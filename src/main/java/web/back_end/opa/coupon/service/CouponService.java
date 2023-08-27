@@ -12,5 +12,7 @@ public interface CouponService extends CoreService{
 	
 	List<Coupon> findAll();
 	
+	List<Coupon> findPart(String input);
+	
 	boolean remove(Integer opaCouponNo);
 }
