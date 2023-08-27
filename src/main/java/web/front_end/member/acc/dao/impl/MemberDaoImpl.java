@@ -4,10 +4,12 @@ import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.query.Query;
+import org.springframework.stereotype.Repository;
 
 import web.front_end.member.acc.dao.MemberDao;
 import web.front_end.member.acc.entity.Member;
 
+@Repository
 public class MemberDaoImpl  implements MemberDao {
 
 	@Override
@@ -53,8 +55,8 @@ public class MemberDaoImpl  implements MemberDao {
 	}
 
 	@Override
-	public Member selectById(Integer memberAcct) {
-		return getSession().get(Member.class,memberAcct);
+	public Member selectById(Integer memberNo) {
+		return getSession().get(Member.class,memberNo);
 	}
 
 	@Override
@@ -66,6 +68,18 @@ public class MemberDaoImpl  implements MemberDao {
 	@Override
 	public Member selectBymemberPhone(String memberPhone) {
 		return getSession().get(Member.class, memberPhone);
+	}
+
+	@Override
+	public Member selectByMemberAcct(String memberAcct) {
+		
+		return getSession().get(Member.class,memberAcct);
+	}
+
+	@Override
+	public Member selectByMemberEmail(String memberEmail) {
+
+		return getSession().get(Member.class,memberEmail);
 	}
 	
 }
