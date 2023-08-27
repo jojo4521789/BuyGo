@@ -114,18 +114,27 @@ public class GpaSoDaoImpl implements GpaSoDao {
 //		}
 //		transaction.commit(); // 送交，同時會結束交易
 		
-		// 查詢selectBySoStat
-		Session session = gpaSoDaoImpl.getSession();
+		// 查詢selectByMemberNoAndSoStat
+//		Session session = gpaSoDaoImpl.getSession();
+//		
+//		Transaction transaction = session.beginTransaction(); // 開始交易
+//		List<GpaSo> gpaSoList = gpaSoDaoImpl.selectByMemberNoAndSoStat(1, 0);
+//		for (GpaSo gpaSo : gpaSoList) {
+//			System.out.print("gpaSoNo:" + gpaSo.getGpaSoNo() + ",");
+//			System.out.print("memberNo:" + gpaSo.getMemberNo() + ",");
+//			System.out.print("gpaProdNo:" + gpaSo.getGpaProdNo() + ",");
+//			System.out.println("gpaProdTotal:" + gpaSo.getGpaProdTotal());
+//		}
+//		transaction.commit(); // 送交，同時會結束交易
 		
-		Transaction transaction = session.beginTransaction(); // 開始交易
-		List<GpaSo> gpaSoList = gpaSoDaoImpl.selectBySoStat(2);
-		for (GpaSo gpaSo : gpaSoList) {
-			System.out.print("gpaSoNo:" + gpaSo.getGpaSoNo() + ",");
-			System.out.print("memberNo:" + gpaSo.getMemberNo() + ",");
-			System.out.print("gpaProdNo:" + gpaSo.getGpaProdNo() + ",");
-			System.out.println("gpaProdTotal:" + gpaSo.getGpaProdTotal());
-		}
-		transaction.commit(); // 送交，同時會結束交易
+		// 修改updateGpaEvaSellerByGpaSoNo
+//		Session session = gpaSoDaoImpl.getSession();
+//		
+//		Transaction transaction = session.beginTransaction(); // 開始交易
+//		
+//		gpaSoDaoImpl.updateGpaEvaSellerByGpaSoNo(1, 4);
+//		
+//		transaction.commit(); // 送交，同時會結束交易
 	}
 
 	@Override
@@ -182,11 +191,23 @@ public class GpaSoDaoImpl implements GpaSoDao {
 	}
 	
 	@Override
-	public List<GpaSo> selectBySoStat(Integer soStat){
-		final String hql = "FROM GpaSo WHERE gpaSoStat = :gpaSoStat ORDER BY gpaSoNo";
+	public List<GpaSo> selectByMemberNoAndSoStat(Integer memberNo, Integer soStat){
+		final String hql = "FROM GpaSo WHERE memberNo = :memberNo AND gpaSoStat = :gpaSoStat ORDER BY gpaSoNo";
 		return getSession()
 				.createQuery(hql, GpaSo.class)
+				.setParameter("memberNo", memberNo)
 				.setParameter("gpaSoStat", soStat)
 				.getResultList();
+	}
+
+	@Override
+	public boolean updateGpaEvaSellerByGpaSoNo(Integer gpaSoNo, Integer gpaEvaSeller) {
+		final String hql = "UPDATE GpaSo set gpaEvaSeller = :gpaEvaSeller WHERE gpaSoNo = :gpaSoNo";
+		getSession()
+		.createQuery(hql)
+		.setParameter("gpaEvaSeller", gpaEvaSeller)
+		.setParameter("gpaSoNo", gpaSoNo)
+		.executeUpdate();
+		return true;
 	}
 }

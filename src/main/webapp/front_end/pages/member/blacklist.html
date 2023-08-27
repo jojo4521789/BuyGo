@@ -361,12 +361,14 @@
 									<li><a href="#">個人資料</a></li>
 									<li><a href="#">最新消息</a></li>
 									<li><a href="../../pages/member/gpa/gpaOrder.html">訂單追蹤</a></li>
-									<li><a href="#">已收藏的項目</a></li>
+									<li><a href="#">我的委託單</a></li>
+									<li><a href="#">已收藏的揪團</a></li>
 									<li><a href="#">優惠券</a></li>
-									<li><a href="#">我的評價</a></li>
 									<li><a href="#">平台錢包</a></li>
 									<li><a href="#">聊天室</a></li>
 									<li><a href="../../pages/member/blacklist.html">黑名單</a></li>
+									<br>
+									<li><a href="../../pages/member/myShop.html">我的賣場</a></li>
 								</ul>
 							</section>
 
@@ -620,32 +622,44 @@
 	<!--<script src="http://maps.googleapis.com/maps/api/js?sensor=false" type="text/javascript"></script>-->
 	<!-- <script src="../../js/common/gmap3.min.js"></script> -->
 	<!-- // Particular Page Javascripts -->
+	<script src="../../js/login.js"></script>
 	<script>
+		checkLoginStatusShowMemberAcct(); // 檢查客戶帳號是否登入，修改頁面右上方Log In/Log Out按鈕，顯示登入者帳號名稱
 
-		loadBlacklist(1); // 測試時先以memberNo=1來做測試，記得回來改
+		loadBlacklist(); // 測試時先以memberNo=1來做測試，記得回來改
 
 		// 載入該頁面時讀取黑名單名單並顯示於頁面上
-		function loadBlacklist(memberNo) {
+		function loadBlacklist() {
 			const blacklist_el = $("#blacklist");
 			let count = 0;
 
 			blacklist_el.children().remove(); // 清空showOrderArea下的所有子元素
 
-			fetch('/BuyGo/front_end/member/black/loadBlacklist', {
+			fetch('/BuyGo/needLoginApi/front_end/loadBlacklist', {
 				method: 'POST',
 				headers: { 'Content-Type': 'application/json;charset:utf-8' },
-				body: JSON.stringify({
-					memberNo: memberNo
-				})
 			})
-				.then(resp => resp.json())
+				.then(response => {
+					if (response.status === 401) {
+						// 客戶未登入，執行頁面重定向到登入頁
+						alert('帳號未登入，將導轉至登入頁面');
+						window.location.href = '/BuyGo/front_end/pages/member/login.html'; // 登入頁面url
+					} else if (response.ok) {
+						// 請求成功
+						return response.json();
+					} else{
+						alert("錯誤狀態:" + response.status);
+						return;
+					}
+				})
 				.then(body => {
+
 					body.forEach(black => {
 						count++;
 						const { memberNoBlack } = black;
 						// 刪除按鈕回傳memberNoBlack來記錄每個按鈕創建時的memberNoBlack，以便後續deleteBlack取值
 						blacklist_el.append(`
-						<li>
+						<li style="cursor: default;">
 							<h4 class="entry-title">
 								<div>#${count}</div>
 							</h4>
@@ -655,30 +669,27 @@
 									<dd>${memberNoBlack}</dd>
 								</dl>
 							</div>
-							<button type="submit" class="btn btn-primary uppercase m-r-sm" onclick="deleteBlack(${memberNo}, ${memberNoBlack});">移除黑名單</button>
+							<button type="submit" class="btn btn-primary uppercase m-r-sm" onclick="deleteBlack(${memberNoBlack});">移除黑名單</button>
 						</li>
 						`);
-						// <button type="submit" class="btn btn-primary uppercase m-r-sm" onclick="deleteBlack(${memberNo}, ${memberNoBlack});this.closest('li').remove();">移除黑名單</button>
 					});
 				});
 		}
 
 		// 刪除黑名單
-		function deleteBlack(memberNo, e) {
+		function deleteBlack(e) {
 			const memberNoBlack = e; //動態生成的項次將memberNoBlack回傳
 
-			fetch('/BuyGo/front_end/member/black/DeleteBlacklist', {
+			fetch('/BuyGo/needLoginApi/front_end/deleteBlacklist', {
 				method: 'POST',
 				headers: { 'Content-Type': 'application/json;charset:utf-8' },
 				body: JSON.stringify({
-					memberNo: memberNo,
 					memberNoBlack: e //刪除項目自帶的memberNoBlack
 				})
 			})
 				.then(resp => resp.json())
 				.then(body => {
-					// const { successful } = body;
-					loadBlacklist(memberNo); // 呼叫函式loadBlacklist，將當前畫面動態刷新
+					loadBlacklist(); // 呼叫函式loadBlacklist，將當前畫面動態刷新
 				})
 		}
 

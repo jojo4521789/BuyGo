@@ -2,9 +2,12 @@ package web.front_end.seller.gpa.order.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import core.entity.Core;
@@ -12,6 +15,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import web.front_end.member.acc.entity.Member;
+import web.front_end.seller.gpa.prod.entity.GpaProd;
 
 @Entity
 @Setter
@@ -59,4 +64,20 @@ public class GpaSo extends Core{
 
     @Column(name = "GPA_EVA_MEMBER")
     private Integer gpaEvaMember;
+    
+//    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
+    @JoinColumn(name = "GPA_PROD_NO",
+    insertable = false, updatable = false)
+    private GpaProd gpaProd;
+    
+//    @ManyToOne
+//    @JoinColumn(name = "GPA_PROD_NO",
+//    insertable = false, updatable = false)
+//    private GpaProd gpaProd;
+    
+    @ManyToOne
+    @JoinColumn(name = "MEMBER_NO",
+    insertable = false, updatable = false)
+    private Member member;
 }

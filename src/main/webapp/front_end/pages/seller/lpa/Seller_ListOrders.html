@@ -87,6 +87,54 @@
 		}
 
 		/*-----------------評價 & 燈箱css結束-----------------*/
+
+		/*-----------------商品詳情燈箱-----------------*/
+		/* Lightbox Container */
+		.lightbox {
+			display: none;
+			position: fixed;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			background-color: rgba(0, 0, 0, 0.7);
+			z-index: 999;
+		}
+
+		/* Lightbox Content */
+		.lightbox-content {
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+			background-color: #fff;
+			padding: 20px;
+			border-radius: 5px;
+			box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+			max-width: 80%;
+			max-height: 80%;
+			overflow-y: auto;
+		}
+
+		/* Close Button */
+		.close-lightbox {
+			position: absolute;
+			top: 10px;
+			right: 10px;
+			cursor: pointer;
+			font-size: 20px;
+		}
+
+		/* Lightbox Content Styling with Increased Font Size */
+		.lightbox-content div {
+			margin-bottom: 10px;
+			font-size: 20px;
+			/* 調整所需的字體大小 */
+		}
+
+		.lightbox-content span {
+			font-weight: bold;
+		}
 	</style>
 </head>
 
@@ -207,9 +255,9 @@
 							<!-- USER RELATED MENU -->
 							<nav id="tiny-menu" class="clearfix">
 								<ul class="user-menu">
-									<li><a href="myaccount.html">My Account</a></li>
-									<li><a href="cart.html">My Wishlist</a></li>
-									<li><a href="checkout.html">Checkout</a></li>
+									<li><a href="myaccount.html">我的帳戶</a></li>
+									<li><a href="cart.html">購物車</a></li>
+									<li><a href="#">賣家中心</a></li>
 									<li><a href="#">Log Out</a></li>
 								</ul>
 							</nav>
@@ -219,7 +267,8 @@
 						<!-- SITE LOGO -->
 						<div class="logo-wrapper">
 							<a href="index-2.html" class="logo" title="GFashion - Responsive e-commerce HTML Template">
-								<img src="../../../img/common/logo.png" alt="GFashion - Responsive e-commerce HTML Template" />
+								<img src="../../../img/common/logo.png"
+									alt="GFashion - Responsive e-commerce HTML Template" />
 							</a>
 						</div>
 						<!-- // SITE LOGO -->
@@ -409,6 +458,7 @@
 									<li><a href="#">平台錢包</a></li>
 									<li><a href="#">聊天室</a></li>
 									<li><a href="blacklist.html">黑名單</a></li>
+
 								</ul>
 							</section>
 
@@ -445,21 +495,21 @@
 									<!--訂單分類列表-->
 									<ul class="nav nav-tabs">
 										<li class="active"><a href="javascript:void(0)" onclick="changePage(0)"
-												data-toggle="tab" id="orderPageBtn1">全部</a></li>
+												data-toggle="tab" id="orderPageBtn1">追加中</a></li>
 										<li><a href="javascript:void(0)" onclick="changePage(1)"
-												data-toggle="tab">已付訂金</a></li>
-										<li><a href="javascript:void(0)" onclick="changePage(2)"
-												data-toggle="tab">待出貨</a></li>
-										<li><a href="javascript:void(0)" onclick="changePage(3)"
 												data-toggle="tab">運送中</a></li>
-										<li><a href="javascript:void(0)" onclick="changePage(4)"
+										<li><a href="javascript:void(0)" onclick="changePage(2)"
+												data-toggle="tab">已完成</a></li>
+										<li><a href="javascript:void(0)" onclick="changePage(3)"
+												data-toggle="tab">不成立</a></li>
+										<!-- <li><a href="javascript:void(0)" onclick="changePage(4)"
 												data-toggle="tab">已完成</a></li>
 										<li><a href="javascript:void(0)" onclick="changePage(5)"
 												data-toggle="tab">不成立</a></li>
 										<li><a href="javascript:void(0)" onclick="changePage(6)"
-												data-toggle="tab">退款/退貨</a></li>
+												data-toggle="tab">申請退款/退貨</a></li>
 										<li><a href="javascript:void(0)" onclick="changePage(7)"
-												data-toggle="tab">未完成取貨</a></li>
+												data-toggle="tab">未完成取貨</a></li> -->
 									</ul>
 									<table id="ordersTable" align="center" width="1000">
 										<thead>
@@ -468,15 +518,39 @@
 												<th>訂單時間</th>
 												<th>訂單商品</th>
 												<th>訂單總金額</th>
-												<th>已付訂金</th>
-												<th>待付金額</th>
-												<th>訂單詳情</th>
+												<!-- <th>已付訂金</th>
+												<th>待付金額</th> -->
+												<th>訂單操作</th>
 											</tr>
 										</thead>
 										<tbody id="showOrderArea">
 
 										</tbody>
 									</table>
+
+									<div id="lightbox" class="lightbox">
+										<div class="lightbox-content">
+											<span class="close-lightbox" id="closeLightbox">&times;</span>
+											<div class="order-details">
+												<h1>訂單詳情</h1>
+												<p><strong>訂單狀態：</strong><span id="orderStatus"></span></p>
+												<p><strong>訂單號碼：</strong><span id="orderNumber"></span></p>
+												<p><strong>訂單日期：</strong><span id="orderTime"></span></p>
+												<p><strong>訂單總金額：</strong><span id="totalAmount"></span></p>
+												<p><strong>收件人姓名：</strong><span id="recName"></span></p>
+												<p><strong>收件地址：</strong><span id="sendAddress"></span></p>
+
+												<p>商品列表
+												<ul>
+													<li id="productsHTML">
+													</li>
+												</ul>
+												</p>
+
+												<button id="closeLightbox_btn">關閉視窗</button>
+											</div>
+										</div>
+									</div>
 
 								</div>
 							</div>
@@ -696,26 +770,28 @@
 
 	<!-- // Particular Page Javascripts -->
 	<script>
-		$("#orderPageBtn1").click(); // 載入頁面時即觸發點即按鈕事件，以觸發撈取資料庫的動作
+		// 載入頁面時即觸發點即按鈕事件，以觸發撈取資料庫的動作
+		$("#orderPageBtn1").click();
+		let orders;
+		let order;
 
-		//----------------------------------------------------------
-		function changePage(selectPage) { // 點擊訂單狀態切換按鈕的觸發事件，依點擊按鈕的不同有不同的selectPage值
-			fetch('/BuyGo/loadLpaOrder?page=' + selectPage, {
+		// 點擊訂單狀態切換按鈕的觸發事件，依點擊按鈕的不同有不同的selectPage值
+		function changePage(selectPage) {
+			fetch('/BuyGo/needLoginApi/loadLpaBuyerOrder?page=' + selectPage, {
 				method: "Get",
 				headers: {
-					'Content-Type': 'application/x-www-form-urlencoded ; charset:utf-8',
+					'Content-Type': 'application/x-www-form-urlencoded ; charset=utf-8',
 				},
-				// body: JSON.stringify(orderSeqData)
 			})
 				.then(function (response) {
 					console.log(response);
 					return response.json();
 				})
 				.then(function (data) {
-					let orders = data;
+					orders = data;
 					console.log(orders); // 印出傳入的JSON物件
 					$('#ordersTable').DataTable().destroy(); // 先销毁之前的 DataTable 实例，然后再进行初始化
-					showOrders(orders);
+					showOrders(selectPage);
 				})
 				.catch(function (error) {
 					console.log(error);
@@ -723,31 +799,31 @@
 		}
 
 
-		//----------------------------------------------------------
-		function showOrders(orders) {
+		// 依照訂單狀態分類 顯示訂單
+		function showOrders(selectPage) {
 			const items = [];
 
 			for (let i = 0; i < orders.length; i++) {
 				const lpaSoSeq = orders[i].lpaSoSeq;
 				const lpaSoTime = orders[i].lpaSoTime;
-				const lpaProdName = (orders[i].lpa_Prods.length > 0 ? `${orders[i].lpa_Prods[0].lpaProdName}...等商品` : 'No products');
+				const lpaProdName = (orders[i].lpaProds[0].lpaProdName);
 				const lpaTotalAmount = orders[i].lpaTotalAmount;
-				const lpaDownPayment = orders[i].lpaDownPayment;
-				const lpaFinalPayment = orders[i].lpaFinalPayment;
+				// const lpaDownPayment = orders[i].lpaDownPayment;
+				// const lpaFinalPayment = orders[i].lpaFinalPayment;
 
 				let item = {
 					lpaSoSeq: lpaSoSeq,
 					lpaSoTime: lpaSoTime,
 					lpaProdName: lpaProdName,
 					lpaTotalAmount: lpaTotalAmount,
-					lpaDownPayment: lpaDownPayment,
-					lpaFinalPayment: lpaFinalPayment,
+					// lpaDownPayment: lpaDownPayment,
+					// lpaFinalPayment: lpaFinalPayment,
 				};
 
 				items.push(item);
 			}
 
-			console.log(items);
+			// 如果訂單狀態是"追加中", 就
 
 			const dataTable = $('#ordersTable').DataTable({
 				language: {
@@ -759,84 +835,119 @@
 					{ data: "lpaSoTime" },
 					{ data: "lpaProdName" },
 					{ data: "lpaTotalAmount" },
-					{ data: "lpaDownPayment" },
-					{ data: "lpaFinalPayment" },
+					// { data: "lpaDownPayment" },
+					// { data: "lpaFinalPayment" },
 					{
-						data: null, title: "訂單詳情",
-						render: function (data, type) {
-							return '<button type="button" class="btn btn-sm">查看</button> '
+						data: null, title: "訂單操作",
+						render: function (data, type, row, meta) {
+							// 将行数据转换为 JSON 字符串并存储在按钮的 data-row 属性中
+							var rowData = JSON.stringify(row);
+
+
+							if (selectPage == 0) {
+								return `<button type="button" class="btn btn-warning btn-sm" data-row=${rowData} onclick="editOrder(${meta.row})">查看詳情</button>` 
+								// + `<button type="button" class="btn btn-warning btn-sm" data-row=${rowData} onclick="deliverProd(${meta.row})">出貨</button>`;
+								
+							} else {
+								// return '<button type="button" class="btn btn-danger btn-sm" data-row=\'' + rowData + '\' onclick="showOrderDetails(' + meta.row + ')">查看詳情</button>'
+								return `<button type="button" class="btn btn-warning btn-sm" onclick="showOrderDetails(${meta.rowIndex})">查看詳情</button>`
+							}
 						}
-					},
+					}
 				]
+			})
+		}
+
+
+		// 點擊詳情出現訂單詳情燈箱
+		function showOrderDetails(rowIndex) {
+			order = orders[rowIndex];
+
+			// Generate the products HTML
+			productsHTML = '';
+
+			for (var i = 0; i < order.lpaSoDetails.length; i++) {
+				let details = order.lpaSoDetails[i];
+				productsHTML += `<div>商品名稱: <span>${details.lpaProd.lpaProdName}</span></div>`;
+				productsHTML += `<div>商品單價: <span>${details.lpaProdPrice}</span></div>`;
+				productsHTML += `<div>商品數量: <span>${details.lpaOrdQty}</span></div>`;
+				productsHTML += `<div class="prodStats">商品狀態: <span>${orderDetailsStatus(details.status)}</span></div>`;
+
+				// 创建一个新的 <select> 元素，并为每个商品添加不同的唯一 id
+				let newSelector = $("<select>").attr("id", "selector_" + i)
+					.append($("<option>").val("option1").text("追加完成"))
+					.append($("<option>").val("option2").text("追加失敗"));
+
+				// 将新的 <select> 元素添加到当前商品的 div.prodStats 中
+				$(".prodStats:eq(" + i + ")").append(newSelector);
+			}
+
+			// Update the lightbox content using jQuery
+			$("#orderStatus").text(orderStatus(order.lpaSoStatus));
+			$("#orderNumber").text(order.lpaSoSeq);
+			$("#orderTime").text(order.lpaSoTime);
+			$("#productsHTML").html(productsHTML);
+			$("#totalAmount").text(order.lpaTotalAmount);
+			$("#recName").text(order.lpaRecName);
+			$("#sendAddress").text(order.lpaSendAddress);
+
+			// Show the lightbox
+			$("#lightbox").show();
+
+			// Close the lightbox when the close button is clicked
+			$("#closeLightbox").click(function () {
+				$("#lightbox").hide();
 			});
-		};
 
-		$(".btn btn-sm").on("click", function(){
-			console.log("ttt");
-		})
+			$("#closeLightbox_btn").click(function () {
+				$("#lightbox").hide();
+			});
+		}
 
+		// 進入訂單詳情頁面&編輯追加狀況
+		function editOrder(rowIndex) {
+			lpaSoSeq = orders[rowIndex].lpaSoSeq;
+			console.log(lpaSoSeq);
+			localStorage.setItem("myData", lpaSoSeq);
+			window.location.href = "Seller_Edit.html"
+		}
 
-		// //----------------------------------------------------------
-		// // 判斷目前所在的page，可給出評價的頁面才顯示評價按鈕
-		// // 若在"已完成"頁面
-		// if (selectPage === 4) {
-		// 	// 加上給予評價按鈕 與 過往評價
-		// 	$("div.orderPrice").append(`
-		// 						<button type="button" class="btn btn-success EvalBtn" style="position:absolute;left:15px; top:20px;visibility:visible;">給予評價</button>
-		// 						<h5 style="position:absolute;left:110px; top:25px; visibility:hidden;"></h5>
-		// 					`);
-		// 	// 加上評價燈箱
-		// 	$("div.tab-content").append(`
-		// 						<div class="overlay" style="z-index:9999;">
-		// 							<article>
-		// 								<div class="star_block">
-		// 									<span onclick="clickStar(this, 1);" class="star"><svg class="svg-inline--fa fa-star fa-w-18" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="star" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" data-fa-i2svg=""><path fill="currentColor" d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z"></path></svg><!-- <i class="fas fa-star"></i> --></span>
-		// 									<span onclick="clickStar(this, 2);" class="star"><svg class="svg-inline--fa fa-star fa-w-18" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="star" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" data-fa-i2svg=""><path fill="currentColor" d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z"></path></svg><!-- <i class="fas fa-star"></i> --></span>
-		// 									<span onclick="clickStar(this, 3);" class="star"><svg class="svg-inline--fa fa-star fa-w-18" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="star" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" data-fa-i2svg=""><path fill="currentColor" d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z"></path></svg><!-- <i class="fas fa-star"></i> --></span>
-		// 									<span onclick="clickStar(this, 4);" class="star"><svg class="svg-inline--fa fa-star fa-w-18" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="star" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" data-fa-i2svg=""><path fill="currentColor" d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z"></path></svg><!-- <i class="fas fa-star"></i> --></span>
-		// 									<span onclick="clickStar(this, 5);" class="star"><svg class="svg-inline--fa fa-star fa-w-18" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="star" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" data-fa-i2svg=""><path fill="currentColor" d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z"></path></svg><!-- <i class="fas fa-star"></i> --></span>
-		// 									<p style="display: none";></p>
-		// 								</div>
-		// 								<br>
-		// 								<button type="button" class="btn_modal_submit" disabled="disabled" onclick="submitEval(this);">提交</button>
-		// 								<button type="button" class="btn_modal_close">關閉</button>
-		// 							</article>
-		// 						</div>
-		// 					`);
-		// }
+		// 將整筆訂單狀態(數字)轉成中文
+		function orderStatus(status) {
+			switch (status) {
+				case 0:
+					return "追加中";
+				case 1:
+					return "運送中";
+				case 2:
+					return "已完成";
+				case 3:
+					return "不成立";
+				default:
+					return "未知狀態";
+			}
+		}
 
-		// //-----------------評價 & 燈箱事件開始-----------------
-		// // 開啟 Modal 彈跳視窗
-		// $(document).on("click", "button.EvalBtn", function (e) {
-		// 	console.log(this);
-		// 	console.log($(this).closest("div.orderPrice").siblings("div.overlay"));
-		// 	$(this).closest("div.orderPrice").siblings("div.overlay").fadeIn();
-		// });
+		// 將訂單詳情追加狀態(數字)轉成中文
+		function orderDetailsStatus(status) {
+			switch (status) {
+				case 0:
+					return "追加中";
+				case 1:
+					return "追加完成";
+				case 2:
+					return "追加失敗";
+				default:
+					return "未知狀態";
+			}
+		}
 
-		// // 關閉 燈箱Modal
-		// $(document).on("click", "button.btn_modal_close, div.overlay, button.btn_modal_submit", function (e) {
-		// 	$("div.overlay").fadeOut();
-		// });
-		// // 點擊 燈箱區域內時不關閉燈箱
-		// $(document).on("click", "div.overlay > article", function (e) {
-		// 	e.stopPropagation();
-		// });
-		// // 評價星星點擊事件
-		// function clickStar(selectStar, starNum) { //返回本身物件 與 星星數量
-		// 	$(selectStar).addClass("-on"); // 被選取的星星亮起
-		// 	$(selectStar).prevAll().addClass("-on"); // 被選取星星以前的所有星星亮起
-		// 	$(selectStar).nextAll().removeClass("-on"); // 被選取星星以前的所有星星轉暗
-		// 	$(selectStar).closest("div.star_block").siblings("button.btn_modal_submit").removeAttr("disabled"); // 使提交按鈕可被點擊
-		// 	$(selectStar).siblings("p").text(starNum); // 將此時選取的星星數記錄在隱藏的p標籤內
-		// }
-		// // 給予評價的提交按鈕點擊事件
-		// function submitEval(selectBtn) {
-		// 	console.log($(selectBtn).closest("article").find("p").text()); // 取得選取的星星數，供後續fetch使用
-		// 	$(selectBtn).closest("div.tab-content").find("button.EvalBtn").attr("disabled", "disabled"); // 將給予評價按鈕失效
-		// 	$(selectBtn).closest("div.tab-content").find("h5").text("過往評價：" + $(selectBtn).closest("article").find("p").text() + "★"); // 顯示過往評價
-		// 	$(selectBtn).closest("div.tab-content").find("h5").css("visibility", "visible"); // 將過往評價顯示出來
-		// }
-		// //-----------------評價 & 燈箱事件結束-----------------
+		$(window).on('pageshow', function (event) {
+			// 页面重新显示时触发的操作
+			if (event.originalEvent.persisted) { // event.persisted是一个boolean，指示页面是否来自缓存
+				$("#orderPageBtn1").click();
+			}
+		});
 	</script>
 
 </body>

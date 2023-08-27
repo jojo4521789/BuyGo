@@ -2,24 +2,30 @@ package web.back_end.lpa.product.entity;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
 
+import core.entity.Core;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import web.back_end.lpa.order.entity.LpaSo;
 
 @Entity
+@Table(name = "lpa_prod")
 @Setter
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Lpa_Prod implements Serializable {
+public class LpaProd extends Core implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "LPA_PROD_NO")
@@ -42,6 +48,8 @@ public class Lpa_Prod implements Serializable {
 	private Timestamp lpaProdOffTime;
 	@Column(name = "LPA_PROD_STATUS", insertable = false)
 	private Integer lpaProdStatus;
+//	@ManyToMany(mappedBy = "lpaProds")
+//	private List<LpaSo> lpaSos;
 
 	// Constructor
 	

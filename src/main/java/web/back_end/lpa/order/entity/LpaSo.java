@@ -5,26 +5,28 @@ import java.util.List;
 
 import javax.persistence.*;
 
+import core.entity.Core;
 import lombok.*;
-import web.back_end.lpa.product.entity.Lpa_Prod;
+import web.back_end.lpa.product.entity.LpaProd;
 
 @Entity
+@Table(name = "lpa_so")
 @Setter
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Lpa_SO {
+public class LpaSo extends Core{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "LPA_SO_NO")
 	private Integer lpaSoNo;
-	@Column(name = "LPA_SO_SEQ", updatable = false)
+	@Column(name = "LPA_SO_SEQ", insertable = false)
     private String lpaSoSeq;
 	@Column(name = "MEMBER_NO", updatable = false)
     private Integer memberNo;
-	@Column(name = "LPA_SO_TIME", insertable = false)
+	@Column(name = "LPA_SO_TIME", insertable = false) // DB自動新增時間
     private Timestamp lpaSoTime;
-	@Column(name = "LPA_SO_STATUS")
+	@Column(name = "LPA_SO_STATUS", insertable = false) // 預設狀態0
     private Byte lpaSoStatus;
 	@Column(name = "LPA_EVA_SELLER", insertable = false)
     private Byte lpaEvaSeller;
@@ -32,9 +34,9 @@ public class Lpa_SO {
     private Byte lpaEvaMember;
 	@Column(name = "LPA_TOTAL_AMOUNT")
     private Integer lpaTotalAmount;
-	@Column(name = "LPA_DOWN_PAYMENT")
+	@Column(name = "LPA_DOWN_PAYMENT", insertable = false)
     private Integer lpaDownPayment;
-	@Column(name = "LPA_FINAL_PAYMENT")
+	@Column(name = "LPA_FINAL_PAYMENT", insertable = false)
     private Integer lpaFinalPayment;
 	@Column(name = "LPA_REC_NAME")
     private String lpaRecName;
@@ -53,5 +55,11 @@ public class Lpa_SO {
 					name="LPA_PROD_NO",
 					referencedColumnName = "LPA_PROD_NO")
 			)
-	private List<Lpa_Prod> lpa_Prods;
+	private List<LpaProd> lpaProds;
+	
+	@OneToMany
+	@JoinColumn(name = "LPA_SO_NO", referencedColumnName = "LPA_SO_NO")
+	private List<LpaSoDetails> lpaSoDetails;
+	
+	
 }
