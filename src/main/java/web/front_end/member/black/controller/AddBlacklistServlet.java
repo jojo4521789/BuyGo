@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import web.front_end.member.black.entity.Blacklist;
 
-@WebServlet("/front_end/member/black/addBlacklist")
+@WebServlet("/needLoginApi/front_end/addBlacklist")
 public class AddBlacklistServlet extends HttpServlet{
 	private static final long serialVersionUID = 1L;
 	@Override
@@ -25,12 +25,9 @@ public class AddBlacklistServlet extends HttpServlet{
 
 		SERVICE.addBlack(blacklist);
 		//successful
-		System.out.println("blacklist.isSuccessful():" + blacklist.isSuccessful());
-		if(blacklist.isSuccessful()) {
-//			System.out.println("修改成功");
+		if(blacklist.isSuccessful()) { // 修改成功
 			writePojo2Json(response, blacklist);
-		}else {
-//			System.out.println("修改失敗");
+		}else { // 修改失敗
 			writePojo2Json(response, blacklist);
 		}
 		

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="zh-Hant" id="the_html">
+
+<head>
+    <meta charset="utf-8">
+    <title>Form</title>
+    <style>
+        input[disabled] {
+            background-color: #eee;
+            cursor: not-allowed;
+        }
+
+        #drop_zone {
+            border: 1px dashed #ccc;
+            height: 50px;
+            position: relative;
+        }
+
+        #drop_zone span.text {
+            position: absolute;
+            display: inline-block;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            z-index: -1;
+            color: lightgray;
+        }
+
+        #drop_zone.-on {
+            border: 1px dashed lightblue;
+            box-shadow: 3px 3px 5px lightblue inset, -3px -3px 5px lightblue inset;
+        }
+
+        #preview {
+            border: 1px solid lightgray;
+            display: inline-block;
+            width: 100px;
+            min-height: 150px;
+            position: relative;
+        }
+
+        #preview span.text {
+            position: absolute;
+            display: inline-block;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            z-index: -1;
+            color: lightgray;
+        }
+
+        #preview img.preview_img {
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <label>消息標題：</label>
+        <input type="text" id="newsTitle">
+    </div>
+
+    <div>
+        <label>消息內容：</label>
+        <input type="text" id="newsContent"></input>
+    </div>
+
+    <div>
+        <label>圖片：</label>
+        <input type="file" id="newsPicture">
+        <div>
+            <img id='preview'> 
+        </div>
+    </div>
+    <button type="submit" id="btn">送出新增</button>
+    <p id="p1"></p>
+
+
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <script>
+
+
+        // =========================== 元素 ========================= //
+        const newsTitle_el = document.getElementById("newsTitle");
+        const newsContent_el = document.getElementById("newsContent");
+        const newsPicture_el = document.getElementById("newsPicture");
+        const preview_el = document.getElementById("preview");
+        const btn_el = document.getElementById("btn");
+        // =========================== 透過 File 取得預覽圖 ========================= //
+        var preview_img = function (file) {
+            var reader = new FileReader(); // 用來讀取檔案
+            reader.readAsDataURL(file); // 讀取檔案
+            reader.addEventListener("load", function () {
+
+                let img_str = '<img src="' + reader.result + '" class="preview_img">';
+                preview_el.innerHTML = img_str;
+            });
+        };
+        newsPicture_el.addEventListener("change", function (e) {
+            if (this.files.length > 0) {
+                preview_img(this.files[0]);
+            } else {
+                preview_el.innerHTML = '<span class="text">預覽圖</span>';
+            }
+        });
+        preview_el.innerHTML = '<span class="text">預覽圖</span>';
+        sessionStorage.clear();
+        //==============================
+
+        //==============================
+        btn_el.addEventListener("click", () => {
+            fetch("front_end / guest / news / NewsIncrese", {
+                method: "POST",
+                header: { "content-type": "application/json;charset=utf-8" },
+                body: JSON.stringify({
+                    newsTitle: newsTitle_el.value,
+                    newsContent: newsContent_el.value,
+                    newsPicture: Array.from(new Uint8Array(arrayBuffer)),
+                })
+            }).then(resp => resp.json())
+            .then(body=>{
+                display_arr_img(body['img'])
+            })
+        });
+
+
+    </script>
+</body>
+
+</html>

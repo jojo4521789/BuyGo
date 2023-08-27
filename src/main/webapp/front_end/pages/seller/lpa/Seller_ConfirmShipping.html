@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>选择出货方式</title>
+    <!-- 引入 jQuery 库 -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <h1>选择出货方式</h1>
+
+    <p>请选择出货方式：</p>
+
+    <form id="shippingForm">
+        <label>
+            <input type="radio" name="shippingMethod" value="711"> 7-Eleven
+        </label>
+        <br>
+        <label>
+            <input type="radio" name="shippingMethod" value="familyMart"> 全家
+        </label>
+        <br>
+        <label>
+            <input type="radio" name="shippingMethod" value="sellerDelivery"> 购买者宅配
+        </label>
+        <br>
+        <label>
+            <input type="radio" name="shippingMethod" value="other"> 其他
+        </label>
+        <br>
+
+        <!-- 如果选择其他，显示输入框 -->
+        <div id="otherMethodInput" style="display: none;">
+            <label for="otherMethod">其他出货方式：</label>
+            <input type="text" id="otherMethod" name="otherMethod">
+        </div>
+
+        <br>
+
+        <button type="submit">确认出货方式</button>
+    </form>
+
+    <script>
+        $(document).ready(function () {
+            const shippingForm = $('#shippingForm');
+            const otherMethodInput = $('#otherMethodInput');
+            const otherMethodField = $('#otherMethod');
+
+            // 当选择其他出货方式时显示输入框
+            shippingForm.on('change', 'input[name="shippingMethod"]', function () {
+                if ($('input[name="shippingMethod"]:checked').val() === 'other') {
+                    otherMethodInput.show();
+                } else {
+                    otherMethodInput.hide();
+                }
+            });
+
+            // 提交表单时处理选择的出货方式
+            shippingForm.on('submit', function (e) {
+                e.preventDefault();
+
+                const selectedMethod = $('input[name="shippingMethod"]:checked').val();
+
+                if (selectedMethod === 'other') {
+                    const customMethod = otherMethodField.val();
+                    alert(`已选择其他方式：${customMethod}`);
+                } else {
+                    alert(`已选择出货方式：${selectedMethod}`);
+                }
+
+                // 这里可以将选择的出货方式发送到后端进行处理
+
+                // 可以跳转到其他页面或执行其他操作
+                // window.location.href = '其他页面的URL';
+            });
+        });
+    </script>
+</body>
+</html>
