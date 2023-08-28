@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import core.entity.Core;
 import web.back_end.opa.prod.entity.Prpics;
 
-@WebServlet("/opa/prpics/remove")
+@WebServlet("/api/opa/prpics/remove")
 public class PrpicsRemoveServlet extends HttpServlet{
 	private static final long serialVersionUID = -7408100172491320609L;
 

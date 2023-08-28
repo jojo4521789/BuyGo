@@ -16,7 +16,7 @@ import static core.util.CommonUtil.json2Pojo;
 import static core.util.CommonUtil.writePojo2Json;
 import static web.back_end.opa.coupon.util.CouponConstants.SERVICE;
 
-@WebServlet("/opa/coupon/search")
+@WebServlet("/api/opa/coupon/search")
 public class SelectServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -25,9 +25,6 @@ public class SelectServlet extends HttpServlet {
 		Coupon coupon = json2Pojo(request, Coupon.class);
 		String input = coupon.getOpaCouponName();
 		List<Coupon> couponList = SERVICE.findPart(input);
-//		for (Coupon coupon2 : couponList) {
-//			System.out.println(coupon2.getOpaCouponName());
-//		}
 		writePojo2Json(response, couponList);
 	}
 }

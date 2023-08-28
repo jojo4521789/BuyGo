@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import web.back_end.opa.prod.entity.Prod;
 
-@WebServlet("/opa/prod/selectById")
+@WebServlet("/api/opa/prod/selectById")
 public class ProdSelectByIdServlet extends HttpServlet {
 	private static final long serialVersionUID = -2109925517241280273L;
 	
