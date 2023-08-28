@@ -27,6 +27,11 @@ public class NewsServiceImpl implements NewsService{
 			news.setSuccessful(false);
 			return news;
 		}
+		if(news.getNewsPicture() == null) {
+			news.setMessage("沒有圖片");
+			news.setSuccessful(false);
+			return news;
+		}
 		final int resultcount = dao.insert(news);
 		if(resultcount != 1) {
 			news.setMessage("新增錯誤");

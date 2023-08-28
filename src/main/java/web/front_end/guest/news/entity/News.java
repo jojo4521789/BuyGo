@@ -1,6 +1,5 @@
 package web.front_end.guest.news.entity;
 
-import java.sql.Blob;
 import java.sql.Timestamp;
 
 import javax.persistence.Column;

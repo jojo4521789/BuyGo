@@ -3,14 +3,16 @@ package web.front_end.guest.news.dao.impl;
 import java.sql.Timestamp;
 import java.util.List;
 
+import javax.persistence.PersistenceContext;
+
 import org.hibernate.Session;
 import org.springframework.stereotype.Repository;
 
-import web.front_end.guest.faq.entity.Faq;
 import web.front_end.guest.news.dao.NewsDao;
 import web.front_end.guest.news.entity.News;
 @Repository
 public class NewsDaoImpl implements NewsDao{
+	
 
 	@Override
 	public int insert(News entity) {
