@@ -28,8 +28,6 @@ public class ProdDaoImpl implements ProdDao {
 
 	@Override
 	public int update(Prod prod) {
-		System.out.println("Name= " + prod.getOpaProdName());
-		System.out.println(prod);
 		final StringBuilder hql = new StringBuilder().append("UPDATE Prod SET ");
 		hql.append("opaPrcatsNo= :opaPrcatsNo, ")
 			.append("opaProdName= :opaProdName, ")
