@@ -17,7 +17,12 @@ public class LogOutServlet extends HttpServlet{
 		response.setCharacterEncoding("UTF-8");
 		HttpSession session = request.getSession(); // 取得當前請求的Session
 		
+		// 顯示登出者名稱
+		String sessionId = (String)session.getAttribute("sessionId");
+		Integer memberNo = (Integer)session.getAttribute("memberNo");
+		System.out.println("使用者登出, memberNo:" + memberNo + ", session.getId:" + sessionId);
+		
 		session.invalidate(); // 完全銷毀session
-		response.sendRedirect("/BuyGo/front_end/"); // 重導至主頁面
+		response.sendRedirect("/BuyGo/front_end/index.html"); // 重導至主頁面
 	}
 }
