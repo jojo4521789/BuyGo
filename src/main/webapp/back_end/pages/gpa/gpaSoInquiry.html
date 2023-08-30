@@ -1,0 +1,292 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html" ; charset="utf-8" />
+    <title>揪團賣場訂單查詢</title>
+
+    <link href="../../css/common/all.css" rel="stylesheet" type="text/css">
+    <link href="../../js/common/bstable/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="../../js/common/bstable/css/bootstrap-table.css" rel="stylesheet" type="text/css">
+
+    <!-- 載入DataTables開始 -->
+    <!-- CSS -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+    <!-- jq -->
+    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <!-- 載入DataTables結束 -->
+
+    <!-- 載入sweetalert -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <style>
+        /* 燈箱css開始 */
+        button {
+            cursor: pointer;
+        }
+
+        #lightbox,
+        #checkAgainLightbox {
+            /*   border: 1px solid red; */
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background-color: hsla(0, 0%, 0%, .5);
+        }
+
+        .none {
+            display: none;
+        }
+
+        /* 元素 article 置中及基本樣式 */
+        #lightbox>article,
+        #checkAgainLightbox>article {
+            background-color: white;
+            width: 90%;
+            max-width: 800px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px #ddd;
+            padding: 10px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        /* 燈箱css結束 */
+    </style>
+</head>
+
+<body>
+    <div class="div_tab01">
+        <div class="map_find1">
+            <div style="display: inline-block;">
+                <label for="gpaSoNoInput" style="width: 70px;">訂單編號：</label>
+                <input type="text" class="map_input" id="gpaSoNoInput" />
+                <br>
+                <label for="memberAcctInput" style="width: 70px;">訂單狀態：</label>
+                <select id="gpaSoStatInput">
+                    <option value="">任意訂單狀態</option>
+                    <option value="0">揪團中</option>
+                    <option value="1">已成團</option>
+                    <option value="2">出貨配送中</option>
+                    <option value="3">待取貨</option>
+                    <option value="4">已完成</option>
+                    <option value="5">已流團</option>
+                    <option value="6">取消</option>
+                    <option value="7">未完成取貨</option>
+                </select>
+            </div>
+            <div style="display: inline-block;">
+                <label for="buyerMemberNoInput" style="width: 100px;">買家會員編號：</label>
+                <input type="text" class="map_input" id="buyerMemberNoInput" />
+                <br>
+                <label for="sellerMemberNoInput" style="width: 100px;">賣家會員編號：</label>
+                <input type="text" class="map_input" id="sellerMemberNoInput" />
+            </div>
+            <div style="display: inline-block;vertical-align: top;">
+                <label for="gpaProdTotalInput">總金額：</label>
+                <input type="text" class="map_input" id="gpaProdTotalInput" />
+            </div>
+            <div style="display: inline-block;vertical-align: top;">
+                <input type="button" value="搜尋" class="find_but" id="searchBtn" style="width: 70px;"
+                    onclick="searchGpaSoAndGpaProdList()">
+                <br>
+                <input type="button" value="全部清空" class="find_but" style="width: 70px;"
+                    onclick="$('.map_input').val('')">
+            </div>
+        </div>
+        <p>
+        <table data-url="json/data_alae_list.json" id="table" class="table_style" style="margin: 0 auto">
+        </table>
+        </p>
+    </div>
+
+    <!-- <script src="../../js/common/jquery/jQuery-2.2.0.min.js"></script> -->
+    <script src="../../js/common/bstable/js/bootstrap.min.js"></script>
+    <script src="../../js/common/bstable/js/bootstrap-table.js"></script>
+    <script src="../../js/common/bstable/js/bootstrap-table-zh-CN.min.js"></script>
+    <script src="../../js/common/date/js/laydate.js"></script>
+
+    <!-- 燈箱開始 -->
+    <div id="lightbox" class="none" style="z-index:9999;">
+        <article>
+            <p>會員編號：<span id="lightbox_memberNo"></span></p>
+            <p>目前錢包金額：<span id="lightbox_WalletAmount"></span></p>
+            <label for="lightbox_modifyWalletAmountText">欲修改的錢包金額：</label>
+            <input type="text" id="lightbox_modifyWalletAmountText">
+            <span id="lightbox_errorMsg" style="color: red;visibility:hidden;"></span>
+            <br>
+            <label for="lightbox_walletDetail">備註：</label>
+            <br>
+            <textarea cols="50" rows="5" id="lightbox_walletDetail"></textarea>
+            <!-- <input type="text" id="lightbox_walletDetail"> -->
+            <br>
+            <button type="button" class="btn_modal_confirm" onclick="modifyWalletAmountInput()">確認</button>
+            <button type="button" id="btn_modal_close">關閉</button>
+        </article>
+    </div>
+    <!-- 燈箱結束 -->
+    <!-- 再次確認用燈箱開始 -->
+    <div id="checkAgainLightbox" class="none" style="z-index:9999;">
+        <article>
+            <p>會員編號：<span id="checkAgainLightbox_memberNo"></span></p>
+            <p>欲修改的錢包金額：<span id="checkAgainLightbox_modifyWalletAmount" style="color: red;font-size: 24px;"></span></p>
+            <span id="checkAgainLightbox_checkMsg" style="color: red;">請確認修改是否送出</span>
+            <br>
+            <button type="button" class="checkAgainLightbox_btn_modal_confirm"
+                onclick="modifyWalletAmountConfirm()">確認</button>
+            <button type="button" id="checkAgainLightbox_btn_modal_close">關閉</button>
+        </article>
+    </div>
+    <!-- 再次確認用燈箱結束 -->
+
+    <!-- DataTable開始 -->
+    <table id="showGpaSoAndGpaProdList" class="display" style="width:100%">
+        <thead>
+            <tr>
+                <th>項次</th>
+                <th>揪團賣場訂單編號</th>
+                <th>賣家會員編號</th>
+                <th>揪團商品名稱</th>
+                <th>買家會員編號</th>
+                <th>數量</th>
+                <th>總金額</th>
+                <th>揪團訂單狀態</th>
+                <th>收貨人</th>
+                <th>收貨人電話</th>
+                <th>收貨地址</th>
+                <th>截止日期</th>
+
+            </tr>
+        </thead>
+        <tbody id="showGpaSoListBody">
+            <!-- 新增訂單資料區域 -->
+        </tbody>
+        <!-- <tfoot>
+            <tr>
+                <th>項次</th>
+                <th>會員編號</th>
+                <th>帳號</th>
+                <th>身分別</th>
+                <th>姓名</th>
+                <th>電話</th>
+                <th>電子信箱</th>
+                <th>性別</th>
+                <th>生日</th>
+                <th>身份證字號</th>
+                <th>錢包金額</th>
+                <th>功能</th>
+            </tr>
+        </tfoot> -->
+    </table>
+    <!-- DataTable結束 -->
+    <script>
+        let selectedModifyBtn; // 全域變數，供記錄最後一次點下的修改按鈕
+
+        $(document).ready(function () {
+            $('#showGpaSoAndGpaProdList').DataTable();
+        });
+        function searchGpaSoAndGpaProdList() {
+            $('#showGpaSoAndGpaProdList').DataTable().clear();
+            $('#showGpaSoAndGpaProdList').DataTable().destroy();
+
+            let gpaSo = {}; // 宣告gpaSo，用於傳送後端用
+            if($("#gpaSoNoInput").val() != ""){
+                gpaSo.gpaSoNo = $("#gpaSoNoInput").val();
+            }
+            if($("#buyerMemberNoInput").val() != ""){
+                gpaSo.memberNo = $("#buyerMemberNoInput").val();
+            }
+            if($("#gpaProdTotalInput").val() != ""){
+                gpaSo.gpaProdTotal = $("#gpaProdTotalInput").val();
+            }
+            if($("#gpaSoStatInput").val() != ""){
+                gpaSo.gpaSoStat = $("#gpaSoStatInput").val();
+            }
+            let gpaProd = {}; // 宣告gpaProd，用於傳送後端用
+            if($("#sellerMemberNoInput").val() != ""){
+                gpaProd.memberNo = $("#sellerMemberNoInput").val();
+            }
+
+            fetch('/BuyGo/api/back_end/loadGpaSoAndGpaProdList', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json;charset:utf-8' },
+                body: JSON.stringify({
+                    gpaSo: gpaSo,
+                    gpaProd: gpaProd
+                })
+            })
+                .then(resp => resp.json())
+                .then(body => {
+                    let gpaSoAndGpaProdCount = 0;
+                    console.log(body);
+
+                    body.forEach(gpaSoAndGpaProdDTO => {
+                        let { gpaSo, gpaProd } = gpaSoAndGpaProdDTO;
+                        let { gpaSoNo, gpaProdCount, gpaProdTotal, gpaSoStat, gpaBuyName, gpaBuyTel, gpaBuyAdd } = gpaSo; // 因買賣家會員編號同名，故不在此宣告memberNo，於使用時直接使用gpaSo.memberNo取值
+                        let { gpaProdName, gpaEndDate } = gpaProd; // 因買賣家會員編號同名，故不在此宣告memberNo，於使用時直接使用gpaProd.memberNo取值
+
+                            switch (gpaSoStat) {
+                                case 0: {
+                                    gpaSoStat = "揪團中";
+                                    break;
+                                }
+                                case 1: {
+                                    gpaSoStat = "已成團";
+                                    break;
+                                }
+                                case 2: {
+                                    gpaSoStat = "出貨配送中";
+                                    break;
+                                }
+                                case 3: {
+                                    gpaSoStat = "待取貨";
+                                    break;
+                                }
+                                case 4: {
+                                    gpaSoStat = "已完成";
+                                    break;
+                                }
+                                case 5: {
+                                    gpaSoStat = "已流團";
+                                    break;
+                                }
+                                case 6: {
+                                    gpaSoStat = "取消";
+                                    break;
+                                }
+                                case 7: {
+                                    gpaSoStat = "未完成取貨";
+                                    break;
+                                }
+                            }
+
+                        gpaSoAndGpaProdCount++;
+                        $("tbody#showGpaSoListBody").append(`
+                            <tr>
+                                <td>${gpaSoAndGpaProdCount}</td>
+                                <td>${gpaSoNo}</td>
+                                <td>${gpaProd.memberNo}</td>
+                                <td>${gpaProdName}</td>
+                                <td>${gpaSo.memberNo}</td>
+                                <td>${gpaProdCount}</td>
+                                <td>${gpaProdTotal}</td>
+                                <td>${gpaSoStat}</td>
+                                <td>${gpaBuyName}</td>
+                                <td>${gpaBuyTel}</td>
+                                <td>${gpaBuyAdd}</td>
+                                <td>${gpaEndDate}</td>
+                            </tr>
+                        `);
+                    });
+                    // 初始化
+                    $('#showGpaSoAndGpaProdList').DataTable();
+                });
+        }
+    </script>
+</body>
+
+</html>

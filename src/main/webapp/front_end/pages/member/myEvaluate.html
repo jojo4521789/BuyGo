@@ -463,64 +463,93 @@
 							<div class="row">
 								<div class="col-xs-12 col-sm-8">
 									<h3 class="uppercase text-bold"><span class="text-xs">我的評價</span></h3>
+									<h4 id="sellerEvaStarAvgContainer"
+										style="position: absolute; right: 10px; top: 70px; visibility: hidden;"
+										class="text-bold">被評價星數總平均: <span id="sellerEvaStarAvg"
+											style="visibility: hidden"></span></h4>
 									<!-- 我的評價的賣場選擇 -->
 									<button type="button" id="paBtn" class="btn btn-success"
-										onclick="paProdEva()">一般代購</button>
+										onclick="paSoEva()">一般代購</button>
 									<!-- <button type="button" class="btn btn-primary"
 										onclick="window.location.href='#'">限時連線代購</button> -->
 									<button type="button" id="gpaBtn" class="btn btn-primary"
-										onclick="gpaProdEva()">揪團</button>
+										onclick="gpaSoEva()">揪團</button>
 									<hr>
 									<input type="text" id="search" class="form-control" style="margin-bottom: 20px;"
 										placeholder="以商品名稱或訂單編號搜尋">
 									<div id="showOrderArea">
 										<!-- 假資料開始 -->
-										<!-- <div class="tab-content" id="orderId1" style="position:relative;width:770px;height:190px;margin-bottom:20px;display:flex; flex-direction:column">
-											<a href="#" class="orderDetail" style="position:absolute;left:0px; top:0px;width:100%;height:120px;">
+										<!-- <div class="tab-content" id="orderId1"
+											style="width:770px;margin-bottom:20px;padding: 10px 10px;">
+											<a href="#" class="orderDetail">
 												<div class="col-xs-12 col-sm-12" style="width:100%;height:120px;">
-													<img src="#" style="width:80px;height:80px;border:1.5px solid LightGray;position:absolute;left:20px; top:20px;" alt="GFashion - Responsive e-commerce HTML Template">
-													<h4 class="prodName" style="position:absolute;left:120px; top:20px;">雨傘</h4>
+													<img src="#"
+														style="width:80px;height:80px;border:1.5px solid LightGray;position:absolute;left:20px; top:20px;"
+														alt="GFashion - Responsive e-commerce HTML Template">
+													<h4 class="prodName"
+														style="position:absolute;left:120px; top:20px;">雨傘</h4>
 													<span style="position:absolute;left:120px; top:80px;">x3</span>
-													<span style="position:absolute;right:10px; top:10px;">賣家名稱：雨傘王</span>
-													<span class="soNo" style="position:absolute;right:10px; top:35px;">訂單編號：1000</span>
-													<div style="position:absolute;right:10px; top:90px;">揪團截止時間：2023-08-19</div>
+													<span
+														style="position:absolute;right:10px; top:10px;">賣家名稱：雨傘王</span>
+													<span class="soNo"
+														style="position:absolute;right:10px; top:35px;">訂單編號：10000000000000000</span>
+													<div style="position:absolute;right:10px; top:90px;">
+														揪團截止時間：2023-08-19</div>
 												</div>
 												<hr style="margin:0px;border:1px solid lightgray">
 											</a>
-											<div class="col-xs-12 col-sm-12 orderPrice" style="width:770px;height:69px;position:absolute;left:0px; top:121px;">
-													<h4 style="position:absolute;right:10px; top:20px;">訂單金額：$900</h4>
+											<div class="col-xs-12 col-sm-12 orderPrice" style="height:70px;">
+												<h4 style="position:relative;text-align:right;top:35%;">訂單金額：$900</h4>
 											</div>
 										</div>
-										<div class="tab-content" id="orderId2" style="position:relative;width:770px;height:190px;margin-bottom:20px;display:flex; flex-direction:column">
-											<a href="#" class="orderDetail" style="position:absolute;left:0px; top:0px;width:100%;height:120px;">
+										<div class="tab-content" id="orderId2"
+											style="position:relative;width:770px;height:190px;margin-bottom:20px;display:flex; flex-direction:column">
+											<a href="#" class="orderDetail"
+												style="position:absolute;left:0px; top:0px;width:100%;height:120px;">
 												<div class="col-xs-12 col-sm-12" style="width:100%;height:120px;">
-													<img src="#" style="width:80px;height:80px;border:1.5px solid LightGray;position:absolute;left:20px; top:20px;" alt="GFashion - Responsive e-commerce HTML Template">
-													<h4 class="prodName" style="position:absolute;left:120px; top:20px;">小雨傘</h4>
+													<img src="#"
+														style="width:80px;height:80px;border:1.5px solid LightGray;position:absolute;left:20px; top:20px;"
+														alt="GFashion - Responsive e-commerce HTML Template">
+													<h4 class="prodName"
+														style="position:absolute;left:120px; top:20px;">小雨傘</h4>
 													<span style="position:absolute;left:120px; top:80px;">x6</span>
-													<span style="position:absolute;right:10px; top:10px;">賣家名稱：David</span>
-													<span class="soNo" style="position:absolute;right:10px; top:35px;">訂單編號：16</span>
-													<div style="position:absolute;right:10px; top:90px;">揪團截止時間：2023-08-19</div>
+													<span
+														style="position:absolute;right:10px; top:10px;">賣家名稱：David</span>
+													<span class="soNo"
+														style="position:absolute;right:10px; top:35px;">訂單編號：16</span>
+													<div style="position:absolute;right:10px; top:90px;">
+														揪團截止時間：2023-08-19</div>
 												</div>
 												<hr style="margin:0px;border:1px solid lightgray">
 											</a>
-											<div class="col-xs-12 col-sm-12 orderPrice" style="width:770px;height:69px;position:absolute;left:0px; top:121px;">
-													<h4 style="position:absolute;right:10px; top:20px;">訂單金額：$1200</h4>
+											<div class="col-xs-12 col-sm-12 orderPrice"
+												style="width:770px;height:69px;position:absolute;left:0px; top:121px;">
+												<h4 style="position:absolute;right:10px; top:20px;">訂單金額：$1200</h4>
 											</div>
 										</div>
-										<div class="tab-content" id="orderId3" style="position:relative;width:770px;height:190px;margin-bottom:20px;display:flex; flex-direction:column">
-											<a href="#" class="orderDetail" style="position:absolute;left:0px; top:0px;width:100%;height:120px;">
+										<div class="tab-content" id="orderId3"
+											style="position:relative;width:770px;height:190px;margin-bottom:20px;display:flex; flex-direction:column">
+											<a href="#" class="orderDetail"
+												style="position:absolute;left:0px; top:0px;width:100%;height:120px;">
 												<div class="col-xs-12 col-sm-12" style="width:100%;height:120px;">
-													<img src="#" style="width:80px;height:80px;border:1.5px solid LightGray;position:absolute;left:20px; top:20px;" alt="GFashion - Responsive e-commerce HTML Template">
-													<h4 class="prodName" style="position:absolute;left:120px; top:20px;">沐浴乳</h4>
+													<img src="#"
+														style="width:80px;height:80px;border:1.5px solid LightGray;position:absolute;left:20px; top:20px;"
+														alt="GFashion - Responsive e-commerce HTML Template">
+													<h4 class="prodName"
+														style="position:absolute;left:120px; top:20px;">沐浴乳</h4>
 													<span style="position:absolute;left:120px; top:80px;">x1</span>
-													<span style="position:absolute;right:10px; top:10px;">賣家名稱：雨傘王</span>
-													<span class="soNo" style="position:absolute;right:10px; top:35px;">訂單編號：15</span>
-													<div style="position:absolute;right:10px; top:90px;">揪團截止時間：2023-08-19</div>
+													<span
+														style="position:absolute;right:10px; top:10px;">賣家名稱：雨傘王</span>
+													<span class="soNo"
+														style="position:absolute;right:10px; top:35px;">訂單編號：15</span>
+													<div style="position:absolute;right:10px; top:90px;">
+														揪團截止時間：2023-08-19</div>
 												</div>
 												<hr style="margin:0px;border:1px solid lightgray">
 											</a>
-											<div class="col-xs-12 col-sm-12 orderPrice" style="width:770px;height:69px;position:absolute;left:0px; top:121px;">
-													<h4 style="position:absolute;right:10px; top:20px;">訂單金額：$100</h4>
+											<div class="col-xs-12 col-sm-12 orderPrice"
+												style="width:770px;height:69px;position:absolute;left:0px; top:121px;">
+												<h4 style="position:absolute;right:10px; top:20px;">訂單金額：$100</h4>
 											</div>
 										</div> -->
 										<!-- 假資料結束 -->
@@ -742,18 +771,11 @@
 	<script src="../../js/login.js"></script>
 	<script>
 		checkLoginStatusShowMemberAcct(); // 檢查客戶帳號是否登入，修改頁面右上方Log In/Log Out按鈕，顯示登入者帳號名稱
+		paSoEva(); // 一載入頁面後即顯示一般代購列表
+		loadMemberSellerEvaStarAvg(); // 一載入頁面後即顯示該登入會員的賣家評價星數平均值
 
 		const showOrderArea_el = $("#showOrderArea");
-		function paProdEva() {
-			$("button#paBtn").addClass("btn-success"); // 修改按鈕樣式
-			$("button#gpaBtn").removeClass("btn-success"); // 修改按鈕樣式
-			$("button#gpaBtn").addClass("btn-primary"); // 修改按鈕樣式
-
-			// 依序印出評價項目
-			$("#showOrderArea").children().remove(); // 清空showOrderArea下的所有子元素
-			$("#search").val(""); // 清空搜尋框
-		}
-		function gpaProdEva() {
+		function gpaSoEva() {
 			$("button#gpaBtn").addClass("btn-success"); // 修改按鈕樣式
 			$("button#paBtn").removeClass("btn-success"); // 修改按鈕樣式
 			$("button#paBtn").addClass("btn-primary"); // 修改按鈕樣式
@@ -761,8 +783,8 @@
 			// 依序印出評價項目
 			$("#showOrderArea").children().remove(); // 清空showOrderArea下的所有子元素
 			$("#search").val(""); // 清空搜尋框
-			let orderCount = 0; // 計數生成的訂單數，將此數字用於div的id
-			fetch('/BuyGo/needLoginApi/front_end/loadGpaProdEva', {
+
+			fetch('/BuyGo/needLoginApi/front_end/loadGpaSoEva', {
 				method: 'Post',
 				headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset:utf-8' },
 			})
@@ -775,58 +797,249 @@
 						// 請求成功
 						return response.json();
 					} else {
-						// alert("錯誤狀態" + response.status);
+						alert("錯誤狀態" + response.status);
 						return;
 					}
 				})
 				.then(body => {
-					body.forEach(gpaProdEvaDTO => {
-						let { gpaProdName, gpaEndDate, gpaSoNo, gpaProdCount, gpaProdTotal, gpaEvaSeller, memberAcct, gpaProdPics } = gpaProdEvaDTO;
+					body.forEach(gpaSoEvaDTO => {
+						let { gpaSo } = gpaSoEvaDTO;
+						let { gpaSoNo, gpaProdCount, gpaProdTotal, gpaEvaSeller, gpaProd, member } = gpaSo;
+						let { gpaProdName, gpaEndDate, gpaProdPics } = gpaProd;
+						let { memberAcct } = member;
+						let { gpaProdPicToBase64 } = gpaProdPics[0];
+
+						let orderCount = 0; // 計數生成的訂單數，將此數字用於div的id
+						orderCount++; // 生成的訂單數+1
+						showOrderArea_el.append(`
+							<div class="tab-content" id="orderId${orderCount}" style="width:770px;margin-bottom:20px;padding: 10px 10px;">
+								<div class="orderDetailArea" style="position: relative">
+									<span style="position:absolute;right:10px; top:10px;">買家名稱：${memberAcct}</span>
+									<span class="soNo" style="position:absolute;right:10px; top:35px;">訂單編號：${gpaSoNo}</span>
+									<a href="#" class="orderLink">
+										<div class="col-xs-12 col-sm-12" style="width:100%;height:120px;">
+											<img src="data:image/jpeg;base64,${gpaProdPicToBase64}" style="width:80px;height:80px;border:1.5px solid LightGray;position:absolute;left:20px; top:20px;" alt="GFashion - Responsive e-commerce HTML Template">
+											<h4 class="prodName" style="position:absolute;left:120px; top:20px;">${gpaProdName}</h4>
+											<span style="position:absolute;left:120px; top:80px;">x${gpaProdCount}</span>
+										</div>
+										<hr style="margin:0px;border:1px solid lightgray">
+									</a>
+								</div>
+								<div class="col-xs-12 col-sm-12 orderPrice" style="height:70px;">
+									<h4 style="position:relative;text-align:right;top:35%;">訂單金額：$${gpaProdTotal}</h4>
+									<h5 class="pastEval" style="position: absolute; left: 10px; top: 25px; visibility: visible;">買家評價：${gpaEvaSeller === 0 ? '尚未評價' : gpaEvaSeller + '★'}</h5>
+								</div>
+							</div>
+						`);
+						// let { gpaProdName, gpaEndDate, gpaSoNo, gpaProdCount, gpaProdTotal, gpaEvaSeller, memberAcct, gpaProdPics } = gpaSoEvaDTO;
+
+						// for (let i = 0; i < gpaSoNo.length; i++) {
+						// 	gpaProdEvaArray.push( // 將讀取到的訂單存放到gpaProdEvaArray
+						// 		{
+						// 			gpaProdName: gpaProdName,
+						// 			gpaEndDate: gpaEndDate,
+						// 			gpaSoNo: gpaSoNo[i],
+						// 			gpaProdCount: gpaProdCount[i],
+						// 			gpaProdTotal: gpaProdTotal[i],
+						// 			gpaEvaSeller: gpaEvaSeller[i],
+						// 			memberAcct: memberAcct[i],
+						// 			gpaProdPics: gpaProdPics[0] // 只將第一張照片顯示於頁面上
+						// 		});
+						// }
+					});
+					// gpaProdEvaArray.sort(function (a, b) { // 依照gpaSoNo降冪排序，使最新的定單排在最前面
+					// 	return b.gpaSoNo - a.gpaSoNo;
+					// });
+				})
+		}
+		// 備份
+		// function gpaProdEva() {
+		// 	$("button#gpaBtn").addClass("btn-success"); // 修改按鈕樣式
+		// 	$("button#paBtn").removeClass("btn-success"); // 修改按鈕樣式
+		// 	$("button#paBtn").addClass("btn-primary"); // 修改按鈕樣式
+
+		// 	// 依序印出評價項目
+		// 	$("#showOrderArea").children().remove(); // 清空showOrderArea下的所有子元素
+		// 	$("#search").val(""); // 清空搜尋框
+
+		// 	let gpaProdEvaArray = []; // 建立一個矩陣，先存放讀取到的所有訂單，再依照gpaSoNo排序
+
+		// 	fetch('/BuyGo/needLoginApi/front_end/loadGpaProdEva', {
+		// 		method: 'Post',
+		// 		headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset:utf-8' },
+		// 	})
+		// 		.then(response => {
+		// 			if (response.status === 401) {
+		// 				// 客戶未登入，執行頁面重定向到登入頁
+		// 				alert('帳號未登入，將導轉至登入頁面');
+		// 				window.location.href = '/BuyGo/front_end/pages/member/login.html'; // 登入頁面url
+		// 			} else if (response.ok) {
+		// 				// 請求成功
+		// 				return response.json();
+		// 			} else {
+		// 				alert("錯誤狀態" + response.status);
+		// 				return;
+		// 			}
+		// 		})
+		// 		.then(body => {
+		// 			body.forEach(gpaProdEvaDTO => {
+		// 				let { gpaProdName, gpaEndDate, gpaSoNo, gpaProdCount, gpaProdTotal, gpaEvaSeller, memberAcct, gpaProdPics } = gpaProdEvaDTO;
+
+		// 				// console.log('gpaProdName:' + gpaProdName);
+		// 				// console.log('gpaEndDate:' + gpaEndDate);
+		// 				for (let i = 0; i < gpaSoNo.length; i++) {
+		// 					gpaProdEvaArray.push( // 將讀取到的訂單存放到gpaProdEvaArray
+		// 						{
+		// 							gpaProdName: gpaProdName,
+		// 							gpaEndDate: gpaEndDate,
+		// 							gpaSoNo: gpaSoNo[i],
+		// 							gpaProdCount: gpaProdCount[i],
+		// 							gpaProdTotal: gpaProdTotal[i],
+		// 							gpaEvaSeller: gpaEvaSeller[i],
+		// 							memberAcct: memberAcct[i],
+		// 							gpaProdPics: gpaProdPics[0] // 只將第一張照片顯示於頁面上
+		// 						});
+		// 				}
+		// 			});
+		// 			gpaProdEvaArray.sort(function (a, b) { // 依照gpaSoNo降冪排序，使最新的定單排在最前面
+		// 				return b.gpaSoNo - a.gpaSoNo;
+		// 			});
+		// 			let orderCount = 0; // 計數生成的訂單數，將此數字用於div的id
+		// 			for (let i = 0; i < gpaProdEvaArray.length; i++) { // 顯示訂單於頁面
+		// 				orderCount++; // 生成的訂單數+1
+		// 				showOrderArea_el.append(`
+		// 				<div class="tab-content" id="orderId${orderCount}" style="width:770px;margin-bottom:20px;padding: 10px 10px;">
+		// 					<div class="orderDetailArea" style="position: relative">
+		// 						<span style="position:absolute;right:10px; top:10px;">買家名稱：${gpaProdEvaArray[i].memberAcct}</span>
+		// 						<span class="soNo" style="position:absolute;right:10px; top:35px;">訂單編號：${gpaProdEvaArray[i].gpaSoNo}</span>
+		// 						<a href="#" class="orderLink">
+		// 							<div class="col-xs-12 col-sm-12" style="width:100%;height:120px;">
+		// 								<img src="data:image/jpeg;base64,${gpaProdEvaArray[i].gpaProdPics}" style="width:80px;height:80px;border:1.5px solid LightGray;position:absolute;left:20px; top:20px;" alt="GFashion - Responsive e-commerce HTML Template">
+		// 								<h4 class="prodName" style="position:absolute;left:120px; top:20px;">${gpaProdEvaArray[i].gpaProdName}</h4>
+		// 								<span style="position:absolute;left:120px; top:80px;">x${gpaProdEvaArray[i].gpaProdCount}</span>
+		// 							</div>
+		// 							<hr style="margin:0px;border:1px solid lightgray">
+		// 						</a>
+		// 					</div>
+		// 					<div class="col-xs-12 col-sm-12 orderPrice" style="height:70px;">
+		// 						<h4 style="position:relative;text-align:right;top:35%;">訂單金額：$${gpaProdEvaArray[i].gpaProdTotal}</h4>
+		// 						<h5 class="pastEval" style="position: absolute; left: 10px; top: 25px; visibility: visible;">買家評價：${gpaProdEvaArray[i].gpaEvaSeller === 0 ? '尚未評價' : gpaProdEvaArray[i].gpaEvaSeller + '★'}</h5>
+		// 					</div>
+		// 				</div>
+		// 				`);
+		// 			}
+		// 		})
+		// }
+
+		function paSoEva() {
+			$("button#paBtn").addClass("btn-success"); // 修改按鈕樣式
+			$("button#gpaBtn").removeClass("btn-success"); // 修改按鈕樣式
+			$("button#gpaBtn").addClass("btn-primary"); // 修改按鈕樣式
+
+			// 依序印出評價項目
+			$("#showOrderArea").children().remove(); // 清空showOrderArea下的所有子元素
+			$("#search").val(""); // 清空搜尋框
+
+			let paProdEvaArray = []; // 建立一個矩陣，先存放讀取到的所有訂單，再依照gpaSoNo排序
+
+			fetch('/BuyGo/needLoginApi/front_end/loadPaSoEva', {
+				method: 'Post',
+				headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset:utf-8' },
+			})
+				.then(response => {
+					if (response.status === 401) {
+						// 客戶未登入，執行頁面重定向到登入頁
+						alert('帳號未登入，將導轉至登入頁面');
+						window.location.href = '/BuyGo/front_end/pages/member/login.html'; // 登入頁面url
+					} else if (response.ok) {
+						// 請求成功
+						return response.json();
+					} else {
+						alert("錯誤狀態" + response.status);
+						return;
+					}
+				})
+				.then(body => {
+					let orderCount = 0; // 計數生成的訂單數，將此數字用於div的id
+					body.forEach(PaSoEvaDTOList => { // PaSoEvaDTOList
+						let { paSoNo, paSoStatus, paSoTotal, paEvaSeller, memberAcct, paSoDetailsEvaDTO } = PaSoEvaDTOList;
+						let { paProdName, paProdQty, paProdPrice, paProdPicToBase64 } = paSoDetailsEvaDTO;
 
 						orderCount++; // 生成的訂單數+1
-						// console.log('gpaProdName:' + gpaProdName);
-						// console.log('gpaEndDate:' + gpaEndDate);
-						for (let i = 0; i < gpaSoNo.length; i++) {
-							// console.log('gpaSoNo:' + gpaSoNo[i]);
-							// console.log('gpaProdCount:' + gpaProdCount[i]);
-							// console.log('gpaProdTotal:' + gpaProdTotal[i]);
-							// console.log('gpaEvaSeller:' + gpaEvaSeller[i]);
-							// console.log('memberAcct:' + memberAcct[i]);
 
-							showOrderArea_el.append(`
-						<div class="tab-content" id="orderId${orderCount}" style="position:relative;width:770px;height:190px;margin-bottom:20px;display:flex; flex-direction:column">
-							<a href="#" class="orderDetail" onclick="testA()" style="position:absolute;left:0px; top:0px;width:100%;height:120px;">
-								<div class="col-xs-12 col-sm-12" style="width:100%;height:120px;">
-									<img src="data:image/jpeg;base64,${gpaProdPics[0]}" style="width:80px;height:80px;border:1.5px solid LightGray;position:absolute;left:20px; top:20px;" alt="GFashion - Responsive e-commerce HTML Template">
-									<h4 class="prodName" style="position:absolute;left:120px; top:20px;">${gpaProdName}</h4>
-									<span style="position:absolute;left:120px; top:80px;">x${gpaProdCount[i]}</span>
-									<span style="position:absolute;right:10px; top:10px;">買家名稱：${memberAcct[i]}</span>
-									<span class="soNo" style="position:absolute;right:10px; top:35px;">訂單編號：${gpaSoNo[i]}</span>
-									<div style="position:absolute;right:10px; top:90px;">揪團截止時間：${gpaEndDate}</div>
-								</div>
-								<hr style="margin:0px;border:1px solid lightgray">
-							</a>
-							<div class="col-xs-12 col-sm-12 orderPrice" style="width:770px;height:69px;position:absolute;left:0px; top:121px;">
-									<h4 style="position:absolute;right:10px; top:20px;">訂單金額：$${gpaProdTotal[i]}</h4>
-									<h5 class="pastEval" style="position: absolute; left: 110px; top: 25px; visibility: visible;">買家評價：${gpaEvaSeller[i] === 0 ? '尚未評價' : gpaEvaSeller[i] + '★'}</h5>
+						showOrderArea_el.append(`
+						<div class="tab-content" id="orderId${orderCount}" style="width:770px;margin-bottom:20px;padding: 10px 10px;">
+							<div class="orderDetailArea" style="position: relative">
+								<span style="position:absolute;right:10px; top:10px;">買家名稱：${memberAcct}</span>
+								<span class="soNo" style="position:absolute;right:10px; top:35px;">訂單編號：${paSoNo}</span>
+							</div>
+							<div class="col-xs-12 col-sm-12 orderPrice" style="height:70px;">
+								<h4 style="position:relative;text-align:right;top:35%;">訂單金額：$${paSoTotal}</h4>
+								<h5 class="pastEval" style="position: absolute; left: 10px; top: 25px; visibility: visible;">買家評價：${paEvaSeller === (0 || undefined) ? '尚未評價' : paEvaSeller + '★'}</h5>
 							</div>
 						</div>
 						`);
-						}
-					});
+						paSoDetailsEvaDTO.forEach(perPaSoDetailsEvaDTO => { // 遍歷paSoDetails
+							let { paProdName, paProdQty, paProdPrice, paProdPicToBase64 } = perPaSoDetailsEvaDTO;
+							$(`div#orderId${orderCount}`).find("div.orderDetailArea").append(`
+								<a href="#" class="orderLink">
+									<div class="col-xs-12 col-sm-12" style="width:100%;height:120px;">
+										<img src="data:image/jpeg;base64,${paProdPicToBase64[0]}" style="width:80px;height:80px;border:1.5px solid LightGray;position:absolute;left:20px; top:20px;" alt="GFashion - Responsive e-commerce HTML Template">
+										<h4 class="prodName" style="position:absolute;left:120px; top:20px;">${paProdName}</h4>
+										<span style="position:absolute;left:120px; top:80px;">x${paProdQty}</span>
+										<h5 style="position:absolute;right:10px; top:80px;">$${paProdPrice}</h5>
+									</div>
+									<hr style="margin:0px;border:1px solid lightgray">
+								</a>
+							`);
+						});
+					})
+				});
+		}
+		function loadMemberSellerEvaStarAvg() {
+			fetch('/BuyGo/needLoginApi/front_end/loadMemberSellerEvaStarAndCount', {
+				method: 'Post',
+				headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset:utf-8' },
+			})
+				.then(response => {
+					if (response.status === 401) {
+						// 客戶未登入，執行頁面重定向到登入頁
+						alert('帳號未登入，將導轉至登入頁面');
+						window.location.href = '/BuyGo/front_end/pages/member/login.html'; // 登入頁面url
+					} else if (response.ok) {
+						// 請求成功
+						return response.json();
+					} else {
+						alert("錯誤狀態" + response.status);
+						return;
+					}
 				})
+				.then(body => {
+					let { sellerEvaStar, sellerEvaCount } = body;
+					let evaStarAvg = (sellerEvaStar / sellerEvaCount).toFixed(2); // 將評價總星數除以評價次數，並取值至小數後兩位數
+					$("h4#sellerEvaStarAvgContainer").css("visibility", "visible"); // 將"被評價星數總平均"標籤顯示出來
+					$("span#sellerEvaStarAvg").css("visibility", "visible"); // 將總平均數值的標籤顯示出來
+					if (isNaN(evaStarAvg)) {
+						$("span#sellerEvaStarAvg").text("尚未被評價");
+					} else {
+						$("span#sellerEvaStarAvg").text(evaStarAvg + '★');
+					}
+				});
 		}
 		//-----------------搜尋框開始-----------------
 		$('#search').on('keyup', function () {
 			let numberOfOrder = $("#showOrderArea").children("div.tab-content").length; // 取得當前訂單數量
 			for (let i = 0; i < numberOfOrder; i++) { // 遍歷所有訂單
-				orderProdName = $("#showOrderArea").children("div.tab-content").eq(i).find("h4.prodName").text(); // 取得一個訂單的產品名稱
-				orderSoNo = $("#showOrderArea").children("div.tab-content").eq(i).find("span.soNo").text(); // 取得一個訂單的訂單編號
-				if (orderProdName.includes($("#search").val()) || orderSoNo.substr(5, orderSoNo.length).includes($("#search").val())) { // 如果搜尋框文字被產品名稱和訂單編號包含
-					$("#showOrderArea").children("div.tab-content").eq(i).show(); // 將符合條件的訂單顯示出來
-				}
-				else {
-					$("#showOrderArea").children("div.tab-content").eq(i).hide(); // 將不符合條件的訂單隱藏起來
+				let numberOfDetail = $("#showOrderArea").children("div.tab-content").eq(i).find("a.orderLink").length; // 取得當前訂單的a標籤個數
+				for (let j = 0; j < numberOfDetail; j++) {
+					orderProdName = $("#showOrderArea").children("div.tab-content").eq(i).find("a.orderLink").find("h4.prodName").text(); // 取得一個訂單的產品名稱
+					orderSoNo = $("#showOrderArea").children("div.tab-content").eq(i).find("span.soNo").text(); // 取得一個訂單的訂單編號
+					if (orderProdName.includes($("#search").val()) || orderSoNo.substr(5, orderSoNo.length).includes($("#search").val())) { // 如果搜尋框文字被產品名稱和訂單編號包含
+						$("#showOrderArea").children("div.tab-content").eq(i).show(); // 將符合條件的訂單顯示出來
+					}
+					else {
+						$("#showOrderArea").children("div.tab-content").eq(i).hide(); // 將不符合條件的訂單隱藏起來
+					}
 				}
 			}
 		});
