@@ -1,21 +1,28 @@
 package web.front_end.prodlist.service.Impl;
 
-import web.front_end.prodlist.dao.impl.ProdlistDAOImpl;
+import java.util.List;
+
+import web.front_end.prodlist.dao.impl.PaProdlistDAOImpl;
 import web.front_end.prodlist.entity.PaProdlist;
 import web.front_end.prodlist.service.ProdlistService;
 
 public class ProdlistServiceImpl implements ProdlistService {
 
-	private ProdlistDAOImpl dao;
+	private PaProdlistDAOImpl dao;
 
 	public ProdlistServiceImpl() {
-		dao = new ProdlistDAOImpl();
+		dao = new PaProdlistDAOImpl();
 	}
 
 	@Override
-	public PaProdlist ProdInfo(Integer paProdNo) {
-		return dao.selectByPaProdNo(paProdNo);
+	public PaProdlist ProdInfoSelectByNo(Integer paProdNo) {
+		return dao.selectById(paProdNo);
 
+	}
+	
+	@Override
+	public List<PaProdlist> RamgetProdNo(Integer paProdNo) {
+		return dao.SelectByPaProdNo(paProdNo);
 	}
 
 }
