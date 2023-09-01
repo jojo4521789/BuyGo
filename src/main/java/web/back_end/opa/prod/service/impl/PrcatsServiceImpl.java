@@ -17,18 +17,6 @@ public class PrcatsServiceImpl implements PrcatsService{
 	
 	@Override
 	public Prcats add(Prcats prcats) {
-		if(prcats.getOpaPrcatsName() == null) {
-			prcats.setMessage("商品類別未輸入");
-			prcats.setSuccessful(false);
-			return prcats;
-		}
-		
-		if(dao.SelectByOpaPrcatsName(prcats.getOpaPrcatsName()) != null) {
-			prcats.setMessage("商品類別名稱重複");
-			prcats.setSuccessful(false);
-			return prcats;
-		}
-		
 		final int resultCount = dao.insert(prcats);
 		if(resultCount < 1) {
 			prcats.setMessage("新增商品類別錯誤，請聯絡管理員!");

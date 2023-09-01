@@ -168,6 +168,57 @@
                 height: 50px;
             }
         }
+
+        #container {
+            width: 80px;
+            height: 20px;
+            margin: auto;
+            position: relative;
+            border-radius: 4px;
+            overflow: hidden;
+            user-select: none;
+            cursor: pointer;
+        }
+
+        .inner-container {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: inherit;
+            height: inherit;
+            text-transform: uppercase;
+            font-size: .6em;
+            letter-spacing: .2em;
+        }
+
+        .inner-container:first-child {
+            background: #e9e9e9;
+            color: #a9a9a9;
+        }
+
+        .inner-container:nth-child(2) {
+            background: dodgerblue;
+            color: white;
+            clip-path: inset(0 50% 0 0);
+            transition: .3s cubic-bezier(0, 0, 0, 1);
+        }
+
+        .toggle {
+            width: 50%;
+            position: absolute;
+            height: inherit;
+            display: flex;
+            box-sizing: border-box;
+        }
+
+        .toggle p {
+            margin: auto;
+            font-size: 8px;
+        }
+
+        .toggle:nth-child(1) {
+            right: 0;
+        }
     </style>
 </head>
 
@@ -523,47 +574,6 @@
             }
         });
 
-        function onEditClick(opaProdNo) {
-            const btn_edit = document.querySelector("#btnEdit_" + opaProdNo);
-            const p_opaProdName = document.querySelector(`#p_${opaProdNo}`);
-            const input_opaProdName = document.querySelector(`#input_${opaProdNo}`);
-            const msg = document.querySelector("#msg");
-            btn_edit.classList.toggle("-on");
-
-            p_opaProdName.classList.toggle("-none");
-            input_opaProdName.classList.toggle("-none");
-
-            if (btn_edit.classList.contains("-on")) {
-                btn_edit.textContent = "儲存";
-            } else {
-                btn_edit.textContent = "編輯";
-                fetch("/BuyGo/api/opa/prod/update", {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json; charset=utf-8",
-                    },
-                    body: JSON.stringify({
-                        opaProdNo: opaProdNo,
-                        opaProdName: input_opaProdName.value.trim(),
-                    })
-                })
-                    .then(resp => resp.json())
-                    .then(body => {
-                        const { successful } = body;
-                        if (successful) {
-                            msg.className = "info";
-                            msg.textContent = "編號" + opaProdNo + "更新成功";
-                            p_opaProdName.textContent = input_opaProdName.value.trim();
-                        } else {
-                            msg.className = "error";
-                            msg.textContent = "編號" + opaProdNo + "更新失敗";
-                            input_opaProdName.value = p_opaProdName.textContent;
-                        }
-                    });
-            }
-        }
-
-
         function datetimeLocal(datetime) {
             const dt = new Date(datetime);
             dt.setMinutes(dt.getMinutes() - dt.getTimezoneOffset());
@@ -582,12 +592,12 @@
                         }
                         let prod = {
                             prpics: `<img src="${prpics_url}" alt="error" style="width: 50px; height: 50px;">`,
-                            opaProdNo: datas[i].opaProdNo,
-                            opaProdName: `<p id="p_ProdName_${datas[i].opaProdNo}">${datas[i].opaProdName}</p><input type="text" id="input_ProdName_${datas[i].opaProdNo}" class="-none" value="${datas[i].opaProdName}">`,
-                            opaProdStockQty: `<p id="p_ProdStockQty_${datas[i].opaProdNo}">${datas[i].opaProdStockQty}</p><input type="text" id="input_ProdStockQty_${datas[i].opaProdNo}" class="-none" value="${datas[i].opaProdStockQty}">`,
-                            opaProdPrice: `<p id="p_ProdPrice_${datas[i].opaProdNo}">${datas[i].opaProdPrice}</p><input type="text" id="input_ProdPrice_${datas[i].opaProdNo}" class="-none" value="${datas[i].opaProdPrice}">`,
+                            opaProdNo: `<p class="p_opaProdNo">${datas[i].opaProdNo}</p>`,
+                            opaProdName: datas[i].opaProdName,
+                            opaProdStockQty: datas[i].opaProdStockQty,
+                            opaProdPrice: datas[i].opaProdPrice,
                             opaPrcatsName: datas[i].prcats.opaPrcatsName,
-                            opaProdStatus: datas[i].opaProdStatus === 0 ? "未上架" : "已上架",
+                            opaProdStatus: getToggleStatusStr(datas[i].opaProdStatus),
                             opaProdUpdate: datas[i].opaProdUpdate,
                             action: `<button id="btnDetail_${datas[i].opaProdNo}" class="find_but" onclick="onDetailClick(${datas[i].opaProdNo})">商品詳情</button>  <button id="btnDel_${datas[i].opaProdNo}" class="find_but" onclick="onRemoveClick(${datas[i].opaProdNo})">刪除</button>`
                         }
@@ -717,7 +727,80 @@
             <div class="div_detailOption">
                 <label class="prod_label">更新日期: </label>
                 <span id="span_opaProdUpdate_view"></span>
-            </div>`;
+            </div>
+        `;
+
+    </script>
+
+    <script>
+        function getToggleStatusStr(opaProdStatus) {
+            let toggleClass = "";
+            let toggleStyle = `style="clip-path: inset(0px 50% 0px 0px); background-color: dodgerblue;"`;
+            if (opaProdStatus === 0) {
+                toggleStyle = `style="clip-path: inset(0px 0px 0px 50%); background-color: rgb(215, 64, 70);"`;
+                toggleClass = "-off";
+            }
+            let toggle_status_str = `
+                <div id="container" onclick="toggleStatusClick(this)">
+                    <div class="inner-container">
+                        <div class="toggle">
+                            <p>下架</p>
+                        </div>
+                        <div class="toggle">
+                            <p>上架</p>
+                        </div>
+                    </div>
+                    <div class="inner-container ${toggleClass}" id='toggle-container' ${toggleStyle}>
+                        <div class="toggle">
+                            <p>下架</p>
+                        </div>
+                        <div class="toggle">
+                            <p>上架</p>
+                        </div>
+                    </div>
+                </div>
+            `;
+            return toggle_status_str;
+        }
+
+        function toggleStatusClick(container) {
+            let opaProdStatus;
+            const toggleContainer = container.querySelector('#toggle-container');
+            toggleContainer.classList.toggle("-off");
+            if (toggleContainer.classList.contains("-off")) {
+                toggleContainer.style.clipPath = 'inset(0 0 0 50%)';
+                toggleContainer.style.backgroundColor = '#D74046';
+                opaProdStatus = 0;
+            } else {
+                toggleContainer.style.clipPath = 'inset(0 50% 0 0)';
+                toggleContainer.style.backgroundColor = 'dodgerblue';
+                opaProdStatus = 1;
+            }
+
+            if (opaProdStatus != null) {
+                let opaProdNo = container.closest("tr").querySelector(".p_opaProdNo").textContent;
+                fetch("/BuyGo/api/opa/prod/prodUpdateStatus", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json; charset=utf-8",
+                    },
+                    body: JSON.stringify({
+                        opaProdNo: opaProdNo,
+                        opaProdStatus: opaProdStatus,
+                    })
+                })
+                    .then(resp => resp.json())
+                    .then(body => {
+                        const { successful } = body;
+                        const msg = document.querySelector("#msg");
+                        if (successful) {
+                            console.log("更新成功");
+                        } else {
+                            console.log("更新失敗");
+                        }
+                    });
+            }
+        }
     </script>
 
     <script>
@@ -912,12 +995,12 @@
                             let prpics_url = datas[i].prpicsList[0].opaProdPicture !== null ? datas[i].prpicsList[0].opaProdPicture : "../ ../back_end/img/Image_not_availab le.png";
                             let prod = {
                                 prpics: `<img src="${prpics_url}" alt="error" style="width: 50px; height: 50px;">`,
-                                opaProdNo: datas[i].opaProdNo,
-                                opaProdName: `<p id="p_ProdName_${datas[i].opaProdNo}">${datas[i].opaProdName}</p><input type="text" id="input_ProdName_${datas[i].opaProdNo}" class="-none" value="${datas[i].opaProdName}">`,
-                                opaProdStockQty: `<p id="p_ProdStockQty_${datas[i].opaProdNo}">${datas[i].opaProdStockQty}</p><input type="text" id="input_ProdStockQty_${datas[i].opaProdNo}" class="-none" value="${datas[i].opaProdStockQty}">`,
-                                opaProdPrice: `<p id="p_ProdPrice_${datas[i].opaProdNo}">${datas[i].opaProdPrice}</p><input type="text" id="input_ProdPrice_${datas[i].opaProdNo}" class="-none" value="${datas[i].opaProdPrice}">`,
+                                opaProdNo: `<p class="p_opaProdNo">${datas[i].opaProdNo}</p>`,
+                                opaProdName: datas[i].opaProdName,
+                                opaProdStockQty: datas[i].opaProdStockQty,
+                                opaProdPrice: datas[i].opaProdPrice,
                                 opaPrcatsName: datas[i].prcats.opaPrcatsName,
-                                opaProdStatus: datas[i].opaProdStatus === 0 ? "未上架" : "已上架",
+                                opaProdStatus: getToggleStatusStr(datas[i].opaProdStatus),
                                 opaProdUpdate: datas[i].opaProdUpdate,
                                 action: `<button id="btnDetail_${datas[i].opaProdNo}" class="find_but" onclick="onDetailClick(${datas[i].opaProdNo})">商品詳情</button>  <button id="btnDel_${datas[i].opaProdNo}" class="find_but" onclick="onRemoveClick(${datas[i].opaProdNo})">刪除</button>`
                             }

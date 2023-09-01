@@ -32,15 +32,15 @@ public class LoginFunctionServlet extends HttpServlet{
 			// 向前端設置Cookie
 			HttpSession session = request.getSession(); // 取得當前請求的Session
 			String sessionId = session.getId();// 取得Servlet Container指定的sessionID，同時將該sessionID設置於前端的cookie內
-//			System.out.println("登入成功, session.getId:" + sessionId);
 			Integer memberNo= SERVICE.LoadMemberBymemberAcctAndmemberPw(member.getMemberAcct(), SHA256Encode(member.getMemberPw())).getMemberNo(); // 取得完成登入者的memberNo
+			System.out.println("使用者登入成功, memberNo:" + memberNo + ", session.getId:" + sessionId);
 			
 			session.setAttribute("sessionId", sessionId); // 將客戶的SessionId放入sessionAttribute，供後續判斷是否為登入狀態
 			session.setAttribute("memberNo", memberNo); // 將客戶的memberNo放入sessionAttribute，供後續換頁時由後端提供給前端
 			
 			writePojo2Json(response, member);
 		}else { // 登入失敗
-//			System.out.println("登入失敗");
+			System.out.println("使用者登入失敗");
 			writePojo2Json(response, member);
 		}
 	}

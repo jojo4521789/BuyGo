@@ -271,11 +271,13 @@
 								<label for="username">帳號：</label>
 								<input type="text" id="username" name="username" placeholder="帳號" required
 									value="peter123" style="font-size: 16px;">
+								<span id="usernameMsg" style="visibility: hidden;color: red;">需輸入</span>
 							</div>
 							<div>
 								<label for="password">密碼：</label>
 								<input type="password" id="password" name="password" placeholder="密碼" required
 									value="123456" style="font-size: 16px;">
+								<span id="passwordMsg" style="visibility: hidden;color: red;">需輸入</span>
 							</div>
 							<div>
 								<input type="checkbox" id="showPassword"
@@ -523,34 +525,46 @@
 			let inputPass = true; // 判斷是否有成功輸入帳號密碼
 			if ($.trim($("input#username").val()) === "") {
 				inputPass = false;
+				$("span#usernameMsg").css("visibility", "visible"); // 將錯誤提示顯示
+				$('p#checkMsg').css('visibility', 'hidden');
+			}
+			else {
+				$("span#usernameMsg").css("visibility", "hidden"); // 將錯誤提示隱藏
 			}
 			if ($.trim($("input#password").val()) === "") {
 				inputPass = false;
+				$("span#passwordMsg").css("visibility", "visible"); // 將錯誤提示顯示
+				$('p#checkMsg').css('visibility', 'hidden');
+			}
+			else {
+				$("span#passwordMsg").css("visibility", "hidden"); // 將錯誤提示隱藏
 			}
 			if (inputPass) {
-				// console.log("登入請求發出成功");
-			}
-			// 向後端發出fetch，確認帳號密碼是否輸入正確
-			fetch('/BuyGo/api/front_end/loginFunction', {
-				method: 'POST',
-				headers: { 'Content-Type': 'application/json;charset:utf-8' },
-				body: JSON.stringify({
-					memberAcct: $('input#username').val(),
-					memberPw: $('input#password').val()
+				$("span#usernameMsg").css("visibility", "hidden"); // 將錯誤提示隱藏
+				$("span#passwordMsg").css("visibility", "hidden"); // 將錯誤提示隱藏
+
+				// 向後端發出fetch，確認帳號密碼是否輸入正確
+				fetch('/BuyGo/api/front_end/loginFunction', {
+					method: 'POST',
+					headers: { 'Content-Type': 'application/json;charset:utf-8' },
+					body: JSON.stringify({
+						memberAcct: $('input#username').val(),
+						memberPw: $('input#password').val()
+					})
 				})
-			})
-				.then(resp => resp.json())
-				.then(body => {
-					const { successful } = body;
-					// console.log('loginFunctionServlet登入狀態回傳:' + successful);
-					if (successful) {
-						$('p#checkMsg').css('visibility', 'hidden');
-						window.location.href = '/BuyGo/front_end'; // 導轉至主頁
-					}
-					else {
-						$('p#checkMsg').css('visibility', 'visible');
-					}
-				});
+					.then(resp => resp.json())
+					.then(body => {
+						const { successful } = body;
+						// console.log('loginFunctionServlet登入狀態回傳:' + successful);
+						if (successful) {
+							$('p#checkMsg').css('visibility', 'hidden');
+							window.location.href = '/BuyGo/front_end/index.html'; // 導轉至主頁
+						}
+						else {
+							$('p#checkMsg').css('visibility', 'visible');
+						}
+					});
+			}
 		});
 	</script>
 	<!-- -------------------登入功能結束--------------------->
