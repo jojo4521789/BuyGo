@@ -7,7 +7,7 @@ import web.front_end.member.pa.prodpic.entity.ProdPic;
 
 public interface ProdPicService extends CoreService {
 	
-	ProdPic add(ProdPic prodpic);
+	ProdPic insert(ProdPic prodpic);
 	
 	ProdPic update(ProdPic prodpic);
 	

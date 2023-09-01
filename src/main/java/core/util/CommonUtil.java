@@ -13,6 +13,7 @@ public class CommonUtil {
 	
 	public static <P> P json2Pojo(HttpServletRequest request, Class<P> classOfPojo) {
 		try (BufferedReader br = request.getReader()) {
+//			System.out.println(br.readLine());
 			return GSON.fromJson(br, classOfPojo);
 		} catch (Exception e) {
 			e.printStackTrace();

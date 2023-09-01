@@ -4,9 +4,6 @@ import static core.util.CommonUtil.json2Pojo;
 import static core.util.CommonUtil.writePojo2Json;
 import static web.front_end.member.pa.prodpic.util.ProdPicConstants.SERVICE;
 
-import java.io.IOException;
-
-import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -14,24 +11,31 @@ import javax.servlet.http.HttpServletResponse;
 
 import web.front_end.member.pa.prodpic.entity.ProdPic;
 
-@WebServlet("/front_end/member/pa/prodpic/ProdPicAddServlet")
+@WebServlet("/api/front_end/member/pa/prodpic/ProdPicAddServlet")
 public class ProdPicAddServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	
+	@Override
+	protected void doGet(HttpServletRequest request, HttpServletResponse response){
+		doPost(request, response);
+	}
+	@Override   
+	protected void doPost(HttpServletRequest request, HttpServletResponse response){
+		response.setCharacterEncoding("UTF-8");
 		ProdPic prodpic = json2Pojo(request, ProdPic.class);
 		
 		System.out.println(prodpic);
 		
-		if(prodpic == null) {
-			prodpic = new ProdPic();
-			prodpic.setMessage("無商品資訊");
-			prodpic.setSuccessful(false);
+		SERVICE.insert(prodpic);
+		//successful
+		System.out.println("prodpic.isSuccessful():" + prodpic.isSuccessful());
+		if(prodpic.isSuccessful()) {
+			System.out.println("修改成功");
+			writePojo2Json(response, prodpic);
+		}else {
+			System.out.println("修改失敗");
 			writePojo2Json(response, prodpic);
 		}
-		
-		prodpic = SERVICE.add(prodpic);
-		writePojo2Json(response, prodpic);
 	}
 
 }

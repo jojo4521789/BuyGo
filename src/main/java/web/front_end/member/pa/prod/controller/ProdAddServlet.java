@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import web.front_end.member.pa.prod.entity.Prod;
 
-@WebServlet("/front_end/member/pa/prod/ProdAddServlet")
+@WebServlet("/api/front_end/member/pa/prod/ProdAddServlet")
 public class ProdAddServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	

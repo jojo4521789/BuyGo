@@ -16,12 +16,12 @@ public class ProdPicServiceImpl implements ProdPicService {
 	}
 	
 	@Override
-	public ProdPic add(ProdPic prodpic) {
-		if(prodpic.getPaProdNo() == null) {
-			prodpic.setMessage("商品編號未輸入");
-			prodpic.setSuccessful(false);
-			return prodpic;
-		}
+	public ProdPic insert(ProdPic prodpic) {
+//		if(prodpic.getPaProdNo() == null) {
+//			prodpic.setMessage("商品編號未輸入");
+//			prodpic.setSuccessful(false);
+//			return prodpic;
+//		}
 		if(prodpic.getPaProdPic() == null) {
 			prodpic.setMessage("商品照片未輸入");
 			prodpic.setSuccessful(false);

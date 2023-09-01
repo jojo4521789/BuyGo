@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 import core.pojo.Core;
 import lombok.AllArgsConstructor;
@@ -15,6 +16,7 @@ import lombok.Setter;
 @Entity
 @Setter
 @Getter
+@Table(name = "PA_PROD_PIC")
 @NoArgsConstructor
 @AllArgsConstructor
 public class ProdPic extends Core {
@@ -24,8 +26,8 @@ public class ProdPic extends Core {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "PA_PROD_PIC_NO", insertable = false)
 	private Integer paProdPicNo;
-	@Column(name = "PA_PROD_NO", insertable = false)
+	@Column(name = "PA_PROD_NO")
 	private Integer paProdNo;
 	@Column(name = "PA_PROD_PIC")
-	private byte[] paProdPic;
+	private String paProdPic;
 }

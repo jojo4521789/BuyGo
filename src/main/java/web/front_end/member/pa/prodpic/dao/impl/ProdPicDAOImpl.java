@@ -14,7 +14,7 @@ public class ProdPicDAOImpl implements ProdPicDAO{
 
 	@Override
 	public int insert(ProdPic prodPic) {
-		getSession().persist(prodPic);
+		getSession().save(prodPic);
 		return 1;
 	}
 
@@ -34,7 +34,7 @@ public class ProdPicDAOImpl implements ProdPicDAO{
 		if(paProdNo != null) {
 			oldProdPic.setPaProdNo(paProdNo);
 		}
-		final byte[] paProdPicture = prodPic.getPaProdPic();
+		final String paProdPicture = prodPic.getPaProdPic();
 		if(paProdPicture != null) {
 			oldProdPic.setPaProdPic(paProdPicture);
 		}

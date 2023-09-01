@@ -29,23 +29,23 @@ public class ProdDAOImpl implements ProdDAO {
 	@Override
 	public int update(Prod prod) {
 		final StringBuilder hql = new StringBuilder().append("UPDATE Prod SET ");
-		hql.append("paProdNo= :paProdNo")
-			.append("paProdName= :paProdName")
-			.append("paProdStockQty= :paProdStockQty")
-			.append("paProdShipQty= :paProdShipQty")
-			.append("paProdPrice= :paProdPrice")
-			.append("paProdContent= :paProdContent")
-			.append("paProdStatus= :paProdStatus")
-			.append("paProdObjNo= :paProdObjNo");
+		hql.append("paProdName= :paProdName, ")
+				.append("paProdStockQty= :paProdStockQty, ")
+				.append("paProdShipQty= :paProdShipQty, ")
+				.append("paProdPrice= :paProdPrice, ")
+				.append("paProdContent= :paProdContent, ")
+				.append("paProdStatus= :paProdStatus, ")
+				.append("paProdObjNo= :paProdObjNo ")
+				.append("WHERE paProdNo= :paProdNo");
 		Query<?> query = getSession().createQuery(hql.toString());
-		return query.setParameter("paProdNo", prod.getPaProdNo())
-				.setParameter("paProdName", prod.getPaProdName())
+		return query.setParameter("paProdName", prod.getPaProdName())
 				.setParameter("paProdStockQty", prod.getPaProdStockQty())
 				.setParameter("paProdShipQty", prod.getPaProdShipQty())
 				.setParameter("paProdPrice", prod.getPaProdPrice())
 				.setParameter("paProdContent", prod.getPaProdContent())
 				.setParameter("paProdStatus", prod.getPaProdStatus())
 				.setParameter("paProdObjNo", prod.getPaProdObjNo())
+				.setParameter("paProdNo", prod.getPaProdNo())
 				.executeUpdate();
 	}
 
@@ -63,7 +63,8 @@ public class ProdDAOImpl implements ProdDAO {
 	@Override
 	public List<Prod> selectByProdNo(String paProdNo) {
 		try {
-			Query<Prod> query = getSession().createQuery("FROM Prod WHERE paProdNo = :paProdNo", Prod.class).setParameter("paProdNo", paProdNo);
+			Query<Prod> query = getSession().createQuery("FROM Prod WHERE paProdNo = :paProdNo", Prod.class)
+					.setParameter("paProdNo", paProdNo);
 			return query.getResultList();
 		} catch (NoResultException e) {
 //			e.printStackTrace();
