@@ -69,4 +69,26 @@ public class ProdDaoImpl implements ProdDao{
 		}
 	}
 
+	@Override
+	public int updateProdStatus(Prod prod) {
+		Session session = getSession();
+		Prod oldProd = session.get(Prod.class, prod.getOpaProdNo());
+		final Integer opaProdStatus = prod.getOpaProdStatus();
+		if(opaProdStatus != null) {
+			oldProd.setOpaProdStatus(opaProdStatus);
+		}
+		return 1;
+	}
+
+	@Override
+	public List<Prod> SelectByOpaProdStatus(Integer opaProdStatus) {
+		try {
+			Query<Prod> query = getSession().createQuery("FROM Prod WHERE opaProdStatus = :opaProdStatus", Prod.class)
+					.setParameter("opaProdStatus", opaProdStatus);
+			return query.getResultList();
+		} catch (NoResultException e) {
+			return null;
+		}
+	}
+
 }

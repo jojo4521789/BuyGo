@@ -17,17 +17,6 @@ public class PrpicsServiceImpl implements PrpicsService{
 	
 	@Override
 	public Prpics add(Prpics prpics) {
-		if(prpics.getOpaProdNo() == null) {
-			prpics.setMessage("商品編號未輸入");
-			prpics.setSuccessful(false);
-			return prpics;
-		}
-		if(prpics.getOpaProdPicture() == null) {
-			prpics.setMessage("商品照片未輸入");
-			prpics.setSuccessful(false);
-			return prpics;
-		}
-		
 		final int resultCount = dao.insert(prpics);
 		if(resultCount < 1) {
 			prpics.setMessage("新增商品照片錯誤，請聯絡管理員!");
