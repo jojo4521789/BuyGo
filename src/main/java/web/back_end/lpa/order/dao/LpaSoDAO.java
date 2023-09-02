@@ -8,11 +8,10 @@ import web.back_end.lpa.product.entity.LpaProd;
 
 public interface LpaSoDAO extends CoreDao<LpaSo, Integer> {
 	
-	List<LpaSo> selectByOrderStatus(Integer memberNo, Byte status);
-	List<LpaSo> selectAllByMember(Integer memberNo);
+	List<LpaSo> selectAll();
+	List<LpaSo> selectByBuyerNo(Integer buyerNo, Byte status);
+	List<LpaSo> selectAllByStatus(Byte status);
 	int updateSoSeq(Integer nextSoId, String soSeq);
 	LpaSo selectByOrderSeq(String lpaSoSeq);
-//	void deleteByProdNo(Integer lpaOrderNo);
-//	int updateByProdNo(Lpa_SO lpa_SO);
-//	Lpa_Prod findByPK(Integer lpaProdNo);
+	int updateSoStatus(Integer lpaSoNo, Byte status);
 }

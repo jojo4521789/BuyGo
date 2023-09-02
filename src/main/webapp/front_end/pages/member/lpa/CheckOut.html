@@ -98,20 +98,21 @@
         $('#checkout').click(function () {
 
             const lpaTotalAmount = $("#total-price").text().substring(1, $("#total-price").text().length);
-            console.log(lpaTotalAmount);
             const lpaRecName = $("#recipient-name").val();
             const lpaSendAddress = $("#recipient-address").val();
             const lpaRecTel = $("#recipient-phone").val();
+            const lpaDeliverMethod = "711店到店"
+            console.log(lpaDeliverMethod);
 
 
             let Data = {
                 lpaSo: {
-                    lpaTotalAmount: 0,
+                    lpaTotalAmount: 700,
                     lpaRecName: lpaRecName,
                     lpaSendAddress: lpaSendAddress,
-                    lpaRecTel: lpaRecTel
+                    lpaRecTel: lpaRecTel,
+                    lpaDeliverMethod: lpaDeliverMethod
                 },
-                // 由購物車頁面傳來陣列資料?
                 lpaSoDetails: [
                     {
                         lpaProdNo: 1,
@@ -132,7 +133,7 @@
                 method: 'POST',
                 body: JSON.stringify(Data),
                 headers: {
-                    'Content-Type': 'application/json; charset=utf-8'
+                    'Content-Type': 'application/json;charset=utf-8'
                 }
             })
                 .then(response => response.json())

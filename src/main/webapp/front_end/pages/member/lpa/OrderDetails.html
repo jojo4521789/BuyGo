@@ -159,6 +159,14 @@
             background-color: #f2f2f2;
             /* 表头背景颜色 */
         }
+
+        .prodPic {
+            max-width: 150px;
+            width: auto\9;
+            height: auto;
+            border: 0;
+            vertical-align: middle;
+        }
     </style>
 </head>
 
@@ -511,9 +519,11 @@
                                     <p><strong>訂單狀態：</strong><span id="orderStatus"></span></p>
                                     <p><strong>訂單號碼：</strong><span id="orderNumber"></span></p>
                                     <p><strong>訂單日期：</strong><span id="orderTime"></span></p>
-                                    <p><strong>訂單總金額：</strong><span id="totalAmount"></span></p>
                                     <p><strong>收件人姓名：</strong><span id="recName"></span></p>
                                     <p><strong>收件地址：</strong><span id="sendAddress"></span></p>
+                                    <p><strong>訂單運送方式：</strong><span id="deliverMethod"></span></p>
+                                    <p><strong>寄件編號：</strong><span id=""></span></p>
+                                    <br>
                                     <p><strong>訂購商品列表：</strong><span id="prodList"></span></p>
                                     <table id="ordersTable">
                                         <thead>
@@ -523,23 +533,17 @@
                                                 <th>商品數量</th>
                                                 <th>商品單價</th>
                                                 <th>小計</th>
-                                                <th>追加狀態 (更改完狀態後，請務必按下"確認更新"按鈕)</th>
+                                                <th>追加結果</th>
                                             </tr>
                                         </thead>
                                         <tbody id="showOrderArea">
 
                                         </tbody>
                                     </table>
-
-                                    <button id="update" onclick="updateStatus()">確認更新</button>
-                                    <button id="back" onclick="PreviousPage()">返回前頁</button>
-                                    <br>
-                                    <br>
-                                    <span id="deliverMsg"></span>
-                                    <button id="ship" onclick="" style="display:none">安排出貨</button>
-                                    <button id="cancelOrder" onclick="" style="display:none">取消訂單</button>
-
-
+                                    <p id="originalAmount">💠原始訂單總金額: <span></span></p>
+                                    <p id="receivable">💠實際應收總金額: <span></span></p>
+                                    <p id="refund">💠退還買家金額: <span></span></p>
+                                    <button>聯繫賣家</button>
                                 </div>
                             </div>
                         </div>
@@ -763,6 +767,7 @@
         let lpaSoSeq = localStorage.getItem("myData");
         let order;
 
+
         fetch('/BuyGo/needLoginApi/showOrderDetails?lpaSoSeq=' + lpaSoSeq, {
             method: "Get",
             headers: {
@@ -772,7 +777,7 @@
             .then(function (response) {
                 return response.json();
             })
-            .then(function (data) {
+            .then(async function (data) {
                 order = data;
                 console.log("載入此頁面, 從後端取得訂單資料");
                 console.log(order); // 印出傳入的JSON物件$
@@ -781,50 +786,54 @@
                 $("#orderStatus").text(orderStatus(order.lpaSoStatus));
                 $("#orderNumber").text(order.lpaSoSeq);
                 $("#orderTime").text(order.lpaSoTime);
-                $("#totalAmount").text(order.lpaTotalAmount);
                 $("#recName").text(order.lpaRecName);
                 $("#sendAddress").text(order.lpaSendAddress);
+                $("#deliverMethod").text(order.lpaDeliverMethod);
+                $("#originalAmount > span").text(order.lpaTotalAmount);
+
+                let originalTotoalAmount = order.lpaTotalAmount;
+                let RefundAmount = 0;
+                // 確認每列商品小計
+                for (let e of order.lpaSoDetails) {
+                    let sum = e.lpaOrdQty * e.lpaProdPrice;
+                    // 若沒有追加成功, 加入退款金額
+                    if (e.status == 2) {
+                        RefundAmount += sum;
+                    }
+                }
+                $("#receivable > span").text(originalTotoalAmount - RefundAmount);
+                $("#refund > span").text(RefundAmount);
+
+                if (order.lpaSoStatus == 0) {
+                    Swal.fire('發生錯誤，將跳轉回訂單列表')
+                        .then((result) => {
+                            /* Read more about isConfirmed, isDenied below */
+                            if (result.isConfirmed) {
+                                window.location.href = "ListOrders.html"
+                            }
+                        })
+                }
 
                 // 將商品代入表格
                 for (let i = 0; i < order.lpaSoDetails.length; i++) {
+                    let blob = await getProdPic(order.lpaSoDetails[i].lpaProd.lpaProdNo);
                     let html = "";
-                    html += `<td>圖片</td>`;
+                    html += `<td><img class="prodPic" src="${URL.createObjectURL(blob)}"></td>`;
                     html += `<td>${order.lpaSoDetails[i].lpaProd.lpaProdName}</td>`;
                     html += `<td>${a = order.lpaSoDetails[i].lpaOrdQty}</td>`;
                     html += `<td>${b = order.lpaSoDetails[i].lpaProdPrice}</td>`;
                     html += `<td>${a * b}</td>`;
-                    // 依照商品狀態預設checkbox
-                    switch (order.lpaSoDetails[i].status) {
-                        case 0:
-                            html += `<td>
-                                <label><input type="radio" name="status[${i}]" value="0" checked> 追加中</label>
-                                <label><input type="radio" name="status[${i}]" value="1"> 追加完成</label>
-                                <label><input type="radio" name="status[${i}]" value="2"> 追加失敗</label>
-                                </td>`
-                            break;
+                    html += `<td>${orderDetailsStatus(order.lpaSoDetails[i].status)}</td>`;
 
-                        case 1:
-                            html += `<td>
-                                <label><input type="radio" name="status[${i}]" value="0"> 追加中</label>
-                                <label><input type="radio" name="status[${i}]" value="1" checked> 追加完成</label>
-                                <label><input type="radio" name="status[${i}]" value="2"> 追加失敗</label>
-                                </td>`
-                            break;
 
-                        case 2:
-                            html += `<td>
-                                <label><input type="radio" name="status[${i}]" value="0"> 追加中</label>
-                                <label><input type="radio" name="status[${i}]" value="1"> 追加完成</label>
-                                <label><input type="radio" name="status[${i}]" value="2" checked> 追加失敗</label>
-                                </td>`
-
-                    }
 
                     let tr = document.createElement("tr");
                     tr.innerHTML = html;
                     $("#showOrderArea").append(tr);
-                    showDeliverBtn(); // 如果沒有追加中商品, 則顯示出貨按鈕
                 }
+                // 最後一列顯示小計
+                let tr = document.createElement("tr");
+                $("#showOrderArea").append(tr);
             })
             .catch(function (error) {
                 console.log(error);
@@ -836,12 +845,14 @@
         function orderStatus(status) {
             switch (status) {
                 case 0:
-                    return "追加中";
+                    return "待付款";
                 case 1:
-                    return "運送中";
+                    return "追加中";
                 case 2:
-                    return "已完成";
+                    return "運送中";
                 case 3:
+                    return "已完成";
+                case 4:
                     return "不成立";
                 default:
                     return "未知狀態";
@@ -852,88 +863,29 @@
         function orderDetailsStatus(status) {
             switch (status) {
                 case 0:
-                    return "追加中";
+                    return "⚠️追加中";
                 case 1:
-                    return "追加完成";
+                    return "✅追加完成";
                 case 2:
-                    return "追加失敗";
+                    return "❌追加失敗";
                 default:
                     return "未知狀態";
             }
         }
 
-        // 取得每個商品的追加狀態(單選框的值), 並送到後端
-        function updateStatus() {
-            let lpaSoDetailsList = [];
-            for (let i = 0; i < order.lpaSoDetails.length; i++) {
-                let lpaSoDetails = {
-                    lpaSoNo: order.lpaSoDetails[i].lpaSoNo,
-                    lpaProdNo: order.lpaSoDetails[i].lpaProdNo,
-                    status: $("input[name='status[" + i + "]']:checked").val()
-                }
-                lpaSoDetailsList.push(lpaSoDetails);
-            }
-            Data = { lpaSoDetailsList: lpaSoDetailsList }
-
-            fetch("/BuyGo/needLoginApi/updateDetailStatus", {
-                method: 'POST',
-                body: JSON.stringify(Data),
-                headers: {
-                    'Content-Type': 'application/json; charset=utf-8'
-
-                }
-            })
-                .then(function (response) {
-                    console.log(response);
-                    return response.json();
-                })
-                .then(function (data) {
-                    console.log("呼叫更新商品servlet, 取得物件為: ");
-                    console.log(data); // 印出傳入的JSON物件
-                    order.lpaSoDetails = data; // 更新lpaSoDetails
-                    Swal.fire(
-                        '商品狀態更新成功!',
-                        '',
-                        'success'
-                    )
-                    showDeliverBtn();
-                })
-                .catch(function (error) {
-                    console.log(error);
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Oops...',
-                        text: 'Something went wrong!',
-                        // footer: '<a href="">Why do I have this issue?</a>'
-                    })
-                })
-        }
-
-        // 安排出貨及確認是否退款
-        function showDeliverBtn() {
-            let allStatusNotZero = true;
-
-            for (let e of order.lpaSoDetails) {
-                if (e.status == 0) {
-                    allStatusNotZero = false; // 如果有任何 e.status == 0，改為 false
-                    $("#ship").hide(); // 隱藏出貨按鈕
-                    $("#deliverMsg").text("");
-                    break;
-                }
-            }
-
-            if (allStatusNotZero) {
-                // 所有商品的狀態都不為 0，顯示出貨按鈕
-                $("#deliverMsg").text("所有商品已確認追加狀態，請進行下一步");
-                $("#ship").show();
-                $("#cancelOrder").hide();
-            } else {
-                $("#deliverMsg").text("尚有商品未追加完成，請確認");
+        // 從後端取得byte[]圖片資料 (用async確保fetch請求結束前 & 取得Blob之前不會執行後續程式)
+        async function getProdPic(prodNo) {
+            try {
+                const blob = await fetch('/BuyGo/needLoginApi/getProdPic?prodNo=' + prodNo)
+                    .then(response => response.blob());
+                return blob;
+            } catch (error) {
+                console.log(error);
             }
         }
 
-        // 前往運送細節
-        // function
+
+
 
         // 為何按返回上一頁沒有反應????
         document.addEventListener('DOMContentLoaded', function () {
