@@ -17,14 +17,10 @@ public class ShowSellerOrderServlet extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) {
-		req.getSession().setAttribute("memberNo", 3);
-		Integer memberNo = (Integer)req.getSession().getAttribute("memberNo"); // 取得登入會員資訊
+		req.getSession().setAttribute("memberNo", 1);
+		Integer sellerNo = (Integer) req.getSession().getAttribute("memberNo"); // 取得登入會員(賣家)資訊
 		Byte status = Byte.parseByte(req.getParameter("page"));
-//		if (status == 0) {
-//			commonUtil.writePojo2Json(resp, service.findAll(memberNo));
-//		} else {
-			commonUtil.writePojo2Json(resp, service.findByOrderStatus(memberNo, status));
-//		}
-		
+		System.out.println(status);
+		commonUtil.writePojo2Json(resp, service.findSellerOrders(sellerNo, status));
 	}
 }

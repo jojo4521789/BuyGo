@@ -1,5 +1,8 @@
 package web.back_end.lpa.product.dao;
 
-public interface LpaProdDao {
+import core.dao.CoreDao;
+import web.back_end.lpa.product.entity.LpaProd;
 
+public interface LpaProdDAO extends CoreDao<LpaProd, Integer>{
+	
 }

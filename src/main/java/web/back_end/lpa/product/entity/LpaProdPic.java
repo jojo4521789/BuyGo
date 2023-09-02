@@ -9,18 +9,19 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import core.entity.Core;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "lpa_so_pic")
+@Table(name = "lpa_prod_pic")
 @Setter
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class LpaProdPic implements Serializable{
+public class LpaProdPic extends Core implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "LPA_PROD_PIC_NO")

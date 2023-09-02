@@ -5,5 +5,5 @@ import web.back_end.lpa.product.entity.LpaProdPic;
 import web.back_end.opa.prod.entity.Prpics;
 
 public interface LpaProdPicsDAO extends CoreDao<LpaProdPic, Integer>{
-
+	byte[] selectProdFirstPic(Integer lpaProdNo);
 }
