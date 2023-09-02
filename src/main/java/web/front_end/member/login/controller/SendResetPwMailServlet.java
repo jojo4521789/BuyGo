@@ -44,7 +44,6 @@ public class SendResetPwMailServlet extends HttpServlet {
 		resetMemberMap.put("memberEmail", member.getMemberEmail());
 		resetMemberMap.put("authCode", authCode);
 		session.setAttribute("resetMemberMap", resetMemberMap); // 將需修改帳號資訊的Map存進session，供後續使用
-//		System.out.println("resetMemberMap:" + session.getAttribute("resetMemberMap"));
 		MailService mailService = new MailService();
 		mailService.sendMail(member.getMemberEmail(), "BuyGo重置密碼驗證信", authCode);
 	}
@@ -135,9 +134,7 @@ public class SendResetPwMailServlet extends HttpServlet {
 				message.setText(messageText);
 
 				Transport.send(message);
-//				System.out.println("傳送成功!");
 			} catch (MessagingException e) {
-//				System.out.println("傳送失敗!");
 				e.printStackTrace();
 			}
 		}
