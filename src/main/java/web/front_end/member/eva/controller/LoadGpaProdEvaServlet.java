@@ -78,6 +78,7 @@ public class LoadGpaProdEvaServlet extends HttpServlet{
 //			}
 //			System.out.println("---------------");
 //		}
+		System.out.println("gpaProdEvaDTOList:" + gpaProdEvaDTOList);
 		// DTO驗證結束
 		writePojo2Json(response, gpaProdEvaDTOList);
 	}

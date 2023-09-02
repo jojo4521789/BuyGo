@@ -27,19 +27,9 @@ public class LoadGpaOrderServlet extends HttpServlet{
 		Integer selectPage = Integer.parseInt(request.getParameter("page"));
 		List<GpaSo> gpaSolist = SERVICE.loadSoByMemberNoAndSoStat((Integer)(session.getAttribute("memberNo")), selectPage);
 		
-		//DTO
 		List<GpaOrderDTO> gpaOrderDTOList = new LinkedList<GpaOrderDTO>();
-//		測試
 		for (GpaSo gpaSo : gpaSolist) {
 			GpaOrderDTO gpaOrderDTO = new GpaOrderDTO();
-			//DTO測試開始
-//			gpaOrderDTO.setGpaProd(gpaSo.getGpaProd().getGpaSo().get(0).getGpaProd().getGpaSo().get(0).getGpaProd());
-//			gpaOrderDTO.setGpaSo(gpaSo);
-//			gpaOrderDTO.setMember(gpaSo.getMember());
-//			gpaOrderDTO2.setGpaSoNo(gpaSo.getGpaSoNo());
-//			gpaOrderDTO2.setGpaProdCount(gpaSo.getGpaProdCount());
-			//DTO測試結束
-			
 //			// DTO寫法開始
 			gpaOrderDTO.setGpaSoNo(gpaSo.getGpaSoNo()); // 揪團賣場訂單編號
 			gpaOrderDTO.setGpaProdCount(gpaSo.getGpaProdCount()); // 購買數量
@@ -60,7 +50,7 @@ public class LoadGpaOrderServlet extends HttpServlet{
 			gpaOrderDTOList.add(gpaOrderDTO);
 //			// DTO寫法結束
 		}
-		// DTO驗證
+		// DTO測試
 //		for(GpaOrderDTO gpaOrderDTO : gpaOrderDTOList) {
 //			System.out.println("---------------");
 //			System.out.println(gpaOrderDTO.getGpaProdName());
@@ -76,9 +66,5 @@ public class LoadGpaOrderServlet extends HttpServlet{
 //			System.out.println("---------------");
 //		}
 		writePojo2Json(response, gpaOrderDTOList);
-	}
-	@Override
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) {
-		response.setCharacterEncoding("UTF-8");
 	}
 }
