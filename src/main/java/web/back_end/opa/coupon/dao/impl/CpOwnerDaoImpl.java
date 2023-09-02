@@ -2,11 +2,15 @@ package web.back_end.opa.coupon.dao.impl;
 
 import java.util.List;
 
+import javax.persistence.NoResultException;
+
 import org.hibernate.Session;
+import org.hibernate.query.Query;
 
 import web.back_end.opa.coupon.dao.CpOwnerDao;
 import web.back_end.opa.coupon.entity.CpOwner;
 import web.back_end.opa.coupon.entity.CpOwnerId;
+import web.front_end.member.opa.cart.entity.OpaCart;
 
 public class CpOwnerDaoImpl implements CpOwnerDao{
 
@@ -44,6 +48,17 @@ public class CpOwnerDaoImpl implements CpOwnerDao{
 	public List<CpOwner> selectAll() {
 		final String hql = "FROM CpOwner ORDER BY cpOwnerId";
 		return getSession().createQuery(hql, CpOwner.class).getResultList();
+	}
+
+	@Override
+	public List<CpOwner> selectByMember(Integer memberNo) {
+		final String hql = "FROM CpOwner WHERE cpOwnerId.memberNo = :memberNo";
+		try {
+			Query<CpOwner> query = getSession().createQuery(hql, CpOwner.class).setParameter("memberNo", memberNo);
+			return query.getResultList();
+		} catch (NoResultException e) {
+			return null;
+		}
 	}
 
 }
