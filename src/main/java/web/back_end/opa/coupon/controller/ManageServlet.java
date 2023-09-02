@@ -14,7 +14,7 @@ import web.back_end.opa.coupon.entity.Coupon;
 import static web.back_end.opa.coupon.util.CouponConstants.SERVICE;
 import static core.util.CommonUtil.writePojo2Json;
 
-@WebServlet("/coupon/manage")
+@WebServlet("/api/opa/coupon/manage")
 public class ManageServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	

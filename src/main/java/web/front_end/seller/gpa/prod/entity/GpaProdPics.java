@@ -1,11 +1,13 @@
 package web.front_end.seller.gpa.prod.entity;
 
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import core.entity.Core;
 import lombok.AllArgsConstructor;
@@ -32,4 +34,7 @@ public class GpaProdPics extends Core{
 
     @Column(name = "GPA_PROD_PIC")
     private byte[] gpaProdPic;
+    
+    @Transient
+    private String gpaProdPicToBase64;
 }

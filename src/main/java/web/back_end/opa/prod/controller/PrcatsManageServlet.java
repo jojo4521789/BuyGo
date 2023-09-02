@@ -14,7 +14,7 @@ import web.back_end.opa.prod.entity.Prcats;
 import static web.back_end.opa.prod.util.PrcatsConstants.SERVICE;
 import static core.util.CommonUtil.writePojo2Json;
 
-@WebServlet("/prcats/manage")
+@WebServlet("/api/opa/prcats/manage")
 public class PrcatsManageServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

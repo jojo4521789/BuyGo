@@ -14,7 +14,7 @@ import core.entity.Core;
 import web.back_end.opa.coupon.entity.Coupon;
 import static web.back_end.opa.coupon.util.CouponConstants.SERVICE;
 
-@WebServlet("/coupon/remove")
+@WebServlet("/api/opa/coupon/remove")
 public class RemoveServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 

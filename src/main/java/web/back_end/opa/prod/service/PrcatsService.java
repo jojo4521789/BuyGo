@@ -12,5 +12,7 @@ public interface PrcatsService extends CoreService{
 	
 	List<Prcats> findAll();
 	
+	List<Prcats> findPart(String input);
+	
 	boolean remove(Integer opaPrcatsNo);
 }

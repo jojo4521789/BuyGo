@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+      .container {
+            width: 500px;
+            margin: 0 auto;
+            border-radius: 20px;
+            padding: 5px;
+        }
+
+        /* 邊框樣式 */
+        .border {
+            border: grey 1px solid;
+        }
+
+        .center {
+            text-align: center;
+            margin: 5px;
+        }
+
+        /* (列表中的) 項目樣式 */
+        .todo-item {
+            margin: 5px;
+            padding: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        /* 外保留距離樣式 */
+        .m-1 {
+            margin: 5px;
+        }
+
+        /* button {
+            width: 30px;
+            height: 30px;
+            border-radius: 15px;
+        } */
+
+        /* (列表中的) 已完成項目樣式 */
+        .isCompleted {
+            text-decoration: line-through;
+        }
+
+        input {
+            width: 440px;
+            height: 40px;
+            font-size: 16px;
+        }
+    * {
+      box-sizing: border-box;
+    }
+
+    ul.list {
+      margin: 24px 0 0 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    ul.list>li {
+      margin-bottom: 30px;
+    }
+
+    ul.list>li:last-child {
+      margin-bottom: 0;
+    }
+
+    ul.list>li>a.link_title {
+      display: block;
+      width: 100%;
+      color: white;
+      background-color: #dd2836;
+      box-shadow: 2px 2px 8px 0 rgba(56, 55, 53, 0.33);
+      border-radius: 26px;
+      padding: 8px 40px;
+      text-decoration: none;
+      font-size: 24px;
+      font-weight: normal;
+    }
+
+    ul.list>li>a.link_title::after {
+      content: "";
+      display: block;
+      clear: both;
+    }
+
+    ul.list>li>a.link_title button.switch_btn {
+      float: right;
+      display: inline-block;
+      background: none;
+      border: 0;
+      outline: none;
+      color: white;
+      font-size: 24px;
+    }
+
+    ul.list>li>a.link_title button.switch_btn span.-minus {
+      display: none;
+    }
+
+    ul.list>li>div.inner_block {
+      font-size: 18px;
+      color: #4a4a4a;
+      margin-top: 8px;
+      padding: 0 40px;
+      line-height: 1.6;
+      display: none;
+    }
+
+    ul.list>li.-on>a.link_title button.switch_btn span.-plus {
+      display: none;
+    }
+
+    ul.list>li.-on>a.link_title button.switch_btn span.-minus {
+      display: inline-block
+    }
+  </style>
+</head>
+
+<body>
+  <div class="border container">
+    <h2 class="center">FAQ</h2>
+    <div class="m-1">
+        faqTitle:<input type="text" id="title" placeholder="請輸入FAQ標題..."><br>
+        faqContent:<input type="text" id="content" placeholder="請輸入FAQ內容..."><br>
+        <button type="button" id="add">送出請求</button>
+    </div>
+    <p id="p1">尚無資料</p>
+    <p id="p2">尚無資料</p>
+    <p id="p3">尚無資料</p>
+    <p id="p4">尚無資料</p>
+
+    <div id="todo-list">
+        <div>
+            <span></span>
+            <span></span>
+        </div>
+        <div>
+            <button>❌</button>
+            <button>✏️</button>
+            <button>✔️</button>
+        </div>
+    </div>
+</div>
+ 
+  <ul class="list">
+
+    <li>
+      <a class="link_title" href="#">
+        <button type="button" class="switch_btn">
+          <span class="-plus">+</span><span class="-minus">-</span>
+        </button>
+       尚無資料
+      </a>
+      <div class="inner_block">
+        尚無內容
+      </div>
+
+    </li>
+
+  </ul>
+  <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+
+  <script>
+    //FAQ展開收藏
+    $("a.link_title").on("click", function (e) {
+      e.preventDefault();
+      console.log(this);
+      $(this).closest("li").toggleClass("-on");
+      $(this).closest("li").find("div.inner_block").slideToggle(100);
+    });
+    //增加FAQ標題並顯示
+    const p1_el = document.getElementById("p1")
+    const p2_el = document.getElementById("p2")
+    const p3_el = document.getElementById("p3")
+    const p4_el = document.getElementById("p4")
+    const title_el = document.getElementById("title")
+    const content_el = document.getElementById("content")
+    document.getElementById("add").addEventListener("click",()=>{
+      fetch("../guset/faq/IncreaseFaq",{
+        method:"POST",
+        headers:{"Content-Type":"application/json;charset:utf-8"},
+        body:JSON.stringify({
+          faqTitle: title_el.value,
+          faqContent: content_el.value
+        })
+      })
+      .then(resp => resp.json())
+      .then(body =>{
+        const {faqTitle,faqContent,successful,message} = body;
+        p1_el.innerHTML = "faqTitle" + faqTitle;
+        p2_el.innerHTML = "faqContent" + faqContent;
+        p3_el.innerHTML = "successful" + successful;
+        p4_el.innerHTML = "message" + message;
+
+      });
+      
+    });
+
+  </script>
+</body>
+
+</html>
