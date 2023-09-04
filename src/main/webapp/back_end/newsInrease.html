@@ -4,37 +4,32 @@
 <head>
     <meta charset="utf-8">
     <title>Form</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <style>
+        .container {
+            width: 700px;
+            margin: 0 auto;
+            border-radius: 20px;
+            padding: 5px;
+        }
+
+        /* 邊框樣式 */
+        .border {
+            border: grey 1px solid;
+        }
+
         input[disabled] {
             background-color: #eee;
             cursor: not-allowed;
         }
 
-        #drop_zone {
-            border: 1px dashed #ccc;
-            height: 50px;
-            position: relative;
-        }
-
-        #drop_zone span.text {
-            position: absolute;
-            display: inline-block;
-            left: 50%;
-            top: 50%;
-            transform: translate(-50%, -50%);
-            z-index: -1;
-            color: lightgray;
-        }
-
-        #drop_zone.-on {
-            border: 1px dashed lightblue;
-            box-shadow: 3px 3px 5px lightblue inset, -3px -3px 5px lightblue inset;
-        }
-
         #preview {
             border: 1px solid lightgray;
             display: inline-block;
-            width: 100px;
+            width: 200px;
             min-height: 150px;
             position: relative;
         }
@@ -56,76 +51,293 @@
 </head>
 
 <body>
-    <div>
-        <label>消息標題：</label>
-        <input type="text" id="newsTitle">
-    </div>
+    <div class="border container">
+        <nav class="navbar navbar-inverse" style="background-color: #e3f2fd;">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="#page3">最新消息</a>
+                </div>
+                <ul class="nav navbar-nav">
+                    <li><a href="#page1" class="nav-link add-link">新增</a></li>
+                    <li><a href="#page2" class="nav-link query-link">查詢/刪除</a></li>
+                </ul>
+            </div>
+        </nav>
+        <div class="page" id="page1">
+            <form action="#" method="#" id="the_form">
+                <div>
+                    <label>消息標題：</label>
+                    <input type="text" id="newsTitle">
+                </div>
 
-    <div>
-        <label>消息內容：</label>
-        <input type="text" id="newsContent"></input>
-    </div>
+                <div>
+                    <label>消息內容：</label>
+                    <input type="text" id="newsContent"></input>
+                </div>
 
-    <div>
-        <label>圖片：</label>
-        <input type="file" id="newsPicture">
-        <div>
-            <img id='preview'> 
+                <div>
+                    <label>圖片：</label>
+                    <input type="file" id="newsPicture">
+                    <div>
+                        <img id='preview' src="#">
+                    </div>
+                </div>
+                <button type="submit" id="btn">送出新增</button>
+            </form>
+        </div>
+
+        <div class="page" id="page2" style="display: none;">
+            <div id="todo-news">
+                <div>
+                    <label>搜尋 : </label>
+                    <input type="text" id="select_news"><br>
+                    <button type="button" id="btn_news">送出</button>
+                </div>
+                <div id="newsList">
+
+                </div>
+            </div>
         </div>
     </div>
-    <button type="submit" id="btn">送出新增</button>
-    <p id="p1"></p>
-
-
     <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.all.min.js"></script>
     <script>
+        // 添加页面切换代码
+        const addLink = document.querySelector('.add-link');
+        const queryLink = document.querySelector('.query-link');
+        const page1 = document.getElementById("page1");
+        const page2 = document.getElementById("page2");
+        const otherPages = document.querySelectorAll(".page");
+        window.onload = function () {
+            page1.style.display = "none";
+        }
+        addLink.addEventListener("click", event => {
+            event.preventDefault();
+            otherPages.forEach(page => page.style.display = "none");
+            page1.style.display = "block";
+            document.querySelectorAll(".navbar-nav a").forEach(link => {
+                link.style.color = "black";
+            });
+            addLink.style.color = "red";
+        });
 
+        queryLink.addEventListener("click", event => {
+            event.preventDefault();
+            otherPages.forEach(page => page.style.display = "none");
+            page2.style.display = "block";
 
-        // =========================== 元素 ========================= //
+            document.querySelectorAll(".navbar-nav a").forEach(link => {
+                link.style.color = "black";
+            });
+            queryLink.style.color = "red";
+        });
+
+        //元素 ========================= //
         const newsTitle_el = document.getElementById("newsTitle");
         const newsContent_el = document.getElementById("newsContent");
         const newsPicture_el = document.getElementById("newsPicture");
         const preview_el = document.getElementById("preview");
         const btn_el = document.getElementById("btn");
-        // =========================== 透過 File 取得預覽圖 ========================= //
-        var preview_img = function (file) {
-            var reader = new FileReader(); // 用來讀取檔案
-            reader.readAsDataURL(file); // 讀取檔案
-            reader.addEventListener("load", function () {
-
-                let img_str = '<img src="' + reader.result + '" class="preview_img">';
-                preview_el.innerHTML = img_str;
-            });
-        };
-        newsPicture_el.addEventListener("change", function (e) {
-            if (this.files.length > 0) {
-                preview_img(this.files[0]);
-            } else {
-                preview_el.innerHTML = '<span class="text">預覽圖</span>';
+        //透過 File 取得預覽圖 ========================= //
+        newsPicture_el.onchange = event => {
+            const [file] = newsPicture_el.files;
+            if (file) {
+                preview_el.src = URL.createObjectURL(file);
             }
-        });
-        preview_el.innerHTML = '<span class="text">預覽圖</span>';
-        sessionStorage.clear();
-        //==============================
-
+        }
         //==============================
         btn_el.addEventListener("click", () => {
-            fetch("front_end / guest / news / NewsIncrese", {
+            if (newsPicture_el.files.length > 0) {
+                const file = newsPicture_el.files[0];
+                const reader = new FileReader();
+                reader.readAsDataURL(file);
+                reader.onload = function () {
+                    const base64Image = reader.result.split(",")[1];
+                    fetch("/BuyGo/back_end/news/news/NewsIncrese", {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json;charset=utf-8" },
+                        body: JSON.stringify({
+                            newsTitle: newsTitle_el.value,
+                            newsContent: newsContent_el.value,
+                            newsPicture: base64Image,
+                        })
+                    }).then(resp => resp.json())
+                        .then(responseBody => {
+                            newsTitle_el.value = "";
+                            newsContent_el.value = "";
+                            newsPicture_el.value = "";
+                            preview_el.src = "#"; // 清空预览图像
+                            const insertedImg = document.createElement("img");
+                            insertedImg.src = responseBody.newsPicture;
+                            insertedImg.className = "preview_img";
+                            preview_el.innerHTML = "";
+                            preview_el.appendChild(insertedImg);
+
+                            // 成功提示
+                            Swal.fire({
+                                position: 'center',
+                                icon: 'success',
+                                title: '成功加入!',
+                                showConfirmButton: false,
+                                timer: 1500
+                            });
+
+                        });
+                };
+            }
+        });
+        //================================
+        const select_news_el = document.querySelector("#select_news");
+        const show_title = document.querySelector("#show_title");
+        const show_content = document.querySelector("#show_content");
+        const show_picture = document.querySelector("#show_picture");
+        const btn_news_el = document.querySelector("#btn_news");
+
+        document.getElementById("btn_news").addEventListener("click", () => {
+            fetch("/BuyGo/back_end/news/news/NewsSelect", {
                 method: "POST",
-                header: { "content-type": "application/json;charset=utf-8" },
+                headers: { "Content-Type": "application/json;charset=utf-8" },
                 body: JSON.stringify({
-                    newsTitle: newsTitle_el.value,
-                    newsContent: newsContent_el.value,
-                    newsPicture: Array.from(new Uint8Array(arrayBuffer)),
+                    newsTitle: select_news_el.value
                 })
             }).then(resp => resp.json())
-            .then(body=>{
-                display_arr_img(body['img'])
-            })
-        });
+                .then(responsebody => {
+                    responsebody.forEach(element => {
+
+                        var div = document.getElementById("newsList");
+                        var br = document.createElement("br");
+                        div.appendChild(br);
+                        const item = document.createElement("div");
+                        item.id = element.newsNo;
+                        const titleDiv = document.createElement("div");
+                        titleDiv.textContent = "News No:";
+                        item.appendChild(titleDiv);
+                        var div2 = document.createElement("input");
+                        div2.setAttribute("type", "text");
+                        div2.setAttribute("ReadOnly", "True");
+                        div2.id = "input_id";
+                        div2.value = element.newsNo;
+                        const titleDiv1 = document.createElement("div");
+                        item.appendChild(div2);
+                        titleDiv1.textContent = "News Title:";
+                        item.appendChild(titleDiv1);
+                        var div3 = document.createElement("input");
+                        div3.setAttribute("type", "text");
+                        div3.setAttribute("ReadOnly", "True");
+                        div3.value = element.newsTitle;
+                        item.appendChild(div3);
+                        const titleDiv2 = document.createElement("div");
+                        titleDiv2.textContent = "News Content:";
+                        item.appendChild(titleDiv2);
+                        var div4 = document.createElement("input");
+                        div4.setAttribute("type", "text");
+                        div4.setAttribute("ReadOnly", "True");
+                        div4.value = element.newsContent;
+                        item.appendChild(div4);
+                        item.appendChild(br);
+
+                        const imageDiv = document.createElement("div");
+                        imageDiv.textContent = "News Image:";
+
+                        var img = document.createElement("img");
+                        img.src = "data:image/jpeg;base64," + element.newsPicture;
+                        imageDiv.appendChild(img);
+
+                        item.appendChild(imageDiv);
+
+                        const deleteButton = document.createElement("button");
+                        deleteButton.textContent = "刪除❌";
+                        deleteButton.id = "delete";
+                        item.appendChild(deleteButton);
+
+                        item.appendChild(br);
+
+                        div.appendChild(item);
 
 
+                        deleteButton.addEventListener("click", () => {
+                            // 向後端發送刪除請求
+                            fetch("/BuyGo/back_end/news/news/NewsDelete", {
+                                method: "POST",
+                                headers: { "Content-Type": "application/json;charset=utf-8" },
+                                body: JSON.stringify({
+                                    newsNo: element.newsNo
+                                })
+                            })
+                                .then(resp => resp.json())
+                                .then(body => {
+                                    // 在成功刪除後，從界面中移除該行資料
+                                    if (body == "yes") {
+                                        item.remove();
+                                    } else {
+                                        console.log("刪除失敗");
+                                    }
+                                })
+
+                        });
+                    })
+                });
+        })
+        //=================
+        function fetchLatestNews() {
+            fetch("/BuyGo/back_end/news/news/NewsSelectAll", {
+                method: "POST",
+                headers: { "Content-Type": "application/json;charset=utf-8" }
+            }).then(resp => resp.json())
+                .then(responsebody => {
+                    const newsList = document.getElementById("newsList");
+                    newsList.innerHTML = ""; // 清空原有内容
+
+                    responsebody.forEach(element => {
+
+                        var div = document.getElementById("newsList");
+                        var br = document.createElement("br");
+                        div.appendChild(br);
+                        const item = document.createElement("div");
+                        item.id = element.newsNo;
+                        const titleDiv = document.createElement("div");
+                        titleDiv.textContent = "News No:";
+                        item.appendChild(titleDiv);
+                        var div2 = document.createElement("input");
+                        div2.setAttribute("type", "text");
+                        div2.setAttribute("ReadOnly", "True");
+                        div2.id = "input_id";
+                        div2.value = element.newsNo;
+                        const titleDiv1 = document.createElement("div");
+                        item.appendChild(div2);
+                        titleDiv1.textContent = "News Title:";
+                        item.appendChild(titleDiv1);
+                        var div3 = document.createElement("input");
+                        div3.setAttribute("type", "text");
+                        div3.setAttribute("ReadOnly", "True");
+                        div3.value = element.newsTitle;
+                        item.appendChild(div3);
+                        const titleDiv2 = document.createElement("div");
+                        titleDiv2.textContent = "News Content:";
+                        item.appendChild(titleDiv2);
+                        var div4 = document.createElement("input");
+                        div4.setAttribute("type", "text");
+                        div4.setAttribute("ReadOnly", "True");
+                        div4.value = element.newsContent;
+                        item.appendChild(div4);
+                        item.appendChild(br);
+
+                        const imageDiv = document.createElement("div");
+                        imageDiv.textContent = "News Image:";
+
+                        var img = document.createElement("img");
+                        img.src = "data:image/jpeg;base64," + element.newsPicture;
+                        imageDiv.appendChild(img);
+
+                        item.appendChild(imageDiv);
+                        item.appendChild(br);
+
+                        div.appendChild(item);
+                    });
+                })
+        };
     </script>
 </body>
+
 
 </html>
