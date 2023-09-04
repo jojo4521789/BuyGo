@@ -19,7 +19,6 @@ public class ShowOrderDetails extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) {
 		String lpaSoSeq = req.getParameter("lpaSoSeq");
 		commonUtil.writePojo2Json(resp, service.findOrderDetailsByLpaSoSeq(lpaSoSeq));
-//		}
 
 	}
 }

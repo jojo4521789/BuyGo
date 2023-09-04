@@ -482,7 +482,7 @@
 						<div class="m-t-lg clearfix">
 							<div class="row">
 								<div class="col-xs-12 col-sm-8">
-									<h3 class="uppercase text-bold"><span class="text-xs">訂單追蹤</span></h3>
+									<h3 class="uppercase text-bold"><span class="text-xs">我的銷售訂單</span></h3>
 									<!-- 訂單分類的賣場選擇 -->
 									<button type="button" class="btn btn-primary"
 										onclick="window.location.href='index.html'">一般代購</button>
@@ -495,16 +495,16 @@
 									<!--訂單分類列表-->
 									<ul class="nav nav-tabs">
 										<li class="active"><a href="javascript:void(0)" onclick="changePage(0)"
-												data-toggle="tab" id="orderPageBtn1">追加中</a></li>
+												data-toggle="tab" id="orderPageBtn0">待付款<span></span></a></li>
 										<li><a href="javascript:void(0)" onclick="changePage(1)"
-												data-toggle="tab">運送中</a></li>
+												data-toggle="tab">追加中<span></span></a></li>
 										<li><a href="javascript:void(0)" onclick="changePage(2)"
-												data-toggle="tab">已完成</a></li>
+												data-toggle="tab">運送中<span></span></a></li>
 										<li><a href="javascript:void(0)" onclick="changePage(3)"
+												data-toggle="tab">已完成<span></span></a></li>
+										<li><a href="javascript:void(0)" onclick="changePage(4)"
 												data-toggle="tab">不成立</a></li>
-										<!-- <li><a href="javascript:void(0)" onclick="changePage(4)"
-												data-toggle="tab">已完成</a></li>
-										<li><a href="javascript:void(0)" onclick="changePage(5)"
+										<!-- <li><a href="javascript:void(0)" onclick="changePage(5)"
 												data-toggle="tab">不成立</a></li>
 										<li><a href="javascript:void(0)" onclick="changePage(6)"
 												data-toggle="tab">申請退款/退貨</a></li>
@@ -770,14 +770,14 @@
 
 	<!-- // Particular Page Javascripts -->
 	<script>
-		// 載入頁面時即觸發點即按鈕事件，以觸發撈取資料庫的動作
-		$("#orderPageBtn1").click();
+		// 載入頁面時即觸發changePage(0)
+		$("#orderPageBtn0").click();
 		let orders;
 		let order;
 
 		// 點擊訂單狀態切換按鈕的觸發事件，依點擊按鈕的不同有不同的selectPage值
 		function changePage(selectPage) {
-			fetch('/BuyGo/needLoginApi/loadLpaBuyerOrder?page=' + selectPage, {
+			fetch('/BuyGo/needLoginApi/loadLpaSellerOrder?page=' + selectPage, {
 				method: "Get",
 				headers: {
 					'Content-Type': 'application/x-www-form-urlencoded ; charset=utf-8',
@@ -791,11 +791,12 @@
 					orders = data;
 					console.log(orders); // 印出傳入的JSON物件
 					$('#ordersTable').DataTable().destroy(); // 先销毁之前的 DataTable 实例，然后再进行初始化
-					showOrders(selectPage);
+					showOrders(selectPage); // 依照訂單狀態分類 顯示訂單
 				})
 				.catch(function (error) {
 					console.log(error);
 				})
+
 		}
 
 
@@ -823,8 +824,7 @@
 				items.push(item);
 			}
 
-			// 如果訂單狀態是"追加中", 就
-
+			// 將items代入DataTable
 			const dataTable = $('#ordersTable').DataTable({
 				language: {
 					url: '//cdn.datatables.net/plug-ins/1.13.6/i18n/zh-HANT.json',
@@ -843,14 +843,13 @@
 							// 将行数据转换为 JSON 字符串并存储在按钮的 data-row 属性中
 							var rowData = JSON.stringify(row);
 
-
-							if (selectPage == 0) {
-								return `<button type="button" class="btn btn-warning btn-sm" data-row=${rowData} onclick="editOrder(${meta.row})">查看詳情</button>` 
+							// 如果訂單狀態是"追加中", 就顯示"編輯"按鈕
+							if (selectPage == 1) {
+								return `<button type="button" class="btn btn-warning btn-sm" data-row=${rowData} onclick="editOrder(${meta.row})">更新狀態</button>` 
 								// + `<button type="button" class="btn btn-warning btn-sm" data-row=${rowData} onclick="deliverProd(${meta.row})">出貨</button>`;
 								
 							} else {
-								// return '<button type="button" class="btn btn-danger btn-sm" data-row=\'' + rowData + '\' onclick="showOrderDetails(' + meta.row + ')">查看詳情</button>'
-								return `<button type="button" class="btn btn-warning btn-sm" onclick="showOrderDetails(${meta.rowIndex})">查看詳情</button>`
+								return `<button type="button" class="btn btn-warning btn-sm" data-row=${rowData} onclick="showOrderDetails(${meta.row})">查看詳情</button>`
 							}
 						}
 					}
@@ -873,13 +872,6 @@
 				productsHTML += `<div>商品數量: <span>${details.lpaOrdQty}</span></div>`;
 				productsHTML += `<div class="prodStats">商品狀態: <span>${orderDetailsStatus(details.status)}</span></div>`;
 
-				// 创建一个新的 <select> 元素，并为每个商品添加不同的唯一 id
-				let newSelector = $("<select>").attr("id", "selector_" + i)
-					.append($("<option>").val("option1").text("追加完成"))
-					.append($("<option>").val("option2").text("追加失敗"));
-
-				// 将新的 <select> 元素添加到当前商品的 div.prodStats 中
-				$(".prodStats:eq(" + i + ")").append(newSelector);
 			}
 
 			// Update the lightbox content using jQuery
@@ -909,19 +901,29 @@
 			lpaSoSeq = orders[rowIndex].lpaSoSeq;
 			console.log(lpaSoSeq);
 			localStorage.setItem("myData", lpaSoSeq);
-			window.location.href = "Seller_Edit.html"
+			window.location.href = "Seller_EditOrder.html"
+		}
+
+		// 查看訂單詳情(已出貨)
+		function showOrderDetails(rowIndex) {
+			lpaSoSeq = orders[rowIndex].lpaSoSeq;
+			// console.log(lpaSoSeq);
+			localStorage.setItem("myData", lpaSoSeq);
+			window.location.href = "Seller_OrderDetails01.html"
 		}
 
 		// 將整筆訂單狀態(數字)轉成中文
 		function orderStatus(status) {
 			switch (status) {
 				case 0:
-					return "追加中";
+					return "待付款";
 				case 1:
-					return "運送中";
+					return "追加中";
 				case 2:
-					return "已完成";
+					return "運送中";
 				case 3:
+					return "已完成";
+				case 4:
 					return "不成立";
 				default:
 					return "未知狀態";
@@ -942,10 +944,10 @@
 			}
 		}
 
+		// 頁面重新顯示時觸發的操作
 		$(window).on('pageshow', function (event) {
-			// 页面重新显示时触发的操作
 			if (event.originalEvent.persisted) { // event.persisted是一个boolean，指示页面是否来自缓存
-				$("#orderPageBtn1").click();
+				$("#orderPageBtn0").click();
 			}
 		});
 	</script>

@@ -72,4 +72,9 @@ public class CouponServiceImpl implements CouponService{
 	public boolean remove(Integer opaCouponNo) {
 		return dao.deleteById(opaCouponNo) > 0;
 	}
+
+	@Override
+	public List<Coupon> findPart(String input) {
+		return dao.selectByOpaCouponNameList(input);
+	}
 }

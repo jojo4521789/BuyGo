@@ -34,7 +34,7 @@ public class PrpicsDaoImpl implements PrpicsDao{
 		if(opaProdNo != null) {
 			oldPrpics.setOpaProdNo(opaProdNo);
 		}
-		final byte[] opaProdPicture = prpics.getOpaProdPicture();
+		final String opaProdPicture = prpics.getOpaProdPicture();
 		if(opaProdPicture != null) {
 			oldPrpics.setOpaProdPicture(opaProdPicture);
 		}

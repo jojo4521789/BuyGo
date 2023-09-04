@@ -42,6 +42,7 @@
 	<link rel="stylesheet" href="../../css/common/owl.theme.css">
 	<!-- // PARTICULAR PAGES CSS FILES -->
 	<link rel="stylesheet" href="../../css/common/responsive.css">
+
 	<style>
 		/* -------------------登入功能css開始------------------- */
 		body {
@@ -141,6 +142,10 @@
 			transform: translate(-50%, -50%);
 		}
 	</style>
+	<!-- 我不是機器人功能 -->
+	<span style="font-size:14px;">
+		<script src="https://www.google.com/recaptcha/api.js"></script>
+	</span>
 </head>
 
 <body>
@@ -259,8 +264,8 @@
 
 			<div class="container">
 				<!-- -------------------登入功能開始--------------------->
-				<div class="login_page" style="height: 620px;">
-					<div id="container1" style="top: 20px;">
+				<div class="login_page" style="height: 710px;">
+					<div id="container1" style="top: 20px;height : 650px;">
 						<div class="login"
 							style="display: flex;flex-direction: column;align-items: left;width: 80%;transform: translate(15%);">
 							<!-- 撐版面用 -->
@@ -271,11 +276,13 @@
 								<label for="username">帳號：</label>
 								<input type="text" id="username" name="username" placeholder="帳號" required
 									value="peter123" style="font-size: 16px;">
+								<span id="usernameMsg" style="visibility: hidden;color: red;">需輸入</span>
 							</div>
 							<div>
 								<label for="password">密碼：</label>
 								<input type="password" id="password" name="password" placeholder="密碼" required
 									value="123456" style="font-size: 16px;">
+								<span id="passwordMsg" style="visibility: hidden;color: red;">需輸入</span>
 							</div>
 							<div>
 								<input type="checkbox" id="showPassword"
@@ -291,8 +298,13 @@
 								style="margin-top:20px; width: 50%; transform: translate(50%)">登入</button>
 							<!-- <input type="submit" value="登入" class="submit"> -->
 							<!-- </form> -->
-							<p id="checkMsg" style="visibility: hidden;color: red;font-size: 10px;margin-top: 30px;">
+							<!-- 我不是機器人 -->
+							<div class="g-recaptcha" data-sitekey="6Ldrpu4nAAAAAJc8GV-8C3QZ8f4f1Q6MTtZvWBUC"
+								style="margin-top: 20px;"></div>
+							<p id="checkMsg1" style="visibility: hidden;color: red;font-size: 10px;margin-top: 30px;">
 								你的帳號或密碼不正確，請再試一次</p>
+							<p id="checkMsg2" style="visibility: hidden;color: red;font-size: 10px;margin-top: 30px;">
+								請通過機器人驗證</p>
 							<div style="text-align: center;">
 								<a href="#" style="width: fit-content;">
 									<h5>註冊帳號</h5>
@@ -523,34 +535,56 @@
 			let inputPass = true; // 判斷是否有成功輸入帳號密碼
 			if ($.trim($("input#username").val()) === "") {
 				inputPass = false;
+				$("span#usernameMsg").css("visibility", "visible"); // 將錯誤提示顯示
+				$('p#checkMsg1').css('visibility', 'hidden');
+			}
+			else {
+				$("span#usernameMsg").css("visibility", "hidden"); // 將錯誤提示隱藏
 			}
 			if ($.trim($("input#password").val()) === "") {
 				inputPass = false;
+				$("span#passwordMsg").css("visibility", "visible"); // 將錯誤提示顯示
+				$('p#checkMsg1').css('visibility', 'hidden');
+			}
+			else {
+				$("span#passwordMsg").css("visibility", "hidden"); // 將錯誤提示隱藏
+			}
+			// 機器人驗證
+			// 取得 reCAPTCHA 驗證的回應 token
+			var response = grecaptcha.getResponse();
+			if (response.length === 0) {
+				inputPass = false;
+				$("p#checkMsg2").css("visibility", "visible"); // 將未驗證機器人的錯誤提示顯示
+			}
+			else{
+				$("p#checkMsg2").css("visibility", "hidden"); // 將未驗證機器人的錯誤提示隱藏
 			}
 			if (inputPass) {
-				// console.log("登入請求發出成功");
-			}
-			// 向後端發出fetch，確認帳號密碼是否輸入正確
-			fetch('/BuyGo/api/front_end/loginFunction', {
-				method: 'POST',
-				headers: { 'Content-Type': 'application/json;charset:utf-8' },
-				body: JSON.stringify({
-					memberAcct: $('input#username').val(),
-					memberPw: $('input#password').val()
+				$("span#usernameMsg").css("visibility", "hidden"); // 將錯誤提示隱藏
+				$("span#passwordMsg").css("visibility", "hidden"); // 將錯誤提示隱藏
+
+				// 向後端發出fetch，確認帳號密碼是否輸入正確
+				fetch('/BuyGo/api/front_end/loginFunction', {
+					method: 'POST',
+					headers: { 'Content-Type': 'application/json;charset:utf-8' },
+					body: JSON.stringify({
+						memberAcct: $('input#username').val(),
+						memberPw: $('input#password').val()
+					})
 				})
-			})
-				.then(resp => resp.json())
-				.then(body => {
-					const { successful } = body;
-					// console.log('loginFunctionServlet登入狀態回傳:' + successful);
-					if (successful) {
-						$('p#checkMsg').css('visibility', 'hidden');
-						window.location.href = '/BuyGo/front_end'; // 導轉至主頁
-					}
-					else {
-						$('p#checkMsg').css('visibility', 'visible');
-					}
-				});
+					.then(resp => resp.json())
+					.then(body => {
+						const { successful } = body;
+						// console.log('loginFunctionServlet登入狀態回傳:' + successful);
+						if (successful) {
+							$('p#checkMsg1').css('visibility', 'hidden');
+							window.location.href = '/BuyGo/front_end/index.html'; // 導轉至主頁
+						}
+						else {
+							$('p#checkMsg1').css('visibility', 'visible');
+						}
+					});
+			}
 		});
 	</script>
 	<!-- -------------------登入功能結束--------------------->
