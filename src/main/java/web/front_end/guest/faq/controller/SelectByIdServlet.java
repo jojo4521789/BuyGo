@@ -27,14 +27,14 @@ public class SelectByIdServlet extends HttpServlet{
 		resp.setCharacterEncoding("utf-8");
 		resp.setContentType("text/html:charset=utf-8");
 		Faq faq = json2Pojo(req, Faq.class);
-		System.out.println(faq.getFaqTitle());
+//		System.out.println(faq.getFaqTitle());
 		List<Faq> faqs = SERVICE.show(faq.getFaqTitle());
 //		if(faqs.size() == 0) {
 //			writePojo2Json(resp, null);
 //		}
 		if(faqs.size() != 0) {
 			writePojo2Json(resp, faqs);
-			System.out.println("OK");
+//			System.out.println("OK");
 		}
 		
 	}

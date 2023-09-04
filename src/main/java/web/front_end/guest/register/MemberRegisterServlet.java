@@ -60,6 +60,7 @@ public class MemberRegisterServlet extends HttpServlet {
 		
 		member = SERVICE.register(member);
 		writePojo2Json(resp, member);
+		
 
 	}
 

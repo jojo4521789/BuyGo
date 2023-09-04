@@ -64,4 +64,10 @@ public class NewsDaoImpl implements NewsDao{
 	 return getSession().createQuery(hql,News.class).setParameter("input","%" + input +"%").getResultList();
 	}
 
+	@Override
+	public Integer selectByIncrese(String input) {
+		
+		return null;
+	}
+
 }
