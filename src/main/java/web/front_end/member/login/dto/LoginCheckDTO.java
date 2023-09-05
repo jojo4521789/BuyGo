@@ -14,6 +14,7 @@ import lombok.Setter;
 public class LoginCheckDTO implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
+	private Integer memberNo;
 	private String memberAcct;
 	private boolean loginState;
 	

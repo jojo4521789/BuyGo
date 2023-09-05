@@ -19,8 +19,21 @@
         <property name="hibernate.format_sql">true</property>
         <property name="hibernate.highlight_sql">true</property>
         
-        <mapping class="web.back_end.lpa.order.entity.Lpa_Prod" />
-        <mapping class="web.back_end.lpa.order.entity.Lpa_SO" />
+<!--         <mapping class="web.back_end.lpa.product.entity.Lpa_Prod" /> -->
+<!--         <mapping class="web.back_end.lpa.order.entity.Lpa_SO" /> -->
+        <mapping class="web.front_end.member.black.entity.Blacklist" />
+        <mapping class="web.front_end.member.chat.entity.ChatroomMessage" />
+        <mapping class="web.front_end.seller.gpa.prod.entity.GpaProd" />
+        <mapping class="web.front_end.seller.gpa.prod.entity.GpaProdPics" />
+        <mapping class="web.front_end.seller.gpa.prod.entity.GpaReach" />
+        <mapping class="web.front_end.seller.gpa.order.entity.GpaSo" />
+        <mapping class="web.front_end.member.acc.entity.Member" />
+        <mapping class="web.front_end.member.eva.entity.PaProd" />
+        <mapping class="web.front_end.member.eva.entity.PaProdPic" />
+        <mapping class="web.front_end.member.eva.entity.PaSo" />
+        <mapping class="web.front_end.member.eva.entity.PaSoDetails" />
+        <mapping class="web.back_end.member.wallet.entity.WalletTransHist" />
+        <mapping class="web.front_end.seller.gpa.order.dto.GpaSoAndGpaProdDTO" />
         
     </session-factory>
 </hibernate-configuration>

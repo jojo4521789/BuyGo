@@ -30,5 +30,4 @@ public class GpaProdRp extends Core {
 	private String gpaProdRpContent;
 	@Column(name = "GPA_PROD_RP_REASON")
 	private Integer gpaProdRpReason;
-
 }
