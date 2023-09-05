@@ -4,21 +4,21 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import web.front_end.member.pa.prod.dao.ProdDAO;
-import web.front_end.member.pa.prod.dao.impl.ProdDAOImpl;
-import web.front_end.member.pa.prod.entity.Prod;
+import web.front_end.member.pa.prod.dao.PaProdDAO;
+import web.front_end.member.pa.prod.dao.impl.PaProdDAOImpl;
+import web.front_end.member.pa.prod.entity.PaProd;
 import web.front_end.member.pa.prod.service.ProdService;
 @Service
 public class ProdServiceImpl implements ProdService {
 
-	private ProdDAO dao;
+	private PaProdDAO dao;
 	
 	public ProdServiceImpl() {
-		dao = new ProdDAOImpl();
+		dao = new PaProdDAOImpl();
 	}
 	
 	@Override
-	public Prod insert(Prod prod) {
+	public PaProd insert(PaProd prod) {
 //		if(prod.getPaProdNo( )== null) {
 //			prod.setMessage("商品編號未輸入");
 //			prod.setSuccessful(false);
@@ -63,7 +63,7 @@ public class ProdServiceImpl implements ProdService {
 	} 
 
 	@Override
-	public Prod updata(Prod prod) {
+	public PaProd updata(PaProd prod) {
 		final int resultCount = dao.update(prod);
 		prod.setMessage(resultCount > 0 ? "修改成功" : "修改失敗");
 		prod.setSuccessful(resultCount > 0);
@@ -71,7 +71,7 @@ public class ProdServiceImpl implements ProdService {
 	}
 
 	@Override
-	public List<Prod> findAll(Integer paprodno) {
+	public List<PaProd> findAll(Integer paprodno) {
 		return dao.selectAll();
 	}
 

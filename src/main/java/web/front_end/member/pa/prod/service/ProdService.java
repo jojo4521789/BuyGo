@@ -3,15 +3,15 @@ package web.front_end.member.pa.prod.service;
 import java.util.List;
 
 import core.service.CoreService;
-import web.front_end.member.pa.prod.entity.Prod;
+import web.front_end.member.pa.prod.entity.PaProd;
 
 public interface ProdService extends CoreService {
 
-	Prod insert (Prod prod);
+	PaProd insert (PaProd prod);
 	
-	Prod updata (Prod prod);
+	PaProd updata (PaProd prod);
 	
-	List<Prod> findAll(Integer paprodno);
+	List<PaProd> findAll(Integer paprodno);
 
 	boolean remove (Integer paprodno);
 }

@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import web.front_end.member.pa.prod.entity.Prod;
+import web.front_end.member.pa.prod.entity.PaProd;
 
 @WebServlet("/api/front_end/member/pa/prod/ProdAddServlet")
 public class ProdAddServlet extends HttpServlet {
@@ -22,7 +22,7 @@ public class ProdAddServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) {
 	    response.setCharacterEncoding("UTF-8");
-	    Prod prod = json2Pojo(request, Prod.class);
+	    PaProd prod = json2Pojo(request, PaProd.class);
 
 		SERVICE.insert(prod);
 		//successful
