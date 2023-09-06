@@ -556,6 +556,7 @@
 						<!-- <span class="input-group-btn">
 						</span> -->
 						<button id="selectCouponBtn" class="btn btn-primary" onclick="selectCoupon()">選擇優惠券</button>
+						<span id="selectedCouponNo" style="display: none;"></span>
 						<span id="selectedCouponName"></span>
 					</div>
 					<!-- <span style="display: inline-block; text-align: left;"></span> -->
@@ -573,13 +574,13 @@
 							<span class="pull-right">$0</span>
 						</div>
 						<div class="text-center">
-							<a class="btn btn-round btn-default uppercase" href="../../checkout.html">去結帳</a>
+							<p id="noCheckoutItemMsg" class="-none" style="color: red;">*請勾選欲結帳商品</p>
+							<button class="btn btn-round btn-default" onclick="checkoutClick()">去結帳</button>
 						</div>
 					</div>
 
 				</div>
 			</section>
-
 
 			<!-- RELATED PRODUCTS -->
 			<section class="section visible-items-4">

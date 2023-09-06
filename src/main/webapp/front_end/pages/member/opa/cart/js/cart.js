@@ -1,3 +1,4 @@
+sessionStorage.removeItem("store_data");
 checkLoginStatusShowMemberAcct();
 
 //假設登入的是1號會員
@@ -137,11 +138,13 @@ function blurQtyInput(el) {
 $(".prod-check-all").on("click", function () {
     $(".prod-check").prop("checked", $(".prod-check-all").prop("checked"));
     calcCartAmt();
+    $("#noCheckoutItemMsg").addClass("-none");
 });
 
 function prodCheckBtn() {
     $(".prod-check-all").prop("checked", $(".prod-check:checked").length === $(".prod-check").length);
     calcCartAmt();
+    $("#noCheckoutItemMsg").addClass("-none");
 }
 
 let usedCoupon_opaMinAmount = 0;
@@ -155,8 +158,8 @@ function calcCartAmt() {
         let prodSubTTL = check_el.closest("tr").querySelector(".row-total").textContent.substring(1);
         subTTL += parseInt(prodSubTTL);
     }
-    
-    if(usedCoupon_opaMinAmount !== 0 && usedCoupon_opaMinAmount > subTTL){
+
+    if (usedCoupon_opaMinAmount !== 0 && usedCoupon_opaMinAmount > subTTL) {
         $("#selectCouponBtn").text("選擇優惠券");
         $("#selectCouponBtn").css("background-color", "#fa6f57");
         $("#selectedCouponName").text("");
@@ -164,7 +167,7 @@ function calcCartAmt() {
         usedCoupon_opaMinAmount = 0;
         usedCoupon_opaDiscountAmo = 0;
     }
-    
+
     GrandTTL = subTTL - usedCoupon_opaDiscountAmo;
     $(".shopcart-total > .cart-subtotal > span.pull-right").text("$" + subTTL);
     $(".shopcart-total > .cart-total > span.pull-right").text("$" + GrandTTL);
@@ -277,24 +280,58 @@ function selectCouponClose() {
     $("#showCouponList").addClass("-none");
     let couponRadio_el = document.querySelector("input[type='radio'][name='couponRadio']:checked");
     if (couponRadio_el && couponRadio_el.id !== "r_unuse") {
+        let r_couponNo = couponRadio_el.closest(".radioDiv").querySelector("input").id;
         let couponName = couponRadio_el.closest(".radioDiv").querySelector(".s-coupon-intro > h4").textContent;
         usedCoupon_opaDiscountAmo = parseInt(couponRadio_el.closest(".radioDiv").querySelector(".coupon_opaDiscountAmo").textContent);
         usedCoupon_opaMinAmount = parseInt(couponRadio_el.closest(".radioDiv").querySelector(".coupon_opaMinAmount").textContent);
         $("#selectCouponBtn").text("已選擇優惠券");
         $("#selectCouponBtn").css("background-color", "seagreen");
         $("#selectedCouponName").text(couponName);
+        $("#selectedCouponNo").text(r_couponNo.substring(2));
         $(".couponDiscount").removeClass("-none");
         let cartSubTTL = parseInt($(".shopcart-total > .cart-subtotal > span.pull-right").text().substring(1));
         let cartGrandTTL = cartSubTTL - usedCoupon_opaDiscountAmo;
         $(".shopcart-total > .cart-total > span.pull-right").text("$" + cartGrandTTL);
         $(".couponDisAmt").text(usedCoupon_opaDiscountAmo);
-        console.log("b usedCoupon_opaMinAmount= " + usedCoupon_opaMinAmount);
     } else {
         $("#selectCouponBtn").text("選擇優惠券");
         $("#selectCouponBtn").css("background-color", "#fa6f57");
         $("#selectedCouponName").text("");
+        $("#selectedCouponNo").text()
         $(".couponDiscount").addClass("-none");
         usedCoupon_opaMinAmount = 0;
         usedCoupon_opaDiscountAmo = 0;
     }
+}
+
+function checkoutClick() {
+    let cartSubTTL = parseInt($(".shopcart-total > .cart-subtotal > span.pull-right").text().substring(1));
+    let cartGrandTTL = parseInt($(".shopcart-total > .cart-total > span.pull-right").text().substring(1));
+    if(cartSubTTL === 0){
+        $("#noCheckoutItemMsg").removeClass("-none");
+        return;
+    }
+
+    let couponNo = $("#selectedCouponNo").text();
+    let prods = [];
+    let check_els = document.querySelectorAll(".prod-check:checked");
+    for (let check_el of check_els) {
+        let prodNo = check_el.closest("tr").id.substring(3);
+        let prodQty = check_el.closest("tr").querySelector(".qty-btn-group > input").value;
+        let prod = {
+            opaProdNo: prodNo,
+            opaCartProdQty: prodQty
+        }
+        prods.push(prod);
+    }
+    let cartData = {
+        prods: prods,
+        opaCouponNo: couponNo,
+        opaDiscountAmo: usedCoupon_opaDiscountAmo,
+        cartSubTTL: cartSubTTL,
+        cartGrandTTL: cartGrandTTL
+    }
+    console.log(cartData);
+    sessionStorage.setItem("cart_data", JSON.stringify(cartData));
+    window.location = "http://localhost:8081/BuyGo/front_end/pages/member/opa/checkout/checkout.html";
 }
