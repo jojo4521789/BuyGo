@@ -95,7 +95,7 @@
                     onclick="searchGpaSoAndGpaProdList()">
                 <br>
                 <input type="button" value="全部清空" class="find_but" style="width: 70px;"
-                    onclick="$('.map_input').val('')">
+                    onclick="$('.map_input').val('');$('select#gpaSoStatInput').val('');">
             </div>
         </div>
         <p>
@@ -187,27 +187,30 @@
         let selectedModifyBtn; // 全域變數，供記錄最後一次點下的修改按鈕
 
         $(document).ready(function () {
-            $('#showGpaSoAndGpaProdList').DataTable();
+            $('#showGpaSoAndGpaProdList').DataTable({
+                bFilter: false,
+                bLengthChange: false
+            });
         });
         function searchGpaSoAndGpaProdList() {
             $('#showGpaSoAndGpaProdList').DataTable().clear();
             $('#showGpaSoAndGpaProdList').DataTable().destroy();
 
             let gpaSo = {}; // 宣告gpaSo，用於傳送後端用
-            if($("#gpaSoNoInput").val() != ""){
+            if ($("#gpaSoNoInput").val() != "") {
                 gpaSo.gpaSoNo = $("#gpaSoNoInput").val();
             }
-            if($("#buyerMemberNoInput").val() != ""){
+            if ($("#buyerMemberNoInput").val() != "") {
                 gpaSo.memberNo = $("#buyerMemberNoInput").val();
             }
-            if($("#gpaProdTotalInput").val() != ""){
+            if ($("#gpaProdTotalInput").val() != "") {
                 gpaSo.gpaProdTotal = $("#gpaProdTotalInput").val();
             }
-            if($("#gpaSoStatInput").val() != ""){
+            if ($("#gpaSoStatInput").val() != "") {
                 gpaSo.gpaSoStat = $("#gpaSoStatInput").val();
             }
             let gpaProd = {}; // 宣告gpaProd，用於傳送後端用
-            if($("#sellerMemberNoInput").val() != ""){
+            if ($("#sellerMemberNoInput").val() != "") {
                 gpaProd.memberNo = $("#sellerMemberNoInput").val();
             }
 
@@ -229,40 +232,40 @@
                         let { gpaSoNo, gpaProdCount, gpaProdTotal, gpaSoStat, gpaBuyName, gpaBuyTel, gpaBuyAdd } = gpaSo; // 因買賣家會員編號同名，故不在此宣告memberNo，於使用時直接使用gpaSo.memberNo取值
                         let { gpaProdName, gpaEndDate } = gpaProd; // 因買賣家會員編號同名，故不在此宣告memberNo，於使用時直接使用gpaProd.memberNo取值
 
-                            switch (gpaSoStat) {
-                                case 0: {
-                                    gpaSoStat = "揪團中";
-                                    break;
-                                }
-                                case 1: {
-                                    gpaSoStat = "已成團";
-                                    break;
-                                }
-                                case 2: {
-                                    gpaSoStat = "出貨配送中";
-                                    break;
-                                }
-                                case 3: {
-                                    gpaSoStat = "待取貨";
-                                    break;
-                                }
-                                case 4: {
-                                    gpaSoStat = "已完成";
-                                    break;
-                                }
-                                case 5: {
-                                    gpaSoStat = "已流團";
-                                    break;
-                                }
-                                case 6: {
-                                    gpaSoStat = "取消";
-                                    break;
-                                }
-                                case 7: {
-                                    gpaSoStat = "未完成取貨";
-                                    break;
-                                }
+                        switch (gpaSoStat) {
+                            case 0: {
+                                gpaSoStat = "揪團中";
+                                break;
                             }
+                            case 1: {
+                                gpaSoStat = "已成團";
+                                break;
+                            }
+                            case 2: {
+                                gpaSoStat = "出貨配送中";
+                                break;
+                            }
+                            case 3: {
+                                gpaSoStat = "待取貨";
+                                break;
+                            }
+                            case 4: {
+                                gpaSoStat = "已完成";
+                                break;
+                            }
+                            case 5: {
+                                gpaSoStat = "已流團";
+                                break;
+                            }
+                            case 6: {
+                                gpaSoStat = "取消";
+                                break;
+                            }
+                            case 7: {
+                                gpaSoStat = "未完成取貨";
+                                break;
+                            }
+                        }
 
                         gpaSoAndGpaProdCount++;
                         $("tbody#showGpaSoListBody").append(`
@@ -283,7 +286,10 @@
                         `);
                     });
                     // 初始化
-                    $('#showGpaSoAndGpaProdList').DataTable();
+                    $('#showGpaSoAndGpaProdList').DataTable({
+                        bFilter: false,
+                        bLengthChange: false
+                    });
                 });
         }
     </script>

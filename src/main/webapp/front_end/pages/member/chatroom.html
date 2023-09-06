@@ -31,10 +31,11 @@
 		<script src="js/respond.min.js"></script>
 		<script src="js/selectivizr-min.js"></script>
 	<![endif]-->
-
-	<script src="../../js/common/jquery.min.js"></script>
-
+	<!--
+	<script src="js/jquery.min.js"></script>
+	-->
 	<script>window.jQuery || document.write('<script src="../../js/common/jquery.min.js"><\/script>');</script>
+
 	<script src="../../js/common/modernizr.min.js"></script>
 	<!-- PARTICULAR PAGES CSS FILES -->
 	<link rel="stylesheet" href="../../css/common/innerpage.css">
@@ -42,6 +43,41 @@
 	<link rel="stylesheet" href="../../css/common/owl.theme.css">
 	<!-- // PARTICULAR PAGES CSS FILES -->
 	<link rel="stylesheet" href="../../css/common/responsive.css">
+	<style>
+		.msgDiv{
+			clear: both;
+		}
+
+		.timehrmin{
+			padding: 8px;
+		}
+
+		.timeymd{
+			padding: 8px;
+		}
+
+		.me,
+		.otherPerson {
+			/* clear: both; */
+			display: inline-block;
+			padding: 8px;
+			border-radius: 15px;
+			margin-bottom: 5px;
+		}
+
+		.me {
+			float: right;
+			background: #0084ff;
+			color: #fff;
+			margin-right: 10px;
+		}
+
+		.otherPerson {
+			float: left;
+			background: #d9d9d9;
+			margin-left: 3px;
+		}
+	</style>
 </head>
 
 <body>
@@ -116,8 +152,7 @@
 											</div>
 											<div class="text-right">
 												<a href="../../pages/member/cart.html"
-													class="btn btn-default btn-round view-cart">View
-													Cart</a>
+													class="btn btn-default btn-round view-cart">View Cart</a>
 											</div>
 										</div>
 									</div>
@@ -247,8 +282,7 @@
 												<p>Lorem ipsum dolor sit, consectetur adipiscing elit. Etiam neque
 													velit, blandit sed scelerisque.</p>
 												<a href="../../pages/guest/products.html"
-													class="btn btn-default btn-round">Go to Shop
-													→</a>
+													class="btn btn-default btn-round">Go to Shop →</a>
 											</div>
 
 										</div>
@@ -365,7 +399,7 @@
 									<li><a href="#">已收藏的揪團</a></li>
 									<li><a href="#">優惠券</a></li>
 									<li><a href="#">平台錢包</a></li>
-									<li><a href="../../pages/member/chatroom.html">聊天室</a></li>
+									<li><a href="#">聊天室</a></li>
 									<li><a href="../../pages/member/blacklist.html">黑名單</a></li>
 									<br>
 									<li><a href="../../pages/member/myShop.html">我的賣場</a></li>
@@ -392,25 +426,71 @@
 						<div class="m-t-lg clearfix">
 							<div class="row">
 								<div class="col-xs-12 col-sm-6">
-									<h3 class="uppercase text-bold"><span class="text-xs">黑名單</span></h3>
-									<!--黑名單列表-->
-									<ul class="store-list unstyled" id="blacklist">
-										<!-- <li>
-											<h4 class="entry-title">
-												<div>#1</div>
-											</h4>
-											<div class="row">
-												<dl class="col-xs-7 col-sm-7">
-													<dt>黑名單會員編號</dt>
-													<dd>Lower Ground Suite 7<br>32a Oxford Street</dd>
-												</dl>
+									<h3 class="uppercase text-bold"><span class="text-xs">聊天室</span></h3>
+									<!--聊天室功能-->
+									<div id="chatroom" style="width: 850px; border: 2px solid lightgray;">
+										<div style="float: left; background-color: #f2f2f2;">
+											<input type="text" id="search" class="form-control" style="margin: 5px 0px;"
+												placeholder="搜尋">
+											<ul class="store-list unstyled" id="memberlist"
+												style="height: 470px; max-height: 470px;">
+												<!-- 假資料開始 -->
+												<!-- <li style="cursor: default;text-align: center;" onclick="">馬利歐</li>
+												<li style="cursor: default;text-align: center;" onclick="">嘿呵</li>
+												<li style="cursor: default;text-align: center;" onclick="">害羞幽靈</li> -->
+												<!-- 假資料結束 -->
+											</ul>
+										</div>
+										<div
+											style="float: right;height: 100%; width: 674px;border: 1px solid lightgray;">
+											<h3 id="chatroomHeadMemberAcct"
+												style="background-color: #f2f2f2; padding: 5px; margin: 0px; height: 46px;">
+											</h3>
+											<hr style="margin: 0px; border: 1px solid lightgray;">
+											<!-- <textarea
+												style="resize: none;width: 100%; height: 360px; background-color: #f2f2f2; border: 0px;"
+												readonly>訊息在此</textarea> -->
+											<div id="messagesContainer"
+												style="width: 100%; height: 360px; background-color: #f2f2f2;overflow: auto;">
+												<ul id="messageArea"></ul>
+													<!-- 假資料開始 -->
+													<!-- <li class="me">安安</li>
+													<li class="otherPerson">嗨嗨</li>
+													<li class="me">123</li>
+													<li class="otherPerson">456</li>
+													<li class="otherPerson">789</li> -->
+													<!-- <div class="msgDiv">
+														<li class="me" timeymd="2023/09/05" timehrmin="09:00">測試123</li>
+														<span class="timehrmin" style="float: right;">789</span>
+														<span class="timehrmin" style="float: right;">111</span>
+													</div>
+													<div class="msgDiv">
+														<li class="otherPerson" timeymd="2023/09/06" timehrmin="01:35">測試2</li>
+														<span class="timehrmin" style="float: left;">123</span>
+														<span class="timehrmin" style="float: left;">111</span>
+													</div> -->
+													
+													<!-- 假資料結束 -->
 											</div>
-											<button type="submit" class="btn btn-primary uppercase m-r-sm" onclick="this.closest('li').remove();">移除黑名單</button>
-										</li> -->
-									</ul>
+											<hr style="margin: 0px; border: 1px solid lightgray;">
+											<div style="background-color: #f2f2f2;height: 103px; position: relative;">
+												<!-- 下方程式碼onclick使用event.preventDefault();確保按下Enter後textarea不會換行 -->
+												<textarea id="message"
+													style="resize: none; position: relative; left: 10px; top: 10px; width: 602px; height: 85px; background-color: #f2f2f2; border: 1px solid lightgray;"
+													placeholder="輸入文字"
+													onkeydown="if(event.keyCode == 13){sendMessage();event.preventDefault();}" oninput="changeSendIcon();"></textarea>
+												<img id="sendIcon" src="../../img/member/chatroom/send_default.jpg" style="position: relative; right: -20px; top: 35px;width: 30px;" onclick="sendMessage()">
+											</div>
+										</div>
+										<div style="clear: both;"></div>
+									</div>
 								</div>
 							</div>
 						</div>
+
+						<section class="col-xs-12 col-sm-8 col-md-9">
+							<!-- 在此新增 -->
+						</section>
 
 					</div>
 
@@ -619,82 +699,218 @@
 	<script src="../../js/common/products.js"></script>
 	<script src="../../js/common/owl.carousel.js"></script>
 	<script src="../../js/common/contact.js"></script>
+	<script src="../../js/login.js"></script>
+
+	<!-- 導入Moment.js -->
+	<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script> -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+
 	<!--<script src="http://maps.googleapis.com/maps/api/js?sensor=false" type="text/javascript"></script>-->
 	<!-- <script src="../../js/common/gmap3.min.js"></script> -->
 	<!-- // Particular Page Javascripts -->
-	<script src="../../js/login.js"></script>
 	<script>
-		checkLoginStatusShowMemberAcct(); // 檢查客戶帳號是否登入，修改頁面右上方Log In/Log Out按鈕，顯示登入者帳號名稱
+		const loginData = checkLoginStatusShowMemberAcct(); // 檢查客戶帳號是否登入，修改頁面右上方Log In/Log Out按鈕，顯示登入者帳號名稱，該函式回傳該登入者的memberNo(非同步，可能過一段時間才取得)
 
-		loadBlacklist(); // 測試時先以memberNo=1來做測試，記得回來改
+		let self = ""; // 全域變數，保存當前登入者的memberNo
 
-		// 載入該頁面時讀取黑名單名單並顯示於頁面上
-		function loadBlacklist() {
-			const blacklist_el = $("#blacklist");
-			let count = 0;
+		loginData.then(function (memberDetail) { // 因取得memberNo為非同步(fetch後再收到伺服器返回值)，故須將有使用到memberDetail(矩陣[0]為memberNo, 矩陣[1]為memberAcct)的程式包在loginData內，確保程式是在memberNo收到值後才執行
+			// websocket開始
+			let memberNo = memberDetail[0];
+			let memberAcct = memberDetail[1];
+			
+			let MyPoint = `/ChatRoomWS/${memberNo}`;
+			let host = window.location.host;
+			let path = window.location.pathname;
+			let webCtx = path.substring(0, path.indexOf('/', 1));
+			let endPointURL = "ws://" + window.location.host + webCtx + MyPoint;
+			self = memberNo.toString(); // 將memberNo轉為字串，並設置至全域變數self
+			// console.log("endPointURL:" + endPointURL);
+			connect(endPointURL);
+		});
 
-			blacklist_el.children().remove(); // 清空showOrderArea下的所有子元素
+		function connect(endPointURL) {
+			// create a websocket
+			webSocket = new WebSocket(endPointURL);
 
-			fetch('/BuyGo/needLoginApi/front_end/loadBlacklist', {
-				method: 'POST',
-				headers: { 'Content-Type': 'application/json;charset:utf-8' },
-			})
-				.then(response => {
-					if (response.status === 401) {
-						// 客戶未登入，執行頁面重定向到登入頁
-						alert('帳號未登入，將導轉至登入頁面');
-						window.location.href = '/BuyGo/front_end/pages/member/login.html'; // 登入頁面url
-					} else if (response.ok) {
-						// 請求成功
-						return response.json();
-					} else{
-						alert("錯誤狀態:" + response.status);
-						return;
-					}
-				})
-				.then(body => {
+			webSocket.onopen = function (event) {
+				console.log("Connect Success!");
+			};
 
-					body.forEach(black => {
-						count++;
-						const { memberNoBlack } = black;
-						// 刪除按鈕回傳memberNoBlack來記錄每個按鈕創建時的memberNoBlack，以便後續deleteBlack取值
-						blacklist_el.append(`
-						<li style="cursor: default;">
-							<h4 class="entry-title">
-								<div>#${count}</div>
-							</h4>
-							<div class="row">
-								<dl class="col-xs-7 col-sm-7">
-									<dt>黑名單會員編號</dt>
-									<dd>${memberNoBlack}</dd>
-								</dl>
+			webSocket.onmessage = function (event) {
+				let jsonObj = JSON.parse(event.data);
+				if ("open" === jsonObj.type) {
+					refreshMemberList(jsonObj);
+				}
+				else if ("history" === jsonObj.type) {
+					$("ul#messageArea").html(""); // 於對話文字區清空對話記錄
+					// 這行的jsonObj.message是從redis撈出跟好友的歷史訊息，再parse成JSON格式處理
+					let messages = JSON.parse(jsonObj.message);
+					for (let i = 0; i < messages.length; i++) { // 遍歷接收到的歷史記錄
+						let historyData = JSON.parse(messages[i]);
+						let showMsg = historyData.message;
+						let time = historyData.time;
+						let timeYMD = (time).substr(0,((time).indexOf(`|`)));
+						let timeHrMin = (time).substr(((time).indexOf(`|`)) + 1, time.length);
+						// console.log('time:' + time);
+						// console.log('timeYMD:' + timeYMD);
+						// console.log('timeHrMin:' + timeHrMin);
+						let liClass = (historyData.sender === self ? 'me' : 'otherPerson'); // 判斷該訊息是自己的或對方的，於li加上不同的class
+						let liFloat = (historyData.sender === self ? 'right' : 'left');
+						$("ul#messageArea").append(`
+							<div class="msgDiv" onmouseenter="$(this).find('span.timeymd').css('visibility', 'visible')" onmouseleave="$(this).find('span.timeymd').css('visibility', 'hidden')">
+								<li class="${liClass}" timeYMD="${timeYMD}" timeHrMin="${timeHrMin}">${showMsg}</li>
+								<span class="timehrmin" style="float: ${liFloat};">${timeHrMin}</span>
+								<span class="timeymd" style="float: ${liFloat};visibility:hidden;">${timeYMD}</span>
 							</div>
-							<button type="submit" class="btn btn-primary uppercase m-r-sm" onclick="deleteBlack(${memberNoBlack});">移除黑名單</button>
-						</li>
 						`);
-					});
-				});
+					}
+					$("div#messagesContainer").scrollTop($("div#messagesContainer").prop('scrollHeight')); // 將對話框拉條拉到最底(最新)
+					// messagesContainer.scrollTop = messagesContainer.scrollHeight;
+
+					// messagesArea.innerHTML = '';
+					// var ul = document.createElement('ul');
+					// ul.id = "area";
+					// messagesArea.appendChild(ul);
+					// // 這行的jsonObj.message是從redis撈出跟好友的歷史訊息，再parse成JSON格式處理
+					// var messages = JSON.parse(jsonObj.message);
+					// for (var i = 0; i < messages.length; i++) {
+					// 	var historyData = JSON.parse(messages[i]);
+					// 	var showMsg = historyData.message;
+					// 	var li = document.createElement('li');
+					// 	// 根據發送者是自己還是對方來給予不同的class名, 以達到訊息左右區分
+					// 	historyData.sender === self ? li.className += 'me' : li.className += 'friend';
+					// 	li.innerHTML = showMsg;
+					// 	ul.appendChild(li);
+					// }
+					// messagesArea.scrollTop = messagesArea.scrollHeight;
+				}
+				else if ("chat" === jsonObj.type) {
+					console.log("jsonObj.message:" + jsonObj.message);
+					let nowChatMember = $("#chatroomHeadMemberAcct").attr("value"); // 取得目前選定的對話對象
+					// console.log("nowChatMember:" + nowChatMember);
+					// console.log("jsonObj.sender:" + jsonObj.sender);
+					// console.log("nowChatMember === jsonObj.sender:" + nowChatMember === jsonObj.sender);
+					let timeYMD = (jsonObj.time).substr(0,((jsonObj.time).indexOf(`|`)));
+					let timeHrMin = (jsonObj.time).substr(((jsonObj.time).indexOf(`|`)) + 1, jsonObj.time.length);
+					console.log("jsonObj.time:" + jsonObj.time);
+					console.log("timeYMD:" + timeYMD);
+					console.log("timeHrMin:" + timeHrMin);
+					console.log(`((jsonObj.time).indexOf("|")):` + ((jsonObj.time).indexOf(`|`)));
+
+					if(nowChatMember === jsonObj.sender || self === jsonObj.sender){ // 確認當前傳送chat的人是使用者於畫面已選定的對話對象或自己(非畫面已選定對話對象的訊息不應出現在對話框)
+						let liClass = (jsonObj.sender === self ? 'me' : 'otherPerson'); // 判斷該訊息是自己的或對方的，於li加上不同的class
+						let liFloat = (jsonObj.sender === self ? 'right' : 'left');
+						$("ul#messageArea").append(`
+							<div class="msgDiv" onmouseenter="$(this).find('span.timeymd').css('visibility', 'visible')" onmouseleave="$(this).find('span.timeymd').css('visibility', 'hidden')">
+								<li class="${liClass}" timeYMD="${timeYMD}" timeHrMin="${timeHrMin}">${jsonObj.message}</li>
+								<span class="timehrmin" style="float: ${liFloat};">${timeHrMin}</span>
+								<span class="timeymd" style="float: ${liFloat};visibility:hidden;">${timeYMD}</span>
+							</div>
+						`);
+						$("div#messagesContainer").scrollTop($("div#messagesContainer").prop('scrollHeight')); // 將對話框拉條拉到最底(最新)
+					}
+				}
+				// else if ("close" === jsonObj.type) { // 當其他人離開時，刷新左側會員名單
+					// refreshMemberList(jsonObj);
+				// }
+			};
 		}
 
-		// 刪除黑名單
-		function deleteBlack(e) {
-			const memberNoBlack = e; //動態生成的項次將memberNoBlack回傳
-
-			fetch('/BuyGo/needLoginApi/front_end/deleteBlacklist', {
-				method: 'POST',
-				headers: { 'Content-Type': 'application/json;charset:utf-8' },
-				body: JSON.stringify({
-					memberNoBlack: e //刪除項目自帶的memberNoBlack
-				})
-			})
-				.then(resp => resp.json())
-				.then(body => {
-					loadBlacklist(); // 呼叫函式loadBlacklist，將當前畫面動態刷新
-				})
+		// 有會員上線或離線就更新列表
+		function refreshMemberList(jsonObj) {
+			let members = jsonObj.members;
+			$("ul#memberlist").html("");
+			console.log("Object.keys(members).length:" + Object.keys(members).length)
+			for(key in members){
+				console.log("key:" + key);
+				console.log("value:" + members[key]);
+				if (key === self) { continue; }
+				$("ul#memberlist").append(`
+					<li value="${key}" style="cursor: default;text-align: center;" onclick="getMemberChatHistory(this)">${members[key]}</li>
+				`);
+			}
+			// for (let i = 0; i < members.length; i++) { // members[0]為會員編號memberNo
+			// 	if (members[i][0] === self) { continue; }
+			// 	$("ul#memberlist").append(`
+			// 		<li value="${members[i]}" style="cursor: default;text-align: center;" onclick="getMemberChatHistory(this)">${members[i]}</li>
+			// 	`);
+			// }
+			// addListener();
 		}
 
+		// 註冊列表點擊事件並抓取好友名字以取得歷史訊息
+		function getMemberChatHistory(obj) {
+			$("#chatroomHeadMemberAcct").text($(obj).text()); // 更換聊天文字區上方對話對象的名稱
+			$("#chatroomHeadMemberAcct").attr("value",($(obj).val())); // 在該標籤的value加上選定會員的memberNo
+
+			let otherPerson = $(obj).val(); // 取得點擊的會員
+			var jsonObj = {
+				"type": "history",
+				"sender": self,
+				"receiver": otherPerson,
+				"message": ""
+			};
+			webSocket.send(JSON.stringify(jsonObj));
+		}
+
+		// 發送訊息
+		function sendMessage() {
+			$("img#sendIcon").attr("src", "../../img/member/chatroom/send_default.jpg"); // 更換sendIcon至預設狀態
+
+			let inputMessage = $("textarea#message");
+			let selectedMember = $("h3#chatroomHeadMemberAcct").attr("value");
+			let message = inputMessage.val().trim();
+
+			if (message === "") {
+				inputMessage.focus();
+			}
+			else if (selectedMember.trim() === "") {
+				alert("請選擇欲發送訊息的會員");
+			}
+			else {
+				// 取得當前時間時間
+				let currentDateTime = moment().format('YYYY/MM/DD|HH:mm');
+
+				var jsonObj = {
+					"type": "chat",
+					"sender": self,
+					"receiver": selectedMember,
+					"message": message,
+					"time": currentDateTime
+				};
+				webSocket.send(JSON.stringify(jsonObj));
+				inputMessage.val(""); // 清空輸入欄位文字
+				inputMessage.focus();
+			}
+		}
+		//-----------------搜尋框開始-----------------
+		$('#search').on('keyup', function () {
+			let numberOfMember = $("#memberlist").children("li").length; // 取得當前會員數量
+			for (let i = 0; i < numberOfMember; i++) { // 遍歷所有會員
+				let memberAcct = $("#memberlist").children("li").eq(i).text();
+				console.log("memberAcct:" + memberAcct);
+				console.log("$('#search').val():" + $("#search").val());
+
+				if(memberAcct.includes($("#search").val())){
+					$("#memberlist").children("li").eq(i).show(); // 將符合條件的會員顯示出來
+				}
+				else {
+					$("#memberlist").children("li").eq(i).hide(); // 將不符合條件的會員隱藏起來
+				}
+			}
+		});
+		//-----------------搜尋框結束-----------------
+		//-----------------SendIcon更換開始-----------------
+		function changeSendIcon(){
+			if($("textarea#message").val() != ""){
+				$("img#sendIcon").attr("src", "../../img/member/chatroom/send_clickable.png");
+			}
+			else{
+				$("img#sendIcon").attr("src", "../../img/member/chatroom/send_default.jpg");
+			}
+		}
+		//-----------------SendIcon更換結束-----------------
 	</script>
-
 </body>
 
 </html>

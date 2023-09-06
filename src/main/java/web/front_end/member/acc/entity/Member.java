@@ -1,9 +1,5 @@
 package web.front_end.member.acc.entity;
 
-import java.sql.Date;
-import java.sql.Timestamp;
-import java.time.LocalDate;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

@@ -26,6 +26,7 @@ public class CheckLoginStatusServlet extends HttpServlet{
 		LoginCheckDTO loginCheckDTO = new LoginCheckDTO();
 		if (session.getAttribute("sessionId") != null) {
 			Member member = SERVICE.LoadMemberAcctByMemberNo((Integer)session.getAttribute("memberNo"));
+			loginCheckDTO.setMemberNo(member.getMemberNo());
 			loginCheckDTO.setMemberAcct(member.getMemberAcct());
 			loginCheckDTO.setLoginState(true);
 			writePojo2Json(response, loginCheckDTO);
