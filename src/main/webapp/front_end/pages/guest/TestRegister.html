@@ -298,12 +298,14 @@
                         </div>
                         <div class="field">
                             <label for="memberPw">會員密碼:</label>
-                            <input type="text" id="memberPw" placeholder="必須包含字母、數字，長度為6-16">
+                            <input type="password" id="memberPw" placeholder="必須包含字母、數字，長度為6-16">
+                            <button type="button" onclick="togglePassword()">顯示密碼</button>
                             <p id="p2" style="color: red"></p>
                         </div>
                         <div class="field">
                             <label for="memberPw1">確認密碼:</label>
-                            <input type="text" id="memberPw1">
+                            <input type="password" id="memberPw1">
+                            <button type="button" onclick="togglePassword1()">顯示密碼</button>
                             <p id="p3" style="color: red"></p>
                         </div>
                         <div class="field">
@@ -588,7 +590,22 @@
 <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
-
+    function togglePassword() {
+        var passwordField = document.getElementById("memberPw");
+        if (passwordField.type === "password") {
+            passwordField.type = "text";
+        } else {
+            passwordField.type = "password";
+        }
+    }
+    function togglePassword1() {
+        var passwordField = document.getElementById("memberPw1");
+        if (passwordField.type === "password") {
+            passwordField.type = "text";
+        } else {
+            passwordField.type = "password";
+        }
+    }
     //地址下拉選單===start
     const data = {
         宜蘭縣: [
@@ -1008,11 +1025,21 @@
                             })
                         }).then(resp => resp.json())
                             .then(body => {
-                                Swal.fire(
-                                    '註冊成功!',
-                                    'success'
-                                )
-                            }))
+                                console.log(body);
+                                if (body === true) {
+                                    Swal.fire(
+                                        '註冊成功!',
+                                        'success'
+                                    )
+                                } else {
+                                    Swal.fire({
+                                        icon: 'error',
+                                        title: 'Oops...',
+                                        text: '似乎發生了什麼錯誤!',
+                                    })
+                                }
+                            }
+                            ))
                         .catch(error => {
                             Swal.showValidationMessage(
                                 `驗證失敗：${error}`

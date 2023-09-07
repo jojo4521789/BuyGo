@@ -17,7 +17,7 @@ import java.io.IOException;
 import java.util.List;
 @WebServlet("/front_end/guest/faq/SelectAll")
 
-public class SelectAllServlet extends HttpServlet{
+public class FaqSelectAllServlet extends HttpServlet{
 	private static final long serialVersionUID = 1L;
 
 	@Override
