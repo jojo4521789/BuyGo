@@ -340,7 +340,7 @@
 						<img src="img/common/rev-slider/img/slides/Street-Fashion.jpg" alt="" />
 
 						<!-- THE CAPTIONS OF THE FIRST SLIDE -->
-						<div class="flex-caption h6 text-bold gfc uppercase animated" data-animation="fadeInLeftBig"
+						<!-- <div class="flex-caption h6 text-bold gfc uppercase animated" data-animation="fadeInLeftBig"
 							data-x="800" data-y="110" data-speed="600" data-start="1200">New Collection</div>
 
 						<div class="flex-caption herotext text-bold gfc animated" data-animation="fadeInRightBig"
@@ -350,7 +350,7 @@
 							data-x="639" data-y="260" data-speed="1600" data-start="2900">
 							Comfy knits and warm jackets for cooler Autumn days<br />
 							<a href="pages/guest/products.html" class="btn btn-primary uppercase">Shop Now</a>
-						</div>
+						</div> -->
 
 					</li>
 
@@ -359,7 +359,7 @@
 						<!-- THE MAIN IMAGE IN THE SLIDE -->
 						<img src="img/common/transparent.png" alt="" />
 
-						<div class="flex-caption super-giant gfc animated uppercase" data-animation="fadeInUp"
+						<!-- <div class="flex-caption super-giant gfc animated uppercase" data-animation="fadeInUp"
 							data-x="center" data-y="60" data-speed="500" data-start="900">Sale</div>
 
 						<div id="caption-left-round" class="flex-caption round gfc animated uppercase"
@@ -374,7 +374,7 @@
 
 						<div class="flex-caption h3 gfc animated uppercase" data-animation="fadeInDown" data-x="center"
 							data-y="250" data-speed="400" data-start="1800"><strong class="text-bold">500’s </strong>of
-							New Products</div>
+							New Products</div> -->
 
 					</li>
 
@@ -383,9 +383,9 @@
 						<!-- THE MAIN IMAGE IN THE SLIDE -->
 						<img src="img/common/rev-slider/img/slides/3303349658_cfaebb811f_o.jpg" alt="" />
 
-						<div class="flex-caption herotext text-bold gfc bg-dark animated uppercase"
+						<!-- <div class="flex-caption herotext text-bold gfc bg-dark animated uppercase"
 							data-animation="fadeInUpBig" data-x="760" data-y="60" data-speed="900" data-start="100">Free
-							Shipping</div>
+							Shipping</div> -->
 
 						<div class="flex-caption h2 text-bold gfc bg-dark animated uppercase"
 							data-animation="fadeInUpBig" data-x="797" data-y="175" data-speed="600" data-start="900">On
@@ -398,7 +398,59 @@
 
 			<script>
 				jQuery(function ($) {
+					fetch("/BuyGo/front_end/guest/news/NewsSelectAll", {
+						method: "POST",
+						headers: { "Content-Type": "application/json;charset=utf-8" }
+					}).then(resp => resp.json())
+						.then(responsebody => {
+							console.log(responsebody);
+							responsebody.forEach(element => {
+								const slideItem = document.createElement("li");
+								const image = document.createElement("img");
+								image.src = "data:image/jpeg;base64," + element.newsPicture;
+								const title = document.createElement("div");
+								title.textContent = element.newsTitle;
+								const content = document.createElement("div");
+								content.textContent = element.newsContent;
+								slideItem.appendChild(image);
+								slideItem.appendChild(title);
+								slideItem.appendChild(content);
+								$slider.find('.slides').append(slideItem);
+
+						
+							});
+							$slider.flexslider({
+							animation: 'slide',
+							easing: 'easeInQuad',
+							slideshow: false,
+							nextText: '<i class="iconfont-angle-right"></i>',
+							prevText: '<i class="iconfont-angle-left"></i>',
+							start: function () {
+								flex_fix_pos(1);
+							},
+							before: function (slider) {
+								console.log(slider);
+								// initial caption animation for next show
+								$slider.find('.slides li .animation-done').each(function () {
+									$(this).removeClass('animation-done');
+									var animation = $(this).attr('data-animation');
+									$(this).removeClass(animation);
+								});
+								
+								console.log(slider.animatingTo);
+								flex_fix_pos(slider.animatingTo + 1);
+							},
+							after: function () {
+								// run caption animation
+								$slider.find('.flex-active-slide .animated').each(function () {
+									var animation = $(this).attr('data-animation');
+									$(this).addClass('animation-done').addClass(animation);
+								});
+							}
+						});
+						});
 					var $slider = $('#home-slider > .flexslider');
+					console.log($slider);
 					$slider.find('.flex-caption').each(function () {
 						var $this = $(this);
 						var configs = {
@@ -432,37 +484,40 @@
 					$(window).trigger('resize');
 
 					$slider.imagesLoaded(function () {
-						$slider.flexslider({
-							animation: 'slide',
-							easing: 'easeInQuad',
-							slideshow: false,
-							nextText: '<i class="iconfont-angle-right"></i>',
-							prevText: '<i class="iconfont-angle-left"></i>',
-							start: function () {
-								flex_fix_pos(1);
-							},
-							before: function (slider) {
-								// initial caption animation for next show
-								$slider.find('.slides li .animation-done').each(function () {
-									$(this).removeClass('animation-done');
-									var animation = $(this).attr('data-animation');
-									$(this).removeClass(animation);
-								});
-
-								flex_fix_pos(slider.animatingTo + 1);
-							},
-							after: function () {
-								// run caption animation
-								$slider.find('.flex-active-slide .animated').each(function () {
-									var animation = $(this).attr('data-animation');
-									$(this).addClass('animation-done').addClass(animation);
-								});
-							}
-						});
+						// $slider.flexslider({
+						// 	animation: 'slide',
+						// 	easing: 'easeInQuad',
+						// 	slideshow: false,
+						// 	nextText: '<i class="iconfont-angle-right"></i>',
+						// 	prevText: '<i class="iconfont-angle-left"></i>',
+						// 	start: function () {
+						// 		flex_fix_pos(1);
+						// 	},
+						// 	before: function (slider) {
+						// 		console.log(slider);
+						// 		// initial caption animation for next show
+						// 		$slider.find('.slides li .animation-done').each(function () {
+						// 			$(this).removeClass('animation-done');
+						// 			var animation = $(this).attr('data-animation');
+						// 			$(this).removeClass(animation);
+						// 		});
+								
+						// 		console.log(slider.animatingTo);
+						// 		flex_fix_pos(slider.animatingTo + 1);
+						// 	},
+						// 	after: function () {
+						// 		// run caption animation
+						// 		$slider.find('.flex-active-slide .animated').each(function () {
+						// 			var animation = $(this).attr('data-animation');
+						// 			$(this).addClass('animation-done').addClass(animation);
+						// 		});
+						// 	}
+						// });
 					});
 
 					function flex_fix_pos(i) {
 						$slider.find('.slides > li:eq(' + i + ') .gfc').each(function () {
+
 							var $this = $(this),
 								pos = $(this).data('positions');
 
@@ -479,27 +534,9 @@
 						});
 					}
 
-					fetch("/BuyGo/front_end/guest/news/NewsSelectAll", {
-						method: "POST",
-						headers: { "Content-Type": "application/json;charset=utf-8" }
-					}).then(resp => resp.json())
-						.then(responsebody => {
-							console.log(responsebody);
-							responsebody.forEach(element => {
-								const slideItem = document.createElement("li");
-								const image = document.createElement("img");
-								image.src = "data:image/jpeg;base64," + element.newsPicture;
-								const title = document.createElement("div");
-								title.textContent = element.newsTitle;
-								const content = document.createElement("div");
-								content.textContent = element.newsContent;
-								slideItem.appendChild(image);
-								slideItem.appendChild(title);
-								slideItem.appendChild(content);
-								$slider.find('.slides').append(slideItem);
-							});
-						});
+					
 				});
+				
 			</script>
 		</div>
 		<!-- // HOMEPAGE SLIDER -->
