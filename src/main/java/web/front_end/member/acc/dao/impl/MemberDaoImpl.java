@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import web.front_end.member.acc.dao.MemberDao;
 import web.front_end.member.acc.entity.Member;
 
-@Repository
+//@Repository
 public class MemberDaoImpl  implements MemberDao {
 
 	@Override

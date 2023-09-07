@@ -21,6 +21,14 @@ public class GpaOrderDTO {
     private Integer gpaProdTotal;
 
     private Integer gpaEvaSeller;
+    
+    private Integer gpaEvaMember;
+    
+    private String gpaBuyName;
+    
+    private String gpaBuyTel;
+    
+    private String gpaBuyAdd;
 
     // GpaProd
     private String gpaProdName;

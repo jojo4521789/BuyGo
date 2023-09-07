@@ -1,7 +1,5 @@
 package web.front_end.member.login.dto;
 
-import java.io.Serializable;
-
 import core.entity.Core;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

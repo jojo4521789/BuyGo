@@ -36,8 +36,8 @@ public class LpaSo extends Core{
     private Integer lpaTotalAmount;
 	@Column(name = "LPA_DOWN_PAYMENT", insertable = false)
     private Integer lpaDownPayment;
-	@Column(name = "LPA_FINAL_PAYMENT", insertable = false)
-    private Integer lpaFinalPayment;
+	@Column(name = "LPA_DELIVER_METHOD")
+    private String lpaDeliverMethod;
 	@Column(name = "LPA_REC_NAME")
     private String lpaRecName;
 	@Column(name = "LPA_REC_TEL")

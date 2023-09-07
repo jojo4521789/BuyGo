@@ -15,6 +15,10 @@ import web.back_end.lpa.product.entity.LpaProd;
 public class LpaProdDAOImpl implements LpaProdDAO {
 	private static final long serialVersionUID = 1L;
 
+	public Session getSession() {
+		return HibernateUtil.getSessionFactory().getCurrentSession();
+	}
+
 	@Override
 	public int insert(LpaProd entity) {
 		// TODO Auto-generated method stub
@@ -50,4 +54,13 @@ public class LpaProdDAOImpl implements LpaProdDAO {
 		return null;
 	}
 
+	// 從資料庫查詢圖片
+	public byte[] selectProdFirstPic(Integer lpaProdNo) {
+		final String hql = "SELECT lpaProdPic from LpaProdPic where lpaProdNo = :prodNo ORDER BY id";
+
+		byte[] pic = getSession().createQuery(hql, byte[].class).setParameter("prodNo", lpaProdNo).setMaxResults(1)
+				.getSingleResult();
+
+		return pic;
+	}
 }

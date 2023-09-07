@@ -42,6 +42,7 @@
 	<link rel="stylesheet" href="../../css/common/owl.theme.css">
 	<!-- // PARTICULAR PAGES CSS FILES -->
 	<link rel="stylesheet" href="../../css/common/responsive.css">
+
 	<style>
 		/* -------------------登入功能css開始------------------- */
 		body {
@@ -141,6 +142,10 @@
 			transform: translate(-50%, -50%);
 		}
 	</style>
+	<!-- 我不是機器人功能 -->
+	<span style="font-size:14px;">
+		<script src="https://www.google.com/recaptcha/api.js"></script>
+	</span>
 </head>
 
 <body>
@@ -259,8 +264,8 @@
 
 			<div class="container">
 				<!-- -------------------登入功能開始--------------------->
-				<div class="login_page" style="height: 620px;">
-					<div id="container1" style="top: 20px;">
+				<div class="login_page" style="height: 710px;">
+					<div id="container1" style="top: 20px;height : 650px;">
 						<div class="login"
 							style="display: flex;flex-direction: column;align-items: left;width: 80%;transform: translate(15%);">
 							<!-- 撐版面用 -->
@@ -293,8 +298,13 @@
 								style="margin-top:20px; width: 50%; transform: translate(50%)">登入</button>
 							<!-- <input type="submit" value="登入" class="submit"> -->
 							<!-- </form> -->
-							<p id="checkMsg" style="visibility: hidden;color: red;font-size: 10px;margin-top: 30px;">
+							<!-- 我不是機器人 -->
+							<div class="g-recaptcha" data-sitekey="6Ldrpu4nAAAAAJc8GV-8C3QZ8f4f1Q6MTtZvWBUC"
+								style="margin-top: 20px;"></div>
+							<p id="checkMsg1" style="visibility: hidden;color: red;font-size: 10px;margin-top: 30px;">
 								你的帳號或密碼不正確，請再試一次</p>
+							<p id="checkMsg2" style="visibility: hidden;color: red;font-size: 10px;margin-top: 30px;">
+								請通過機器人驗證</p>
 							<div style="text-align: center;">
 								<a href="#" style="width: fit-content;">
 									<h5>註冊帳號</h5>
@@ -526,7 +536,7 @@
 			if ($.trim($("input#username").val()) === "") {
 				inputPass = false;
 				$("span#usernameMsg").css("visibility", "visible"); // 將錯誤提示顯示
-				$('p#checkMsg').css('visibility', 'hidden');
+				$('p#checkMsg1').css('visibility', 'hidden');
 			}
 			else {
 				$("span#usernameMsg").css("visibility", "hidden"); // 將錯誤提示隱藏
@@ -534,10 +544,20 @@
 			if ($.trim($("input#password").val()) === "") {
 				inputPass = false;
 				$("span#passwordMsg").css("visibility", "visible"); // 將錯誤提示顯示
-				$('p#checkMsg').css('visibility', 'hidden');
+				$('p#checkMsg1').css('visibility', 'hidden');
 			}
 			else {
 				$("span#passwordMsg").css("visibility", "hidden"); // 將錯誤提示隱藏
+			}
+			// 機器人驗證
+			// 取得 reCAPTCHA 驗證的回應 token
+			var response = grecaptcha.getResponse();
+			if (response.length === 0) {
+				inputPass = false;
+				$("p#checkMsg2").css("visibility", "visible"); // 將未驗證機器人的錯誤提示顯示
+			}
+			else{
+				$("p#checkMsg2").css("visibility", "hidden"); // 將未驗證機器人的錯誤提示隱藏
 			}
 			if (inputPass) {
 				$("span#usernameMsg").css("visibility", "hidden"); // 將錯誤提示隱藏
@@ -557,11 +577,11 @@
 						const { successful } = body;
 						// console.log('loginFunctionServlet登入狀態回傳:' + successful);
 						if (successful) {
-							$('p#checkMsg').css('visibility', 'hidden');
+							$('p#checkMsg1').css('visibility', 'hidden');
 							window.location.href = '/BuyGo/front_end/index.html'; // 導轉至主頁
 						}
 						else {
-							$('p#checkMsg').css('visibility', 'visible');
+							$('p#checkMsg1').css('visibility', 'visible');
 						}
 					});
 			}

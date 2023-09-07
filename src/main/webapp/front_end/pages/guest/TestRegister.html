@@ -2,89 +2,593 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <meta charset="UTF-8" />
+    <title>GFashion - Responsive e-commerce HTML Template</title>
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!-- Favorite Icons -->
+    <link rel="icon" href="../../img/common/favicon/favicon.html" type="image/x-icon" />
+    <link rel="apple-touch-icon-precomposed" sizes="144x144"
+        href="../../img/common/favicon/apple-touch-icon-144x144-precomposed.html">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72"
+        href="../../img/common/favicon/apple-touch-icon-72x72-precomposed.html">
+    <link rel="apple-touch-icon-precomposed" href="../../img/common/favicon/apple-touch-icon-precomposed.html">
+    <!-- // Favorite Icons -->
+
+    <!--<link href='http://fonts.useso.com/css?family=Open+Sans:300,400,600,700' rel='stylesheet' type='text/css'>-->
+
+    <!-- GENERAL CSS FILES -->
+    <link rel="stylesheet" href="../../css/common/minified.css">
+    <!-- // GENERAL CSS FILES -->
+
+    <!--[if IE 8]>
+		<script src="js/respond.min.js"></script>
+		<script src="js/selectivizr-min.js"></script>
+	<![endif]-->
+    <!--
+	<script src="js/jquery.min.js"></script>
+	-->
+    <script>window.jQuery || document.write('<script src="../../js/common/jquery.min.js"><\/script>');</script>
+    <script src="../../js/common/modernizr.min.js"></script>
+    <!-- PARTICULAR PAGES CSS FILES -->
+    <link rel="stylesheet" href="../../css/common/innerpage.css">
+    <link rel="stylesheet" href="../../css/common/owl.carousel.css">
+    <link rel="stylesheet" href="../../css/common/owl.theme.css">
+    <!-- // PARTICULAR PAGES CSS FILES -->
+    <link rel="stylesheet" href="../../css/common/responsive.css">
+    <style>
+        /* Style the submit button */
+        button[type="button"] {
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 4px;
+            margin-top: 20px;
+        }
+
+        /* Style the error messages */
+        .error-message {
+            color: red;
+            margin-top: 5px;
+        }
+
+        /* 添加一個外部容器框 */
+        #form-container {
+            width: 100%;
+            margin: 30px;
+            padding: 50px;
+            border: 2px solid #ccc;
+            border-radius: 10px;
+            box-shadow: 0 0 30px 15px rgba(210, 84, 11, 0.546);
+            background: linear-gradient(to bottom, #ebe3bec6, #ffffb7b2);
+        }
+
+
+        /* 選項樣式 */
+        select {
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            padding: 10px;
+            background: transparent;
+            background-image: url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css");
+            background-repeat: no-repeat;
+            background-position: right center;
+        }
+
+        /* 按鈕樣式 */
+        button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .address-section {
+            color: #056831;
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 10px;
+        }
+
+        .address-section label,
+        .address-section p {
+            margin-bottom: 5px;
+        }
+
+        .address-section select,
+        .address-section input[type="text"] {
+            margin-top: 5px;
+            width: 100px;
+        }
+
+        input {
+            background-color: transparent;
+            border: none;
+            border-bottom: 1px solid var(--input-color);
+            color: var(--input-color);
+            font-size: 1.5em;
+            padding: .5em .5em .5em;
+            width: 50%;
+        }
+
+        input:focus+label,
+        input+label.show {
+            border-radius: 4px;
+            color: var(--label-color);
+            font-size: 1em;
+            left: .5em;
+            padding: 0 .15em;
+            text-transform: uppercase;
+            top: -1em;
+        }
+
+        :root {
+            --input-color: #056831;
+            --label-color: #f61d62;
+        }
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+        }
+
+        .field {
+            color: var(--input-color);
+            margin-bottom: 2em;
+            position: relative;
+        }
+
+        input:focus {
+            border-color: var(--label-color);
+            outline: 0;
+        }
+
+        /* ===== */
+        div.logo-wrapper {
+            position: relative;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        h1 {
+            color: #056831;
+        }
+
+        h2 {
+            color: #056831;
+        }
+    </style>
 </head>
 
 <body>
-    <h2>註冊會員</h2>
-    <div>
-        <div>
-            <label for="memberAcct">會員帳號:</label><input type="text" id="memberAcct">
-            <p id="p1" style="color: red"></p>
-            <p>開頭為英文，長度至少為8至多20...</p>
-        </div>
-        <div>
-            <label for="memberPw">會員密碼:</label><input type="text" id="memberPw">
-            <p id="p2" style="color: red"></p>
-            <p>需含有英文及數字至少8個字元...</p>
-        </div>
-        <div>
-            <label for="memberPw1">確認密碼:</label><input type="text" id="memberPw1">
-            <p id="p3" style="color: red"></p>
-        </div>
-        <div>
-            <label for="memberName">會員姓名:</label><input type="text" id="memberName">
-            <p id="p4" style="color: red"></p>
-        </div>
-        <div>
-            <label for="memberPhone">會員電話:</label><input type="text" id="memberPhone">
-            <p id="p5" style="color: red"></p>
-        </div>
-        <div>
-            <label for="memberEmail">會員電子信箱:</label><input type="text" id="memberEmail">
-            <p id="p6" style="color: red"></p>
-        </div>
+    <!-- PAGE WRAPPER -->
+    <div id="page-wrapper">
 
-        <div>
-            <select id="memberGender">
-                <p id="p7" style="color: red"></p>
-                <option>請輸入您的性別</option>
-                <option>男生</option>
-                <option>女生</option>
-            </select>
-        </div>
-        <div>
-            <p>請輸入您的生日</p>
-            <p id="p8" style="color: red"></p>
-            <input type="date" id="memberBirthday">
-        </div>
-        <div>
-            <label for="memberId">會員身分證:</label><input type="text" id="memberId">
-            <p id="p9" style="color: red"></p>
-        </div>
-        <div>
-            <label for="slCity">會員居住地址:</label>
-            <p id="p10" style="color: red"></p>
-            <p>請選擇縣市</p>
-            <select id="slCity">
-                <option disabled selected>--請選擇縣市--</option>
-            </select>
-            <br>
-            <p>請選擇鄉鎮市區</p>
-            <select id="slCountry"></select>
-            <br>
-            <input type="text" id="village">村/里
-            <input type="text" id="adjacent">鄰
-            <input type="text" id="road">路
-            <input type="text" id="lane">巷
-            <input type="text" id="add_num">號
-            <input type="text" id="add_floor">樓
-        </div>
-        <div>
-            <select id="memberStatus">
-                <option value="1">一般會員</option>
-            </select>
-        </div>
-        <div>
-            <button type="button" id="button">送出資料</button>
-        </div>
-        <div id="errorMessages" style="color: red;"></div>
+        <!-- SITE HEADER -->
+        <header id="site-header" role="banner">
+            <!-- HEADER TOP -->
+            <div class="header-top">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-6 col-md-7">
+                            <!-- CONTACT INFO -->
+                            <div class="contact-info">
+                                <i class="iconfont-headphones round-icon"></i>
+                                <strong>+444 (100) 1234</strong>
+                                <span>(Mon- Fri: 09.00 - 21.00)</span>
+                            </div>
+                            <!-- // CONTACT INFO -->
+                        </div>
+                        <div class="col-xs-12 col-sm-6 col-md-5">
+                            <ul class="actions unstyled clearfix">
+                                <li>
+                                    <!-- SEARCH BOX -->
+                                    <div class="search-box">
+                                        <form action="#" method="post">
+                                            <div class="input-iconed prepend">
+                                                <button class="input-icon"><i class="iconfont-search"></i></button>
+                                                <label for="input-search" class="placeholder">Search here…</label>
+                                                <input type="text" name="q" id="input-search"
+                                                    class="round-input full-width" required />
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <!-- // SEARCH BOX -->
+                                </li>
+                                <li data-toggle="sub-header" data-target="#sub-social">
+                                    <!-- SOCIAL ICONS -->
+                                    <a href="javascript:void(0);" id="social-icons">
+                                        <i class="iconfont-share round-icon"></i>
+                                    </a>
+
+                                    <div id="sub-social" class="sub-header">
+                                        <ul class="social-list unstyled text-center">
+                                            <li><a href="#"><i class="iconfont-facebook round-icon"></i></a></li>
+                                            <li><a href="#"><i class="iconfont-twitter round-icon"></i></a></li>
+                                            <li><a href="#"><i class="iconfont-google-plus round-icon"></i></a></li>
+                                            <li><a href="#"><i class="iconfont-pinterest round-icon"></i></a></li>
+                                            <li><a href="#"><i class="iconfont-rss round-icon"></i></a></li>
+                                        </ul>
+                                    </div>
+                                    <!-- // SOCIAL ICONS -->
+                                </li>
+                                <li data-toggle="sub-header" data-target="#sub-cart">
+                                    <!-- SHOPPING CART -->
+                                    <a href="javascript:void(0);" id="total-cart">
+                                        <i class="iconfont-shopping-cart round-icon"></i>
+                                    </a>
+
+                                    <div id="sub-cart" class="sub-header">
+                                        <div class="cart-header">
+                                            <span>Your cart is currently empty.</span>
+                                            <small><a href="../../pages/member/cart.html">(See All)</a></small>
+                                        </div>
+                                        <ul class="cart-items product-medialist unstyled clearfix"></ul>
+                                        <div class="cart-footer">
+                                            <div class="cart-total clearfix">
+                                                <span class="pull-left uppercase">Total</span>
+                                                <span class="pull-right total">$ 0</span>
+                                            </div>
+                                            <div class="text-right">
+                                                <a href="../../pages/member/cart.html"
+                                                    class="btn btn-default btn-round view-cart">View
+                                                    Cart</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- // SHOPPING CART -->
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ADD TO CART MESSAGE -->
+                <div class="cart-notification">
+                    <ul class="unstyled"></ul>
+                </div>
+                <!-- // ADD TO CART MESSAGE -->
+            </div>
+            <!-- // HEADER TOP -->
+            <!-- MAIN HEADER -->
+            <div class="main-header-wrapper">
+                <div class="container">
+                    <div class="main-header">
+                        <!-- SITE LOGO -->
+                        <div class="logo-wrapper">
+                            <a href="../../index.html" class="logo"
+                                title="GFashion - Responsive e-commerce HTML Template">
+                                <img src="../../img/common/logo.png"
+                                    alt="GFashion - Responsive e-commerce HTML Template" style="height: 120px" />
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- // MAIN HEADER -->
+        </header>
+        <!-- // SITE HEADER -->
+
+
+        <!-- SITE MAIN CONTENT -->
+        <main id="main-content" role="main">
+
+            <div class="container">
+                <div id="form-container">
+                    <h1>===============註冊會員===============</h1>
+                    <h2>請輸入您的個人資料</h2>
+                    <div>
+                        <div class="field">
+                            <label for="memberAcct">會員帳號:</label>
+                            <input type="text" id="memberAcct" placeholder="開頭為英文，長度為8-20...">
+                            <p id="p1" style="color: red"></p>
+                        </div>
+                        <div class="field">
+                            <label for="memberPw">會員密碼:</label>
+                            <input type="text" id="memberPw" placeholder="必須包含字母、數字，長度為6-16">
+                            <p id="p2" style="color: red"></p>
+                        </div>
+                        <div class="field">
+                            <label for="memberPw1">確認密碼:</label>
+                            <input type="text" id="memberPw1">
+                            <p id="p3" style="color: red"></p>
+                        </div>
+                        <div class="field">
+                            <label for="memberName">會員姓名:</label>
+                            <input type="text" id="memberName">
+                            <p id="p4" style="color: red"></p>
+                        </div>
+                        <div class="field">
+                            <label for="memberPhone">會員電話:</label>
+                            <input type="text" id="memberPhone">
+                            <p id="p5" style="color: red"></p>
+                        </div>
+                        <div class="field">
+                            <label for="memberEmail">會員電子信箱:</label>
+                            <input type="text" id="memberEmail">
+                            <p id="p6" style="color: red"></p>
+                        </div>
+
+                        <div class="field">
+                            <select id="memberGender">
+                                <p id="p7" style="color: red"></p>
+                                <option>請輸入您的性別</option>
+                                <option>男生</option>
+                                <option>女生</option>
+                            </select>
+                        </div>
+                        <div class="field">
+                            <p>請輸入您的生日</p>
+                            <p id="p8" style="color: red"></p>
+                            <input type="date" id="memberBirthday">
+                        </div>
+                        <div class="field">
+                            <label for="memberId">會員身分證:</label>
+                            <input type="text" id="memberId">
+                            <p id="p9" style="color: red"></p>
+                        </div>
+                        <div class="address-section">
+                            <label for="slCity">會員居住地址:</label>
+                            <p id="p10" style="color: red"></p>
+                            <p>請選擇縣市</p>
+                            <select id="slCity">
+                                <option disabled selected>--請選擇縣市--</option>
+                            </select>
+                            <br>
+                            <p>請選擇鄉鎮市區</p>
+                            <select id="slCountry"></select>
+                            <br>
+                            <table>
+                                <tr>
+                                    <td><input type="text" id="village">村/里</td>
+                                    <td><input type="text" id="adjacent">鄰</td>
+                                    <td><input type="text" id="road">路</td>
+                                    <td><input type="text" id="street">街</td>
+                                </tr>
+                                <tr>
+
+                                    <td><input type="text" id="section">段</td>
+                                    <td><input type="text" id="lane">巷</td>
+                                    <td><input type="text" id="add_num">號</td>
+                                    <td><input type="text" id="add_floor">樓</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div>
+                            <select id="memberStatus">
+                                <option value="1">一般會員</option>
+                            </select>
+                        </div>
+                        <div>
+                            <button type="button" id="button">送出資料</button>
+                        </div>
+                        <div id="errorMessages" style="color: red;"></div>
+                    </div>
+                </div>
+        </main>
+        <!-- // SITE MAIN CONTENT -->
+
+        <!-- SITE FOOTER -->
+        <footer class="page-footer">
+
+            <!-- WIDGET AREA -->
+            <div class="widgets">
+
+                <!-- FIRST ROW -->
+                <div class="section">
+                    <div class="container">
+                        <div class="row">
+
+                            <div class="col-xs-12 col-sm-6 col-md-3">
+                                <section class="widget widget-text">
+                                    <h5 class="widget-title">our store</h5>
+                                    <div class="widget-content">
+                                        <p>Sed ornare cras donec litora integer curabitur orci, at nullam aliquam libero
+                                            nam himenaeos, amet massa amet ut ipsum viverra mauris rhoncus neque aenean
+                                            rhoncus gravida orci facilisis quis dui consectetur.</p>
+                                        <p>Nisi porttitor inceptos consectetur donec orci, dui ipsum leo class gravida,
+                                            felis primis viverra placerat.</p>
+                                    </div>
+                                </section>
+                            </div>
+
+                            <div class="col-xs-12 col-sm-6 col-md-3">
+                                <section class="widget widget-text">
+                                    <h5 class="widget-title">Opening Time</h5>
+                                    <div class="widget-content">
+                                        <p>Monday-Friday:-------------------------9.00 to 18.00</p>
+                                        <p>Saturday:--------------------------------10.00 to 16.00</p>
+                                        <p>Sunday:----------------------------------10.00 to 16.00</p>
+                                        <br />
+                                        <p>Every 30 day of month Lorem ipsum dolor sit amet, consectetur adipiscing.</p>
+                                    </div>
+                                </section>
+                            </div>
+
+                            <div class="space40 visible-sm clearfix"></div>
+
+                            <div class="col-xs-12 col-sm-6 col-md-3">
+                                <section class="widget widget-menu">
+                                    <h5 class="widget-title">information</h5>
+                                    <div class="widget-content">
+                                        <ul class="menu iconed-menu unstyled">
+                                            <li><a href="#"><i class="iconfont-circle-blank menu-icon"></i>Affiliate</a>
+                                            </li>
+                                            <li><a href="#"><i class="iconfont-circle-blank menu-icon"></i>Shipping</a>
+                                            </li>
+                                            <li><a href="#"><i class="iconfont-circle-blank menu-icon"></i>Shop
+                                                    support</a></li>
+                                            <li><a href="#"><i class="iconfont-circle-blank menu-icon"></i>Customer
+                                                    Service</a></li>
+                                            <li><a href="#"><i class="iconfont-circle-blank menu-icon"></i>Payment &
+                                                    Return</a></li>
+                                            <li><a href="#"><i class="iconfont-circle-blank menu-icon"></i>Terms &
+                                                    Conditions</a></li>
+                                        </ul>
+                                    </div>
+                                </section>
+                            </div>
+
+                            <div class="col-xs-12 col-sm-6 col-md-3">
+                                facebook
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <!-- // FIRST ROW -->
+
+                <!-- SECOND ROW -->
+                <div class="section">
+                    <div class="container">
+                        <div class="row">
+
+                            <div class="col-xs-12 col-sm-12 col-md-3">
+                                <section class="widget widget-menu">
+                                    <h5 class="widget-title">Contact info</h5>
+                                    <div class="widget-content">
+                                        <ul class="menu iconed-list unstyled">
+                                            <li>
+                                                <span class="list-icon"><i
+                                                        class="round-icon iconfont-map-marker"></i></span>
+                                                <div class="list-content">Lorem ipsum maecenas dapibus luctus euismod
+                                                    133/2 New York City</div>
+                                            </li>
+                                            <li>
+                                                <span class="list-icon"><i class="round-icon iconfont-phone"></i></span>
+                                                <div class="list-content">(+00)1344356-675</div>
+                                            </li>
+                                            <li>
+                                                <span class="list-icon"><i
+                                                        class="round-icon iconfont-envelope-alt"></i></span>
+                                                <div class="list-content">support@themina.net</div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </section>
+                            </div>
+
+                            <div class="col-xs-12 col-sm-12 col-md-6">
+                                <section class="widget widget-ads">
+                                    <div class="widget-content">
+                                        <div class="center-xs">
+                                            <div class="ads">
+                                                <a href="#">
+                                                    <img src="../../img/common/demo/images-footer.jpg" alt="" />
+                                                </a>
+                                                <div class="ads-caption bottom-right">
+                                                    <a href="#" class="btn btn-default btn-round">
+                                                        <i class="round-icon iconfont-angle-right"></i>
+                                                        <span class="inline-middle">Show More</span>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </section>
+                            </div>
+
+                            <div class="col-xs-12 col-sm-12 col-md-3">
+                                <section class="widget widget-subscription">
+                                    <h5 class="widget-title">Newletter</h5>
+                                    <div class="widget-content">
+                                        <p>Subscribe to be the first to know about Sales, Events, and Exclusive Offers!
+                                        </p>
+                                        <form action="#" method="post">
+                                            <div class="input-group">
+                                                <label for="subscription-email" class="placeholder">Enter Your
+                                                    Email</label>
+                                                <input type="email" id="subscription-email" name="email"
+                                                    class="form-control" required />
+                                                <span class="input-group-btn">
+                                                    <button class="btn btn-primary">Subscribe</button>
+                                                </span>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </section>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <!-- // SECOND ROW -->
+
+            </div>
+            <!-- // WIDGET AREA -->
+
+            <div class="footer-sub">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-6">
+                            <div class="footer-links center-xs clearfix">
+                                <ul class="unstyled">
+                                    <li><a href="#">Site Map</a></li>
+                                    <li><a href="#">FAQ</a></li>
+                                    <li><a href="#">Work for us</a></li>
+                                    <li><a href="#">Contact Us</a></li>
+                                </ul>
+                            </div>
+                            <div class="space10"></div>
+                            <div class="copyright center-xs">
+                                <p>(c) 2013 More Templates <a href="http://www.cssmoban.com/" target="_blank"
+                                        title="模板之家">模板之家</a> - Collect from <a href="http://www.cssmoban.com/"
+                                        title="网页模板" target="_blank">网页模板</a>. All Rights Reserved.</p>
+                            </div>
+                        </div>
+
+                        <div class="space40 visible-xs"></div>
+
+                        <div class="col-xs-12 col-sm-6 center-xs">
+                            <div class="pull-right">
+                                <div class="vmid">
+                                    <span class="uppercase">Payment Accept&emsp;</span>
+                                    <a href="#"><img src="../../img/common/visacard.png" alt="" width="40" /></a>
+                                    <a href="#"><img src="../../img/common/mastercard.png" alt="" width="40" /></a>
+                                    <a href="#"><img src="../../img/common/paypal.png" alt="" width="40" /></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </footer>
+        <!-- // SITE FOOTER -->
+
     </div>
+    <!-- // PAGE WRAPPER -->
+
+    <!-- Essential Javascripts -->
+    <script src="../../js/common/minified.js"></script>
+    <!-- // Essential Javascripts -->
+
+    <!-- Particular Page Javascripts -->
+    <script src="../../js/common/products.js"></script>
+    <script src="../../js/common/owl.carousel.js"></script>
+    <script src="../../js/common/contact.js"></script>
+    <!--<script src="http://maps.googleapis.com/maps/api/js?sensor=false" type="text/javascript"></script>-->
+    <!-- <script src="../../js/common/gmap3.min.js"></script> -->
+    <!-- // Particular Page Javascripts -->
 </body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
+
     //地址下拉選單===start
     const data = {
         宜蘭縣: [
@@ -265,8 +769,11 @@
     const lane_el = document.querySelector('#lane');
     const add_num_el = document.querySelector('#add_num');
     const add_floor_el = document.querySelector('#add_floor');
+    const section_el = document.querySelector('#section');
+    const street_el = document.querySelector('#street');
 
     const errorMessages_el = document.querySelector('#errorMessages');
+
     function getAddress() {
         let add = slCity_el.value + slCountry_el.value;
         let addressParts = [];
@@ -277,10 +784,16 @@
             addressParts.push(adjacent_el.value + "鄰");
         }
         if (road_el.value) {
-            addressParts.push(road_el.value + "路/街");
+            addressParts.push(road_el.value + "路");
         }
         if (lane_el.value) {
             addressParts.push(lane_el.value + "巷");
+        }
+        if (street_el.value) {
+            addressParts.push(street_el.value + "街");
+        }
+        if (section_el.value) {
+            addressParts.push(section_el.value + "弄");
         }
         if (add_num_el.value) {
             addressParts.push(add_num_el.value + "號");
@@ -303,7 +816,7 @@
         }
 
         if (!re.test(string)) {
-            p1_el.innerHTML += ( "不符合帳號格式！開頭需為英文至少8位數，至多20位數");
+            p1_el.innerHTML += ("不符合帳號格式！開頭需為英文至少8位數，至多20位數");
             return false;
         }
 
@@ -311,10 +824,10 @@
         return true;
     }
     function checkPassword(password) {
-        const re = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{7,20}$/;
-
+        // const re = /^(?=.*[a-zA-Z])(?=.*\d)[A-Za-z\d]{8,20}$/;
+        var re = /^(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z0-9!@#$%^&*]{6,16}$/;
         if (!re.test(password)) {
-            p2_el.innerHTML += "密碼必須包含字母、數字和特殊字符，長度須為8-20";
+            p2_el.innerHTML += "密碼必須包含字母、數字，長度須為6-16";
             return false;
         }
 
@@ -372,8 +885,8 @@
         p6_el.innerHTML == "";
         return true;
     }
-   
-    function getGender(integer){
+
+    function getGender(integer) {
         if (memberGender_el.value === "男生") {
             return 1;
         }
@@ -404,81 +917,132 @@
         return true;
 
     }
-
+    //註冊判斷+驗證信箱
     button_el.addEventListener("click", () => {
         errorMessages_el.innerHTML = "";
+        p1_el.innerHTML = "";
+        p2_el.innerHTML = "";
+        p3_el.innerHTML = "";
+        p4_el.innerHTML = "";
+        p5_el.innerHTML = "";
+        p6_el.innerHTML = "";
+        p8_el.innerHTML = "";
+        p9_el.innerHTML = "";
+        // 调用验证函数并更新错误消息
+        if (!checkAcct(memberAcct_el.value)) {
+            errorMessages_el.innerHTML += "<p>會員帳號格式錯誤</p>";
+        }
+        if (!checkPassword(memberPw_el.value)) {
+            errorMessages_el.innerHTML += "<p>密碼格式錯誤</p>";
+        }
+        if (!checkPasswordConfirm(memberPw1_el.value)) {
+            errorMessages_el.innerHTML += "<p>確認密碼錯誤</p>";
+        }
+        if (!checkName(memberName_el.value)) {
+            errorMessages_el.innerHTML += "<p>會員名稱錯誤</p>";
+        }
+        if (!checkPhone(memberPhone_el.value)) {
+            errorMessages_el.innerHTML += "<p>電話錯誤</p>";
+        }
+        if (!checkEmail(memberEmail_el.value)) {
+            errorMessages_el.innerHTML += "<p>Email格式錯誤</p>";
+        }
+        if (!checkBirthday(memberBirthday_el.value)) {
+            errorMessages_el.innerHTML += "<p>生日錯誤</p>";
+        }
+        if (!checkId(memberId_el.value)) {
+            errorMessages_el.innerHTML += "<p>會員身分證錯誤</p>";
+        }
 
-            // 调用验证函数并更新错误消息
-            if (!checkAcct(memberAcct_el.value)) {
-                errorMessages_el.innerHTML += "<p>會員帳號格式錯誤</p>";
-            }
-            if (!checkPassword(memberPw_el.value)) {
-                errorMessages_el.innerHTML += "<p>密碼格式錯誤</p>";
-            }
-            if (!checkPasswordConfirm(memberPw1_el.value)) {
-                errorMessages_el.innerHTML += "<p>確認密碼錯誤</p>";
-            }
-            if (!checkName(memberName_el.value)) {
-                errorMessages_el.innerHTML += "<p>會員名稱錯誤</p>";
-            }
-            if (!checkPhone(memberPhone_el.value)) {
-                errorMessages_el.innerHTML += "<p>電話錯誤</p>";
-            }
-            if (!checkEmail(memberEmail_el.value)) {
-                errorMessages_el.innerHTML += "<p>Email格式錯誤</p>";
-            }
-            if (!checkBirthday(memberBirthday_el.value)) {
-                errorMessages_el.innerHTML += "<p>生日錯誤</p>";
-            }
-            if (!checkId(memberId_el.value)) {
-                errorMessages_el.innerHTML += "<p>會員身分證錯誤</p>";
-            }
-
-            // 如果有错误信息，阻止提交数据
-            if (errorMessages_el.innerHTML !== "") {
-                event.preventDefault();
-            }
-        
-        // fetch("http://localhost:8081/BuyGo/front_end/guest/register/MemberRegister", {
-        fetch("http://localhost:8081/BuyGo/front_end/guest/register/MemberRegister", {
-
-            method: "POST",
-            header: { "content-type": "application/json;charset=utf-8" },
-            body: JSON.stringify({
-            memberAcct: memberAcct_el.value,
-            memberPw: memberPw_el.value,
-            memberPw1: memberPw1_el.value,
-            memberStatus: memberStatus_el.value,
-            memberName: memberName_el.value,
-            memberAdd: getAddress(),
-            memberPhone: memberPhone_el.value,
-            memberEmail: memberEmail_el.value,
-            memberGender: getGender(),
-            memberBirthday: memberBirthday_el.value,
-            memberId: memberId_el.value
-        
+        // 如果有错误信息，阻止提交数据
+        if (errorMessages_el.innerHTML !== "") {
+            event.preventDefault();
+            // return;
+        } else {
+            //送出驗證信
+            fetch("http://localhost:8081/BuyGo/api/front_end/guest/register/MemberRegisterCheckMailServlet", {
+                method: "POST",
+                header: { "content-type": "application/json;charset=utf-8" },
+                body: JSON.stringify({
+                    memberEmail: memberEmail_el.value
+                })
             })
-        }).then(resp => resp.json())
-            .then(body => {
-                console.log(body);
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
 
-    })
-    window.onload = function () {
-        memberAcct_el.value = "chuntingliu0403";
-        memberPw_el.value = "qqq123456";
-        memberPw1_el.value = "qqq123456";
-        memberStatus_el.value = "u1";
-        memberName_el.value = "liu";
-        memberPhone_el.value = "0921442101";
-        memberEmail_el.value = "chuntingliu0403@gmail.com";
-        memberGender_el.value = "男生";
-        memberBirthday_el.value = "2000-05-20";
-        memberId_el.value = "M123345456";
-    }
+            Swal.fire({
+                title: '輸入驗證碼',
+                input: 'text',
+                showCancelButton: true,
+                confirmButtonText: '送出',
+                cancelButtonText: '取消',
+                preConfirm: (verificationCode) => {
+                    console.log(verificationCode);
+                    // const data1 = {verificationCode};
+                    return fetch("http://localhost:8081/BuyGo/api/front_end/guest/register/RegisterCheckMailAuthCode", {
+                        method: "POST",
+                        header: { "content-type": "application/json;charset=utf-8" },
+                        body: JSON.stringify(
+                            verificationCode
+                        )
+                    })
+                        .then(response => {
+                            // console.log(response);
+                            if (!response.ok) {
+                                throw new Error(response.statusText);
+                            }
+                        }).then(fetch("http://localhost:8081/BuyGo/front_end/guest/register/MemberRegister", {
+
+                            method: "POST",
+                            header: { "content-type": "application/json;charset=utf-8" },
+                            body: JSON.stringify({
+                                memberAcct: memberAcct_el.value,
+                                memberPw: memberPw_el.value,
+                                memberStatus: memberStatus_el.value,
+                                memberName: memberName_el.value,
+                                memberAdd: getAddress(),
+                                memberPhone: memberPhone_el.value,
+                                memberEmail: memberEmail_el.value,
+                                memberGender: getGender(),
+                                memberBirthday: memberBirthday_el.value,
+                                memberId: memberId_el.value
+
+                            })
+                        }).then(resp => resp.json())
+                            .then(body => {
+                                Swal.fire(
+                                    '註冊成功!',
+                                    'success'
+                                )
+                            }))
+                        .catch(error => {
+                            Swal.showValidationMessage(
+                                `驗證失敗：${error}`
+                            );
+                        });
+                },
+                allowOutsideClick: () => !Swal.isLoading()
+
+
+
+
+            })
+
+
+        }
+    });
+
+
+    // window.onload = function () {
+    //     memberAcct_el.value = "chuntingliu0403";
+    //     memberPw_el.value = "qqq123456";
+    //     memberPw1_el.value = "qqq123456";
+    //     memberStatus_el.value = "u1";
+    //     memberName_el.value = "liu";
+    //     memberPhone_el.value = "0921442101";
+    //     memberEmail_el.value = "chuntingliu0403@gmail.com";
+    //     memberGender_el.value = "男生";
+    //     memberBirthday_el.value = "2000-05-20";
+    //     memberId_el.value = "M123345456";
+    // }
 
 
 

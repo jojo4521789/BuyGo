@@ -1,9 +1,5 @@
 package web.front_end.member.acc.entity;
 
-import java.sql.Date;
-import java.sql.Timestamp;
-import java.time.LocalDate;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -55,7 +51,8 @@ public class Member extends Core {
 	private Integer sellerEvaStar;
 	@Column(name = "SELLER_EVA_COUNT", insertable = false)
 	private Integer sellerEvaCount;
-
+	@Column(name = "MEMBER_WALLET_AMOUNT", insertable = false)
+	private Double memberWalletAmount;
 	
 
 }

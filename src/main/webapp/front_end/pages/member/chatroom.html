@@ -1,0 +1,916 @@
+<!DOCTYPE html>
+<!--[if IE 7 ]><html class="ie ie7 lte9 lte8 lte7" lang="en-US"><![endif]-->
+<!--[if IE 8]><html class="ie ie8 lte9 lte8" lang="en-US">	<![endif]-->
+<!--[if IE 9]><html class="ie ie9 lte9" lang="en-US"><![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!-->
+<html class="noIE" lang="en-US"><!--<![endif]-->
+
+<head>
+	<meta charset="UTF-8" />
+	<title>GFashion - Responsive e-commerce HTML Template</title>
+	<meta name="description" content="" />
+	<meta name="keywords" content="" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<!-- Favorite Icons -->
+	<link rel="icon" href="../../img/common/favicon/favicon.html" type="image/x-icon" />
+	<link rel="apple-touch-icon-precomposed" sizes="144x144"
+		href="../../img/common/favicon/apple-touch-icon-144x144-precomposed.html">
+	<link rel="apple-touch-icon-precomposed" sizes="72x72"
+		href="../../img/common/favicon/apple-touch-icon-72x72-precomposed.html">
+	<link rel="apple-touch-icon-precomposed" href="../../img/common/favicon/apple-touch-icon-precomposed.html">
+	<!-- // Favorite Icons -->
+
+	<!--<link href='http://fonts.useso.com/css?family=Open+Sans:300,400,600,700' rel='stylesheet' type='text/css'>-->
+
+	<!-- GENERAL CSS FILES -->
+	<link rel="stylesheet" href="../../css/common/minified.css">
+	<!-- // GENERAL CSS FILES -->
+
+	<!--[if IE 8]>
+		<script src="js/respond.min.js"></script>
+		<script src="js/selectivizr-min.js"></script>
+	<![endif]-->
+	<!--
+	<script src="js/jquery.min.js"></script>
+	-->
+	<script>window.jQuery || document.write('<script src="../../js/common/jquery.min.js"><\/script>');</script>
+
+	<script src="../../js/common/modernizr.min.js"></script>
+	<!-- PARTICULAR PAGES CSS FILES -->
+	<link rel="stylesheet" href="../../css/common/innerpage.css">
+	<link rel="stylesheet" href="../../css/common/owl.carousel.css">
+	<link rel="stylesheet" href="../../css/common/owl.theme.css">
+	<!-- // PARTICULAR PAGES CSS FILES -->
+	<link rel="stylesheet" href="../../css/common/responsive.css">
+	<style>
+		.msgDiv{
+			clear: both;
+		}
+
+		.timehrmin{
+			padding: 8px;
+		}
+
+		.timeymd{
+			padding: 8px;
+		}
+
+		.me,
+		.otherPerson {
+			/* clear: both; */
+			display: inline-block;
+			padding: 8px;
+			border-radius: 15px;
+			margin-bottom: 5px;
+		}
+
+		.me {
+			float: right;
+			background: #0084ff;
+			color: #fff;
+			margin-right: 10px;
+		}
+
+		.otherPerson {
+			float: left;
+			background: #d9d9d9;
+			margin-left: 3px;
+		}
+	</style>
+</head>
+
+<body>
+
+	<!-- PAGE WRAPPER -->
+	<div id="page-wrapper">
+
+		<!-- SITE HEADER -->
+		<header id="site-header" role="banner">
+			<!-- HEADER TOP -->
+			<div class="header-top">
+				<div class="container">
+					<div class="row">
+						<div class="col-xs-12 col-sm-6 col-md-7">
+							<!-- CONTACT INFO -->
+							<div class="contact-info">
+								<i class="iconfont-headphones round-icon"></i>
+								<strong>+444 (100) 1234</strong>
+								<span>(Mon- Fri: 09.00 - 21.00)</span>
+							</div>
+							<!-- // CONTACT INFO -->
+						</div>
+						<div class="col-xs-12 col-sm-6 col-md-5">
+							<ul class="actions unstyled clearfix">
+								<li>
+									<!-- SEARCH BOX -->
+									<div class="search-box">
+										<form action="#" method="post">
+											<div class="input-iconed prepend">
+												<button class="input-icon"><i class="iconfont-search"></i></button>
+												<label for="input-search" class="placeholder">Search here…</label>
+												<input type="text" name="q" id="input-search"
+													class="round-input full-width" required />
+											</div>
+										</form>
+									</div>
+									<!-- // SEARCH BOX -->
+								</li>
+								<li data-toggle="sub-header" data-target="#sub-social">
+									<!-- SOCIAL ICONS -->
+									<a href="javascript:void(0);" id="social-icons">
+										<i class="iconfont-share round-icon"></i>
+									</a>
+
+									<div id="sub-social" class="sub-header">
+										<ul class="social-list unstyled text-center">
+											<li><a href="#"><i class="iconfont-facebook round-icon"></i></a></li>
+											<li><a href="#"><i class="iconfont-twitter round-icon"></i></a></li>
+											<li><a href="#"><i class="iconfont-google-plus round-icon"></i></a></li>
+											<li><a href="#"><i class="iconfont-pinterest round-icon"></i></a></li>
+											<li><a href="#"><i class="iconfont-rss round-icon"></i></a></li>
+										</ul>
+									</div>
+									<!-- // SOCIAL ICONS -->
+								</li>
+								<li data-toggle="sub-header" data-target="#sub-cart">
+									<!-- SHOPPING CART -->
+									<a href="javascript:void(0);" id="total-cart">
+										<i class="iconfont-shopping-cart round-icon"></i>
+									</a>
+
+									<div id="sub-cart" class="sub-header">
+										<div class="cart-header">
+											<span>Your cart is currently empty.</span>
+											<small><a href="../../pages/member/cart.html">(See All)</a></small>
+										</div>
+										<ul class="cart-items product-medialist unstyled clearfix"></ul>
+										<div class="cart-footer">
+											<div class="cart-total clearfix">
+												<span class="pull-left uppercase">Total</span>
+												<span class="pull-right total">$ 0</span>
+											</div>
+											<div class="text-right">
+												<a href="../../pages/member/cart.html"
+													class="btn btn-default btn-round view-cart">View Cart</a>
+											</div>
+										</div>
+									</div>
+									<!-- // SHOPPING CART -->
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+
+				<!-- ADD TO CART MESSAGE -->
+				<div class="cart-notification">
+					<ul class="unstyled"></ul>
+				</div>
+				<!-- // ADD TO CART MESSAGE -->
+			</div>
+			<!-- // HEADER TOP -->
+			<!-- MAIN HEADER -->
+			<div class="main-header-wrapper">
+				<div class="container">
+					<div class="main-header">
+						<!-- CURRENCY / LANGUAGE / USER MENU -->
+						<div class="actions">
+							<div class="center-xs">
+								<!-- CURRENCY -->
+								<ul class="option-list unstyled">
+									<li class="active"><a href="#" data-toggle="tooltip" title="USD - US Dollar">$</a>
+									</li>
+									<li><a href="#" data-toggle="tooltip" title="GBP - British Pound">lb</a></li>
+									<li><a href="#" data-toggle="tooltip" title="EUR - Euro">EUR</a></li>
+								</ul>
+								<!-- // CURRENCY -->
+								<!-- LANGUAGES -->
+								<ul class="option-list unstyled">
+									<li class="active"><a href="#" data-toggle="tooltip" title="English">EN</a></li>
+									<li><a href="#" data-toggle="tooltip" title="French">FR</a></li>
+									<li><a href="#" data-toggle="tooltip" title="Deutsch">DE</a></li>
+								</ul>
+								<!-- // LANGUAGES -->
+							</div>
+							<div class="clearfix"></div>
+							<!-- USER RELATED MENU -->
+							<nav id="tiny-menu" class="clearfix">
+								<ul class="user-menu">
+									<li><a href="../../pages/member/myaccount.html">My Account</a></li>
+									<li><a href="../../pages/member/cart.html">My Wishlist</a></li>
+									<li><a href="../../pages/member/checkout.html">Checkout</a></li>
+									<li><a href="#">Log Out</a></li>
+								</ul>
+							</nav>
+							<!-- // USER RELATED MENU -->
+						</div>
+						<!-- // CURRENCY / LANGUAGE / USER MENU -->
+						<!-- SITE LOGO -->
+						<div class="logo-wrapper">
+							<a href="../../index-2.html" class="logo"
+								title="GFashion - Responsive e-commerce HTML Template">
+								<img src="../../img/common/logo.png"
+									alt="GFashion - Responsive e-commerce HTML Template" />
+							</a>
+						</div>
+						<!-- // SITE LOGO -->
+						<!-- SITE NAVIGATION MENU -->
+						<nav id="site-menu" role="navigation">
+							<ul class="main-menu hidden-sm hidden-xs">
+								<li class="active">
+									<a href="../../index.html">Home</a>
+								</li>
+								<li>
+									<a href="../../pages/guest/products.html">Women</a>
+								</li>
+								<li>
+									<a href="../../pages/guest/products.html">Men</a>
+
+									<!-- MEGA MENU -->
+									<div class="mega-menu" data-col-lg="9" data-col-md="12">
+										<div class="row">
+
+											<div class="col-md-3">
+												<h4 class="menu-title">Clothing</h4>
+												<ul class="mega-sub">
+													<li><a href="../../pages/guest/products.html">Casual Wear</a></li>
+													<li><a href="../../pages/guest/products.html">Evening Wear</a></li>
+													<li><a href="../../pages/guest/products.html">Formal Attire</a></li>
+													<li><a href="../../pages/guest/products.html">Womens Jeans</a></li>
+													<li><a href="../../pages/guest/products.html">Mens Jeans</a></li>
+													<li><a href="../../pages/guest/products.html">Fall Styles</a></li>
+												</ul>
+											</div>
+
+											<div class="col-md-3">
+												<h4 class="menu-title">Accessories</h4>
+												<ul class="mega-sub">
+													<li><a href="../../pages/guest/products.html">Casual Wear</a></li>
+													<li><a href="../../pages/guest/products.html">Evening Wear</a></li>
+													<li><a href="../../pages/guest/products.html">Formal Attire</a></li>
+													<li><a href="../../pages/guest/products.html">Womens Jeans</a></li>
+													<li><a href="../../pages/guest/products.html">Mens Jeans</a></li>
+													<li><a href="../../pages/guest/products.html">Fall Styles</a></li>
+												</ul>
+											</div>
+
+											<div class="col-md-3">
+												<h4 class="menu-title">Brands</h4>
+												<ul class="mega-sub">
+													<li><a href="../../pages/guest/products.html">Casual Wear</a></li>
+													<li><a href="../../pages/guest/products.html">Evening Wear</a></li>
+													<li><a href="../../pages/guest/products.html">Formal Attire</a></li>
+													<li><a href="../../pages/guest/products.html">Womens Jeans</a></li>
+													<li><a href="../../pages/guest/products.html">Mens Jeans</a></li>
+													<li><a href="../../pages/guest/products.html">Fall Styles</a></li>
+												</ul>
+											</div>
+
+											<div class="col-md-3">
+												<div class="carousel slide m-b" data-ride="carousel">
+													<div class="carousel-inner">
+														<div class="item active">
+															<img src="../../img/common/men/slide1.jpg" alt="" />
+														</div>
+														<div class="item">
+															<img src="../../img/common/men/slide2.jpg" alt="" />
+														</div>
+													</div>
+												</div>
+												<h5 class="text-semibold uppercase m-b-sm">Featured Products</h5>
+												<p>Lorem ipsum dolor sit, consectetur adipiscing elit. Etiam neque
+													velit, blandit sed scelerisque.</p>
+												<a href="../../pages/guest/products.html"
+													class="btn btn-default btn-round">Go to Shop →</a>
+											</div>
+
+										</div>
+									</div>
+									<!-- // MEGA MENU -->
+
+								</li>
+								<li>
+									<a href="../../pages/components.html">Components</a>
+								</li>
+								<li>
+									<a href="../../pages/guest/store-locator.html">Store Locator</a>
+								</li>
+								<li>
+									<a href="../../pages/guest/contact-us.html">Contact Us</a>
+								</li>
+								<li>
+									<a href="#">Buy Me!</a>
+								</li>
+							</ul>
+
+							<!-- MOBILE MENU -->
+							<div id="mobile-menu" class="dl-menuwrapper visible-xs visible-sm">
+								<button class="dl-trigger"><i class="iconfont-reorder round-icon"></i></button>
+								<ul class="dl-menu">
+									<li class="active">
+										<a href="javsacript:void(0);">Home</a>
+									</li>
+									<li>
+										<a href="javsacript:void(0);">Women</a>
+									</li>
+									<li>
+										<a href="javsacript:void(0);">Men</a>
+
+										<ul class="dl-submenu">
+											<li>
+												<a href="../../pages/guest/products.html">Clothing</a>
+												<ul class="dl-submenu">
+													<li><a href="../../pages/guest/products.html">Casual Wear</a></li>
+													<li><a href="../../pages/guest/products.html">Evening Wear</a></li>
+													<li><a href="../../pages/guest/products.html">Formal Attire</a></li>
+													<li><a href="../../pages/guest/products.html">Womens Jeans</a></li>
+													<li><a href="../../pages/guest/products.html">Mens Jeans</a></li>
+													<li><a href="../../pages/guest/products.html">Fall Styles</a></li>
+												</ul>
+											</li>
+											<li>
+												<a href="../../pages/guest/products.html">Accessories</a>
+												<ul class="dl-submenu">
+													<li><a href="../../pages/guest/products.html">Casual Wear</a></li>
+													<li><a href="../../pages/guest/products.html">Evening Wear</a></li>
+													<li><a href="../../pages/guest/products.html">Formal Attire</a></li>
+													<li><a href="../../pages/guest/products.html">Womens Jeans</a></li>
+													<li><a href="../../pages/guest/products.html">Mens Jeans</a></li>
+													<li><a href="../../pages/guest/products.html">Fall Styles</a></li>
+												</ul>
+											</li>
+											<li>
+												<a href="../../pages/guest/products.html">Brands</a>
+												<ul class="dl-submenu">
+													<li><a href="../../pages/guest/products.html">Casual Wear</a></li>
+													<li><a href="../../pages/guest/products.html">Evening Wear</a></li>
+													<li><a href="../../pages/guest/products.html">Formal Attire</a></li>
+													<li><a href="../../pages/guest/products.html">Womens Jeans</a></li>
+													<li><a href="../../pages/guest/products.html">Mens Jeans</a></li>
+													<li><a href="../../pages/guest/products.html">Fall Styles</a></li>
+												</ul>
+											</li>
+										</ul>
+									</li>
+								</ul>
+							</div>
+							<!-- // MOBILE MENU -->
+
+						</nav>
+						<!-- // SITE NAVIGATION MENU -->
+					</div>
+				</div>
+			</div>
+			<!-- // MAIN HEADER -->
+		</header>
+		<!-- // SITE HEADER -->
+
+		<!-- BREADCRUMB -->
+		<div class="breadcrumb-container">
+			<div class="container">
+				<div class="relative">
+					<ul class="bc unstyled clearfix">
+						<li><a href="#">Home</a></li>
+						<li class="active">MY ACCOUNT</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<!-- // BREADCRUMB -->
+
+		<!-- SITE MAIN CONTENT -->
+		<main id="main-content" role="main">
+
+			<div class="container">
+				<div class="row">
+
+					<div class="m-t-b clearfix">
+						<!-- SIDEBAR -->
+						<aside class="col-xs-12 col-sm-4 col-md-3">
+							<section class="side-section">
+								<h3 class="uppercase text-bold"><span class="text-xs">MyAccount Pages</span></h3>
+
+								<ul class="nav nav-tabs nav-stacked">
+									<li><a href="#">個人資料</a></li>
+									<li><a href="#">最新消息</a></li>
+									<li><a href="../../pages/member/gpa/gpaOrder.html">訂單追蹤</a></li>
+									<li><a href="#">我的委託單</a></li>
+									<li><a href="#">已收藏的揪團</a></li>
+									<li><a href="#">優惠券</a></li>
+									<li><a href="#">平台錢包</a></li>
+									<li><a href="#">聊天室</a></li>
+									<li><a href="../../pages/member/blacklist.html">黑名單</a></li>
+									<br>
+									<li><a href="../../pages/member/myShop.html">我的賣場</a></li>
+								</ul>
+							</section>
+
+							<!-- PROMO -->
+							<div class="promo inverse-background"
+								style="background: url('../../img/common/demo/Barn-Dress-Girl_t.jpg') no-repeat; background-size: auto 100%;">
+								<div class="inner text-center np">
+									<div class="ribbon">
+										<h6 class="nmb">New Arrivals</h6>
+										<h5 class="text-semibold uppercase nmb">Leather Fashion</h5>
+										<div class="space10"></div>
+										<a href="../../pages/guest/products.html" class="with-icon prepend-icon"><i
+												class="iconfont-caret-right"></i><span> Shop Now</span></a>
+									</div>
+								</div>
+							</div>
+							<!-- // PROMO -->
+						</aside>
+						<!-- // SIDEBAR -->
+
+						<div class="m-t-lg clearfix">
+							<div class="row">
+								<div class="col-xs-12 col-sm-6">
+									<h3 class="uppercase text-bold"><span class="text-xs">聊天室</span></h3>
+									<!--聊天室功能-->
+									<div id="chatroom" style="width: 850px; border: 2px solid lightgray;">
+										<div style="float: left; background-color: #f2f2f2;">
+											<input type="text" id="search" class="form-control" style="margin: 5px 0px;"
+												placeholder="搜尋">
+											<ul class="store-list unstyled" id="memberlist"
+												style="height: 470px; max-height: 470px;">
+												<!-- 假資料開始 -->
+												<!-- <li style="cursor: default;text-align: center;" onclick="">馬利歐</li>
+												<li style="cursor: default;text-align: center;" onclick="">嘿呵</li>
+												<li style="cursor: default;text-align: center;" onclick="">害羞幽靈</li> -->
+												<!-- 假資料結束 -->
+											</ul>
+										</div>
+										<div
+											style="float: right;height: 100%; width: 674px;border: 1px solid lightgray;">
+											<h3 id="chatroomHeadMemberAcct"
+												style="background-color: #f2f2f2; padding: 5px; margin: 0px; height: 46px;">
+											</h3>
+											<hr style="margin: 0px; border: 1px solid lightgray;">
+											<!-- <textarea
+												style="resize: none;width: 100%; height: 360px; background-color: #f2f2f2; border: 0px;"
+												readonly>訊息在此</textarea> -->
+											<div id="messagesContainer"
+												style="width: 100%; height: 360px; background-color: #f2f2f2;overflow: auto;">
+												<ul id="messageArea"></ul>
+													<!-- 假資料開始 -->
+													<!-- <li class="me">安安</li>
+													<li class="otherPerson">嗨嗨</li>
+													<li class="me">123</li>
+													<li class="otherPerson">456</li>
+													<li class="otherPerson">789</li> -->
+													<!-- <div class="msgDiv">
+														<li class="me" timeymd="2023/09/05" timehrmin="09:00">測試123</li>
+														<span class="timehrmin" style="float: right;">789</span>
+														<span class="timehrmin" style="float: right;">111</span>
+													</div>
+													<div class="msgDiv">
+														<li class="otherPerson" timeymd="2023/09/06" timehrmin="01:35">測試2</li>
+														<span class="timehrmin" style="float: left;">123</span>
+														<span class="timehrmin" style="float: left;">111</span>
+													</div> -->
+													
+													<!-- 假資料結束 -->
+											</div>
+											<hr style="margin: 0px; border: 1px solid lightgray;">
+											<div style="background-color: #f2f2f2;height: 103px; position: relative;">
+												<!-- 下方程式碼onclick使用event.preventDefault();確保按下Enter後textarea不會換行 -->
+												<textarea id="message"
+													style="resize: none; position: relative; left: 10px; top: 10px; width: 602px; height: 85px; background-color: #f2f2f2; border: 1px solid lightgray;"
+													placeholder="輸入文字"
+													onkeydown="if(event.keyCode == 13){sendMessage();event.preventDefault();}" oninput="changeSendIcon();"></textarea>
+												<img id="sendIcon" src="../../img/member/chatroom/send_default.jpg" style="position: relative; right: -20px; top: 35px;width: 30px;" onclick="sendMessage()">
+											</div>
+										</div>
+										<div style="clear: both;"></div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<section class="col-xs-12 col-sm-8 col-md-9">
+							<!-- 在此新增 -->
+						</section>
+
+					</div>
+
+				</div>
+			</div>
+
+		</main>
+		<!-- // SITE MAIN CONTENT -->
+
+		<!-- SITE FOOTER -->
+		<footer class="page-footer">
+
+			<!-- WIDGET AREA -->
+			<div class="widgets">
+
+				<!-- FIRST ROW -->
+				<div class="section">
+					<div class="container">
+						<div class="row">
+
+							<div class="col-xs-12 col-sm-6 col-md-3">
+								<section class="widget widget-text">
+									<h5 class="widget-title">our store</h5>
+									<div class="widget-content">
+										<p>Sed ornare cras donec litora integer curabitur orci, at nullam aliquam libero
+											nam himenaeos, amet massa amet ut ipsum viverra mauris rhoncus neque aenean
+											rhoncus gravida orci facilisis quis dui consectetur.</p>
+										<p>Nisi porttitor inceptos consectetur donec orci, dui ipsum leo class gravida,
+											felis primis viverra placerat.</p>
+									</div>
+								</section>
+							</div>
+
+							<div class="col-xs-12 col-sm-6 col-md-3">
+								<section class="widget widget-text">
+									<h5 class="widget-title">Opening Time</h5>
+									<div class="widget-content">
+										<p>Monday-Friday:-------------------------9.00 to 18.00</p>
+										<p>Saturday:--------------------------------10.00 to 16.00</p>
+										<p>Sunday:----------------------------------10.00 to 16.00</p>
+										<br />
+										<p>Every 30 day of month Lorem ipsum dolor sit amet, consectetur adipiscing.</p>
+									</div>
+								</section>
+							</div>
+
+							<div class="space40 visible-sm clearfix"></div>
+
+							<div class="col-xs-12 col-sm-6 col-md-3">
+								<section class="widget widget-menu">
+									<h5 class="widget-title">information</h5>
+									<div class="widget-content">
+										<ul class="menu iconed-menu unstyled">
+											<li><a href="#"><i class="iconfont-circle-blank menu-icon"></i>Affiliate</a>
+											</li>
+											<li><a href="#"><i class="iconfont-circle-blank menu-icon"></i>Shipping</a>
+											</li>
+											<li><a href="#"><i class="iconfont-circle-blank menu-icon"></i>Shop
+													support</a></li>
+											<li><a href="#"><i class="iconfont-circle-blank menu-icon"></i>Customer
+													Service</a></li>
+											<li><a href="#"><i class="iconfont-circle-blank menu-icon"></i>Payment &
+													Return</a></li>
+											<li><a href="#"><i class="iconfont-circle-blank menu-icon"></i>Terms &
+													Conditions</a></li>
+										</ul>
+									</div>
+								</section>
+							</div>
+
+							<div class="col-xs-12 col-sm-6 col-md-3">
+								facebook
+							</div>
+
+						</div>
+					</div>
+				</div>
+				<!-- // FIRST ROW -->
+
+				<!-- SECOND ROW -->
+				<div class="section">
+					<div class="container">
+						<div class="row">
+
+							<div class="col-xs-12 col-sm-12 col-md-3">
+								<section class="widget widget-menu">
+									<h5 class="widget-title">Contact info</h5>
+									<div class="widget-content">
+										<ul class="menu iconed-list unstyled">
+											<li>
+												<span class="list-icon"><i
+														class="round-icon iconfont-map-marker"></i></span>
+												<div class="list-content">Lorem ipsum maecenas dapibus luctus euismod
+													133/2 New York City</div>
+											</li>
+											<li>
+												<span class="list-icon"><i class="round-icon iconfont-phone"></i></span>
+												<div class="list-content">(+00)1344356-675</div>
+											</li>
+											<li>
+												<span class="list-icon"><i
+														class="round-icon iconfont-envelope-alt"></i></span>
+												<div class="list-content">support@themina.net</div>
+											</li>
+										</ul>
+									</div>
+								</section>
+							</div>
+
+							<div class="col-xs-12 col-sm-12 col-md-6">
+								<section class="widget widget-ads">
+									<div class="widget-content">
+										<div class="center-xs">
+											<div class="ads">
+												<a href="#">
+													<img src="../../img/common/demo/images-footer.jpg" alt="" />
+												</a>
+												<div class="ads-caption bottom-right">
+													<a href="#" class="btn btn-default btn-round">
+														<i class="round-icon iconfont-angle-right"></i>
+														<span class="inline-middle">Show More</span>
+													</a>
+												</div>
+											</div>
+										</div>
+									</div>
+								</section>
+							</div>
+
+							<div class="col-xs-12 col-sm-12 col-md-3">
+								<section class="widget widget-subscription">
+									<h5 class="widget-title">Newletter</h5>
+									<div class="widget-content">
+										<p>Subscribe to be the first to know about Sales, Events, and Exclusive Offers!
+										</p>
+										<form action="#" method="post">
+											<div class="input-group">
+												<label for="subscription-email" class="placeholder">Enter Your
+													Email</label>
+												<input type="email" id="subscription-email" name="email"
+													class="form-control" required />
+												<span class="input-group-btn">
+													<button class="btn btn-primary">Subscribe</button>
+												</span>
+											</div>
+										</form>
+									</div>
+								</section>
+							</div>
+
+						</div>
+					</div>
+				</div>
+				<!-- // SECOND ROW -->
+
+			</div>
+			<!-- // WIDGET AREA -->
+
+			<div class="footer-sub">
+				<div class="container">
+					<div class="row">
+						<div class="col-xs-12 col-sm-6">
+							<div class="footer-links center-xs clearfix">
+								<ul class="unstyled">
+									<li><a href="#">Site Map</a></li>
+									<li><a href="#">FAQ</a></li>
+									<li><a href="#">Work for us</a></li>
+									<li><a href="#">Contact Us</a></li>
+								</ul>
+							</div>
+							<div class="space10"></div>
+							<div class="copyright center-xs">
+								<p>(c) 2013 More Templates <a href="http://www.cssmoban.com/" target="_blank"
+										title="模板之家">模板之家</a> - Collect from <a href="http://www.cssmoban.com/"
+										title="网页模板" target="_blank">网页模板</a>. All Rights Reserved.</p>
+							</div>
+						</div>
+
+						<div class="space40 visible-xs"></div>
+
+						<div class="col-xs-12 col-sm-6 center-xs">
+							<div class="pull-right">
+								<div class="vmid">
+									<span class="uppercase">Payment Accept&emsp;</span>
+									<a href="#"><img src="../../img/common/visacard.png" alt="" width="40" /></a>
+									<a href="#"><img src="../../img/common/mastercard.png" alt="" width="40" /></a>
+									<a href="#"><img src="../../img/common/paypal.png" alt="" width="40" /></a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</footer>
+		<!-- // SITE FOOTER -->
+
+	</div>
+	<!-- // PAGE WRAPPER -->
+
+	<!-- Essential Javascripts -->
+	<script src="../../js/common/minified.js"></script>
+	<!-- // Essential Javascripts -->
+
+	<!-- Particular Page Javascripts -->
+	<script src="../../js/common/products.js"></script>
+	<script src="../../js/common/owl.carousel.js"></script>
+	<script src="../../js/common/contact.js"></script>
+	<script src="../../js/login.js"></script>
+
+	<!-- 導入Moment.js -->
+	<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script> -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+
+	<!--<script src="http://maps.googleapis.com/maps/api/js?sensor=false" type="text/javascript"></script>-->
+	<!-- <script src="../../js/common/gmap3.min.js"></script> -->
+	<!-- // Particular Page Javascripts -->
+	<script>
+		const loginData = checkLoginStatusShowMemberAcct(); // 檢查客戶帳號是否登入，修改頁面右上方Log In/Log Out按鈕，顯示登入者帳號名稱，該函式回傳該登入者的memberNo(非同步，可能過一段時間才取得)
+
+		let self = ""; // 全域變數，保存當前登入者的memberNo
+
+		loginData.then(function (memberDetail) { // 因取得memberNo為非同步(fetch後再收到伺服器返回值)，故須將有使用到memberDetail(矩陣[0]為memberNo, 矩陣[1]為memberAcct)的程式包在loginData內，確保程式是在memberNo收到值後才執行
+			// websocket開始
+			let memberNo = memberDetail[0];
+			let memberAcct = memberDetail[1];
+			
+			let MyPoint = `/ChatRoomWS/${memberNo}`;
+			let host = window.location.host;
+			let path = window.location.pathname;
+			let webCtx = path.substring(0, path.indexOf('/', 1));
+			let endPointURL = "ws://" + window.location.host + webCtx + MyPoint;
+			self = memberNo.toString(); // 將memberNo轉為字串，並設置至全域變數self
+			// console.log("endPointURL:" + endPointURL);
+			connect(endPointURL);
+		});
+
+		function connect(endPointURL) {
+			// create a websocket
+			webSocket = new WebSocket(endPointURL);
+
+			webSocket.onopen = function (event) {
+				console.log("Connect Success!");
+			};
+
+			webSocket.onmessage = function (event) {
+				let jsonObj = JSON.parse(event.data);
+				if ("open" === jsonObj.type) {
+					refreshMemberList(jsonObj);
+				}
+				else if ("history" === jsonObj.type) {
+					$("ul#messageArea").html(""); // 於對話文字區清空對話記錄
+					// 這行的jsonObj.message是從redis撈出跟好友的歷史訊息，再parse成JSON格式處理
+					let messages = JSON.parse(jsonObj.message);
+					for (let i = 0; i < messages.length; i++) { // 遍歷接收到的歷史記錄
+						let historyData = JSON.parse(messages[i]);
+						let showMsg = historyData.message;
+						let time = historyData.time;
+						let timeYMD = (time).substr(0,((time).indexOf(`|`)));
+						let timeHrMin = (time).substr(((time).indexOf(`|`)) + 1, time.length);
+						// console.log('time:' + time);
+						// console.log('timeYMD:' + timeYMD);
+						// console.log('timeHrMin:' + timeHrMin);
+						let liClass = (historyData.sender === self ? 'me' : 'otherPerson'); // 判斷該訊息是自己的或對方的，於li加上不同的class
+						let liFloat = (historyData.sender === self ? 'right' : 'left');
+						$("ul#messageArea").append(`
+							<div class="msgDiv" onmouseenter="$(this).find('span.timeymd').css('visibility', 'visible')" onmouseleave="$(this).find('span.timeymd').css('visibility', 'hidden')">
+								<li class="${liClass}" timeYMD="${timeYMD}" timeHrMin="${timeHrMin}">${showMsg}</li>
+								<span class="timehrmin" style="float: ${liFloat};">${timeHrMin}</span>
+								<span class="timeymd" style="float: ${liFloat};visibility:hidden;">${timeYMD}</span>
+							</div>
+						`);
+					}
+					$("div#messagesContainer").scrollTop($("div#messagesContainer").prop('scrollHeight')); // 將對話框拉條拉到最底(最新)
+					// messagesContainer.scrollTop = messagesContainer.scrollHeight;
+
+					// messagesArea.innerHTML = '';
+					// var ul = document.createElement('ul');
+					// ul.id = "area";
+					// messagesArea.appendChild(ul);
+					// // 這行的jsonObj.message是從redis撈出跟好友的歷史訊息，再parse成JSON格式處理
+					// var messages = JSON.parse(jsonObj.message);
+					// for (var i = 0; i < messages.length; i++) {
+					// 	var historyData = JSON.parse(messages[i]);
+					// 	var showMsg = historyData.message;
+					// 	var li = document.createElement('li');
+					// 	// 根據發送者是自己還是對方來給予不同的class名, 以達到訊息左右區分
+					// 	historyData.sender === self ? li.className += 'me' : li.className += 'friend';
+					// 	li.innerHTML = showMsg;
+					// 	ul.appendChild(li);
+					// }
+					// messagesArea.scrollTop = messagesArea.scrollHeight;
+				}
+				else if ("chat" === jsonObj.type) {
+					console.log("jsonObj.message:" + jsonObj.message);
+					let nowChatMember = $("#chatroomHeadMemberAcct").attr("value"); // 取得目前選定的對話對象
+					// console.log("nowChatMember:" + nowChatMember);
+					// console.log("jsonObj.sender:" + jsonObj.sender);
+					// console.log("nowChatMember === jsonObj.sender:" + nowChatMember === jsonObj.sender);
+					let timeYMD = (jsonObj.time).substr(0,((jsonObj.time).indexOf(`|`)));
+					let timeHrMin = (jsonObj.time).substr(((jsonObj.time).indexOf(`|`)) + 1, jsonObj.time.length);
+					console.log("jsonObj.time:" + jsonObj.time);
+					console.log("timeYMD:" + timeYMD);
+					console.log("timeHrMin:" + timeHrMin);
+					console.log(`((jsonObj.time).indexOf("|")):` + ((jsonObj.time).indexOf(`|`)));
+
+					if(nowChatMember === jsonObj.sender || self === jsonObj.sender){ // 確認當前傳送chat的人是使用者於畫面已選定的對話對象或自己(非畫面已選定對話對象的訊息不應出現在對話框)
+						let liClass = (jsonObj.sender === self ? 'me' : 'otherPerson'); // 判斷該訊息是自己的或對方的，於li加上不同的class
+						let liFloat = (jsonObj.sender === self ? 'right' : 'left');
+						$("ul#messageArea").append(`
+							<div class="msgDiv" onmouseenter="$(this).find('span.timeymd').css('visibility', 'visible')" onmouseleave="$(this).find('span.timeymd').css('visibility', 'hidden')">
+								<li class="${liClass}" timeYMD="${timeYMD}" timeHrMin="${timeHrMin}">${jsonObj.message}</li>
+								<span class="timehrmin" style="float: ${liFloat};">${timeHrMin}</span>
+								<span class="timeymd" style="float: ${liFloat};visibility:hidden;">${timeYMD}</span>
+							</div>
+						`);
+						$("div#messagesContainer").scrollTop($("div#messagesContainer").prop('scrollHeight')); // 將對話框拉條拉到最底(最新)
+					}
+				}
+				// else if ("close" === jsonObj.type) { // 當其他人離開時，刷新左側會員名單
+					// refreshMemberList(jsonObj);
+				// }
+			};
+		}
+
+		// 有會員上線或離線就更新列表
+		function refreshMemberList(jsonObj) {
+			let members = jsonObj.members;
+			$("ul#memberlist").html("");
+			console.log("Object.keys(members).length:" + Object.keys(members).length)
+			for(key in members){
+				console.log("key:" + key);
+				console.log("value:" + members[key]);
+				if (key === self) { continue; }
+				$("ul#memberlist").append(`
+					<li value="${key}" style="cursor: default;text-align: center;" onclick="getMemberChatHistory(this)">${members[key]}</li>
+				`);
+			}
+			// for (let i = 0; i < members.length; i++) { // members[0]為會員編號memberNo
+			// 	if (members[i][0] === self) { continue; }
+			// 	$("ul#memberlist").append(`
+			// 		<li value="${members[i]}" style="cursor: default;text-align: center;" onclick="getMemberChatHistory(this)">${members[i]}</li>
+			// 	`);
+			// }
+			// addListener();
+		}
+
+		// 註冊列表點擊事件並抓取好友名字以取得歷史訊息
+		function getMemberChatHistory(obj) {
+			$("#chatroomHeadMemberAcct").text($(obj).text()); // 更換聊天文字區上方對話對象的名稱
+			$("#chatroomHeadMemberAcct").attr("value",($(obj).val())); // 在該標籤的value加上選定會員的memberNo
+
+			let otherPerson = $(obj).val(); // 取得點擊的會員
+			var jsonObj = {
+				"type": "history",
+				"sender": self,
+				"receiver": otherPerson,
+				"message": ""
+			};
+			webSocket.send(JSON.stringify(jsonObj));
+		}
+
+		// 發送訊息
+		function sendMessage() {
+			$("img#sendIcon").attr("src", "../../img/member/chatroom/send_default.jpg"); // 更換sendIcon至預設狀態
+
+			let inputMessage = $("textarea#message");
+			let selectedMember = $("h3#chatroomHeadMemberAcct").attr("value");
+			let message = inputMessage.val().trim();
+
+			if (message === "") {
+				inputMessage.focus();
+			}
+			else if (selectedMember.trim() === "") {
+				alert("請選擇欲發送訊息的會員");
+			}
+			else {
+				// 取得當前時間時間
+				let currentDateTime = moment().format('YYYY/MM/DD|HH:mm');
+
+				var jsonObj = {
+					"type": "chat",
+					"sender": self,
+					"receiver": selectedMember,
+					"message": message,
+					"time": currentDateTime
+				};
+				webSocket.send(JSON.stringify(jsonObj));
+				inputMessage.val(""); // 清空輸入欄位文字
+				inputMessage.focus();
+			}
+		}
+		//-----------------搜尋框開始-----------------
+		$('#search').on('keyup', function () {
+			let numberOfMember = $("#memberlist").children("li").length; // 取得當前會員數量
+			for (let i = 0; i < numberOfMember; i++) { // 遍歷所有會員
+				let memberAcct = $("#memberlist").children("li").eq(i).text();
+				console.log("memberAcct:" + memberAcct);
+				console.log("$('#search').val():" + $("#search").val());
+
+				if(memberAcct.includes($("#search").val())){
+					$("#memberlist").children("li").eq(i).show(); // 將符合條件的會員顯示出來
+				}
+				else {
+					$("#memberlist").children("li").eq(i).hide(); // 將不符合條件的會員隱藏起來
+				}
+			}
+		});
+		//-----------------搜尋框結束-----------------
+		//-----------------SendIcon更換開始-----------------
+		function changeSendIcon(){
+			if($("textarea#message").val() != ""){
+				$("img#sendIcon").attr("src", "../../img/member/chatroom/send_clickable.png");
+			}
+			else{
+				$("img#sendIcon").attr("src", "../../img/member/chatroom/send_default.jpg");
+			}
+		}
+		//-----------------SendIcon更換結束-----------------
+	</script>
+</body>
+
+</html>

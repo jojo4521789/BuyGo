@@ -3,6 +3,8 @@ package web.back_end.opa.coupon.entity;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import core.entity.Core;
@@ -18,4 +20,7 @@ public class CpOwner extends Core{
 	@Column(name = "OPA_CPOWNER_STATUS")
 	private Integer opaCpownerStatus;
 	
+	@OneToOne
+	@JoinColumn(name = "OPA_COUPON_NO", insertable = false, updatable = false)
+	private Coupon coupon;
 }

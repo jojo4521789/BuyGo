@@ -65,19 +65,13 @@ public class GpaSo extends Core{
     @Column(name = "GPA_EVA_MEMBER")
     private Integer gpaEvaMember;
     
-//    @ManyToOne(fetch = FetchType.LAZY)
     @ManyToOne
     @JoinColumn(name = "GPA_PROD_NO",
     insertable = false, updatable = false)
-    private GpaProd gpaProd;
-    
-//    @ManyToOne
-//    @JoinColumn(name = "GPA_PROD_NO",
-//    insertable = false, updatable = false)
-//    private GpaProd gpaProd;
+    private GpaProd gpaProd = new GpaProd();
     
     @ManyToOne
     @JoinColumn(name = "MEMBER_NO",
     insertable = false, updatable = false)
-    private Member member;
+    private Member member = new Member();
 }

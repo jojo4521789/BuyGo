@@ -10,12 +10,13 @@ import web.back_end.lpa.order.entity.LpaSo;
 
 public class LpaSoDAOImpl implements LpaSoDAO {
 	private static final long serialVersionUID = 1L;
-	public Session getSession () {
+
+	public Session getSession() {
 		return HibernateUtil.getSessionFactory().getCurrentSession();
 	}
 
 	public int insert(LpaSo lpaSo) {
-		getSession().persist(lpaSo); 
+		getSession().persist(lpaSo);
 		return lpaSo.getLpaSoNo(); // 回傳產生的識別值
 	}
 
@@ -25,28 +26,35 @@ public class LpaSoDAOImpl implements LpaSoDAO {
 		session.remove(lpaSo);
 		return 1;
 	}
-	
+
 	public LpaSo selectById(Integer id) {
 		return getSession().get(LpaSo.class, id);
 	}
-	
+
 	public List<LpaSo> selectAll() {
 		// HQL寫法
 		final String hql = "FROM LpaSo ORDER BY lpaSoNo";
-		return getSession()
-				.createQuery(hql, LpaSo.class)
-				.getResultList();
+		return getSession().createQuery(hql, LpaSo.class).getResultList();
 	}
-	
-	public List<LpaSo> selectAllByMember(Integer memberNo) {
+
+	public List<LpaSo> selectAllByStatus(Byte status) {
 		// HQL寫法
-		final String hql = "FROM LpaSo WHERE memberNo = :buyerNo ORDER BY lpaSoNo"; // 以買家角度查詢全部訂單
+		final String hql = "FROM LpaSo WHERE lpaSoStatus = :status ORDER BY lpaSoNo ";
 		return getSession()
 				.createQuery(hql, LpaSo.class)
-				.setParameter("buyerNo", memberNo)
+				.setParameter("status", status)
 				.getResultList();
 	}
-	
+
+//	public List<LpaSo> selectAllByMember(Integer memberNo) {
+//		// HQL寫法
+//		final String hql = "FROM LpaSo WHERE memberNo = :buyerNo ORDER BY lpaSoNo"; // 以買家角度查詢全部訂單
+//		return getSession()
+//				.createQuery(hql, LpaSo.class)
+//				.setParameter("buyerNo", memberNo)
+//				.getResultList();
+//	}
+
 	public LpaSo selectByOrderSeq(String lpaSoSeq) {
 		final String hql = "FROM LpaSo WHERE lpaSoSeq = :seq";
 		return getSession()
@@ -54,14 +62,11 @@ public class LpaSoDAOImpl implements LpaSoDAO {
 				.setParameter("seq", lpaSoSeq)
 				.getSingleResult();
 	}
-	
-	public List<LpaSo> selectByOrderStatus(Integer memberNo, Byte status) {
+
+	public List<LpaSo> selectByBuyerNo(Integer buyerNo, Byte status) {
 		final String hql = "FROM LpaSo WHERE memberNo = :buyerNo AND lpaSoStatus = :status";
-		return getSession()
-				.createQuery(hql, LpaSo.class)
-				.setParameter("buyerNo", memberNo)
-				.setParameter("status", status)
-				.getResultList();
+		return getSession().createQuery(hql, LpaSo.class).setParameter("buyerNo", buyerNo)
+				.setParameter("status", status).getResultList();
 	}
 
 	@Override
@@ -69,7 +74,7 @@ public class LpaSoDAOImpl implements LpaSoDAO {
 		// TODO Auto-generated method stub
 		return 0;
 	}
-	
+
 	public int updateSoSeq(Integer nextSoId, String soSeq) {
 		// TODO Auto-generated method stub
 		final String hql = "UPDATE LpaSo SET lpaSoSeq = :seq WHERE id = :id";
@@ -79,9 +84,16 @@ public class LpaSoDAOImpl implements LpaSoDAO {
 				.setParameter("id", nextSoId)
 				.executeUpdate();
 	}
-	
-	
-	
+
+	public int updateSoStatus(Integer lpaSoNo, Byte status) {
+		final String hql = "UPDATE LpaSo SET lpaSoStatus = :status WHERE id = :id";
+		getSession().createQuery(hql)
+		.setParameter("status", status)
+		.setParameter("id", lpaSoNo)
+		.executeUpdate();
+		return 1;
+	}
+
 //	public int updateSoSeq(Lpa_SO lpa_SO) {
 //		final StringBuilder hql = new StringBuilder()
 //				.append("UPDATE lpa_so SET ");

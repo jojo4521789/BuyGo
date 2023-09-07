@@ -1,6 +1,7 @@
 package web.front_end.seller.gpa.prod.entity;
 
 import java.sql.Timestamp;
+import java.util.LinkedList;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -71,7 +72,7 @@ public class GpaProd extends Core{
     @OneToMany
     @JoinColumn(name = "GPA_PROD_NO",
     referencedColumnName = "GPA_PROD_NO")
-    private List<GpaProdPics> gpaProdPics;
+    private List<GpaProdPics> gpaProdPics = new LinkedList<GpaProdPics>();
     
     @OneToMany(mappedBy = "gpaProd")
     private List<GpaSo> gpaSo;
