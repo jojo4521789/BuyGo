@@ -15,6 +15,7 @@ public class MPaReqServiceImpl implements MPaReqService {
 		dao = new MPaReqDAOImpl();
 	}
 
+	@Override
 	// 買家新增委託單
 	public MPaReq add(MPaReq mPaReq) {
 
@@ -59,6 +60,7 @@ public class MPaReqServiceImpl implements MPaReqService {
 		return mPaReq;
 	}
 
+	@Override
 	// 查詢委託紀錄
 	public List<MPaReq> checkAll() {
 		
@@ -66,10 +68,27 @@ public class MPaReqServiceImpl implements MPaReqService {
 		return dao.selectAll();
 	}
 	
+	@Override
 	//用會員ID查詢屬於該會員的委託資料
 	public List<MPaReq> loadReqListByMemberNo(Integer memberNoMember) {
 		return dao.selectByMemberNo(memberNoMember);
 	}
+	
+	@Override
+	//用會員ID查詢屬於該會員的委託資料
+	public List<MPaReq> loadReqListByMemberNoSeller(Integer memberNoSeller) {
+		return dao.selectByMemberNoSeller(memberNoSeller);
+	}
+	
+	@Override
+	//修改委託單狀態(賣家)
+	public MPaReq updatePaReqStatus(MPaReq mPaReq) {
+		final int resultCount = dao.updateReqStatus(mPaReq);
+		mPaReq.setMessage(resultCount > 0 ? "修改成功" : "修改失敗");
+		mPaReq.setSuccessful(resultCount > 0);
+		return mPaReq;
+	}
+
 
 
 }
