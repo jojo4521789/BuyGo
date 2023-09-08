@@ -1,12 +1,15 @@
 package web.front_end.prodlist.entity;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import core.entity.Core;
@@ -27,7 +30,7 @@ public class PaProdlist extends Core{
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "PA_PROD_NO", insertable = false)
+	@Column(name = "PA_PROD_NO", insertable = false, updatable = false)
 	private Integer paProdNo;
 	@Column(name = "MEMBER_NO")
 	private Integer memberNo;
@@ -47,5 +50,9 @@ public class PaProdlist extends Core{
 	private String paProdContent;
 	@Column(name = "PA_PROD_STATUS")
 	private Integer paProdStatus;
+	
+	@OneToMany
+	@JoinColumn(name = "PA_PROD_NO", referencedColumnName = "PA_PROD_NO")
+	private List<PaProdPic> paPicsList;
 
 }

@@ -9,6 +9,6 @@ public interface ProdlistService extends CoreService {
 
 	PaProdlist ProdInfoSelectByNo(Integer paProdNo);
 	
-	List<PaProdlist> RamgetProdNo(Integer paProdNo);
+	List<PaProdlist> RangetProdNo(Integer limit, Integer paProdObjNo);
 	
 }
