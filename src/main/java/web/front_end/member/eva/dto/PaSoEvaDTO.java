@@ -19,7 +19,7 @@ public class PaSoEvaDTO {
 	
 	private Integer paSoStatus;
 	
-	private Integer paSoTotal;
+	private Integer paTotalAmount;
 	
 	private Integer paEvaSeller;
 	

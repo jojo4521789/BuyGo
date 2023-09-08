@@ -23,7 +23,6 @@ public class EvaPaSoDaoImpl implements EvaPaSoDao{
 		List<PaSo> PaSoList = evaPaSoDaoImpl.selectAll();
 		for (PaSo paSo : PaSoList) {
 			System.out.print("paSoNo:" + paSo.getPaSoNo() + ",");
-			System.out.println("paSoTotal:" + paSo.getPaSoTotal());
 			for(PaSoDetails paSoDetails : paSo.getPaSoDetails()) {
 				System.out.println("paProdName:" + paSoDetails.getPaProdName());
 				System.out.println("paProdQty:" + paSoDetails.getPaProdQty());

@@ -77,6 +77,20 @@
 			background: #d9d9d9;
 			margin-left: 3px;
 		}
+
+		/* 未讀訊息css */
+		#chatMemberUnreadMsgCount{
+			/* float: right; */
+			position: absolute;
+			right: 2px;
+			top: 18px;
+			padding: 2px 8px;
+			border-radius: 15px;
+			background: lightgreen;
+		}
+		#chatMemberAcct{
+			font-size: 16px;
+		}
 	</style>
 </head>
 
@@ -429,15 +443,20 @@
 									<h3 class="uppercase text-bold"><span class="text-xs">聊天室</span></h3>
 									<!--聊天室功能-->
 									<div id="chatroom" style="width: 850px; border: 2px solid lightgray;">
-										<div style="float: left; background-color: #f2f2f2;">
+										<div style="float: left; background-color: #f2f2f2; max-width: 171px">
 											<input type="text" id="search" class="form-control" style="margin: 5px 0px;"
 												placeholder="搜尋">
 											<ul class="store-list unstyled" id="memberlist"
 												style="height: 470px; max-height: 470px;">
 												<!-- 假資料開始 -->
-												<!-- <li style="cursor: default;text-align: center;" onclick="">馬利歐</li>
-												<li style="cursor: default;text-align: center;" onclick="">嘿呵</li>
-												<li style="cursor: default;text-align: center;" onclick="">害羞幽靈</li> -->
+												<!-- <li value="2" style="cursor: default; position: relative;" onclick="getMemberChatHistory(this)">
+													<p style="display: inline-block;" id="chatMemberAcct">嘿呵</p>
+													<p id="chatMemberUnreadMsgCount">10</p>
+												</li>
+												<li value="3" style="cursor: default; position: relative" onclick="getMemberChatHistory(this)">
+													<p style="display: inline-block;" id="chatMemberAcct">害羞幽靈</p>
+													<p id="chatMemberUnreadMsgCount">10</p>
+												</li> -->
 												<!-- 假資料結束 -->
 											</ul>
 										</div>
@@ -454,11 +473,6 @@
 												style="width: 100%; height: 360px; background-color: #f2f2f2;overflow: auto;">
 												<ul id="messageArea"></ul>
 													<!-- 假資料開始 -->
-													<!-- <li class="me">安安</li>
-													<li class="otherPerson">嗨嗨</li>
-													<li class="me">123</li>
-													<li class="otherPerson">456</li>
-													<li class="otherPerson">789</li> -->
 													<!-- <div class="msgDiv">
 														<li class="me" timeymd="2023/09/05" timehrmin="09:00">測試123</li>
 														<span class="timehrmin" style="float: right;">789</span>
@@ -469,7 +483,6 @@
 														<span class="timehrmin" style="float: left;">123</span>
 														<span class="timehrmin" style="float: left;">111</span>
 													</div> -->
-													
 													<!-- 假資料結束 -->
 											</div>
 											<hr style="margin: 0px; border: 1px solid lightgray;">
@@ -709,6 +722,8 @@
 	<!-- <script src="../../js/common/gmap3.min.js"></script> -->
 	<!-- // Particular Page Javascripts -->
 	<script>
+		let currentChatMemberNo = ""; // 全域變數，用以保存當前聊天室所選擇的聊天對象memberNo
+
 		const loginData = checkLoginStatusShowMemberAcct(); // 檢查客戶帳號是否登入，修改頁面右上方Log In/Log Out按鈕，顯示登入者帳號名稱，該函式回傳該登入者的memberNo(非同步，可能過一段時間才取得)
 
 		let self = ""; // 全域變數，保存當前登入者的memberNo
@@ -724,7 +739,6 @@
 			let webCtx = path.substring(0, path.indexOf('/', 1));
 			let endPointURL = "ws://" + window.location.host + webCtx + MyPoint;
 			self = memberNo.toString(); // 將memberNo轉為字串，並設置至全域變數self
-			// console.log("endPointURL:" + endPointURL);
 			connect(endPointURL);
 		});
 
@@ -743,6 +757,8 @@
 				}
 				else if ("history" === jsonObj.type) {
 					$("ul#messageArea").html(""); // 於對話文字區清空對話記錄
+					$(`li#memberLi${jsonObj.receiver}`).find("p#chatMemberUnreadMsgCount").text("0"); // 將未讀訊息改為0
+					$(`li#memberLi${jsonObj.receiver}`).find("p#chatMemberUnreadMsgCount").css("visibility","hidden"); // 將未讀訊息隱藏
 					// 這行的jsonObj.message是從redis撈出跟好友的歷史訊息，再parse成JSON格式處理
 					let messages = JSON.parse(jsonObj.message);
 					for (let i = 0; i < messages.length; i++) { // 遍歷接收到的歷史記錄
@@ -751,9 +767,6 @@
 						let time = historyData.time;
 						let timeYMD = (time).substr(0,((time).indexOf(`|`)));
 						let timeHrMin = (time).substr(((time).indexOf(`|`)) + 1, time.length);
-						// console.log('time:' + time);
-						// console.log('timeYMD:' + timeYMD);
-						// console.log('timeHrMin:' + timeHrMin);
 						let liClass = (historyData.sender === self ? 'me' : 'otherPerson'); // 判斷該訊息是自己的或對方的，於li加上不同的class
 						let liFloat = (historyData.sender === self ? 'right' : 'left');
 						$("ul#messageArea").append(`
@@ -765,37 +778,17 @@
 						`);
 					}
 					$("div#messagesContainer").scrollTop($("div#messagesContainer").prop('scrollHeight')); // 將對話框拉條拉到最底(最新)
-					// messagesContainer.scrollTop = messagesContainer.scrollHeight;
-
-					// messagesArea.innerHTML = '';
-					// var ul = document.createElement('ul');
-					// ul.id = "area";
-					// messagesArea.appendChild(ul);
-					// // 這行的jsonObj.message是從redis撈出跟好友的歷史訊息，再parse成JSON格式處理
-					// var messages = JSON.parse(jsonObj.message);
-					// for (var i = 0; i < messages.length; i++) {
-					// 	var historyData = JSON.parse(messages[i]);
-					// 	var showMsg = historyData.message;
-					// 	var li = document.createElement('li');
-					// 	// 根據發送者是自己還是對方來給予不同的class名, 以達到訊息左右區分
-					// 	historyData.sender === self ? li.className += 'me' : li.className += 'friend';
-					// 	li.innerHTML = showMsg;
-					// 	ul.appendChild(li);
-					// }
-					// messagesArea.scrollTop = messagesArea.scrollHeight;
 				}
 				else if ("chat" === jsonObj.type) {
-					console.log("jsonObj.message:" + jsonObj.message);
+					if(jsonObj.unreadMsgCount != undefined){ // 如果後端傳來的unreadMsgCount不為空值(有未讀訊息數)
+						if($("h3#chatroomHeadMemberAcct").attr("value") != jsonObj.sender){ // 如果現在的對話框對象不等於發來訊息的人(應將未讀訊息數量更新)
+							$(`li#memberLi${jsonObj.sender}`).find("p#chatMemberUnreadMsgCount").text(jsonObj.unreadMsgCount); // 對方發來訊息，將我方聊天室的未讀訊息更新
+							$(`li#memberLi${jsonObj.sender}`).find("p#chatMemberUnreadMsgCount").css("visibility","visible"); // 將未讀訊息數顯示出來
+						}
+					}
 					let nowChatMember = $("#chatroomHeadMemberAcct").attr("value"); // 取得目前選定的對話對象
-					// console.log("nowChatMember:" + nowChatMember);
-					// console.log("jsonObj.sender:" + jsonObj.sender);
-					// console.log("nowChatMember === jsonObj.sender:" + nowChatMember === jsonObj.sender);
 					let timeYMD = (jsonObj.time).substr(0,((jsonObj.time).indexOf(`|`)));
 					let timeHrMin = (jsonObj.time).substr(((jsonObj.time).indexOf(`|`)) + 1, jsonObj.time.length);
-					console.log("jsonObj.time:" + jsonObj.time);
-					console.log("timeYMD:" + timeYMD);
-					console.log("timeHrMin:" + timeHrMin);
-					console.log(`((jsonObj.time).indexOf("|")):` + ((jsonObj.time).indexOf(`|`)));
 
 					if(nowChatMember === jsonObj.sender || self === jsonObj.sender){ // 確認當前傳送chat的人是使用者於畫面已選定的對話對象或自己(非畫面已選定對話對象的訊息不應出現在對話框)
 						let liClass = (jsonObj.sender === self ? 'me' : 'otherPerson'); // 判斷該訊息是自己的或對方的，於li加上不同的class
@@ -810,40 +803,38 @@
 						$("div#messagesContainer").scrollTop($("div#messagesContainer").prop('scrollHeight')); // 將對話框拉條拉到最底(最新)
 					}
 				}
-				// else if ("close" === jsonObj.type) { // 當其他人離開時，刷新左側會員名單
-					// refreshMemberList(jsonObj);
-				// }
 			};
 		}
 
-		// 有會員上線或離線就更新列表
 		function refreshMemberList(jsonObj) {
 			let members = jsonObj.members;
 			$("ul#memberlist").html("");
-			console.log("Object.keys(members).length:" + Object.keys(members).length)
 			for(key in members){
-				console.log("key:" + key);
-				console.log("value:" + members[key]);
 				if (key === self) { continue; }
 				$("ul#memberlist").append(`
-					<li value="${key}" style="cursor: default;text-align: center;" onclick="getMemberChatHistory(this)">${members[key]}</li>
+					<li id="memberLi${key}" value="${key}" style="cursor: default; position: relative;" onclick="getMemberChatHistory(this)">
+						<p style="display: inline-block;" id="chatMemberAcct">${members[key][0]}</p>
+						<p id="chatMemberUnreadMsgCount" style="${members[key][1] == 0 ? "visibility:hidden" : "visibility: visible"}">${members[key][1]}</p>
+					</li>
 				`);
 			}
-			// for (let i = 0; i < members.length; i++) { // members[0]為會員編號memberNo
-			// 	if (members[i][0] === self) { continue; }
-			// 	$("ul#memberlist").append(`
-			// 		<li value="${members[i]}" style="cursor: default;text-align: center;" onclick="getMemberChatHistory(this)">${members[i]}</li>
-			// 	`);
-			// }
-			// addListener();
 		}
 
 		// 註冊列表點擊事件並抓取好友名字以取得歷史訊息
 		function getMemberChatHistory(obj) {
-			$("#chatroomHeadMemberAcct").text($(obj).text()); // 更換聊天文字區上方對話對象的名稱
+			let otherPerson = $(obj).val(); // 取得點擊的會員
+			if(currentChatMemberNo != ""){ // 如果currentChatMemberNo不為空字串，須將切換聊天對象前的聊天對象的未讀訊息數重置為0
+				var jsonResetUnreadMsg = {
+					"type": "resetUnreadMsg",
+					"sender": self,
+					"receiver": currentChatMemberNo
+				};
+				webSocket.send(JSON.stringify(jsonResetUnreadMsg));
+			}
+			currentChatMemberNo = $(obj).val(); // 將currentChatMemberNo更新為欲切換對象的memberNo
+			$("#chatroomHeadMemberAcct").text($(obj).find("p#chatMemberAcct").text()); // 更換聊天文字區上方對話對象的名稱
 			$("#chatroomHeadMemberAcct").attr("value",($(obj).val())); // 在該標籤的value加上選定會員的memberNo
 
-			let otherPerson = $(obj).val(); // 取得點擊的會員
 			var jsonObj = {
 				"type": "history",
 				"sender": self,
@@ -888,8 +879,6 @@
 			let numberOfMember = $("#memberlist").children("li").length; // 取得當前會員數量
 			for (let i = 0; i < numberOfMember; i++) { // 遍歷所有會員
 				let memberAcct = $("#memberlist").children("li").eq(i).text();
-				console.log("memberAcct:" + memberAcct);
-				console.log("$('#search').val():" + $("#search").val());
 
 				if(memberAcct.includes($("#search").val())){
 					$("#memberlist").children("li").eq(i).show(); // 將符合條件的會員顯示出來
