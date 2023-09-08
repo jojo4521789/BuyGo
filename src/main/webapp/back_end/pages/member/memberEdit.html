@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html" ; charset="utf-8" />
+    <title>平台會員管理</title>
+
+    <link href="../../css/common/all.css" rel="stylesheet" type="text/css">
+    <link href="../../js/common/bstable/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="../../js/common/bstable/css/bootstrap-table.css" rel="stylesheet" type="text/css">
+
+    <!-- 載入DataTables開始 -->
+    <!-- CSS -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+    <!-- jq -->
+    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <script>
+        // $(document).ready(function () {
+        //     $('#showMemberList').DataTable();
+        // });
+    </script>
+    <!-- 載入DataTables結束 -->
+
+    <!-- 載入sweetalert -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <style>
+        /* 燈箱css開始 */
+        button {
+            cursor: pointer;
+        }
+
+        #lightbox,
+        #checkAgainLightbox {
+            /*   border: 1px solid red; */
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background-color: hsla(0, 0%, 0%, .5);
+        }
+
+        .none {
+            display: none;
+        }
+
+        /* 元素 article 置中及基本樣式 */
+        #lightbox>article,
+        #checkAgainLightbox>article {
+            background-color: white;
+            width: 90%;
+            max-width: 800px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px #ddd;
+            padding: 10px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        /* 燈箱css結束 */
+    </style>
+</head>
+
+<body>
+    <div class="div_tab01">
+        <div class="map_find1">
+            <div style="display: inline-block;">
+                <label for="memberNoInput" style="width: 70px;">會員編號：</label>
+                <input type="text" class="map_input" id="memberNoInput" />
+                <br>
+                <label for="memberAcctInput" style="width: 70px;">帳號：</label>
+                <input type="text" class="map_input" id="memberAcctInput" />
+            </div>
+            <div style="display: inline-block;">
+                <label for="memberPhoneInput" style="width: 70px;">電話：</label>
+                <input type="text" class="map_input" id="memberPhoneInput" />
+                <br>
+                <label for="memberEmailInput" style="width: 70px;">電子信箱：</label>
+                <input type="text" class="map_input" id="memberEmailInput" />
+            </div>
+            <div style="display: inline-block;vertical-align: top;">
+                <label for="memberIdInput">身份證字號：</label>
+                <input type="text" class="map_input" id="memberIdInput" />
+            </div>
+            <div style="display: inline-block;vertical-align: top;">
+                <input type="button" value="搜尋" class="find_but" id="searchBtn" style="width: 70px;"
+                    onclick="searchMemberList()">
+                <br>
+                <input type="button" value="全部清空" class="find_but" style="width: 70px;"
+                    onclick="$('.map_input').val('')">
+            </div>
+        </div>
+        <!-- <p class="p_but">
+
+            <i class="down_i"></i><a href="#" class="add_a">导出</a>
+            <i class="print_i"></i><a href="#" class="add_a">打印</a>
+        </p> -->
+        <p>
+        <table data-url="json/data_alae_list.json" id="table" class="table_style" style="margin: 0 auto">
+        </table>
+        </p>
+    </div>
+
+    <!-- <script src="../../js/common/jquery/jQuery-2.2.0.min.js"></script> -->
+    <script src="../../js/common/bstable/js/bootstrap.min.js"></script>
+    <script src="../../js/common/bstable/js/bootstrap-table.js"></script>
+    <script src="../../js/common/bstable/js/bootstrap-table-zh-CN.min.js"></script>
+    <script src="../../js/common/date/js/laydate.js"></script>
+
+    <!-- 燈箱開始 -->
+    <div id="lightbox" class="none" style="z-index:9999;">
+        <article>
+            <p>會員編號：<span id="lightbox_memberNo"></span></p>
+            <p>目前錢包金額：<span id="lightbox_walletAmount"></span></p>
+            <label for="lightbox_modifyWalletAmountText">欲修改的錢包金額：</label>
+            <input type="text" id="lightbox_modifyWalletAmountText">
+            <span id="lightbox_errorMsg" style="color: red;visibility:hidden;"></span>
+            <br>
+            <label for="lightbox_walletDetail">備註：</label>
+            <br>
+            <textarea cols="50" rows="5" id="lightbox_walletDetail"></textarea>
+            <!-- <input type="text" id="lightbox_walletDetail"> -->
+            <br>
+            <button type="button" class="btn_modal_confirm" onclick="modifyWalletAmountInput()">確認</button>
+            <button type="button" id="btn_modal_close">關閉</button>
+        </article>
+    </div>
+    <!-- 燈箱結束 -->
+    <!-- 再次確認用燈箱開始 -->
+    <div id="checkAgainLightbox" class="none" style="z-index:9999;">
+        <article>
+            <p>會員編號：<span id="checkAgainLightbox_memberNo"></span></p>
+            <p>目前錢包金額：<span id="checkAgainLightbox_WalletAmount"></span></p>
+            <p>欲修改的錢包金額：<span id="checkAgainLightbox_modifyWalletAmount" style="color: red;font-size: 24px;"></span></p>
+            <p>備註：<span id="checkAgainLightbox_walletDetail" style="color: red;font-size: 24px;"></span></p>
+            <p><span id="checkAgainLightbox_warn" style="color: red;font-size: 24px;"></span></p>
+            <span id="checkAgainLightbox_checkMsg" style="color: red;">請確認修改是否送出</span>
+            <br>
+            <button type="button" class="checkAgainLightbox_btn_modal_confirm"
+                onclick="modifyWalletAmountConfirm()">確認</button>
+            <button type="button" id="checkAgainLightbox_btn_modal_close">關閉</button>
+        </article>
+    </div>
+    <!-- 再次確認用燈箱結束 -->
+
+    <!-- DataTable開始 -->
+    <table id="showMemberList" class="display" style="width:100%">
+        <thead>
+            <tr>
+                <th>項次</th>
+                <th>會員編號</th>
+                <th>帳號</th>
+                <th>身分別</th>
+                <th>姓名</th>
+                <th>電話</th>
+                <th>電子信箱</th>
+                <th>性別</th>
+                <th>生日</th>
+                <th>身份證字號</th>
+                <th>錢包金額</th>
+                <th>功能</th>
+            </tr>
+        </thead>
+        <tbody id="showMemberListBody">
+            <!-- <tr>
+                <td class="memberNo">1</td>
+                <td>2</td>
+                <td>peter123</td>
+                <td>一般會員</td>
+                <td>Peter</td>
+                <td>0987654321</td>
+                <td>peter123@gmail.com</td>
+                <td>男</td>
+                <td>1980-08-17</td>
+                <td>B123456789</td>
+                <td>100</td>
+                <td><input type="button" value="修改錢包金額" class="find_but" id="but_open"></td>
+            </tr> -->
+        </tbody>
+        <!-- <tfoot>
+            <tr>
+                <th>項次</th>
+                <th>會員編號</th>
+                <th>帳號</th>
+                <th>身分別</th>
+                <th>姓名</th>
+                <th>電話</th>
+                <th>電子信箱</th>
+                <th>性別</th>
+                <th>生日</th>
+                <th>身份證字號</th>
+                <th>錢包金額</th>
+                <th>功能</th>
+            </tr>
+        </tfoot> -->
+    </table>
+    <!-- DataTable結束 -->
+    <script>
+        let selectedModifyBtn; // 全域變數，供記錄最後一次點下的修改按鈕
+
+        $(document).ready(function () {
+            $('#showMemberList').DataTable();
+        });
+        function searchMemberList() {
+            // $("tbody#showMemberListBody").children().remove(); // 清空showMemberListBody下的所有子元素
+
+            $('#showMemberList').DataTable().clear();
+            $('#showMemberList').DataTable().destroy();
+
+            let fetchBody = "{"; // fetchBody為Json格式，供傳送至後端用
+            if ($("input#memberNoInput").val() != "") { // 若memberNo未輸入數值，則不加入Json傳至後端，避免後端收到空值
+                fetchBody += "\"memberNo\":" + "\"" + $("input#memberNoInput").val() + "\",";
+            }
+            fetchBody += "\"memberAcct\":" + "\"" + $("input#memberAcctInput").val() + "\",";
+            fetchBody += "\"memberPhone\":" + "\"" + $("input#memberPhoneInput").val() + "\",";
+            fetchBody += "\"memberEmail\":" + "\"" + $("input#memberEmailInput").val() + "\",";
+            fetchBody += "\"memberId\":" + "\"" + $("input#memberIdInput").val() + "\"";
+            fetchBody += "}";
+
+            fetch('/BuyGo/api/back_end/loadMemberList', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json;charset:utf-8' },
+                // body: JSON.stringify(
+                body: fetchBody
+                // memberNo: $("input#memberNoInput").val(),
+                // memberAcct: $("input#memberAcctInput").val(),
+                // memberPhone: $("input#memberPhoneInput").val(),
+                // memberEmail: $("input#memberEmailInput").val(),
+                // memberId: $("input#memberIdInput").val()
+
+            })
+                .then(resp => resp.json())
+                .then(body => {
+                    let memberCount = 0;
+                    body.forEach(member => {
+                        let { memberNo, memberAcct, memberStatus, memberName, memberPhone, memberEmail, memberGender, memberBirthday, memberId, memberWalletAmount } = member;
+
+                        switch (memberStatus) {
+                            case 1: {
+                                memberStatus = "一般會員";
+                                break;
+                            }
+                            case 2: {
+                                memberStatus = "賣家";
+                                break;
+                            }
+                            case 3: {
+                                memberStatus = "停權";
+                                break;
+                            }
+                        }
+                        switch (memberGender) {
+                            case 0: {
+                                memberGender = "無";
+                                break;
+                            }
+                            case 1: {
+                                memberGender = "男";
+                                break;
+                            }
+                            case 2: {
+                                memberGender = "女";
+                                break;
+                            }
+                        }
+
+                        memberCount++;
+                        $("tbody#showMemberListBody").append(`
+                            <tr>
+                                <td>${memberCount}</td>
+                                <td class="memberNo">${memberNo}</td>
+                                <td>${memberAcct}</td>
+                                <td class="statusCell">${memberStatus}
+                                   
+                                </td>
+                                <td>${memberName}</td>
+                                <td>${memberPhone}</td>
+                                <td>${memberEmail}</td>
+                                <td>${memberGender}</td>
+                                <td>${memberBirthday}</td>
+                                <td>${memberId}</td>
+                                <td class="walletAmount">${memberWalletAmount}</td>
+                                <td><input type="button" value="修改錢包金額" class="modifyWalletBtn find_but" id="but_open" onclick="modifyWalletAmount(this)">
+                                <button type="button" class="changeStatusBtn find_but" onclick="showStatusDropdown(this)">更改身分別</button>
+                                <select class="statusDropdown" style="display: none;">
+                                    <option value="1">一般會員</option>
+                                    <option value="2">賣家</option>
+                                    <option value="3">停權</option>
+                                    </select>
+                                </td>
+                                
+                            </tr>
+                        `);
+                    });
+                    // 初始化
+                    $('#showMemberList').DataTable();
+                });
+        }
+        function showStatusDropdown(button) {
+            const dropdown = $(button).siblings('.statusDropdown');
+            if (dropdown.css('display') === 'none') {
+                dropdown.show();
+            } else {
+                dropdown.hide();
+            }
+        }
+
+        $(document).on('change', '.statusDropdown', function () {
+            const newStatus = $(this).val();
+            console.log(newStatus);
+            const rowElement = $(this).closest('tr');
+
+            const memberNo_el = rowElement.find('.memberNo').text();
+            console.log(memberNo_el);
+            fetch("/BuyGo/back_end/member/MemberEditStatus", {
+                method: "POST",
+                headers: { "content-type": "application/json;charset=utf-8" },
+                body: JSON.stringify({
+                    memberNo: memberNo_el,
+                    memberStatus: newStatus
+                })
+                
+            }).then(resp => resp.json())
+                .then(body => {
+                    console.log(body);
+                    if (body.successful === true) {
+                        Swal.fire({
+                            position: 'top-end',
+                            icon: 'success',
+                            title: '修改成功',
+                            showConfirmButton: false,
+                            timer: 1500
+                        })
+                    } else {
+                        Swal.fire({
+                            position: 'top-end',
+                            icon: 'error',
+                            title: '修改失敗',
+                            showConfirmButton: false,
+                            timer: 1500
+                        })
+                    }
+                })
+            const statusCell = $(this).closest('tr').find('.statusCell'); // 通過查找最近的tr元素，然後查找包含class="statusCell"的元素
+            statusCell.text(getStatusText(newStatus)); // 更新身分別內容
+            // $(this).hide(); // 隱藏下拉式選單
+        });
+
+        function getStatusText(statusCode) {
+            switch (statusCode) {
+                case '1':
+                    return '一般會員';
+                case '2':
+                    return '賣家';
+                case '3':
+                    return '停權';
+                default:
+                    return '';
+            }
+        }
+
+        // 燈箱事件開始
+        // let btn_modal_el = document.getElementsByClassName("btn_modal")[0];
+        // btn_modal_el.addEventListener("click", function () {
+
+        // $(document).on("click", "input.modifyWalletBtn", function (e) {
+        // });
+
+        function modifyWalletAmount(obj) {
+            $("textarea#lightbox_walletDetail").val("BuyGo官方人員修改"); // 重置備註欄
+
+            memberNo = $(obj).closest("td").siblings("td.memberNo").text(); // 取得該"修改錢包金額"按鈕所屬的memberNo
+            walletAmount = $(obj).closest("td").siblings("td.walletAmount").text();
+
+            selectedModifyBtn = $(obj); // 將點擊的按鈕保存至selectedModifyBtn，可供後續使用
+
+            // 燈箱顯示
+            let lightbox_el = document.getElementById("lightbox");
+            lightbox_el.classList.remove("none");
+
+            $("span#lightbox_errorMsg").css("visibility", "hidden"); // 將錯誤提示隱藏
+
+            $("span#lightbox_memberNo").text(memberNo); // 將會員編號顯示於燈箱
+            $("span#lightbox_walletAmount").text(walletAmount); // 將錢包金額顯示於燈箱
+            $("input#lightbox_modifyWalletAmountText").val(walletAmount); // 將錢包金額預設印在input text格內
+        }
+        function modifyWalletAmountInput() {
+            if ($("input#lightbox_modifyWalletAmountText").val() === "") {
+                $("span#lightbox_errorMsg").text("錢包金額不可為空");
+                $("span#lightbox_errorMsg").css("visibility", "visible"); // 將錯誤提示顯示出來
+            }
+            else if ($("input#lightbox_modifyWalletAmountText").val() < 0) {
+                $("span#lightbox_errorMsg").text("錢包金額不可負數");
+                $("span#lightbox_errorMsg").css("visibility", "visible"); // 將錯誤提示顯示出來
+            }
+            else if (isNaN($("input#lightbox_modifyWalletAmountText").val())) {
+                $("span#lightbox_errorMsg").text("請輸入合法的數值");
+                $("span#lightbox_errorMsg").css("visibility", "visible"); // 將錯誤提示顯示出來
+            }
+            else {
+                $("div#lightbox").addClass("none"); // 關閉輸入金額燈箱
+
+                let memberNo = $("span#lightbox_memberNo").text(); // 取得欲修改金額的會員編號
+                $("span#checkAgainLightbox_memberNo").text(memberNo); // 將會員編號顯示於再次確認燈箱
+                let modifyWalletAmount = $("input#lightbox_modifyWalletAmountText").val(); // 取得欲修改的金額
+                $("span#checkAgainLightbox_modifyWalletAmount").text(modifyWalletAmount); // 將欲修改的金額顯示於再次確認燈箱
+                let walletAmount = $("span#lightbox_walletAmount").text(); // 取得未更改前的錢包金額
+                $("span#checkAgainLightbox_WalletAmount").text(walletAmount); // 將未更改前的錢包金額顯示於再次確認燈箱
+                let walletDetail = $("textarea#lightbox_walletDetail").val(); // 取得備註欄
+                $("span#checkAgainLightbox_walletDetail").text(walletDetail); // 將備註欄資訊顯示於再次確認燈箱
+
+                walletAmountAbs = Math.abs(modifyWalletAmount - walletAmount); // 取得修改後金額與修改前金額差值的絕對值
+                if (parseFloat(modifyWalletAmount) >= parseFloat(walletAmount)) { // 顯示警告訊息，提示該操作為"存入"或"提出"，金額為多少
+                    $("span#checkAgainLightbox_warn").text("該操作將對錢包\"存入\"" + walletAmountAbs + "元");
+                }
+                else {
+                    $("span#checkAgainLightbox_warn").text("該操作將對錢包\"提出\"" + walletAmountAbs + "元");
+                }
+                $("div#checkAgainLightbox").removeClass("none"); // 開啟再次確認用燈箱
+            }
+        }
+        function modifyWalletAmountConfirm() {
+
+            let memberNo = $("span#lightbox_memberNo").text(); // 取得欲修改金額的會員編號
+            let walletAmount = $("input#lightbox_modifyWalletAmountText").val(); // 取得欲修改的金額
+            let walletDetail = $("textarea#lightbox_walletDetail").val();
+
+            fetch('/BuyGo/api/back_end/modifyWalletAmount', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json;charset:utf-8' },
+                body: JSON.stringify({
+                    memberNo: memberNo,
+                    memberWalletAmount: walletAmount,
+                    message: walletDetail
+                })
+            })
+                .then(resp => resp.json())
+                .then(body => {
+                    let { successful } = body;
+                    $(selectedModifyBtn).closest("td").siblings("td.walletAmount").text(walletAmount); // 將修改後的金額於列表中修改
+                    $("div#checkAgainLightbox").addClass("none"); // 關閉再次確認用燈箱
+
+                    // sweetalert
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'success',
+                        title: '修改成功',
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
+                })
+        }
+
+        // 點擊關閉按鈕後關閉燈箱
+        let btn_modal_close_el = document.getElementById("btn_modal_close");
+        btn_modal_close_el.addEventListener("click", function () {
+            $("div#lightbox").addClass("none"); // 關閉燈箱
+        });
+        $(document).on("click", "#checkAgainLightbox_btn_modal_close", function (e) {
+            // let lightbox_el = document.getElementById("lightbox");
+            // lightbox_el.classList.add("none");
+            // $("div#lightbox").addClass("none"); // 關閉燈箱
+            $("div#checkAgainLightbox").addClass("none"); // 關閉再次確認用燈箱
+        });
+
+        // modal 中的半透明黑色區域
+        let lightbox_el = document.getElementById("lightbox");
+        lightbox_el.addEventListener("click", function () {
+            this.classList.add("none");
+        });
+
+        $(document).on("click", "div#checkAgainLightbox", function (e) { // 關閉再次確認用燈箱
+            $(this).addClass("none");
+        });
+
+
+        // 點擊 lightbox 中的白色區域，不會關掉 modal
+        lightbox_el.querySelector("article").addEventListener("click", function (e) {
+            e.stopPropagation();
+        });
+        $(document).on("click", "div#checkAgainLightbox > article", function (e) { // 點擊再次確認用燈箱顯示區域時不關閉燈箱
+            e.stopPropagation();
+        });
+        // 燈箱事件結束
+    </script>
+</body>
+
+</html>

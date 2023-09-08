@@ -86,17 +86,7 @@ public class MemberServiceImpl implements MemberService{
 
 	@Override
 	public Member edit(Member member) {
-		final Member oMember = dao.selectByMemberAcct(member.getMemberAcct());
-		member.setMemberAcct(oMember.getMemberAcct());
-		member.setMemberPw(oMember.getMemberPw());
-		member.setMemberStatus(oMember.getMemberStatus());
-		member.setMemberName(oMember.getMemberName());
-		member.setMemberAdd(oMember.getMemberAdd());
-		member.setMemberPhone(oMember.getMemberPhone());
-		member.setMemberEmail(oMember.getMemberEmail());
-		member.setMemberGender(oMember.getMemberGender());
-		member.setMemberBirthday(oMember.getMemberBirthday());
-		member.setMemberId(oMember.getMemberId());
+		
 		final int resultCount = dao.update(member);
 		member.setSuccessful(resultCount > 0);
 		member.setMessage(resultCount > 0 ? "修改成功" : "修改失敗");
@@ -126,5 +116,6 @@ public class MemberServiceImpl implements MemberService{
 	public Member forgetMember(String email) {
 		return dao.selectByMemberEmail(email);
 	}
+
 
 }

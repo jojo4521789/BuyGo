@@ -47,16 +47,33 @@
 <!-- // PARTICULAR PAGES CSS FILES -->
 <link rel="stylesheet" href="../../../../css/common/responsive.css">
 
+<!-- Data-Table -->
+	<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+	
+	<link rel="stylesheet"
+	href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
+	
+	<script
+		src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+		
+	<script>
+		$(document).ready(function () {
+		    $('#table_id').DataTable();
+		    ordering: false
+		});
+	</script>
+
 <style>
 th {
 	border: 1px solid rgb(130, 81, 81);
 	background-color: lightsalmon;
+	white-space: nowrap;
 }
 
-/* col-xs-12 col-sm-6{
-        background-color: gray;
-        } */
+
 </style>
+
+
 </head>
 
 <body>
@@ -397,7 +414,7 @@ th {
 								<ul class="nav nav-tabs nav-stacked">
 									<li><a href="#">個人資料</a></li>
 									<li><a href="#">最新消息</a></li>
-									<li><a href="../../../../pages/member/gpa/gpaOrder.html">訂單追蹤</a></li>
+									<li><a href="../../pages/member/gpa/gpaOrder.html">訂單追蹤</a></li>
 									<li><a href="#">我的委託單</a></li>
 									<li><a href="#">已收藏的揪團</a></li>
 									<li><a href="#">優惠券</a></li>
@@ -405,7 +422,7 @@ th {
 									<li><a href="#">聊天室</a></li>
 									<li><a href="../../pages/member/blacklist.html">黑名單</a></li>
 									<br>
-									<li><a href="../../../../pages/member/myShop.html">我的賣場</a></li>
+									<li><a href="../../pages/member/myShop.html">我的賣場</a></li>
 								</ul>
 							</section>
 
@@ -429,34 +446,35 @@ th {
 
 						<div class="m-t-lg clearfix">
 							<div class="row">
-								<div class="col-xs-12 col-sm-6">
+								<div>
 									<h3 class="uppercase text-bold">
 										<span class="text-xs">我的委託單</span>
 									</h3>
 									<h3 class="uppercase text-bold">
-										<span class="text-xs">一般代購委託單填寫</span>
+										<span class="text-xs">一般代購委託項目</span>
 									</h3>
 
-									<h3>私人代購委託表單</h3>
-
-									<label style="color: red;">(*號為必填欄位)</label><br> <label
-										for="memberNoMember">買家:</label> <input type="text"
-										id="memberNoMember"><br> <label
-										for="memberNoSeller">代購賣家:</label> <input type="text"
-										id="memberNoSeller"><br> <label
-										for="paRqProdName">*委託商品名稱:</label> <input type="text"
-										id="paRqProdName"><br> <label for="paRqUrl">*委託商品網址:</label>
-									<input type="url" id="paRqUrl"><br> <label
-										for="paRqPrice">*委託商品單價:</label> <input type="number" min="0"
-										max="100000" id="paRqPrice"> <label>(幣別:日幣)</label><br>
-
-									<label for="paRqQty">*委託商品數量:</label> <input type="number"
-										min="0" id="paRqQty"><br> <label for="paRqNote">備註:</label>
-									<input type="text" id="paRqNote"><br>
-
-									<button type="submit" id="submit_btn">確認送出</button>
-									<button type="reset" id="reset_btn">資料清空</button>
-									<div id="msg" class="error" style="color: red;"></div>
+									<!--委託單列表-->
+									<div style="overflow-y: auto;">
+										<table id="table_id" class="display">
+											<thead>
+												<tr>
+													<th>排序</th>
+													<th>委託單編號</th>
+													<th>買家名稱</th>
+													<th>商品名稱</th>
+													<th>商品網址</th>
+													<th>商品單價</th>
+													<th>購買數量</th>
+													<th>備註</th>
+													<th>請求狀態</th>
+													<th>發佈時間</th>
+												</tr>
+											</thead>
+											<tbody id="paReqListTable">
+											</tbody>
+										</table>
+									</div>
 
 								</div>
 							</div>
@@ -668,149 +686,89 @@ th {
 	<script src="../../../../js/login.js"></script>
 
 	<!--委託單列表-->
-	<!-- <ul class="store-list unstyled" id="paReqList"></ul> -->
-
-	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+	<ul class="store-list unstyled" id="paReqList"></ul>
 
 	<script>
+        window.addEventListener('load', function () {
+            const paReqList_el = document.querySelector('#paReqList');
+            const paReqListTable = document.getElementById("paReqListTable");
 
-        window.addEventListener("load", function () {
+            loadPaReqList(10);//測試用寫死，記得修改
 
-            //元素
-            const the_form = document.querySelector("#the_form");
-            const memberNoMember_el = document.querySelector("#memberNoMember");
-            const memberNoSeller_el = document.querySelector("#memberNoSeller");
-            const msg_el = document.querySelector("#msg")
-            const submit_btn_el = document.querySelector("#submit_btn");
-            const reset_btn_el = document.querySelector("#reset_btn");
-            const paRqProdName_el = document.querySelector("#paRqProdName");
-            const paRqUrl_el = document.querySelector("#paRqUrl");
-            const paRqPrice_el = document.querySelector("#paRqPrice");
-            const paRqQty_el = document.querySelector("#paRqQty");
-            const paRqNote_el = document.querySelector("#paRqNote");
-            const inputs = document.querySelectorAll('input');
-            const currentTime = new Date().toISOString();
-
-            //送出時有必填框未輸入時跳出提示訊息------------------------------------------------------------------
-
-            submit_btn_el.addEventListener("click", function () {
-
-                msg_el.textContent = "";
-                if (paRqProdName_el.value === "") {
-                    msg.textContent = "請輸入商品名稱";
-                    return;
-                }
-                if (paRqUrl_el.value === "") {
-                    msg.textContent = "請輸入商品網址";
-                    return;
-                }
-                if (paRqPrice_el.value === "") {
-                    msg.textContent = "請輸入商品金額";
-                    return;
-                }
-                if (isNaN(paRqPrice_el.value)) {
-                    msg.textContent = "金額只能為數字";
-                    return;
-                }
-                if (paRqQty_el.value === "") {
-                    msg.textContent = "請輸入商品數量";
-                    return;
-                }
-                if (isNaN(paRqQty_el.value)) {
-                    msg.textContent = "輸入數量無效";
-                    return;
-                }
-
-                // fetch-------------------------------------------------------------------------------------------
-
-                msg.textContent = "";
-                fetch('/BuyGo/api/front_end/member/AddPaReq', {
-
+            //讀取該會員的所有委託單
+            function loadPaReqList(memberNoSeller) {
+                fetch('/BuyGo/api/front_end/seller/getSellerPaReqs', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json; charset=utf-8',
                     },
-
                     body: JSON.stringify({
-
-                        memberNoMember: memberNoMember_el.value,
-                        memberNoSeller: memberNoSeller_el.value,
-                        paRqProdName: paRqProdName_el.value,
-                        paRqUrl: paRqUrl_el.value,
-                        paRqPrice: paRqPrice_el.value,
-                        paRqQty: paRqQty_el.value,
-                        paRqNote: paRqNote_el.value,
-                        paRqStat: '0',
-                        paRqStartDate: currentTime,
-
-                    })
-
+                        memberNoSeller: memberNoSeller,
+                    }),
                 })
+                    .then((resp) => resp.json())
+                    .then((data) => {
+                    	
+                    	$('#table_id').DataTable().destroy();
+                    	
+                    	const table = $('#table_id').DataTable({
+                            data: data,
+                            columns: [
+                            	{ 
+                                    data: null,
+                                    render: function (data, type, row, meta) {
+                                        if (type === 'display') {
+                                            return meta.row + 1;
+                                        }
+                                        return data;
+                                    }
+                                },
+                                { data: 'paRqNo' },
+                                { data: 'memberNoMember' },
+                                { data: 'paRqProdName' },
+                                { 
+                                    data: 'paRqUrl',
+                                    render: function (data, type, row, meta) {
+                                        if (type === 'display') {
+                                            const maxUrlLength = 50; // 限制url的最大長度
+                                            if (data.length > maxUrlLength) {
+                                                // 超過的部分改用刪節號
+                                                const truncatedUrl = data.substring(0, maxUrlLength) + '...';
+                                                return '<a href="' + data + '" target="_blank" title="' + data + '">' + truncatedUrl + '</a>';
+                                            } else {
+                                                return '<a href="' + data + '" target="_blank">' + data + '</a>';
+                                            }
+                                        }
+                                        return data;
+                                    }
+                                },
+                                { data: 'paRqPrice' },
+                                { data: 'paRqQty' },
+                                { data: 'paRqNote' },
+                                { 
+                                    data: 'paRqStat',
+                                    render: function (data, type, row, meta) {
+                                        if (type === 'display') {
+                                            const selectHtml = `
+                                                <select>
+                                                    <option value="0" ${data === 0 ? 'selected' : ''}>未處理</option>
+                                                    <option value="1" ${data === 1 ? 'selected' : ''}>接受委託</option>
+                                                    <option value="2" ${data === 2 ? 'selected' : ''}>拒絕委託</option>
+                                                </select>
+                                            `;
+                                            return selectHtml;
+                                        }
+                                        return data;
+                                    }
+                                },
+                                { data: 'paRqStartDate' }
+                            ]
+                        });
 
-                    .then(resp => resp.json())
-                    .then(body => {
-                        if (body.successful) {
-                              
-                            paRqProdName_el.value = "";
-                            paRqUrl_el.value = "";
-                            paRqPrice_el.value = "";
-                            paRqQty_el.value = "";
-                            paRqNote_el.value = "";
-
-                            submit_btn_el.disabled = false;
-
-                            Swal.fire({
-                                title: '填寫成功',
-                                text: '請耐心等待賣家回覆。',
-                                icon: 'success',
-                                showCancelButton: true,
-                                confirmButtonText: '繼續填寫新表單',
-                                cancelButtonText: '查看所有委託',
-                            }).then((result) => {
-                                if (result.isConfirmed) {
-                                	
-                                	//const additionalInfoEl = document.querySelector("#additionalInfo");
-                                    //additionalInfoEl.textContent = "請注意如要更換賣家請退出表單重新選擇新賣家";
-                                    
-                                } else if (result.dismiss === Swal.DismissReason.cancel) {
-                                	
-                                    window.location.href = '../../MemberAllPaReq.html';
-                                    
-                                }
-                            });
-                        } else {
-                            Swal.fire(
-                                '送出失敗',
-                                '請重新填寫。',
-                                'error'
-                            );
-                        }
+	                        
                     });
-
-            });
-
-
-
-
-            //清空資料------------------------------------------------------------------------------------------
-            reset_btn_el.addEventListener("click", function () {
-            	
-            	Swal.fire(
-					'清空資料',
-					'已清空委託單所有欄位。',
-					'warning'
-				)
-				
-                paRqProdName_el.value = "";
-                paRqUrl_el.value = "";
-                paRqPrice_el.value = "";
-                paRqQty_el.value = "";
-                paRqNote_el.value = "";
-
-            });
-
+            }
         });
-
     </script>
 
 </body>
