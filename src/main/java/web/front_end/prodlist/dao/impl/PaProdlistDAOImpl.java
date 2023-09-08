@@ -13,13 +13,13 @@ public class PaProdlistDAOImpl implements PaProdlistDAO {
 		return getSession().get(PaProdlist.class, paProdNo);
 	}
 	
-	//用商品編號隨機拿取商品資訊
+	//用商品類別編號隨機拿取商品資訊
 	@Override
-	public List<PaProdlist> SelectByPaProdNo(Integer paProdNo) {
-		final String hql = "FROM PaProdlist WHERE paProdNo = :paProdNo ORDER BY RAND()";
+	public List<PaProdlist> SelectByPaProdNo(Integer paProdObjNo) {
+		final String hql = "FROM PaProdlist WHERE paProdObjNo = :paProdObjNo ORDER BY RAND()";
 		return getSession()
 				.createQuery(hql, PaProdlist.class)
-				.setParameter("paProdNo", paProdNo)
+				.setParameter("paProdObjNo", paProdObjNo)
 				.getResultList();
 	}
 
