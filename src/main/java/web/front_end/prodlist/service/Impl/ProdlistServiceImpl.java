@@ -21,8 +21,9 @@ public class ProdlistServiceImpl implements ProdlistService {
 	}
 	
 	@Override
-	public List<PaProdlist> RamgetProdNo(Integer paProdNo) {
-		return dao.SelectByPaProdNo(paProdNo);
+	public List<PaProdlist> RangetProdNo(Integer limit, Integer paProdObjNo) {
+		
+		return dao.SelectByPaProdNo(paProdObjNo);
 	}
 
 }

@@ -7,7 +7,6 @@ import web.front_end.prodlist.entity.PaProdlist;
 
 public interface PaProdlistDAO extends CoreDao<PaProdlist, Integer>{
 	
-	List<PaProdlist> SelectByPaProdNo(Integer paProdNo);
-
+	List<PaProdlist> SelectByPaProdNo(Integer paProdObjNo);
 	
 }
