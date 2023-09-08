@@ -34,10 +34,10 @@ public class NewsIncrese extends HttpServlet{
 		news = SERVICE.increse(news);
 		writePojo2Json(resp, news);
 		System.out.println(news);
-		Jedis jedis = new Jedis("localhost",6379);
-		String serialNum = "NEWS" + jedis.incr(SERIAL_NUMBER_KEY);
-		jedis.set(serialNum,news.getNewsContent());
-		jedis.close();
+//		Jedis jedis = new Jedis("localhost",6379);
+//		String serialNum = "NEWS" + jedis.incr(SERIAL_NUMBER_KEY);
+//		jedis.set(serialNum,news.getNewsContent());
+//		jedis.close();
 	}
 	
 }
