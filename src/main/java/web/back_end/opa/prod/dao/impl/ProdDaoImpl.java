@@ -63,25 +63,12 @@ public class ProdDaoImpl implements ProdDao {
 	}
 
 	@Override
-	public List<Prod> SelectByOpaProdName(String opaProdName) {
-		try {
-			Query<Prod> query = getSession().createQuery("FROM Prod WHERE opaProdName = :opaProdName", Prod.class)
-					.setParameter("opaProdName", opaProdName);
-			return query.getResultList();
-		} catch (NoResultException e) {
-//			e.printStackTrace();
-			return null;
-		}
-	}
-
-	@Override
-	public List<Prod> SelectByOpaProdNameList(String opaProdName) {
+	public List<Prod> selectByOpaProdName(String opaProdName) {
 		try {
 			Query<Prod> query = getSession().createQuery("FROM Prod WHERE opaProdName LIKE :opaProdName", Prod.class)
 					.setParameter("opaProdName", "%" + opaProdName + "%");
 			return query.getResultList();
 		} catch (NoResultException e) {
-//			e.printStackTrace();
 			return null;
 		}
 	}
@@ -98,7 +85,7 @@ public class ProdDaoImpl implements ProdDao {
 	}
 
 	@Override
-	public List<Prod> SelectByOpaProdStatus(Integer opaProdStatus) {
+	public List<Prod> selectByOpaProdStatus(Integer opaProdStatus) {
 		try {
 			Query<Prod> query = getSession().createQuery("FROM Prod WHERE opaProdStatus = :opaProdStatus", Prod.class)
 					.setParameter("opaProdStatus", opaProdStatus);
@@ -106,6 +93,39 @@ public class ProdDaoImpl implements ProdDao {
 		} catch (NoResultException e) {
 			return null;
 		}
+	}
+
+	@Override
+	public List<Prod> selectProdWithLimit(Integer limit, Integer offset) {
+		final String nativeSql = "SELECT * FROM OPA_PRODUCTS WHERE OPA_PROD_STATUS = 1 LIMIT :limit OFFSET :offset";
+		List<Prod> prods = getSession().createNativeQuery(nativeSql, Prod.class)
+				.setParameter("limit", limit)
+				.setParameter("offset", offset)
+				.getResultList();
+		return prods;
+	}
+
+	@Override
+	public List<Prod> selectByOpaProdNameWithLimit(String opaProdName, Integer limit, Integer offset) {
+		final String nativeSql = "SELECT * FROM OPA_PRODUCTS WHERE OPA_PROD_STATUS = 1 AND OPA_PROD_NAME LIKE :opaProdName LIMIT :limit OFFSET :offset";
+		List<Prod> prods = getSession().createNativeQuery(nativeSql, Prod.class)
+				.setParameter("opaProdName", "%" + opaProdName + "%")
+				.setParameter("limit", limit)
+				.setParameter("offset", offset)
+				.getResultList();
+		return prods;
+	}
+
+	@Override
+	public int getProdTotalQty() {
+		Query<?> query = getSession().createNativeQuery("SELECT COUNT(*) FROM OPA_PRODUCTS WHERE OPA_PROD_STATUS = 1");
+		return Integer.parseInt(query.getSingleResult().toString());
+	}
+
+	@Override
+	public int getProdTotalQtySelectByOpaProdName(String opaProdName) {
+		Query<?> query = getSession().createNativeQuery("SELECT COUNT(*) FROM OPA_PRODUCTS WHERE OPA_PROD_STATUS = 1 AND OPA_PROD_NAME LIKE :opaProdName").setParameter("opaProdName", "%" + opaProdName + "%");
+		return Integer.parseInt(query.getSingleResult().toString());
 	}
 
 }

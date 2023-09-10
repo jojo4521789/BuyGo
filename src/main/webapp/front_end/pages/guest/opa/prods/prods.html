@@ -42,6 +42,67 @@
     <link rel="stylesheet" href="../../../../css/common/innerpage.css">
     <!-- // PARTICULAR PAGES CSS FILES -->
     <link rel="stylesheet" href="../../../../css/common/responsive.css">
+    <style>
+        .-none {
+            display: none;
+        }
+
+        .cart-footer .s-cart-total {
+            background: #fff;
+            font-size: 12px;
+            font-weight: 700;
+            padding: 1em;
+            color: #1f1f1f;
+        }
+
+        .product-medialist .item .s-close {
+            background: #1f1f1f;
+            opacity: 1;
+            color: #FFF;
+            text-shadow: none;
+            width: 16px;
+            height: 16px;
+            font-size: 14px;
+            text-align: center;
+            margin: 0 0 4px 4px;
+            -webkit-transition: all .1s ease;
+            -moz-transition: all .1s ease;
+            -o-transition: all .1s ease;
+            -ms-transition: all .1s ease;
+            transition: all .1s ease;
+        }
+
+        button.s-close {
+            padding: 0;
+            cursor: pointer;
+            background: 0 0;
+            border: 0;
+            /* -webkit-appearance: none; */
+        }
+
+        .s-close {
+            float: right;
+            font-size: 21px;
+            font-weight: 700;
+            line-height: 1;
+            color: #000;
+            text-shadow: 0 1px 0 #fff;
+            opacity: .2;
+            filter: alpha(opacity=20);
+        }
+
+        .pageSelected {
+            color: #fa6f57;
+            font-weight: bold;
+        }
+
+        .text-currency {
+            width: 70px;
+            height: 30px;
+            border: solid 1px #ccc;
+            border-radius: 5px;
+        }
+    </style>
 </head>
 
 <body class="products-view">
@@ -69,14 +130,15 @@
                                 <li>
                                     <!-- SEARCH BOX -->
                                     <div class="search-box">
-                                        <form action="#" method="post">
-                                            <div class="input-iconed prepend">
-                                                <button class="input-icon"><i class="iconfont-search"></i></button>
-                                                <label for="input-search" class="placeholder">Search here…</label>
-                                                <input type="text" name="q" id="input-search"
-                                                    class="round-input full-width" required />
-                                            </div>
-                                        </form>
+                                        <!-- <form action="#" method="post"> -->
+                                        <div class="input-iconed prepend">
+                                            <button class="input-icon" onclick="searchBtnClick()"><i
+                                                    class="iconfont-search"></i></button>
+                                            <label for="input-search" class="placeholder">Search here…</label>
+                                            <input type="text" name="q" id="input-search"
+                                                class="round-input full-width" />
+                                        </div>
+                                        <!-- </form> -->
                                     </div>
                                     <!-- // SEARCH BOX -->
                                 </li>
@@ -109,14 +171,15 @@
                                             <small><a href="../../../member/opa/cart/cart.html">(See All)</a></small>
                                         </div>
                                         <!-- <ul class="cart-items product-medialist unstyled clearfix"></ul> -->
+                                        <ul class="s-cart-items product-medialist unstyled clearfix"></ul>
                                         <div class="cart-footer">
                                             <!-- <div class="cart-total clearfix">
                                                 <span class="pull-left uppercase">Total</span>
                                                 <span class="pull-right total">$ 0</span>
                                             </div> -->
-                                            <div class="cart-total clearfix">
+                                            <div class="s-cart-total clearfix">
                                                 <span class="pull-left uppercase">Total</span>
-                                                <!-- <span class="pull-right total">$ 0</span> -->
+                                                <span class="pull-right total">$ 0</span>
                                             </div>
                                             <div class="text-right">
                                                 <a href="../../../member/opa/cart/cart.html"
@@ -339,14 +402,14 @@
             <div class="container">
                 <div class="relative">
                     <ul class="bc push-up unstyled clearfix">
-                        <li><a href="../../../../index-2.html">Home</a></li>
-                        <li class="active">Products</li>
+                        <li><a href="../../../../index-2.html">首頁</a></li>
+                        <li class="active">商品</li>
                     </ul>
                 </div>
             </div>
         </div>
         <!-- // BREADCRUMB -->
-        
+
         <!-- SITE MAIN CONTENT -->
         <main id="main-content" role="main">
             <div class="container">
@@ -360,7 +423,7 @@
                                 <!-- CATEGORIES -->
                                 <section class="side-section bg-white">
                                     <header class="side-section-header">
-                                        <h3 class="side-section-title">Categories</h3>
+                                        <h3 class="side-section-title">商品分類</h3>
                                     </header>
                                     <div class="side-section-content">
                                         <ul id="category-list" class="vmenu unstyled">
@@ -413,19 +476,25 @@
                                 <!-- PRODUCT FILTER -->
                                 <section class="side-section bg-white">
                                     <header class="side-section-header">
-                                        <h3 class="side-section-title">Filter</h3>
+                                        <h3 class="side-section-title">篩選</h3>
                                     </header>
 
                                     <!-- PRICE RANGE SLIDER -->
                                     <div id="filter-by-price" class="side-section-content">
-                                        <h4 class="side-section-subheader">Filter By Price</h4>
+                                        <h4 class="side-section-subheader">價格篩選</h4>
                                         <div class="range-slider-container">
                                             <div class="range-slider" data-min="0" data-max="100000" data-step="10"
                                                 data-currency="$"></div>
                                             <div class="range-slider-value clearfix">
-                                                <span>Price: &ensp;</span>
-                                                <span class="min"></span>
-                                                <span class="max"></span>
+                                                <span>價格: &ensp;</span>
+                                                <span class="min -none"></span>
+                                                <span class="max -none"></span>
+
+                                                <span class="currency-code">$</span>
+                                                <input type="number" class="input-min text-currency" value="0"/>
+                                                -
+                                                <span class="currency-code">$</span>
+                                                <input type="number" class="input-max text-currency" value="100000"/>
                                             </div>
                                         </div>
                                     </div>
@@ -499,23 +568,22 @@
                                             <!-- DISPLAY MODE -->
                                             <ul class="unstyled inline-li li-m-r-l-sm pull-left">
                                                 <li><a class="round-icon active" href="#" data-toggle="tooltip"
-                                                        data-layout="grid" data-title="Switch to List Grid Mode"><i
+                                                        data-layout="grid" data-title="圖片"><i
                                                             class="iconfont-th"></i></a></li>
                                                 <li><a class="round-icon" href="#" data-toggle="tooltip"
-                                                        data-layout="list" data-title="Switch to List View Mode"><i
+                                                        data-layout="list" data-title="列表"><i
                                                             class="iconfont-list"></i></a></li>
                                             </ul>
                                             <!-- // DISPLAY MODE -->
 
                                             <!-- NUMBER OF ITEMS TO BE DISPLAY -->
                                             <div class="pull-right m-l-lg">
-                                                <span class="inline-middle m-r-sm text-xs">Show</span>
+                                                <span class="inline-middle m-r-sm text-xs">顯示筆數</span>
                                                 <div class="inline-middle styled-dd">
-                                                    <select>
-                                                        <option value="9">9</option>
-                                                        <option value="12" selected>12</option>
-                                                        <option value="24">24</option>
-                                                        <option value="36">36</option>
+                                                    <select id="displayItemQty">
+                                                        <option value="10" selected>10</option>
+                                                        <option value="20">20</option>
+                                                        <option value="30">30</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -526,15 +594,11 @@
                                         <div class="col-xs-12 col-sm-12 col-md-6 center-xs">
                                             <ul class="paginator li-m-r-l pull-right">
                                                 <li><a class="round-icon" href="#" data-toggle="tooltip"
-                                                        data-title="Previous Page"><i
-                                                            class="iconfont-angle-left"></i></a></li>
+                                                        data-title="上一頁"><i class="iconfont-angle-left"></i></a>
+                                                </li>
                                                 <li><a href="#">1</a></li>
-                                                <li><a href="#">2</a></li>
-                                                <li><a href="#">3</a></li>
-                                                <li><a href="#">4</a></li>
-                                                <li><a href="#">5</a></li>
                                                 <li><a class="round-icon" href="#" data-toggle="tooltip"
-                                                        data-title="Next Page"><i class="iconfont-angle-right"></i></a>
+                                                        data-title="下一頁"><i class="iconfont-angle-right"></i></a>
                                                 </li>
                                             </ul>
                                         </div>
@@ -544,7 +608,7 @@
                                 <!-- // DISPLAY MODE - NUMBER OF ITEMS TO BE DISPLAY - PAGINATION -->
 
                                 <!-- PRODUCT LAYOUT -->
-                                <div class="products-layout grid m-t-b add-cart" data-product=".product"
+                                <div class="products-layout m-t-b grid add-cart" data-product=".product"
                                     data-thumbnail=".entry-media .thumb" data-title=".entry-title > a"
                                     data-url=".entry-title > a" data-price=".entry-price > .price">
 
@@ -754,22 +818,6 @@
 
     <script src="js/prods.js"></script>
     <script src="../../../../js/login.js"></script>
-
-    <script>
-        setTimeout(() => {
-            [
-                '../../../../js/common/minified.js',
-                '../../../../js/common/jquery.nouislider.js',
-                '../../../../js/common/jquery.isotope.min.js',
-                '../../../../js/common/products.js'
-            ].forEach(function (src) {
-                const script = document.createElement('script');
-                script.src = src;
-                script.async = false;
-                document.head.appendChild(script);
-            });
-        }, 800);
-    </script>
 
     <!-- Essential Javascripts -->
     <!-- <script src="../../../../js/common/minified.js"></script> -->

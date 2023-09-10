@@ -8,9 +8,15 @@ import web.back_end.opa.prod.entity.Prod;
 public interface ProdDao extends CoreDao<Prod, Integer>{
 	int updateProdStatus(Prod prod);
 	
-	List<Prod> SelectByOpaProdName(String opaProdName);
+	List<Prod> selectByOpaProdName(String opaProdName);
 	
-	List<Prod> SelectByOpaProdNameList(String opaProdName);
+	List<Prod> selectByOpaProdStatus(Integer opaProdStatus);
 	
-	List<Prod> SelectByOpaProdStatus(Integer opaProdStatus);
+	List<Prod> selectProdWithLimit(Integer limit, Integer offset);
+	
+	List<Prod> selectByOpaProdNameWithLimit(String opaProdName, Integer limit, Integer offset);
+	
+	int getProdTotalQty();
+	
+	int getProdTotalQtySelectByOpaProdName(String opaProdName);
 }
