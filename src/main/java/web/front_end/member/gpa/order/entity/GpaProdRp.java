@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 import core.entity.Core;
 import lombok.AllArgsConstructor;
@@ -17,6 +18,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Table(name = "GPA_PROD_RP")
 public class GpaProdRp extends Core {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,5 +32,6 @@ public class GpaProdRp extends Core {
 	private String gpaProdRpContent;
 	@Column(name = "GPA_PROD_RP_REASON")
 	private Integer gpaProdRpReason;
-
+	@Column(name = "ALL_SAUSAGE")
+	private String allSausage;
 }

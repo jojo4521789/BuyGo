@@ -934,18 +934,98 @@
         return true;
 
     }
+    memberAcct_el.addEventListener("change", function () {
+			clearTimeout(typingTimer);
+            p1_el.innerHTML = "";
+			var typingTimer = setTimeout(function () {
+				fetch("http://localhost:8081/BuyGo/front_end/guest/register/MemberRegister", {
+					method: "POST",
+					headers: { "content-type": "application/json;charset=utf-8" },
+					body: JSON.stringify({
+						action: "testmemberAcct",
+						memberAcct: memberAcct_el.value
+					})
+				}).then(resp => resp.json())
+					.then(body => {
+						console.log(body);
+						if (body === true) {
+							p1_el.innerHTML = "此帳號已有人使用";
+						}
+					})
+			}, 200)
+		})
+    memberPhone_el.addEventListener("change", function () {
+			clearTimeout(typingTimer);
+            p5_el.innerHTML = "";
+			var typingTimer = setTimeout(function () {
+				fetch("http://localhost:8081/BuyGo/front_end/guest/register/MemberRegister", {
+					method: "POST",
+					headers: { "content-type": "application/json;charset=utf-8" },
+					body: JSON.stringify({
+						action: "testmemberPhone",
+						memberPhone: memberPhone_el.value
+					})
+				}).then(resp => resp.json())
+					.then(body => {
+						console.log(body);
+						if (body === true) {
+							p5_el.innerHTML = "此號碼已有人使用";
+						}
+					})
+			}, 200)
+		})
+    memberEmail_el.addEventListener("change", function () {
+			clearTimeout(typingTimer);
+            p6_el.innerHTML = "";
+			var typingTimer = setTimeout(function () {
+				fetch("http://localhost:8081/BuyGo/front_end/guest/register/MemberRegister", {
+					method: "POST",
+					headers: { "content-type": "application/json;charset=utf-8" },
+					body: JSON.stringify({
+						action: "testmemberEmail",
+						memberEmail: memberEmail_el.value
+					})
+				}).then(resp => resp.json())
+					.then(body => {
+						console.log(body);
+						if (body === true) {
+							p6_el.innerHTML = "此信箱已有人使用";
+						}
+					})
+			}, 200)
+		})
+    memberId_el.addEventListener("change", function () {
+			clearTimeout(typingTimer);
+            p9_el.innerHTML = "";
+			var typingTimer = setTimeout(function () {
+				fetch("http://localhost:8081/BuyGo/front_end/guest/register/MemberRegister", {
+					method: "POST",
+					headers: { "content-type": "application/json;charset=utf-8" },
+					body: JSON.stringify({
+						action: "testmemberId",
+						memberId: memberId_el.value
+					})
+				}).then(resp => resp.json())
+					.then(body => {
+						console.log(body);
+						if (body === true) {
+							p9_el.innerHTML = "此身分證號碼已有人使用";
+						}
+					})
+			}, 200)
+		})
+
     //註冊判斷+驗證信箱
     button_el.addEventListener("click", () => {
         errorMessages_el.innerHTML = "";
-        p1_el.innerHTML = "";
-        p2_el.innerHTML = "";
-        p3_el.innerHTML = "";
-        p4_el.innerHTML = "";
-        p5_el.innerHTML = "";
-        p6_el.innerHTML = "";
-        p8_el.innerHTML = "";
-        p9_el.innerHTML = "";
-        // 调用验证函数并更新错误消息
+        // p1_el.innerHTML = "";
+        // p2_el.innerHTML = "";
+        // p3_el.innerHTML = "";
+        // p4_el.innerHTML = "";
+        // p5_el.innerHTML = "";
+        // p6_el.innerHTML = "";
+        // p8_el.innerHTML = "";
+        // p9_el.innerHTML = "";
         if (!checkAcct(memberAcct_el.value)) {
             errorMessages_el.innerHTML += "<p>會員帳號格式錯誤</p>";
         }
@@ -971,7 +1051,6 @@
             errorMessages_el.innerHTML += "<p>會員身分證錯誤</p>";
         }
 
-        // 如果有错误信息，阻止提交数据
         if (errorMessages_el.innerHTML !== "") {
             event.preventDefault();
             // return;
@@ -992,7 +1071,7 @@
                 confirmButtonText: '送出',
                 cancelButtonText: '取消',
                 preConfirm: (verificationCode) => {
-                    console.log(verificationCode);
+                    // console.log(verificationCode);
                     // const data1 = {verificationCode};
                     return fetch("http://localhost:8081/BuyGo/api/front_end/guest/register/RegisterCheckMailAuthCode", {
                         method: "POST",
@@ -1011,6 +1090,7 @@
                             method: "POST",
                             header: { "content-type": "application/json;charset=utf-8" },
                             body: JSON.stringify({
+                                action:"register",
                                 memberAcct: memberAcct_el.value,
                                 memberPw: memberPw_el.value,
                                 memberStatus: memberStatus_el.value,
@@ -1030,7 +1110,18 @@
                                     Swal.fire(
                                         '註冊成功!',
                                         'success'
-                                    )
+
+                                    ).then((result) => {
+                                        if (result.isConfirmed) {
+                                            window.location.href = "../member/login.html";
+                                        }
+                                    });
+                                }else if(body=== false){
+                                    Swal.fire({
+                                        icon: 'error',
+                                        title: 'Oops...',
+                                        text: '請確認輸入的資料!',
+                                    })
                                 } else {
                                     Swal.fire({
                                         icon: 'error',
