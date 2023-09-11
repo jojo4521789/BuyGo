@@ -1,0 +1,253 @@
+<!-- <!DOCTYPE html> -->
+<!--[if IE 7 ]><html class="ie ie7 lte9 lte8 lte7" lang="en-US"><![endif]-->
+<!--[if IE 8]><html class="ie ie8 lte9 lte8" lang="en-US">	<![endif]-->
+<!--[if IE 9]><html class="ie ie9 lte9" lang="en-US"><![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!-->
+    <html class="noIE" lang="en-US"><!--<![endif]-->
+
+    <head>
+        <meta charset="UTF-8" />
+        <title>GFashion - Responsive e-commerce HTML Template</title>
+        <meta name="description" content="" />
+        <meta name="keywords" content="" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+        <!-- Favorite Icons -->
+        <link rel="icon" href="../../img/common/favicon/favicon.html" type="image/x-icon" />
+        <link rel="apple-touch-icon-precomposed" sizes="144x144"
+            href="../../img/common/favicon/apple-touch-icon-144x144-precomposed.html">
+        <link rel="apple-touch-icon-precomposed" sizes="72x72"
+            href="../../img/common/favicon/apple-touch-icon-72x72-precomposed.html">
+        <link rel="apple-touch-icon-precomposed" href="../../img/common/favicon/apple-touch-icon-precomposed.html">
+        <!-- // Favorite Icons -->
+    
+        <!--<link href='http://fonts.useso.com/css?family=Open+Sans:300,400,600,700' rel='stylesheet' type='text/css'>-->
+    
+        <!-- GENERAL CSS FILES -->
+        <!-- // GENERAL CSS FILES -->
+    
+        <!--[if IE 8]>
+            <script src="js/respond.min.js"></script>
+            <script src="js/selectivizr-min.js"></script>
+        <![endif]-->
+        <!--
+        <script src="js/jquery.min.js"></script>
+        -->
+        <script>window.jQuery || document.write('<script src="../../../js/common/jquery/jQuery-2.2.0.min.js"><\/script>');</script>
+        <!-- PARTICULAR PAGES CSS FILES -->
+        <!-- // PARTICULAR PAGES CSS FILES -->
+        <style>
+            /* -------------------登入功能css開始------------------- */
+            body {
+                background-color: white;
+            }
+    
+            #username,
+            #password,
+            h3,
+            #fullname,
+            #comfirm_password,
+            #username2,
+            #password2 {
+                width: 250px;
+                height: 40px;
+                margin: 10px;
+                color: blue;
+            }
+    
+            h5 {
+                margin: 20px;
+                color: #a3a2a3;
+            }
+    
+            h5:hover {
+                color: black;
+            }
+    
+            #container1,
+            #container2 {
+                /* margin: 50px; */
+                padding: 10px;
+                /* width: 230px; */
+                width: 500px;
+                height: 550px;
+                background-color: white;
+                border-radius: 5px;
+                border-top: 10px solid blue;
+                box-shadow: 0 0px 70px rgba(0, 0, 0, 0.1);
+    
+                /*定位對齊*/
+                position: relative;
+                margin: auto;
+                top: 100px;
+                /* text-align:center;   */
+            }
+    
+            .system_name {
+                /*定位對齊*/
+                position: relative;
+                margin: auto;
+                top: 100px;
+                text-align: center;
+            }
+    
+            .submit {
+                color: white;
+                background: #df5334;
+                width: 200px;
+                height: 30px;
+                margin: 10px;
+                padding: 5px;
+                border-radius: 5px;
+                border: 0px;
+            }
+    
+            .submit:hover {
+                background: #db6937;
+            }
+    
+            #container2 {
+                visibility: hidden;
+                /*剛開始消失*/
+                height: 350px;
+            }
+    
+    
+            #copyright {
+                text-align: center;
+                color: #a3a2a3;
+                margin: -200px 0px 0px 0px;
+                font-size: 14px;
+            }
+    
+            input {
+                padding: 5px;
+                border: none;
+                border: solid 1px #ccc;
+                border-radius: 5px;
+            }
+    
+            /* -------------------登入功能css結束------------------- */
+            div.logo-wrapper {
+                position: relative;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+            }
+        </style>
+    </head>
+    
+    <body>
+    
+        <!-- PAGE WRAPPER -->
+        <div id="page-wrapper">
+    
+    
+            <!-- SITE MAIN CONTENT -->
+            <main id="main-content" role="main">
+    
+                <div class="container">
+                    <!-- -------------------登入功能開始--------------------->
+                    <div class="login_page" style="height: 620px;">
+                        <div id="container1" style="top: 20px;">
+                            <div class="login" style="display: flex;flex-direction: column;align-items: center;">
+                                <!-- 撐版面用 -->
+                                <div style="margin-top:100px;"></div>
+                                <h3>員工登入</h3>
+    
+    
+                                <div>
+                                    <label for="username">帳號：</label>
+                                    <input type="text" id="username" name="username" placeholder="帳號" required
+                                        value="acct001" style="font-size: 16px;">
+                                    <span id="usernameMsg" style="visibility: hidden;color: red;">需輸入</span>
+                                </div>
+                                <div>
+                                    <label for="password">密碼：</label>
+                                    <input type="password" id="password" name="password" placeholder="密碼" required
+                                        value="123456" style="font-size: 16px;">
+                                    <span id="passwordMsg" style="visibility: hidden;color: red;">需輸入</span>
+                                </div>
+                                <div>
+                                    <input type="checkbox" id="showPassword"
+                                        onclick="$(this).is(':checked') ? $('input#password').attr('type', 'text') : $('input#password').attr('type', 'password')">
+                                    <label for="showPassword">顯示密碼</label>
+                                </div>
+                                <!-- <div>
+                                    <input type="checkbox" id="rememberPassword" onclick="console.log($(this))">
+                                    <label for="rememberPassword">記住密碼</label>
+                                </div> -->
+    
+                                <button class="btn btn-primary btn-round padder loginSubmit"
+                                    style="margin-top:20px;">登入</button>
+                                <!-- <input type="submit" value="登入" class="submit"> -->
+                                <!-- </form> -->
+                                <p id="checkMsg" style="visibility: hidden;color: red;font-size: 10px;margin-top: 30px;">
+                                    你的帳號或密碼不正確，請再試一次</p>
+    
+    
+                            </div><!-- login end-->
+                        </div><!-- container1 end-->
+                    </div><!-- login_page end-->
+                </div>
+                <!-- -------------------登入功能結束--------------------->
+    
+            </main>
+            <!-- // SITE MAIN CONTENT -->
+    
+         
+    
+        </div>
+
+        <script>
+            $(document).on("click", "button.loginSubmit",async function (e) {
+                let inputPass = true; // 判斷是否有成功輸入帳號密碼
+                console.log($.trim($("input#username").val()));
+                console.log($.trim($("input#password").val()));
+                if ($.trim($("input#username").val()) === "") {
+                    console.log('username為空');
+                    inputPass = false;
+                    $("span#usernameMsg").css("visibility", "visible"); // 將錯誤提示顯示
+                    $('p#checkMsg').css('visibility', 'hidden');
+                }
+                else {
+                    $("span#usernameMsg").css("visibility", "hidden"); // 將錯誤提示隱藏
+                }
+                if ($.trim($("input#password").val()) === "") {
+                    console.log('password為空');
+                    inputPass = false;
+                    $("span#passwordMsg").css("visibility", "visible"); // 將錯誤提示顯示
+                    $('p#checkMsg').css('visibility', 'hidden');
+                }
+                else {
+                    $("span#passwordMsg").css("visibility", "hidden"); // 將錯誤提示隱藏
+                }
+                if (inputPass) {
+                    $("span#usernameMsg").css("visibility", "hidden"); // 將錯誤提示隱藏
+				    $("span#passwordMsg").css("visibility", "hidden"); // 將錯誤提示隱藏
+                    
+                    await fetch('/BuyGo/api/back_end/EmpLogin', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json;charset:utf-8' },
+                        body: JSON.stringify({
+                            empAcct: $('input#username').val(),
+                            empPw: $('input#password').val()
+                        })
+                    })
+                    .then(resp => resp.json())
+                    .then(body => {
+                        const { successful } = body;
+                        if (successful) {
+                            $('p#checkMsg').css('visibility', 'hidden');
+                            window.location.href = '/BuyGo/back_end/loginfilter.html';
+                        }
+                        else {
+                            $('p#checkMsg').css('visibility', 'visible');
+                        }
+                    });
+                }
+            });
+                </script>
+    </body>
+    
+    </html>
