@@ -42,6 +42,7 @@
     <link rel="stylesheet" href="../../../../css/common/owl.theme.css">
     <!-- // PARTICULAR PAGES CSS FILES -->
     <link rel="stylesheet" href="../../../../css/common/responsive.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.4/css/lightbox.min.css">
     <style>
         /*-----------------評價 & 燈箱css開始-----------------*/
         div.overlay {
@@ -121,6 +122,12 @@
             border: 0;
             vertical-align: middle;
         }
+
+        .paRtnPic {
+        width: 100px; /* 设置你想要的宽度 */
+        height: 100px; /* 设置你想要的高度 */
+        object-fit: cover; /* 保持纵横比并填充 */
+        }    
     </style>
 </head>
 
@@ -470,8 +477,8 @@
                                 <div class="col-xs-12 col-sm-8">
 
                                     <h1>退貨詳情</h1>
-                                    <p><strong>退貨處理狀態：</strong><span id="paRtnStat"></span></p>
-                                    <p><strong>退貨單號碼：</strong><span id="paRtnSeq"></span></p>
+                                    <p>退貨處理狀態：<span id="paRtnStat"></span></p>
+                                    <p>退貨單號碼：<span id="paRtnSeq"></span></p>
                                     <p><strong>買家帳號：</strong><span id="buyerName"></span></p>
                                     <p><strong>退貨申請日期：</strong><span id="paRtnDate"></span></p>
                                     <p><strong>退貨商品：</strong><span id="paRtnProds"></span>
@@ -742,6 +749,7 @@
     <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
     <script src="../../../../js/common//minified.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.4/js/lightbox.min.js"></script>
     <!-- // Essential Javascripts -->
 
     <!-- Particular Page Javascripts -->
@@ -786,7 +794,7 @@
                 $("#paRtnReason").text(paReturn.paRtnReason);
                 $("#paRtnText").text(paReturn.paRtnText);
                 $("#paRtnAmount").text(paReturn.paRtnAmount);
-                getReturnPicBase64(paRtnNo);
+                getReturnPicBase64(paReturn.paRtnNo);
 
                 for ( let paReturnDetails of paReturn.paReturnDetails) {
                     let html = "";
@@ -799,7 +807,7 @@
                 $("#paRtnPic").text();
 
 
-                // 將訂單資訊代入列表
+                // 將原始訂單資訊代入列表
                 $("#orderStatus").text(orderStatus(order.paSoStatus));
                 $("#orderNumber").text(order.paSoSeq);
                 $("#orderTime").text(order.paSoTime);
