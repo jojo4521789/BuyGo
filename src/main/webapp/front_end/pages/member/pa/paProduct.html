@@ -58,7 +58,7 @@
 			max-height: auto;
 		}
 
-		/* Image Slider CSS Start */
+		/* Image Slider CSS Start  滑動圖片CSS*/
 
 		body {
 			background: #e6e6e6;
@@ -73,10 +73,11 @@
 			;
 		}
 
-		.slide {
-			width: 100%;
+		/* 注意要將.slide 改成.slide2 */
+		.slide2 {
 
-			/* display: none; */
+			width: 100%;
+			display: none;
 			animation-name: fade;
 			animation-duration: 1s;
 
@@ -111,7 +112,7 @@
 			transition: 0.3s;
 		}
 
-		.controls:active {
+		.controls:active_dot {
 			color: grey;
 		}
 
@@ -136,6 +137,7 @@
 			margin: 10px 5px;
 		}
 
+		/* .active 修改成.active_dot  */
 		.active_dot {
 			background: crimson;
 		}
@@ -155,7 +157,7 @@
 			}
 		}
 
-		/* Image Slider CSS End */
+		/* Image Slider CSS End 滑動圖片CSS*/
 	</style>
 </head>
 
@@ -434,26 +436,25 @@
 
 							<div class="product-preview">
 
-								<div style=" width: 400px; height:400px;">
+								<!--Controlling arrows (按鈕)-->
+								<span class="controls" onclick="prevSlide(-1)" id="left-arrow"
+									style="position:absolute; z-index:9999; left: 5px; top: 200px">
+									<i class="iconfont-angle-left" aria-hidden="true"></i>
+								</span>
+								<span class="controls" id="right-arrow" onclick="nextSlide(1)"
+									style="position:absolute; z-index:9999; right: 5px; top: 200px">
+									<i class="iconfont-angle-right" aria-hidden="true"></i>
+								</span>
 
-									<!--Controlling arrows-->
-									<span class="controls" onclick="prevSlide(-1)" id="left-arrow"><i
-											class="fa fa-arrow-left" aria-hidden="true"></i>
-									</span>
-									<span class="controls" id="right-arrow" onclick="nextSlide(1)"><i
-											class="fa fa-arrow-right" aria-hidden="true"></i>
-									</span>
+								<div style=" width: 400px; height:400px;">
 
 									<div id="slider" style=" width: 400px; height:400px;">
 									</div>
 
-
 								</div>
+
 								<div id="dots-con">
-									<span class="dot"></span>
-									<span class="dot"></span>
-									<span class="dot"></span>
-									<span class="dot"></span>
+									<!-- <span class="dot"></span> -->
 								</div>
 
 							</div>
@@ -471,7 +472,7 @@
 								<header class="entry-header">
 									<h2 class="entry-title uppercase" id="prodName"></h2>
 								</header>
-								<article class="entry-content">
+								<article class="entry-content" style="font-size: 15px;">
 									<figure>
 										<span class="entry-price inline-middle" id="prodPrice"></span>
 
@@ -669,6 +670,45 @@
 
 	<script>
 
+		// Image Slider js Start (圖片滑動顯示)
+
+		var index = 0;
+		var slides, dots;
+
+		function prevSlide(n) {
+			index += n;
+			var slides = document.querySelectorAll(".slide2");
+			console.log("prevSlide is called");
+			changeSlide(slides);
+		}
+
+		function nextSlide(n) {
+			index += n;
+			var slides = document.querySelectorAll(".slide2");
+			changeSlide(slides);
+		}
+
+		function changeSlide(slides) {
+
+			var dots = document.querySelectorAll(".dot");
+
+			if (index > slides.length - 1)
+				index = 0;
+
+			if (index < 0)
+				index = slides.length - 1;
+
+			for (let i = 0; i < slides.length; i++) {
+				slides[i].style.display = "none";
+				dots[i].classList.remove("active_dot");
+			}
+
+			slides[index].style.display = "block";
+			dots[index].classList.add("active_dot");
+		}
+
+		// Image Slider js End (圖片滑動顯示)
+
 		window.addEventListener("load", function () {
 
 			//---------------------------------------元素-------------------------------------------------------
@@ -685,16 +725,21 @@
 			const objName_el = document.querySelector("#objName");
 			const objPrice_el = document.querySelector("#objPrice");
 
-			//             const ranRecommend_el = document.querySelector("#ranRecommend");
 
 			let paProdPicNoArray = [];
 			let count = 0;
 
 			//---------------------------------------fetch-------------------------------------------------------
 
+			//網址切換part
+			const queryString = window.location.search;
+			const urlParms = new URLSearchParams(queryString);
+			let prodId = urlParms.get("prodId");
 
+			loadProdDetail(prodId); // 傳入商品編號
 
-			loadProdDetail(3); // 測試用，暫時寫死
+			const full = location.protocol + '//' + location.host;
+			console.log(full);
 
 			// 載入頁面時讀取商品詳細資訊
 			function loadProdDetail(paProdNo) {
@@ -732,17 +777,23 @@
 						prodName_el.append(prodName);
 						prodText_el.append(prodText);
 
-						
+						slides = document.querySelectorAll(".slide2");
+						dots = document.querySelectorAll(".dot");
 
 						//圖片載入
 						if (body.paPicsList.length !== 0) {
 
-							$("#slider").html(`<img class="firstPic" src="${body.paPicsList[0].paProdPic}" alt="無法載入圖片" />`);
-							let paProdPics_el = "";
-							for (let paPrPic of body.paPicsList) {
-								var html = `
+							// $("#slider").html(`<img class="firstPic" src="${body.paPicsList[0].paProdPic}" alt="無法載入圖片" />`); (原本的第一張要拿掉)
 
-											<div class="slide" style=" display: none; ">
+							let count_dot = 0;
+
+							for (let paPrPic of body.paPicsList) {
+
+								count_dot++;
+
+								//注意要將.slide 改成.slide2
+								var html = `
+											<div class="slide2">
     											<img src="${paPrPic.paProdPic}" >
   											</div>
                                 		`;
@@ -750,6 +801,21 @@
 								$("#slider").append(html);
 							}
 
+							//代表圖片數量的點點 Start (圖片滑動顯示)
+							for (let d = 1; d <= count_dot; d++) {
+
+								var dot_html = `
+												<span class="dot"></span>
+											`;
+								$("#dots-con").append(dot_html);
+							}
+
+							var slides = document.querySelectorAll(".slide2"); //注意要將.slide 改成.slide2
+							var dots = document.querySelectorAll(".dot");
+
+							changeSlide(slides);
+
+							//代表圖片數量的點點 End (圖片滑動顯示)
 
 						} else {
 							$("#img_main_view").attr("src", "../../back_end/img/common/Image_not_available.png");
@@ -787,22 +853,23 @@
 								paProdObjNo: paProdObjNo
 							})
 						}).then(response => response.json())
-						.then(body => {
+							.then(body => {
 
 								body.forEach(random => {
 									console.log();
 									count++;
-									const { paProdName, paProdPrice } = random;
+									const { paProdName, paProdPrice, paProdNo } = random;
 
+									//這邊有幾項記得改成點選可以跳轉該商品
 									let productDiv = `
 
 										<div class="product" data-product-id="${count}" data-category="${paProdName}" data-brand="brand1"
 											data-price="" data-colors="red|blue|black|white" data-size="S|M|L">
-											<div class="entry-media">
-												<div class="hover" style="overflow: hidden">
-													<img src="${random.paPicsList[0].paProdPic}" class="entry-url" style="width: 100%">
+											<div class="entry-media" style=" min-height: 220px; overflow: hidden">
+												<div class="hover" style="height: auto;">
+													<img src="${random.paPicsList[0].paProdPic}" class="entry-url" style="height: 100%">
 													<ul class="icons unstyled">
-														<li><a href="${count}" class="circle" data-toggle="lightbox"> <i class="iconfont-search"></i>
+														<li><a href="${full}/BuyGo/front_end/pages/member/pa/paProduct.html?prodId=${paProdNo}" class="circle" data-toggle="lightbox"> <i class="iconfont-search"></i>
 															</a></li>
 														<li><a href="#" class="circle add-to-cart" onclick="addToCart(${count});"> <i
 																	class="iconfont-shopping-cart"></i>
@@ -812,7 +879,7 @@
 											</div>
 											<div class="entry-main" style="border-bottom-left-radius: 10px; border-bottom-right-radius: 10px;">
 												<h5 class="entry-title">
-													<a href="../../product.html">${paProdName}</a>
+													<a href="${full}/BuyGo/front_end/pages/member/pa/paProduct.html?prodId=${paProdNo}">${paProdName}</a>
 												</h5>
 												<div class="entry-description visible-list">
 													<p>${paProdName}</p>
@@ -835,180 +902,70 @@
 					})
 
 
-				// Image Slider js Start
-
-				var slides = document.querySelectorAll(".slide");
-				var dots = document.querySelectorAll(".dot");
-				var index = 0;
-
-
-				function prevSlide(n) {
-					index += n;
-					console.log("prevSlide is called");
-					changeSlide();
-				}
-
-				function nextSlide(n) {
-					index += n;
-					changeSlide();
-				}
-
-				changeSlide();
-
-				function changeSlide() {
-
-					if (index > slides.length - 1)
-						index = 0;
-
-					if (index < 0)
-						index = slides.length - 1;
-
-
-
-					for (let i = 0; i < slides.length; i++) {
-						slides[i].style.display = "none";
-
-						dots[i].classList.remove("active_dot");
-
-
-					}
-
-					slides[index].style.display = "block";
-					dots[index].classList.add("active_dot");
-
-
-
-				}
-
-				// Image Slider js End
-
 			}
 
+			//將商品類別的編號轉成文字資訊
+			function changeObjText(paProdObjNo) {
+				switch (paProdObjNo) {
+					case 1:
+						return '女生衣著';
+					case 1:
+						return '美食';
+					case 3:
+						return '伴手禮';
+					case 4:
+						return '手機平板與周邊';
+					case 5:
+						return '文創用品';
+					case 6:
+						return '書籍及雜誌期刊';
+					case 7:
+						return '男女鞋';
+					case 8:
+						return '娛樂、收藏';
+					case 9:
+						return '男生包包與配件';
+					case 10:
+						return '服務、票券';
+					case 11:
+						return '男生衣著';
+					case 12:
+						return '汽機車零件百貨';
+					case 13:
+						return '嬰幼兒與母親';
+					case 14:
+						return '3C與筆電';
+					case 15:
+						return '居家生活';
+					case 16:
+						return '女姓配件/黃金';
+					case 17:
+						return '寵物';
+					case 18:
+						return '戶外/旅行';
+					case 19:
+						return '運動/健身';
+					case 20:
+						return '電玩遊戲';
+					case 21:
+						return '女性包包/精品';
+					case 22:
+						return '家電影音';
+					case 23:
+						return '其他類別';
+					default:
+						return '出現錯誤，請聯繫客服人員';
+				}
 
+
+
+			}
 
 		});
 
-		//將商品類別的編號轉成文字資訊
-		function changeObjText(paProdObjNo) {
-			switch (paProdObjNo) {
-				case 1:
-					return '女生衣著';
-				case 1:
-					return '美食';
-				case 3:
-					return '伴手禮';
-				case 4:
-					return '手機平板與周邊';
-				case 5:
-					return '文創用品';
-				case 6:
-					return '書籍及雜誌期刊';
-				case 7:
-					return '男女鞋';
-				case 8:
-					return '娛樂、收藏';
-				case 9:
-					return '男生包包與配件';
-				case 10:
-					return '服務、票券';
-				case 11:
-					return '男生衣著';
-				case 12:
-					return '汽機車零件百貨';
-				case 13:
-					return '嬰幼兒與母親';
-				case 14:
-					return '3C與筆電';
-				case 15:
-					return '居家生活';
-				case 16:
-					return '女姓配件/黃金';
-				case 17:
-					return '寵物';
-				case 18:
-					return '戶外/旅行';
-				case 19:
-					return '運動/健身';
-				case 20:
-					return '電玩遊戲';
-				case 21:
-					return '女性包包/精品';
-				case 22:
-					return '家電影音';
-				case 23:
-					return '其他類別';
-				default:
-					return '出現錯誤，請聯繫客服人員';
-			}
-		}
 
 	</script>
 
 </body>
 
 </html>
-
-<!-- let productDiv = `
-
-	<div class="product" data-product-id="${body.opaProdNo}" data-category="${paProdName}" data-brand="brand1"
-		data-price="${paProdPrice}" data-colors="red|blue|black|white" data-size="S|M|L">
-		<div class="entry-media">
-			<img data-src="${prpics_url}" alt="" class="lazyLoad thumb" />
-			<div class="hover">
-				<a href="../../product.html" class="entry-url"></a>
-				<ul class="icons unstyled">
-
-					<li><a href="${prpics_url}" class="circle" data-toggle="lightbox"> <i class="iconfont-search"></i>
-						</a></li>
-					<li><a href="#" class="circle add-to-cart" onclick="addToCart(${data.opaProdNo});"> <i
-								class="iconfont-shopping-cart"></i>
-						</a></li>
-				</ul>
-			</div>
-		</div>
-		<div class="entry-main">
-			<h5 class="entry-title">
-				<a href="../../product.html">${paProdName}</a>
-			</h5>
-			<div class="entry-description visible-list">
-				<p>${data.opaProdContent}</p>
-			</div>
-			<div class="entry-price">
-				<strong class="price" style="margin-bottom: 15px">$ ${paProdPrice}</strong>
-
-				<a href="#" class="btn btn-default btn-lg btn-round add-to-cart">加入購物車</a>
-			</div>
-		</div>
-	</div>
-
-`; -->
-
-<!-- <img src="${paPrPic.paProdPic}" alt=""/> -->
-
-<!-- if (body.paPicsList.length !== 0) {
-	$(".big-image").html(`<img class="firstPic" src="${body.paPicsList[0].paProdPic}" alt="無法載入圖片" />`);
-	// $(".firstPic").attr("src", body.paPicsList[0].paProdPic);
-	let paProdPics_el = "";
-	for (let paPrPic of body.paPicsList) {
-		// paProdPicNoArray.push(paPrPic.paProdPicNo);
-		// let img_id = "img_" + paPrPic.paProdPicNo;
-		// paProdPics_el += `<img id="img_${paPrPic.paProdPicNo}" src="${paPrPic.paProdPic}" onclick="viewImgs(this)">`;
-		var html = `
-
-					<li>
-						<a href="${paPrPic.paProdPic}">
-							<img src="${paPrPic.paProdPic}" alt=""/>
-						</a>
-					</li>
-					
-		`;
-
-		$("#thumbnails").append(html);
-	}
-	// $(".thumbs unstyled clearfix").html(paProdPics_el);
-
-	console.log('圖片載入成功');
-
-} else {
-	$("#img_main_view").attr("src", "../../back_end/img/common/Image_not_available.png");
-} -->
