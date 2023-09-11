@@ -39,10 +39,8 @@ public class PaSoDetails extends Core{
     @Column(name = "PA_PROD_QTY")
     private Integer paProdQty;
     
-//    @ManyToOne
-//    @JoinColumn(name = "PA_SO_NO",
-//    insertable = false, updatable = false)
-//    private PaSo paSo;
+    @Column(name = "STATUS")
+    private Integer status;
     
     @ManyToOne
     @JoinColumn(name = "PA_PROD_NO",

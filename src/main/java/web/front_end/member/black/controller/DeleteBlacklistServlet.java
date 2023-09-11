@@ -18,19 +18,18 @@ public class DeleteBlacklistServlet extends HttpServlet{
 	
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) {
-	response.setCharacterEncoding("UTF-8");
-	HttpSession session = request.getSession(); // 取得當前請求的Session
-	Blacklist blacklist = json2Pojo(request, Blacklist.class);
-	
-	
-	// 如果刪除成功
-	if(SERVICE.deleteBlacklistByMemberNoAndMemberNoBlack((Integer)(session.getAttribute("memberNo")), blacklist.getMemberNoBlack())) {
-		blacklist.setSuccessful(true);
-		writePojo2Json(response, blacklist);
-	}
-	else { // 目前尚無刪除失敗的回傳
-		blacklist.setSuccessful(false);
-		writePojo2Json(response, blacklist);
-	}
+		response.setCharacterEncoding("UTF-8");
+		HttpSession session = request.getSession(); // 取得當前請求的Session
+		Blacklist blacklist = json2Pojo(request, Blacklist.class);
+		
+		// 如果刪除成功
+		if(SERVICE.deleteBlacklistByMemberNoAndMemberNoBlack((Integer)(session.getAttribute("memberNo")), blacklist.getMemberNoBlack())) {
+			blacklist.setSuccessful(true);
+			writePojo2Json(response, blacklist);
+		}
+		else { // 目前尚無刪除失敗的回傳
+			blacklist.setSuccessful(false);
+			writePojo2Json(response, blacklist);
+		}
 	}
 }

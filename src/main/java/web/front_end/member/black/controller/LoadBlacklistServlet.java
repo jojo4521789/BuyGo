@@ -21,7 +21,6 @@ public class LoadBlacklistServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) {
 		HttpSession session = request.getSession(); // 取得當前請求的Session
-
 		response.setCharacterEncoding("UTF-8");
 
 		List<Blacklist> blacklists = SERVICE.loadBlacklistByMemberNo((Integer)(session.getAttribute("memberNo"))); // 依目前登入者的memberNo查詢黑名單

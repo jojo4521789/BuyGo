@@ -1,6 +1,5 @@
 package core.util;
 
-import java.io.UnsupportedEncodingException;
 import java.util.Base64;
 
 public class Base64Util {

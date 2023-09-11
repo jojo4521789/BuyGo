@@ -2,7 +2,7 @@ package web.front_end.member.pa.req.dao.impl;
 
 import java.util.List;
 
-import org.hibernate.Transaction;
+import org.hibernate.query.Query;
 
 import web.front_end.member.pa.req.dao.MPaReqDAO;
 import web.front_end.member.pa.req.entity.MPaReq;
@@ -16,31 +16,42 @@ public class MPaReqDAOImpl implements MPaReqDAO {
 		return 1;
 	}
 	
+	
 	//用會員ID去查詢屬於該會員ID的委託單資料
+	@Override
 	public List<MPaReq> selectByMemberNo(Integer memberNoMember) {
 		final String hql = "FROM MPaReq WHERE memberNoMember = :memberNoMember ORDER BY paRqNo";
+		
+		
+		
 		return getSession()
 				.createQuery(hql, MPaReq.class)
 				.setParameter("memberNoMember", memberNoMember)
 				.getResultList();
 	}
 	
-	
-	public MPaReq selectByMemberNoMember(Integer memberNoMember) {
-		return getSession().get(MPaReq.class, memberNoMember);
-	}
-
-	public MPaReq selectByMemberNoSeller(Integer memberNoSeller) {
-		return getSession().get(MPaReq.class, memberNoSeller);
-	}
-	
-	public MPaReq selectByPaRqProdName(String paRqProdName) {
-		return getSession().get(MPaReq.class, paRqProdName);
+	//用會員ID去查詢屬於委託該賣家的委託單資料
+	@Override
+	public List<MPaReq> selectByMemberNoSeller(Integer memberNoSeller) {
+		final String hql = "FROM MPaReq WHERE memberNoSeller = :memberNoSeller ORDER BY paRqNo";
+		return getSession()
+				.createQuery(hql, MPaReq.class)
+				.setParameter("memberNoSeller", memberNoSeller)
+				.getResultList();
 	}
 	
-	public MPaReq selectByPaRqNo(String paRqNo) {
-		return getSession().get(MPaReq.class, paRqNo);
+	//修改委託狀態
+	@Override
+	public int updateReqStatus(MPaReq mPaReq) {
+		final StringBuilder hql = new StringBuilder().append("UPDATE MPaReq SET ");
+		hql.append("paRqStat= :paRqStat ")
+		.append("WHERE memberNoSeller= :memberNoSeller");
+	Query<?> query = getSession().createQuery(hql.toString());
+	return query.setParameter("paRqStat", mPaReq.getPaRqStat())
+//			.setParameter("memberNoSeller", mPaReq.getMemberNoSeller())
+			.executeUpdate();
 	}
+	
 
 	//一次查出所有資料庫中的委託內容
 	@Override

@@ -13,5 +13,4 @@ public interface MemberService extends CoreService {
 	boolean remove(Integer id);
 	boolean save(Member member);
 	Member forgetMember(String email);
-
 }

@@ -11,8 +11,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
+import web.front_end.member.util.SHA256EncoderUtil;
 import web.front_end.member.acc.entity.Member;
+import static web.front_end.member.util.SHA256EncoderUtil.SHA256Encode;;
 
 @WebServlet("/front_end/guest/register/MemberRegister")
 public class MemberRegisterServlet extends HttpServlet {
@@ -44,22 +45,21 @@ public class MemberRegisterServlet extends HttpServlet {
 
 //
 		req.setCharacterEncoding("utf-8");
+		resp.setCharacterEncoding("utf-8");
 		resp.setContentType("text/html:charset=utf-8");
 //		String memberGender = req.getParameter("memberGender");
 //		System.out.println(memberGender);
 		Member member = json2Pojo(req,Member.class);
 //		System.out.println(member);
+		String memberPassWord = member.getMemberPw();
 		
-		if (member == null) {
-			member = new Member();
-			member.setMessage("無會員資訊");
-			member.setSuccessful(false);
-			writePojo2Json(resp, member);
-			return;
-		}
+			member.setMemberPw(SHA256Encode(memberPassWord));
+			
+			member = SERVICE.register(member);
+			member.setSuccessful(true);
+			member.setMessage("註冊成功");
+			writePojo2Json(resp, true);
 		
-		member = SERVICE.register(member);
-		writePojo2Json(resp, member);
 		
 
 	}

@@ -12,5 +12,9 @@ public interface MPaReqService extends CoreService{
 	List<MPaReq> checkAll();
 	
 	List<MPaReq> loadReqListByMemberNo(Integer memberNoMember);
+	
+	List<MPaReq> loadReqListByMemberNoSeller(Integer memberNoSeller);
+	
+	MPaReq updatePaReqStatus(MPaReq mPaReq);
 
 }
