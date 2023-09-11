@@ -46,5 +46,14 @@ public class ProdServlet extends HttpServlet{
 			List<Prod> prods = SERVICE.findByOpaProdNameWithLimit(opaProdName, limit, offset);
 			writePojo2Json(resp, prods);
 		}
+		if("getRandomProdsByPrcatsWithLimit".equals(action)) {
+			Integer opaProdNo = prod.getOpaProdNo();
+			Integer opaPrcatsNo = prod.getOpaPrcatsNo();
+			Integer limit = prod.getLimit();
+			System.out.println(prod);
+			List<Prod> prods = SERVICE.getRandomProdsByPrcatsWithLimit(opaProdNo, opaPrcatsNo, limit);
+			System.out.println(prods);
+			writePojo2Json(resp, prods);
+		}
 	}
 }
