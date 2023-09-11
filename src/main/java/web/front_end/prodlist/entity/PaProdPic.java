@@ -1,7 +1,6 @@
 package web.front_end.prodlist.entity;
 
-import java.sql.Blob;
-
+import javax.persistence.AttributeOverride;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -21,6 +20,7 @@ import lombok.Setter;
 @Table(name = "PA_PROD_PIC", catalog = "buygo")
 @NoArgsConstructor
 @AllArgsConstructor
+@AttributeOverride(name = "id", column = @Column(name = "PA_PROD_NO", insertable = false, updatable = false))
 
 public class PaProdPic extends Core{
 	
@@ -33,6 +33,6 @@ public class PaProdPic extends Core{
 	@Column(name = "PA_PROD_NO")
 	private Integer paProdNo;
 	@Column(name = "PA_PROD_PIC")
-	private Blob paProdPic;
+	private String paProdPic;
 
 }

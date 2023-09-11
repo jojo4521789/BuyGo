@@ -10,5 +10,5 @@ import web.front_end.guest.news.entity.News;
 @Repository
 public interface NewsDao extends CoreDao<News, Integer>{
 	List<News> selectByInput (String input);
-
+	Integer selectByIncrese (String input);
 }

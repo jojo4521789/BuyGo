@@ -441,7 +441,7 @@
 									<li><a href="#">已收藏的揪團</a></li>
 									<li><a href="#">優惠券</a></li>
 									<li><a href="#">平台錢包</a></li>
-									<li><a href="#">聊天室</a></li>
+									<li><a href="../../../pages/member/chatroom.html">聊天室</a></li>
 									<li><a href="../../../pages/member/blacklist.html">黑名單</a></li>
 									<br>
 									<li><a href="../../../pages/member/myShop.html">我的賣場</a></li>
@@ -472,8 +472,6 @@
 									<!-- 訂單分類的賣場選擇 -->
 									<button type="button" class="btn btn-primary"
 										onclick="window.location.href='../../../index.html'">一般代購</button>
-									<button type="button" class="btn btn-primary"
-										onclick="window.location.href='../../../index.html'">限時連線代購</button>
 									<button type="button" class="btn btn-success">揪團</button>
 									<button type="button" class="btn btn-primary"
 										onclick="window.location.href='../../../index.html'">平台代購</button>
@@ -551,12 +549,27 @@
 										</div> -->
 										<!-- 假資料結束 -->
 									</div>
+									<!-- 分頁 -->
+									<ul class="paginator li-m-r-l pull-right" id="pageBtnContainer">
+										<li id="previousPageBtn"><a class="round-icon" href="#" data-toggle="tooltip"
+												data-title="Previous Page"><i class="iconfont-angle-left"></i></a></li>
+										<li class="numOfPagesClass" id="pageBtn1" style="display: none"><a
+												href="#">1</a></li>
+										<li class="numOfPagesClass" id="pageBtn2" style="display: none"><a
+												href="#">2</a></li>
+										<li class="numOfPagesClass" id="pageBtn3" style="display: none"><a
+												href="#">3</a></li>
+										<li class="numOfPagesClass" id="pageBtn4" style="display: none"><a
+												href="#">4</a></li>
+										<li class="numOfPagesClass" id="pageBtn5" style="display: none"><a
+												href="#">5</a></li>
+										<li id="nextPageBtn"><a class="round-icon" href="#" data-toggle="tooltip"
+												data-title="Next Page"><i class="iconfont-angle-right"></i></a></li>
+									</ul>
 								</div>
 							</div>
 						</div>
-
 					</div>
-
 				</div>
 			</div>
 
@@ -767,19 +780,125 @@
 	<!-- // Particular Page Javascripts -->
 	<script src="../../../js/login.js"></script>
 	<script>
+		let currentgpaSoStat = 0; // 全域變數，用來記錄當前訂單狀態，每次切換訂單狀態時會更新此變數
 		checkLoginStatusShowMemberAcct(); // 檢查客戶帳號是否登入，修改頁面右上方Log In/Log Out按鈕，顯示登入者帳號名稱
-
-		$("#orderPageBtn1").click(); // 載入頁面時即觸發點即按鈕事件，以觸發撈取資料庫的動作
+		changePage(0); // 載入頁面時即觸發更換頁面事件，以觸發撈取資料庫的動作
 
 		function changePage(selectPage) { // 點擊訂單狀態切換按鈕的觸發事件，依點擊按鈕的不同有不同的selectPage值
 			$("#showOrderArea").children().remove(); // 清空showOrderArea下的所有子元素
 			$("#search").val(""); // 清空搜尋框
+			currentgpaSoStat = selectPage; // 更新當前訂單狀態至全域變數
+			getPageData(1, ""); // 載入頁面時即觸發取得第一頁分頁資料的請求
+		}
+		//-----------------分頁功能開始-------------------
+		function getPageData(searchPageNum, searchStr) {
+			// 清空分頁按鈕
+			$("li#previousPageBtn").html("");
+			$("li#pageBtn1").html("");
+			$("li#pageBtn2").html("");
+			$("li#pageBtn3").html("");
+			$("li#pageBtn4").html("");
+			$("li#pageBtn5").html("");
+			$("li#nextPageBtn").html("");
 
+			// 使用fetch取得總訂單數
+			fetch('/BuyGo/needLoginApi/front_end/loadGpaSoCountByMemberNoAndSoStatAndSearchStr', {
+				method: 'POST',
+				headers: { 'Content-Type': 'application/json;charset:utf-8' },
+				body: JSON.stringify({
+					gpaSoStat: currentgpaSoStat,
+					searchStr: searchStr
+				})
+			})
+				.then(resp => resp.json())
+				.then(body => {
+					let { gpaSoCount } = body; // gpaSoCount為總訂單數
+
+					// 設定項開始
+					let limit = 5; // 設定每頁顯示的訂單筆數
+					// 設定項結束
+
+					let createNumOfPage = 1; // 更新最大需創建的頁面數，1為暫定，後續將計算後的最大創建頁面數設置於此變數
+					let offset = parseInt((searchPageNum - 1) * limit);
+
+					// 更新最大需創建的頁面數
+					if (gpaSoCount % limit === 0) { // 若總訂單數可被每頁顯示訂單數整除
+						createNumOfPage = parseInt(gpaSoCount / limit);
+					}
+					else {
+						createNumOfPage = parseInt(gpaSoCount / limit) + 1; // 若總訂單數不可被每頁顯示訂單數整除，再加1
+					}
+					// 新建分頁按鈕開始
+					// 視當前頁面頁數，顯示前後各2頁跳頁按鈕(頁數按鈕不為負數、頁數按鈕不超過最大頁數)，並於當前頁數加上底線
+					if (parseInt(createNumOfPage) < 5) {
+						for (let i = 1; i <= parseInt(createNumOfPage); i++) {
+							$(`li#pageBtn${i}`).append(`
+								<a href="#" onclick="getPageData(${i}, '${searchStr}')">${i}</a>
+							`);
+							$(`li#pageBtn${i}`).css("display", "inline-block"); // 顯示出有使用到的li標籤
+						}
+					}
+					else {
+						for (let i = 1; i <= 5; i++) {
+							if (searchPageNum < 3) {
+								$(`li#pageBtn${i}`).append(`
+									<a href="#" onclick="getPageData(${i}, '${searchStr}')">${i}</a>
+								`);
+								$(`li#pageBtn${i}`).css("display", "inline-block"); // 顯示出有使用到的li標籤
+							}
+							else if ((parseInt(i + searchPageNum - 3) <= createNumOfPage) && ((parseInt(createNumOfPage) - parseInt(searchPageNum)) >= 2)) {
+								$(`li#pageBtn${i}`).append(`
+									<a href="#" onclick="getPageData(${i + searchPageNum - 3}, '${searchStr}')">${i + searchPageNum - 3}</a>
+								`);
+								$(`li#pageBtn${i}`).css("display", "inline-block"); // 顯示出有使用到的li標籤
+							}
+							else {
+								$(`li#pageBtn${i}`).append(`
+									<a href="#" onclick="getPageData(${i + createNumOfPage - 5}, '${searchStr}')">${i + createNumOfPage - 5}</a>
+								`);
+								$(`li#pageBtn${i}`).css("display", "inline-block"); // 顯示出有使用到的li標籤
+							}
+						}
+					}
+					for (let i = 0; i < 5; i++) { // 將該分頁的數字按鈕加上底線
+						getPageBtn = $("ul#pageBtnContainer").find("li.numOfPagesClass").eq(i).find("a");
+						getPageBtnNum = getPageBtn.text();
+						if (searchPageNum === parseInt(getPageBtnNum)) {
+							getPageBtn.css("text-decoration", "underline");
+							break;
+						}
+					}
+					// 新建分頁按鈕結束
+					// 上一頁&下一頁按鈕開始
+					if (parseInt(createNumOfPage) != 1 && parseInt(createNumOfPage) != 0) {
+						if (parseInt(searchPageNum) === 1 || (parseInt(searchPageNum) != parseInt(createNumOfPage))) { // 建立下一頁按鈕
+							$("li#nextPageBtn").append(`
+								<a class="round-icon" href="#" data-toggle="tooltip" data-title="Next Page" onclick="getPageData(${searchPageNum + 1}, '${searchStr}')"><i class="iconfont-angle-right"></i></a>
+							`);
+						}
+						if (parseInt(searchPageNum) === parseInt(createNumOfPage) || (parseInt(searchPageNum) != 1)) { // 建立上一頁按鈕
+							$("li#previousPageBtn").append(`
+								<a class="round-icon" href="#" data-toggle="tooltip" data-title="Previous Page" onclick="getPageData(${searchPageNum - 1}, '${searchStr}')"><i class="iconfont-angle-left"></i></a>
+							`);
+						}
+					}
+					// 上一頁&下一頁按鈕結束
+					showPageDataAtPage(limit, offset, searchStr);
+				});
+		}
+		// 生成訂單於頁面上
+		function showPageDataAtPage(limit, offset, searchStr) {
 			const showOrderArea_el = $("#showOrderArea");
 			let orderCount = 0; // 計數生成的訂單數，將此數字用於div的id
-			fetch('/BuyGo/needLoginApi/front_end/loadGpaOrder?page=' + selectPage, {
-				method: 'Get',
-				headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset:utf-8' },
+			fetch('/BuyGo/needLoginApi/front_end/loadGpaOrderByLimitAndOffsetAndSearchStr', {
+				method: 'POST',
+				headers: { 'Content-Type': 'application/json;charset:utf-8' },
+				body: JSON.stringify({
+					limit: limit,
+					offset: offset,
+					gpaSoStat: currentgpaSoStat,
+					searchStr: searchStr
+				})
 			})
 				.then(response => {
 					if (response.status === 401) {
@@ -795,35 +914,36 @@
 					}
 				})
 				.then(body => {
+					$("#showOrderArea").children().remove(); // 清空showOrderArea下的所有子元素
 					body.forEach(gpaOrderDTO => {
 						let { gpaSoNo, gpaProdCount, gpaProdTotal, gpaEvaSeller, gpaProdName, gpaEndDate, memberAcct } = gpaOrderDTO;
 						let { gpaProdPics } = gpaOrderDTO;
 
 						orderCount++; // 生成的訂單數+1
-						// 已完成的取值方法
-						showOrderArea_el.append(`
-						<div class="tab-content" id="orderId${orderCount}" style="position:relative;width:770px;height:190px;margin-bottom:20px;display:flex; flex-direction:column">
-							<a href="#" class="orderDetail" onclick="testA()" style="position:absolute;left:0px; top:0px;width:100%;height:120px;">
-								<div class="col-xs-12 col-sm-12" style="width:100%;height:120px;">
-									<img src="data:image/jpeg;base64,${gpaProdPics[0]}" style="width:80px;height:80px;border:1.5px solid LightGray;position:absolute;left:20px; top:20px;" alt="GFashion - Responsive e-commerce HTML Template">
-									<h4 class="prodName" style="position:absolute;left:120px; top:20px;">${gpaProdName}</h4>
-									<span style="position:absolute;left:120px; top:80px;">x${gpaProdCount}</span>
-									<span style="position:absolute;right:10px; top:10px;">賣家名稱：${memberAcct}</span>
+						$("#showOrderArea").append(`
+							<div class="tab-content" id="orderId${orderCount}" style="width:770px;margin-bottom:20px;padding: 10px 10px;">
+								<div class="orderDetailArea" style="position: relative">
+									<span style="position:absolute;right:10px; top:10px;">買家名稱：${memberAcct}</span>
 									<span class="soNo" style="position:absolute;right:10px; top:35px;">訂單編號：${gpaSoNo}</span>
 									<div style="position:absolute;right:10px; top:90px;">揪團截止時間：${gpaEndDate}</div>
+									<a href="#" class="orderLink">
+										<div class="col-xs-12 col-sm-12" style="width:100%;height:120px;">
+											<img src="data:image/jpeg;base64,${gpaProdPics[0]}" style="width:80px;height:80px;border:1.5px solid LightGray;position:absolute;left:20px; top:20px;" alt="GFashion - Responsive e-commerce HTML Template">
+											<h4 class="prodName" style="position:absolute;left:120px; top:20px;">${gpaProdName}</h4>
+											<span style="position:absolute;left:120px; top:80px;">x${gpaProdCount}</span>
+										</div>
+										<hr style="margin:0px;border:1px solid lightgray">
+									</a>
 								</div>
-								<hr style="margin:0px;border:1px solid lightgray">
-							</a>
-							<div class="col-xs-12 col-sm-12 orderPrice" style="width:770px;height:69px;position:absolute;left:0px; top:121px;">
-									<h4 style="position:absolute;right:10px; top:20px;">訂單金額：$${gpaProdTotal}</h4>
+								<div class="col-xs-12 col-sm-12 orderPrice" style="height:70px;">
+									<h4 style="position:relative;text-align:right;top:35%;">訂單金額：$${gpaProdTotal}</h4>
+								</div>
 							</div>
-						</div>
 						`);
 						// 判斷目前所在的page，可給出評價的頁面才顯示評價按鈕
 						// 若在"已完成"頁面
-						if (selectPage === 4) {
+						if (currentgpaSoStat === 4) {
 							// 加上給予評價按鈕 與 過往評價
-							// $("div.orderPrice").append(`
 							$(`#orderId${orderCount}`).find('div.orderPrice').append(`
 								<button type="button" class="btn btn-warning EvalBtn" style="position:absolute;left:15px; top:20px;visibility:visible;">給予評價</button>
 								<h5 class="pastEval" style="position:absolute;left:110px; top:25px; visibility:hidden;"></h5>
@@ -859,12 +979,12 @@
 					});
 				})
 		}
+		//-----------------分頁功能結束-------------------
 		//-----------------評價 & 燈箱事件開始-----------------
 		// 開啟 Modal 彈跳視窗
 		$(document).on("click", "button.EvalBtn", function (e) {
 			$(this).closest("div.orderPrice").siblings("div.overlay").fadeIn();
 		});
-
 		// 關閉 燈箱Modal
 		$(document).on("click", "button.btn_modal_close, div.overlay, button.btn_modal_submit", function (e) {
 			$("div.overlay").fadeOut();
@@ -885,7 +1005,7 @@
 		function submitEval(selectBtn, soNo) {
 			starNum = $(selectBtn).closest("article").find("p").text(); // 取得選取的星星數，供後續fetch使用
 			// 向後端發出fetch請求，到資料庫中將該訂單的評價修改成前端輸入的評價數
-			fetch('/BuyGo/needLoginApi/front_end/UpdateGpaEvaSeller', {
+			fetch('/BuyGo/needLoginApi/front_end/updateGpaEvaSeller', {
 				method: 'POST',
 				headers: { 'Content-Type': 'application/json;charset:utf-8' },
 				body: JSON.stringify({
@@ -901,21 +1021,9 @@
 		//-----------------評價 & 燈箱事件結束-----------------
 		//-----------------搜尋框開始-----------------
 		$('#search').on('keyup', function () {
-			let numberOfOrder = $("#showOrderArea").children("div.tab-content").length; // 取得當前訂單數量
-			for(let i = 0 ; i < numberOfOrder ; i++){ // 遍歷所有訂單
-				orderProdName = $("#showOrderArea").children("div.tab-content").eq(i).find("h4.prodName").text(); // 取得一個訂單的產品名稱
-				orderSoNo = $("#showOrderArea").children("div.tab-content").eq(i).find("span.soNo").text(); // 取得一個訂單的訂單編號
-				if(orderProdName.includes($("#search").val()) || orderSoNo.substr(5,orderSoNo.length).includes($("#search").val())){ // 如果搜尋框文字被產品名稱和訂單編號包含
-					$("#showOrderArea").children("div.tab-content").eq(i).show(); // 將符合條件的訂單顯示出來
-				}
-				else{
-					$("#showOrderArea").children("div.tab-content").eq(i).hide(); // 將不符合條件的訂單隱藏起來
-				}
-			}
+			getPageData(1, $("#search").val());
 		});
 		//-----------------搜尋框結束-----------------
 	</script>
-
 </body>
-
 </html>

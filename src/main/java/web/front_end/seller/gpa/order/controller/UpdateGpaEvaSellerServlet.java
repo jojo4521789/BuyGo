@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import web.front_end.seller.gpa.order.entity.GpaSo;
 
-@WebServlet("/needLoginApi/front_end/UpdateGpaEvaSeller")
+@WebServlet("/needLoginApi/front_end/updateGpaEvaSeller")
 public class UpdateGpaEvaSellerServlet extends HttpServlet{
 	private static final long serialVersionUID = 1L;
 	

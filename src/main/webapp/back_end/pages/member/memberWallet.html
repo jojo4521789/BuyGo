@@ -86,9 +86,11 @@
                 <input type="text" class="map_input" id="memberIdInput" />
             </div>
             <div style="display: inline-block;vertical-align: top;">
-                <input type="button" value="搜尋" class="find_but" id="searchBtn" style="width: 70px;" onclick="searchMemberList()">
+                <input type="button" value="搜尋" class="find_but" id="searchBtn" style="width: 70px;"
+                    onclick="searchMemberList()">
                 <br>
-                <input type="button" value="全部清空" class="find_but" style="width: 70px;" onclick="$('.map_input').val('')">
+                <input type="button" value="全部清空" class="find_but" style="width: 70px;"
+                    onclick="$('.map_input').val('')">
             </div>
         </div>
         <!-- <p class="p_but">
@@ -200,7 +202,10 @@
         let selectedModifyBtn; // 全域變數，供記錄最後一次點下的修改按鈕
 
         $(document).ready(function () {
-            $('#showMemberList').DataTable();
+            $('#showMemberList').DataTable({
+                bFilter: false,
+                bLengthChange: false
+            });
         });
         function searchMemberList() {
             // $("tbody#showMemberListBody").children().remove(); // 清空showMemberListBody下的所有子元素
@@ -236,30 +241,30 @@
                     body.forEach(member => {
                         let { memberNo, memberAcct, memberStatus, memberName, memberPhone, memberEmail, memberGender, memberBirthday, memberId, memberWalletAmount } = member;
 
-                        switch(memberStatus){
-                            case 1:{
+                        switch (memberStatus) {
+                            case 1: {
                                 memberStatus = "一般會員";
                                 break;
                             }
-                            case 2:{
+                            case 2: {
                                 memberStatus = "賣家";
                                 break;
                             }
-                            case 3:{
+                            case 3: {
                                 memberStatus = "停權";
                                 break;
                             }
                         }
-                        switch(memberGender){
-                            case 0:{
+                        switch (memberGender) {
+                            case 0: {
                                 memberGender = "無";
                                 break;
                             }
-                            case 1:{
+                            case 1: {
                                 memberGender = "男";
                                 break;
                             }
-                            case 2:{
+                            case 2: {
                                 memberGender = "女";
                                 break;
                             }
@@ -284,7 +289,10 @@
                         `);
                     });
                     // 初始化
-                    $('#showMemberList').DataTable();
+                    $('#showMemberList').DataTable({
+                        bFilter: false,
+                        bLengthChange: false
+                    });
                 });
         }
 
@@ -340,10 +348,10 @@
                 $("span#checkAgainLightbox_walletDetail").text(walletDetail); // 將備註欄資訊顯示於再次確認燈箱
 
                 walletAmountAbs = Math.abs(modifyWalletAmount - walletAmount); // 取得修改後金額與修改前金額差值的絕對值
-                if(parseFloat(modifyWalletAmount) >= parseFloat(walletAmount)){ // 顯示警告訊息，提示該操作為"存入"或"提出"，金額為多少
+                if (parseFloat(modifyWalletAmount) >= parseFloat(walletAmount)) { // 顯示警告訊息，提示該操作為"存入"或"提出"，金額為多少
                     $("span#checkAgainLightbox_warn").text("該操作將對錢包\"存入\"" + walletAmountAbs + "元");
                 }
-                else{
+                else {
                     $("span#checkAgainLightbox_warn").text("該操作將對錢包\"提出\"" + walletAmountAbs + "元");
                 }
                 $("div#checkAgainLightbox").removeClass("none"); // 開啟再次確認用燈箱
