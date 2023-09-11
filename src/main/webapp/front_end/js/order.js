@@ -5,7 +5,7 @@ jQuery(function($) {
         dataType: "json",
         success: function(data) {
             var target = $("#order_tab");
-            var tabs = target.find("ul");
+            var tabs = target.find("ul.nav-tabs");
             var panels = target.find("div");
             for (var i = 0; i < data.length; i++) {
                 var li = $("<li></li>").addClass(i == 0 ? "active" : "");
@@ -49,6 +49,9 @@ jQuery(function($) {
                     }, {
                         field: "opaRealStatus",
                         title: "實際付款狀態",
+                    }, {
+                        field: "opaFailedReason",
+                        title: "訂單失敗原因",
                     }]
                 });
             }

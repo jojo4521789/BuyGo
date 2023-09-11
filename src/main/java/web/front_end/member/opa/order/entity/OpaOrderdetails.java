@@ -11,7 +11,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import web.back_end.opa.prod.entity.Prod;
+import web.front_end.guest.prod.entity.OpaProducts;
 
 
 @Entity
@@ -20,7 +20,7 @@ public class OpaOrderdetails implements java.io.Serializable {
 
 	private static final long serialVersionUID = 5461408637317149354L;
 	private OpaOrderdetailsId id;
-	private Prod opaProducts;
+	private OpaProducts opaProducts;
 	private OpaOrder opaSo;
 	private String opaProdName;
 	private double opaProdPrice;
@@ -29,7 +29,7 @@ public class OpaOrderdetails implements java.io.Serializable {
 	public OpaOrderdetails() {
 	}
 
-	public OpaOrderdetails(OpaOrderdetailsId id, Prod opaProducts, OpaOrder opaSo, String opaProdName,
+	public OpaOrderdetails(OpaOrderdetailsId id, OpaProducts opaProducts, OpaOrder opaSo, String opaProdName,
 			double opaProdPrice, int opaOrdQty) {
 		this.id = id;
 		this.opaProducts = opaProducts;
@@ -53,11 +53,11 @@ public class OpaOrderdetails implements java.io.Serializable {
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "OPA_PROD_NO", nullable = false, insertable = false, updatable = false)
-	public Prod getOpaProducts() {
+	public OpaProducts getOpaProducts() {
 		return this.opaProducts;
 	}
 
-	public void setOpaProducts(Prod opaProducts) {
+	public void setOpaProducts(OpaProducts opaProducts) {
 		this.opaProducts = opaProducts;
 	}
 
