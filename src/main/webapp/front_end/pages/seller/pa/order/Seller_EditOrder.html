@@ -24,7 +24,7 @@
     <!--<link href='http://fonts.useso.com/css?family=Open+Sans:300,400,600,700' rel='stylesheet' type='text/css'>-->
 
     <!-- GENERAL CSS FILES -->
-    <link rel="stylesheet" href="../../../css/common/minified.css">
+    <link rel="stylesheet" href="../../../../css/common/minified.css">
     <!-- // GENERAL CSS FILES -->
 
     <!--[if IE 8]>
@@ -32,16 +32,16 @@
 		<script src="js/selectivizr-min.js"></script>
 	<![endif]-->
 
-    <script src="../../../js/common/jquery.min.js"></script>
+    <script src="../../../../js/common/jquery.min.js"></script>
 
     <script>window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>');</script>
-    <script src="../../../js/common/modernizr.min.js"></script>
+    <script src="../../../../js/common/modernizr.min.js"></script>
     <!-- PARTICULAR PAGES CSS FILES -->
-    <link rel="stylesheet" href="../../../css/common/innerpage.css">
-    <link rel="stylesheet" href="../../../css/common/owl.carousel.css">
-    <link rel="stylesheet" href="../../../css/common/owl.theme.css">
+    <link rel="stylesheet" href="../../../../css/common/innerpage.css">
+    <link rel="stylesheet" href="../../../../css/common/owl.carousel.css">
+    <link rel="stylesheet" href="../../../../css/common/owl.theme.css">
     <!-- // PARTICULAR PAGES CSS FILES -->
-    <link rel="stylesheet" href="../../../css/common/responsive.css">
+    <link rel="stylesheet" href="../../../../css/common/responsive.css">
     <style>
         /*-----------------評價 & 燈箱css開始-----------------*/
         div.overlay {
@@ -299,7 +299,7 @@
                         <!-- SITE LOGO -->
                         <div class="logo-wrapper">
                             <a href="index-2.html" class="logo" title="GFashion - Responsive e-commerce HTML Template">
-                                <img src="../../../img/common/logo.png"
+                                <img src="../../../../img/common/logo.png"
                                     alt="GFashion - Responsive e-commerce HTML Template" />
                             </a>
                         </div>
@@ -360,10 +360,10 @@
                                                 <div class="carousel slide m-b" data-ride="carousel">
                                                     <div class="carousel-inner">
                                                         <div class="item active">
-                                                            <img src="../../../img/common/men/slide1.jpg" alt="" />
+                                                            <img src="../../../../img/common/men/slide1.jpg" alt="" />
                                                         </div>
                                                         <div class="item">
-                                                            <img src="../../../img/common/men/slide2.jpg" alt="" />
+                                                            <img src="../../../../img/common/men/slide2.jpg" alt="" />
                                                         </div>
                                                     </div>
                                                 </div>
@@ -515,15 +515,12 @@
                             <div class="row">
                                 <div class="col-xs-12 col-sm-8">
 
-                                    <h1>訂單詳情</h1>
+                                    <h1>更新追加狀態</h1>
                                     <p><strong>訂單狀態：</strong><span id="orderStatus"></span></p>
                                     <p><strong>訂單號碼：</strong><span id="orderNumber"></span></p>
                                     <p><strong>訂單日期：</strong><span id="orderTime"></span></p>
                                     <p><strong>收件人姓名：</strong><span id="recName"></span></p>
                                     <p><strong>收件地址：</strong><span id="sendAddress"></span></p>
-                                    <p><strong>訂單運送方式：</strong><span id="deliverMethod"></span></p>
-                                    <p><strong>寄件編號：</strong><span id=""></span></p>
-                                    <br>
                                     <p><strong>訂購商品列表：</strong><span id="prodList"></span></p>
                                     <table id="ordersTable">
                                         <thead>
@@ -533,16 +530,35 @@
                                                 <th>商品數量</th>
                                                 <th>商品單價</th>
                                                 <th>小計</th>
-                                                <th>追加結果</th>
+                                                <th>追加狀態 (更改完狀態後，請務必按下"確認更新"按鈕)</th>
                                             </tr>
                                         </thead>
                                         <tbody id="showOrderArea">
 
                                         </tbody>
                                     </table>
+
+                                    <button id="update" onclick="updateStatus()">確認更新</button>
+                                    <button id="back" onclick="PreviousPage()">返回前頁</button>
+                                    <br>
+                                    <br>
+
                                     <p id="originalAmount">💠原始訂單總金額: <span></span></p>
                                     <p id="receivable">💠實際應收總金額: <span></span></p>
-                                    <p id="refund">💠退還買家金額: <span></span></p>
+                                    <p id="refund">💠應退還買家金額: <span></span></p>
+
+                                    <div id="#allOrdersNotZero">
+                                        <span id="shipMsg"></span>
+                                        <br>
+                                        <p style="display:none" id="ship">請輸入出貨備註 <input type="text" id="deliverMsg">
+                                        <button id="ship_btn" onclick="confirmOrder(2)">出貨</button>
+                                        </p>
+
+                                        <button id="cancelOrder" onclick="confirmOrder(4)"
+                                            style="display:none">取消訂單</button>
+                                    </div>
+
+
                                 </div>
                             </div>
                         </div>
@@ -661,7 +677,7 @@
                                         <div class="center-xs">
                                             <div class="ads">
                                                 <a href="#">
-                                                    <img src="../../../img/common/demo/images-footer.jpg" alt="" />
+                                                    <img src="../../../../img/common/demo/images-footer.jpg" alt="" />
                                                 </a>
                                                 <div class="ads-caption bottom-right">
                                                     <a href="#" class="btn btn-default btn-round">
@@ -730,9 +746,9 @@
                             <div class="pull-right">
                                 <div class="vmid">
                                     <span class="uppercase">Payment Accept&emsp;</span>
-                                    <a href="#"><img src="../../../img/common/visacard.png" alt="" width="40" /></a>
-                                    <a href="#"><img src="../../../img/common/mastercard.png" alt="" width="40" /></a>
-                                    <a href="#"><img src="../../../img/common/paypal.png" alt="" width="40" /></a>
+                                    <a href="#"><img src="../../../../img/common/visacard.png" alt="" width="40" /></a>
+                                    <a href="#"><img src="../../../../img/common/mastercard.png" alt="" width="40" /></a>
+                                    <a href="#"><img src="../../../../img/common/paypal.png" alt="" width="40" /></a>
                                 </div>
                             </div>
                         </div>
@@ -748,15 +764,15 @@
 
     <!-- Essential Javascripts -->
     <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
-    <script src="../../../js/common//minified.js"></script>
+    <script src="../../../../js/common//minified.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="../../../js/login.js"></script>
     <!-- // Essential Javascripts -->
 
     <!-- Particular Page Javascripts -->
-    <script src="../../../js/common/products.js"></script>
-    <script src="../../../js/common/owl.carousel.js"></script>
-    <script src="../../../js/common/contact.js"></script>
+    <script src="../../../../js/common/products.js"></script>
+    <script src="../../../../js/common/owl.carousel.js"></script>
+    <script src="../../../../js/common/contact.js"></script>
+    <script src="../../../../js/login.js"></script>
     <!--<script src="http://maps.googleapis.com/maps/api/js?sensor=false" type="text/javascript"></script>-->
     <!-- <script src="js/gmap3.min.js"></script> -->
 
@@ -764,12 +780,12 @@
     <!-- // Particular Page Javascripts -->
     <script>
         checkLoginStatusShowMemberAcct();
-
-        let lpaSoSeq = localStorage.getItem("myData");
+        
+        let paSoNo = localStorage.getItem("paSoNo"); // 從localStorage取得訂單編號
         let order;
 
-
-        fetch('/BuyGo/needLoginApi/showOrderDetails?lpaSoSeq=' + lpaSoSeq, {
+        // 從後端取得該筆訂單(PaSo)物件
+        fetch('/BuyGo/needLoginApi/showOrderDetails?paSoNo=' + paSoNo, {
             method: "Get",
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded ; charset=utf-8',
@@ -784,68 +800,74 @@
                 console.log(order); // 印出傳入的JSON物件$
 
                 // 將訂單資訊代入列表
-                $("#orderStatus").text(orderStatus(order.lpaSoStatus));
-                $("#orderNumber").text(order.lpaSoSeq);
-                $("#orderTime").text(order.lpaSoTime);
-                $("#recName").text(order.lpaRecName);
-                $("#sendAddress").text(order.lpaSendAddress);
-                $("#deliverMethod").text(order.lpaDeliverMethod);
-                $("#originalAmount > span").text(order.lpaTotalAmount);
+                $("#orderStatus").text(orderStatus(order.paSoStatus));
+                $("#orderNumber").text(order.paSoSeq);
+                $("#orderTime").text(order.paSoTime);
+                $("#recName").text(order.paRecName);
+                $("#sendAddress").text(order.paSendAddress);
+                $("#originalAmount > span").text(order.paTotalAmount);
 
-                let originalTotoalAmount = order.lpaTotalAmount;
-                let RefundAmount = 0;
-                // 確認每列商品小計
-                for (let e of order.lpaSoDetails) {
-                    let sum = e.lpaOrdQty * e.lpaProdPrice;
-                    // 若沒有追加成功, 加入退款金額
-                    if (e.status == 2) {
-                        RefundAmount += sum;
-                    }
-                }
-                $("#receivable > span").text(originalTotoalAmount - RefundAmount);
-                $("#refund > span").text(RefundAmount);
-
-                if (order.lpaSoStatus == 0 || order.lpaSoStatus == 1) {
-                    Swal.fire('發生錯誤，將跳轉回訂單列表')
-                        .then((result) => {
-                            /* Read more about isConfirmed, isDenied below */
-                            if (result.isConfirmed) {
-                                window.location.href = "Seller_ListOrders.html"
-                            }
-                        })
+                if (order.paSoStatus !== 1) {
+                    Swal.fire('此訂單無法編輯，將跳轉回訂單列表');
+                    window.location.href = "Seller_ListOrders.html"
                 }
 
                 // 將商品代入表格
-                for (let i = 0; i < order.lpaSoDetails.length; i++) {
-                    let blob = await getProdPic(order.lpaSoDetails[i].lpaProd.lpaProdNo);
+                for (let i = 0; i < order.paSoDetails.length; i++) {
+                    // 若在 then()方法内叫用 getProdPic(), getProdPic()會return Promise, 並且可以使用 await 來等待其结果
+                    let base64_str = await getProdPicBase64(order.paSoDetails[i].paProdNo); 
+                    // console.log("805行回傳");
+                    // console.log(blob);
+                    
                     let html = "";
-                    html += `<td><img class="prodPic" src="${URL.createObjectURL(blob)}"></td>`;
-                    html += `<td>${order.lpaSoDetails[i].lpaProd.lpaProdName}</td>`;
-                    html += `<td>${a = order.lpaSoDetails[i].lpaOrdQty}</td>`;
-                    html += `<td>${b = order.lpaSoDetails[i].lpaProdPrice}</td>`;
+                    html += `<td><img class="prodPic" src="${base64_str}"></td>`;
+                    html += `<td>${order.paSoDetails[i].paProd.paProdName}</td>`;
+                    html += `<td>${a = order.paSoDetails[i].paOrdQty}</td>`;
+                    html += `<td>${b = order.paSoDetails[i].paProdPrice}</td>`;
                     html += `<td>${a * b}</td>`;
-                    html += `<td>${orderDetailsStatus(order.lpaSoDetails[i].status)}</td>`;
 
+                    // 依照商品狀態預設checkbox
+                    switch (order.paSoDetails[i].status) {
+                        case 0:
+                            html += `<td>
+                                <label><input type="radio" name="status[${i}]" value="0" checked> 追加中</label>
+                                <label><input type="radio" name="status[${i}]" value="1"> 追加完成</label>
+                                <label><input type="radio" name="status[${i}]" value="2"> 追加失敗</label>
+                                </td>`
+                            break;
 
+                        case 1:
+                            html += `<td>
+                                <label><input type="radio" name="status[${i}]" value="0"> 追加中</label>
+                                <label><input type="radio" name="status[${i}]" value="1" checked> 追加完成</label>
+                                <label><input type="radio" name="status[${i}]" value="2"> 追加失敗</label>
+                                </td>`
+                            break;
 
+                        case 2:
+                            html += `<td>
+                                <label><input type="radio" name="status[${i}]" value="0"> 追加中</label>
+                                <label><input type="radio" name="status[${i}]" value="1"> 追加完成</label>
+                                <label><input type="radio" name="status[${i}]" value="2" checked> 追加失敗</label>
+                                </td>`
+
+                    }
+
+                    // 新增<tr>(橫列)元素
                     let tr = document.createElement("tr");
                     tr.innerHTML = html;
                     $("#showOrderArea").append(tr);
+                    showDeliverBtn(); // 如果沒有追加中商品, 則顯示出貨按鈕
                 }
-                // 最後一列顯示小計
-                let tr = document.createElement("tr");
-                $("#showOrderArea").append(tr);
             })
             .catch(function (error) {
                 console.log(error);
             })
 
-
-
         // 將整筆訂單狀態(數字)轉成中文
         function orderStatus(status) {
             switch (status) {
-				case 0:
+                case 0:
 					return "待付款";
 				case 1:
 					return "追加中";
@@ -857,20 +879,204 @@
 					return "不成立";
 				default:
 					return "未知狀態";
-			}
+            }
         }
 
         // 將訂單追加狀態(數字)轉成中文
         function orderDetailsStatus(status) {
             switch (status) {
                 case 0:
-                    return "⚠️追加中";
+                    return "追加中";
                 case 1:
-                    return "✅追加完成";
+                    return "追加完成";
                 case 2:
-                    return "❌追加失敗";
+                    return "追加失敗";
                 default:
                     return "未知狀態";
+            }
+        }
+
+        // 取得每個商品的追加狀態(單選框的值), 並送到後端
+        function updateStatus() {
+            let paSoDetailsList = [];
+            for (let i = 0; i < order.paSoDetails.length; i++) {
+                let paSoDetails = {
+                    paSoNo: order.paSoDetails[i].paSoNo,
+                    paProdNo: order.paSoDetails[i].paProdNo,
+                    status: $("input[name='status[" + i + "]']:checked").val()
+                }
+                paSoDetailsList.push(paSoDetails);
+            }
+            Data = { paSoDetailsList: paSoDetailsList }
+
+            fetch("/BuyGo/needLoginApi/updateDetailStatus", {
+                method: 'POST',
+                body: JSON.stringify(Data),
+                headers: {
+                    'Content-Type': 'application/json; charset=utf-8'
+
+                }
+            })
+                .then(function (response) {
+                    console.log(response);
+                    return response.json();
+                })
+                .then(function (data) {
+                    console.log("呼叫更新商品servlet, 取得物件為: ");
+                    console.log(data); // 印出傳入的JSON物件
+                    order.paSoDetails = data; // 更新paSoDetails
+                    Swal.fire(
+                        '商品狀態更新成功!',
+                        '',
+                        'success'
+                    )
+                    showDeliverBtn();
+
+                })
+                .catch(function (error) {
+                    console.log(error);
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Something went wrong!',
+                        // footer: '<a href="">Why do I have this issue?</a>'
+                    })
+                })
+        }
+
+        // 安排出貨及確認是否退款
+        function showDeliverBtn() {
+            let allStatusNotZero = true;
+            let allStatusTwo = true;
+
+            for (let e of order.paSoDetails) {
+                if (e.status != 2) {
+                    allStatusTwo = false;
+                }
+
+                if (e.status == 0) {
+                    allStatusNotZero = false; // 如果有任何 e.status == 0，改為 false
+                    $("#ship").hide(); // 隱藏出貨按鈕
+                    $("#shipMsg").text("");
+                    break;
+                }
+            }
+
+            if (allStatusTwo) {
+                $("#shipMsg").text("😞所有商品皆未追加成功，請進行下一步");
+                $("#ship").hide();
+                $("#cancelOrder").show();
+                calculateRealTotal();
+            } else if (allStatusNotZero && !allStatusTwo) {
+                $("#shipMsg").text("✔️所有商品已確認追加狀態，請確認訂單金額並進行下一步");
+                $("#ship").show();
+                $("#cancelOrder").hide();
+                calculateRealTotal();
+            } else {
+                $("#shipMsg").text("⚠️尚有商品未追加完成，請確認");
+                $("#ship").hide();
+                $("#cancelOrder").hide();
+                $("#receivable > span").text("❓請先確認所有商品追加狀態")
+                $("#refund > span").text("❓請先確認所有商品追加狀態");
+            }
+        }
+
+        // 前往運送細節
+        function calculateRealTotal() {
+            let originalTotoalAmount = order.paTotalAmount;
+            let RefundAmount = 0;
+            // 確認每列商品小計
+            for (let e of order.paSoDetails) {
+                let sum = e.paOrdQty * e.paProdPrice;
+                // 若沒有追加成功, 則加入退款金額
+                if (e.status == 2) {
+                    RefundAmount += sum;
+                }
+            }
+            $("#receivable > span").text(originalTotoalAmount - RefundAmount);
+            $("#refund > span").text(RefundAmount);
+
+        }
+
+        // 確認訂單並退款 *參數為訂單狀態(要求後端改為=> 2:運送中 or 4:不成立)
+        function confirmOrder(status) {
+            if (status == 2) { // 如果是出貨
+                Swal.fire({
+                    title: '確定出貨?',
+                    html: `🔵請用[${order.paDeliverMethod}]方式出貨<br>🔵出貨備註：${$("#deliverMsg").val()}`,
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: '確定',
+                    cancelButtonText: '取消'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        let Data = {
+                            newStatus: status,
+                            buyerNo: order.memberNo,
+                            refundToBuyer: $("#refund > span").text(),
+                            paSoNo: order.paSoNo,
+                            deliverMsg: $("#deliverMsg").val()
+                        }
+
+                        console.log(Data);
+
+                        // 將資料傳到後端
+                        fetch('/BuyGo/needLoginApi/UpdateOrder', {
+                            method: "POST",
+                            body: JSON.stringify(Data),
+                            headers: {
+                                'Content-Type': 'application/json; charset=utf-8'
+                            }
+                        })
+                            .then(function (response) {
+                                alert("已修改訂單狀態!");
+                                window.location.href = "Seller_ListOrders.html"
+                                // return response.json();
+                            })
+                            .catch(function (error) {
+                                console.log(error);
+                            })
+                    }
+                })
+
+            } else if (status == 4) { // 如果是取消訂單
+                Swal.fire({
+                    title: '確定取消?',
+                    text: "將取消訂單",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: '確定',
+                    cancelButtonText: '取消'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        let Data = {
+                            newStatus: status,
+                            buyerNo: order.memberNo,
+                            refundToBuyer: $("#refund > span").text(),
+                            paSoNo: order.paSoNo
+                        }
+
+                        // 將資料傳到後端
+                        fetch('/BuyGo/needLoginApi/UpdateOrder', {
+                            method: "POST",
+                            body: JSON.stringify(Data),
+                            headers: {
+                                'Content-Type': 'application/json; charset=utf-8'
+                            }
+                        })
+                            .then(function (response) {
+                                alert("訂單已取消");
+                                window.location.href = "Seller_ListOrders.html"
+                            })
+                            .catch(function (error) {
+                                console.log(error);
+                            })
+                    }
+                })
             }
         }
 
@@ -885,28 +1091,23 @@
             }
         }
 
+        async function getProdPicBase64(prodNo) {
+            try {
+                const base64_Str = await fetch('/BuyGo/needLoginApi/getProdPic?prodNo=' + prodNo)
+                    .then(response => response.text()); // await 關鍵字會等待 Promise 完成並返回其解析值
+                    // console.log(base64_Str);
+                return base64_Str;
+            } catch (error) {
+                console.log(error);
+            }
+        }
 
 
 
-        // 為何按返回上一頁沒有反應????
-        document.addEventListener('DOMContentLoaded', function () {
-            window.addEventListener('popstate', function (event) {
-                event.preventDefault();
-                Swal.fire({
-                    title: '您确定要离开此页面吗？',
-                    text: '未保存的更改将会丢失!',
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#3085d6',
-                    cancelButtonColor: '#d33',
-                    confirmButtonText: '確定返回!'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        history.back(); // 返回上一页
-                    }
-                });
-            });
-        });
+
+
+
+
 
     </script>
 

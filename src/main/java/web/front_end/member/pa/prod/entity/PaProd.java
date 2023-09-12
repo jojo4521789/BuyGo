@@ -1,15 +1,12 @@
 package web.front_end.member.pa.prod.entity;
 
 import java.sql.Timestamp;
-import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import core.entity.Core;
@@ -17,7 +14,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import web.front_end.member.pa.prodpic.entity.ProdPic;
 
 @Entity
 @Setter
@@ -51,9 +47,5 @@ public class PaProd extends Core{
  private String paProdContent;
  @Column(name = "PA_PROD_STATUS", insertable = false)
  private Integer paProdStatus;
- 
-	@OneToMany
-	@JoinColumn(name = "PA_PROD_NO", referencedColumnName = "PA_PROD_NO")
-	private List<ProdPic> prodPic;
- 
+
 }
