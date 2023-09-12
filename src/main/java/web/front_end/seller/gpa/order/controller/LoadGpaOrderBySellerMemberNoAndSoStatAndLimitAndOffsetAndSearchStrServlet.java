@@ -44,6 +44,7 @@ public class LoadGpaOrderBySellerMemberNoAndSoStatAndLimitAndOffsetAndSearchStrS
 			gpaOrderDTO.setGpaBuyName(gpaSo.getGpaBuyName()); // 收貨人
 			gpaOrderDTO.setGpaBuyTel(gpaSo.getGpaBuyTel()); // 收貨人電話
 			gpaOrderDTO.setGpaBuyAdd(gpaSo.getGpaBuyAdd()); // 收貨地址
+			gpaOrderDTO.setGpaProdNo(gpaSo.getGpaProd().getGpaProdNo()); // 揪團商品編號
 			gpaOrderDTO.setGpaProdName(gpaSo.getGpaProd().getGpaProdName()); // 商品名稱
 			gpaOrderDTO.setGpaEndDate(gpaSo.getGpaProd().getGpaEndDate()); // 截止日期
 			gpaOrderDTO.setMemberAcct(gpaSo.getMember().getMemberAcct()); // 買家名稱

@@ -14,7 +14,7 @@ import javax.servlet.http.HttpSession;
 
 import com.google.gson.Gson;
 
-import web.front_end.member.black.dto.ActionDTO;
+import core.dto.ActionDTO;
 import web.front_end.member.black.entity.Blacklist;
 
 @WebServlet("/needLoginApi/front_end/blacklist")

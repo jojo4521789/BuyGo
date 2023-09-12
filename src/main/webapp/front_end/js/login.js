@@ -1,4 +1,4 @@
-async function checkLoginStatusShowMemberAcct(){
+async function checkLoginStatusShowMemberAcct() {
     const response = await fetch('/BuyGo/api/front_end/checkLoginStatus', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json;charset:utf-8' },
@@ -24,4 +24,11 @@ async function checkLoginStatusShowMemberAcct(){
             }
         });
     return response; // 將收到的會員詳細資訊回傳給呼叫方
+}
+
+function notLoggedInAction() {
+    // 客戶未登入，執行頁面重定向到登入頁
+    sessionStorage.setItem("redirectURL", (window.location.pathname + location.search)); // 保存當前網址至sessionStorage，以使登入後能返回該網址
+    alert('帳號未登入，將導轉至登入頁面');
+    window.location.href = '/BuyGo/front_end/pages/member/login.html'; // 導轉至登入頁面url
 }

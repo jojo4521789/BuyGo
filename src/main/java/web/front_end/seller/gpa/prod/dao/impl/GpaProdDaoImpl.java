@@ -1,16 +1,10 @@
 package web.front_end.seller.gpa.prod.dao.impl;
 
-import java.sql.Timestamp;
-import java.time.LocalDateTime;
 import java.util.List;
 
 import org.hibernate.Session;
-import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
-import web.front_end.member.black.dao.impl.BlacklistDaoImpl;
-import web.front_end.member.black.entity.Blacklist;
-import web.front_end.member.chat.entity.ChatroomMessage;
 import web.front_end.seller.gpa.prod.dao.GpaProdDao;
 import web.front_end.seller.gpa.prod.entity.GpaProd;
 
@@ -127,6 +121,22 @@ public class GpaProdDaoImpl implements GpaProdDao{
 //			System.out.println("gpaPreProd:" + gpaProd.getGpaPreProd());
 //		}
 //		transaction.commit(); // 送交，同時會結束交易
+		
+		// 查詢randomSelectByGpaCatsNo
+//		Session session = gpaProdDaoImpl.getSession();
+//		
+//		Transaction transaction = session.beginTransaction(); // 開始交易
+//		List<GpaProd> gpaProdList = gpaProdDaoImpl.randomSelectByGpaCatsNo(18);
+//		System.out.println("gpaProdList.size():" + gpaProdList.size());
+//		for (GpaProd gpaProd : gpaProdList) {
+//			System.out.println("------------");
+//			System.out.print("gpaProdNo:" + gpaProd.getGpaProdNo() + ",");
+//			System.out.print("memberNo:" + gpaProd.getMemberNo() + ",");
+//			System.out.print("gpaProdName:" + gpaProd.getGpaProdName() + ",");
+//			System.out.println("gpaPreProd:" + gpaProd.getGpaPreProd());
+//			System.out.println("------------");
+//		}
+//		transaction.commit(); // 送交，同時會結束交易
 	}
 
 	@Override
@@ -189,6 +199,15 @@ public class GpaProdDaoImpl implements GpaProdDao{
 		return getSession()
 				.createQuery(hql, GpaProd.class)
 				.setParameter("gpaProdName", prodName)
+				.getResultList();
+	}
+
+	@Override
+	public List<GpaProd> randomSelectByGpaCatsNo(Integer gpaCatsNo) {
+		final String hql = "FROM GpaProd WHERE gpaCatsNo = :gpaCatsNo ORDER BY RAND()";
+		return getSession()
+				.createQuery(hql, GpaProd.class)
+				.setParameter("gpaCatsNo", gpaCatsNo)
 				.getResultList();
 	}
 }

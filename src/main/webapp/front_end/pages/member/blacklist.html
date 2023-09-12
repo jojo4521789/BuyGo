@@ -623,6 +623,10 @@
 	<!-- <script src="../../js/common/gmap3.min.js"></script> -->
 	<!-- // Particular Page Javascripts -->
 	<script src="../../js/login.js"></script>
+
+	<!-- 載入sweetalert -->
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 	<script>
 		checkLoginStatusShowMemberAcct(); // 檢查客戶帳號是否登入，修改頁面右上方Log In/Log Out按鈕，顯示登入者帳號名稱
 
@@ -642,12 +646,11 @@
 				.then(response => {
 					if (response.status === 401) {
 						// 客戶未登入，執行頁面重定向到登入頁
-						alert('帳號未登入，將導轉至登入頁面');
-						window.location.href = '/BuyGo/front_end/pages/member/login.html'; // 登入頁面url
+						notLoggedInAction();
 					} else if (response.ok) {
 						// 請求成功
 						return response.json();
-					} else{
+					} else {
 						alert("錯誤狀態:" + response.status);
 						return;
 					}
@@ -656,7 +659,7 @@
 
 					body.forEach(black => {
 						count++;
-						const { memberNoBlack } = black;
+						const { memberNoBlack, memberAcctBlack } = black;
 						// 刪除按鈕回傳memberNoBlack來記錄每個按鈕創建時的memberNoBlack，以便後續deleteBlack取值
 						blacklist_el.append(`
 						<li style="cursor: default;">
@@ -665,8 +668,12 @@
 							</h4>
 							<div class="row">
 								<dl class="col-xs-7 col-sm-7">
-									<dt>黑名單會員編號</dt>
+									<dt>會員編號</dt>
 									<dd>${memberNoBlack}</dd>
+								</dl>
+								<dl class="col-xs-7 col-sm-7">
+									<dt>會員帳號</dt>
+									<dd>${memberAcctBlack}</dd>
 								</dl>
 							</div>
 							<button type="submit" class="btn btn-primary uppercase m-r-sm" onclick="deleteBlack(${memberNoBlack});">移除黑名單</button>
@@ -687,8 +694,27 @@
 					memberNoBlack: e //刪除項目自帶的memberNoBlack
 				})
 			})
-				.then(resp => resp.json())
+				.then(response => {
+					if (response.status === 401) {
+						// 客戶未登入，執行頁面重定向到登入頁
+						notLoggedInAction();
+					} else if (response.ok) {
+						// 請求成功
+						return response.json();
+					} else {
+						alert("錯誤狀態:" + response.status);
+						return;
+					}
+				})
 				.then(body => {
+					// sweetalert
+					Swal.fire({
+						position: 'center',
+						icon: 'success',
+						title: '成功刪除黑名單',
+						showConfirmButton: false,
+						timer: 1500
+					})
 					loadBlacklist(); // 呼叫函式loadBlacklist，將當前畫面動態刷新
 				})
 		}
