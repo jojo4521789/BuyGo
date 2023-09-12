@@ -9,4 +9,5 @@ public class Constants {
 	public static final Gson GSON = new GsonBuilder().create();
 	public static final String JSON_MIME_TYPE = "application/json";
 	public static final String PREFIX_WEB_INF = "/WEB-INF";
+	public static final String SERVER_URL = "https://04f9-2402-7500-4e8-b6f-7d7a-653c-1865-b2d8.ngrok.io";
 }

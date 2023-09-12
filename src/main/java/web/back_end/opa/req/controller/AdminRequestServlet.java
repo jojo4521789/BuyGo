@@ -38,7 +38,10 @@ public class AdminRequestServlet extends HttpServlet {
 		}
 		int id = Integer.parseInt(request.getParameter("id"));
         int status = Integer.parseInt(request.getParameter("status"));
-        boolean success = SERVICE.updateStatus(id, status);
+		Integer failed = Integer.parseInt(request.getParameter("failed"));
+		if(failed == -1) 
+			failed = null;
+        boolean success = SERVICE.updateStatus(id, status, failed);
         core.setSuccessful(success);
 		writePojo2Json(response, core);
 	}

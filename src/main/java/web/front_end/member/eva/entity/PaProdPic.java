@@ -32,7 +32,7 @@ public class PaProdPic extends Core{
     private Integer paProdNo;
 
     @Column(name = "PA_PROD_PIC")
-    private byte[] paProdPic;
+    private String paProdPic;
     
     @Transient
     private String paProdPicToBase64;

@@ -791,13 +791,12 @@
 				.then(response => {
 					if (response.status === 401) {
 						// 客戶未登入，執行頁面重定向到登入頁
-						alert('帳號未登入，將導轉至登入頁面');
-						window.location.href = '/BuyGo/front_end/pages/member/login.html'; // 登入頁面url
+						notLoggedInAction();
 					} else if (response.ok) {
 						// 請求成功
 						return response.json();
 					} else {
-						alert("錯誤狀態" + response.status);
+						alert("錯誤狀態:" + response.status);
 						return;
 					}
 				})
@@ -805,7 +804,7 @@
 					body.forEach(gpaSoEvaDTO => {
 						let { gpaSo } = gpaSoEvaDTO;
 						let { gpaSoNo, gpaProdCount, gpaProdTotal, gpaEvaSeller, gpaProd, member } = gpaSo;
-						let { gpaProdName, gpaEndDate, gpaProdPics } = gpaProd;
+						let { gpaProdNo, gpaProdName, gpaEndDate, gpaProdPics } = gpaProd;
 						let { memberAcct } = member;
 						let { gpaProdPicToBase64 } = gpaProdPics[0];
 
@@ -816,7 +815,7 @@
 								<div class="orderDetailArea" style="position: relative">
 									<span style="position:absolute;right:10px; top:10px;">買家名稱：${memberAcct}</span>
 									<span class="soNo" style="position:absolute;right:10px; top:35px;">訂單編號：${gpaSoNo}</span>
-									<a href="#" class="orderLink">
+									<a href="/BuyGo/front_end/pages/member/gpa/gpaProduct.html?gpaProdNo=${gpaProdNo}" class="orderLink">
 										<div class="col-xs-12 col-sm-12" style="width:100%;height:120px;">
 											<img src="data:image/jpeg;base64,${gpaProdPicToBase64}" style="width:80px;height:80px;border:1.5px solid LightGray;position:absolute;left:20px; top:20px;" alt="GFashion - Responsive e-commerce HTML Template">
 											<h4 class="prodName" style="position:absolute;left:120px; top:20px;">${gpaProdName}</h4>
@@ -831,105 +830,9 @@
 								</div>
 							</div>
 						`);
-						// let { gpaProdName, gpaEndDate, gpaSoNo, gpaProdCount, gpaProdTotal, gpaEvaSeller, memberAcct, gpaProdPics } = gpaSoEvaDTO;
-
-						// for (let i = 0; i < gpaSoNo.length; i++) {
-						// 	gpaProdEvaArray.push( // 將讀取到的訂單存放到gpaProdEvaArray
-						// 		{
-						// 			gpaProdName: gpaProdName,
-						// 			gpaEndDate: gpaEndDate,
-						// 			gpaSoNo: gpaSoNo[i],
-						// 			gpaProdCount: gpaProdCount[i],
-						// 			gpaProdTotal: gpaProdTotal[i],
-						// 			gpaEvaSeller: gpaEvaSeller[i],
-						// 			memberAcct: memberAcct[i],
-						// 			gpaProdPics: gpaProdPics[0] // 只將第一張照片顯示於頁面上
-						// 		});
-						// }
 					});
-					// gpaProdEvaArray.sort(function (a, b) { // 依照gpaSoNo降冪排序，使最新的定單排在最前面
-					// 	return b.gpaSoNo - a.gpaSoNo;
-					// });
 				})
 		}
-		// 備份
-		// function gpaProdEva() {
-		// 	$("button#gpaBtn").addClass("btn-success"); // 修改按鈕樣式
-		// 	$("button#paBtn").removeClass("btn-success"); // 修改按鈕樣式
-		// 	$("button#paBtn").addClass("btn-primary"); // 修改按鈕樣式
-
-		// 	// 依序印出評價項目
-		// 	$("#showOrderArea").children().remove(); // 清空showOrderArea下的所有子元素
-		// 	$("#search").val(""); // 清空搜尋框
-
-		// 	let gpaProdEvaArray = []; // 建立一個矩陣，先存放讀取到的所有訂單，再依照gpaSoNo排序
-
-		// 	fetch('/BuyGo/needLoginApi/front_end/loadGpaProdEva', {
-		// 		method: 'Post',
-		// 		headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset:utf-8' },
-		// 	})
-		// 		.then(response => {
-		// 			if (response.status === 401) {
-		// 				// 客戶未登入，執行頁面重定向到登入頁
-		// 				alert('帳號未登入，將導轉至登入頁面');
-		// 				window.location.href = '/BuyGo/front_end/pages/member/login.html'; // 登入頁面url
-		// 			} else if (response.ok) {
-		// 				// 請求成功
-		// 				return response.json();
-		// 			} else {
-		// 				alert("錯誤狀態" + response.status);
-		// 				return;
-		// 			}
-		// 		})
-		// 		.then(body => {
-		// 			body.forEach(gpaProdEvaDTO => {
-		// 				let { gpaProdName, gpaEndDate, gpaSoNo, gpaProdCount, gpaProdTotal, gpaEvaSeller, memberAcct, gpaProdPics } = gpaProdEvaDTO;
-
-		// 				// console.log('gpaProdName:' + gpaProdName);
-		// 				// console.log('gpaEndDate:' + gpaEndDate);
-		// 				for (let i = 0; i < gpaSoNo.length; i++) {
-		// 					gpaProdEvaArray.push( // 將讀取到的訂單存放到gpaProdEvaArray
-		// 						{
-		// 							gpaProdName: gpaProdName,
-		// 							gpaEndDate: gpaEndDate,
-		// 							gpaSoNo: gpaSoNo[i],
-		// 							gpaProdCount: gpaProdCount[i],
-		// 							gpaProdTotal: gpaProdTotal[i],
-		// 							gpaEvaSeller: gpaEvaSeller[i],
-		// 							memberAcct: memberAcct[i],
-		// 							gpaProdPics: gpaProdPics[0] // 只將第一張照片顯示於頁面上
-		// 						});
-		// 				}
-		// 			});
-		// 			gpaProdEvaArray.sort(function (a, b) { // 依照gpaSoNo降冪排序，使最新的定單排在最前面
-		// 				return b.gpaSoNo - a.gpaSoNo;
-		// 			});
-		// 			let orderCount = 0; // 計數生成的訂單數，將此數字用於div的id
-		// 			for (let i = 0; i < gpaProdEvaArray.length; i++) { // 顯示訂單於頁面
-		// 				orderCount++; // 生成的訂單數+1
-		// 				showOrderArea_el.append(`
-		// 				<div class="tab-content" id="orderId${orderCount}" style="width:770px;margin-bottom:20px;padding: 10px 10px;">
-		// 					<div class="orderDetailArea" style="position: relative">
-		// 						<span style="position:absolute;right:10px; top:10px;">買家名稱：${gpaProdEvaArray[i].memberAcct}</span>
-		// 						<span class="soNo" style="position:absolute;right:10px; top:35px;">訂單編號：${gpaProdEvaArray[i].gpaSoNo}</span>
-		// 						<a href="#" class="orderLink">
-		// 							<div class="col-xs-12 col-sm-12" style="width:100%;height:120px;">
-		// 								<img src="data:image/jpeg;base64,${gpaProdEvaArray[i].gpaProdPics}" style="width:80px;height:80px;border:1.5px solid LightGray;position:absolute;left:20px; top:20px;" alt="GFashion - Responsive e-commerce HTML Template">
-		// 								<h4 class="prodName" style="position:absolute;left:120px; top:20px;">${gpaProdEvaArray[i].gpaProdName}</h4>
-		// 								<span style="position:absolute;left:120px; top:80px;">x${gpaProdEvaArray[i].gpaProdCount}</span>
-		// 							</div>
-		// 							<hr style="margin:0px;border:1px solid lightgray">
-		// 						</a>
-		// 					</div>
-		// 					<div class="col-xs-12 col-sm-12 orderPrice" style="height:70px;">
-		// 						<h4 style="position:relative;text-align:right;top:35%;">訂單金額：$${gpaProdEvaArray[i].gpaProdTotal}</h4>
-		// 						<h5 class="pastEval" style="position: absolute; left: 10px; top: 25px; visibility: visible;">買家評價：${gpaProdEvaArray[i].gpaEvaSeller === 0 ? '尚未評價' : gpaProdEvaArray[i].gpaEvaSeller + '★'}</h5>
-		// 					</div>
-		// 				</div>
-		// 				`);
-		// 			}
-		// 		})
-		// }
 
 		function paSoEva() {
 			$("button#paBtn").addClass("btn-success"); // 修改按鈕樣式
@@ -942,28 +845,29 @@
 
 			let paProdEvaArray = []; // 建立一個矩陣，先存放讀取到的所有訂單，再依照gpaSoNo排序
 
-			fetch('/BuyGo/needLoginApi/front_end/loadPaSoEva', {
+			fetch('/BuyGo/needLoginApi/front_end/eva', {
 				method: 'Post',
 				headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset:utf-8' },
+				body: JSON.stringify({
+					action: "loadPaSoEva"
+				})
 			})
 				.then(response => {
 					if (response.status === 401) {
 						// 客戶未登入，執行頁面重定向到登入頁
-						alert('帳號未登入，將導轉至登入頁面');
-						window.location.href = '/BuyGo/front_end/pages/member/login.html'; // 登入頁面url
+						notLoggedInAction();
 					} else if (response.ok) {
 						// 請求成功
 						return response.json();
 					} else {
-						alert("錯誤狀態" + response.status);
+						alert("錯誤狀態:" + response.status);
 						return;
 					}
 				})
 				.then(body => {
 					let orderCount = 0; // 計數生成的訂單數，將此數字用於div的id
 					body.forEach(PaSoEvaDTOList => { // PaSoEvaDTOList
-						let { paSoNo, paSoStatus, paSoTotal, paEvaSeller, memberAcct, paSoDetailsEvaDTO } = PaSoEvaDTOList;
-						let { paProdName, paProdQty, paProdPrice, paProdPicToBase64 } = paSoDetailsEvaDTO;
+						let { paSoNo, paSoStatus, paTotalAmount, paEvaSeller, memberAcct, paSoDetailsEvaDTO } = PaSoEvaDTOList;
 
 						orderCount++; // 生成的訂單數+1
 
@@ -974,7 +878,7 @@
 								<span class="soNo" style="position:absolute;right:10px; top:35px;">訂單編號：${paSoNo}</span>
 							</div>
 							<div class="col-xs-12 col-sm-12 orderPrice" style="height:70px;">
-								<h4 style="position:relative;text-align:right;top:35%;">訂單金額：$${paSoTotal}</h4>
+								<h4 style="position:relative;text-align:right;top:35%;">訂單金額：$${paTotalAmount}</h4>
 								<h5 class="pastEval" style="position: absolute; left: 10px; top: 25px; visibility: visible;">買家評價：${paEvaSeller === (0 || undefined) ? '尚未評價' : paEvaSeller + '★'}</h5>
 							</div>
 						</div>
@@ -987,7 +891,7 @@
 										<img src="data:image/jpeg;base64,${paProdPicToBase64[0]}" style="width:80px;height:80px;border:1.5px solid LightGray;position:absolute;left:20px; top:20px;" alt="GFashion - Responsive e-commerce HTML Template">
 										<h4 class="prodName" style="position:absolute;left:120px; top:20px;">${paProdName}</h4>
 										<span style="position:absolute;left:120px; top:80px;">x${paProdQty}</span>
-										<h5 style="position:absolute;right:10px; top:80px;">$${paProdPrice}</h5>
+										<h5 style="position:absolute;right:10px; top:80px;">$${paProdPrice * paProdQty}</h5>
 									</div>
 									<hr style="margin:0px;border:1px solid lightgray">
 								</a>
@@ -1004,13 +908,12 @@
 				.then(response => {
 					if (response.status === 401) {
 						// 客戶未登入，執行頁面重定向到登入頁
-						alert('帳號未登入，將導轉至登入頁面');
-						window.location.href = '/BuyGo/front_end/pages/member/login.html'; // 登入頁面url
+						notLoggedInAction();
 					} else if (response.ok) {
 						// 請求成功
 						return response.json();
 					} else {
-						alert("錯誤狀態" + response.status);
+						alert("錯誤狀態:" + response.status);
 						return;
 					}
 				})

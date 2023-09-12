@@ -77,6 +77,11 @@ public class GpaProd extends Core{
     @OneToMany(mappedBy = "gpaProd")
     private List<GpaSo> gpaSo;
     
+    @OneToMany
+    @JoinColumn(name = "GPA_PROD_NO",
+    referencedColumnName = "GPA_PROD_NO")
+    private List<GpaReach> gpaReach = new LinkedList<GpaReach>();
+    
 //    @OneToMany
 //    @JoinColumn(name = "GPA_PROD_NO",
 //    referencedColumnName = "GPA_PROD_NO")

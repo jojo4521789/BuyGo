@@ -35,17 +35,19 @@
         function sendNotification(id) {
             // send post request to change status
             $.ajax({
-                url: ROOT_URL + "/needLoginApi/admin/sendNotification",
+                url: ROOT_URL + "/needLoginApi/admin/opa/request/notify",
                 type: "POST",
                 data: {
-                    "type": "request",
                     "id": id
                 },
                 success: function (data) {
                     if (data.successful) {
                         alert("發送成功");
                     } else {
-                        alert("發送失敗");
+                        if(data.message)
+                            alert(data.message);
+                        else
+                            alert("發送失敗");
                     }
                 },
                 error: function (e) {
@@ -60,8 +62,13 @@
         }
 
         function operationFormatter(v, row, index, field) {
-            var value = row.opaRequestStatus;
+            var value = row.opaRequestNo;
             return '<button onclick="sendNotification(' + value + ')" class="btn btn-primary">發送通知</button>';
+        }
+
+        function failedReasonFormatter(v, row, index, field) {
+            value = row.opaFailedReason;
+            return OPA_FAILED_REASON_MAPPING[value];
         }
 
         $().ready(function () {
@@ -118,6 +125,18 @@
                         sortable: true
                     },
                     {
+                        field: 'opaFailedReason',
+                        title: '委託失敗原因',
+                        formatter: failedReasonFormatter,
+                        filterData: 'var:OPA_FAILED_REASON_FILTER',
+                        filterControl: 'select',
+                        sortable: true,
+                        editable: {
+                            type: 'select',
+                            source: OPA_FAILED_REASON
+                        }
+                    },
+                    {
                         field: 'operation',
                         title: '操作',
                         formatter: operationFormatter
@@ -126,8 +145,12 @@
                 onEditableSave: function(field, row, rowIndex, oldValue, $el) {
                     var id = row.opaRequestNo;
                     var value = row.opaRequestStatus;
+                    var failed_value = -1;
+                    if(row.opaFailedReason !== undefined) {
+                        failed_value = row.opaFailedReason;
+                    }
                     $.ajax({
-                        url: ROOT_URL + "/needLoginApi/admin/opa/request?id=" + id + "&status=" + value,
+                        url: ROOT_URL + "/needLoginApi/admin/opa/request?id=" + id + "&status=" + value + "&failed=" + failed_value,
                         type: "PUT",
                         success: function (data) {
                             if (data.successful) {
@@ -157,6 +180,11 @@
             })
         });
     </script>
+    <style>
+        table th {
+            vertical-align: top!important;
+        }
+    </style>
 </body>
 
 </html>

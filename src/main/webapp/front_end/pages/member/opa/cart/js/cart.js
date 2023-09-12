@@ -208,13 +208,13 @@ function getMemberCoupon() {
             let hasCoupon = false;
             if (datas) {
                 for (let data of datas) {
-                    if (data.opaCpownerStatus === 1) {
+                    let opaExpDate = new Date(data.coupon.opaExpDate);
+                    if (data.opaCpownerStatus === 1 || opaExpDate < new Date()) {
                         continue;
                     }
                     let couponDisabled = data.coupon.opaMinAmount > cartSubTTL ? "disabled" : "";
                     let couponMsg = data.coupon.opaMinAmount > cartSubTTL ? "" : "-none";
                     hasCoupon = true;
-                    let opaExpDate = new Date(data.coupon.opaExpDate);
                     const options = {
                         year: 'numeric',    // 年: 使用4位數
                         month: '2-digit',   // 月: 使用2數位

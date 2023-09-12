@@ -34,6 +34,9 @@ public class PaSo extends Core{
     @Column(name = "PA_SO_NO")
     private Integer paSoNo;
 
+    @Column(name = "PA_SO_SEQ")
+    private String paSoSeq;
+    
     @Column(name = "MEMBER_NO")
     private Integer memberNo;
 
@@ -42,33 +45,32 @@ public class PaSo extends Core{
 
     @Column(name = "PA_SO_STATUS")
     private Integer paSoStatus;
-
-    @Column(name = "PA_SO_1ST")
-    private Integer paSo1st;
-
-    @Column(name = "PA_SO_2ND")
-    private Integer paSo2nd;
-
-    @Column(name = "PA_SO_TOTAL")
-    private Integer paSoTotal;
-
-    @Column(name = "PA_REAL_STATUS")
-    private Integer paRealStatus;
-
-    @Column(name = "PA_BUY_NAME")
-    private String paBuyName;
-
-    @Column(name = "PA_BUY_TEL")
-    private String paBuyTel;
-
-    @Column(name = "PA_BUY_ADD")
-    private String paBuyAdd;
-
     @Column(name = "PA_EVA_SELLER")
     private Integer paEvaSeller;
-
+    
     @Column(name = "PA_EVA_MEMBER")
     private Integer paEvaMember;
+    
+    @Column(name = "PA_TOTAL_AMOUNT")
+    private Integer paTotalAmount;
+    
+    @Column(name = "PA_DELIVER_METHOD")
+    private String paDeliverMethod;
+    
+    @Column(name = "PA_DELIVER_TIME")
+    private Timestamp paDeliverTime;
+    
+    @Column(name = "PA_DELIVER_MSG")
+    private String paDeliverMsg;
+    
+    @Column(name = "PA_REC_NAME")
+    private String paRecName;
+    
+    @Column(name = "PA_REC_TEL")
+    private String paRecTel;
+    
+    @Column(name = "PA_SEND_ADDRESS")
+    private String paSendAddress;
     
     @ManyToOne
     @JoinColumn(name = "MEMBER_NO",

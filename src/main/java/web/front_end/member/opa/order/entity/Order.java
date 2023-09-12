@@ -17,4 +17,5 @@ public class Order {
 	private Integer opaTotal;
 	private Integer opaRealTotal;
 	private String opaRealStatus;
+	private String opaFailedReason;
 }

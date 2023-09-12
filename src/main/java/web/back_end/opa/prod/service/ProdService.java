@@ -21,4 +21,14 @@ public interface ProdService extends CoreService{
 	List<Prod> getOnOffShelfProds(Integer opaProdStatus);
 	
 	boolean remove(Integer opaProdNo);
+	
+	List<Prod> findAllProdWithLimit(Integer limit, Integer offset);
+	
+	List<Prod> findByOpaProdNameWithLimit(String opaProdName, Integer limit, Integer offset);
+	
+	int getProdTotalQty();
+	
+	int getProdTotalQtySelectByOpaProdName(String opaProdName);
+	
+	List<Prod> getRandomProdsByPrcatsWithLimit(Integer opaProdNo, Integer opaPrcatsNo, Integer limit);
 }

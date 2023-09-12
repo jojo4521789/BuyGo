@@ -54,7 +54,7 @@ public class ProdServiceImpl implements ProdService{
 
 	@Override
 	public List<Prod> findPart(String input) {
-		return dao.SelectByOpaProdNameList(input);
+		return dao.selectByOpaProdName(input);
 	}
 
 	@Override
@@ -67,7 +67,32 @@ public class ProdServiceImpl implements ProdService{
 
 	@Override
 	public List<Prod> getOnOffShelfProds(Integer opaProdStatus) {
-		return dao.SelectByOpaProdStatus(opaProdStatus);
+		return dao.selectByOpaProdStatus(opaProdStatus);
+	}
+
+	@Override
+	public List<Prod> findAllProdWithLimit(Integer limit, Integer offset) {
+		return dao.selectProdWithLimit(limit, offset);
+	}
+
+	@Override
+	public List<Prod> findByOpaProdNameWithLimit(String opaProdName, Integer limit, Integer offset) {
+		return dao.selectByOpaProdNameWithLimit(opaProdName, limit, offset);
+	}
+
+	@Override
+	public int getProdTotalQty() {
+		return dao.getProdTotalQty();
+	}
+
+	@Override
+	public int getProdTotalQtySelectByOpaProdName(String opaProdName) {
+		return dao.getProdTotalQtySelectByOpaProdName(opaProdName);
+	}
+
+	@Override
+	public List<Prod> getRandomProdsByPrcatsWithLimit(Integer opaProdNo, Integer opaPrcatsNo, Integer limit) {
+		return dao.getRandomProdsByPrcatsWithLimit(opaProdNo, opaPrcatsNo, limit);
 	}
 
 }

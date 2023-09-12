@@ -5,8 +5,8 @@ package ecpay.payment.integration.domain;
  * @author mark.chiu
  *
  */
-public class AioCheckOutALL {
-	
+public class AioCheckOutALL{
+
 	/**
 	 * MerchantID
 	 * 合作特店編號(由綠界提供)
@@ -129,7 +129,7 @@ public class AioCheckOutALL {
 	
 	/**
 	 * CustomField1
-	 * 自訂名稱欄位1，提供合作廠商使用記錄用客製化使用欄位
+	 * action，自訂名稱欄位1，提供合作廠商使用記錄用客製化使用欄位
 	 */
 	private String CustomField1 = "";
 	
@@ -826,14 +826,14 @@ public class AioCheckOutALL {
 		StoreID = storeID;
 	}
 	/**
-	 * 取得CustomField1 自訂名稱欄位1，提供合作廠商使用記錄用客製化使用欄位
+	 * action，取得CustomField1 自訂名稱欄位1，提供合作廠商使用記錄用客製化使用欄位
 	 * @return CustomField1
 	 */
 	public String getCustomField1() {
 		return CustomField1;
 	}
 	/**
-	 * 設定CustomField1 自訂名稱欄位1，提供合作廠商使用記錄用客製化使用欄位
+	 * action，設定CustomField1 自訂名稱欄位1，提供合作廠商使用記錄用客製化使用欄位
 	 * @param customField1
 	 */
 	public void setCustomField1(String customField1) {

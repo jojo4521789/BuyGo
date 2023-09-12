@@ -24,18 +24,20 @@ public class OpaRequest implements java.io.Serializable {
 	private String opaRequestProductsContent;
 	private byte opaRequestStatus;
 	private Date opaRequestStartdate;
+	private Integer opaFailedReason;
 
 	public OpaRequest() {
 	}
 
 	public OpaRequest(int memberNo, String opaRequestProductsName, String opaRequestProductsUrl,
-			String opaRequestProductsContent, byte opaRequestStatus, Date opaRequestStartdate) {
+			String opaRequestProductsContent, byte opaRequestStatus, Date opaRequestStartdate, Integer opaFailedReason) {
 		this.memberNo = memberNo;
 		this.opaRequestProductsName = opaRequestProductsName;
 		this.opaRequestProductsUrl = opaRequestProductsUrl;
 		this.opaRequestProductsContent = opaRequestProductsContent;
 		this.opaRequestStatus = opaRequestStatus;
 		this.opaRequestStartdate = opaRequestStartdate;
+		this.opaFailedReason = opaFailedReason;
 	}
 
 	@Id
@@ -105,4 +107,12 @@ public class OpaRequest implements java.io.Serializable {
 		this.opaRequestStartdate = opaRequestStartdate;
 	}
 
+	@Column(name = "OPA_REQUEST_REASON", nullable = true)
+	public Integer getOpaFailedReason() {
+        return this.opaFailedReason;
+    }
+
+	public void setOpaFailedReason(Integer opaFailedReason) {
+        this.opaFailedReason = opaFailedReason;
+    }
 }

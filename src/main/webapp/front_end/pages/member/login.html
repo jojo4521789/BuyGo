@@ -556,7 +556,7 @@
 				inputPass = false;
 				$("p#checkMsg2").css("visibility", "visible"); // 將未驗證機器人的錯誤提示顯示
 			}
-			else{
+			else {
 				$("p#checkMsg2").css("visibility", "hidden"); // 將未驗證機器人的錯誤提示隱藏
 			}
 			if (inputPass) {
@@ -575,10 +575,17 @@
 					.then(resp => resp.json())
 					.then(body => {
 						const { successful } = body;
-						// console.log('loginFunctionServlet登入狀態回傳:' + successful);
 						if (successful) {
 							$('p#checkMsg1').css('visibility', 'hidden');
-							window.location.href = '/BuyGo/front_end/index.html'; // 導轉至主頁
+
+							const redirectURL = sessionStorage.getItem('redirectURL');
+							if (redirectURL != null) { // 如果登入前是因未登入而被強制導轉過來登入頁，則sessionStorage的redirectURL不會為null
+								sessionStorage.removeItem("redirectURL"); // 於刪除sessionStorage刪除redirectURL記錄
+								window.location.href = redirectURL; // 導轉至強制導轉前的訪問頁面
+							}
+							else{ // 未被強制導轉登入頁，則登入後正常導轉至首頁
+								window.location.href = '/BuyGo/front_end/index.html'; // 導轉至主頁
+							}
 						}
 						else {
 							$('p#checkMsg1').css('visibility', 'visible');
