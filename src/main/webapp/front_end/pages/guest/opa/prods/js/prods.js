@@ -31,8 +31,7 @@ function addToCart(opaProdNo) {
         .then(resp => {
             if (resp.status === 401) {
                 // 客戶未登入，執行頁面重定向到登入頁
-                alert('帳號未登入，將導轉至登入頁面');
-                window.location.href = '/BuyGo/front_end/pages/member/login.html'; // 登入頁面url
+                notLoggedInAction();
             } else if (resp.ok) {
                 // 請求成功
                 return resp.json();
@@ -65,7 +64,6 @@ function addToCart(opaProdNo) {
                     }
                 });
         });
-
 }
 
 function updateCartItem() {
@@ -314,8 +312,7 @@ function loadProds(displayItemQty, offset) {
                             <div class="entry-price">
                                 <strong class="price">$ ${data.opaProdPrice}</strong>
                                 <a href="#"
-                                    class="btn btn-round btn-default add-to-cart visible-list" onclick="addToCart(${data.opaProdNo});">Add to
-                                    Cart</a>
+                                    class="btn btn-round btn-default add-to-cart visible-list" onclick="addToCart(${data.opaProdNo});">加入購物車</a>
                             </div>
                         </div>
                     </div>
@@ -506,8 +503,7 @@ function loadSearchProds(displayItemQty, offset) {
                             <div class="entry-price">
                                 <strong class="price">$ ${data.opaProdPrice}</strong>
                                 <a href="#"
-                                    class="btn btn-round btn-default add-to-cart visible-list" onclick="addToCart(${data.opaProdNo});">Add to
-                                    Cart</a>
+                                    class="btn btn-round btn-default add-to-cart visible-list" onclick="addToCart(${data.opaProdNo});">加入購物車</a>
                             </div>
                         </div>
                     </div>

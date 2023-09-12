@@ -17,8 +17,7 @@ fetch("/BuyGo/needLoginApi/opa/cart/selectByMember", {
     .then(resp => {
         if (resp.status === 401) {
             // 客戶未登入，執行頁面重定向到登入頁
-            alert('帳號未登入，將導轉至登入頁面');
-            window.location.href = '/BuyGo/front_end/pages/member/login.html'; // 登入頁面url
+            notLoggedInAction();
         } else if (resp.ok) {
             // 請求成功
             return resp.json();
@@ -43,7 +42,7 @@ fetch("/BuyGo/needLoginApi/opa/cart/selectByMember", {
                             data-toggle="lightbox">
                             <img src="${prpics_url}" alt="" />
                         </a>
-                        <a id="${data.prod.opaProdNo}" class="entry-title" href="../../../guest/product.html">${data.prod.opaProdName}</a>
+                        <a id="${data.prod.opaProdNo}" class="cart-entry-title" href="../../../guest/product.html">${data.prod.opaProdName}</a>
                     </td>
                     <td><span class="unit-price">$${data.prod.opaProdPrice}</span></td>
                     <td>
@@ -75,7 +74,7 @@ function addQty(el) {
     let subTotal = el.closest("tr").querySelector(".row-total");
     subTotal.textContent = "$" + qty * price;
 
-    let opaProdNo = el.closest("tr").querySelector(".entry-title").id;
+    let opaProdNo = el.closest("tr").querySelector(".cart-entry-title").id;
     cartProdQtyUpdate(opaProdNo, qty);
     calcCartAmt();
 }
@@ -91,7 +90,7 @@ function minusQty(el) {
     let subTotal = el.closest("tr").querySelector(".row-total");
     subTotal.textContent = "$" + qty * price;
 
-    let opaProdNo = el.closest("tr").querySelector(".entry-title").id;
+    let opaProdNo = el.closest("tr").querySelector(".cart-entry-title").id;
     if (qty === 0) {
         cartProdRemove(opaProdNo);
     } else {
@@ -331,7 +330,6 @@ function checkoutClick() {
         cartSubTTL: cartSubTTL,
         cartGrandTTL: cartGrandTTL
     }
-    console.log(cartData);
     sessionStorage.setItem("cart_data", JSON.stringify(cartData));
     window.location = "http://localhost:8081/BuyGo/front_end/pages/member/opa/checkout/checkout.html";
 }
