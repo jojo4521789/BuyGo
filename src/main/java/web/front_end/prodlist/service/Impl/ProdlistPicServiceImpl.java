@@ -3,7 +3,7 @@ package web.front_end.prodlist.service.Impl;
 import java.util.List;
 
 import web.front_end.prodlist.dao.impl.PaProdPicDAOImpl;
-import web.front_end.prodlist.entity.PaProdPic;
+import web.front_end.member.pa.prodpic.entity.ProdPic;
 import web.front_end.prodlist.service.ProdlistPicService;
 
 public class ProdlistPicServiceImpl implements ProdlistPicService{
@@ -15,7 +15,7 @@ public class ProdlistPicServiceImpl implements ProdlistPicService{
 	}
 	
 	@Override
-	public List<PaProdPic> selectByPaProdId(Integer paProdNo) {
+	public List<ProdPic> selectByPaProdId(Integer paProdNo) {
 		return dao.SelectByPaProdNo(paProdNo);
 
 	}

@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import web.front_end.prodlist.entity.PaProdlist;
+import web.front_end.member.pa.prod.entity.PaProd;
 
 
 @WebServlet("/api/front_end/paProdInfo")
@@ -26,9 +26,9 @@ public class ProdSelectByProdNoServlet extends HttpServlet{
 		
 		response.setContentType("text/html;charset=utf-8");
 		
-		Integer paProdNo = json2Pojo(request, PaProdlist.class).getPaProdNo();
+		Integer paProdNo = json2Pojo(request, PaProd.class).getPaProdNo();
 		
-		PaProdlist paProdlist = SERVICE.ProdInfoSelectByNo(paProdNo);
+		PaProd paProdlist = SERVICE.ProdInfoSelectByNo(paProdNo);
 		writePojo2Json(response, paProdlist);
 		
 	}

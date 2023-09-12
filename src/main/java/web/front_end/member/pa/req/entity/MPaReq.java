@@ -52,10 +52,10 @@ public class MPaReq extends Core{
 	private Timestamp paRqStartDate;
 	
 	 @ManyToOne
-	    @JoinColumn(name = "MEMBER_NO_SELLER", referencedColumnName = "MEMBER_NO")
-	    private Member member;
+     @JoinColumn(name = "MEMBER_NO_SELLER", referencedColumnName = "MEMBER_NO")
+     private Member member;
 
-	}
+}
 
 	
 
