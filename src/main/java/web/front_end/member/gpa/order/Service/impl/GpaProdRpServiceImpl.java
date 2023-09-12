@@ -24,10 +24,10 @@ public class GpaProdRpServiceImpl implements GpaProdRpService{
 		return gpaProdRp;
 	}
 
+	
 	@Override
-	public List<GpaProdRp> selectAll(GpaProdRp gpaProdRp) {
-		
-		return dao.selectAll();
+	public List<GpaProdRp> selectByProdRps(GpaProdRp gpaProdRp) {
+		return dao.selectByProdNo();
 	}
 	
 }

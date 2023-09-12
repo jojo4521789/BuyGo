@@ -7,5 +7,6 @@ import web.front_end.member.gpa.order.entity.GpaProdRp;
 
 public interface GpaProdRpService extends CoreService{
 	GpaProdRp increse(GpaProdRp gpaProdRp);
-	List<GpaProdRp> selectAll(GpaProdRp gpaProdRp);
+	List<GpaProdRp> selectByProdRps(GpaProdRp gpaProdRp);
+	
 }
