@@ -17,7 +17,7 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "OPA_PRODUCTS")
+@Table(name = "OPA_PRODUCTS2")
 public class Prod extends ProdCore{
 	private static final long serialVersionUID = 1346237891643762428L;
 	@Id
