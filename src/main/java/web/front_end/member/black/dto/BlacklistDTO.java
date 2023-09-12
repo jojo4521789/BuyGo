@@ -1,6 +1,5 @@
 package web.front_end.member.black.dto;
 
-import core.entity.Core;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,8 +9,14 @@ import lombok.Setter;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class ActionDTO{
+public class BlacklistDTO{
 	private static final long serialVersionUID = 1L;
 
-	private String action;
+	private Integer blackNo;
+	
+	private Integer memberNo;
+	
+	private Integer memberNoBlack;
+	
+	private String memberAcctBlack;
 }

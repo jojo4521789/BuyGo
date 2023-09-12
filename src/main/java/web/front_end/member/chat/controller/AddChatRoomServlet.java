@@ -1,6 +1,7 @@
 package web.front_end.member.chat.controller;
 
 import static core.util.CommonUtil.json2Pojo;
+import static core.util.CommonUtil.writePojo2Json;
 import static web.front_end.member.login.util.LoginConstants.SERVICE;
 
 import java.util.List;
@@ -13,6 +14,7 @@ import javax.servlet.http.HttpSession;
 
 import com.google.gson.Gson;
 
+import core.entity.Core;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 import web.front_end.member.acc.entity.Member;
@@ -73,5 +75,9 @@ public class AddChatRoomServlet extends HttpServlet{
 //			System.out.println("已建立對方memberNo至Detail");
 		}
 		jedis.close();
+		// 回傳成功訊息
+		Core core = new Core();
+		core.setSuccessful(true);
+		writePojo2Json(response, core);
 	}
 }

@@ -40,6 +40,7 @@ public class LoadGpaOrderByLimitAndOffsetAndSearchStrServlet extends HttpServlet
 			gpaOrderDTO.setGpaProdCount(gpaSo.getGpaProdCount()); // 購買數量
 			gpaOrderDTO.setGpaProdTotal(gpaSo.getGpaProdTotal()); // 總金額
 			gpaOrderDTO.setGpaEvaSeller(gpaSo.getGpaEvaSeller()); // 給賣家的評價
+			gpaOrderDTO.setGpaProdNo(gpaSo.getGpaProd().getGpaProdNo()); // 揪團商品編號
 			gpaOrderDTO.setGpaProdName(gpaSo.getGpaProd().getGpaProdName()); // 商品名稱
 			gpaOrderDTO.setGpaEndDate(gpaSo.getGpaProd().getGpaEndDate()); // 截止日期
 			gpaOrderDTO.setMemberAcct(gpaSo.getGpaProd().getMember().getMemberAcct()); // 賣家名稱
