@@ -1,6 +1,6 @@
 package web.front_end.member.opa.order.controller;
 import static web.front_end.member.opa.order.util.OpaOrderConstants.SERVICE;
-
+import web.front_end.member.opa.order.service.impl.OpaOrderServiceImpl;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -10,6 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import core.util.CommonUtil;
 import web.front_end.member.opa.order.entity.OpaOrder;
@@ -25,7 +26,8 @@ public class OrderServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        int memberNo = 1;
+		HttpSession session = request.getSession();
+        int memberNo = (Integer)session.getAttribute("memberNo");
         String type = request.getParameter("type");
 		response.setCharacterEncoding("UTF-8");
         if (type == null) {
@@ -68,6 +70,10 @@ public class OrderServlet extends HttpServlet {
             ordersArray[i].setOpaTotal(orders.get(i).getOpaTotal());
             ordersArray[i].setOpaRealTotal(orders.get(i).getOpaRealTotal());
             ordersArray[i].setOpaRealStatus(ORDER_PAY_STATUS_MAPPING[orders.get(i).getOpaRealStatus()]);
+            if(orders.get(i).getOpaFailedReason() != null)
+                ordersArray[i].setOpaFailedReason(OpaOrderServiceImpl.failedReasonMap[orders.get(i).getOpaFailedReason()]);
+            else
+                ordersArray[i].setOpaFailedReason("-");
         }
         CommonUtil.writePojo2Json(response, ordersArray);
     }

@@ -7,7 +7,7 @@
 
 <head>
     <meta charset="UTF-8" />
-    <title>My Wallet</title>
+    <title>平台代購委託單</title>
     <meta name="description" content="" />
     <meta name="keywords" content="" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -17,7 +17,8 @@
     <link rel="icon" href="img/common/favicon/favicon.html" type="image/x-icon" />
     <link rel="apple-touch-icon-precomposed" sizes="144x144"
         href="img/common/favicon/apple-touch-icon-144x144-precomposed.html">
-    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="img/common/favicon/apple-touch-icon-72x72-precomposed.html">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72"
+        href="img/common/favicon/apple-touch-icon-72x72-precomposed.html">
     <link rel="apple-touch-icon-precomposed" href="img/common/favicon/apple-touch-icon-precomposed.html">
 
     <!-- GENERAL CSS FILES -->
@@ -33,7 +34,6 @@
     <link rel="stylesheet" href="css/common/responsive.css">
 
     <link href="https://unpkg.com/bootstrap-table@1.22.1/dist/bootstrap-table.min.css" rel="stylesheet">
-
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.7.0.min.js"
         integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
@@ -50,9 +50,6 @@
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="js/common/modernizr.min.js"></script>
-    <script src="js/const.js"></script>
-    <script src="js/wallet.js"></script>
-
 </head>
 
 <body>
@@ -374,206 +371,14 @@
                     <!-- // SIDEBAR -->
 
                     <section class="col-xs-12 col-sm-8 col-md-9">
-                        <style>
-                            .transection-box {
-                                border: 1px solid #ccc;
-                                padding: 10px;
-                                margin-bottom: 10px;
-                            }
-
-                            .transection-box form {
-                                text-align: center;
-                            }
-                        </style>
-                        <section class="section">
-                            <div>
-                                <h1>
-                                    我的錢包儀表板
-                                </h1>
-                                <div style="text-align: right;">
-                                    <button type="button" class="btn btn-secondary" data-toggle="modal"
-                                        data-target="#whatIsWallet"
-                                        style="border-radius: 50%!important; padding: 2px 8px;">?
-                                    </button>
-                                    什麼是錢包
-                                </div>
-                            </div>
-                            <div class="row text-center">
-                                <div class="col-sm-4">
-                                    <h3>
-                                        當前總餘額
-                                    </h3>
-                                    <span id="total">--</span>
-                                </div>
-                                <div class="col-sm-4">
-                                    <h3>
-                                        目前可動用總餘額
-                                    </h3>
-                                    <span id="current">--</span>
-                                </div>
-                                <div class="col-sm-4">
-                                    <h3>
-                                        待處理交易金額
-                                    </h3>
-                                    <span id="pending">--</span>
-                                </div>
-                            </div>
-                        </section>
-                        <section class="section">
-                            <div class="panel-group" id="checkout-collapse">
-                                <div class="panel panel-default">
-                                    <div class="panel-heading">
-                                        <h4 class="panel-title">
-                                            <a data-toggle="collapse" data-parent="#checkout-collapse"
-                                                href="#checkout-collapse1">
-                                                交易相關操作
-                                            </a>
-                                        </h4>
-                                    </div>
-                                    <div id="checkout-collapse1" class="panel-collapse collapse in">
-                                        <div class="panel-body">
-                                            <div class="transection-box">
-                                                <span>存款</span>
-                                                <form role="form" id="wallet_add">
-                                                    <input type="hidden" name="action" value="add" />
-                                                    <div class="form-group stylish-input">
-                                                        <label for="input1">請輸入欲存款金額</label>
-                                                        <input type="text" id="input1" class="form-control" name="value"
-                                                            required />
-                                                    </div>
-                                                    <button type="submit" class="btn btn-primary">下一步</button>
-                                                </form>
-                                            </div>
-
-                                            <div class="transection-box">
-                                                <span>提款</span>
-                                                <form role="form" id="wallet_withdraw">
-                                                    <input type="hidden" name="action" value="withdraw" />
-                                                    <div class="form-group stylish-input">
-                                                        <label for="input1">請輸入欲提款金額</label>
-                                                        <input type="text" id="input1" class="form-control" name="value"
-                                                            required />
-                                                    </div>
-                                                    <button type="submit" class="btn btn-primary">下一步</button>
-                                                </form>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="panel panel-default">
-                                    <div class="panel-heading">
-                                        <h4 class="panel-title">
-                                            <a data-toggle="collapse" data-parent="#checkout-collapse"
-                                                href="#checkout-collapse2">
-                                                錢包交易歷史紀錄
-                                            </a>
-                                        </h4>
-                                    </div>
-                                    <div id="checkout-collapse2" class="panel-collapse collapse">
-                                        <div class="panel-body">
-                                            <table id="wallet_table" class="table_style table table-hover"></table>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="modal fade" id="add_wallet_confirm" tabindex="-1" role="dialog"
-                                    aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                    <form role="form" method="post">
-                                        <div class="modal-dialog" role="document">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title" id="exampleModalLabel">付款資訊</h5>
-                                                    <button type="button" class="close" data-dismiss="modal"
-                                                        aria-label="Close">
-                                                        <span aria-hidden="true">&times;</span>
-                                                    </button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <input type="hidden" name="action" value="add" />
-                                                    <input type="hidden" name="value" value="" />
-                                                    <div class="form-group stylish-input">
-                                                        <label for="cardNumber">請輸入卡號:</label>
-                                                        <input type="text" id="cardNumber" name="cardNumber"
-                                                            class="form-control" required>
-                                                    </div>
-                                                    <div class="form-group stylish-input">
-                                                        <label for="expiryDate">請輸入有效期限:</label>
-                                                        <input type="text" id="expiryDate" name="expiryDate"
-                                                            class="form-control" placeholder="MM/YY" required>
-                                                    </div>
-                                                    <div class="form-group stylish-input">
-                                                        <label for="cvv">請輸入CVV:</label>
-                                                        <input type="text" id="cvv" name="cvv" class="form-control"
-                                                            required>
-                                                    </div>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary"
-                                                        data-dismiss="modal">關閉</button>
-                                                    <button type="submit" class="btn btn-primary">提交</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
-
-                                <div class="modal fade" id="withdraw_wallet_confirm" tabindex="-1" role="dialog"
-                                    aria-labelledby="exampleModalLabel1" aria-hidden="true">
-                                    <form role="form" method="post">
-                                        <div class="modal-dialog" role="document">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title" id="exampleModalLabel1">密碼確認
-                                                    </h5>
-                                                    <button type="button" class="close" data-dismiss="modal"
-                                                        aria-label="Close">
-                                                        <span aria-hidden="true">&times;</span>
-                                                    </button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <input type="hidden" name="action" value="withdraw" />
-                                                    <input type="hidden" name="value" value="" />
-                                                    <div class="form-group stylish-input">
-                                                        <label for="password">請輸入密碼:</label>
-                                                        <input type="password" id="password" name="password"
-                                                            class="form-control" required>
-                                                    </div>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary"
-                                                        data-dismiss="modal">關閉</button>
-                                                    <button type="submit" class="btn btn-primary">提交</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
-
-                                <!-- Modal -->
-                                <div class="modal fade" id="whatIsWallet" tabindex="-1" role="dialog"
-                                    aria-labelledby="whatIsWallet" aria-hidden="true">
-                                    <div class="modal-dialog modal-dialog-centered" role="document">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalLongTitle">錢包如何使用?</h5>
-                                                <button type="button" class="close" data-dismiss="modal"
-                                                    aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
-                                                </button>
-                                            </div>
-                                            <!--  <div class="modal-body">
-                                                  Wallet is wallet-->
-                                            <div class="modal-body">
-                我的錢包是一項功能，您可以將資金存入其中，以便日後在集刻取代上進行付款。在預設情況下，取消的訂單費用也會回到錢包。錢包中的資金永遠不會過期。       
-                                                
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary"
-                                                    data-dismiss="modal">關閉</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                        <section class="section" id="order_tab">
+                            <h1>
+                                平台代購委託單
+                            </h1>
+                            <div class="tab-content">
+                                <table id="request-table" class="table_style table table-hover">
+                                    
+                                </table>
                             </div>
                         </section>
                     </section>
@@ -778,10 +583,12 @@
     <!-- // Essential Javascripts -->
 
     <!-- Particular Page Javascripts -->
-
+    <script src="https://unpkg.com/bootstrap-table@1.22.1/dist/bootstrap-table.min.js"></script>
     <script src="js/common/jquery.nouislider.js"></script>
     <script src="js/common/jquery.isotope.min.js"></script>
+    <script src="js/const.js"></script>
     <script src="js/common/products.js"></script>
+    <script src="js/request.js"></script>
     <script src="js/common/owl.carousel.js"></script>
     <!-- // Particular Page Javascripts -->
 </body>

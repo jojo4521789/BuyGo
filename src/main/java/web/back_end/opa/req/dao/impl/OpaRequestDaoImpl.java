@@ -35,6 +35,11 @@ public class OpaRequestDaoImpl implements OpaRequestDao {
     public OpaRequest selectById(Integer id) {
 		return getSession().get(getEntityClass(), id);
 	}
+
+	@Override
+    public List<OpaRequest> selectByMember(Integer memberNo) {
+		return getSession().createQuery("from " + this.getEntityClass().getSimpleName() + " where MEMBER_NO = :memberNo").setParameter("memberNo", memberNo).list();
+	}
     
     public void delete(OpaRequest entity) {
 		getSession().delete(entity);

@@ -35,13 +35,14 @@ public class OpaOrder implements java.io.Serializable {
 	private String opaBuyName;
 	private String opaBuyTel;
 	private String opaBuyAdd;
+	private Integer opaFailedReason;
 	private Set<OpaOrderdetails> opaOrderdetailses = new HashSet<OpaOrderdetails>(0);
 
 	public OpaOrder() {
 	}
 
 	public OpaOrder(int memberNo, byte opaSoStatus, double opaProdTotal, double opaDiscount, String opaBuyName,
-			String opaBuyTel, String opaBuyAdd) {
+			String opaBuyTel, String opaBuyAdd, Integer opaFailedReason) {
 		this.memberNo = memberNo;
 		this.opaSoStatus = opaSoStatus;
 		this.opaProdTotal = opaProdTotal;
@@ -49,6 +50,7 @@ public class OpaOrder implements java.io.Serializable {
 		this.opaBuyName = opaBuyName;
 		this.opaBuyTel = opaBuyTel;
 		this.opaBuyAdd = opaBuyAdd;
+		this.opaFailedReason = opaFailedReason;
 	}
 
 	public OpaOrder(int memberNo, byte opaSoStatus, Date opaSoDate, double opaProdTotal, double opaDiscount,
@@ -211,4 +213,12 @@ public class OpaOrder implements java.io.Serializable {
 		this.opaOrderdetailses = opaOrderdetailses;
 	}
 
+	@Column(name = "OPA_FAILED_REASON", nullable = true)
+	public Integer getOpaFailedReason() {
+        return this.opaFailedReason;
+    }
+
+	public void setOpaFailedReason(Integer opaFailedReason) {
+        this.opaFailedReason = opaFailedReason;
+    }
 }
