@@ -762,19 +762,21 @@
     <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
     <script src="../../../js/common//minified.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="sweetalert2.all.min.js"></script>
     <!-- // Essential Javascripts -->
 
     <!-- Particular Page Javascripts -->
     <script src="../../../js/common/products.js"></script>
     <script src="../../../js/common/owl.carousel.js"></script>
     <script src="../../../js/common/contact.js"></script>
+    <script src="../../../js/login.js"></script>
     <!--<script src="http://maps.googleapis.com/maps/api/js?sensor=false" type="text/javascript"></script>-->
     <!-- <script src="js/gmap3.min.js"></script> -->
 
 
     <!-- // Particular Page Javascripts -->
     <script>
+        checkLoginStatusShowMemberAcct();
+        
         let lpaSoSeq = localStorage.getItem("myData"); // 從localStorage取得訂單編號
         let order;
 

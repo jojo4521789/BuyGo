@@ -35,6 +35,14 @@ public class ECPayCheckoutServlet extends HttpServlet {
 			returnURL = SERVER_URL + req.getContextPath() + "/api/opa/ECPayUpdateOrder?BuyGoOrderId="
 					+ obj.getCustomField2();
 		}
+		
+		if ("paCheckout".equals(action)) {
+			// 設定綠界付款成功的回傳網址(放付款成功要執行的Controller路徑)
+			// CustomField2為要傳給Controller更新用的OrderId
+			returnURL = SERVER_URL + req.getContextPath() + "/api/UpdateOrder?paSoNo="
+					+ obj.getCustomField2();
+			System.out.println(returnURL);
+		}
 
 		// =================================TODO=================================
 		// 要用綠界的可以直接照這裡的格式串接，TODO以外的地方應該不用改

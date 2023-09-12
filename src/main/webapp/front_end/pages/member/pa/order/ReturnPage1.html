@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<!--[if IE 7 ]><html class="ie ie7 lte9 lte8 lte7" lang="en-US"><![endif]-->
+<!--[if IE 8]><html class="ie ie8 lte9 lte8" lang="en-US">	<![endif]-->
+<!--[if IE 9]><html class="ie ie9 lte9" lang="en-US"><![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!-->
+<html class="noIE" lang="en-US"><!--<![endif]-->
+
+<head>
+    <meta charset="UTF-8" />
+    <title>GFashion - Responsive e-commerce HTML Template</title>
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!-- Favorite Icons -->
+    <link rel="icon" href="img/favicon/favicon.html" type="image/x-icon" />
+    <link rel="apple-touch-icon-precomposed" sizes="144x144"
+        href="img/favicon/apple-touch-icon-144x144-precomposed.html">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="img/favicon/apple-touch-icon-72x72-precomposed.html">
+    <link rel="apple-touch-icon-precomposed" href="img/favicon/apple-touch-icon-precomposed.html">
+    <link rel="stylesheet" href="//cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+    <!-- // Favorite Icons -->
+
+    <!--<link href='http://fonts.useso.com/css?family=Open+Sans:300,400,600,700' rel='stylesheet' type='text/css'>-->
+
+    <!-- GENERAL CSS FILES -->
+    <link rel="stylesheet" href="../../../../css/common/minified.css">
+    <!-- // GENERAL CSS FILES -->
+
+    <!--[if IE 8]>
+		<script src="js/respond.min.js"></script>
+		<script src="js/selectivizr-min.js"></script>
+	<![endif]-->
+
+    <script src="../../../../js/common/jquery.min.js"></script>
+
+    <script>window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>');</script>
+    <script src="../../../../js/common/modernizr.min.js"></script>
+    <!-- PARTICULAR PAGES CSS FILES -->
+    <link rel="stylesheet" href="../../../../css/common/innerpage.css">
+    <link rel="stylesheet" href="../../../../css/common/owl.carousel.css">
+    <link rel="stylesheet" href="../../../../css/common/owl.theme.css">
+    <!-- // PARTICULAR PAGES CSS FILES -->
+    <link rel="stylesheet" href="../../../../css/common/responsive.css">
+    <style>
+        .return {
+            background-color: whitesmoke;
+            /* border-radius: 10px; */
+            margin: 10px 0 10px 10px;
+        }
+
+
+        .return>* {
+            background-color: whitesmoke;
+            /* border-radius: 10px; */
+            margin: 0 0 10px 20px;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-style: normal;
+            margin: 0px 0 5px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- PAGE WRAPPER -->
+    <div id="page-wrapper">
+
+        <!-- SITE HEADER -->
+        <header id="site-header" role="banner">
+            <!-- HEADER TOP -->
+            <div class="header-top">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-6 col-md-7">
+                            <!-- CONTACT INFO -->
+                            <div class="contact-info">
+                                <i class="iconfont-headphones round-icon"></i>
+                                <strong>+444 (100) 1234</strong>
+                                <span>(Mon- Fri: 09.00 - 21.00)</span>
+                            </div>
+                            <!-- // CONTACT INFO -->
+                        </div>
+                        <div class="col-xs-12 col-sm-6 col-md-5">
+                            <ul class="actions unstyled clearfix">
+                                <li>
+                                    <!-- SEARCH BOX -->
+                                    <div class="search-box">
+                                        <form action="#" method="post">
+                                            <div class="input-iconed prepend">
+                                                <button class="input-icon"><i class="iconfont-search"></i></button>
+                                                <label for="input-search" class="placeholder">Search here…</label>
+                                                <input type="text" name="q" id="input-search"
+                                                    class="round-input full-width" required />
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <!-- // SEARCH BOX -->
+                                </li>
+                                <li data-toggle="sub-header" data-target="#sub-social">
+                                    <!-- SOCIAL ICONS -->
+                                    <a href="javascript:void(0);" id="social-icons">
+                                        <i class="iconfont-share round-icon"></i>
+                                    </a>
+
+                                    <div id="sub-social" class="sub-header">
+                                        <ul class="social-list unstyled text-center">
+                                            <li><a href="#"><i class="iconfont-facebook round-icon"></i></a></li>
+                                            <li><a href="#"><i class="iconfont-twitter round-icon"></i></a></li>
+                                            <li><a href="#"><i class="iconfont-google-plus round-icon"></i></a></li>
+                                            <li><a href="#"><i class="iconfont-pinterest round-icon"></i></a></li>
+                                            <li><a href="#"><i class="iconfont-rss round-icon"></i></a></li>
+                                        </ul>
+                                    </div>
+                                    <!-- // SOCIAL ICONS -->
+                                </li>
+                                <li data-toggle="sub-header" data-target="#sub-cart">
+                                    <!-- SHOPPING CART -->
+                                    <a href="javascript:void(0);" id="total-cart">
+                                        <i class="iconfont-shopping-cart round-icon"></i>
+                                    </a>
+
+                                    <div id="sub-cart" class="sub-header">
+                                        <div class="cart-header">
+                                            <span>Your cart is currently empty.</span>
+                                            <small><a href="cart.html">(See All)</a></small>
+                                        </div>
+                                        <ul class="cart-items product-medialist unstyled clearfix"></ul>
+                                        <div class="cart-footer">
+                                            <div class="cart-total clearfix">
+                                                <span class="pull-left uppercase">Total</span>
+                                                <span class="pull-right total">$ 0</span>
+                                            </div>
+                                            <div class="text-right">
+                                                <a href="cart.html" class="btn btn-default btn-round view-cart">View
+                                                    Cart</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- // SHOPPING CART -->
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ADD TO CART MESSAGE -->
+                <div class="cart-notification">
+                    <ul class="unstyled"></ul>
+                </div>
+                <!-- // ADD TO CART MESSAGE -->
+            </div>
+            <!-- // HEADER TOP -->
+            <!-- MAIN HEADER -->
+            <div class="main-header-wrapper">
+                <div class="container">
+                    <div class="main-header">
+                        <!-- CURRENCY / LANGUAGE / USER MENU -->
+                        <div class="actions">
+                            <div class="center-xs">
+                                <!-- CURRENCY -->
+                                <ul class="option-list unstyled">
+                                    <li class="active"><a href="#" data-toggle="tooltip" title="USD - US Dollar">$</a>
+                                    </li>
+                                    <li><a href="#" data-toggle="tooltip" title="GBP - British Pound">lb</a></li>
+                                    <li><a href="#" data-toggle="tooltip" title="EUR - Euro">EUR</a></li>
+                                </ul>
+                                <!-- // CURRENCY -->
+                                <!-- LANGUAGES -->
+                                <ul class="option-list unstyled">
+                                    <li class="active"><a href="#" data-toggle="tooltip" title="English">EN</a></li>
+                                    <li><a href="#" data-toggle="tooltip" title="French">FR</a></li>
+                                    <li><a href="#" data-toggle="tooltip" title="Deutsch">DE</a></li>
+                                </ul>
+                                <!-- // LANGUAGES -->
+                            </div>
+                            <div class="clearfix"></div>
+                            <!-- USER RELATED MENU -->
+                            <nav id="tiny-menu" class="clearfix">
+                                <ul class="user-menu">
+                                    <li><a href="myaccount.html">我的帳戶</a></li>
+                                    <li><a href="cart.html">購物車</a></li>
+                                    <li><a href="#">賣家中心</a></li>
+                                    <li><a href="#">Log Out</a></li>
+                                </ul>
+                            </nav>
+                            <!-- // USER RELATED MENU -->
+                        </div>
+                        <!-- // CURRENCY / LANGUAGE / USER MENU -->
+                        <!-- SITE LOGO -->
+                        <div class="logo-wrapper">
+                            <a href="index-2.html" class="logo" title="GFashion - Responsive e-commerce HTML Template">
+                                <img src="../../../../img/common/logo.png"
+                                    alt="GFashion - Responsive e-commerce HTML Template" />
+                            </a>
+                        </div>
+                        <!-- // SITE LOGO -->
+                        <!-- SITE NAVIGATION MENU -->
+                        <nav id="site-menu" role="navigation">
+                            <ul class="main-menu hidden-sm hidden-xs">
+                                <li class="active">
+                                    <a href="index.html">Home</a>
+                                </li>
+                                <li>
+                                    <a href="products.html">Women</a>
+                                </li>
+                                <li>
+                                    <a href="products.html">Men</a>
+
+                                    <!-- MEGA MENU -->
+                                    <div class="mega-menu" data-col-lg="9" data-col-md="12">
+                                        <div class="row">
+
+                                            <div class="col-md-3">
+                                                <h4 class="menu-title">Clothing</h4>
+                                                <ul class="mega-sub">
+                                                    <li><a href="products.html">Casual Wear</a></li>
+                                                    <li><a href="products.html">Evening Wear</a></li>
+                                                    <li><a href="products.html">Formal Attire</a></li>
+                                                    <li><a href="products.html">Womens Jeans</a></li>
+                                                    <li><a href="products.html">Mens Jeans</a></li>
+                                                    <li><a href="products.html">Fall Styles</a></li>
+                                                </ul>
+                                            </div>
+
+                                            <div class="col-md-3">
+                                                <h4 class="menu-title">Accessories</h4>
+                                                <ul class="mega-sub">
+                                                    <li><a href="products.html">Casual Wear</a></li>
+                                                    <li><a href="products.html">Evening Wear</a></li>
+                                                    <li><a href="products.html">Formal Attire</a></li>
+                                                    <li><a href="products.html">Womens Jeans</a></li>
+                                                    <li><a href="products.html">Mens Jeans</a></li>
+                                                    <li><a href="products.html">Fall Styles</a></li>
+                                                </ul>
+                                            </div>
+
+                                            <div class="col-md-3">
+                                                <h4 class="menu-title">Brands</h4>
+                                                <ul class="mega-sub">
+                                                    <li><a href="products.html">Casual Wear</a></li>
+                                                    <li><a href="products.html">Evening Wear</a></li>
+                                                    <li><a href="products.html">Formal Attire</a></li>
+                                                    <li><a href="products.html">Womens Jeans</a></li>
+                                                    <li><a href="products.html">Mens Jeans</a></li>
+                                                    <li><a href="products.html">Fall Styles</a></li>
+                                                </ul>
+                                            </div>
+
+                                            <div class="col-md-3">
+                                                <div class="carousel slide m-b" data-ride="carousel">
+                                                    <div class="carousel-inner">
+                                                        <div class="item active">
+                                                            <img src="../../../../img/common/men/slide1.jpg" alt="" />
+                                                        </div>
+                                                        <div class="item">
+                                                            <img src="../../../../img/common/men/slide2.jpg" alt="" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <h5 class="text-semibold uppercase m-b-sm">Featured Products</h5>
+                                                <p>Lorem ipsum dolor sit, consectetur adipiscing elit. Etiam neque
+                                                    velit, blandit sed scelerisque.</p>
+                                                <a href="products.html" class="btn btn-default btn-round">Go to Shop
+                                                    →</a>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <!-- // MEGA MENU -->
+
+                                </li>
+                                <li>
+                                    <a href="components.html">Components</a>
+                                </li>
+                                <li>
+                                    <a href="store-locator.html">Store Locator</a>
+                                </li>
+                                <li>
+                                    <a href="contact-us.html">Contact Us</a>
+                                </li>
+                                <li>
+                                    <a href="#">Buy Me!</a>
+                                </li>
+                            </ul>
+
+                            <!-- MOBILE MENU -->
+                            <div id="mobile-menu" class="dl-menuwrapper visible-xs visible-sm">
+                                <button class="dl-trigger"><i class="iconfont-reorder round-icon"></i></button>
+                                <ul class="dl-menu">
+                                    <li class="active">
+                                        <a href="javsacript:void(0);">Home</a>
+                                    </li>
+                                    <li>
+                                        <a href="javsacript:void(0);">Women</a>
+                                    </li>
+                                    <li>
+                                        <a href="javsacript:void(0);">Men</a>
+
+                                        <ul class="dl-submenu">
+                                            <li>
+                                                <a href="products.html">Clothing</a>
+                                                <ul class="dl-submenu">
+                                                    <li><a href="products.html">Casual Wear</a></li>
+                                                    <li><a href="products.html">Evening Wear</a></li>
+                                                    <li><a href="products.html">Formal Attire</a></li>
+                                                    <li><a href="products.html">Womens Jeans</a></li>
+                                                    <li><a href="products.html">Mens Jeans</a></li>
+                                                    <li><a href="products.html">Fall Styles</a></li>
+                                                </ul>
+                                            </li>
+                                            <li>
+                                                <a href="products.html">Accessories</a>
+                                                <ul class="dl-submenu">
+                                                    <li><a href="products.html">Casual Wear</a></li>
+                                                    <li><a href="products.html">Evening Wear</a></li>
+                                                    <li><a href="products.html">Formal Attire</a></li>
+                                                    <li><a href="products.html">Womens Jeans</a></li>
+                                                    <li><a href="products.html">Mens Jeans</a></li>
+                                                    <li><a href="products.html">Fall Styles</a></li>
+                                                </ul>
+                                            </li>
+                                            <li>
+                                                <a href="products.html">Brands</a>
+                                                <ul class="dl-submenu">
+                                                    <li><a href="products.html">Casual Wear</a></li>
+                                                    <li><a href="products.html">Evening Wear</a></li>
+                                                    <li><a href="products.html">Formal Attire</a></li>
+                                                    <li><a href="products.html">Womens Jeans</a></li>
+                                                    <li><a href="products.html">Mens Jeans</a></li>
+                                                    <li><a href="products.html">Fall Styles</a></li>
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                            <!-- // MOBILE MENU -->
+
+                        </nav>
+                        <!-- // SITE NAVIGATION MENU -->
+                    </div>
+                </div>
+            </div>
+            <!-- // MAIN HEADER -->
+        </header>
+        <!-- // SITE HEADER -->
+
+
+
+
+    </div>
+    <!-- // PAGE WRAPPER -->
+
+    <!-- 退貨退款 -->
+    <main id="main-content" role="main">
+        <div class="container">
+            <div class="return">
+                <h3>申請退貨/退款</h3>
+                <div>申請退貨退款前請先善用[聊天功能]與賣家確認細節</div>
+            </div>
+
+            <br>
+
+            <div class="return">
+                <h3>
+                    請選擇欲退回商品
+                </h3>
+                <div>
+                    請在同個退貨訂單申請中，勾選您所需退貨的商品
+                </div>
+                <div id="listReturnItem">
+                    <!-- <div>
+                        <input type="checkbox" id="">
+                        <img alt="" height="72" width="72"
+                            src="https://down-tw.img.susercontent.com/file/3d0caf572143922c6ba4162d955c69b1_tn">
+                        <span>商品名稱：</span> <span id="prodName">嘎哈逗貓棒</span> <span id="prodQty">x1</span>
+                    </div> -->
+                </div>
+            </div>
+
+            <button id="submitButton" onclick="toReturnPage2()">下一步</button>
+
+
+
+    </main>
+
+
+    <!-- Essential Javascripts -->
+    <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+    <script src="../../../../js/common//minified.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!-- // Essential Javascripts -->
+
+    <!-- Particular Page Javascripts -->
+    <script src="../../../../js/common/products.js"></script>
+    <script src="../../../../js/common/owl.carousel.js"></script>
+    <script src="../../../../js/common/contact.js"></script>
+    <script src="../../../../js/login.js"></script>
+    <!--<script src="http://maps.googleapis.com/maps/api/js?sensor=false" type="text/javascript"></script>-->
+    <!-- <script src="js/gmap3.min.js"></script> -->
+
+
+    <!-- // Particular Page Javascripts -->
+    <script>
+        checkLoginStatusShowMemberAcct();
+
+        let paSoNo = localStorage.getItem("paSoNo");
+        let order;
+
+
+        fetch('/BuyGo/needLoginApi/showOrderDetails?paSoNo=' + paSoNo, {
+            method: "Get",
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded ; charset=utf-8',
+            },
+        })
+            .then(function (response) {
+                return response.json();
+            })
+            .then(async function (data) {
+                order = data;
+                console.log("載入此頁面, 從後端取得訂單資料");
+                console.log(order); // 印出傳入的JSON物件$
+
+
+
+                // 將商品代入表格
+                for (let i = 0; i < order.paSoDetails.length; i++) {
+                    let prodNo = order.paSoDetails[i].paProdNo;
+                    let base64_str = await getProdPicBase64(prodNo);
+                    let html = "";
+
+                    // 若有追加到才可以退貨
+                    if (order.paSoDetails[i].status == 1) {
+                         html += `<div>
+                        <input type="checkbox" class="returnProds" value="${prodNo}">
+                        <img id="prodImg_${prodNo}" alt="" height="72" width="72" src="${base64_str}">
+                        <span>商品名稱：</span> 
+                        <span id="prodName_${prodNo}">${order.paSoDetails[i].paProd.paProdName}</span> 
+                        <span>x<span id="prodQty_${prodNo}">${order.paSoDetails[i].paOrdQty}</span></span>
+                        <span style="margin-left: 10px;"> 小計$ <span id="prodSubTotal_${prodNo}">${order.paSoDetails[i].paProdPrice*order.paSoDetails[i].paOrdQty}</span></span>
+                    </div>`;
+                    }
+                   
+
+                    let div = document.createElement("div");
+                    div.innerHTML = html;
+                    $("#listReturnItem").append(div);
+                }
+            })
+            .catch(function (error) {
+                console.log(error);
+            })
+
+        async function getProdPicBase64(prodNo) {
+            try {
+                const base64_Str = await fetch('/BuyGo/needLoginApi/getProdPic?prodNo=' + prodNo)
+                    .then(response => response.text()); // await 關鍵字會等待 Promise 完成並返回其解析值
+                // console.log(base64_Str);
+                return base64_Str;
+            } catch (error) {
+                console.log(error);
+            }
+        }
+
+        // 勾選完欲退貨商品之後, 將商品編號存入selectedValues陣列
+        function toReturnPage2() {
+            let selectedProds = [];
+            $(".returnProds").each(function () {
+                console.log(this);
+                if (this.checked) { // 如果商品有打勾的話
+                    let prodNo = $(this).val();
+                    let prod = {
+                        prodNo: prodNo,
+                        prodImg: $(`#prodImg_${prodNo}`).attr("src"),
+                        prodName: $(`#prodName_${prodNo}`).text(),
+                        prodQty: $(`#prodQty_${prodNo}`).text(),
+                        prodSubTotal: $(`#prodSubTotal_${prodNo}`).text(),
+                    }
+                    selectedProds.push(prod);
+                }
+            })
+            sessionStorage.setItem("prods", JSON.stringify(selectedProds));
+            window.location.href = "ReturnPage2.html"
+        };
+
+
+    </script>
+
+</body>
+
+</html>
