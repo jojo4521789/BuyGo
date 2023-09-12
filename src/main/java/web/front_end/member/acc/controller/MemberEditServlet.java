@@ -5,6 +5,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import web.front_end.member.acc.entity.Member;
 
@@ -14,7 +15,7 @@ import static web.front_end.member.acc.util.MemberConstants.SERVICE;
 import static web.front_end.member.util.SHA256EncoderUtil.SHA256Encode;
 import java.io.IOException;
 
-@WebServlet("/front_end/member/acc/MemberEdit")
+@WebServlet("/needLoginApi/front_end/member/acc/MemberEdit")
 public class MemberEditServlet extends HttpServlet{
 	private static final long serialVersionUID = 1L;
 
@@ -31,6 +32,8 @@ public class MemberEditServlet extends HttpServlet{
 		String action = member.getAction();
 //		System.out.println(action +"AAAAAAAAAAAA");
 		if("show".equals(action)) {
+			HttpSession session = req.getSession(); // 取得當前請求的Session
+			member.setMemberNo((Integer)session.getAttribute("memberNo"));
 			member = SERVICE.selectById(member.getMemberNo());
 			writePojo2Json(resp, member);
 		}else if("checkPassword".equals(action)) {
