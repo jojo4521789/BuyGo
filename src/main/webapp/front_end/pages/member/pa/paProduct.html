@@ -139,7 +139,7 @@
 
 		/* .active 修改成.active_dot  */
 		.active_dot {
-			background: crimson;
+			background: rgb(220, 135, 32);
 		}
 
 		@media (max-width:576px) {
@@ -158,6 +158,18 @@
 		}
 
 		/* Image Slider CSS End 滑動圖片CSS*/
+
+		#delegateButton {
+			border-radius: 4px;
+			background-color: #d98c5c;
+			color: #353535;
+			cursor: pointer;
+			border: none;
+		}
+
+		#delegateButton:hover {
+			background-color: #b67045;
+		}
 	</style>
 </head>
 
@@ -478,6 +490,7 @@
 
 										<ul class="entry-meta unstyled">
 											<li><span class="key">賣家:</span> <span class="value" id="memberNo"></span>
+												<button id="delegateButton">委託此賣家</button>
 											</li>
 											<li><span class="key">商品編號:</span> <span class="value" id="prodNo"></span>
 											</li>
@@ -860,7 +873,7 @@
 									count++;
 									const { paProdName, paProdPrice, paProdNo } = random;
 
-									//這邊有幾項記得改成點選可以跳轉該商品
+									//這邊有幾項記得改成點選可以跳轉該商品及購物車
 									let productDiv = `
 
 										<div class="product" data-product-id="${count}" data-category="${paProdName}" data-brand="brand1"
