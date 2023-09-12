@@ -5,6 +5,7 @@ import static core.util.CommonUtil.writePojo2Json;
 import static web.front_end.member.acc.util.MemberConstants.SERVICE;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -40,27 +41,73 @@ public class MemberRegisterServlet extends HttpServlet {
 //			i += readLength;
 //		}
 //		String s = new String(bytes);
-		
+
 //		System.out.println(s);
 
-//
 		req.setCharacterEncoding("utf-8");
 		resp.setCharacterEncoding("utf-8");
 		resp.setContentType("text/html:charset=utf-8");
-//		String memberGender = req.getParameter("memberGender");
-//		System.out.println(memberGender);
-		Member member = json2Pojo(req,Member.class);
-//		System.out.println(member);
-		String memberPassWord = member.getMemberPw();
-		
+
+		Member member = json2Pojo(req, Member.class);
+		String action = member.getAction();
+		if ("register".equals(action)) {
+			String memberPassWord = member.getMemberPw();
 			member.setMemberPw(SHA256Encode(memberPassWord));
 			
 			member = SERVICE.register(member);
-			member.setSuccessful(true);
-			member.setMessage("註冊成功");
+			if(member.getMessage().equals("新增錯誤")) {
+				writePojo2Json(resp, false);
+			}
 			writePojo2Json(resp, true);
-		
-		
+		} else if ("testmemberAcct".equals(action)) {
+			List<Member> listMember = SERVICE.findall();
+			String omemberAcct = member.getMemberAcct();
+			Boolean isAcount = false;
+//			System.out.println(omemberAcct);
+			for (Member member2 : listMember) {
+				if (omemberAcct.equals(member2.getMemberAcct())) {
+					isAcount = true;
+					break;
+				}
+			}
+			writePojo2Json(resp, isAcount);
+		} else if ("testmemberPhone".equals(action)) {
+			List<Member> listMember = SERVICE.findall();
+			String omemberPhone = member.getMemberPhone();
+			Boolean isAcount = false;
+//			System.out.println(omemberPhone);
+			for (Member member2 : listMember) {
+				if (omemberPhone.equals(member2.getMemberPhone())) {
+					isAcount = true;
+					break;
+				}
+			}
+			writePojo2Json(resp, isAcount);
+		} else if ("testmemberEmail".equals(action)) {
+			List<Member> listMember = SERVICE.findall();
+			String omemberEmail = member.getMemberEmail();
+			Boolean isAcount = false;
+//		System.out.println(omemberEmail);
+			for (Member member2 : listMember) {
+				if (omemberEmail.equals(member2.getMemberEmail())) {
+					isAcount = true;
+					break;
+				}
+			}
+			writePojo2Json(resp, isAcount);
+		} else if ("testmemberId".equals(action)) {
+			List<Member> listMember = SERVICE.findall();
+			String omemberId = member.getMemberId();
+			Boolean isAcount = false;
+//	System.out.println(omemberPhone);
+			for (Member member2 : listMember) {
+				if (omemberId.equals(member2.getMemberId())) {
+					isAcount = true;
+					break;
+				}
+			}
+			writePojo2Json(resp, isAcount);
+		}
 
 	}
 

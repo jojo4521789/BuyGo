@@ -15,7 +15,7 @@ import javax.servlet.http.HttpSession;
 
 import com.google.gson.Gson;
 
-import web.front_end.member.black.dto.ActionDTO;
+import core.dto.ActionDTO;
 import web.front_end.member.eva.dto.PaSoDetailsEvaDTO;
 import web.front_end.member.eva.dto.PaSoEvaDTO;
 import web.front_end.member.eva.entity.PaProdPic;

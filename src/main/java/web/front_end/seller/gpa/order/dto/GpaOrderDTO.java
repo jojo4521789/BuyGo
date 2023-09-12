@@ -31,6 +31,8 @@ public class GpaOrderDTO {
     private String gpaBuyAdd;
 
     // GpaProd
+    private Integer gpaProdNo;
+    
     private String gpaProdName;
 
     private Timestamp gpaEndDate;

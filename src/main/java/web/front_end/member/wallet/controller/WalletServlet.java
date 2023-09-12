@@ -22,7 +22,8 @@ public class WalletServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        int memberNo = 1;
+        HttpSession session = request.getSession();
+        int memberNo = (Integer)session.getAttribute("memberNo");
         int currentBalance = web.front_end.member.wallet.util.OpaWalletConstants.SERVICE.getCurrentBalanceByMember(memberNo);
         int pendingTransaction = web.front_end.member.opa.order.util.OpaOrderConstants.SERVICE.getPendingTransactionByMember(memberNo);
         int totalBalance = currentBalance - pendingTransaction;

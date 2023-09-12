@@ -13,13 +13,12 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import core.entity.Core;
 import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "OPA_PRODUCTS")
-public class Prod extends Core{
+@Table(name = "OPA_PRODUCTS2")
+public class Prod extends ProdCore{
 	private static final long serialVersionUID = 1346237891643762428L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

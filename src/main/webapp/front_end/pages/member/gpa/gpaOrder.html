@@ -810,7 +810,18 @@
 					searchStr: searchStr
 				})
 			})
-				.then(resp => resp.json())
+				.then(response => {
+					if (response.status === 401) {
+						// 客戶未登入，執行頁面重定向到登入頁
+						notLoggedInAction();
+					} else if (response.ok) {
+						// 請求成功
+						return response.json();
+					} else {
+						alert("錯誤狀態:" + response.status);
+						return;
+					}
+				})
 				.then(body => {
 					let { gpaSoCount } = body; // gpaSoCount為總訂單數
 
@@ -903,20 +914,19 @@
 				.then(response => {
 					if (response.status === 401) {
 						// 客戶未登入，執行頁面重定向到登入頁
-						alert('帳號未登入，將導轉至登入頁面');
-						window.location.href = '/BuyGo/front_end/pages/member/login.html'; // 登入頁面url
+						notLoggedInAction();
 					} else if (response.ok) {
 						// 請求成功
 						return response.json();
 					} else {
-						alert("錯誤狀態" + response.status);
+						alert("錯誤狀態:" + response.status);
 						return;
 					}
 				})
 				.then(body => {
 					$("#showOrderArea").children().remove(); // 清空showOrderArea下的所有子元素
 					body.forEach(gpaOrderDTO => {
-						let { gpaSoNo, gpaProdCount, gpaProdTotal, gpaEvaSeller, gpaProdName, gpaEndDate, memberAcct } = gpaOrderDTO;
+						let { gpaSoNo, gpaProdCount, gpaProdTotal, gpaEvaSeller, gpaProdNo, gpaProdName, gpaEndDate, memberAcct } = gpaOrderDTO;
 						let { gpaProdPics } = gpaOrderDTO;
 
 						orderCount++; // 生成的訂單數+1
@@ -926,7 +936,7 @@
 									<span style="position:absolute;right:10px; top:10px;">買家名稱：${memberAcct}</span>
 									<span class="soNo" style="position:absolute;right:10px; top:35px;">訂單編號：${gpaSoNo}</span>
 									<div style="position:absolute;right:10px; top:90px;">揪團截止時間：${gpaEndDate}</div>
-									<a href="#" class="orderLink">
+									<a href="/BuyGo/front_end/pages/member/gpa/gpaProduct.html?gpaProdNo=${gpaProdNo}" class="orderLink">
 										<div class="col-xs-12 col-sm-12" style="width:100%;height:120px;">
 											<img src="data:image/jpeg;base64,${gpaProdPics[0]}" style="width:80px;height:80px;border:1.5px solid LightGray;position:absolute;left:20px; top:20px;" alt="GFashion - Responsive e-commerce HTML Template">
 											<h4 class="prodName" style="position:absolute;left:120px; top:20px;">${gpaProdName}</h4>
@@ -1013,7 +1023,18 @@
 					gpaEvaSeller: starNum
 				})
 			})
-				.then(resp => resp.json())
+				.then(response => {
+					if (response.status === 401) {
+						// 客戶未登入，執行頁面重定向到登入頁
+						notLoggedInAction();
+					} else if (response.ok) {
+						// 請求成功
+						return response.json();
+					} else {
+						alert("錯誤狀態:" + response.status);
+						return;
+					}
+				})
 				.then(body => {
 					changePage(4); // 呼叫函式changePage，將當前畫面動態刷新
 				});
@@ -1026,4 +1047,5 @@
 		//-----------------搜尋框結束-----------------
 	</script>
 </body>
+
 </html>

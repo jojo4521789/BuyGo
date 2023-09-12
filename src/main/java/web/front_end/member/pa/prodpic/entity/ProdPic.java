@@ -1,5 +1,6 @@
 package web.front_end.member.pa.prodpic.entity;
 
+import javax.persistence.AttributeOverride;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -19,15 +20,17 @@ import lombok.Setter;
 @Table(name = "PA_PROD_PIC")
 @NoArgsConstructor
 @AllArgsConstructor
+@AttributeOverride(name = "id", column = @Column(name = "PA_PROD_NO", insertable = false, updatable = false))
+
 public class ProdPic extends Core {
 
-	private static final long serialVersionUID = 8042542712391581786L;
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "PA_PROD_PIC_NO", insertable = false)
-	private Integer paProdPicNo;
-	@Column(name = "PA_PROD_NO")
-	private Integer paProdNo;
-	@Column(name = "PA_PROD_PIC")
-	private String paProdPic;
+ private static final long serialVersionUID = 8042542712391581786L;
+ @Id
+ @GeneratedValue(strategy = GenerationType.IDENTITY)
+ @Column(name = "PA_PROD_PIC_NO", insertable = false)
+ private Integer paProdPicNo;
+ @Column(name = "PA_PROD_NO")
+ private Integer paProdNo;
+ @Column(name = "PA_PROD_PIC")
+ private String paProdPic;
 }

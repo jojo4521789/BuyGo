@@ -388,32 +388,32 @@
                         <section class="section">
                             <div>
                                 <h1>
-                                    My Wallet Dashboard
+                                    我的錢包儀表板
                                 </h1>
                                 <div style="text-align: right;">
                                     <button type="button" class="btn btn-secondary" data-toggle="modal"
                                         data-target="#whatIsWallet"
                                         style="border-radius: 50%!important; padding: 2px 8px;">?
                                     </button>
-                                    What is your wallet
+                                    什麼是錢包
                                 </div>
                             </div>
                             <div class="row text-center">
                                 <div class="col-sm-4">
                                     <h3>
-                                        Current Total Balance
+                                        當前總餘額
                                     </h3>
                                     <span id="total">--</span>
                                 </div>
                                 <div class="col-sm-4">
                                     <h3>
-                                        Current Available Balance
+                                        目前可動用總餘額
                                     </h3>
                                     <span id="current">--</span>
                                 </div>
                                 <div class="col-sm-4">
                                     <h3>
-                                        Pending Transactions
+                                        待處理交易金額
                                     </h3>
                                     <span id="pending">--</span>
                                 </div>
@@ -426,35 +426,35 @@
                                         <h4 class="panel-title">
                                             <a data-toggle="collapse" data-parent="#checkout-collapse"
                                                 href="#checkout-collapse1">
-                                                Transaction Related Operations
+                                                交易相關操作
                                             </a>
                                         </h4>
                                     </div>
                                     <div id="checkout-collapse1" class="panel-collapse collapse in">
                                         <div class="panel-body">
                                             <div class="transection-box">
-                                                <span>Add</span>
+                                                <span>存款</span>
                                                 <form role="form" id="wallet_add">
                                                     <input type="hidden" name="action" value="add" />
                                                     <div class="form-group stylish-input">
-                                                        <label for="input1">input the amount</label>
+                                                        <label for="input1">請輸入欲存款金額</label>
                                                         <input type="text" id="input1" class="form-control" name="value"
                                                             required />
                                                     </div>
-                                                    <button type="submit" class="btn btn-primary">Next</button>
+                                                    <button type="submit" class="btn btn-primary">下一步</button>
                                                 </form>
                                             </div>
 
                                             <div class="transection-box">
-                                                <span>Withdraw</span>
+                                                <span>提款</span>
                                                 <form role="form" id="wallet_withdraw">
                                                     <input type="hidden" name="action" value="withdraw" />
                                                     <div class="form-group stylish-input">
-                                                        <label for="input1">input the amount</label>
+                                                        <label for="input1">請輸入欲提款金額</label>
                                                         <input type="text" id="input1" class="form-control" name="value"
                                                             required />
                                                     </div>
-                                                    <button type="submit" class="btn btn-primary">Next</button>
+                                                    <button type="submit" class="btn btn-primary">下一步</button>
                                                 </form>
                                             </div>
                                         </div>
@@ -465,7 +465,7 @@
                                         <h4 class="panel-title">
                                             <a data-toggle="collapse" data-parent="#checkout-collapse"
                                                 href="#checkout-collapse2">
-                                                History
+                                                錢包交易歷史紀錄
                                             </a>
                                         </h4>
                                     </div>
@@ -482,7 +482,7 @@
                                         <div class="modal-dialog" role="document">
                                             <div class="modal-content">
                                                 <div class="modal-header">
-                                                    <h5 class="modal-title" id="exampleModalLabel">Payment Info</h5>
+                                                    <h5 class="modal-title" id="exampleModalLabel">付款資訊</h5>
                                                     <button type="button" class="close" data-dismiss="modal"
                                                         aria-label="Close">
                                                         <span aria-hidden="true">&times;</span>
@@ -492,25 +492,25 @@
                                                     <input type="hidden" name="action" value="add" />
                                                     <input type="hidden" name="value" value="" />
                                                     <div class="form-group stylish-input">
-                                                        <label for="cardNumber">Card Number:</label>
+                                                        <label for="cardNumber">請輸入卡號:</label>
                                                         <input type="text" id="cardNumber" name="cardNumber"
                                                             class="form-control" required>
                                                     </div>
                                                     <div class="form-group stylish-input">
-                                                        <label for="expiryDate">Expiry Date:</label>
+                                                        <label for="expiryDate">請輸入有效期限:</label>
                                                         <input type="text" id="expiryDate" name="expiryDate"
                                                             class="form-control" placeholder="MM/YY" required>
                                                     </div>
                                                     <div class="form-group stylish-input">
-                                                        <label for="cvv">CVV:</label>
+                                                        <label for="cvv">請輸入CVV:</label>
                                                         <input type="text" id="cvv" name="cvv" class="form-control"
                                                             required>
                                                     </div>
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-secondary"
-                                                        data-dismiss="modal">Close</button>
-                                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                                        data-dismiss="modal">關閉</button>
+                                                    <button type="submit" class="btn btn-primary">提交</button>
                                                 </div>
                                             </div>
                                         </div>
@@ -523,8 +523,7 @@
                                         <div class="modal-dialog" role="document">
                                             <div class="modal-content">
                                                 <div class="modal-header">
-                                                    <h5 class="modal-title" id="exampleModalLabel1">Password
-                                                        Confirmation
+                                                    <h5 class="modal-title" id="exampleModalLabel1">密碼確認
                                                     </h5>
                                                     <button type="button" class="close" data-dismiss="modal"
                                                         aria-label="Close">
@@ -535,15 +534,15 @@
                                                     <input type="hidden" name="action" value="withdraw" />
                                                     <input type="hidden" name="value" value="" />
                                                     <div class="form-group stylish-input">
-                                                        <label for="password">Password:</label>
+                                                        <label for="password">請輸入密碼:</label>
                                                         <input type="password" id="password" name="password"
                                                             class="form-control" required>
                                                     </div>
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-secondary"
-                                                        data-dismiss="modal">Close</button>
-                                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                                        data-dismiss="modal">關閉</button>
+                                                    <button type="submit" class="btn btn-primary">提交</button>
                                                 </div>
                                             </div>
                                         </div>
@@ -556,7 +555,7 @@
                                     <div class="modal-dialog modal-dialog-centered" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalLongTitle">Wallet?</h5>
+                                                <h5 class="modal-title" id="exampleModalLongTitle">錢包如何使用?</h5>
                                                 <button type="button" class="close" data-dismiss="modal"
                                                     aria-label="Close">
                                                     <span aria-hidden="true">&times;</span>
@@ -570,7 +569,7 @@
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary"
-                                                    data-dismiss="modal">Close</button>
+                                                    data-dismiss="modal">關閉</button>
                                             </div>
                                         </div>
                                     </div>

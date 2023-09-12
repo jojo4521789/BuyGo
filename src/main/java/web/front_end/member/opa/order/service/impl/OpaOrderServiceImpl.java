@@ -2,13 +2,16 @@ package web.front_end.member.opa.order.service.impl;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.sql.Timestamp;
 
 import web.front_end.member.opa.order.dao.OpaOrderDao;
 import web.front_end.member.opa.order.dao.impl.OpaOrderDaoImpl;
-import web.front_end.member.opa.order.entity.OpaOrder;
+import web.front_end.member.opa.order.entity.*;
 import web.front_end.member.opa.order.service.OpaOrderService;
+import web.front_end.member.notification.entity.Notification;
 
 public class OpaOrderServiceImpl implements OpaOrderService {
+    public static String [] failedReasonMap = new String[] { "藥品, 醫療器材", "酒類 / 菸類商品", "武器 / 彈藥 / 軍事用品", "活體動物, 保育動物及其製品", "導向外部資訊或交易", "此商品可能令人感到不適或違反善良風俗","仿冒品","重覆刊登/複製他人商品圖文","違反鑑賞期","疫區/國外肉製, 蛋, 海鮮, 寵物食品","刷單製造不實銷量","濫用文字誤導搜尋","NCC/BSMI認證字號未填寫","誇大不實療效/涉及醫療效能","其他","無庫存" };
 	private static String [] statusMap = new String[] { "全部","待付款","待出貨","待收貨","已完成","已取消","已退款" };
 	private static int [] statusMapping = new int[] { 0, 1, 2, 3, 1, 1, 3, 4, 3, 5, 6 };
 	private OpaOrderDao opaOrderDao;
@@ -19,6 +22,23 @@ public class OpaOrderServiceImpl implements OpaOrderService {
 
     public List<OpaOrder> findAll() {
         return opaOrderDao.selectAll();
+    }
+
+    public Notification getCancelNotification(int id) throws RuntimeException {
+        OpaOrder order = opaOrderDao.selectById(id);
+        if(order == null)
+            throw new RuntimeException("Order not found");
+        Integer opaFailedReason = order.getOpaFailedReason();
+        if(opaFailedReason == null)
+            throw new RuntimeException("No error found");
+
+        String message = "訂單#" + String.valueOf(id) + "已取消, 原因: " + failedReasonMap[opaFailedReason];
+        Notification notification = new Notification(0);
+        notification.setNotifiTitle("訂單已取消");
+        notification.setNotifiContent(message);
+		notification.setMemberNo(order.getMemberNo());
+        notification.setNotifiTime(new Timestamp(System.currentTimeMillis()));
+        return notification;
     }
 
     @SuppressWarnings("unchecked")
@@ -52,12 +72,14 @@ public class OpaOrderServiceImpl implements OpaOrderService {
         return statusMap;
     }
 
-    public boolean updateStatus(int id, int status) {
+    public boolean updateStatus(int id, int status, Integer failed) {
         OpaOrder opaOrder = opaOrderDao.selectById(id);
         if (opaOrder == null) {
             return false;
         }
         opaOrder.setOpaSoStatus((byte) status);
+        if(failed != null)
+            opaOrder.setOpaFailedReason(failed);
         opaOrderDao.update(opaOrder);
         return true;
     }
@@ -74,6 +96,14 @@ public class OpaOrderServiceImpl implements OpaOrderService {
             }
         }
         return pendingTransaction;
+    }
+
+    public Integer save(OpaOrder order) {
+        return (Integer) opaOrderDao.save(order);
+    }
+
+	public OpaOrderdetailsId save(OpaOrderdetails orderdetails) {
+        return (OpaOrderdetailsId) opaOrderDao.save(orderdetails);
     }
 
 }

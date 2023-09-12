@@ -14,6 +14,7 @@ public interface NotificationService extends CoreService {
 	Notification evaluate (Notification notification);	//請評價商品
 	Notification noread (Notification notification);
 	boolean remove (Integer notifiNo);
+	Integer insert(Notification notification);
 	List<Notification> findall();
 	
 }

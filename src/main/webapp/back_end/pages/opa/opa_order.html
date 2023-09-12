@@ -36,6 +36,46 @@
             return OPA_ORDER_PAY_STATUS_MAPPING[value];
         }
 
+        function failedReasonFormatter(v, row, index, field) {
+            value = row.opaFailedReason;
+            return OPA_FAILED_REASON_MAPPING[value];
+        }
+
+        function operationFormatter(v, row, index, field) {
+            var value = row.opaSoNo;
+            return '<button onclick="sendNotification(' + value + ')" class="btn btn-primary">發送通知</button>';
+        }
+
+        function sendNotification(id) {
+            // send post request to change status
+            $.ajax({
+                url: ROOT_URL + "/needLoginApi/admin/opa/order/notify",
+                type: "POST",
+                data: {
+                    "id": id
+                },
+                success: function (data) {
+                    if (data.successful) {
+                        alert("發送成功");
+                    } else {
+                        if(data.message)
+                            alert(data.message);
+                        else
+                            alert("發送失敗");
+                    }
+                },
+                error: function (e) {
+                    if(e.status == 401) {
+                        alert("帳號未登入，將導轉置登入頁面");
+                        window.location.href = LOGIN_PAGE;
+                        return;
+                    }
+                    alert("發送失敗");
+                }
+            });
+        }
+
+
         $().ready(function () {
             $('#table').bootstrapTable({
                 url: ROOT_URL + '/needLoginApi/admin/opa/order',
@@ -108,13 +148,35 @@
                         filterData: 'var:OPA_ORDER_PAY_STATUS_FILTER',
                         filterControl: 'select',
                         sortable: true
+                    },
+                    {
+                        field: 'opaFailedReason',
+                        title: '訂單失敗原因',
+                        formatter: failedReasonFormatter,
+                        filterData: 'var:OPA_FAILED_REASON_FILTER',
+                        filterControl: 'select',
+                        sortable: true,
+                        editable: {
+                            type: 'select',
+                            source: OPA_FAILED_REASON
+                        }
+                    },
+                    {
+                        field: 'operation',
+                        title: '操作',
+                        formatter: operationFormatter
                     }
                 ], 
                 onEditableSave: function(field, row, rowIndex, oldValue, $el) {
                     var id = row.opaSoNo;
                     var value = row.opaSoStatus;
+                    
+                    var failed_value = -1;
+                    if(row.opaFailedReason !== undefined) {
+                        failed_value = row.opaFailedReason;
+                    }
                     $.ajax({
-                        url: ROOT_URL + "/needLoginApi/admin/opa/order?id=" + id + "&status=" + value,
+                        url: ROOT_URL + "/needLoginApi/admin/opa/order?id=" + id + "&status=" + value + "&failed=" + failed_value,
                         type: "PUT",
                         success: function (data) {
                             if (data.successful) {
@@ -144,6 +206,11 @@
             })
         });
     </script>
+    <style>
+        table th {
+            vertical-align: top!important;
+        }
+    </style>
 </body>
 
 </html>

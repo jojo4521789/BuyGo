@@ -55,7 +55,6 @@ $().ready(function () {
         modal.find('form').attr('action', ROOT_URL + '/needLoginApi/member/wallet/history');
         modal.modal('show');
     });
-    
     $('#wallet_withdraw').submit(function (event) {
         event.preventDefault();
         var form = event.target;
@@ -64,4 +63,13 @@ $().ready(function () {
         modal.find('form').attr('action', ROOT_URL + '/needLoginApi/member/wallet/history');
         modal.modal('show');
     });
+    var url = window.location.href;
+    var params = url.split('?');
+    if(params.length > 1) {
+        var message = params[1].split('=');
+        if(message[0] =='message') {
+            alert(decodeURIComponent(message[1]));
+            window.location.href = params[0];
+        }
+    }
 });

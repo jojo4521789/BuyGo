@@ -2,8 +2,7 @@ package web.front_end.member.opa.order.dao.impl;
 import java.io.Serializable;
 
 import web.front_end.member.opa.order.dao.OpaOrderDao;
-import web.front_end.member.opa.order.entity.OpaOrder;
-
+import web.front_end.member.opa.order.entity.*;
 import java.util.List; 
 import javax.persistence.criteria.*;
 
@@ -53,6 +52,10 @@ public class OpaOrderDaoImpl implements OpaOrderDao {
     }
 
     public Serializable save(OpaOrder entity) {
+		return getSession().save(entity);
+	}
+
+	public Serializable save(OpaOrderdetails entity) {
 		return getSession().save(entity);
 	}
 

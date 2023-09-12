@@ -116,6 +116,14 @@ public class MemberServiceImpl implements MemberService{
 	public Member forgetMember(String email) {
 		return dao.selectByMemberEmail(email);
 	}
+	@Override
+	public Member selectById(Integer id) {
+		return dao.selectById(id);
+	}
+	@Override
+	public Member checkMemberAcct(String memberAcct) {
+		return dao.selectByMemberAcct(memberAcct);
+	}
 
 
 }

@@ -14,8 +14,13 @@ public class MemberDaoImpl  implements MemberDao {
 
 	@Override
 	public int insert(Member entity) {
-		getSession().persist(entity);
-		return 1;
+		try {
+			getSession().persist(entity);
+			return 1;
+			
+		} catch (Exception e) {
+			return -1;
+		}
 	}
 
 	@Override

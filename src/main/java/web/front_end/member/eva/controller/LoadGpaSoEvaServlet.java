@@ -26,7 +26,6 @@ public class LoadGpaSoEvaServlet extends HttpServlet{
 		HttpSession session = request.getSession(); // 取得當前請求的Session
 		response.setCharacterEncoding("UTF-8");
 		List<GpaSo> gpaSoList = SERVICE.loadSoBySellerMemberNoAndSoStat((Integer)(session.getAttribute("memberNo")), 4); //只搜尋訂單狀態4(已完成)
-		System.out.println("gpaSoList.size():" + gpaSoList.size());
 //		for(GpaSo gpaSo : gpaSoList) {
 //			System.out.println("-----------------");
 //			System.out.println("getGpaSoNo:" + gpaSo.getGpaSoNo());
@@ -44,6 +43,7 @@ public class LoadGpaSoEvaServlet extends HttpServlet{
 			
 			gpaSoEvaDTO.getGpaSo().getMember().setMemberAcct(gpaSo.getMember().getMemberAcct()); // 買家帳號
 			
+			gpaSoEvaDTO.getGpaSo().getGpaProd().setGpaProdNo(gpaSo.getGpaProd().getGpaProdNo()); // 揪團商品編號
 			gpaSoEvaDTO.getGpaSo().getGpaProd().setGpaProdName(gpaSo.getGpaProd().getGpaProdName()); // 揪團商品名稱
 			gpaSoEvaDTO.getGpaSo().getGpaProd().setGpaEndDate(gpaSo.getGpaProd().getGpaEndDate()); // 揪團商品截止時間
 			
