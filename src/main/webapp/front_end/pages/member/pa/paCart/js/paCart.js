@@ -33,12 +33,12 @@ fetch("/BuyGo/needLoginApi/pa/cart/selectByMember", {
     .then(datas => {
         for (let data of datas) {
             let paPrpics_url = "../../../../img/common/Image_not_available.png";
-            if (data.paProdlist.paPicsList.length !== 0) {
-                paPrpics_url = data.paProdlist.paPicsList[0].paProdPic;
+            if (data.paProd.prodPic.length !== 0) {
+                paPrpics_url = data.paProd.prodPic[0].paProdPic;
             }
-            let paProdSubTTL = data.paProdlist.paProdPrice * data.paOrdQty;
+            let paProdSubTTL = data.paProd.paProdPrice * data.paOrdQty;
             let paProd_tr = `
-                <tr id="tr_${data.paProdlist.paProdNo}">
+                <tr id="tr_${data.paProd.paProdNo}">
                     <td>
                         <input type="checkbox" class="paProd-check" onclick="paProdCheckBtn()">
                         <a class="entry-thumbnail"
@@ -46,9 +46,9 @@ fetch("/BuyGo/needLoginApi/pa/cart/selectByMember", {
                             data-toggle="lightbox">
                             <img src="${paPrpics_url}" alt="" />
                         </a>
-                        <a id="${data.paProdlist.paProdNo}" class="entry-title" href="../../../guest/product.html">${data.paProdlist.paProdName}</a>
+                        <a id="${data.paProd.paProdNo}" class="entry-title" href="../../../guest/product.html">${data.paProd.paProdName}</a>
                     </td>
-                    <td><span class="unit-price">$${data.paProdlist.paProdPrice}</span></td>
+                    <td><span class="unit-price">$${data.paProd.paProdPrice}</span></td>
                     <td>
                         <div class="qty-btn-group">
                             <button type="button" class="down" onclick="minusQty(this)" onfocus="focusQtyInput(this)" onblur="blurQtyInput(this)"><i
@@ -59,7 +59,7 @@ fetch("/BuyGo/needLoginApi/pa/cart/selectByMember", {
                         </div>
                     </td>
                     <td class="hidden-xs"><strong class="text-bold row-total">$${paProdSubTTL}</strong></td>
-                    <td class="hidden-xs"><button type="button" class="close" aria-hidden="true" onclick="cartProdRemove(${data.paProdlist.paProdNo})">×</button>
+                    <td class="hidden-xs"><button type="button" class="close" aria-hidden="true" onclick="cartProdRemove(${data.paProd.paProdNo})">×</button>
                     </td>
                 </tr>`;
 

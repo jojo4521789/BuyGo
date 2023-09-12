@@ -9,7 +9,7 @@ import javax.persistence.Table;
 
 import core.entity.Core;
 import lombok.Data;
-import web.front_end.prodlist.entity.PaProdlist;
+import web.front_end.member.pa.prod.entity.PaProd;
 
 @Data
 @Entity
@@ -26,10 +26,9 @@ public class PaCart extends Core{
 	@Column(name = "PA_ORD_QTY")
 	private Integer paOrdQty;
 	
-	//關連到商品表格(可能需要換成祥暘的entity
 	@OneToOne
 	@JoinColumn(name = "PA_PROD_NO", insertable = false, updatable = false)
-	private PaProdlist paProdlist;
+	private PaProd paProd;
 
 
 	}

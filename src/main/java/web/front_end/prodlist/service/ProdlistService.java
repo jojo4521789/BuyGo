@@ -3,12 +3,12 @@ package web.front_end.prodlist.service;
 import java.util.List;
 
 import core.service.CoreService;
-import web.front_end.prodlist.entity.PaProdlist;
+import web.front_end.member.pa.prod.entity.PaProd;
 
 public interface ProdlistService extends CoreService {
 
-	PaProdlist ProdInfoSelectByNo(Integer paProdNo);
+	PaProd ProdInfoSelectByNo(Integer paProdNo);
 	
-	List<PaProdlist> RangetProdNo(Integer limit, Integer paProdObjNo);
+	List<PaProd> RangetProdNo(Integer limit, Integer paProdObjNo);
 	
 }
