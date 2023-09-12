@@ -46,8 +46,12 @@ public class WalletHistoryServlet extends HttpServlet {
         int value;
         try {
             value = Integer.parseInt(request.getParameter("value"));
+            if (value <= 0) {
+                response.sendRedirect(request.getContextPath() + PAGE_URL + "?message=%E9%87%91%E9%A1%8D%E9%8C%AF%E8%AA%A4");
+                return;
+            }
         } catch (NumberFormatException e) {
-            response.sendRedirect(request.getContextPath() + PAGE_URL);
+            response.sendRedirect(request.getContextPath() + PAGE_URL + "?message=%E9%87%91%E9%A1%8D%E9%8C%AF%E8%AA%A4");
             return;
         }
         request.setAttribute("action", action);
@@ -80,7 +84,7 @@ public class WalletHistoryServlet extends HttpServlet {
             int memberNo) throws ServletException, IOException {
         String password = request.getParameter("password");
         
-        if (password != null) {
+        if (password != null) { 
             Member member = web.front_end.member.login.util.LoginConstants.SERVICE.LoadMemberAcctByMemberNo(memberNo);
 		    boolean b = web.front_end.member.login.util.LoginConstants.SERVICE.CheckMemberAcctAndPassword(member.getMemberAcct(), SHA256Encode(password));
             if(!b) {
