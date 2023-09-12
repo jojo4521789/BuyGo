@@ -1023,7 +1023,7 @@
                         console.log(Data);
 
                         // 將資料傳到後端
-                        fetch('/BuyGo/needLoginApi/ShipOrCancelOrder', {
+                        fetch('/BuyGo/needLoginApi/UpdateOrder', {
                             method: "POST",
                             body: JSON.stringify(Data),
                             headers: {
@@ -1061,7 +1061,7 @@
                         }
 
                         // 將資料傳到後端
-                        fetch('/BuyGo/needLoginApi/ShipOrCancelOrder', {
+                        fetch('/BuyGo/needLoginApi/UpdateOrder', {
                             method: "POST",
                             body: JSON.stringify(Data),
                             headers: {

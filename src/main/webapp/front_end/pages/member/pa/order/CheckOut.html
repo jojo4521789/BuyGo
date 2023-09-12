@@ -93,8 +93,10 @@
         // 初始化时计算一次总金额
         calculateTotal();
 
-        
-        // 結帳
+
+        let newPaSoNo;
+
+        // 按下結帳，產生訂單
         $('#checkout').click(function () {
 
             const paTotalAmount = $("#total-price").text().substring(1, $("#total-price").text().length);
@@ -102,10 +104,8 @@
             const paSendAddress = $("#recipient-address").val();
             const paRecTel = $("#recipient-phone").val();
             const paDeliverMethod = "711店到店"
-            console.log(paDeliverMethod);
 
-
-            let Data = {
+            let paSoData = {
                 action: "aaa",
                 paSo: {
                     paTotalAmount: 700,
@@ -128,31 +128,60 @@
                 ]
             }
 
-            console.log(Data);
-        	
+            console.log(paSoData);
+
             fetch('/BuyGo/needLoginApi/newOrder', {
                 method: 'POST',
-                body: JSON.stringify(Data),
+                body: JSON.stringify(paSoData),
                 headers: {
                     'Content-Type': 'application/json;charset=utf-8'
                 }
             })
                 .then(response => response.json())
                 .then(data => {
-                    alert('訂單已提交！' + data);
+                    newPaSoNo = data;
+                    alert('訂單已產生！訂單ID = ' + data + "請進行付款作業");
                     cart = []; // 清空購物車
-                    // updateCart();
+                    EcPay(); // 進行綠界支付
                 })
                 .catch(error => {
                     console.error('錯誤：', error);
                 });
+
         });
 
 
-        function returnToCart() {
-            // 返回到购物车页面的逻辑
-            // 可以使用JavaScript的window.location来跳转到购物车页面
+        // 綠界支付
+        function EcPay() {
+            let AioCheckOutALL = {
+                TotalAmount: 700,
+                TradeDesc: "交易描述",
+                ItemName: "商品名稱",
+                CustomField1: "paCheckout", // 傳到後端的action
+                CustomField2: newPaSoNo, // 付款成功後要更新的paSoNo
+
+            }
+
+            console.log(AioCheckOutALL);
+
+            fetch('/BuyGo/ecpay/checkout', {
+                method: 'POST',
+                body: JSON.stringify(AioCheckOutALL),
+                headers: {
+                    'Content-Type': 'application/json;charset=utf-8'
+                }
+            })
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data);
+                    window.open(data); //開啟綠界付款網址
+                })
+                .catch(error => {
+                    alert("付款發生錯誤");
+                    console.error('付款錯誤：', error);
+                });
         }
+
     </script>
 </body>
 

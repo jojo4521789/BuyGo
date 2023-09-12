@@ -951,7 +951,7 @@
                 cancelButtonText: '取消'
             }).then((result) => {
                 if (result.isConfirmed) {
-                    fetch('/BuyGo/needLoginApi/ShipOrCancelOrder', {
+                    fetch('/BuyGo/needLoginApi/UpdateOrder', {
                         method: "POST",
                         body: JSON.stringify(Data),
                         headers: {

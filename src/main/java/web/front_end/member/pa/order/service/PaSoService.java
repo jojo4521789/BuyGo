@@ -3,7 +3,7 @@ package web.front_end.member.pa.order.service;
 import java.util.List;
 
 import core.service.CoreService;
-import web.front_end.member.pa.order.DTO.ShipOrCancelDTO;
+import web.front_end.member.pa.order.DTO.UpdateOrderDTO;
 import web.front_end.member.pa.order.entity.PaReturn;
 import web.front_end.member.pa.order.entity.PaSo;
 import web.front_end.member.pa.order.entity.PaSoDetails;
@@ -18,11 +18,11 @@ public interface PaSoService extends CoreService{
 	
 	PaSo findPaSoByPaSoNo(Integer paSoNo); 
 	
-	String generateNewOrder(Integer memberNo, PaSo lpaSO, List<PaSoDetails> lpaSoList);
+	Integer generateNewOrder(Integer memberNo, PaSo lpaSO, List<PaSoDetails> lpaSoList);
 	
 	PaSoDetails updateOrderDetailStatus(PaSoDetails paSoDetails);
 	
-	int ShipOrCancelOrder (ShipOrCancelDTO shipOrCancelDTO);
+	int updateOrder (UpdateOrderDTO updateOrderDTO);
 	
 //	byte[] showFirstImage(Integer prodNo);
 	String showFirstImage(Integer prodNo);

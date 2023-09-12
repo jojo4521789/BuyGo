@@ -17,9 +17,7 @@ public class ShowSellerOrderServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) {
 		Integer sellerNo = (Integer) req.getSession().getAttribute("memberNo"); // 取得登入會員(賣家)資訊
-//		System.out.println("sellerNo = " + sellerNo);
 		Byte status = Byte.parseByte(req.getParameter("page"));
-//		System.out.println("status = " + status);
 		CommonUtil.writePojo2Json(resp, service.findSellerOrders(sellerNo, status));
 	}
 }

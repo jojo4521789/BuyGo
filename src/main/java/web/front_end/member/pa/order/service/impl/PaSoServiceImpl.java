@@ -14,10 +14,12 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
 import redis.clients.jedis.Jedis;
+import web.back_end.member.wallet.dao.WalletMemberDao;
+import web.back_end.member.wallet.dao.impl.WalletMemberDaoImpl;
 import web.front_end.member.acc.dao.MemberDao;
 import web.front_end.member.acc.dao.impl.MemberDaoImpl;
 import web.front_end.member.acc.entity.Member;
-import web.front_end.member.pa.order.DTO.ShipOrCancelDTO;
+import web.front_end.member.pa.order.DTO.UpdateOrderDTO;
 import web.front_end.member.pa.order.dao.PaReturnDAO;
 import web.front_end.member.pa.order.dao.PaReturnDetailsDAO;
 import web.front_end.member.pa.order.dao.PaSoDAO;
@@ -36,6 +38,9 @@ import web.front_end.member.pa.prod.dao.impl.PaProdDAOImpl;
 import web.front_end.member.pa.prod.entity.PaProd;
 import web.front_end.member.pa.prodpic.dao.ProdPicDAO;
 import web.front_end.member.pa.prodpic.dao.impl.ProdPicDAOImpl;
+import web.front_end.member.wallet.dao.WalletTransHistDao;
+import web.front_end.member.wallet.dao.impl.WalletTransHistDaoImpl;
+import web.front_end.member.wallet.entity.WalletTransHist;
 
 public class PaSoServiceImpl implements PaSoService {
 	private PaSoDAO paSoDAO;
@@ -45,6 +50,8 @@ public class PaSoServiceImpl implements PaSoService {
 	private MemberDao memberDao;
 	private PaReturnDAO paReturnDAO;
 	private PaReturnDetailsDAO paReturnDetailsDAO;
+	private WalletTransHistDao walletTransHistDao;
+	private WalletMemberDao walletMemberDao;
 	private static final int[] DIGIT_RANGE = { 9, 99, 999, 9999, 99999, 999999, 9999999 };
 
 	public PaSoServiceImpl() {
@@ -55,6 +62,7 @@ public class PaSoServiceImpl implements PaSoService {
 		memberDao = new MemberDaoImpl();
 		paReturnDAO = new PaReturnDAOImpl();
 		paReturnDetailsDAO = new PaReturnDetailsDAOImpl();
+		walletTransHistDao = new WalletTransHistDaoImpl();
 	}
 
 	// 查詢所有PaSo
@@ -76,7 +84,7 @@ public class PaSoServiceImpl implements PaSoService {
 		List<PaSo> newList = new LinkedList<PaSo>();
 		for (PaSo paSo : oldList) {
 			for (PaSoDetails paSoDetails : paSo.getPaSoDetails()) {
-				if (paSoDetails.getPaProd().getMemberNo() == sellerNo) { // 確認商品明細是哪個賣家
+				if (paSoDetails.getPaProd().getMemberNo().equals(sellerNo)) { // 確認商品明細是哪個賣家(equals是比較值是否相等，而非是否為同樣物件)
 					newList.add(paSo);
 					break; // 因一張訂單都是同一個賣家, 只要加入一次List即可
 				}
@@ -92,7 +100,7 @@ public class PaSoServiceImpl implements PaSoService {
 	}
 
 	// 產生新訂單
-	public String generateNewOrder(Integer memberNo, PaSo paSo, List<PaSoDetails> paSoDetailsList) {
+	public Integer generateNewOrder(Integer memberNo, PaSo paSo, List<PaSoDetails> paSoDetailsList) {
 		paSo.setMemberNo(memberNo); // 設定買家
 		Integer generatedId = paSoDAO.insert(paSo); // 新增PaSo並取得自增主鍵值
 		paSoDAO.updateSoSeq(generatedId, seqPadding(generatedId)); // 更新PaSo.lpaSeq
@@ -104,7 +112,7 @@ public class PaSoServiceImpl implements PaSoService {
 		// 加入刪除購物車欄位
 
 		String paSoSeq = paSoDAO.selectById(generatedId).getPaSoSeq(); // why null??
-		return "新訂單已成立，訂單編號為: " + seqPadding(generatedId);
+		return generatedId;
 	}
 
 	// 將新訂單產生編號
@@ -140,13 +148,18 @@ public class PaSoServiceImpl implements PaSoService {
 		return paSoDetailsDAO.selectBySoNoAndProdNo(paSoNo, paProdNo);
 	}
 
-	// 更改訂單狀態
-	public int ShipOrCancelOrder(ShipOrCancelDTO shipOrCancelDTO) {
-		Integer paSoNo = shipOrCancelDTO.getPaSoNo();
-		Byte newStatus = shipOrCancelDTO.getNewStatus();
-		Integer buyerNo = shipOrCancelDTO.getBuyerNo();
-		String deliverMsg = shipOrCancelDTO.getDeliverMsg();
-		Integer refundAmount = Integer.valueOf(shipOrCancelDTO.getRefundToBuyer());
+	// 更改訂單狀態(改已付款, 運送中, 取消...等等)
+	public int updateOrder(UpdateOrderDTO updateOrderDTO) {
+		Integer paSoNo = updateOrderDTO.getPaSoNo();
+		Byte newStatus = updateOrderDTO.getNewStatus();
+		Integer buyerNo = updateOrderDTO.getBuyerNo();
+		String deliverMsg = updateOrderDTO.getDeliverMsg();
+		Integer refundAmount = Integer.valueOf(updateOrderDTO.getRefundToBuyer()); // 退款金額
+		// 若新狀態是1(改為已付款)
+		if (newStatus == 1) {
+			paSoDAO.updateSoStatus(paSoNo, newStatus);
+		}
+
 		// 若新狀態是2(運送中), 需更新PaSo出貨相關欄位並檢查是否退款給賣家
 		if (newStatus == 2) {
 			paSoDAO.updateSoStatus(paSoNo, newStatus);
@@ -154,7 +167,18 @@ public class PaSoServiceImpl implements PaSoService {
 
 			PaSo paSo = paSoDAO.selectById(paSoNo);
 			Member buyer = memberDao.selectById(buyerNo);
+			// 發送出貨通知
 			sendMail(paSo, buyer);
+
+			// 確認是否需退款
+			if (refundAmount != 0) {
+				WalletTransHist walletTransHist = new WalletTransHist();
+				walletTransHist.setMemberNo(buyerNo);
+				walletTransHist.setWalletAmount(refundAmount);
+				walletTransHist.setWalletDetail("退款" + refundAmount + "元");
+				walletTransHist.setWalletStatus((byte) 3);
+				walletTransHistDao.insert(walletTransHist);
+			}
 		}
 
 		// 若新狀態是3(確認收貨), 不用退款給買家
@@ -164,7 +188,15 @@ public class PaSoServiceImpl implements PaSoService {
 		// 若新狀態是4(取消訂單), 全額退款給賣家
 		if (newStatus == 4) {
 			paSoDAO.updateSoStatus(paSoNo, newStatus);
-			// TODO 待補退款至買家錢包
+			// 退款給買家
+			if (refundAmount != 0) {
+				WalletTransHist walletTransHist = new WalletTransHist();
+				walletTransHist.setMemberNo(buyerNo);
+				walletTransHist.setWalletAmount(refundAmount);
+				walletTransHist.setWalletDetail("退款" + refundAmount + "元");
+				walletTransHist.setWalletStatus((byte) 3);
+				walletTransHistDao.insert(walletTransHist);
+			}
 		}
 
 		return 0;
@@ -198,7 +230,7 @@ public class PaSoServiceImpl implements PaSoService {
 
 				// 將訂單狀態改成5(退貨)
 				paSoDAO.updateSoStatus(paReturn.getPaSoNo(), (byte) 5);
-				
+
 				// 將退貨圖片的Base64存到Redis
 				for (String base64 : images) {
 					jedis.rpush("paRtn" + generatedId, base64);
@@ -211,7 +243,7 @@ public class PaSoServiceImpl implements PaSoService {
 		} catch (Exception e) {
 			e.printStackTrace(); // javax.persistence.NoResultException: No entity found for query
 			return "發生錯誤";
-		} 
+		}
 
 	}
 
@@ -237,17 +269,28 @@ public class PaSoServiceImpl implements PaSoService {
 
 		return sb.append(nextId).toString();
 	}
-	
+
 	// 更新退貨單狀態
 	public int updateOrCancelReturn(PaReturn paReturn) {
 		Integer paRtnNo = paReturn.getPaRtnNo();
 		Integer newPaRtnStat = paReturn.getPaRtnStat();
 		Integer paSoNo = paReturn.getPaSoNo();
-		
-		if (newPaRtnStat == 4) {
+		Integer paRtnAmount = paReturn.getPaRtnAmount();
+		Integer buyerNo = paSoDAO.selectById(paSoNo).getMemberNo();
+
+		if (newPaRtnStat == 4) { // 買家取消申請退貨
+			return paReturnDAO.updateReturnStatus(paRtnNo, newPaRtnStat);
+		} else if (newPaRtnStat == 2) { // 賣家同意退貨
+			// 退款到錢包
+			WalletTransHist walletTransHist = new WalletTransHist();
+			walletTransHist.setMemberNo(buyerNo);
+			walletTransHist.setWalletAmount(paRtnAmount);
+			walletTransHist.setWalletDetail("退款" + paRtnAmount + "元");
+			walletTransHist.setWalletStatus((byte) 3);
+			walletTransHistDao.insert(walletTransHist);
+
 			return paReturnDAO.updateReturnStatus(paRtnNo, newPaRtnStat);
 		} else {
-			// 若將退貨單更改成其他狀態(如賣家同意/不同意取消)
 			return paReturnDAO.updateReturnStatus(paRtnNo, newPaRtnStat);
 		}
 	}
