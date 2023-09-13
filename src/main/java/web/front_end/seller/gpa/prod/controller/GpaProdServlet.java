@@ -108,8 +108,11 @@ public class GpaProdServlet extends HttpServlet {
 				newGpaProd.setGpaProdNo(gpaProd.getGpaProdNo());
 				newGpaProd.setGpaProdName(gpaProd.getGpaProdName());
 				newGpaProd.setGpaFirstPrice(gpaProd.getGpaFirstPrice());
+				newGpaProd.setGpaPreProd(gpaProd.getGpaPreProd());
 				newGpaProd.setGpaCatsNo(gpaProd.getGpaCatsNo());
 				newGpaProd.setGpaProdContent(gpaProd.getGpaProdContent());
+				newGpaProd.setGpaEndDate(gpaProd.getGpaEndDate());
+				newGpaProd.setGpaReach(gpaProd.getGpaReach());
 				String gpaProdPicToBase64 = "";
 				try {
 					if (gpaProd.getGpaProdPics().size() != 0) {
