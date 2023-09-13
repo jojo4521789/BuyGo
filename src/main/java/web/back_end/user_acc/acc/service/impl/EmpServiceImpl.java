@@ -22,8 +22,10 @@ public class EmpServiceImpl implements EmpService {
 
 	@Override
 	public Emp edit(Emp emp) {
-		// TODO Auto-generated method stub
-		return null;
+		final int resultCount = dao.update(emp);
+		emp.setMessage(resultCount > 0 ? "修改成功" : "修改失敗");
+		emp.setSuccessful(resultCount > 0);
+		return emp;
 	}
 
 	@Override
@@ -44,6 +46,28 @@ public class EmpServiceImpl implements EmpService {
 	@Override
 	public boolean save(Emp emp) {
 		return dao.update(emp) > 0;
+	}
+
+
+	@Override
+	public Emp insert(Emp emp) {
+		
+		final int resultCount = dao.insert(emp);
+		if(resultCount < 1) {
+			emp.setMessage("新增商品錯誤，請聯絡管理員!");
+			emp.setSuccessful(false);
+			return emp;
+		}
+		
+		emp.setMessage("新增會員成功");
+		emp.setSuccessful(true);
+		return emp;
+	}
+
+
+	@Override
+	public List<Emp> selectEmpByNO(Integer empno) {
+		return dao.selectByEmpNo(empno);
 	}
 
 }

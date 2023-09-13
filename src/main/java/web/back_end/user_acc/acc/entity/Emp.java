@@ -23,7 +23,7 @@ public class Emp extends Core {
 	private static final long serialVersionUID = -4387917041108258272L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "EMP_NO")
+	@Column(name = "EMP_NO", insertable = false)
 	private Integer empNo;
 	@Column(name = "EMP_NAME")
 	private String empName;
@@ -37,7 +37,7 @@ public class Emp extends Core {
 	private String empAcct;
 	@Column(name = "EMP_PW")
 	private String empPw;
-	@Column(name = "EMP_STATE")
+	@Column(name = "EMP_STATE", insertable = false)
 	private Integer empState;
 	@Column(name = "EMP_FUN")
 	private Integer empfun;

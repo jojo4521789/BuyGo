@@ -2,6 +2,8 @@ package web.back_end.user_acc.acc.dao.impl;
 
 import java.util.List;
 
+import javax.persistence.NoResultException;
+
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 
@@ -11,8 +13,8 @@ import web.back_end.user_acc.acc.entity.Emp;
 public class EmpDaoImpl implements EmpDAO {
 
 	@Override
-	public int insert(Emp entity) {
-		getSession().persist(entity);
+	public int insert(Emp emp) {
+		getSession().save(emp);;
 		return 1;
 	}
 
@@ -25,10 +27,10 @@ public class EmpDaoImpl implements EmpDAO {
 	}
 
 	@Override
-	public int update(Emp entity) {
+	public int update(Emp emp) {
 		final StringBuilder hql = new StringBuilder().append("UPDATE Member SET");
 		int offset = 0;
-		final String pw = entity.getEmpPw();
+		final String pw = emp.getEmpPw();
 		if(pw != null && !pw.isEmpty()) {
 			hql.append("pw = :empPw,");
 			offset = 1;
@@ -43,10 +45,10 @@ public class EmpDaoImpl implements EmpDAO {
 			query.setParameter("MEMBER_PW", pw);
 		}
 		
-		return query.setParameter("empName", entity.getEmpName())
-					.setParameter("empPhone", entity.getEmpTel())
-					.setParameter("empEmail", entity.getEmpMail())
-					.setParameter("empGender", entity.getEmpGender())
+		return query.setParameter("empName", emp.getEmpName())
+					.setParameter("empPhone", emp.getEmpTel())
+					.setParameter("empEmail", emp.getEmpMail())
+					.setParameter("empGender", emp.getEmpGender())
 					.executeUpdate();
 	}
 
@@ -57,20 +59,26 @@ public class EmpDaoImpl implements EmpDAO {
 
 	@Override
 	public List<Emp> selectAll() {
-		// TODO Auto-generated method stub
-		return null;
+		final String hql = "FROM emp ORDER BY empNo";
+		return getSession().createQuery(hql, Emp.class).getResultList();
 	}
 
-	@Override
-	public Emp selectByEmpNo(String empno) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	@Override
 	public Emp selectByEmpEmail(String empmail) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public List<Emp> selectByEmpNo(Integer empno) {
+		try {
+			Query<Emp> query = getSession().createQuery("FROM Emp WHERE empNo = :empNo", Emp.class)
+					.setParameter("empno", empno);
+			return query.getResultList();
+		} catch (NoResultException e) {
+			return null;
+		}
 	}
 	
 	

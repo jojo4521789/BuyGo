@@ -6,6 +6,11 @@
     <link rel="stylesheet" href="../back_end/css/common/font-awesome.min.css">
     <link rel="stylesheet" href="../back_end/css/common/index.css">
     <link rel="stylesheet" href="../back_end/css/common/skins/_all-skins.css">
+    <style>
+        .menuItem.custom-style {
+            background-color: white;
+        }
+    </style>
 </head>
 <body class="hold-transition skin-blue sidebar-mini" style="overflow:hidden;">
     <div id="ajax-loader" style="cursor: progress; position: fixed; top: -50%; left: -50%; width: 200%; height: 200%; background: #fff; z-index: 10000; overflow: hidden;">
@@ -52,7 +57,7 @@
                                 <li><a href="javascript:void();"><i class="fa fa-trash-o"></i>清空缓存</a></li>
                                 <li><a href="javascript:void();"><i class="fa fa-paint-brush"></i>更換大頭照</a></li>
                                 <li class="divider"></li>
-                                <li><a href="~/Login/OutLogin"><i class="ace-icon fa fa-power-off"></i>登出</a></li>
+                                <li><a href="../back_end/pages/member/login/login_test.html"><i class="ace-icon fa fa-power-off"></i>登出</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -71,6 +76,10 @@
                         </span>
                     </div>
                 </form>
+                
+                <!-- <p id="checkMsg" style="visibility: hidden;color: red;font-size: 10px;margin-top: 30px;">
+                        你的帳號或密碼不正確，請再試一次</p> -->
+                
                 <ul class="sidebar-menu" id="sidebar-menu">
                     <!--<li class="header">导航菜单</li>-->
                 </ul>
@@ -107,15 +116,11 @@
             </div>
             <div class="content-iframe" style="overflow: hidden;">
                 <div class="mainContent" id="content-main" style="margin: 10px; margin-bottom: 0px; padding: 0;">
-                    <iframe class="LRADMS_iframe" width="100%" height="100%" src="../back_end/pages/other/book01.html" frameborder="0" data-id="book01.html"></iframe>
+                    <iframe class="LRADMS_iframe" width="100%" height="100%" src="./pages/member/memberInfo.html" frameborder="0" data-id="book01.html"></iframe>
                 </div>
             </div>
         </div>
     </div>
-    <script src="../back_end/js/common/jquery/jQuery-2.2.0.min.js"></script>
-    <script src="../back_end/js/common/bootstrap/js/bootstrap.min.js"></script>
-    <script src="../back_end/js/common/index.js"></script>
-    <!-- <script src="../back_end/js/common/empLogin.js"></script> -->
     <script>
         EmpFunCheck();
         
@@ -130,16 +135,20 @@
 
             let empfun = body.empFun;
             let empacct = body.empAcct;
+            
 
             switch(empfun) {
             case 3:
-                console.log('tttt');
+                $('p#checkMsg').css('visibility', 'visible');
+                // $('li#sidebar-item-6').css('display', 'none');
+                $('li#sidebar-item-7').css('display', 'none');
                 break;
             case 2:
                 console.log('dddd');
                 break;
             case 1:
-                console.log('aaaaa');
+                $('li#sidebar-item-6').css('display', 'none');
+                $('li#sidebar-item-7').css('display', 'none');
                 break;
         }
     });
@@ -147,6 +156,10 @@
     }
     
     </script>
+    <script src="../back_end/js/common/jquery/jQuery-2.2.0.min.js"></script>
+    <script src="../back_end/js/common/bootstrap/js/bootstrap.min.js"></script>
+    <script src="../back_end/js/common/index.js"></script>
+    <!-- <script src="../back_end/js/common/empLogin.js"></script> -->
     <script>
     </script>
 </body>
