@@ -37,8 +37,6 @@ public class PaSoDetails extends Core implements Serializable {
 	private String paProdName; // Alan add
 	@Column(name = "PA_PROD_PRICE")
 	private Integer paProdPrice;
-//	@Column(name = "PA_PROD_QTY")
-//	private Integer paProdQty; // Alan add
 	@Column(name = "PA_ORD_QTY")
 	private Integer paOrdQty;
 	@Column(name = "STATUS", insertable = false)
