@@ -25,18 +25,21 @@ import web.front_end.member.pa.prod.entity.PaProd;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class PaSoDetails extends Core implements Serializable{
+public class PaSoDetails extends Core implements Serializable {
 	@Id
 	@Column(name = "PA_SO_NO")
 	private Integer paSoNo;
 	@Id
 	@Column(name = "PA_PROD_NO")
 	private Integer paProdNo;
+
+	@Column(name = "PA_PROD_NAME")
+	private String paProdName; // Alan add
 	@Column(name = "PA_PROD_PRICE")
 	private Integer paProdPrice;
 	@Column(name = "PA_ORD_QTY")
 	private Integer paOrdQty;
-	@Column(name = "STATUS", insertable=false)
+	@Column(name = "STATUS", insertable = false)
 	private Integer status;
 	// 參考PaProd(一個明細對應到一個商品,一個商品可以對應到多個明細)
 	@ManyToOne

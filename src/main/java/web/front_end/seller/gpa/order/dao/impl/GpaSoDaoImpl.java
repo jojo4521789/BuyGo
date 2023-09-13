@@ -20,32 +20,32 @@ public class GpaSoDaoImpl implements GpaSoDao {
 
 		// 測試
 		// 新增insert
-//		Session session = gpaSoDaoImpl.getSession();
-//		
-//		GpaSo gpaSo = new GpaSo();
-//		gpaSo.setGpaProdNo(3);
-//		gpaSo.setMemberNo(5);
-//		gpaSo.setGpaProdCount(100);
-//		gpaSo.setGpaProdPrice(1000);
-//		gpaSo.setGpaProdTotal(100000);
-//		gpaSo.setGpaSoStat(1);
-//		gpaSo.setGpaBuyName("Alan");
-//		gpaSo.setGpaBuyTel("0912345678");
-//		gpaSo.setGpaBuyAdd("台北市");
-//		gpaSo.setGpaEvaSeller(5);
-//		gpaSo.setGpaEvaMember(5);
-//		
-//		try {
-//			Transaction transaction = session.beginTransaction(); // 開始交易
-//			gpaSoDaoImpl.insert(gpaSo); // 新增
-//			transaction.commit(); // 送交，同時會結束交易
-//			System.out.println("成功");
-//		}
-//		catch (Exception e) {
-//			e.printStackTrace();
-//			session.getTransaction().rollback(); // 還原，同時會結束交易
-//			System.out.println("失敗");
-//		}
+		Session session = gpaSoDaoImpl.getSession();
+		
+		GpaSo gpaSo = new GpaSo();
+		gpaSo.setGpaProdNo(3);
+		gpaSo.setMemberNo(5);
+		gpaSo.setGpaProdCount(1);
+		gpaSo.setGpaProdPrice(1000);
+		gpaSo.setGpaProdTotal(100000);
+		gpaSo.setGpaSoStat(1);
+		gpaSo.setGpaBuyName("Alan");
+		gpaSo.setGpaBuyTel("0912345678");
+		gpaSo.setGpaBuyAdd("台北市");
+		gpaSo.setGpaProd(null); // 未使用到該關聯表單資料，將此表單null避免報錯
+		gpaSo.setMember(null); // 未使用到該關聯表單資料，將此表單null避免報錯
+		
+		try {
+			Transaction transaction = session.beginTransaction(); // 開始交易
+			gpaSoDaoImpl.insert(gpaSo); // 新增
+			transaction.commit(); // 送交，同時會結束交易
+			System.out.println("成功");
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			session.getTransaction().rollback(); // 還原，同時會結束交易
+			System.out.println("失敗");
+		}
 
 		// 刪除deleteById
 //		Session session = gpaSoDaoImpl.getSession();
@@ -189,12 +189,12 @@ public class GpaSoDaoImpl implements GpaSoDao {
 //		transaction.commit(); // 送交，同時會結束交易
 		
 		// 查詢selectGpaSoCountBySellerMemberNoAndSoStatAndSearchStr
-		Session session = gpaSoDaoImpl.getSession();
-		
-		Transaction transaction = session.beginTransaction(); // 開始交易
-		Integer count = gpaSoDaoImpl.selectGpaSoCountBySellerMemberNoAndSoStatAndSearchStr(2, 0, "");
-		System.out.println("count:" + count);
-		transaction.commit(); // 送交，同時會結束交易
+//		Session session = gpaSoDaoImpl.getSession();
+//		
+//		Transaction transaction = session.beginTransaction(); // 開始交易
+//		Integer count = gpaSoDaoImpl.selectGpaSoCountBySellerMemberNoAndSoStatAndSearchStr(2, 0, "");
+//		System.out.println("count:" + count);
+//		transaction.commit(); // 送交，同時會結束交易
 		
 		// 查詢selectByMemberNoAndSoStatAndLimitAndOffsetAndSearchStr
 //		Session session = gpaSoDaoImpl.getSession();
