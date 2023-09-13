@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<meta charset="UTF-8">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Forum</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+
+<body>
+
+    <h1>新增文章</h1>
+    <form action="ForumServlet" method="post">
+        <label for="title">Title:</label>
+        <input type="text" id="title" name="title"><br><br>
+        <label for="content">Content:</label><br>
+        <textarea id="content" name="content" rows="4" cols="50"></textarea><br><br>
+        <input type="submit" value="Post">
+    </form>
+
+    <script>
+        $(document).ready(function () {
+            $("form").submit(function (event) {
+                event.preventDefault(); // 阻止表單自動提交
+
+                var title = $("#title").val();
+                var content = $("#content").val();
+
+                var formData = {
+                    articleTitle: title,
+                    articleContent: content
+                };
+
+                fetch("/BuyGo/api/forumArticle/add", {
+                    method: "POST",
+                    headers: {
+                        'Content-Type': 'application/json;charset=UTF-8' // 修正 Content-Type
+                    },
+                    body: JSON.stringify(formData)
+                })
+                .then(response => response.json())
+                .then(data => {
+                    // 在這裡處理後端返回的數據
+                    console.log(data);
+                })
+                .catch(error => {
+                    console.error("Error:", error);
+                });
+            });
+        });
+    </script>
+
+</body>
+
+</html>

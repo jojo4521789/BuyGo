@@ -6,25 +6,40 @@ import java.util.List;
 import javax.persistence.NoResultException;
 
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
 import web.front_end.member.forum.dao.ForumArticleDao;
+import web.front_end.member.forum.entity.ArticleMsg;
 import web.front_end.member.forum.entity.ForumArticle;
 
 public class ForumArticleDaoImpl implements ForumArticleDao {
 
+//	public static void main(String[] args) {
+//		ForumArticleDaoImpl forumArticleDaoImpl = new ForumArticleDaoImpl();
+//		Session session = forumArticleDaoImpl.getSession();
+//		Transaction transaction = session.beginTransaction(); // 開始交易
+//		
+//		forumArticleDaoImpl.deleteById(1);
+//		
+//		transaction.commit(); // 結束交易
+//				
+//	}
+
 	@Override
+	// 新增文章內容和標題
 	public int insert(ForumArticle forumArticle) {
 		getSession().persist(forumArticle);
 		return 1;
 	}
 
 	@Override
+	// 只改變文章狀態0 變 1
 	public int deleteById(Integer articleNo) {
-		Session session = getSession();
-		ForumArticle forumArticle = session.get(ForumArticle.class, articleNo);
-		session.remove(forumArticle);
-		return 0;
+		final String hql = "UPDATE ForumArticle SET articleStatus = 1 WHERE articleNo = :articleNo";
+		int rowsUpdated = getSession().createQuery(hql).setParameter("articleNo", articleNo).executeUpdate();
+		return rowsUpdated;
+
 	}
 
 	@Override
@@ -72,7 +87,7 @@ public class ForumArticleDaoImpl implements ForumArticleDao {
 
 	@Override
 	public List<ForumArticle> selectAll() {
-		final String hq1 = "FROM ForumArticle ORDER BY articleNo";
+		final String hq1 = "FROM ForumArticle WHERE articleStatus = 0";
 		return getSession().createQuery(hq1, ForumArticle.class).getResultList();
 
 	}
@@ -88,6 +103,39 @@ public class ForumArticleDaoImpl implements ForumArticleDao {
 		} catch (NoResultException e) {
 			return null;
 		}
+	}
+
+	@Override
+	// 根據 articleNo(文章編號) 值查詢 ForumArticle 表格() "回傳只有該articleNo(文章編號)的list"
+	public List<ForumArticle> selectByArticleNo(Integer articleNo) {
+		final String hql = "FROM ForumArticle WHERE articleNo = :articleNo";
+		return getSession().createQuery(hql, ForumArticle.class).setParameter("articleNo", articleNo).getResultList();
+	}
+	
+
+	@Override
+	public int updateByArticleNo(Integer articleNo, Integer articleStatus) {
+		final String hql = "UPDATE ForumArticle SET articleStatus = :articleStatus WHERE articleNo = :articleNo";
+		int rowsUpdated = getSession().createQuery(hql)
+				.setParameter("articleStatus", articleStatus)
+				.setParameter("articleNo", articleNo)
+				.executeUpdate();
+		return rowsUpdated;
+	}
+
+	@Override
+	public List<ForumArticle> selectByMemberNo(Integer memberNo) {
+		final String hql = "FROM ForumArticle WHERE memberNo = :memberNo AND articleStatus = 0 ORDER BY articlePublish DESC";
+		return getSession().createQuery(hql, ForumArticle.class).setParameter("memberNo", memberNo).getResultList();
+	
+	}
+
+	@Override
+	public List<ForumArticle> selectByMemberNo_test(Integer memberNo) {
+		  final String hql = "SELECT AC FROM ArticleCollList AC WHERE AC.memberNo = :memberNo";
+		    return getSession().createQuery(hql, ForumArticle.class)
+		            .setParameter("memberNo", memberNo)
+		            .getResultList();
 	}
 
 }
