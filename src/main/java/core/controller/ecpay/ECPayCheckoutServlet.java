@@ -29,7 +29,6 @@ public class ECPayCheckoutServlet extends HttpServlet {
 		// 取得action
 		String action = obj.getCustomField1();
 		String returnURL = "";
-		String clientBackURL = obj.getClientBackURL();
 		if ("opaOrderFirstCheckout".equals(action)) {
 			// 設定綠界付款成功的回傳網址(放付款成功要執行的Controller路徑)
 			// CustomField2為要傳給Controller更新用的OrderId
@@ -55,7 +54,7 @@ public class ECPayCheckoutServlet extends HttpServlet {
 		// 若returnURL不為空值就建立綠界付款表單傳回給前端
 		if (returnURL != "") {
 			// 取得綠界建立的form表單字串，並存在session寫入JSP檔
-			String form = SERVICE.getECpayForm(obj, returnURL, clientBackURL);
+			String form = SERVICE.getECpayForm(obj, returnURL);
 			req.getSession().setAttribute("ECPayForm", form);
 			String url = "/front_end/pages/member/ECPayForm.jsp";
 
