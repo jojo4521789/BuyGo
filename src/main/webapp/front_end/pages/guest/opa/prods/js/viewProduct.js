@@ -182,7 +182,7 @@ function getRanRecommendProds(opaProdNo, opaPrcatsNo) {
 }
 
 function addToCart(opaProdNo) {
-    if(opaProdNo === -1){
+    if(opaProdNo === 0){
         opaProdNo = prodId;
     }
     checkLoginStatusShowMemberAcct();
@@ -201,8 +201,7 @@ function addToCart(opaProdNo) {
         .then(resp => {
             if (resp.status === 401) {
                 // 客戶未登入，執行頁面重定向到登入頁
-                alert('帳號未登入，將導轉至登入頁面');
-                window.location.href = '/BuyGo/front_end/pages/member/login.html'; // 登入頁面url
+                notLoggedInAction();
             } else if (resp.ok) {
                 // 請求成功
                 return resp.json();

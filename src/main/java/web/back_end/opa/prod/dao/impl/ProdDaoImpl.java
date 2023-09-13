@@ -97,7 +97,7 @@ public class ProdDaoImpl implements ProdDao {
 
 	@Override
 	public List<Prod> selectProdWithLimit(Integer limit, Integer offset) {
-		final String nativeSql = "SELECT * FROM OPA_PRODUCTS WHERE OPA_PROD_STATUS = 1 LIMIT :limit OFFSET :offset";
+		final String nativeSql = "SELECT * FROM OPA_PRODUCTS2 WHERE OPA_PROD_STATUS = 1 LIMIT :limit OFFSET :offset";
 		List<Prod> prods = getSession().createNativeQuery(nativeSql, Prod.class)
 				.setParameter("limit", limit)
 				.setParameter("offset", offset)
@@ -107,7 +107,7 @@ public class ProdDaoImpl implements ProdDao {
 
 	@Override
 	public List<Prod> selectByOpaProdNameWithLimit(String opaProdName, Integer limit, Integer offset) {
-		final String nativeSql = "SELECT * FROM OPA_PRODUCTS WHERE OPA_PROD_STATUS = 1 AND OPA_PROD_NAME LIKE :opaProdName LIMIT :limit OFFSET :offset";
+		final String nativeSql = "SELECT * FROM OPA_PRODUCTS2 WHERE OPA_PROD_STATUS = 1 AND OPA_PROD_NAME LIKE :opaProdName LIMIT :limit OFFSET :offset";
 		List<Prod> prods = getSession().createNativeQuery(nativeSql, Prod.class)
 				.setParameter("opaProdName", "%" + opaProdName + "%")
 				.setParameter("limit", limit)
@@ -118,19 +118,19 @@ public class ProdDaoImpl implements ProdDao {
 
 	@Override
 	public int getProdTotalQty() {
-		Query<?> query = getSession().createNativeQuery("SELECT COUNT(*) FROM OPA_PRODUCTS WHERE OPA_PROD_STATUS = 1");
+		Query<?> query = getSession().createNativeQuery("SELECT COUNT(*) FROM OPA_PRODUCTS2 WHERE OPA_PROD_STATUS = 1");
 		return Integer.parseInt(query.getSingleResult().toString());
 	}
 
 	@Override
 	public int getProdTotalQtySelectByOpaProdName(String opaProdName) {
-		Query<?> query = getSession().createNativeQuery("SELECT COUNT(*) FROM OPA_PRODUCTS WHERE OPA_PROD_STATUS = 1 AND OPA_PROD_NAME LIKE :opaProdName").setParameter("opaProdName", "%" + opaProdName + "%");
+		Query<?> query = getSession().createNativeQuery("SELECT COUNT(*) FROM OPA_PRODUCTS2 WHERE OPA_PROD_STATUS = 1 AND OPA_PROD_NAME LIKE :opaProdName").setParameter("opaProdName", "%" + opaProdName + "%");
 		return Integer.parseInt(query.getSingleResult().toString());
 	}
 
 	@Override
 	public List<Prod> getRandomProdsByPrcatsWithLimit(Integer opaProdNo, Integer opaPrcatsNo, Integer limit) {
-		final String nativeSql = "SELECT * FROM OPA_PRODUCTS WHERE OPA_PROD_STATUS = 1 AND OPA_PROD_NO <> :opaProdNo AND OPA_PRCATS_NO = :opaPrcatsNo ORDER BY RAND() LIMIT :limit";
+		final String nativeSql = "SELECT * FROM OPA_PRODUCTS2 WHERE OPA_PROD_STATUS = 1 AND OPA_PROD_NO <> :opaProdNo AND OPA_PRCATS_NO = :opaPrcatsNo ORDER BY RAND() LIMIT :limit";
 		List<Prod> prods = getSession().createNativeQuery(nativeSql, Prod.class)
 				.setParameter("opaProdNo", opaProdNo)
 				.setParameter("opaPrcatsNo", opaPrcatsNo)

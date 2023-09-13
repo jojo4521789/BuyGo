@@ -39,7 +39,8 @@ public class GpaProdServlet extends HttpServlet{
 	    String action = actionDTO.getAction();
 	    // -----action共有以下模式-----
 	    // randomLoadByGpaCatsNoAndFilterGpaProdNo 回傳指定gpaCatsNo的揪團商品並排除指定的單筆GpaProdNo
-	    // 
+	    // loadGpaPreProdByGpaProdNo 輸入指定的GpaProdNo回傳指定商品編號的庫存剩餘數量
+	    // decreaseGpaPreProdByGpaProdNo 輸入指定的GpaProdNo，將該商品的庫存數量減1後保存置資料庫
 	    // ------------------------
 	    if ("randomLoadByGpaCatsNoAndFilterGpaProdNo".equals(action)) {
 	    	GpaProd gpaProd = gson.fromJson(requestToJson, GpaProd.class);
@@ -72,6 +73,29 @@ public class GpaProdServlet extends HttpServlet{
 	    		recommendedGpaProdDTO = null;
 	    	}
 			writePojo2Json(response, recommendedGpaProdDTOList);
+	    }
+	    
+	    if ("loadGpaPreProdByGpaProdNo".equals(action)) {
+	    	 GpaProd gpaProd = gson.fromJson(requestToJson, GpaProd.class);
+	    	 GpaProd currentGpaProd = SERVICE.loadByGpaProdNo(gpaProd.getGpaProdNo());
+	    	 Integer currentGpaPreProd = currentGpaProd.getGpaPreProd();
+	    	 GpaProd newGpaProd = new GpaProd();
+	    	 newGpaProd.setGpaPreProd(currentGpaPreProd);
+	    	 newGpaProd.setGpaProdPics(null); // 將未使用到的table設為null
+	    	 newGpaProd.setGpaReach(null); // 將未使用到的table設為null
+	    	 writePojo2Json(response, newGpaProd);
+	    }
+	    
+	    if ("decreaseGpaPreProdByGpaProdNo".equals(action)) {
+	    	 GpaProd gpaProd = gson.fromJson(requestToJson, GpaProd.class);
+	    	 GpaProd currentGpaProd = SERVICE.loadByGpaProdNo(gpaProd.getGpaProdNo());
+	    	 Integer currentGpaPreProd = currentGpaProd.getGpaPreProd(); // 取得當前商品目前的庫存數量
+	    	 boolean result = SERVICE.changeGpaPreProdByGpaProdNo(gpaProd.getGpaProdNo(), currentGpaPreProd - 1); // 將該商品庫存數量-1並保存至資料庫
+	    	 GpaProd newGpaProd = new GpaProd();
+	    	 newGpaProd.setSuccessful(result); // 將成功與否的布林狀態回傳前端
+	    	 newGpaProd.setGpaProdPics(null); // 將未使用到的table設為null
+	    	 newGpaProd.setGpaReach(null); // 將未使用到的table設為null
+	    	 writePojo2Json(response, newGpaProd);
 	    }
 	}
 }
