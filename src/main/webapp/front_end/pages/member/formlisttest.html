@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html>
+<meta charset="UTF-8">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Forum</title>
+    <style>
+        /* Reset CSS */
+        body,
+        div,
+        p,
+        h1,
+        h2,
+        h3,
+        table,
+        tr,
+        th,
+        td {
+            margin: 0;
+            padding: 0;
+            border: 0;
+            font-size: 100%;
+            font-family: inherit;
+            vertical-align: baseline;
+        }
+
+        /* Basic styling */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+        }
+
+        h1 {
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th,
+        td {
+            padding: 10px;
+            border: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            border: 1px solid #ddd;
+            /* 新增表格整體邊框 */
+            background-color: #fff;
+            /* 背景色設為白色 */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            /* 添加陰影效果 */
+        }
+
+        th,
+        td {
+            padding: 10px;
+            border: 1px solid #ddd;
+            text-align: center;
+            /* 文字置中對齊 */
+        }
+
+        th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            /* 背景遮罩 */
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 20% auto;
+            padding: 20px;
+            border: 1px solid #ddd;
+            width: 50%;
+            text-align: center;
+        }
+
+        button {
+            margin: 5px;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+
+<body>
+    <h1>文章列表</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>文章編號</th>
+                <th>會員編號</th>
+                <th>文章標題</th>
+                <th>文章內容</th>
+                <th>文章狀態</th>
+                <th>發文時間</th>
+                <th>編輯時間</th>
+                <th>文章按讚數</th>
+                <th>文章倒讚數</th>
+                <th>刪除</th> <!-- 新增删除按钮列 -->
+                <div id="deleteModal" class="modal">
+                    <div class="modal-content">
+                        <p>確定要刪除這篇文章嗎？</p>
+                        <button id="confirmDeleteBtn">確認</button>
+                        <button id="cancelDeleteBtn">取消</button>
+                    </div>
+                </div>
+            </tr>
+        </thead>
+        <tbody id="articleList"></tbody>
+    </table>
+
+    <script>
+        const ForumArticle_el = $("#articleList");
+
+        function fetchForumArticles() {
+            fetch('/BuyGo/api/forumArticle/manage', {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json;charset:utf-8',
+                    'Accept': 'application/json;charset:utf-8'
+                },
+            })
+                .then(response => response.json())
+                .then(data => processForumArticles(data))
+                .catch(error => console.error('Error fetching forum articles:', error));
+        }
+
+        function processForumArticles(articles) {
+            ForumArticle_el.empty();
+
+            articles.forEach(forum => {
+                const {
+                    articleNo,
+                    memberNo,
+                    articleTitle,
+                    articleContent,
+                    articleStatus,
+                    articlePublish,
+                    articleUpdate,
+                    articleLike,
+                    articleDislike
+                } = forum;
+
+                const articleRow = `
+                    <tr>
+                        <td class="article-no" name="" value="${articleNo}">${articleNo}</td>
+                        <td>${memberNo}</td>
+                        <td>${articleTitle}</td>
+                        <td>${articleContent}</td>
+                        <td>${articleStatus}</td>
+                        <td>${articlePublish}</td>
+                        <td>${articleUpdate}</td>
+                        <td>${articleLike}</td>
+                        <td>${articleDislike}</td>
+                        <td><button class="delete-btn">×</button></td> <!-- 删除按钮 -->
+                    </tr>
+                `;
+
+                ForumArticle_el.append(articleRow);
+            });
+
+
+            // 新增刪除按鈕點擊事件
+            $(".delete-btn").click(function () {
+                const articleNo = $(this).closest("td").siblings("td.article-no").text();
+                const modal = $("#deleteModal");
+                modal.show();
+
+                // 確認刪除按鈕點擊事件
+                $("#confirmDeleteBtn").click(function () {
+                    modal.hide();
+                    deleteArticle(articleNo);
+
+                    // 從表格中刪除對應行
+                    $(this).closest("tr").remove();
+                });
+
+                // 取消刪除按鈕點擊事件
+                $("#cancelDeleteBtn").click(function () {
+                    modal.hide();
+                });
+            });
+        }
+
+
+        // 向後端發送删除请求
+        function deleteArticle(articleNo) {
+            fetch('/BuyGo/api/forumArticle/remove', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json;charset:utf-8',
+                    'Accept': 'application/json;charset:utf-8'
+                },
+                body: JSON.stringify({
+                    articleNo: articleNo
+                })
+            })
+                .then(response => response.json())
+                .then(data => {
+                    // 在這裡處理後端返回的數據
+                    console.log(data);
+                })
+                .catch(error => {
+                    console.error("Error:", error);
+                });
+        }
+
+        $(document).ready(() => {// 呼叫函式lfetchForumArticle，將當前畫面動態刷新
+            fetchForumArticles();
+        });
+    </script>
+</body>
+
+</html>

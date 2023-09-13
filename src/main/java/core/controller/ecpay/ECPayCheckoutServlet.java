@@ -31,9 +31,9 @@ public class ECPayCheckoutServlet extends HttpServlet {
 		String returnURL = "";
 		if ("opaOrderFirstCheckout".equals(action)) {
 			// 設定綠界付款成功的回傳網址(放付款成功要執行的Controller路徑)
-			// CustomField1為要傳給Controller更新用的OrderId
+			// CustomField2為要傳給Controller更新用的OrderId
 			returnURL = SERVER_URL + req.getContextPath() + "/api/opa/ECPayUpdateOrder?BuyGoOrderId="
-					+ obj.getCustomField2();
+					+ obj.getCustomField2() + "&CouponId=" + obj.getCustomField3();
 		}
 		
 		if ("paCheckout".equals(action)) {

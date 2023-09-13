@@ -1,0 +1,1119 @@
+<!DOCTYPE html>
+<!--[if IE 7 ]><html class="ie ie7 lte9 lte8 lte7" lang="en-US"><![endif]-->
+<!--[if IE 8]><html class="ie ie8 lte9 lte8" lang="en-US">	<![endif]-->
+<!--[if IE 9]><html class="ie ie9 lte9" lang="en-US"><![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!-->
+<html class="noIE" lang="en-US"><!--<![endif]-->
+
+<head>
+	<style>
+		body {
+			font-family: Arial, sans-serif;
+			margin: 0;
+			padding: 0;
+		}
+
+		.article-list {
+			list-style: none;
+			padding: 0;
+		}
+
+		.article-item {
+			border-bottom: 1px solid #ccc;
+			padding: 10px;
+			display: flex;
+			flex-direction: column;
+		}
+
+		.article-title {
+			font-weight: bold;
+			margin: 0;
+		}
+
+		.article-date {
+			color: #666;
+			margin: 0;
+		}
+
+		.article-content {
+			margin-top: 5px;
+		}
+
+		.buttons {
+			margin-top: 10px;
+		}
+
+		.button {
+			margin-right: 10px;
+			padding: 5px 10px;
+			border: none;
+			cursor: pointer;
+			font-size: 14px;
+			background-color: transparent;
+			/* 背景色設為透明 */
+			border: none;
+			/* 去掉按鈕的線框 */
+		}
+
+		.button.report {
+			color: #ff3300;
+		}
+
+		.dialog {
+			display: none;
+			position: fixed;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			background: rgba(0, 0, 0, 0.5);
+			/* 半透明背景 */
+			z-index: 9999;
+		}
+
+		.dialog-content {
+			background: #fff;
+			width: 300px;
+			padding: 20px;
+			border-radius: 5px;
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+			text-align: center;
+		}
+
+		/* 共同的按鈕樣式 */
+		.button {
+			padding: 5px 10px;
+			border: none;
+			cursor: pointer;
+			font-size: 14px;
+			background-color: transparent;
+			border: none;
+			margin-right: 10px;
+			/* 添加右邊距，以分隔按鈕 */
+			transition: background-color 0.3s, color 0.3s;
+			/* 添加顏色過渡效果 */
+		}
+
+		/* 讚好按鈕 */
+		.button.fa-regular.fa-thumbs-up {
+			color: #00cc00;
+			/* 讚好按鈕的顏色 */
+		}
+
+		/* 不喜歡按鈕 */
+		.button.fa-regular.fa-thumbs-down {
+			color: #ff0000;
+			/* 不喜歡按鈕的顏色 */
+		}
+
+		/* 收藏按鈕 */
+		.button.fa-regular.fa-star {
+			color: #000000;
+			/* 收藏按鈕的顏色 */
+		}
+
+		/* 留言按鈕 */
+		.button.comment {
+			background-color: transparent;
+			/* 留言按鈕的背景颜色 */
+			color: #000000;
+			/* 留言按鈕的文字颜色 */
+			padding: 5px 15px;
+			/* 增加水平内边距，使按钮更大 */
+			border: none;
+			/* 移除按钮的边框 */
+			cursor: pointer;
+		}
+
+		/* 按钮悬停效果 */
+		.button.comment:hover {
+			background-color: #555;
+			/* 鼠标悬停时的背景颜色 */
+			color: #fff;
+			/* 鼠标悬停时的文字颜色 */
+		}
+
+		/* 檢舉按鈕 */
+		.button.report {
+			background-color: transparent;
+			/* 移除檢舉按鈕的背景顏色，使其透明 */
+			color: red;
+			/* 檢舉按鈕的文字顏色 */
+			padding: 5px 15px;
+			/* 增加水平內邊距，使按鈕更大 */
+		}
+
+		/* 按鈕懸停效果 */
+		.button:hover {
+			background-color: #555;
+			/* 懸停時的背景顏色 */
+			color: #fff;
+			/* 懸停時的文字顏色 */
+		}
+
+		/* 修改新增按鈕樣式 */
+		#addArticleButton {
+			background-color: #4caf50;
+			/* 設置背景顏色為綠色 */
+			color: #fff;
+			/* 設置文本顏色為白色 */
+			border: none;
+			padding: 5px 10px;
+			cursor: pointer;
+			border-radius: 5px;
+			transition: background-color 0.3s ease, color 0.3s ease;
+		}
+
+		/* 鼠標懸停時的新增按鈕樣式 */
+		#addArticleButton:hover {
+			background-color: #45a049;
+			/* 鼠標懸停時的背景顏色 */
+		}
+
+		/* 使用Font Awesome圖標替換文本 */
+		#addArticleButton::before {
+			content: "\f067";
+			/* 使用Font Awesome中的"fas fa-plus"圖標 */
+			font-family: 'Font Awesome 5 Free';
+			margin-right: 5px;
+			/* 可以添加右邊距，使圖標與文本之間有一些間隔 */
+		}
+
+		/* 隐藏带有 "hidden" 类的特定 h2 元素 */
+		h2.hidden {
+			display: none;
+		}
+
+
+		#articleMsgList {
+			display: block;
+			margin-top: 20px;
+			padding: 10px;
+			border: none;
+			/* Remove the border */
+			background-color: 0;
+			max-width: 500px;
+			margin-left: 0;
+			/* Align to the left */
+			margin-right: auto;
+			/* Add other styles as needed */
+		}
+
+
+		.comment {
+			border-bottom: 1px solid #ccc;
+			/* 分隔每个留言 */
+			padding: 10px 0;
+			/* 上下内边距 */
+			margin-bottom: 10px;
+			/* 留白 */
+		}
+
+		.comment p {
+			margin: 0;
+			/* 清除段落默认边距 */
+		}
+
+		.comment strong {
+			font-weight: bold;
+			/* 粗体 */
+			color: #333;
+			/* 文本颜色 */
+		}
+
+		.dialog-content i.fas.fa-exclamation-circle {
+			color: red;
+			font-size: 40px;
+
+		}
+	</style>
+	<meta charset="UTF-8" />
+	<title>GFashion - Responsive e-commerce HTML Template</title>
+	<meta name="description" content="" />
+	<meta name="keywords" content="" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<script src="https://kit.fontawesome.com/f8d426f7f0.js" crossorigin="anonymous"></script>
+	<!-- Favorite Icons -->
+	<link rel="icon" href="../img/common/favicon/favicon.html" type="image/x-icon" />
+	<link rel="apple-touch-icon-precomposed" sizes="144x144"
+		href="../img/common/favicon/apple-touch-icon-144x144-precomposed.html">
+	<link rel="apple-touch-icon-precomposed" sizes="72x72"
+		href="../img/common/favicon/apple-touch-icon-72x72-precomposed.html">
+	<link rel="apple-touch-icon-precomposed" href="../img/common/favicon/apple-touch-icon-precomposed.html">
+	<!-- // Favorite Icons -->
+
+	<!--<link href='http://fonts.useso.com/css?family=Open+Sans:300,400,600,700' rel='stylesheet' type='text/css'>-->
+
+	<!-- GENERAL CSS FILES -->
+	<link rel="stylesheet" href="../css/common/minified.css">
+	<!-- // GENERAL CSS FILES -->
+
+	<!--[if IE 8]>
+		<script src="js/respond.min.js"></script>
+		<script src="js/selectivizr-min.js"></script>
+	<![endif]-->
+	<!--
+	<script src="js/jquery.min.js"></script>
+	-->
+	<script>window.jQuery || document.write('<script src="../js/common/jquery.min.js"><\/script>');</script>
+	<script src="../js/common/modernizr.min.js"></script>
+	<!-- PARTICULAR PAGES CSS FILES -->
+	<link rel="stylesheet" href="../css/common/innerpage.css">
+	<!-- // PARTICULAR PAGES CSS FILES -->
+	<link rel="stylesheet" href="../css/common/responsive.css">
+</head>
+
+<body>
+
+	<!-- PAGE WRAPPER -->
+	<div id="page-wrapper">
+
+		<!-- SITE HEADER -->
+		<header id="site-header" role="banner">
+			<!-- HEADER TOP -->
+			<div class="header-top">
+				<div class="container">
+					<div class="row">
+						<div class="col-xs-12 col-sm-6 col-md-7">
+							<!-- CONTACT INFO -->
+							<div class="contact-info">
+								<i class="iconfont-headphones round-icon"></i>
+								<strong>+444 (100) 1234</strong>
+								<span>(Mon- Fri: 09.00 - 21.00)</span>
+							</div>
+							<!-- // CONTACT INFO -->
+						</div>
+						<div class="col-xs-12 col-sm-6 col-md-5">
+							<ul class="actions unstyled clearfix">
+								<li>
+									<!-- SEARCH BOX -->
+									<div class="search-box">
+										<form action="#" method="post">
+											<div class="input-iconed prepend">
+												<button class="input-icon"><i class="iconfont-search"></i></button>
+												<label for="input-search" class="placeholder">Search here…</label>
+												<input type="text" name="q" id="input-search"
+													class="round-input full-width" required />
+											</div>
+										</form>
+									</div>
+									<!-- // SEARCH BOX -->
+								</li>
+								<li data-toggle="sub-header" data-target="#sub-social">
+									<!-- SOCIAL ICONS -->
+									<a href="javascript:void(0);" id="social-icons">
+										<i class="iconfont-share round-icon"></i>
+									</a>
+
+									<div id="sub-social" class="sub-header">
+										<ul class="social-list unstyled text-center">
+											<li><a href="#"><i class="iconfont-facebook round-icon"></i></a></li>
+											<li><a href="#"><i class="iconfont-twitter round-icon"></i></a></li>
+											<li><a href="#"><i class="iconfont-google-plus round-icon"></i></a></li>
+											<li><a href="#"><i class="iconfont-pinterest round-icon"></i></a></li>
+											<li><a href="#"><i class="iconfont-rss round-icon"></i></a></li>
+										</ul>
+									</div>
+									<!-- // SOCIAL ICONS -->
+								</li>
+								<li data-toggle="sub-header" data-target="#sub-cart">
+									<!-- SHOPPING CART -->
+									<a href="javascript:void(0);" id="total-cart">
+										<i class="iconfont-shopping-cart round-icon"></i>
+									</a>
+
+									<div id="sub-cart" class="sub-header">
+										<div class="cart-header">
+											<span>Your cart is currently empty.</span>
+											<small><a href="../pages/member/cart.html">(See All)</a></small>
+										</div>
+										<ul class="cart-items product-medialist unstyled clearfix"></ul>
+										<div class="cart-footer">
+											<div class="cart-total clearfix">
+												<span class="pull-left uppercase">Total</span>
+												<span class="pull-right total">$ 0</span>
+											</div>
+											<div class="text-right">
+												<a href="../pages/member/cart.html"
+													class="btn btn-default btn-round view-cart">View Cart</a>
+											</div>
+										</div>
+									</div>
+									<!-- // SHOPPING CART -->
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+
+				<!-- ADD TO CART MESSAGE -->
+				<div class="cart-notification">
+					<ul class="unstyled"></ul>
+				</div>
+				<!-- // ADD TO CART MESSAGE -->
+			</div>
+			<!-- // HEADER TOP -->
+			<!-- MAIN HEADER -->
+			<div class="main-header-wrapper">
+				<div class="container">
+					<div class="main-header">
+						<!-- CURRENCY / LANGUAGE / USER MENU -->
+						<div class="actions">
+							<div class="center-xs">
+								<!-- CURRENCY -->
+								<ul class="option-list unstyled">
+									<li class="active"><a href="#" data-toggle="tooltip" title="USD - US Dollar">$</a>
+									</li>
+									<li><a href="#" data-toggle="tooltip" title="GBP - British Pound">lb</a></li>
+									<li><a href="#" data-toggle="tooltip" title="EUR - Euro">EUR</a></li>
+								</ul>
+								<!-- // CURRENCY -->
+								<!-- LANGUAGES -->
+								<ul class="option-list unstyled">
+									<li class="active"><a href="#" data-toggle="tooltip" title="English">EN</a></li>
+									<li><a href="#" data-toggle="tooltip" title="French">FR</a></li>
+									<li><a href="#" data-toggle="tooltip" title="Deutsch">DE</a></li>
+								</ul>
+								<!-- // LANGUAGES -->
+							</div>
+							<div class="clearfix"></div>
+							<!-- USER RELATED MENU -->
+							<nav id="tiny-menu" class="clearfix">
+								<ul class="user-menu">
+									<li><a href="../pages/member/myaccount.html">My Account</a></li>
+									<li><a href="../pages/member/cart.html">My Wishlist</a></li>
+									<li><a href="../pages/member/checkout.html">Checkout</a></li>
+									<li><a href="#">Log Out</a></li>
+								</ul>
+							</nav>
+							<!-- // USER RELATED MENU -->
+						</div>
+						<!-- // CURRENCY / LANGUAGE / USER MENU -->
+						<!-- SITE LOGO -->
+						<div class="logo-wrapper">
+							<a href="../index-2.html" class="logo"
+								title="GFashion - Responsive e-commerce HTML Template">
+								<img src="../img/common/logo.png"
+									alt="GFashion - Responsive e-commerce HTML Template" />
+							</a>
+						</div>
+						<!-- // SITE LOGO -->
+						<!-- SITE NAVIGATION MENU -->
+						<nav id="site-menu" role="navigation">
+							<ul class="main-menu hidden-sm hidden-xs">
+								<li class="active">
+									<a href="../index.html">Home</a>
+								</li>
+								<li>
+									<a href="../pages/guest/products.html">Women</a>
+								</li>
+								<li>
+									<a href="../pages/guest/products.html">Men</a>
+
+									<!-- MEGA MENU -->
+									<div class="mega-menu" data-col-lg="9" data-col-md="12">
+										<div class="row">
+
+											<div class="col-md-3">
+												<h4 class="menu-title">Clothing</h4>
+												<ul class="mega-sub">
+													<li><a href="../pages/guest/products.html">Casual Wear</a></li>
+													<li><a href="../pages/guest/products.html">Evening Wear</a></li>
+													<li><a href="../pages/guest/products.html">Formal Attire</a></li>
+													<li><a href="../pages/guest/products.html">Womens Jeans</a></li>
+													<li><a href="../pages/guest/products.html">Mens Jeans</a></li>
+													<li><a href="../pages/guest/products.html">Fall Styles</a></li>
+												</ul>
+											</div>
+
+											<div class="col-md-3">
+												<h4 class="menu-title">Accessories</h4>
+												<ul class="mega-sub">
+													<li><a href="../pages/guest/products.html">Casual Wear</a></li>
+													<li><a href="../pages/guest/products.html">Evening Wear</a></li>
+													<li><a href="../pages/guest/products.html">Formal Attire</a></li>
+													<li><a href="../pages/guest/products.html">Womens Jeans</a></li>
+													<li><a href="../pages/guest/products.html">Mens Jeans</a></li>
+													<li><a href="../pages/guest/products.html">Fall Styles</a></li>
+												</ul>
+											</div>
+
+											<div class="col-md-3">
+												<h4 class="menu-title">Brands</h4>
+												<ul class="mega-sub">
+													<li><a href="../pages/guest/products.html">Casual Wear</a></li>
+													<li><a href="../pages/guest/products.html">Evening Wear</a></li>
+													<li><a href="../pages/guest/products.html">Formal Attire</a></li>
+													<li><a href="../pages/guest/products.html">Womens Jeans</a></li>
+													<li><a href="../pages/guest/products.html">Mens Jeans</a></li>
+													<li><a href="../pages/guest/products.html">Fall Styles</a></li>
+												</ul>
+											</div>
+
+											<div class="col-md-3">
+												<div class="carousel slide m-b" data-ride="carousel">
+													<div class="carousel-inner">
+														<div class="item active">
+															<img src="../img/common/men/slide1.jpg" alt="" />
+														</div>
+														<div class="item">
+															<img src="../img/common/men/slide2.jpg" alt="" />
+														</div>
+													</div>
+												</div>
+												<h5 class="text-semibold uppercase m-b-sm">Featured Products</h5>
+												<p>Lorem ipsum dolor sit, consectetur adipiscing elit. Etiam neque
+													velit, blandit sed scelerisque.</p>
+												<a href="../pages/guest/products.html"
+													class="btn btn-default btn-round">Go to Shop →</a>
+											</div>
+
+										</div>
+									</div>
+									<!-- // MEGA MENU -->
+
+								</li>
+								<li>
+									<a href="Articles.html">論壇文章</a>
+								</li>
+								<li>
+									<a href="../pages/guest/store-locator.html">Store Locator</a>
+								</li>
+								<li>
+									<a href="../pages/guest/contact-us.html">Contact Us</a>
+								</li>
+								<li>
+									<a href="#">Buy Me!</a>
+								</li>
+							</ul>
+
+							<!-- MOBILE MENU -->
+							<div id="mobile-menu" class="dl-menuwrapper visible-xs visible-sm">
+								<button class="dl-trigger"><i class="iconfont-reorder round-icon"></i></button>
+								<ul class="dl-menu">
+									<li class="active">
+										<a href="javsacript:void(0);">Home</a>
+									</li>
+									<li>
+										<a href="javsacript:void(0);">Women</a>
+									</li>
+									<li>
+										<a href="javsacript:void(0);">Men</a>
+
+										<ul class="dl-submenu">
+											<li>
+												<a href="../pages/guest/products.html">Clothing</a>
+												<ul class="dl-submenu">
+													<li><a href="../pages/guest/products.html">Casual Wear</a></li>
+													<li><a href="../pages/guest/products.html">Evening Wear</a></li>
+													<li><a href="../pages/guest/products.html">Formal Attire</a></li>
+													<li><a href="../pages/guest/products.html">Womens Jeans</a></li>
+													<li><a href="../pages/guest/products.html">Mens Jeans</a></li>
+													<li><a href="../pages/guest/products.html">Fall Styles</a></li>
+												</ul>
+											</li>
+											<li>
+												<a href="../pages/guest/products.html">Accessories</a>
+												<ul class="dl-submenu">
+													<li><a href="../pages/guest/products.html">Casual Wear</a></li>
+													<li><a href="../pages/guest/products.html">Evening Wear</a></li>
+													<li><a href="../pages/guest/products.html">Formal Attire</a></li>
+													<li><a href="../pages/guest/products.html">Womens Jeans</a></li>
+													<li><a href="../pages/guest/products.html">Mens Jeans</a></li>
+													<li><a href="../pages/guest/products.html">Fall Styles</a></li>
+												</ul>
+											</li>
+											<li>
+												<a href="../pages/guest/products.html">Brands</a>
+												<ul class="dl-submenu">
+													<li><a href="../pages/guest/products.html">Casual Wear</a></li>
+													<li><a href="../pages/guest/products.html">Evening Wear</a></li>
+													<li><a href="../pages/guest/products.html">Formal Attire</a></li>
+													<li><a href="../pages/guest/products.html">Womens Jeans</a></li>
+													<li><a href="../pages/guest/products.html">Mens Jeans</a></li>
+													<li><a href="../pages/guest/products.html">Fall Styles</a></li>
+												</ul>
+											</li>
+										</ul>
+									</li>
+								</ul>
+							</div>
+							<!-- // MOBILE MENU -->
+
+						</nav>
+						<!-- // SITE NAVIGATION MENU -->
+					</div>
+				</div>
+			</div>
+			<!-- // MAIN HEADER -->
+		</header>
+		<!-- // SITE HEADER -->
+
+		<!-- BREADCRUMB -->
+		<div class="breadcrumb-container">
+			<div class="container">
+				<div class="relative">
+					<ul class="bc unstyled clearfix">
+						<li><a href="#">Home</a></li>
+						<li class="active">Checkout</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<!-- // BREADCRUMB -->
+
+		<!-- SITE MAIN CONTENT -->
+		<main id="main-content" role="main">
+			<div class="container">
+				<button id="addArticleButton">新增文章</button>
+				<div class="row" id="articleList">
+					<h1>文章列表</h1>
+				</div>
+
+				<div id="commentAlert" class="dialog">
+					<div class="dialog-content">
+						<i class="fas fa-exclamation-circle"></i> <!-- Font Awesome 警告图标 -->
+						<h2>提示</h2>
+						<p>請輸入留言</p>
+						<button id="closeCommentAlert">確定</button>
+					</div>
+				</div>
+
+
+				<div id="reportDialog" class="dialog">
+					<div class="dialog-content">
+						<h2>檢舉內容</h2>
+						<label for="reportReason">請選擇檢舉原因：</label>
+						<br><br>
+						<select id="reportReason">
+							<option value="廣告不實">廣告不實</option>
+							<option value="色情內容">色情內容</option>
+							<option value="暴力或會人反感的內容">暴力或會人反感的內容</option>
+							<option value="仇恨或悪意內容">仇恨或悪意內容</option>
+							<option value="騷擾或霸淩內容">騷擾或霸淩內容</option>
+							<option value="有害或危險舉動"> 有害或危險舉動</option>
+							<option value="錯誤資訊"> 錯誤資訊</option>
+							<option value="虐待兒童">虐待兒童</option>
+							<option value="法律問題"> 法律問題</option>
+							<option value="宣傳恐怖主義"> 宣傳恐怖主義</option>
+							<option value="垃圾內容或誤導性內容"> 垃圾內容或誤導性內容</option>
+							<!-- 在這裡添加更多選項 -->
+						</select>
+						<br><br>
+						<button id="submitReport">提交檢舉</button>
+
+						<!-- 取消按鈕 -->
+						<button id="cancelReport">取消</button>
+					</div>
+				</div>
+
+				<div id="articleMsgList" style="display: none;"></div>
+
+
+				</section>
+				<!-- // ACCORDION -->
+
+				</section>
+
+			</div>
+	</div>
+	</main>
+	<!-- // SITE MAIN CONTENT -->
+
+	<!-- SITE FOOTER -->
+	<footer class="page-footer">
+
+		<!-- WIDGET AREA -->
+		<div class="widgets">
+
+			<!-- FIRST ROW -->
+			<div class="section">
+				<div class="container">
+					<div class="row">
+
+						<div class="col-xs-12 col-sm-6 col-md-3">
+							<section class="widget widget-text">
+								<h5 class="widget-title">our store</h5>
+								<div class="widget-content">
+									<p>Sed ornare cras donec litora integer curabitur orci, at nullam aliquam libero
+										nam himenaeos, amet massa amet ut ipsum viverra mauris rhoncus neque aenean
+										rhoncus gravida orci facilisis quis dui consectetur.</p>
+									<p>Nisi porttitor inceptos consectetur donec orci, dui ipsum leo class gravida,
+										felis primis viverra placerat.</p>
+								</div>
+							</section>
+						</div>
+
+						<div class="col-xs-12 col-sm-6 col-md-3">
+							<section class="widget widget-text">
+								<h5 class="widget-title">Opening Time</h5>
+								<div class="widget-content">
+									<p>Monday-Friday:-------------------------9.00 to 18.00</p>
+									<p>Saturday:--------------------------------10.00 to 16.00</p>
+									<p>Sunday:----------------------------------10.00 to 16.00</p>
+									<br />
+									<p>Every 30 day of month Lorem ipsum dolor sit amet, consectetur adipiscing.</p>
+								</div>
+							</section>
+						</div>
+
+						<div class="space40 visible-sm clearfix"></div>
+
+						<div class="col-xs-12 col-sm-6 col-md-3">
+							<section class="widget widget-menu">
+								<h5 class="widget-title">information</h5>
+								<div class="widget-content">
+									<ul class="menu iconed-menu unstyled">
+										<li><a href="#"><i class="iconfont-circle-blank menu-icon"></i>Affiliate</a>
+										</li>
+										<li><a href="#"><i class="iconfont-circle-blank menu-icon"></i>Shipping</a>
+										</li>
+										<li><a href="#"><i class="iconfont-circle-blank menu-icon"></i>Shop
+												support</a></li>
+										<li><a href="#"><i class="iconfont-circle-blank menu-icon"></i>Customer
+												Service</a></li>
+										<li><a href="#"><i class="iconfont-circle-blank menu-icon"></i>Payment &
+												Return</a></li>
+										<li><a href="#"><i class="iconfont-circle-blank menu-icon"></i>Terms &
+												Conditions</a></li>
+									</ul>
+								</div>
+							</section>
+						</div>
+
+						<div class="col-xs-12 col-sm-6 col-md-3">
+							facebook
+						</div>
+
+					</div>
+				</div>
+			</div>
+			<!-- // FIRST ROW -->
+
+			<!-- SECOND ROW -->
+			<div class="section">
+				<div class="container">
+					<div class="row">
+
+						<div class="col-xs-12 col-sm-12 col-md-3">
+							<section class="widget widget-menu">
+								<h5 class="widget-title">Contact info</h5>
+								<div class="widget-content">
+									<ul class="menu iconed-list unstyled">
+										<li>
+											<span class="list-icon"><i
+													class="round-icon iconfont-map-marker"></i></span>
+											<div class="list-content">Lorem ipsum maecenas dapibus luctus euismod
+												133/2 New York City</div>
+										</li>
+										<li>
+											<span class="list-icon"><i class="round-icon iconfont-phone"></i></span>
+											<div class="list-content">(+00)1344356-675</div>
+										</li>
+										<li>
+											<span class="list-icon"><i
+													class="round-icon iconfont-envelope-alt"></i></span>
+											<div class="list-content">support@themina.net</div>
+										</li>
+									</ul>
+								</div>
+							</section>
+						</div>
+
+						<div class="col-xs-12 col-sm-12 col-md-6">
+							<section class="widget widget-ads">
+								<div class="widget-content">
+									<div class="center-xs">
+										<div class="ads">
+											<a href="#">
+												<img src="../img/common/demo/images-footer.jpg" alt="" />
+											</a>
+											<div class="ads-caption bottom-right">
+												<a href="#" class="btn btn-default btn-round">
+													<i class="round-icon iconfont-angle-right"></i>
+													<span class="inline-middle">Show More</span>
+												</a>
+											</div>
+										</div>
+									</div>
+								</div>
+							</section>
+						</div>
+
+						<div class="col-xs-12 col-sm-12 col-md-3">
+							<section class="widget widget-subscription">
+								<h5 class="widget-title">Newletter</h5>
+								<div class="widget-content">
+									<p>Subscribe to be the first to know about Sales, Events, and Exclusive Offers!
+									</p>
+									<form action="#" method="post">
+										<div class="input-group">
+											<label for="subscription-email" class="placeholder">Enter Your
+												Email</label>
+											<input type="email" id="subscription-email" name="email"
+												class="form-control" required />
+											<span class="input-group-btn">
+												<button class="btn btn-primary">Subscribe</button>
+											</span>
+										</div>
+									</form>
+								</div>
+							</section>
+						</div>
+
+					</div>
+				</div>
+			</div>
+			<!-- // SECOND ROW -->
+
+		</div>
+		<!-- // WIDGET AREA -->
+
+		<div class="footer-sub">
+			<div class="container">
+				<div class="row">
+					<div class="col-xs-12 col-sm-6">
+						<div class="footer-links center-xs clearfix">
+							<ul class="unstyled">
+								<li><a href="#">Site Map</a></li>
+								<li><a href="#">FAQ</a></li>
+								<li><a href="#">Work for us</a></li>
+								<li><a href="#">Contact Us</a></li>
+							</ul>
+						</div>
+						<div class="space10"></div>
+						<div class="copyright center-xs">
+							<p>(c) 2013 More Templates <a href="http://www.cssmoban.com/" target="_blank"
+									title="模板之家">模板之家</a> - Collect from <a href="http://www.cssmoban.com/" title="网页模板"
+									target="_blank">网页模板</a>. All Rights Reserved.</p>
+						</div>
+					</div>
+
+					<div class="space40 visible-xs"></div>
+
+					<div class="col-xs-12 col-sm-6 center-xs">
+						<div class="pull-right">
+							<div class="vmid">
+								<span class="uppercase">Payment Accept&emsp;</span>
+								<a href="#"><img src="../img/common/visacard.png" alt="" width="40" /></a>
+								<a href="#"><img src="../img/common/mastercard.png" alt="" width="40" /></a>
+								<a href="#"><img src="../img/common/paypal.png" alt="" width="40" /></a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</footer>
+	<!-- // SITE FOOTER -->
+
+	</div>
+	<!-- // PAGE WRAPPER -->
+
+	<!-- Essential Javascripts -->
+	<script src="../js/common/minified.js"></script>
+	<!-- // Essential Javascripts -->
+
+	<script>
+		//==========================將資料庫所有論壇文章(狀態0),顯示出來==================================
+		const ForumArticle_el = $("#articleList");//列表顯示對應位子
+		function fetchForumArticles() {
+			fetch('/BuyGo/api/forumArticle/manage', {
+				method: 'GET',
+				headers: {
+					'Content-Type': 'application/json;charset:utf-8',
+					'Accept': 'application/json;charset:utf-8'
+				},
+			})
+				.then(response => response.json())
+				.then(data => processForumArticles(data))
+				.catch(error => console.error('Error fetching forum articles:', error));
+		}
+
+		function processForumArticles(articles) {
+			ForumArticle_el.empty();
+			console.log(articles);   //DTO
+			articles.forEach(forum => {
+				const {
+					articleNo,
+					memberNo,
+					articleTitle,
+					articleContent,
+					articleStatus,
+					articlePublish,
+					articleUpdate,
+					articleLike,
+					articleDislike
+				} = forum;
+				// IstMsg.forEach(perIstMsg => {
+				// 	const { content } = perIstMsg;
+				// })
+				const IstMsg = forum.lstMsg;
+				//const IstMsgContent = IstMsg.map(msg => msg.content,msg => msg.member).join(', ');//留言內容相應數據的陣列
+				// const IstMsgmessageTime = IstMsg.map(msg => msg.messageTime).join('');//留言會員編號相應數據的陣列
+				// const IstMsgmessageTime_el = new Date(IstMsgmessageTime).toLocaleString();
+				//const IstMsgmessageTime = IstMsg.map(msg => new Date(msg.messageTime).toLocaleString()).join('');
+
+				const IstMsgContent =
+					IstMsg.map(msg =>
+						` 
+						<p>留言者：${msg.member}</p>
+					<p>${msg.content}</p>
+					<p>${new Date(msg.messageTime).toLocaleString()}</p>
+					`
+					).join('<br>');
+
+
+				// console.log(IstMsgmember);
+				// console.log(articleNo);
+				console.log(IstMsgContent);
+
+				const formattedPublishDate = new Date(articlePublish).toLocaleString();
+				const articleRow = `
+				<ul class="article-list">
+    	<li class="article-item">
+		<h2 id = "idxx" class="article-no hidden">${articleNo}</h2>
+      	<h2 class="article-title">${articleTitle}</h2>
+      	<p class="article-date">發布日期：${formattedPublishDate}</p>
+      	<p class="article-content">${articleContent}</p>
+      	<div class="buttons">
+        <button class="button fa-regular fa-thumbs-up">${articleLike !== undefined ? articleLike : ""}</button>
+        <button class="button fa-regular fa-thumbs-down">${articleDislike !== undefined ? articleDislike : ""}</button>
+        <button class="button fa-regular fa-star" style="color: #000000;"></button>
+		<button class="button comment" id="commentButton1"><i class="fas fa-comment"></i> 留言</button>
+
+        <button class="button report"><i class="fas fa-flag"></i> 檢舉</button>
+      	</div>
+     	 <div class="comment-box">
+        	<input id="commentText" class="st02" data-view="na03" type="text" placeholder="留言..."></input>
+			<button id="submitComment" class="button post-comment" type="submit"><i class="fas fa-paper-plane"></i></button>
+
+     		 </div>
+			  <div class="comment_el" id="#articleMsgList" style="display: none;">
+                	${IstMsgContent}
+             </div>
+    		</li>
+			</ul>
+                `;
+
+				ForumArticle_el.append(articleRow);
+
+
+			});
+
+
+			//==========================檢舉 + 留言功能===============================================================
+			// 獲取對話框和按鈕元素
+			const reportDialog = document.getElementById("reportDialog");
+			const reportButtons = document.querySelectorAll(".button.report"); // 修正選擇器以匹配多個按鈕
+
+			//=========================留言新增(按鈕)=======================================================================
+
+
+			// 提交评论按钮的点击事件处理程序
+			$(".button.post-comment").on('click', function () {
+				const commentText = $(this).closest(".article-item").find("#commentText").val(); // 获取输入框中的文本
+				const articleNo = $(this).closest(".article-item").find(".article-no").text(); // 获取文章编号
+				console.log("留言文字: " + commentText);
+				console.log("文章編號: " + articleNo);
+
+				if (commentText === "") {
+					// 如果评论文本为空，显示燈箱提示
+					$("#commentAlert").show();
+					return;
+				}
+
+				// 在这里将评论文本发送到后端进行处理，可以使用fetch或其他AJAX方法
+				var formData = {
+					content: commentText,
+					articleNo: articleNo
+				};
+				fetch("/BuyGo/needLoginApi/articleMsg/add", {
+					method: "POST",
+					headers: {
+						'Content-Type': 'application/json;charset=UTF-8' // 修正 Content-Type
+					},
+					//前端傳到後端
+					body: JSON.stringify(formData)
+
+				})
+					//後端回傳到前端
+					.then(response => {
+						if (response.status === 401) { // 客戶未登入，執行頁面重定向到登入頁
+							alert('帳號未登入，將導轉至登入頁面');
+							window.location.href = '/BuyGo/front_end/pages/member/login.html'; // 登入頁面url
+						} else if (response.ok) { // 通常 200
+							$(this).closest(".article-item").find("#commentText").val("");
+							// 請求成功，顯示燈箱
+							//showLightbox();
+							return response.json();
+						} else {
+							alert("錯誤狀態:" + response.status);
+							return;
+						}
+					})
+					.then(data => {
+						// 在這裡處理後端返回的數據
+						console.log(data);
+					})
+					.catch(error => {
+						console.error("錯誤:", error);
+					});
+
+			});
+
+			// 关闭燈箱提示的按钮点击事件
+			$("#closeCommentAlert").on('click', function () {
+				$("#commentAlert").hide(); // 隐藏燈箱提示
+			});
+
+
+			//=========================留言顯示(按鈕)=======================================================================
+			let isCommentSectionVisible = false; // 默认隐藏评论部分
+			$(".button.comment").off('click').on('click', function () {
+				// 找到具有 .article-item 類別的最近祖先元素
+				const articleItem = $(this).closest(".article-item");
+
+				// 從文章元素中獲取文章編號
+				const articleNo = articleItem.find(".article-no").text();
+				console.log("articleNo: " + articleNo); // 獲取文章編號
+
+				isCommentSectionVisible = !isCommentSectionVisible;
+
+				// 获取留言部分元素，这里使用类名 .comment_el 来选择要显示/隐藏的元素
+				const articleMsgList = articleItem.find(".comment_el");
+
+				// 根据显示状态设置留言部分的显示或隐藏
+				if (isCommentSectionVisible) {
+					articleMsgList.show();
+				} else {
+					articleMsgList.hide();
+				}
+			});
+
+			// 添加點擊事件監聽器到每個檢舉按鈕
+			reportButtons.forEach(reportButton => {
+				reportButton.addEventListener("click", () => {
+					reportDialog.style.display = "block"; // 顯示對話框
+
+					const articleNo = $(reportButton).closest(".article-item").find(".article-no").text();//取得文章編號
+					console.log("文章編號：" + articleNo);
+
+
+					//=========================檢舉功能(按鈕)===============================================================
+					// 提交檢舉按鈕的點擊事件
+					$("#submitReport").off('click').on('click', function () {
+						const selectedReason = $("#reportReason").val(); // 取得文章檢舉原因
+						//const articleNo = $("#idxx").text(); // 取得文章檢舉原因
+						console.log("文章檢舉原因：" + selectedReason);
+						console.log("文章編號：" + articleNo);
+
+						var formData = {
+							reportContent: selectedReason,
+							articleNo: articleNo
+						};
+						fetch("/BuyGo/needLoginApi/apArticle/add", {
+							method: "POST",
+							headers: {
+								'Content-Type': 'application/json;charset=UTF-8' // 修正 Content-Type
+							},
+							//前端傳到後端
+							body: JSON.stringify(formData)
+						})
+							//後端回傳到前端
+							.then(response => {
+								if (response.status === 401) { // 客戶未登入，執行頁面重定向到登入頁
+									alert('帳號未登入，將導轉至登入頁面');
+									window.location.href = '/BuyGo/front_end/pages/member/login.html'; // 登入頁面url
+								} else if (response.ok) { // 通常 200
+									// 請求成功，顯示燈箱
+									//showLightbox();
+									return response.json();
+								} else {
+									alert("錯誤狀態:" + response.status);
+									return;
+								}
+							})
+							.then(data => {
+								// 在這裡處理後端返回的數據
+								console.log(data);
+							})
+							.catch(error => {
+								console.error("錯誤:", error);
+							});
+
+						// 在這里執行提交檢舉後的邏輯，例如顯示成功消息或關閉檢舉對話框
+						reportDialog.style.display = "none"; // 關閉檢舉對話框
+					});
+
+				});
+
+			});
+
+
+			// 添加取消按鈕的點擊事件監聽器
+			const cancelReportButton = document.getElementById("cancelReport");
+			if (cancelReportButton) { // 檢查是否存在
+				cancelReportButton.addEventListener("click", () => {
+					reportDialog.style.display = "none"; // 關閉對話框
+				});
+			}
+		}
+
+		//==========================刪除功能==========================================================
+
+		// 新增刪除按鈕點擊事件
+		$(".delete-btn").click(function () {
+			const row = $(this).closest("tr");
+			// 自訂屬性獲取文章編號
+			const articleNo = $(this).closest("td").siblings("td.article-no").text();
+
+			console.log(articleNo);
+
+			// 發送請求到後端刪除對應文章
+			deleteArticle(articleNo);
+
+			// 從表格中刪除對應行
+			row.remove();
+		});
+
+
+		// 向後端發送刪除請求
+		function deleteArticle(articleNo) {
+			fetch('/BuyGo/api/forumArticle/remove', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json;charset:utf-8',
+					'Accept': 'application/json;charset:utf-8'
+				},
+				body: JSON.stringify({
+					articleNo: articleNo
+				})
+			})
+				.then(response => response.json())
+				.then(data => {
+					// 在這裡處理後端返回的數據
+					console.log(data);
+				})
+				.catch(error => {
+					console.error("Error:", error);
+				});
+		}
+		//==========================呼叫函式lfetchForumArticle，將當前畫面動態刷新==================================
+		$(document).ready(() => {
+			fetchForumArticles();
+			// 新增文章按鈕的點擊事件
+			$("#addArticleButton").click(() => {
+				// 跳轉至指定的連結
+				window.location.href = "http://localhost:8081/BuyGo/front_end/pages/AddArticles.html";
+			});
+		});
+	</script>
+
+	</body>
+
+</html>
