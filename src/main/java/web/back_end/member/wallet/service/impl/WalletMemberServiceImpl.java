@@ -6,7 +6,7 @@ import web.back_end.member.wallet.dao.WalletMemberDao;
 import web.back_end.member.wallet.dao.WalletTransHistDao;
 import web.back_end.member.wallet.dao.impl.WalletMemberDaoImpl;
 import web.back_end.member.wallet.dao.impl.WalletTransHistDaoImpl;
-import web.back_end.member.wallet.entity.WalletTransHist;
+import web.back_end.member.wallet.entity.BackEndWalletTransHist;
 import web.back_end.member.wallet.service.WalletMemberService;
 import web.front_end.member.acc.entity.Member;
 
@@ -36,7 +36,7 @@ public class WalletMemberServiceImpl implements WalletMemberService {
 	}
 
 	@Override
-	public Boolean addWalletTransHist(WalletTransHist walletTransHist) {
+	public Boolean addWalletTransHist(BackEndWalletTransHist walletTransHist) {
 		int result = walletTransHistDao.insert(walletTransHist);
 		if(result == 1) {
 			return true;

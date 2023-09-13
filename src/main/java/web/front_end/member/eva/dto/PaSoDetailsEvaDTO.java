@@ -7,7 +7,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import web.front_end.member.eva.entity.PaSo;
+//import web.front_end.member.eva.entity.PaSo;
+import web.front_end.member.pa.order.entity.PaSo;
 
 @Setter
 @Getter

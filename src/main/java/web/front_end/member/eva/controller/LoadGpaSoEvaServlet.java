@@ -26,13 +26,6 @@ public class LoadGpaSoEvaServlet extends HttpServlet{
 		HttpSession session = request.getSession(); // 取得當前請求的Session
 		response.setCharacterEncoding("UTF-8");
 		List<GpaSo> gpaSoList = SERVICE.loadSoBySellerMemberNoAndSoStat((Integer)(session.getAttribute("memberNo")), 4); //只搜尋訂單狀態4(已完成)
-//		for(GpaSo gpaSo : gpaSoList) {
-//			System.out.println("-----------------");
-//			System.out.println("getGpaSoNo:" + gpaSo.getGpaSoNo());
-//			System.out.println("getGpaProdNo:" + gpaSo.getGpaProdNo());
-//			System.out.println("getGpaSoStat:" + gpaSo.getGpaSoStat());
-//			System.out.println("-----------------");	
-//		}
 		List<GpaSoEvaDTO> gpaSoEvaDTOList = new LinkedList<GpaSoEvaDTO>();
 		for(GpaSo gpaSo : gpaSoList) {
 			GpaSoEvaDTO gpaSoEvaDTO = new GpaSoEvaDTO();
@@ -60,60 +53,6 @@ public class LoadGpaSoEvaServlet extends HttpServlet{
 			gpaSoEvaDTOList.add(gpaSoEvaDTO);
 			gpaSoEvaDTO = null;
 		}
-//		//DTO
-//		List<GpaProdEvaDTO> gpaProdEvaDTOList = new LinkedList<GpaProdEvaDTO>();
-//		
-//		for (GpaProd gpaProd : gpsProdlist) {
-//			GpaProdEvaDTO gpaProdEvaDTO = new GpaProdEvaDTO();
-//			
-////			// DTO開始
-//			
-//			gpaProdEvaDTO.setGpaProdName(gpaProd.getGpaProdName()); // 揪團商品名稱
-//			gpaProdEvaDTO.setGpaEndDate(gpaProd.getGpaEndDate()); // 揪團商品截止時間
-//			
-//			for(int i =0 ; i < gpaProd.getGpaSo().size() ; i++) {
-//				gpaProdEvaDTO.getGpaSoNo().add(gpaProd.getGpaSo().get(i).getGpaSoNo()); // 揪團賣場訂單編號
-//				gpaProdEvaDTO.getGpaProdCount().add(gpaProd.getGpaSo().get(i).getGpaProdCount()); // 購買數量
-//				gpaProdEvaDTO.getGpaProdTotal().add(gpaProd.getGpaSo().get(i).getGpaProdTotal()); // 總金額
-//				gpaProdEvaDTO.getGpaEvaSeller().add(gpaProd.getGpaSo().get(i).getGpaEvaSeller()); // 給賣家的評價
-//				gpaProdEvaDTO.getMemberAcct().add(gpaProd.getGpaSo().get(i).getMember().getMemberAcct()); // 買家名稱
-//			}
-//			
-//			for(int i = 0 ; i < gpaProd.getGpaProdPics().size() ; i++) { // 商品圖片(轉Base64)
-//				try {
-//					String gpaProdPicToBase64 = Base64EncoderByByte(gpaProd.getGpaProdPics().get(i).getGpaProdPic());
-//					gpaProdEvaDTO.getGpaProdPics().add(gpaProdPicToBase64);
-//				} catch (Exception e) {
-//					e.printStackTrace();
-//				} // 商品圖片
-//			}
-//			gpaProdEvaDTOList.add(gpaProdEvaDTO);
-////			// DTO寫法結束
-//		}
-//		// DTO驗證開始
-////		for(GpaProdEvaDTO gpaProdEvaDTO : gpaProdEvaDTOList) {
-////			System.out.println("---------------");
-////			System.out.println(gpaProdEvaDTO.getGpaProdName());
-////			System.out.println(gpaProdEvaDTO.getGpaEndDate());
-////			for(String pic : gpaProdEvaDTO.getGpaProdPics()) {
-////				System.out.println(pic);
-////			}
-////			
-////			for(int i = 0 ; i < gpaProdEvaDTO.getGpaSoNo().size() ; i++) {
-////				System.out.println("--訂單開始--");
-////				System.out.println(gpaProdEvaDTO.getGpaSoNo().get(i));
-////				System.out.println(gpaProdEvaDTO.getGpaProdCount().get(i));
-////				System.out.println(gpaProdEvaDTO.getGpaProdTotal().get(i));
-////				System.out.println(gpaProdEvaDTO.getGpaProdTotal().get(i));
-////				System.out.println(gpaProdEvaDTO.getGpaEvaSeller().get(i));
-////				System.out.println(gpaProdEvaDTO.getMemberAcct().get(i));
-////				System.out.println("--訂單結束--");
-////			}
-////			System.out.println("---------------");
-////		}
-//		System.out.println("gpaProdEvaDTOList:" + gpaProdEvaDTOList);
-//		// DTO驗證結束
-		
 		
 		writePojo2Json(response, gpaSoEvaDTOList);
 	}

@@ -860,7 +860,6 @@
 
 					currentGpaProdName = gpaProdName; // 將gpaProdName的值保存至全域變數
 					currentGpaProdPrice = gpaFirstPrice; // 將gpaFirstPrice的值保存至全域變數
-					$("#orderNowLightbox_totoalPrice").text(Number(currentGpaProdPrice) + 100); // 將商品價格+運費100元顯示於預定燈箱的總金額
 
 					// 將gpaEndDate更換時間格式為指定格式
 					let gpaEndDateToMoment = moment(gpaEndDate, "MMM DD, YYYY, h:mm:ss A");
@@ -937,6 +936,7 @@
 							$("span#beforeProdPrice").css("text-decoration", "line-through"); // 新增刪除線
 							$("span#beforeProdPrice").css("display", ""); // 刪除隱藏(顯示出來)
 
+							
 							currentGpaProdPrice = gpaLevelPrice; // 將優惠價設置進全域變數
 
 							// 將已完成的達標條件依序印至燈箱內
@@ -951,6 +951,7 @@
 							`);
 						}
 					})
+					$("#orderNowLightbox_totoalPrice").text(Number(currentGpaProdPrice) + 100); // 將商品價格+運費100元顯示於預定燈箱的總金額
 					setRecommendedGpaProd(gpaCatsNo, currentParameterValue_gpaProdNo); // 設置推薦商品
 				});
 		});
@@ -1384,12 +1385,11 @@
 				})
 				.then(deductionWalletAmountDTO => {
 					let { successful, message } = deductionWalletAmountDTO;
-					console.log("successful:" + successful);
-					console.log("message:" + message);
 					if (successful) {
 						createGpaOrder(); // 建立訂單
 						// decreaseGpaPreProdByGpaProdNo(); // 庫存量-1
-						$("span#gpaPreProd").text($("span#gpaPreProd").text() - 1); // 動態將畫面上的庫存數量-1
+						$("span#gpaPreProd").text(Number($("span#gpaPreProd").text()) + 1); // 動態將畫面上的已預定數量+1
+						$("span#stockQty").text(Number($("span#stockQty").text()) - 1); // 動態將畫面上的庫存數量-1
 
 						orderNowLightbox_el.classList.add("none"); // 關閉燈箱
 
@@ -1450,6 +1450,7 @@
 						TotalAmount: Number(currentGpaProdPrice) + 100,
 						TradeDesc: "交易描述",
 						ItemName: currentGpaProdName,
+						ClientBackURL: location.protocol + "//" + location.hostname + ":" + location.port + "/BuyGo/front_end/pages/member/gpa/gpaOrder.html", // 成功付款後導到訂單追蹤頁面
 						CustomField1: "gpaOrderCheckout",
 						CustomField2: "orderId",
 						CustomField3: currentBuyerMemberNo + "," + currentGpaProdNo + "," + "1" + "," + Number(currentGpaProdPrice) + "," + "100" + "," + $("input#gpaBuyName").val() + "," + $("input#gpaBuyTel").val() + "," + $("input#gpaBuyAdd").val()
