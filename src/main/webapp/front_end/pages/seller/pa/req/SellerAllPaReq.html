@@ -173,38 +173,7 @@ th {
 					<div class="main-header">
 						<!-- CURRENCY / LANGUAGE / USER MENU -->
 						<div class="actions">
-							<div class="center-xs">
-								<!-- CURRENCY -->
-								<ul class="option-list unstyled">
-									<li class="active"><a href="#" data-toggle="tooltip"
-										title="USD - US Dollar">$</a></li>
-									<li><a href="#" data-toggle="tooltip"
-										title="GBP - British Pound">lb</a></li>
-									<li><a href="#" data-toggle="tooltip" title="EUR - Euro">EUR</a></li>
-								</ul>
-								<!-- // CURRENCY -->
-								<!-- LANGUAGES -->
-								<ul class="option-list unstyled">
-									<li class="active"><a href="#" data-toggle="tooltip"
-										title="English">EN</a></li>
-									<li><a href="#" data-toggle="tooltip" title="French">FR</a></li>
-									<li><a href="#" data-toggle="tooltip" title="Deutsch">DE</a></li>
-								</ul>
-								<!-- // LANGUAGES -->
-							</div>
-							<div class="clearfix"></div>
-							<!-- USER RELATED MENU -->
-							<nav id="tiny-menu" class="clearfix">
-								<ul class="user-menu">
-									<li><a href="../../../../pages/member/myaccount.html">My
-											Account</a></li>
-									<li><a href="../../../../pages/member/cart.html">My
-											Wishlist</a></li>
-									<li><a href="../../../../pages/member/checkout.html">Checkout</a></li>
-									<li><a href="#">Log Out</a></li>
-								</ul>
-							</nav>
-							<!-- // USER RELATED MENU -->
+							<!-- 頁面右上功能區 -->
 						</div>
 						<!-- // CURRENCY / LANGUAGE / USER MENU -->
 						<!-- SITE LOGO -->
@@ -389,8 +358,9 @@ th {
 			<div class="container">
 				<div class="relative">
 					<ul class="bc unstyled clearfix">
-						<li><a href="#">Home</a></li>
-						<li class="active">MY ACCOUNT</li>
+						<li><a href="../../../../index.html">首頁</a></li>
+						<li><a href="../../../../pages/member/myaccount.html">我的帳戶</a></li>
+						<li class="active">我的賣場</li>
 					</ul>
 				</div>
 			</div>
@@ -408,33 +378,26 @@ th {
 						<aside class="col-xs-12 col-sm-4 col-md-3">
 							<section class="side-section">
 								<h3 class="uppercase text-bold">
-									<span class="text-xs">MyAccount Pages</span>
+									<span class="text-xs">我的賣場</span>
 								</h3>
 
 								<ul class="nav nav-tabs nav-stacked">
-									<li><a href="#">個人資料</a></li>
-									<li><a href="#">最新消息</a></li>
-									<li><a href="../../pages/member/gpa/gpaOrder.html">訂單追蹤</a></li>
-									<li><a href="#">我的委託單</a></li>
-									<li><a href="#">已收藏的揪團</a></li>
-									<li><a href="#">優惠券</a></li>
-									<li><a href="#">平台錢包</a></li>
-									<li><a href="#">聊天室</a></li>
-									<li><a href="../../pages/member/blacklist.html">黑名單</a></li>
-									<br>
-									<li><a href="../../pages/member/myShop.html">我的賣場</a></li>
+									<li><a href="../../../../pages/member/myEvaluate.html">我的評價</a></li>
+									<li><a href="#">商品上架</a></li>
+									<li><a href="../../../../pages/seller/pa/order/Seller_ListOrders.html">訂單管理</a></li>
+									<li><a href="../../../../pages/seller/pa/req/SellerAllPaReq.html">委託單管理</a></li>
 								</ul>
 							</section>
 
 							<!-- PROMO -->
 							<div class="promo inverse-background"
-								style="background: url('../../img/common/demo/Barn-Dress-Girl_t.jpg') no-repeat; background-size: auto 100%;">
+								style="background: url('../../../../img/common/demo/Barn-Dress-Girl_t.jpg') no-repeat; background-size: auto 100%;">
 								<div class="inner text-center np">
 									<div class="ribbon">
 										<h6 class="nmb">New Arrivals</h6>
 										<h5 class="text-semibold uppercase nmb">Leather Fashion</h5>
 										<div class="space10"></div>
-										<a href="../../pages/guest/products.html"
+										<a href="../../../../pages/guest/products.html"
 											class="with-icon prepend-icon"><i
 											class="iconfont-caret-right"></i><span> Shop Now</span></a>
 									</div>
@@ -448,7 +411,7 @@ th {
 							<div class="row">
 								<div>
 									<h3 class="uppercase text-bold">
-										<span class="text-xs">我的委託單</span>
+										<span class="text-xs">委託單管理</span>
 									</h3>
 									<h3 class="uppercase text-bold">
 										<span class="text-xs">一般代購委託項目</span>
@@ -689,6 +652,8 @@ th {
 	<ul class="store-list unstyled" id="paReqList"></ul>
 
 	<script>
+		checkLoginStatusShowMemberAcct(); // 檢查客戶帳號是否登入，修改頁面右上方Log In/Log Out按鈕，顯示登入者帳號名稱
+		
         window.addEventListener('load', function () {
             const paReqList_el = document.querySelector('#paReqList');
             const paReqListTable = document.getElementById("paReqListTable");
