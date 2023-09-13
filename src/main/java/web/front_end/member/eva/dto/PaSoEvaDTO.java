@@ -7,7 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import web.front_end.member.eva.entity.PaSo;
+//import web.front_end.member.eva.entity.PaSo;
 
 @Setter
 @Getter
@@ -17,11 +17,11 @@ public class PaSoEvaDTO {
 	// PaSo
 	private Integer paSoNo;
 	
-	private Integer paSoStatus;
+	private byte paSoStatus;
 	
 	private Integer paTotalAmount;
 	
-	private Integer paEvaSeller;
+	private byte paEvaSeller;
 	
 	// Member
 	private String memberAcct;

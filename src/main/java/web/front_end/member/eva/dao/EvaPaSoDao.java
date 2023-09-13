@@ -6,7 +6,8 @@ import java.util.List;
 
 import org.hibernate.Session;
 
-import web.front_end.member.eva.entity.PaSo;
+//import web.front_end.member.eva.entity.PaSo;
+import web.front_end.member.pa.order.entity.PaSo;
 import web.front_end.seller.gpa.prod.entity.GpaProd;
 
 public interface EvaPaSoDao{
