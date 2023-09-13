@@ -27,23 +27,24 @@ public class ArticleCollListByAddServlet extends HttpServlet {
 			throws ServletException, IOException {
 		response.setContentType("text/html;charset=UTF-8");
 		ArticleCollList articleCollList_el = json2Pojo(request, ArticleCollList.class);
+		Integer articleNo = articleCollList_el.getArticleNo();
+		
 		HttpSession session = request.getSession();
 		Integer memberNo = (Integer) (session.getAttribute("memberNo"));
 
 		// 測試用"登入功能加進來"(記得刪)
 		if (memberNo == null) {
-			memberNo = 2;
+			memberNo = 3;
 		}
 
-		List<ArticleCollList> articleCollList = SERVICE.loadArticleCollListBymemberNo(memberNo);
-		System.out.println("articleCollList.size()" + articleCollList.size());
-
-		if (articleCollList.size() != 0) {
-			System.out.println("取得成功");
+		boolean articleCollList = SERVICE.select(memberNo, articleNo);
+		
+		if (!articleCollList) {
+			System.out.println("文章收藏成功");
 			articleCollList_el = SERVICE.add(memberNo, articleCollList_el);
 			writePojo2Json(response, articleCollList_el);
 		} else {
-			System.out.println("取得失敗");
+			System.out.println("此會員已收藏過文章");
 		}
 	}
 
