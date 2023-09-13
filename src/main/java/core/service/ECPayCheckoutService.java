@@ -7,7 +7,7 @@ import ecpay.payment.integration.AllInOne;
 import ecpay.payment.integration.domain.AioCheckOutALL;
 
 public class ECPayCheckoutService {
-	public String getECpayForm(AioCheckOutALL aioCheckOutALL, String returnURL) {
+	public String getECpayForm(AioCheckOutALL aioCheckOutALL, String returnURL, String clientBackURL) {
 		// java.util.Date → String
 		java.util.Date tradeDate = new java.util.Date();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
@@ -20,6 +20,7 @@ public class ECPayCheckoutService {
 		aioCheckOutALL.setMerchantTradeNo(uuId);
 		aioCheckOutALL.setMerchantTradeDate(tradeDateStr);
 		aioCheckOutALL.setReturnURL(returnURL);
+		aioCheckOutALL.setClientBackURL(clientBackURL);
 		aioCheckOutALL.setNeedExtraPaidInfo("N");
 		String form = all.aioCheckOut(aioCheckOutALL, null);
 		return form;
