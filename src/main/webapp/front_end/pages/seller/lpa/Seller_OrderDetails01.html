@@ -750,7 +750,7 @@
     <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
     <script src="../../../js/common//minified.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="sweetalert2.all.min.js"></script>
+    <script src="../../../js/login.js"></script>
     <!-- // Essential Javascripts -->
 
     <!-- Particular Page Javascripts -->
@@ -763,6 +763,8 @@
 
     <!-- // Particular Page Javascripts -->
     <script>
+        checkLoginStatusShowMemberAcct();
+
         let lpaSoSeq = localStorage.getItem("myData");
         let order;
 

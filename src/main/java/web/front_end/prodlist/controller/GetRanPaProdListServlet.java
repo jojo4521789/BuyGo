@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import web.front_end.prodlist.entity.PaProdlist;
+import web.front_end.member.pa.prod.entity.PaProd;
 
 
 @WebServlet("/api/front_end/ranPaProdInfo")
@@ -24,9 +24,9 @@ public class GetRanPaProdListServlet extends HttpServlet{
 		System.out.println("fetch成功");
 		
 		resp.setContentType("text/html;charset=utf-8");
-		PaProdlist paProdlist = json2Pojo(req, PaProdlist.class);
+		PaProd paProdlist = json2Pojo(req, PaProd.class);
 		
-		List<PaProdlist> paProdlists = SERVICE.RangetProdNo(4, paProdlist.getPaProdObjNo());
+		List<PaProd> paProdlists = SERVICE.RangetProdNo(4, paProdlist.getPaProdObjNo());
 		
 		//使用subList取得前四筆資料
 		if (paProdlists.size() >= 4) {

@@ -139,7 +139,7 @@
 
 		/* .active 修改成.active_dot  */
 		.active_dot {
-			background: crimson;
+			background: rgb(220, 135, 32);
 		}
 
 		@media (max-width:576px) {
@@ -158,6 +158,18 @@
 		}
 
 		/* Image Slider CSS End 滑動圖片CSS*/
+
+		#delegateButton {
+			border-radius: 4px;
+			background-color: #d98c5c;
+			color: #353535;
+			cursor: pointer;
+			border: none;
+		}
+
+		#delegateButton:hover {
+			background-color: #b67045;
+		}
 	</style>
 </head>
 
@@ -478,6 +490,7 @@
 
 										<ul class="entry-meta unstyled">
 											<li><span class="key">賣家:</span> <span class="value" id="memberNo"></span>
+												<button id="delegateButton">委託此賣家</button>
 											</li>
 											<li><span class="key">商品編號:</span> <span class="value" id="prodNo"></span>
 											</li>
@@ -781,13 +794,13 @@
 						dots = document.querySelectorAll(".dot");
 
 						//圖片載入
-						if (body.paPicsList.length !== 0) {
+						if (body.prodPic.length !== 0) {
 
-							// $("#slider").html(`<img class="firstPic" src="${body.paPicsList[0].paProdPic}" alt="無法載入圖片" />`); (原本的第一張要拿掉)
+							// $("#slider").html(`<img class="firstPic" src="${body.prodPic[0].paProdPic}" alt="無法載入圖片" />`); (原本的第一張要拿掉)
 
 							let count_dot = 0;
 
-							for (let paPrPic of body.paPicsList) {
+							for (let paPrPic of body.prodPic) {
 
 								count_dot++;
 
@@ -860,14 +873,14 @@
 									count++;
 									const { paProdName, paProdPrice, paProdNo } = random;
 
-									//這邊有幾項記得改成點選可以跳轉該商品
+									//這邊有幾項記得改成點選可以跳轉該商品及購物車
 									let productDiv = `
 
 										<div class="product" data-product-id="${count}" data-category="${paProdName}" data-brand="brand1"
 											data-price="" data-colors="red|blue|black|white" data-size="S|M|L">
 											<div class="entry-media" style=" min-height: 220px; overflow: hidden">
 												<div class="hover" style="height: auto;">
-													<img src="${random.paPicsList[0].paProdPic}" class="entry-url" style="height: 100%">
+													<img src="${random.prodPic[0].paProdPic}" class="entry-url" style="height: 100%">
 													<ul class="icons unstyled">
 														<li><a href="${full}/BuyGo/front_end/pages/member/pa/paProduct.html?prodId=${paProdNo}" class="circle" data-toggle="lightbox"> <i class="iconfont-search"></i>
 															</a></li>
