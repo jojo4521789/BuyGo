@@ -8,4 +8,6 @@ public interface GpaProdService {
 	GpaProd loadByGpaProdNo(Integer gpaProdNo);
 	
 	List<GpaProd> randomLoadByGpaCatsNoAndFilterGpaProdNo(Integer gpaCatsNo, Integer gpaProdNo); // 輸入欲搜尋的gpaCatsNo和欲忽視單筆的gpaProdNo
+	
+	boolean changeGpaPreProdByGpaProdNo(Integer gpaProdNo, Integer gpaPreProd);
 }
