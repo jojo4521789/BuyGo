@@ -171,6 +171,11 @@ public class ArticleCollListServiceImpl implements ArticleCollListService {
 	    }
 	    return null; // 如果找不到匹配的ForumArticle，返回null
 	}
+
+	@Override
+	public boolean select(Integer memberNo, Integer articleNo) {
+		return dao.selectById(memberNo, articleNo) > 0;
+	}
 	
 	
 

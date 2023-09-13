@@ -229,6 +229,14 @@
 			font-size: 40px;
 
 		}
+
+		.article-content {
+			margin-top: 5px;
+			max-height: 200px;
+			/* 设置最大高度 */
+			overflow-y: auto;
+			/* 添加垂直滚动条 */
+		}
 	</style>
 	<meta charset="UTF-8" />
 	<title>GFashion - Responsive e-commerce HTML Template</title>
@@ -949,7 +957,7 @@
 						} else if (response.ok) { // 通常 200
 							$(this).closest(".article-item").find("#commentText").val("");
 							// 請求成功，顯示燈箱
-							//showLightbox();
+							notLoggedInAction();
 							return response.json();
 						} else {
 							alert("錯誤狀態:" + response.status);
@@ -1031,7 +1039,7 @@
 									window.location.href = '/BuyGo/front_end/pages/member/login.html'; // 登入頁面url
 								} else if (response.ok) { // 通常 200
 									// 請求成功，顯示燈箱
-									//showLightbox();
+									notLoggedInAction();
 									return response.json();
 								} else {
 									alert("錯誤狀態:" + response.status);
@@ -1114,6 +1122,6 @@
 		});
 	</script>
 
-	</body>
+</body>
 
 </html>
