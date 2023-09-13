@@ -15,13 +15,13 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Entity
+@Entity(name = "BackEndWalletTransHist")
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "WALLET_TRANS_HIST")
-public class WalletTransHist extends Core{
+public class BackEndWalletTransHist extends Core{
 	private static final long serialVersionUID = 1457755989409740329L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

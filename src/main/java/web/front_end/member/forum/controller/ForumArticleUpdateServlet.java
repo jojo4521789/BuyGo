@@ -17,7 +17,7 @@ import web.front_end.member.forum.entity.ForumArticle;
 
 
 @WebServlet("/api/forumArticle/update")
-public class UpdateServlet extends HttpServlet {
+public class ForumArticleUpdateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	@Override
@@ -25,6 +25,8 @@ public class UpdateServlet extends HttpServlet {
 			throws ServletException, IOException {
 		response.setContentType("text/html;charset=utf-8");
 		final HttpSession session = request.getSession();
+		
+		
 		ForumArticle forumArticle = json2Pojo(request, ForumArticle.class);
 		writePojo2Json(response, SERVICE.update(forumArticle));
 	}
