@@ -45,6 +45,7 @@ public class ArticleCollListByAddServlet extends HttpServlet {
 			writePojo2Json(response, articleCollList_el);
 		} else {
 			System.out.println("此會員已收藏過文章");
+			//writePojo2Json(response, articleCollList_el);
 		}
 	}
 
