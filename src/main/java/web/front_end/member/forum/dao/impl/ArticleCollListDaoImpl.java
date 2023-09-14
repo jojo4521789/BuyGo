@@ -10,7 +10,6 @@ import web.front_end.member.forum.entity.ForumArticle;
 
 public class ArticleCollListDaoImpl implements ArticleCollListDao {
 
-
 	@Override
 	public List<ArticleCollList> selectByMemberNo(Integer memberNo) {
 		final String hql = "FROM ArticleCollList WHERE memberNo = :memberNo";
@@ -20,17 +19,40 @@ public class ArticleCollListDaoImpl implements ArticleCollListDao {
 	@Override
 	public int deleteById(Integer memberNo, Integer articleNo) {
 		final String hql = "DELETE FROM ArticleCollList WHERE memberNo = :memberNo AND articleNo = :articleNo";
-		int rowsUpdated = getSession().createQuery(hql).setParameter("memberNo", memberNo)
+		int rowsUpdated = getSession().createQuery(hql)
+				.setParameter("memberNo", memberNo)
 				.setParameter("articleNo", articleNo).executeUpdate();
 		return rowsUpdated;
 	}
 
+//	@Override
+//	public int selectById(Integer memberNo, Integer articleNo) {
+//		final String hql = "FROM ArticleCollList WHERE memberNo = :memberNo AND articleNo = :articleNo";
+//		int rowsUpdated =getSession().createQuery(hql).setParameter("memberNo", memberNo)
+//				.setParameter("articleNo", articleNo).executeUpdate();
+//		return rowsUpdated;
+//	}
+
+	@Override
+	public int selectById(Integer memberNo, Integer articleNo) {
+	    final String hql = "SELECT COUNT(*) FROM ArticleCollList WHERE memberNo = :memberNo AND articleNo = :articleNo";
+	    Long rowCount = (Long) getSession().createQuery(hql)
+	        .setParameter("memberNo", memberNo)
+	        .setParameter("articleNo", articleNo)
+	        .uniqueResult();
+
+	    // 转换为 int 类型并返回
+	    return rowCount != null ? rowCount.intValue() : 0;
+	}
+
+	
+	
+	
 	@Override
 	public int insert(ArticleCollList articleCollList) {
 		getSession().persist(articleCollList);
 		return 1;
 	}
-	
 
 	@Override
 	public int update(ArticleCollList entity) {

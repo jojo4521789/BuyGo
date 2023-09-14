@@ -8,6 +8,265 @@
 <head>
 	<meta charset="UTF-8" />
 	<title>GFashion - Responsive e-commerce HTML Template</title>
+	<style>
+		/* Reset CSS */
+		body,
+		div,
+		p,
+		h1,
+		h2,
+		h3,
+		table,
+		tr,
+		th,
+		td {
+			margin: 0;
+			padding: 0;
+			border: 0;
+			font-size: 100%;
+			font-family: inherit;
+			vertical-align: baseline;
+		}
+
+		/* Basic styling */
+		body {
+			font-family: Arial, sans-serif;
+			background-color: #f5f5f5;
+		}
+
+		h1 {
+			text-align: center;
+			padding: 20px 0;
+		}
+
+		table {
+			width: 100%;
+			border-collapse: collapse;
+			margin-top: 20px;
+		}
+
+		th,
+		td {
+			padding: 10px;
+			border: 1px solid #ddd;
+		}
+
+		th {
+			background-color: #f2f2f2;
+		}
+
+		tr:nth-child(even) {
+			background-color: #f2f2f2;
+		}
+
+		table {
+			width: 100%;
+			border-collapse: collapse;
+			margin-top: 20px;
+			border: 1px solid #ddd;
+			/* 新增表格整体边框 */
+			background-color: #fff;
+			/* 背景色设为白色 */
+			box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+			/* 添加阴影效果 */
+		}
+
+		th,
+		td {
+			padding: 10px;
+			border: 1px solid #ddd;
+			text-align: center;
+			/* 文字置中对齐 */
+		}
+
+		th {
+			background-color: #f2f2f2;
+			font-weight: bold;
+		}
+
+		tr:nth-child(even) {
+			background-color: #f2f2f2;
+		}
+
+		.modal {
+			display: none;
+			position: fixed;
+			z-index: 1;
+			left: 0;
+			top: 0;
+			width: 100%;
+			height: 100%;
+			background-color: rgba(0, 0, 0, 0.5);
+			/* 背景遮罩 */
+		}
+
+		.modal-content {
+			background-color: white;
+			margin: 20% auto;
+			padding: 20px;
+			border: 1px solid #ddd;
+			width: 50%;
+			text-align: center;
+		}
+
+		button {
+			margin: 5px;
+			padding: 5px 10px;
+			cursor: pointer;
+		}
+
+		.hidden-cell {
+			visibility: hidden;
+		}
+
+		/* 删除按钮样式 */
+		.delete-btn {
+			background-color: transparent;
+			/* 将背景颜色设置为透明 */
+			color: #f44336;
+			/* 设置文本颜色为红色 */
+			border: none;
+			padding: 5px 10px;
+			cursor: pointer;
+			border-radius: 5px;
+			transition: background-color 0.3s ease, color 0.3s ease;
+		}
+
+		/* 鼠标悬停时的删除按钮样式 */
+		.delete-btn:hover {
+			background-color: rgba(211, 47, 47, 0.3);
+			color: #fff;
+			/* 悬停时也可修改文字颜色 */
+		}
+
+		/* 删除模态框 */
+		#deleteModal {
+			display: none;
+			position: fixed;
+			z-index: 1;
+			left: 0;
+			top: 0;
+			width: 100%;
+			height: 100%;
+			background-color: rgba(0, 0, 0, 0.5);
+			/* 背景遮罩 */
+		}
+
+		/* 删除模态框内容 */
+		.modal-content {
+			background-color: white;
+			margin: 20% auto;
+			padding: 20px;
+			border: 1px solid #ddd;
+			width: 50%;
+			text-align: center;
+			border-radius: 5px;
+			box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+			animation: zoomIn 0.3s ease;
+		}
+
+		/* 动画效果 - 弹出模态框时缩放 */
+		@keyframes zoomIn {
+			from {
+				transform: scale(0.5);
+			}
+
+			to {
+				transform: scale(1);
+			}
+		}
+
+		/* 修改删除按钮图标样式 */
+		.delete-btn i {
+			color: red;
+			/* 修改图标颜色为红色 */
+			font-size: 20px;
+			/* 修改图标大小为20像素 */
+			/* 添加其他样式属性 */
+		}
+
+		/* 修改确认按钮样式 */
+		#confirmDeleteBtn {
+			background-color: #f44336;
+			/* 设置背景颜色为红色 */
+			color: #fff;
+			/* 设置文本颜色为白色 */
+			border: none;
+			padding: 5px 10px;
+			cursor: pointer;
+			border-radius: 5px;
+			transition: background-color 0.3s ease, color 0.3s ease;
+			margin-right: 10px;
+			/* 可以添加右边距，使按钮之间有一些间隔 */
+		}
+
+		/* 鼠标悬停时的确认按钮样式 */
+		#confirmDeleteBtn:hover {
+			background-color: #d32f2f;
+			/* 鼠标悬停时的背景颜色 */
+		}
+
+		/* 修改取消按钮样式 */
+		#cancelDeleteBtn {
+			background-color: #ccc;
+			/* 设置背景颜色为灰色 */
+			color: #000;
+			/* 设置文本颜色为黑色 */
+			border: none;
+			padding: 5px 10px;
+			cursor: pointer;
+			border-radius: 5px;
+			transition: background-color 0.3s ease, color 0.3s ease;
+		}
+
+		/* 鼠标悬停时的取消按钮样式 */
+		#cancelDeleteBtn:hover {
+			background-color: #999;
+			/* 鼠标悬停时的背景颜色 */
+			color: #fff;
+			/* 鼠标悬停时的文本颜色 */
+		}
+
+		/* 修改新增按钮样式 */
+		#addArticleButton {
+			background-color: #4caf50;
+			/* 设置背景颜色为绿色 */
+			color: #fff;
+			/* 设置文本颜色为白色 */
+			border: none;
+			padding: 5px 10px;
+			cursor: pointer;
+			border-radius: 5px;
+			transition: background-color 0.3s ease, color 0.3s ease;
+		}
+
+		/* 鼠标悬停时的新增按钮样式 */
+		#addArticleButton:hover {
+			background-color: #45a049;
+			/* 鼠标悬停时的背景颜色 */
+		}
+
+		/* 使用Font Awesome图标替换文本 */
+		#addArticleButton::before {
+			content: "\f067";
+			/* 使用Font Awesome中的"fas fa-plus"图标 */
+			font-family: 'Font Awesome 5 Free';
+			margin-right: 5px;
+			/* 可以添加右边距，使图标与文本之间有一些间隔 */
+		}
+
+		.article-content-container {
+			max-height: 300px;
+			/* 设置最大高度，根据需要进行调整 */
+			overflow-y: auto;
+			/* 启用垂直滚动条 */
+			padding: 10px;
+			/* 可选的内边距，根据需要进行调整 */
+			border: 1px solid #ddd;
+			/* 可选的边框样式，根据需要进行调整 */
+		}
+	</style>
+
 	<meta name="description" content="" />
 	<meta name="keywords" content="" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -31,151 +290,17 @@
 		<script src="js/respond.min.js"></script>
 		<script src="js/selectivizr-min.js"></script>
 	<![endif]-->
-	<!--
-	<script src="js/jquery.min.js"></script>
-	-->
+
+	<script src="../../js/common/jquery.min.js"></script>
+
 	<script>window.jQuery || document.write('<script src="../../js/common/jquery.min.js"><\/script>');</script>
 	<script src="../../js/common/modernizr.min.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 	<!-- PARTICULAR PAGES CSS FILES -->
 	<link rel="stylesheet" href="../../css/common/innerpage.css">
 	<link rel="stylesheet" href="../../css/common/owl.carousel.css">
 	<link rel="stylesheet" href="../../css/common/owl.theme.css">
 	<!-- // PARTICULAR PAGES CSS FILES -->
 	<link rel="stylesheet" href="../../css/common/responsive.css">
-	<style>
-		button[type="button"] {
-			background-color: #007BFF;
-			color: #fff;
-			border: none;
-			padding: 10px 20px;
-			cursor: pointer;
-			border-radius: 4px;
-			margin-top: 20px;
-		}
-
-		/* Style the error messages */
-		.error-message {
-			color: red;
-			margin-top: 5px;
-		}
-
-		/* 添加一個外部容器框 */
-		#form-container {
-			width: 60%;
-			margin: 30px;
-			padding: 50px;
-			border: 2px solid #ccc;
-			border-radius: 10px;
-			box-shadow: 0 0 10px 5px rgba(210, 84, 11, 0.546);
-			background: linear-gradient(to bottom, #ebe3bec6, #ffffb7b2);
-		}
-
-
-		/* 選項樣式 */
-		select {
-			appearance: none;
-			-webkit-appearance: none;
-			-moz-appearance: none;
-			padding: 10px;
-			background: transparent;
-			background-image: url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css");
-			background-repeat: no-repeat;
-			background-position: right center;
-		}
-
-		/* 按鈕樣式 */
-		button {
-			background-color: #007bff;
-			color: #fff;
-			border: none;
-			border-radius: 5px;
-			cursor: pointer;
-			transition: background-color 0.3s ease;
-		}
-
-		button:hover {
-			background-color: #0056b3;
-		}
-
-		.address-section {
-			color: #056831;
-			display: flex;
-			flex-direction: column;
-			margin-bottom: 10px;
-		}
-
-		.address-section label,
-		.address-section p {
-			margin-bottom: 5px;
-		}
-
-		.address-section select,
-		.address-section input[type="text"] {
-			margin-top: 5px;
-			width: 100px;
-		}
-
-		input {
-			background-color: transparent;
-			border: none;
-			border-bottom: 1px solid var(--input-color);
-			color: var(--input-color);
-			font-size: 1.5em;
-			padding: .5em .5em .5em;
-			width: 50%;
-		}
-
-		input:focus+label,
-		input+label.show {
-			border-radius: 4px;
-			color: var(--label-color);
-			font-size: 1em;
-			left: .5em;
-			padding: 0 .15em;
-			text-transform: uppercase;
-			top: -1em;
-		}
-
-		:root {
-			--input-color: #056831;
-			--label-color: #f61d62;
-		}
-
-		*,
-		*::before,
-		*::after {
-			box-sizing: border-box;
-		}
-
-		.field {
-			color: var(--input-color);
-			margin-bottom: 2em;
-			position: relative;
-		}
-
-		input:focus {
-			border-color: var(--label-color);
-			outline: 0;
-		}
-
-		/* ===== */
-		div.logo-wrapper {
-			position: relative;
-			top: 50%;
-			left: 50%;
-			transform: translate(-50%, -50%);
-		}
-
-		h1 {
-			color: #056831;
-		}
-
-		h2 {
-			color: #056831;
-		}
-	</style>
-	</style>
 </head>
 
 <body>
@@ -250,7 +375,8 @@
 											</div>
 											<div class="text-right">
 												<a href="../../pages/member/cart.html"
-													class="btn btn-default btn-round view-cart">View Cart</a>
+													class="btn btn-default btn-round view-cart">View
+													Cart</a>
 											</div>
 										</div>
 									</div>
@@ -274,11 +400,38 @@
 					<div class="main-header">
 						<!-- CURRENCY / LANGUAGE / USER MENU -->
 						<div class="actions">
-							<!-- 頁面右上功能區 -->
+							<div class="center-xs">
+								<!-- CURRENCY -->
+								<ul class="option-list unstyled">
+									<li class="active"><a href="#" data-toggle="tooltip" title="USD - US Dollar">$</a>
+									</li>
+									<li><a href="#" data-toggle="tooltip" title="GBP - British Pound">lb</a></li>
+									<li><a href="#" data-toggle="tooltip" title="EUR - Euro">EUR</a></li>
+								</ul>
+								<!-- // CURRENCY -->
+								<!-- LANGUAGES -->
+								<ul class="option-list unstyled">
+									<li class="active"><a href="#" data-toggle="tooltip" title="English">EN</a></li>
+									<li><a href="#" data-toggle="tooltip" title="French">FR</a></li>
+									<li><a href="#" data-toggle="tooltip" title="Deutsch">DE</a></li>
+								</ul>
+								<!-- // LANGUAGES -->
+							</div>
+							<div class="clearfix"></div>
+							<!-- USER RELATED MENU -->
+							<nav id="tiny-menu" class="clearfix">
+								<ul class="user-menu">
+									<li><a href="../../pages/member/myaccount.html">My Account</a></li>
+									<li><a href="../../pages/member/cart.html">My Wishlist</a></li>
+									<li><a href="../../pages/member/checkout.html">Checkout</a></li>
+									<li><a href="#">Log Out</a></li>
+								</ul>
+							</nav>
+							<!-- // USER RELATED MENU -->
 						</div>
 						<!-- // CURRENCY / LANGUAGE / USER MENU -->
 						<!-- SITE LOGO -->
-						<div class="logo-wrapper" style="left: 98px;">
+						<div class="logo-wrapper">
 							<a href="../../index-2.html" class="logo"
 								title="GFashion - Responsive e-commerce HTML Template">
 								<img src="../../img/common/logo.png"
@@ -353,7 +506,8 @@
 												<p>Lorem ipsum dolor sit, consectetur adipiscing elit. Etiam neque
 													velit, blandit sed scelerisque.</p>
 												<a href="../../pages/guest/products.html"
-													class="btn btn-default btn-round">Go to Shop →</a>
+													class="btn btn-default btn-round">Go to Shop
+													→</a>
 											</div>
 
 										</div>
@@ -362,7 +516,7 @@
 
 								</li>
 								<li>
-									<a href="../../pages/components.html">Components</a>
+									<a href="../../pages/components.html">論壇文章</a>
 								</li>
 								<li>
 									<a href="../../pages/guest/store-locator.html">Store Locator</a>
@@ -442,8 +596,8 @@
 			<div class="container">
 				<div class="relative">
 					<ul class="bc unstyled clearfix">
-						<li><a href="../../index.html">首頁</a></li>
-						<li class="active">我的帳戶</li>
+						<li><a href="#">Home</a></li>
+						<li class="active">MY ACCOUNT</li>
 					</ul>
 				</div>
 			</div>
@@ -460,15 +614,17 @@
 						<!-- SIDEBAR -->
 						<aside class="col-xs-12 col-sm-4 col-md-3">
 							<section class="side-section">
-								<h3 class="uppercase text-bold"><span class="text-xs">我的帳戶</span></h3>
+								<h3 class="uppercase text-bold"><span class="text-xs">MyAccount Pages</span></h3>
 
 								<ul class="nav nav-tabs nav-stacked">
-									<li><a href="../../pages/member/TestEditMember.html">個人資料</a></li>
-									<li><a href="../../pages/member/pa/order/ListOrders.html">訂單追蹤</a></li>
-									<li><a href="../../pages/member/pa/req/MemberAllPaReq.html">我的委託單</a></li>
-									<li><a href="../../pages/member/mycoupon.html">優惠券</a></li>
-									<li><a href="../../pages/member/wallet.html">平台錢包</a></li>
-									<li><a href="../../pages/member/chatroom.html">聊天室</a></li>
+									<li><a href="#">個人資料</a></li>
+									<li><a href="#">最新消息</a></li>
+									<li><a href="../../pages/member/gpa/gpaOrder.html">訂單追蹤</a></li>
+									<li><a href="#">我的委託單</a></li>
+									<li><a href="#">已收藏的揪團</a></li>
+									<li><a href="#">優惠券</a></li>
+									<li><a href="#">平台錢包</a></li>
+									<li><a href="#">聊天室</a></li>
 									<li><a href="../../pages/member/blacklist.html">黑名單</a></li>
 									<li><a href="../../pages/member/myCollListforum.html">我的收藏文章</a></li>
 									<li><a href="../../pages/member/myforum.html">我的文章</a></li>
@@ -494,101 +650,56 @@
 						</aside>
 						<!-- // SIDEBAR -->
 
-						<section class="col-xs-12 col-sm-8 col-md-9">
-							<!-- 在此新增 -->
+						<div class="m-t-lg clearfix">
+							<div class="row">
+								<div class="col-xs-12 col-sm-6" style="width: 74%;">
+									<h3 class="uppercase text-bold"><span class="text-xs">我的收藏文章</span></h3>
+									<!--我的收藏文章列表-->
+									<table style="width: 100%;">
+										<thead>
+											<tr>
+												<th class="hidden-cell" style="display: none;">文章編號</th>
+												<th class="hidden-cell" style="display: none;">會員編號</th>
+												<th style="width: 20%; text-align: center;font-weight: bold;">文章標題</th>
+												<!-- 设置宽度为20%（可以根据需要调整） -->
+												<th style="width: 30%;text-align: center;font-weight: bold;">文章內容</th>
+												<!-- 设置宽度为30%（可以根据需要调整） -->
+												<th class="hidden-cell" style="display: none;">文章狀態</th>
+												<th style="width: 10%; text-align: center;font-weight: bold;">發文時間</th>
+												<!-- 设置宽度为10%（可以根据需要调整） -->
+												<th class="hidden-cell" style="display: none;">編輯時間</th>
+												<th class="hidden-cell"
+													style="width: 10%; text-align: center; white-space: nowrap;font-weight: bold; display: none;">
+													文章按讚數
+												</th>
+												<!-- 设置宽度为10%（可以根据需要调整） -->
+												<th class="hidden-cell"
+													style="width: 10%;text-align: center; white-space: nowrap;font-weight: bold; display: none;">
+													文章倒讚數
+												</th>
+												<!-- 设置宽度为10%（可以根据需要调整） -->
+												<th style="width: 5%;text-align: center;font-weight: bold;">移除</th>
+												<!-- 设置宽度为5%（可以根据需要调整） -->
+												<!-- 新增删除按钮列 -->
+												<div id="deleteModal" class="modal">
+													<div class="modal-content">
+														<p>確定要刪除這篇文章嗎？</p>
+														<button id="confirmDeleteBtn"><i
+																class="fas fa-check"></i></button>
+														<button id="cancelDeleteBtn"><i
+																class="fas fa-times"></i></button>
+													</div>
+												</div>
+											</tr>
+										</thead>
+										<tbody id="articleList"></tbody>
+									</table>
+									<button id="addArticleButton">新增文章</button>
 
-							<main id="main-content" role="main">
 
-								<div class="container">
-									<div id="form-container">
-										<h2>您的個人資料</h2>
-										<div>
-											<div class="field">
-												<label for="memberAcct">會員帳號:</label>
-												<input type="text" id="memberAcct" placeholder="開頭為英文，長度為8-20..."
-													readonly>
-												<p id="p1" style="color: red"></p>
-											</div>
-											<div class="field">
-												<label for="memberPw">輸入舊密碼:</label>
-												<input type="password" id="memberPw" placeholder="必須包含字母、數字，長度為6-16">
-												<button type="button" onclick="togglePassword()">顯示密碼</button>
-												<p id="p2" style="color: red"></p>
-											</div>
-											<div class="field">
-												<label for="new_memberPw">輸入新密碼:</label>
-												<input type="password" id="new_memberPw"
-													placeholder="必須包含字母、數字，長度為6-16">
-												<button type="button" onclick="togglePassword1()">顯示密碼</button>
-												<p id="p3" style="color: red"></p>
-											</div>
-											<div class="field">
-												<label for="new_memberPw1">確認密碼:</label>
-												<input type="password" id="new_memberPw1"
-													placeholder="必須包含字母、數字，長度為6-16">
-												<button type="button" onclick="togglePassword2()">顯示密碼</button>
-												<p id="p3_1" style="color: red"></p>
-											</div>
-											<div class="field">
-												<label for="memberName">會員姓名:</label>
-												<input type="text" id="memberName">
-												<p id="p4" style="color: red"></p>
-											</div>
-											<div class="field">
-												<label for="memberPhone">會員電話:</label>
-												<input type="text" id="memberPhone">
-												<p id="p5" style="color: red"></p>
-											</div>
-											<div class="field">
-												<label for="memberEmail">會員電子信箱:</label>
-												<input type="text" id="memberEmail"><br>
-												<input type="text" id="checkmemberEmail" placeholder="請輸入驗證碼"
-													style="display: none;">
-												<button type="button" id="proofEmail">信箱驗證</button>
-												<p id="p6" style="color: red"></p>
-											</div>
-
-											<div class="field">
-												<select id="memberGender">
-													<p id="p7" style="color: red"></p>
-													<option>請輸入您的性別</option>
-													<option value="1">男生</option>
-													<option value="2">女生</option>
-												</select>
-											</div>
-											<div class="field">
-												<p>請輸入您的生日</p>
-												<p id="p8" style="color: red"></p>
-												<input type="date" id="memberBirthday">
-											</div>
-											<div class="field">
-												<label for="memberId">會員身分證:</label>
-												<input type="text" id="memberId">
-												<p id="p9" style="color: red"></p>
-											</div>
-											<div class="address-section">
-												<label for="slCity">會員居住地址:</label>
-												<p id="p10" style="color: red"></p>
-												<input id="memberAddress">
-											</div>
-											<div>
-												<select id="memberStatus" disabled>
-													<option value="1">一般會員</option>
-													<option value="2">賣家</option>
-												</select>
-											</div>
-											<div>
-												<label for="memberWallet">會員錢包餘額:</label>
-												<input id="memberWallet" readonly>
-											</div>
-											<div>
-												<button type="button" id="button">送出資料</button>
-											</div>
-											<div id="errorMessages" style="color: red;"></div>
-										</div>
-									</div>
-							</main>
-						</section>
+								</div>
+							</div>
+						</div>
 
 					</div>
 
@@ -797,317 +908,198 @@
 	<script src="../../js/common/products.js"></script>
 	<script src="../../js/common/owl.carousel.js"></script>
 	<script src="../../js/common/contact.js"></script>
-	<script src="../../js/login.js"></script>
 	<!--<script src="http://maps.googleapis.com/maps/api/js?sensor=false" type="text/javascript"></script>-->
 	<!-- <script src="../../js/common/gmap3.min.js"></script> -->
 	<!-- // Particular Page Javascripts -->
-	<script>
-		checkLoginStatusShowMemberAcct(); // 檢查客戶帳號是否登入，修改頁面右上方Log In/Log Out按鈕，顯示登入者帳號名稱
-	</script>
-	<script>
-		const p1_el = document.querySelector('#p1'); //帳號
-		const p2_el = document.querySelector('#p2'); //密碼
-		const p3_el = document.querySelector('#p3'); //確認密碼
-		const p3_1_el = document.querySelector('#p3_1'); //確認密碼
-		const p4_el = document.querySelector('#p4'); //會員名稱
-		const p5_el = document.querySelector('#p5'); //會員電話
-		const p6_el = document.querySelector('#p6'); //電子信箱
-		const p7_el = document.querySelector('#p7'); //性別
-		const p8_el = document.querySelector('#p8'); //生日
-		const p9_el = document.querySelector('#p9'); //Id
-		const p10_el = document.querySelector('#p10'); //身分
-		const memberAcct_el = document.querySelector('#memberAcct');
-		const memberPw_el = document.querySelector('#memberPw');
-		const new_memberPw_el = document.querySelector('#new_memberPw');
-		const new_memberPw1_el = document.querySelector('#new_memberPw1');
-		const memberName_el = document.querySelector('#memberName');
-		const memberPhone_el = document.querySelector('#memberPhone');
-		const memberEmail_el = document.querySelector('#memberEmail');
-		const memberGender_el = document.querySelector('#memberGender');
-		const memberBirthday_el = document.querySelector('#memberBirthday');
-		const memberAddress_el = document.querySelector('#memberAddress');
-		const memberId_el = document.querySelector('#memberId');
-		const memberStatus_el = document.querySelector('#memberStatus');
-		const button_el = document.querySelector('#button');
-		const proofEmail_el = document.querySelector('#proofEmail');
-		const checkmemberEmail_el = document.querySelector('#checkmemberEmail')
-		const errorMessages_el = document.querySelector('#errorMessages');
-		const memberWallet_el = document.querySelector('#memberWallet');
-		const url = "/BuyGo/front_end/member/acc/MemberEdit";
-		function togglePassword() {
-			var passwordField = document.getElementById("memberPw");
-			if (passwordField.type === "password") {
-				passwordField.type = "text";
-			} else {
-				passwordField.type = "password";
-			}
-		}
-		function togglePassword1() {
-			var passwordField = document.getElementById("new_memberPw");
-			if (passwordField.type === "password") {
-				passwordField.type = "text";
-			} else {
-				passwordField.type = "password";
-			}
-		}
-		function togglePassword2() {
-			var passwordField = document.getElementById("new_memberPw1");
-			if (passwordField.type === "password") {
-				passwordField.type = "text";
-			} else {
-				passwordField.type = "password";
-			}
-		}
+	<script src="../../js/login.js"></script>
 
-		function checkPassword(password) {
-			// const re = /^(?=.*[a-zA-Z])(?=.*\d)[A-Za-z\d]{8,20}$/;
-			var re = /^(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z0-9!@#$%^&*]{6,16}$/;
-			if (!re.test(password)) {
-				p3_el.innerHTML += "密碼必須包含字母、數字，長度須為6-16";
-				return false;
-			}
 
-			p3_el.innerHTML == "";
-			return true;
-		}
-
-		function checkPasswordConfirm(confirmPassword) {
-			if (confirmPassword === '') {
-				p3_1_el.innerHTML += "確認密碼為必填欄位！";
-				return false;
-			}
-			if (confirmPassword !== new_memberPw_el.value) {
-				p3_1_el.innerHTML += "請再次確認密碼是否相符！";
-				return false;
-			}
-			p3_1_el.innerHTML = "";
-			return true;
-		}
-
-		function checkName(string) {
-
-			if (string === '') {
-				p4_el.innerHTML += "會員名稱為必填欄位！";
-				return false;
-			}
-			p4_el.innerHTML == " ";
-			return true;
-		}
-		function checkPhone(string) {
-			const re = /^(?:\+8869|09)\d{8}$/;
-			if (string === '') {
-				p5_el.innerHTML += "電話為必填欄位";
-				return false;
-			}
-			if (!re.test(string)) {
-				p5_el.innerHTML += "錯誤的電話格式";
-				return false;
-			}
-			p5_el.innerHTML == " ";
-			return true;
-		}
-		function checkEmail(string) {
-			re1 = /^[a-zA-Z][a-z0-9_]+@[a-zA-Z0-9]*\.[a-zA-Z]{2,3}$/;
-			re2 = /^[a-zA-Z][a-z0-9_]+@[a-zA-Z0-9]*\.[a-zA-Z]{2,}\.[a-zA-Z]{2,3}$/;
-			re3 = /^[a-zA-Z][a-z0-9_]+@[a-zA-Z0-9]*\.[a-zA-Z]{2,}\.[a-zA-Z]{2,}\.[a-zA-Z]{2,3}$/;
-			if ((string === '')) {
-				p6_el.innerHTML += "Email為必填欄位！";
-				return false;
-			}
-			if ((!re1.test(string)) && (!re2.test(string)) && (!re3.test(string))) {
-				p6_el.innerHTML += "不符合e-mail的格式！";
-				return false;
-			}
-			p6_el.innerHTML == "";
-			return true;
-		}
-
-		function getGender(integer) {
-			if (memberGender_el.value === "男生") {
-				return 1;
-			}
-			if (memberGender_el.value === "女生") {
-				return 2;
-			}
-		}
-		function checkBirthday(date) {
-			if (memberBirthday_el.value === " ") {
-				p8_el.innerHTML += "請輸入您的生日日期";
-				return false;
-			}
-			p8_el.innerHTML == "";
-			return true;
-		}
-
-		function checkId(string) {
-			const re = /^[A-Z][1-2]\d{8}$/;
-			if (string === '') {
-				p9_el.innerHTML += "此欄不能為空白";
-				return false;
-			}
-			if (!re.test(string)) {
-				p9_el.innerHTML += "輸入格式錯誤";
-				return false;
-			}
-			p9_el.innerHTML == "";
-			return true;
-
-		}
-
-		memberPw_el.addEventListener("input", function () {
-			clearTimeout(typingTimer);
-			var typingTimer = setTimeout(function () {
-				fetch(url, {
-					method: "POST",
-					headers: { "content-type": "application/json;charset=utf-8" },
-					body: JSON.stringify({
-						action: "checkPassword",
-						memberNo: 38,
-						memberPw: memberPw_el.value
-					})
-				}).then(resp => resp.json())
-					.then(body => {
-						console.log(body);
-						if (body === false) {
-							p2_el.innerHTML = "輸入錯誤";
-						} else {
-							p2_el.innerHTML = "";
-						}
-					})
-			}, 3000)
-		})
-		proofEmail_el.addEventListener("click", function () {
-			fetch("http://localhost:8081/BuyGo/api/front_end/guest/register/MemberRegisterCheckMailServlet", {
-				method: "POST",
-				header: { "content-type": "application/json;charset=utf-8" },
-				body: JSON.stringify({
-					memberEmail: memberEmail_el.value
-				})
-			})
-			checkmemberEmail_el.style.display = "block";
-		})
-		window.onload = function () {
-
-			fetch(url, {
-				method: "POST",
-				headers: { "content-type": "application/json;charset=utf-8" },
-				body: JSON.stringify({
-					action: "show"
-				})
-			}).then(resp => resp.json())
-				.then(body => {
-					console.log(body);
-					memberAcct_el.value = body.memberAcct;
-					memberBirthday_el.value = body.memberBirthday;
-					memberName_el.value = body.memberName;
-					memberStatus_el.value = body.memberStatus;
-					memberPhone_el.value = body.memberPhone;
-					memberId_el.value = body.memberId;
-					memberEmail_el.value = body.memberEmail;
-					memberAddress_el.value = body.memberAdd;
-					memberGender_el.value = body.memberGender;
-					memberWallet_el.value = body.memberWalletAmount
-				})
-		}
-		checkmemberEmail_el.addEventListener("input", function () {
-			fetch("http://localhost:8081/BuyGo/api/front_end/guest/register/RegisterCheckMailAuthCode", {
-				method: "POST",
-				header: { "content-type": "application/json;charset=utf-8" },
-				body: JSON.stringify(
-					checkmemberEmail_el.value
-				)
-			})
-				.then(resp => resp.json())
-				.then(body => {
-					if (body === true) {
-						p6_el.innerHTML = "";
-					} else {
-						p6_el.innerHTML = "驗證碼錯誤";
-
-					}
-
-				})
-
-		})
-		button_el.addEventListener("click", () => {
-			errorMessages_el.innerHTML = "";
-			p1_el.innerHTML = "";
-			p2_el.innerHTML = "";
-			p3_el.innerHTML = "";
-			p3_1_el.innerHTML = "";
-			p4_el.innerHTML = "";
-			p5_el.innerHTML = "";
-			p6_el.innerHTML = "";
-			p8_el.innerHTML = "";
-			p9_el.innerHTML = "";
-			if (checkmemberEmail_el.style.display === "block") {
-				if (checkmemberEmail_el.value === "") {
-					errorMessages_el.innerHTML += "<p>請輸入驗證碼</p>";
-				}
-			}
-			if (memberPw_el.value === "" && new_memberPw_el.value === "" && new_memberPw1_el.value === "") {
-				errorMessages_el.innerHTML += "<p>請輸入密碼</p>";
-			}
-			if (new_memberPw_el.value != "") {
-				if (!checkPassword(new_memberPw_el.value)) {
-					errorMessages_el.innerHTML += "<p>密碼格式錯誤</p>";
-				}
-				if (!checkPasswordConfirm(new_memberPw_el.value)) {
-					errorMessages_el.innerHTML += "<p>確認密碼錯誤</p>";
-				}
-			}
-			if (!checkName(memberName_el.value)) {
-				errorMessages_el.innerHTML += "<p>會員名稱錯誤</p>";
-			}
-			if (!checkPhone(memberPhone_el.value)) {
-				errorMessages_el.innerHTML += "<p>電話錯誤</p>";
-			}
-			if (!checkEmail(memberEmail_el.value)) {
-				errorMessages_el.innerHTML += "<p>Email格式錯誤</p>";
-			}
-			if (!checkBirthday(memberBirthday_el.value)) {
-				errorMessages_el.innerHTML += "<p>生日錯誤</p>";
-			}
-			if (!checkId(memberId_el.value)) {
-				errorMessages_el.innerHTML += "<p>會員身分證錯誤</p>";
-			}
-			var passwordToSend = '';
-			if (new_memberPw_el.value !== '') {
-				passwordToSend = new_memberPw_el.value;
-			} else {
-				passwordToSend = memberPw_el.value;
-			}
-
-			if (errorMessages_el.innerHTML !== "" ) {
-				event.preventDefault();
-				// return;
-			} else {
-				fetch(url, {
-					method: "POST",
-					headers: { "content-type": "application/json;charset=utf-8" },
-					body: JSON.stringify({
-						action: "editMember",
-						memberNo: 38,
-						memberPw: passwordToSend,
-						memberName: memberName_el.value,
-						memberPhone: memberPhone_el.value,
-						memberEmail: memberEmail_el.value,
-						memberBirthday: memberBirthday_el.value,
-						memberGender: memberGender_el.value,
-						memberAdd: memberAddress_el.value,
-						memberId: memberId_el.value
-					})
-				}).then(resp => resp.json())
-					.then(body => {
-						console.log(body);
-						Swal.fire(
-							'修改成功!',
-						)
-					})
-			}
-		})
-
-	</script>
 </body>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://kit.fontawesome.com/f8d426f7f0.js" crossorigin="anonymous"></script>
+<script>
+	const ForumArticle_el = $("#articleList");
+
+	function fetchForumArticles() {
+		fetch('/BuyGo/needLoginApi/articleCollLis/loadByMemberNo', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json;charset=UTF-8',
+				'Accept': 'application/json;charset=UTF-8'
+			},
+		})
+			.then(response => {
+				if (response.status === 401) { // 客戶未登入，執行頁面重定向到登入頁
+					alert('帳號未登入，將導轉至登入頁面');
+					window.location.href = '/BuyGo/front_end/pages/member/login.html'; // 登入頁面url
+				} else if (response.ok) { // 通常 200
+					// 請求成功，顯示燈箱
+					//notLoggedInAction();
+					return response.json();
+				} else {
+					alert("錯誤狀態:" + response.status);
+					return;
+				}
+			})
+			.then(data => processForumArticles(data))
+			.catch(error => console.error('Error fetching forum articles:', error));
+	}
+
+	function processForumArticles(articles) {
+		ForumArticle_el.empty();
+		console.log(articles);
+
+		articles.forEach(forum => {
+			const {
+				articleNo,
+				memberNo,
+				articleContent,
+				articleDislike,
+				articlePublish,
+				articleStatus,
+				articleTitle,
+				articleUpdate,
+				articleLike
+
+			} = forum;
+
+
+			// const { articleTitle } = forumArticle;
+			// const { articleContent } = forumArticle;
+			// const { articlePublish } = forumArticle;
+			// const formattedPublishDate = new Date(articlePublish).toLocaleString();
+			// const { articleDislike } = forumArticle;
+			// const { articleLike } = forumArticle;
+			// const { articleStatus } = forumArticle;
+			// const { articleUpdate } = forumArticle;
+
+
+
+			const articleRow = `
+                    <tr>
+                        <td class="hidden-cell article-no" style="display: none;" name="" value="${articleNo}">${articleNo}</td>
+                        <td class="hidden-cell member-no" style="display: none;">${memberNo}</td>
+                        <td>${articleTitle}</td>
+                        <td>
+  						<div class="article-content-container">
+    					${articleContent}
+  						</div>
+						</td>
+                        <td class="hidden-cell" style="display: none;">${articleStatus}</td>
+                        <td style="white-space: nowrap;">${articlePublish}</td>
+                        <td class="hidden-cell" style="display: none;">${articleUpdate}</td>
+                        <td class="hidden-cell" style="display: none;">${articleLike !== undefined ? articleLike : 0}</td>
+                        <td class="hidden-cell" style="display: none;">${articleDislike !== undefined ? articleDislike : 0}</td>
+                        <td><button class="delete-btn"><i class="fas fa-times"></i></button></td> <!-- 移除按钮 -->
+                    </tr>
+                `;
+
+			ForumArticle_el.append(articleRow);
+		});
+
+		// 新增刪除按鈕點擊事件
+		// $(".delete-btn").click(function () {
+		// 	const articleNo = $(this).closest("td").siblings("td.article-no").text();//取得文章編號
+		// 	const memberNo = $(this).closest("td").siblings("td.member-no").text();//取得發文者的會員編號
+		// 	console.log("移除articleNo：" + articleNo);
+		// 	console.log("移除memberNo：" + memberNo);
+		// 	const modal = $("#deleteModal");
+		// 	modal.show();
+
+
+		// 	// 確認刪除按鈕點擊事件
+		// 	$("#confirmDeleteBtn").click(function () {
+		// 		$(document).ready(() => {
+		// 			// 呼叫函式 fetchForumArticle，將當前畫面動態刷新
+		// 			fetchForumArticles();
+		// 		});
+
+		// 		modal.hide();
+		// 		deleteArticle(articleNo);
+
+		// 		// 從表格中刪除對應行
+		// 		const row = $(this).closest("tr");
+		// 		row.remove();
+
+
+		// 	});
+
+		// 	// 取消刪除按鈕點擊事件
+		// 	$("#cancelDeleteBtn").click(function () {
+		// 		modal.hide();
+		// 	});
+
+		// });
+
+		$(".delete-btn").click(function () {
+			const articleNo = $(this).closest("tr").find("td.article-no").text(); // 取得文章編號
+			const memberNo = $(this).closest("tr").find("td.member-no").text(); // 取得發文者的會員編號
+			console.log("移除articleNo：" + articleNo);
+			console.log("移除memberNo：" + memberNo);
+			const modal = $("#deleteModal");
+			modal.show();
+
+			// 確認刪除按鈕點擊事件
+			$("#confirmDeleteBtn").off().click(function () {
+				
+				modal.hide();
+				deleteArticle(articleNo);
+
+				// 從表格中刪除對應行
+				const row = $(this).closest("tr");
+				row.remove();
+
+				// 呼叫函式 fetchForumArticles，將當前畫面動態刷新
+				fetchForumArticles();
+
+			});
+
+			// 取消刪除按鈕點擊事件
+			$("#cancelDeleteBtn").off().click(function () {
+				modal.hide();
+			});
+		});
+	}
+
+	// 向後端發送删除请求
+	function deleteArticle(articleNo) {
+		fetch('/BuyGo/api/articleCollList/remove', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json;charset=UTF-8',
+				'Accept': 'application/json;charset=UTF-8'
+			},
+			body: JSON.stringify({
+				articleNo: articleNo,
+
+			})
+		})
+			.then(response => response.json())
+			.then(data => {
+				// 在這裡處理後端返回的數據
+				console.log(data);
+
+			})
+			.catch(error => {
+				console.error("Error:", error);
+				console.log("移除memberNo：" + memberNo);
+			});
+
+	}
+	//===================================前畫面動態刷新===================
+	$(document).ready(() => {
+		// 呼叫函式 fetchForumArticle，將當前畫面動態刷新
+		fetchForumArticles();
+
+		// 新增文章按鈕的點擊事件
+		$("#addArticleButton").click(() => {
+			// 跳轉至指定的連結
+			window.location.href = "http://localhost:8081/BuyGo/front_end/pages/AddArticles.html";
+		});
+	});
+</script>
+</body>
+
+</html>
 
 </html>

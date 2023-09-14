@@ -265,7 +265,7 @@ function loadProds() {
     fetch("/BuyGo/api/front_end/gpaProd", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body:JSON.stringify({
+        body: JSON.stringify({
             action: "getAllGpaProds"
         })
     })
@@ -277,13 +277,32 @@ function loadProds() {
                 if (data.message !== "") {
                     prpics_url = data.message;
                 }
-                let prod_div = `
+
+                let isReach = false; // 判斷是否達到揪團商品達標門檻
+                let specialPrice = 0;
+
+                // 將gpaEndDate更換時間格式為指定格式
+                let gpaEndDateToMoment = moment(data.gpaEndDate, "MMM DD, YYYY, h:mm:ss A");
+                let gpaEndDateToformatted = gpaEndDateToMoment.format("YYYY-MM-DD HH:mm");
+
+                data.gpaReach.forEach(perGpaReach => {
+                    let { gpaLevelCount, gpaLevelPrice } = perGpaReach;
+                    if (data.gpaPreProd >= gpaLevelCount) { // 若該商品銷量大於等於達標數量時，將優惠價更新為
+                        isReach = true;
+                        specialPrice = gpaLevelPrice;
+                    }
+                })
+
+                // 將gpaEndDate轉為Date，以比較當前時間與gpaEndDate時間來得知揪團截止時間是否已超過
+                let gpaEndDateToDate = new Date(data.gpaEndDate);
+                let currentDate = new Date();
+                if (currentDate < gpaEndDateToDate) { // 如果揪團尚未截止，將該商品顯示於頁面上
+                    let prod_div = `
                     <div class="product" data-product-id="${data.gpaProdNo}"
                         data-category="${changeObjText(data.gpaCatsNo)}" data-brand="brand1"
                         data-price="${data.gpaFirstPrice}" data-colors="red|blue|black|white" data-size="S|M|L">
-                        <div class="entry-media">
-                            <img data-src="${prpics_url}"
-                                alt="" class="lazyLoad thumb" />
+                        <div class="entry-media" style="width: 260px; height: 150px;">
+                            <img src="data:image/jpeg;base64,${prpics_url}" alt="" class="lazyLoad thumb" style="width: 100%; height: 100%;" />
                             <div class="hover">
                                 <a href="${full}/BuyGo/front_end/pages/member/gpa/gpaProduct.html?gpaProdNo=${data.gpaProdNo}" class="entry-url"></a>
                                 <ul class="icons unstyled">
@@ -291,13 +310,8 @@ function loadProds() {
                                         <div class="circle ribbon ribbon-sale">Sale</div>
                                     </li>
                                     <li>
-                                        <a href="${prpics_url}" class="circle" data-toggle="lightbox">
+                                        <a href="data:image/jpeg;base64,${prpics_url}" class="circle" data-toggle="lightbox">
                                             <i class="iconfont-search"></i>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#" class="circle add-to-cart" onclick="addToCart(${data.gpaProdNo});">
-                                            <i class="iconfont-shopping-cart"></i>
                                         </a>
                                     </li>
                                 </ul>
@@ -311,14 +325,18 @@ function loadProds() {
                                 <p>${data.gpaProdContent}</p>
                             </div>
                             <div class="entry-price">
-                                <strong class="price">$ ${data.gpaFirstPrice}</strong>
-                                <a href="#"
-                                    class="btn btn-round btn-default add-to-cart visible-list" onclick="addToCart(${data.gpaProdNo});">加入購物車</a>
+                                ${isReach ? `<strong class="specialPrice">$ ${specialPrice}</strong>` : ""}
+                                ${isReach ? `<strong class="price" style="text-decoration: line-through; font-size: 13px;">$ ${data.gpaFirstPrice}</strong>` : `<strong class="price">$ ${data.gpaFirstPrice}</strong>`}
+                                <br>
+                                <p>已預定數量:${data.gpaPreProd}</p>
+                                <br>
+                                <p>截止日期:${gpaEndDateToformatted}</p>
                             </div>
                         </div>
                     </div>
-                `;
-                $(".products-layout").append(prod_div);
+                    `;
+                    $(".products-layout").append(prod_div);
+                }
             }
             removeJS();
             setTimeout(() => {

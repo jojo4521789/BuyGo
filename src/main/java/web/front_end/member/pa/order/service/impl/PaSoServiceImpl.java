@@ -63,6 +63,7 @@ public class PaSoServiceImpl implements PaSoService {
 		paReturnDAO = new PaReturnDAOImpl();
 		paReturnDetailsDAO = new PaReturnDetailsDAOImpl();
 		walletTransHistDao = new WalletTransHistDaoImpl();
+		walletMemberDao = new WalletMemberDaoImpl();
 	}
 
 	// 查詢所有PaSo
@@ -154,6 +155,8 @@ public class PaSoServiceImpl implements PaSoService {
 		Byte newStatus = updateOrderDTO.getNewStatus();
 		Integer buyerNo = updateOrderDTO.getBuyerNo();
 		String deliverMsg = updateOrderDTO.getDeliverMsg();
+		WalletTransHist walletTransHist = new WalletTransHist();
+		Double newWalletAmount;
 		Integer refundAmount = Integer.valueOf(updateOrderDTO.getRefundToBuyer()); // 退款金額
 		// 若新狀態是1(改為已付款)
 		if (newStatus == 1) {
@@ -170,32 +173,51 @@ public class PaSoServiceImpl implements PaSoService {
 			// 發送出貨通知
 			sendMail(paSo, buyer);
 
-			// 確認是否需退款
+			// 確認是否需退款給買家
 			if (refundAmount != 0) {
-				WalletTransHist walletTransHist = new WalletTransHist();
+				// 增加錢包交易紀錄
 				walletTransHist.setMemberNo(buyerNo);
 				walletTransHist.setWalletAmount(refundAmount);
-				walletTransHist.setWalletDetail("退款" + refundAmount + "元");
+				walletTransHist.setWalletDetail("部分商品追加失敗，退款" + refundAmount + "元");
 				walletTransHist.setWalletStatus((byte) 3);
 				walletTransHistDao.insert(walletTransHist);
+				// 更新會員錢包餘額
+				newWalletAmount = walletMemberDao.selectMemberByMemberNo(buyerNo).getMemberWalletAmount() + refundAmount;
+				walletMemberDao.updateWalletAmountByMemberNoAndWalletAmount(buyerNo, newWalletAmount);
 			}
 		}
 
-		// 若新狀態是3(確認收貨), 不用退款給買家
+		// 若新狀態是3(確認收貨), 撥款給賣家
 		if (newStatus == 3) {
 			paSoDAO.updateSoStatus(paSoNo, newStatus);
+			
+			Integer orderAmount = paSoDAO.selectById(paSoNo).getPaTotalAmount();
+			Integer sellerNo = paSoDAO.selectById(paSoNo).getPaProds().get(0).getMemberNo();
+			
+			// 增加錢包交易紀錄
+			walletTransHist.setMemberNo(sellerNo);
+			walletTransHist.setWalletAmount(orderAmount);
+			walletTransHist.setWalletDetail("存入貨款" + orderAmount + "元");
+			walletTransHist.setWalletStatus((byte) 3);
+			walletTransHistDao.insert(walletTransHist);
+			// 更新會員錢包餘額
+			newWalletAmount = walletMemberDao.selectMemberByMemberNo(sellerNo).getMemberWalletAmount() +orderAmount;
+			walletMemberDao.updateWalletAmountByMemberNoAndWalletAmount(sellerNo, newWalletAmount);
 		}
 		// 若新狀態是4(取消訂單), 全額退款給賣家
 		if (newStatus == 4) {
 			paSoDAO.updateSoStatus(paSoNo, newStatus);
 			// 退款給買家
 			if (refundAmount != 0) {
-				WalletTransHist walletTransHist = new WalletTransHist();
+				// 增加錢包交易紀錄
 				walletTransHist.setMemberNo(buyerNo);
 				walletTransHist.setWalletAmount(refundAmount);
-				walletTransHist.setWalletDetail("退款" + refundAmount + "元");
+				walletTransHist.setWalletDetail("訂單取消，退款" + refundAmount + "元");
 				walletTransHist.setWalletStatus((byte) 3);
 				walletTransHistDao.insert(walletTransHist);
+				// 更新會員錢包餘額
+				newWalletAmount = walletMemberDao.selectMemberByMemberNo(buyerNo).getMemberWalletAmount() + refundAmount;
+				walletMemberDao.updateWalletAmountByMemberNoAndWalletAmount(buyerNo, newWalletAmount);
 			}
 		}
 
@@ -277,6 +299,7 @@ public class PaSoServiceImpl implements PaSoService {
 		Integer paSoNo = paReturn.getPaSoNo();
 		Integer paRtnAmount = paReturn.getPaRtnAmount();
 		Integer buyerNo = paSoDAO.selectById(paSoNo).getMemberNo();
+		Double newWalletAmount;
 
 		if (newPaRtnStat == 4) { // 買家取消申請退貨
 			return paReturnDAO.updateReturnStatus(paRtnNo, newPaRtnStat);
@@ -285,9 +308,12 @@ public class PaSoServiceImpl implements PaSoService {
 			WalletTransHist walletTransHist = new WalletTransHist();
 			walletTransHist.setMemberNo(buyerNo);
 			walletTransHist.setWalletAmount(paRtnAmount);
-			walletTransHist.setWalletDetail("退款" + paRtnAmount + "元");
+			walletTransHist.setWalletDetail("退貨成立，退款" + paRtnAmount + "元");
 			walletTransHist.setWalletStatus((byte) 3);
 			walletTransHistDao.insert(walletTransHist);
+			// 更新會員錢包餘額
+			newWalletAmount = walletMemberDao.selectMemberByMemberNo(buyerNo).getMemberWalletAmount() + paRtnAmount;
+			walletMemberDao.updateWalletAmountByMemberNoAndWalletAmount(buyerNo, newWalletAmount);
 
 			return paReturnDAO.updateReturnStatus(paRtnNo, newPaRtnStat);
 		} else {

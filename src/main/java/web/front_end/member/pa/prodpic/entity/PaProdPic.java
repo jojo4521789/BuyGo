@@ -7,6 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import core.entity.Core;
 import lombok.AllArgsConstructor;
@@ -22,7 +23,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @AttributeOverride(name = "id", column = @Column(name = "PA_PROD_NO", insertable = false, updatable = false))
 
-public class ProdPic extends Core {
+public class PaProdPic extends Core {
 
  private static final long serialVersionUID = 8042542712391581786L;
  @Id
@@ -33,4 +34,7 @@ public class ProdPic extends Core {
  private Integer paProdNo;
  @Column(name = "PA_PROD_PIC")
  private String paProdPic;
+ 
+ @Transient
+ private String paProdPicToBase64;
 }

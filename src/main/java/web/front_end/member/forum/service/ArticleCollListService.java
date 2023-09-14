@@ -21,4 +21,6 @@ public interface ArticleCollListService extends CoreService{
 	
 	List<ArticleCollListDto> loadAllArticleInfo(int selfMemeberNo);//DTO寫法
 	
+	boolean select(Integer memberNo, Integer articleNo);
+	
 }

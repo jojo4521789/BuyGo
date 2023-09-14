@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import web.front_end.member.gpa.order.entity.GpaProdRp;
-@WebServlet("/front_end/member/gpa/order/GpaProdRpIncrease")
+@WebServlet("/api/front_end/member/gpa/order/GpaProdRpIncrease")
 public class GpaProdRpIncreaseServlet extends HttpServlet{
 	private static final long serialVersionUID = 1L;
 

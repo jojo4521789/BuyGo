@@ -18,12 +18,11 @@ import com.google.gson.Gson;
 import core.dto.ActionDTO;
 import web.front_end.member.eva.dto.PaSoDetailsEvaDTO;
 import web.front_end.member.eva.dto.PaSoEvaDTO;
-//import web.front_end.member.eva.entity.PaProdPic;
-import web.front_end.member.pa.prodpic.entity.ProdPic;
 //import web.front_end.member.eva.entity.PaSo;
 import web.front_end.member.pa.order.entity.PaSo;
 //import web.front_end.member.eva.entity.PaSoDetails;
 import web.front_end.member.pa.order.entity.PaSoDetails;
+import web.front_end.member.pa.prodpic.entity.PaProdPic;
 
 @WebServlet("/needLoginApi/front_end/eva")
 public class EvaServlet extends HttpServlet{
@@ -62,7 +61,7 @@ public class EvaServlet extends HttpServlet{
 					paSoDetatilEvaDTO.setPaProdName(paSoDetails.getPaProdName());
 					paSoDetatilEvaDTO.setPaProdQty(paSoDetails.getPaOrdQty());
 					paSoDetatilEvaDTO.setPaProdPrice(paSoDetails.getPaProdPrice());
-					for(ProdPic paProdPic: paSoDetails.getPaProd().getPaProdPic()) {
+					for(PaProdPic paProdPic: paSoDetails.getPaProd().getPaProdPic()) {
 						paSoDetatilEvaDTO.getPaProdPicToBase64().add(paProdPic.getPaProdPicToBase64());
 					}
 					paSoEvaDTO.getPaSoDetailsEvaDTO().add(paSoDetatilEvaDTO);

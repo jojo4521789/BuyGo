@@ -553,9 +553,8 @@
 										</ul>
 
 										<ul class="inline-li li-m-r-l m-t-lg">
-											<li><a id="rpProd" href="#"
-													class="btn btn-default btn-lg btn-round add-to-cart"
-													style="background: #be3232">檢舉商品</a>
+											<li><button id="Rp_btn" class="btn btn-default btn-lg btn-round add-to-cart"
+													style="background: #be3232">檢舉商品</button>
 											</li>
 											<li><a id="track" href="#"
 													class="btn btn-warning btn-lg btn-round add-to-cart">加入追蹤</a>
@@ -572,6 +571,49 @@
 
 									</figure>
 								</article>
+								<!-- 燈箱開始 -->
+								<!-- <div id="lightbox" class="none" style="z-index:9999;">
+									<article id="lightboxContentArea">
+										<div id="gpaReachList"></div>
+										<button id="lightbox_close">關閉</button>
+									</article>
+								</div> -->
+								<!-- 燈箱結束 -->
+								<!-- 燈箱表單 -->
+								<div id="lightbox" class="none" style="z-index:9999;">
+									<article id="lightboxContentArea">
+										<button id="lightbox_close" class="close-button">關閉</button>
+
+										<select id="selectSausage">
+											<option value="1">一般商場</option>
+											<option value="2">揪團商場</option>
+										</select><br>
+										<span>商品編號:</span><input type="text"><br>
+										<span>檢舉人編號:</span><input type="text"><br>
+										<select id="reportReason">
+											<option value="0">0: 藥品, 醫療器材</option>
+											<option value="1">1: 酒類 / 菸類商品</option>
+											<option value="2">2: 武器 / 彈藥 / 軍事用品</option>
+											<option value="3">3: 活體動物, 保育動物及其製品</option>
+											<option value="4">4: 導向外部資訊或交易</option>
+											<option value="5">5: 此商品可能令人感到不適或違反善良風俗</option>
+											<option value="6">6: 仿冒品</option>
+											<option value="7">7: 重覆刊登/複製他人商品圖文</option>
+											<option value="8">8: 違反鑑賞期</option>
+											<option value="9">9: 疫區/國外肉製, 蛋, 海鮮, 寵物食品</option>
+											<option value="10">10: 刷單製造不實銷量</option>
+											<option value="11">11: 濫用文字誤導搜尋</option>
+											<option value="12">12: NCC/BSMI認證字號未填寫</option>
+											<option value="13">13: 誇大不實療效/涉及醫療效能</option>
+											<option value="14">14:其他</option>
+										</select>
+										<label for="reportContent">檢舉理由：</label>
+										<textarea id="reportContent" name="reportContent" required></textarea>
+										<button type="button" id="submit_report">提交檢舉</button>
+
+									</article>
+								</div>
+								<!-- 燈箱結束-->
 							</section>
 						</div>
 						<!-- // PRODUCT DETAILS -->
@@ -1146,15 +1188,11 @@
 						<div class="entry-media">
 							<div class="hover" style="overflow: hidden">
 								<img src="data:image/jpeg;base64,${gpaProdPicToBase64}" class="entry-url">
-								<ul class="icons unstyled">
-									<li><a href="/BuyGo/front_end/pages/member/gpa/gpaProduct.html?gpaProdNo=${gpaProdNo}" class="circle" data-toggle="lightbox"> <i class="iconfont-search"></i>
-										</a></li>
-								</ul>
 							</div>
 						</div>
 						<div class="entry-main" style="border-bottom-left-radius: 10px; border-bottom-right-radius: 10px;">
 							<h5 class="entry-title">
-								<a href="../../product.html">${gpaProdName}</a>
+								<a href="/BuyGo/front_end/pages/member/gpa/gpaProduct.html?gpaProdNo=${gpaProdNo}">${gpaProdName}</a>
 							</h5>
 							<div class="entry-price">
 								<strong class="price" style="color: #fa6f57; margin: 0px 3px; font-weight: bold; ${specialPrice != 0 ? "" : "display: none;"}">$ ${specialPrice}</strong>
@@ -1523,7 +1561,48 @@
 			e.stopPropagation();
 		});
 		// 燈箱事件結束
+		//=============檢舉功能================
 
+		document.getElementById('Rp_btn').addEventListener('click', function () {
+			showGpaReach();
+			const reportReason = document.getElementById("reportReason");
+			const reportContent = document.getElementById("reportContent");
+			const selectSausage = document.getElementById("selectSausage");
+			lightbox.style.display = 'block';
+			document.getElementById("submit_report").addEventListener("click", function () {
+				let gpaProdNo = "";
+				let paProdNo = "";
+				if(selectSausage.value === 1){
+					gpaProdNo = currentParameterValue_gpaProdNo;
+				}else if(selectSausage.value === 2){
+					paProdNo = "2";//一般賣場詳細頁面的商品編號
+				}
+				fetch("/BuyGo/api/front_end/member/gpa/order/GpaProdRpIncrease", {
+					method: "POST",
+					headers: { 'Content-Type': 'application/json;charset:utf-8' },
+					body: JSON.stringify({
+						gpaProdNo: gpaProdNo,
+						memberNo: sellerMemberNo,
+						gpaProdRpContent: reportContent.value,
+						gpaProdRpReason: reportReason.value,
+						paProdNo: paProdNo,
+						prodSell: selectSausage.value
+					})
+				}).then(resp => resp.json())
+					.then(body => {
+						console.log(body);
+						Swal.fire(
+							'感謝您的建議!',
+							'已成功送出'
+						)
+						lightbox_el.classList.add("none");
+					})
+
+
+			})
+
+		});
+		//=============檢舉結束================
 	</script>
 
 </body>

@@ -6,22 +6,22 @@ import javax.persistence.NoResultException;
 
 import org.hibernate.query.Query;
 
+import web.front_end.member.pa.prodpic.entity.PaProdPic;
 import web.front_end.prodlist.dao.PaProdPicDAO;
-import web.front_end.member.pa.prodpic.entity.ProdPic;
 
 public class PaProdPicDAOImpl implements PaProdPicDAO{
 	
 	//用paProdNo去select此paProdNo所有的圖片
 	@Override
-	public ProdPic selectById(Integer paProdNo) {
-		return getSession().get(ProdPic.class, paProdNo);
+	public PaProdPic selectById(Integer paProdNo) {
+		return getSession().get(PaProdPic.class, paProdNo);
 	}
 	
 	@Override
-	public List<ProdPic> SelectByPaProdNo(Integer paProdNo){
+	public List<PaProdPic> SelectByPaProdNo(Integer paProdNo){
 		try {
-			Query<ProdPic> query = getSession()
-					.createQuery("FROM ProdPic WHERE paProdNo =:paProdNo", ProdPic.class)
+			Query<PaProdPic> query = getSession()
+					.createQuery("FROM PaProdPic WHERE paProdNo =:paProdNo", PaProdPic.class)
 					.setParameter("paProdNo", paProdNo);
 			return query.getResultList();
 		} catch (NoResultException e) {
@@ -31,7 +31,7 @@ public class PaProdPicDAOImpl implements PaProdPicDAO{
 	}
 
 	@Override
-	public int insert(ProdPic entity) {
+	public int insert(PaProdPic entity) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
@@ -43,14 +43,14 @@ public class PaProdPicDAOImpl implements PaProdPicDAO{
 	}
 
 	@Override
-	public int update(ProdPic entity) {
+	public int update(PaProdPic entity) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
 
 	@Override
-	public List<ProdPic> selectAll() {
+	public List<PaProdPic> selectAll() {
 		// TODO Auto-generated method stub
 		return null;
 	}
