@@ -5,7 +5,9 @@ import java.util.List;
 import java.sql.Timestamp;
 
 import web.front_end.member.opa.order.dao.OpaOrderDao;
+import web.front_end.member.opa.order.dao.OpaOrderdetailsDao;
 import web.front_end.member.opa.order.dao.impl.OpaOrderDaoImpl;
+import web.front_end.member.opa.order.dao.impl.OpaOrderdetailsDaoImpl;
 import web.front_end.member.opa.order.entity.*;
 import web.front_end.member.opa.order.service.OpaOrderService;
 import web.front_end.member.notification.entity.Notification;
@@ -15,9 +17,11 @@ public class OpaOrderServiceImpl implements OpaOrderService {
 	private static String [] statusMap = new String[] { "全部","待付款","待出貨","待收貨","已完成","已取消","已退款" };
 	private static int [] statusMapping = new int[] { 0, 1, 2, 3, 1, 1, 3, 4, 3, 5, 6 };
 	private OpaOrderDao opaOrderDao;
+	private OpaOrderdetailsDao opaOrderdetailsDao;
     
     public OpaOrderServiceImpl() {
     	opaOrderDao = new OpaOrderDaoImpl();
+    	opaOrderdetailsDao = new OpaOrderdetailsDaoImpl();
     }
 
     public List<OpaOrder> findAll() {
@@ -98,12 +102,52 @@ public class OpaOrderServiceImpl implements OpaOrderService {
         return pendingTransaction;
     }
 
-    public Integer save(OpaOrder order) {
-        return (Integer) opaOrderDao.save(order);
+    public OpaOrder save(OpaOrder order) {
+    	final int resultCount = (Integer) opaOrderDao.save(order);
+    	if(resultCount < 1) {
+    		order.setMessage("新增訂單錯誤，請聯絡管理員!");
+    		order.setSuccessful(false);
+    		return order;
+    	}
+    	
+    	order.setMessage("新增訂單成功");
+		order.setSuccessful(true);
+		return order;
     }
 
 	public OpaOrderdetailsId save(OpaOrderdetails orderdetails) {
         return (OpaOrderdetailsId) opaOrderDao.save(orderdetails);
     }
+
+	@Override
+	public OpaOrderdetails addOpaOrderdetails(OpaOrderdetails opaOrderdetails) {
+		final int resultCount = opaOrderdetailsDao.insert(opaOrderdetails);
+		if(resultCount < 1) {
+			opaOrderdetails.setMessage("新增訂單明細失敗，請聯絡管理員!");
+			opaOrderdetails.setSuccessful(false);
+			return opaOrderdetails;
+		}
+		opaOrderdetails.setMessage("新增訂單明細成功");
+		opaOrderdetails.setSuccessful(true);
+		return opaOrderdetails;
+	}
+
+	@Override
+	public List<OpaOrderdetails> selectOrderdetailsByOpaSoNo(Integer opaSoNo) {
+		return opaOrderdetailsDao.selectByOpaSoNo(opaSoNo);
+	}
+
+	@Override
+	public OpaOrder update(OpaOrder opaOrder) {
+		final int resultCount = opaOrderDao.update(opaOrder);
+		opaOrder.setMessage(resultCount > 0 ? "修改成功" : "修改失敗");
+		opaOrder.setSuccessful(resultCount > 0);
+		return opaOrder;
+	}
+
+	@Override
+	public OpaOrder selectById(Integer opaSoNo) {
+		return opaOrderDao.selectById(opaSoNo);
+	}
 
 }
