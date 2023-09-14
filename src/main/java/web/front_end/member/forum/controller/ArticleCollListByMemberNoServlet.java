@@ -39,9 +39,11 @@ public class ArticleCollListByMemberNoServlet extends HttpServlet {
 
 		if (articleCollList_Ins.size() != 0) {
 			System.out.println("取得成功");
+			System.out.println("memberNo" + memberNo);
 			writePojo2Json(response, articleCollList_Ins);
 		} else {
 			System.out.println("取得失敗");
+			writePojo2Json(response, articleCollList_Ins);
 		}
 	}
 
