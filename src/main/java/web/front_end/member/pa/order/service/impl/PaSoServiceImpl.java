@@ -19,6 +19,7 @@ import web.back_end.member.wallet.dao.impl.WalletMemberDaoImpl;
 import web.front_end.member.acc.dao.MemberDao;
 import web.front_end.member.acc.dao.impl.MemberDaoImpl;
 import web.front_end.member.acc.entity.Member;
+import web.front_end.member.chat.util.JedisPoolUtil;
 import web.front_end.member.pa.order.DTO.UpdateOrderDTO;
 import web.front_end.member.pa.order.dao.PaReturnDAO;
 import web.front_end.member.pa.order.dao.PaReturnDetailsDAO;
@@ -155,9 +156,9 @@ public class PaSoServiceImpl implements PaSoService {
 		Byte newStatus = updateOrderDTO.getNewStatus();
 		Integer buyerNo = updateOrderDTO.getBuyerNo();
 		String deliverMsg = updateOrderDTO.getDeliverMsg();
+		Integer refundAmount = Integer.valueOf(updateOrderDTO.getRefundToBuyer()); // 退款金額
 		WalletTransHist walletTransHist = new WalletTransHist();
 		Double newWalletAmount;
-		Integer refundAmount = Integer.valueOf(updateOrderDTO.getRefundToBuyer()); // 退款金額
 		// 若新狀態是1(改為已付款)
 		if (newStatus == 1) {
 			paSoDAO.updateSoStatus(paSoNo, newStatus);
@@ -191,17 +192,18 @@ public class PaSoServiceImpl implements PaSoService {
 		if (newStatus == 3) {
 			paSoDAO.updateSoStatus(paSoNo, newStatus);
 			
-			Integer orderAmount = paSoDAO.selectById(paSoNo).getPaTotalAmount();
+			Integer originalAmount = paSoDAO.selectById(paSoNo).getPaTotalAmount();
+			Integer finalReceive = originalAmount - refundAmount;
 			Integer sellerNo = paSoDAO.selectById(paSoNo).getPaProds().get(0).getMemberNo();
 			
 			// 增加錢包交易紀錄
 			walletTransHist.setMemberNo(sellerNo);
-			walletTransHist.setWalletAmount(orderAmount);
-			walletTransHist.setWalletDetail("存入貨款" + orderAmount + "元");
+			walletTransHist.setWalletAmount(finalReceive);
+			walletTransHist.setWalletDetail("存入貨款" + finalReceive + "元");
 			walletTransHist.setWalletStatus((byte) 3);
 			walletTransHistDao.insert(walletTransHist);
 			// 更新會員錢包餘額
-			newWalletAmount = walletMemberDao.selectMemberByMemberNo(sellerNo).getMemberWalletAmount() +orderAmount;
+			newWalletAmount = walletMemberDao.selectMemberByMemberNo(sellerNo).getMemberWalletAmount() + finalReceive;
 			walletMemberDao.updateWalletAmountByMemberNoAndWalletAmount(sellerNo, newWalletAmount);
 		}
 		// 若新狀態是4(取消訂單), 全額退款給賣家
@@ -233,7 +235,10 @@ public class PaSoServiceImpl implements PaSoService {
 	// 產生新退貨單 & 退貨單明細
 	public String generateNewReturn(PaReturn paReturn, List<Integer> paReturnProdNos, List<String> images) {
 
-		try (Jedis jedis = new Jedis("localhost", 6379)) {
+		Jedis jedis = null;
+		try  {
+			jedis = JedisPoolUtil.getJedisPool().getResource();
+			jedis.select(1);
 			// 先確認該訂單號碼是否已申請過退貨單
 			if (paReturnDAO.selectByPaSoNo(paReturn.getPaSoNo()).size() == 0) {
 				// 新增退貨單並取得自增主鍵值
@@ -265,6 +270,8 @@ public class PaSoServiceImpl implements PaSoService {
 		} catch (Exception e) {
 			e.printStackTrace(); // javax.persistence.NoResultException: No entity found for query
 			return "發生錯誤";
+		} finally {
+			jedis.close();
 		}
 
 	}
