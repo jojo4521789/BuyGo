@@ -2,7 +2,7 @@ package web.front_end.member.pa.req.dao.impl;
 
 import java.util.List;
 
-import org.hibernate.query.Query;
+import org.hibernate.Session;
 
 import web.front_end.member.pa.req.dao.MPaReqDAO;
 import web.front_end.member.pa.req.entity.MPaReq;
@@ -43,13 +43,9 @@ public class MPaReqDAOImpl implements MPaReqDAO {
 	//修改委託狀態
 	@Override
 	public int updateReqStatus(MPaReq mPaReq) {
-		final StringBuilder hql = new StringBuilder().append("UPDATE MPaReq SET ");
-		hql.append("paRqStat= :paRqStat ")
-		.append("WHERE memberNoSeller= :memberNoSeller");
-	Query<?> query = getSession().createQuery(hql.toString());
-	return query.setParameter("paRqStat", mPaReq.getPaRqStat())
-//			.setParameter("memberNoSeller", mPaReq.getMemberNoSeller())
-			.executeUpdate();
+		Session session = getSession();
+		session.merge(mPaReq);
+		return 1;
 	}
 	
 

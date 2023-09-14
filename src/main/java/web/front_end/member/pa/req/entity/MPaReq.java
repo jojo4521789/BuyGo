@@ -34,7 +34,7 @@ public class MPaReq extends Core{
     private Integer paRqNo;
 	@Column(name ="MEMBER_NO_MEMBER")
     private Integer memberNoMember;
-	@Column(name ="MEMBER_NO_SELLER", insertable = false, updatable = false)
+	@Column(name ="MEMBER_NO_SELLER")
     private Integer memberNoSeller;
 	@Column(name ="PA_RQ_PROD_NAME")
     private String paRqProdName;
@@ -52,7 +52,8 @@ public class MPaReq extends Core{
 	private Timestamp paRqStartDate;
 	
 	 @ManyToOne
-     @JoinColumn(name = "MEMBER_NO_SELLER", referencedColumnName = "MEMBER_NO")
+     @JoinColumn(name = "MEMBER_NO_SELLER", referencedColumnName = "MEMBER_NO",
+     insertable = false, updatable = false)
      private Member member;
 
 }

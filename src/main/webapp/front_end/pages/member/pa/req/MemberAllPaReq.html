@@ -676,11 +676,23 @@
 	<ul class="store-list unstyled" id="paReqList"></ul>
 
 	<script>
+
 		window.addEventListener('load', function () {
+
+			sessionStorage.removeItem("store_data");
+			let memberNoId;
+
+			checkLoginStatusShowMemberAcct().then(response => {
+				memberNoId = response[0];
+				console.log("3/" + memberNoId);
+
+				loadPaReqList(memberNoId);//測試用寫死，記得修改
+			})
+
 			const paReqList_el = document.querySelector('#paReqList');
 			const paReqListTable = document.getElementById("paReqListTable");
 
-			loadPaReqList(1);//測試用寫死，記得修改
+
 
 			//將商品狀態的數字轉成文字資訊
 			function changeStatText(statusCode) {
@@ -695,28 +707,35 @@
 						return '出現錯誤，請聯繫客服人員';
 				}
 			}
-			
+
 
 			//讀取該會員的所有委託單
-			function loadPaReqList(memberNoMember) {
-				fetch('/BuyGo/api/front_end/member/getAllPaReq', {
+			function loadPaReqList() {
+
+				fetch('/BuyGo/needLoginApi/front_end/member/getAllPaReq', {
 					method: 'POST',
 					headers: {
 						'Content-Type': 'application/json; charset=utf-8',
 					},
 					body: JSON.stringify({
-						memberNoMember: memberNoMember,
-					}),
+						memberNoMember: memberNoId,
+					})
+
 				})
-					.then((resp) => resp.json())
+					.then(response => {
+						if (response.status === 401) {
+							// 客戶未登入，執行頁面重定向到登入頁
+							alert('未登入帳號，將導向至登入頁面');
+							window.location.href = '/BuyGo/front_end/pages/member/login.html'; // 登入頁面url
+						} else if (response.ok) {
+							// 請求成功
+							return response.json();
+						} else {
+							alert("錯誤狀態:" + response.status);
+							return;
+						}
+					})
 					.then((data) => {
-
-						// data.forEach(element => {
-						// 	let { memberNoMember,  sellerName} = element;
-						// 	let { memberAcct } = sellerName;
-
-						// 	console.log("memberAcct:" + memberAcct);
-						// });
 
 						$('#table_id').DataTable().destroy();
 

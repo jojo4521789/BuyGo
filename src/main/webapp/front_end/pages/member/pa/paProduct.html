@@ -165,6 +165,7 @@
 			color: #353535;
 			cursor: pointer;
 			border: none;
+			cursor: pointer;
 		}
 
 		#delegateButton:hover {
@@ -232,16 +233,17 @@
 									<div id="sub-cart" class="sub-header">
 										<div class="cart-header">
 											<span>Your cart is currently empty.</span> <small><a
-													href="../../../pages/member/cart.html">(See All)</a></small>
+													href="../pa/paCart/paCart.html">(See All)</a></small>
 										</div>
-										<ul class="cart-items product-medialist unstyled clearfix"></ul>
+										<!-- <ul class="cart-items product-medialist unstyled clearfix"></ul> -->
+										<ul class="s-cart-items product-medialist unstyled clearfix"></ul>
 										<div class="cart-footer">
 											<div class="cart-total clearfix">
 												<span class="pull-left uppercase">Total</span> <span
 													class="pull-right total">$ 0</span>
 											</div>
 											<div class="text-right">
-												<a href="../../../pages/member/cart.html"
+												<a href="../pa/paCart/paCart.html"
 													class="btn btn-default btn-round view-cart">View Cart</a>
 											</div>
 										</div>
@@ -272,7 +274,7 @@
 								<ul class="user-menu">
 									<li><a href="../../../pages/member/myaccount.html">My
 											Account</a></li>
-									<li><a href="../../../pages/member/cart.html">My
+									<li><a href="../pa/paCart/paCart.html">My
 											Wishlist</a></li>
 									<li><a href="../../../pages/member/checkout.html">Checkout</a></li>
 									<li><a href="#">Log Out</a></li>
@@ -477,9 +479,7 @@
 
 						<!-- PRODUCT DETAILS -->
 
-						<!-- <div class="col-xs-12 col-sm-8"> -->
-						<div class="col-xs-12 col-sm-4">
-							<!-- <div> -->
+						<div class="col-xs-12 col-sm-8">
 							<section class="product-details add-cart">
 								<header class="entry-header">
 									<h2 class="entry-title uppercase" id="prodName"></h2>
@@ -505,11 +505,12 @@
 										</ul>
 
 										<ul class="inline-li li-m-r-l m-t-lg">
-											<li><a href="#" class="btn btn-default btn-lg btn-round add-to-cart"
+											<!-- <li><a href="#" class="btn btn-default btn-lg btn-round report-button"
 													style="background: #be3232">檢舉商品</a>
-											</li>
-											<li><a href="#"
-													class="btn btn-default btn-lg btn-round add-to-cart">加入購物車</a>
+											</li> -->
+											<li style="padding: 0px 60px;"></li>
+											<li><a href="#" class="btn btn-default btn-lg btn-round add-to-cart"
+													onclick="addToCart(0)">加入購物車</a>
 											</li>
 										</ul>
 
@@ -556,7 +557,7 @@
 					<div class="container">
 						<div class="row">
 
-							<div class="col-xs-12 col-sm-12 col-md-3">
+							<div class="col-xs-12 col-sm-12 col-md-5">
 								<section class="widget widget-menu">
 									<h5 class="widget-title">Contact info</h5>
 									<div class="widget-content">
@@ -585,38 +586,11 @@
 												<a href="#"> <img src="../../../img/common/demo/images-footer.jpg"
 														alt="" />
 												</a>
-												<div class="ads-caption bottom-right">
-													<a href="#" class="btn btn-default btn-round"> <i
-															class="round-icon iconfont-angle-right"></i> <span
-															class="inline-middle">Show More</span>
-													</a>
-												</div>
 											</div>
 										</div>
 									</div>
 								</section>
 							</div>
-
-							<div class="col-xs-12 col-sm-12 col-md-3">
-								<section class="widget widget-subscription">
-									<h5 class="widget-title">Newletter</h5>
-									<div class="widget-content">
-										<p>Subscribe to be the first to know about Sales, Events,
-											and Exclusive Offers!</p>
-										<form action="#" method="post">
-											<div class="input-group">
-												<label for="subscription-email" class="placeholder">Enter
-													Your Email</label> <input type="email" id="subscription-email"
-													name="email" class="form-control" required /> <span
-													class="input-group-btn">
-													<button class="btn btn-primary">Subscribe</button>
-												</span>
-											</div>
-										</form>
-									</div>
-								</section>
-							</div>
-
 						</div>
 					</div>
 				</div>
@@ -631,15 +605,12 @@
 						<div class="col-xs-12 col-sm-6">
 							<div class="footer-links center-xs clearfix">
 								<ul class="unstyled">
-									<li><a href="#">Site Map</a></li>
 									<li><a href="#">FAQ</a></li>
-									<li><a href="#">Work for us</a></li>
-									<li><a href="#">Contact Us</a></li>
 								</ul>
 							</div>
 							<div class="space10"></div>
 							<div class="copyright center-xs">
-								<p>(c) 2013 More Templates</p>
+								<p>(c) 2023</p>
 							</div>
 						</div>
 
@@ -680,6 +651,9 @@
 	</script>
 	<!-- // Disqus -->
 
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+	<script src="../../../js/login.js"></script>
 
 	<script>
 
@@ -725,6 +699,9 @@
 		window.addEventListener("load", function () {
 
 			//---------------------------------------元素-------------------------------------------------------
+			//檢查客戶帳號是否登入，修改頁面右上方Log In/Log Out按鈕，顯示登入者帳號名稱
+			const checkLogin = checkLoginStatusShowMemberAcct();
+			let = "";
 
 			const memberNo_el = document.querySelector("#memberNo");
 			const prodName_el = document.querySelector("#prodName");
@@ -738,9 +715,12 @@
 			const objName_el = document.querySelector("#objName");
 			const objPrice_el = document.querySelector("#objPrice");
 
+			const delegateButton_el = document.getElementById("delegateButton")
 
 			let paProdPicNoArray = [];
 			let count = 0;
+
+			let sellerNo;
 
 			//---------------------------------------fetch-------------------------------------------------------
 
@@ -794,13 +774,13 @@
 						dots = document.querySelectorAll(".dot");
 
 						//圖片載入
-						if (body.prodPic.length !== 0) {
+						if (body.paProdPic.length !== 0) {
 
-							// $("#slider").html(`<img class="firstPic" src="${body.prodPic[0].paProdPic}" alt="無法載入圖片" />`); (原本的第一張要拿掉)
+							// $("#slider").html(`<img class="firstPic" src="${body.paProdPic[0].paProdPic}" alt="無法載入圖片" />`); (原本的第一張要拿掉)
 
 							let count_dot = 0;
 
-							for (let paPrPic of body.prodPic) {
+							for (let paPrPic of body.paProdPic) {
 
 								count_dot++;
 
@@ -847,12 +827,12 @@
 							.then(resp => resp.json())
 							.then(data => {
 
+								sellerNo = data.memberNo;
 								const memberName = data.memberName
 
 								memberNo_el.append(memberName);
 							})
 
-						// console.log(paProdObjNo);
 
 						//用商品類別抓4個商品資訊
 
@@ -880,11 +860,11 @@
 											data-price="" data-colors="red|blue|black|white" data-size="S|M|L">
 											<div class="entry-media" style=" min-height: 220px; overflow: hidden">
 												<div class="hover" style="height: auto;">
-													<img src="${random.prodPic[0].paProdPic}" class="entry-url" style="height: 100%">
+													<img src="${random.paProdPic[0].paProdPic}" class="entry-url" style="height: 100%">
 													<ul class="icons unstyled">
 														<li><a href="${full}/BuyGo/front_end/pages/member/pa/paProduct.html?prodId=${paProdNo}" class="circle" data-toggle="lightbox"> <i class="iconfont-search"></i>
 															</a></li>
-														<li><a href="#" class="circle add-to-cart" onclick="addToCart(${count});"> <i
+														<li><a href="#" class="circle add-to-cart" onclick="addToCart(${paProdNo});"> <i
 																	class="iconfont-shopping-cart"></i>
 															</a></li>
 													</ul>
@@ -970,11 +950,213 @@
 						return '出現錯誤，請聯繫客服人員';
 				}
 
-
-
 			}
 
+			// 委託賣家按鈕
+			delegateButton_el.addEventListener("click", function () {
+
+				checkLogin.then(function (memberDetail) {
+
+					// 檢查是否有登入會員
+
+					if (memberDetail && memberDetail[0] && memberDetail[1] !== undefined) {
+
+						let memberNo = memberDetail[0];
+						let memberAcct = memberDetail[1];
+
+						Swal.fire({
+							title: '委託此賣家',
+							text: '將跳轉至委託頁面',
+							icon: 'info',
+							showCancelButton: true,
+							confirmButtonText: '確認',
+							cancelButtonText: '取消',
+						}).then((result) => {
+							if (result.isConfirmed) {
+								// 確認後跳轉頁面
+								let sellerId = sellerNo;
+								let sellerName = document.querySelector("#memberNo").textContent;;
+
+								let sellerInfo = {
+									memberNo: memberNo,
+									sellerId: sellerId,
+									sellerName: sellerName
+								}
+								console.log(sellerInfo);
+								sessionStorage.setItem("seller_Info", JSON.stringify(sellerInfo));
+								// Swal.fire(window.location = "http://localhost:8081/BuyGo/front_end/pages/member/pa/req/AddPaReq.html");
+								Swal.fire(window.location.pathname = "/BuyGo/front_end/pages/member/pa/req/AddPaReq.html");
+							}
+						});
+
+					} else {
+
+						alert("請先登入會員，將跳轉至登入畫面");
+						// window.location = "http://localhost:8081/BuyGo/front_end/pages/member/login.html";
+						window.location.pathname = "/BuyGo/front_end/pages/member/login.html";
+
+					}
+
+				})
+					.catch(function (error) {
+						console.error(error);
+					});
+			});
+
 		});
+
+		//加入購物車
+
+		function addToCart(paProdNo) {
+
+			const queryString = window.location.search;
+			const urlParms = new URLSearchParams(queryString);
+			let prodId = urlParms.get("prodId");
+
+			if (paProdNo === 0) {
+				paProdNo = prodId;
+			}
+			checkLoginStatusShowMemberAcct();
+			let paCartId = {
+				memberNo: null,
+				paProdNo: paProdNo
+			}
+
+			fetch("/BuyGo/needLoginApi/pa/cart/selectById", {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json; charset=utf-8",
+				},
+				body: JSON.stringify({ paCartId }),
+			})
+				.then(resp => {
+					if (resp.status === 401) {
+						// 客戶未登入，執行頁面重定向到登入頁
+						notLoggedInAction();
+					} else if (resp.ok) {
+						// 請求成功
+						return resp.json();
+					} else {
+						alert("錯誤狀態" + resp.status);
+						return;
+					}
+				})
+				.then(data => {
+					let paOrdQty = 1;
+					if (data !== null) {
+						paOrdQty = data.paOrdQty + 1;
+					}
+
+					fetch("/BuyGo/needLoginApi/pa/cart/update", {
+						method: "POST",
+						headers: {
+							"Content-Type": "application/json; charset=utf-8",
+						},
+						body: JSON.stringify({
+							paCartId: paCartId,
+							paProdSum: paProdSum,
+							paOrdQty: paOrdQty
+						}),
+					})
+						.then(resp => resp.json())
+						.then(body => {
+							const { successful } = body;
+							if (successful) {
+								updateCartItem();
+							}
+						});
+				});
+
+			function updateCartItem() {
+
+				fetch("/BuyGo/needLoginApi/pa/cart/selectByMember", {
+					method: "POST",
+					headers: {
+						"Content-Type": "application/json; charset=utf-8",
+					},
+					// body: JSON.stringify({ paCartId }),
+				})
+					.then(resp => {
+						if (resp.status === 401) {
+							// 客戶未登入，不撈取購物車資料
+							return;
+						} else if (resp.ok) {
+							// 請求成功
+							return resp.json();
+						} else {
+							alert("錯誤狀態" + resp.status);
+							return;
+						}
+					})
+					.then(datas => {
+						if (datas && datas.length > 0) {
+							$(".cart-header").addClass("-none");
+							let cart_li = "";
+							let prodGrandTotal = 0;
+							for (let data of datas) {
+								let prpics_url = "../../../../img/common/Image_not_available.png";
+								if (data.paProd.paProdPic.length !== 0) {
+									prpics_url = data.paProd.paProdPic[0].paProdPic;
+								}
+								let prodSubTTL = data.paProd.paProdPrice * data.paOrdQty;
+								prodGrandTotal += prodSubTTL;
+								cart_li += `
+                        <li id="li_${data.paProd.paProdNo}">
+                            <div class="item clearfix" data-product-id="${data.paProd.paProdNo}"> 
+                                <button type="button" class="s-close" aria-hidden="true" onclick="removeCartProd(this)">×</button> 
+                                <a href="#" data-toggle="lightbox" class="entry-thumbnail">
+                                    <img src="${prpics_url}" alt="${data.paProd.paProdName}">
+                                </a>
+                                <h5 class="entry-title cart-entry-title"><a href="#">${data.paProd.paProdName}</a></h5>
+                                <span class="entry-price s-entry-price">$ <span class="s-price">${data.paProd.paProdPrice}</span> x <span class="s-qty">${data.paOrdQty}</span></span>
+                            </div>
+                        </li>
+                    `;
+
+							}
+							$(".s-cart-items").html(cart_li);
+							$(".s-cart-total > .total").html("$ " + prodGrandTotal);
+						}
+					});
+			}
+			updateCartItem();
+
+			function removeCartProd(btnEl) {
+				let paProdNo = btnEl.closest(".item").getAttribute("data-product-id");
+
+				let paCartId = {
+					memberNo: null,
+					paProdNo:paProdNo
+				};
+				fetch("/BuyGo/needLoginApi/pa/cart/removeProd", {
+					method: "POST",
+					headers: { "Content-Type": "application/json" },
+					body: JSON.stringify({ paCartId })
+				})
+					.then(resp => resp.json())
+					.then(body => {
+						if (body.successful) {
+							$("#li_" + paProdNo).fadeOut(500, function () {
+								$(this).remove();
+								calcuCartGrandTotal();
+							});
+						}
+					});
+			}
+
+			function calcuCartGrandTotal() {
+				let prodEls = document.querySelectorAll(".s-entry-price");
+				let grandTotal = 0
+				for (let prodEl of prodEls) {
+					let price = parseInt(prodEl.querySelector(".s-price").textContent);
+					let qty = parseInt(prodEl.querySelector(".s-qty").textContent);
+					grandTotal += price * qty;
+				}
+				$(".s-cart-total > .total").html("$ " + grandTotal);
+			}
+
+		}
+
 
 
 	</script>

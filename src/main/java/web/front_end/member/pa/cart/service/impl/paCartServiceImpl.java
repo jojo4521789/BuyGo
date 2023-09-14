@@ -65,7 +65,10 @@ public class paCartServiceImpl implements PaCartService{
 	}
 	
 	//還要加上依照賣家選取的dao
-	
+	@Override
+	public List<PaCart> selectBySellerNo(Integer memberNo) {
+		return dao.selectBySellerNo(memberNo);
+	}
 	
 	
 }

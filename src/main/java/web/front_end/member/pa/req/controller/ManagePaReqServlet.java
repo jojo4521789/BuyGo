@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import web.front_end.member.pa.req.entity.MPaReq;
 
-@WebServlet("/api/front_end/seller/manager")
+@WebServlet("/needLoginApi/front_end/seller/manager")
 public class ManagePaReqServlet extends HttpServlet{
 
 	private static final long serialVersionUID = 1L;

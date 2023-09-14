@@ -7,71 +7,82 @@
 <!--<![endif]-->
 
 <head>
-<meta charset="UTF-8" />
-<title>GFashion - Responsive e-commerce HTML Template</title>
-<meta name="description" content="" />
-<meta name="keywords" content="" />
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, maximum-scale=1">
+	<meta charset="UTF-8" />
+	<title>GFashion - Responsive e-commerce HTML Template</title>
+	<meta name="description" content="" />
+	<meta name="keywords" content="" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-<!-- Favorite Icons -->
-<link rel="icon" href="../../../../img/common/favicon/favicon.html"
-	type="image/x-icon" />
-<link rel="apple-touch-icon-precomposed" sizes="144x144"
-	href="../../../../img/common/favicon/apple-touch-icon-144x144-precomposed.html">
-<link rel="apple-touch-icon-precomposed" sizes="72x72"
-	href="../../../../img/common/favicon/apple-touch-icon-72x72-precomposed.html">
-<link rel="apple-touch-icon-precomposed"
-	href="../../../../img/common/favicon/apple-touch-icon-precomposed.html">
-<!-- // Favorite Icons -->
+	<!-- Favorite Icons -->
+	<link rel="icon" href="../../../../img/common/favicon/favicon.html" type="image/x-icon" />
+	<link rel="apple-touch-icon-precomposed" sizes="144x144"
+		href="../../../../img/common/favicon/apple-touch-icon-144x144-precomposed.html">
+	<link rel="apple-touch-icon-precomposed" sizes="72x72"
+		href="../../../../img/common/favicon/apple-touch-icon-72x72-precomposed.html">
+	<link rel="apple-touch-icon-precomposed" href="../../../../img/common/favicon/apple-touch-icon-precomposed.html">
+	<!-- // Favorite Icons -->
 
-<!--<link href='http://fonts.useso.com/css?family=Open+Sans:300,400,600,700' rel='stylesheet' type='text/css'>-->
+	<!--<link href='http://fonts.useso.com/css?family=Open+Sans:300,400,600,700' rel='stylesheet' type='text/css'>-->
 
-<!-- GENERAL CSS FILES -->
-<link rel="stylesheet" href="../../../../css/common/minified.css">
-<!-- // GENERAL CSS FILES -->
+	<!-- GENERAL CSS FILES -->
+	<link rel="stylesheet" href="../../../../css/common/minified.css">
+	<!-- // GENERAL CSS FILES -->
 
-<!--[if IE 8]>
+	<!--[if IE 8]>
 		<script src="js/respond.min.js"></script>
 		<script src="js/selectivizr-min.js"></script>
 	<![endif]-->
 
-<script src="../../../../js/common/jquery.min.js"></script>
+	<script src="../../../../js/common/jquery.min.js"></script>
 
-<script>window.jQuery || document.write('<script src="../../../../js/common/jquery.min.js"><\/script>');</script>
-<script src="../../../../js/common/modernizr.min.js"></script>
-<!-- PARTICULAR PAGES CSS FILES -->
-<link rel="stylesheet" href="../../../../css/common/innerpage.css">
-<link rel="stylesheet" href="../../../../css/common/owl.carousel.css">
-<link rel="stylesheet" href="../../../../css/common/owl.theme.css">
-<!-- // PARTICULAR PAGES CSS FILES -->
-<link rel="stylesheet" href="../../../../css/common/responsive.css">
+	<script>window.jQuery || document.write('<script src="../../../../js/common/jquery.min.js"><\/script>');</script>
+	<script src="../../../../js/common/modernizr.min.js"></script>
+	<!-- PARTICULAR PAGES CSS FILES -->
+	<link rel="stylesheet" href="../../../../css/common/innerpage.css">
+	<link rel="stylesheet" href="../../../../css/common/owl.carousel.css">
+	<link rel="stylesheet" href="../../../../css/common/owl.theme.css">
+	<!-- // PARTICULAR PAGES CSS FILES -->
+	<link rel="stylesheet" href="../../../../css/common/responsive.css">
 
-<!-- Data-Table -->
+	<!-- Data-Table -->
 	<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-	
-	<link rel="stylesheet"
-	href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
-	
-	<script
-		src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
-		
+
+	<link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
+
+	<script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+
 	<script>
 		$(document).ready(function () {
-		    $('#table_id').DataTable();
-		    ordering: false
+			$('#table_id').DataTable();
+			ordering: false
 		});
 	</script>
 
-<style>
-th {
-	border: 1px solid rgb(130, 81, 81);
-	background-color: lightsalmon;
-	white-space: nowrap;
-}
+	<style>
+		th {
+			border: 1px solid rgb(130, 81, 81);
+			background-color: lightsalmon;
+			white-space: nowrap;
+		}
 
+		.edit-button {
+			background-color: #af754c;
+			color: white;
+			border: none;
+			/* padding: 10px 20px; */
+			text-align: center;
+			text-decoration: none;
+			display: inline-block;
+			font-size: 14px;
+			margin: 4px 2px;
+			cursor: pointer;
+			border-radius: 5px;
+		}
 
-</style>
+		.edit-button :hover {
+			background-color: #af4c4c;
+		}
+	</style>
 
 
 </head>
@@ -113,34 +124,29 @@ th {
 									</div> <!-- // SEARCH BOX -->
 								</li>
 								<li data-toggle="sub-header" data-target="#sub-social">
-									<!-- SOCIAL ICONS --> <a href="javascript:void(0);"
-									id="social-icons"> <i class="iconfont-share round-icon"></i>
-								</a>
+									<!-- SOCIAL ICONS --> <a href="javascript:void(0);" id="social-icons"> <i
+											class="iconfont-share round-icon"></i>
+									</a>
 
 									<div id="sub-social" class="sub-header">
 										<ul class="social-list unstyled text-center">
-											<li><a href="#"><i
-													class="iconfont-facebook round-icon"></i></a></li>
-											<li><a href="#"><i
-													class="iconfont-twitter round-icon"></i></a></li>
-											<li><a href="#"><i
-													class="iconfont-google-plus round-icon"></i></a></li>
-											<li><a href="#"><i
-													class="iconfont-pinterest round-icon"></i></a></li>
+											<li><a href="#"><i class="iconfont-facebook round-icon"></i></a></li>
+											<li><a href="#"><i class="iconfont-twitter round-icon"></i></a></li>
+											<li><a href="#"><i class="iconfont-google-plus round-icon"></i></a></li>
+											<li><a href="#"><i class="iconfont-pinterest round-icon"></i></a></li>
 											<li><a href="#"><i class="iconfont-rss round-icon"></i></a></li>
 										</ul>
 									</div> <!-- // SOCIAL ICONS -->
 								</li>
 								<li data-toggle="sub-header" data-target="#sub-cart">
-									<!-- SHOPPING CART --> <a href="javascript:void(0);"
-									id="total-cart"> <i
-										class="iconfont-shopping-cart round-icon"></i>
-								</a>
+									<!-- SHOPPING CART --> <a href="javascript:void(0);" id="total-cart"> <i
+											class="iconfont-shopping-cart round-icon"></i>
+									</a>
 
 									<div id="sub-cart" class="sub-header">
 										<div class="cart-header">
 											<span>Your cart is currently empty.</span> <small><a
-												href="../../pages/member/cart.html">(See All)</a></small>
+													href="../../pages/member/cart.html">(See All)</a></small>
 										</div>
 										<ul class="cart-items product-medialist unstyled clearfix"></ul>
 										<div class="cart-footer">
@@ -176,17 +182,15 @@ th {
 							<div class="center-xs">
 								<!-- CURRENCY -->
 								<ul class="option-list unstyled">
-									<li class="active"><a href="#" data-toggle="tooltip"
-										title="USD - US Dollar">$</a></li>
-									<li><a href="#" data-toggle="tooltip"
-										title="GBP - British Pound">lb</a></li>
+									<li class="active"><a href="#" data-toggle="tooltip" title="USD - US Dollar">$</a>
+									</li>
+									<li><a href="#" data-toggle="tooltip" title="GBP - British Pound">lb</a></li>
 									<li><a href="#" data-toggle="tooltip" title="EUR - Euro">EUR</a></li>
 								</ul>
 								<!-- // CURRENCY -->
 								<!-- LANGUAGES -->
 								<ul class="option-list unstyled">
-									<li class="active"><a href="#" data-toggle="tooltip"
-										title="English">EN</a></li>
+									<li class="active"><a href="#" data-toggle="tooltip" title="English">EN</a></li>
 									<li><a href="#" data-toggle="tooltip" title="French">FR</a></li>
 									<li><a href="#" data-toggle="tooltip" title="Deutsch">DE</a></li>
 								</ul>
@@ -211,8 +215,8 @@ th {
 						<div class="logo-wrapper">
 							<a href="../../../../index-2.html" class="logo"
 								title="GFashion - Responsive e-commerce HTML Template"> <img
-								src="../../../../img/common/logo.png"
-								alt="GFashion - Responsive e-commerce HTML Template" />
+									src="../../../../img/common/logo.png"
+									alt="GFashion - Responsive e-commerce HTML Template" />
 							</a>
 						</div>
 						<!-- // SITE LOGO -->
@@ -302,7 +306,8 @@ th {
 											</div>
 
 										</div>
-									</div> <!-- // MEGA MENU --></li>
+									</div> <!-- // MEGA MENU -->
+								</li>
 								<li><a href="../../../../pages/components.html">Components</a>
 								</li>
 								<li><a href="../../../../pages/guest/store-locator.html">Store
@@ -313,8 +318,7 @@ th {
 							</ul>
 
 							<!-- MOBILE MENU -->
-							<div id="mobile-menu"
-								class="dl-menuwrapper visible-xs visible-sm">
+							<div id="mobile-menu" class="dl-menuwrapper visible-xs visible-sm">
 								<button class="dl-trigger">
 									<i class="iconfont-reorder round-icon"></i>
 								</button>
@@ -339,7 +343,8 @@ th {
 															Jeans</a></li>
 													<li><a href="../../../../pages/guest/products.html">Fall
 															Styles</a></li>
-												</ul></li>
+												</ul>
+											</li>
 											<li><a href="../../pages/guest/products.html">Accessories</a>
 												<ul class="dl-submenu">
 													<li><a href="../../../../pages/guest/products.html">Casual
@@ -354,7 +359,8 @@ th {
 															Jeans</a></li>
 													<li><a href="../../../../pages/guest/products.html">Fall
 															Styles</a></li>
-												</ul></li>
+												</ul>
+											</li>
 											<li><a href="../../../../pages/guest/products.html">Brands</a>
 												<ul class="dl-submenu">
 													<li><a href="../../../../pages/guest/products.html">Casual
@@ -369,8 +375,10 @@ th {
 															Jeans</a></li>
 													<li><a href="../../../../pages/guest/products.html">Fall
 															Styles</a></li>
-												</ul></li>
-										</ul></li>
+												</ul>
+											</li>
+										</ul>
+									</li>
 								</ul>
 							</div>
 							<!-- // MOBILE MENU -->
@@ -434,9 +442,8 @@ th {
 										<h6 class="nmb">New Arrivals</h6>
 										<h5 class="text-semibold uppercase nmb">Leather Fashion</h5>
 										<div class="space10"></div>
-										<a href="../../pages/guest/products.html"
-											class="with-icon prepend-icon"><i
-											class="iconfont-caret-right"></i><span> Shop Now</span></a>
+										<a href="../../pages/guest/products.html" class="with-icon prepend-icon"><i
+												class="iconfont-caret-right"></i><span> Shop Now</span></a>
 									</div>
 								</div>
 							</div>
@@ -534,20 +541,17 @@ th {
 									<h5 class="widget-title">information</h5>
 									<div class="widget-content">
 										<ul class="menu iconed-menu unstyled">
-											<li><a href="#"><i
-													class="iconfont-circle-blank menu-icon"></i>Affiliate</a></li>
-											<li><a href="#"><i
-													class="iconfont-circle-blank menu-icon"></i>Shipping</a></li>
-											<li><a href="#"><i
-													class="iconfont-circle-blank menu-icon"></i>Shop support</a></li>
-											<li><a href="#"><i
-													class="iconfont-circle-blank menu-icon"></i>Customer
+											<li><a href="#"><i class="iconfont-circle-blank menu-icon"></i>Affiliate</a>
+											</li>
+											<li><a href="#"><i class="iconfont-circle-blank menu-icon"></i>Shipping</a>
+											</li>
+											<li><a href="#"><i class="iconfont-circle-blank menu-icon"></i>Shop
+													support</a></li>
+											<li><a href="#"><i class="iconfont-circle-blank menu-icon"></i>Customer
 													Service</a></li>
-											<li><a href="#"><i
-													class="iconfont-circle-blank menu-icon"></i>Payment &
+											<li><a href="#"><i class="iconfont-circle-blank menu-icon"></i>Payment &
 													Return</a></li>
-											<li><a href="#"><i
-													class="iconfont-circle-blank menu-icon"></i>Terms &
+											<li><a href="#"><i class="iconfont-circle-blank menu-icon"></i>Terms &
 													Conditions</a></li>
 										</ul>
 									</div>
@@ -572,15 +576,17 @@ th {
 									<div class="widget-content">
 										<ul class="menu iconed-list unstyled">
 											<li><span class="list-icon"><i
-													class="round-icon iconfont-map-marker"></i></span>
+														class="round-icon iconfont-map-marker"></i></span>
 												<div class="list-content">Lorem ipsum maecenas dapibus
-													luctus euismod 133/2 New York City</div></li>
+													luctus euismod 133/2 New York City</div>
+											</li>
+											<li><span class="list-icon"><i class="round-icon iconfont-phone"></i></span>
+												<div class="list-content">(+00)1344356-675</div>
+											</li>
 											<li><span class="list-icon"><i
-													class="round-icon iconfont-phone"></i></span>
-												<div class="list-content">(+00)1344356-675</div></li>
-											<li><span class="list-icon"><i
-													class="round-icon iconfont-envelope-alt"></i></span>
-												<div class="list-content">support@themina.net</div></li>
+														class="round-icon iconfont-envelope-alt"></i></span>
+												<div class="list-content">support@themina.net</div>
+											</li>
 										</ul>
 									</div>
 								</section>
@@ -591,13 +597,13 @@ th {
 									<div class="widget-content">
 										<div class="center-xs">
 											<div class="ads">
-												<a href="#"> <img
-													src="../../img/common/demo/images-footer.jpg" alt="" />
+												<a href="#"> <img src="../../img/common/demo/images-footer.jpg"
+														alt="" />
 												</a>
 												<div class="ads-caption bottom-right">
 													<a href="#" class="btn btn-default btn-round"> <i
-														class="round-icon iconfont-angle-right"></i> <span
-														class="inline-middle">Show More</span>
+															class="round-icon iconfont-angle-right"></i> <span
+															class="inline-middle">Show More</span>
 													</a>
 												</div>
 											</div>
@@ -655,10 +661,9 @@ th {
 							<div class="pull-right">
 								<div class="vmid">
 									<span class="uppercase">Payment Accept&emsp;</span> <a href="#"><img
-										src="../../img/common/visacard.png" alt="" width="40" /></a> <a
-										href="#"><img src="../../img/common/mastercard.png" alt=""
-										width="40" /></a> <a href="#"><img
-										src="../../img/common/paypal.png" alt="" width="40" /></a>
+											src="../../img/common/visacard.png" alt="" width="40" /></a> <a
+										href="#"><img src="../../img/common/mastercard.png" alt="" width="40" /></a> <a
+										href="#"><img src="../../img/common/paypal.png" alt="" width="40" /></a>
 								</div>
 							</div>
 						</div>
@@ -689,87 +694,138 @@ th {
 	<ul class="store-list unstyled" id="paReqList"></ul>
 
 	<script>
-        window.addEventListener('load', function () {
-            const paReqList_el = document.querySelector('#paReqList');
-            const paReqListTable = document.getElementById("paReqListTable");
+		window.addEventListener('load', function () {
 
-            loadPaReqList(10);//測試用寫死，記得修改
+			sessionStorage.removeItem("store_data");
+			let memberNoId;
 
-            //讀取該會員的所有委託單
-            function loadPaReqList(memberNoSeller) {
-                fetch('/BuyGo/api/front_end/seller/getSellerPaReqs', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json; charset=utf-8',
-                    },
-                    body: JSON.stringify({
-                        memberNoSeller: memberNoSeller,
-                    }),
-                })
-                    .then((resp) => resp.json())
-                    .then((data) => {
-                    	
-                    	$('#table_id').DataTable().destroy();
-                    	
-                    	const table = $('#table_id').DataTable({
-                            data: data,
-                            columns: [
-                            	{ 
-                                    data: null,
-                                    render: function (data, type, row, meta) {
-                                        if (type === 'display') {
-                                            return meta.row + 1;
-                                        }
-                                        return data;
-                                    }
-                                },
-                                { data: 'paRqNo' },
-                                { data: 'memberNoMember' },
-                                { data: 'paRqProdName' },
-                                { 
-                                    data: 'paRqUrl',
-                                    render: function (data, type, row, meta) {
-                                        if (type === 'display') {
-                                            const maxUrlLength = 50; // 限制url的最大長度
-                                            if (data.length > maxUrlLength) {
-                                                // 超過的部分改用刪節號
-                                                const truncatedUrl = data.substring(0, maxUrlLength) + '...';
-                                                return '<a href="' + data + '" target="_blank" title="' + data + '">' + truncatedUrl + '</a>';
-                                            } else {
-                                                return '<a href="' + data + '" target="_blank">' + data + '</a>';
-                                            }
-                                        }
-                                        return data;
-                                    }
-                                },
-                                { data: 'paRqPrice' },
-                                { data: 'paRqQty' },
-                                { data: 'paRqNote' },
-                                { 
-                                    data: 'paRqStat',
-                                    render: function (data, type, row, meta) {
-                                        if (type === 'display') {
-                                            const selectHtml = `
-                                                <select>
+			checkLoginStatusShowMemberAcct().then(response => {
+				memberNoId = response[0];
+				console.log("3/" + memberNoId);
+
+				loadPaReqList(memberNoId);//測試用寫死，記得修改
+			})
+
+			const paReqList_el = document.querySelector('#paReqList');
+			const paReqListTable = document.getElementById("paReqListTable");
+
+			//讀取該會員的所有委託單
+			function loadPaReqList(memberNoSeller) {
+				fetch('/BuyGo/needLoginApi/front_end/seller/getSellerPaReqs', {
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/json; charset=utf-8',
+					},
+					body: JSON.stringify({
+						memberNoSeller: memberNoSeller,
+					}),
+				})
+				.then(response => {
+						if (response.status === 401) {
+							// 客戶未登入，執行頁面重定向到登入頁
+							alert('未登入帳號，將導向至登入頁面');
+							window.location.href = '/BuyGo/front_end/pages/member/login.html'; // 登入頁面url
+						} else if (response.ok) {
+							// 請求成功
+							return response.json();
+						} else {
+							alert("錯誤狀態:" + response.status);
+							return;
+						}
+					})
+					.then((data) => {
+
+						$('#table_id').DataTable().destroy();
+
+						const table = $('#table_id').DataTable({
+							data: data,
+							columns: [
+								{
+									data: null,
+									render: function (data, type, row, meta) {
+										if (type === 'display') {
+											return meta.row + 1;
+										}
+										return data;
+									}
+								},
+								{ data: 'paRqNo' },
+								{ data: 'memberNoMember' },
+								{ data: 'paRqProdName' },
+								{
+									data: 'paRqUrl',
+									render: function (data, type, row, meta) {
+										if (type === 'display') {
+											const maxUrlLength = 50; // 限制url的最大長度
+											if (data.length > maxUrlLength) {
+												// 超過的部分改用刪節號
+												const truncatedUrl = data.substring(0, maxUrlLength) + '...';
+												return '<a href="' + data + '" target="_blank" title="' + data + '">' + truncatedUrl + '</a>';
+											} else {
+												return '<a href="' + data + '" target="_blank">' + data + '</a>';
+											}
+										}
+										return data;
+									}
+								},
+								{ data: 'paRqPrice' },
+								{ data: 'paRqQty' },
+								{ data: 'paRqNote' },
+								{
+									data: 'paRqStat',
+									render: function (data, type, row, meta) {
+										if (type === 'display') {
+											const selectHtml = `
+                                                <select id="roleId">
                                                     <option value="0" ${data === 0 ? 'selected' : ''}>未處理</option>
                                                     <option value="1" ${data === 1 ? 'selected' : ''}>接受委託</option>
                                                     <option value="2" ${data === 2 ? 'selected' : ''}>拒絕委託</option>
                                                 </select>
+												<button class="edit-button" id="btnEdit_ProdDetailS">修改</button>
                                             `;
-                                            return selectHtml;
-                                        }
-                                        return data;
-                                    }
-                                },
-                                { data: 'paRqStartDate' }
-                            ]
-                        });
+											return selectHtml;
+										}
+										return data;
+									}
+								},
+								{ data: 'paRqStartDate' }
+							]
 
-	                        
-                    });
-            }
-        });
-    </script>
+
+						});
+
+					});
+			}
+
+			// $("#btnEdit_ProdDetail").on("click", function () {
+			// 	const statChange = document.querySelector(`#roleId`).value;
+
+			// 	fetch('/BuyGo/needLoginApi/front_end/seller/getSellerPaReqs', {
+			// 		method: 'POST',
+			// 		headers: { 'Content-Type': 'application/json; charset=utf-8' },
+			// 		body: JSON.stringify({
+			// 			id,
+			// 			username,
+			// 			password,
+			// 			nickname,
+			// 			pass,
+			// 			roleId,
+			// 			updater
+			// 		})
+			// 	})
+			// 		.then(resp => resp.json())
+			// 		.then(body => {
+			// 			const { successful, message } = body;
+			// 			if (successful) {
+			// 				alert('存檔成功!');
+			// 				location.reload();
+			// 			} else {
+			// 				alert(message ?? '存檔失敗');
+			// 			}
+			// 		});
+			// })
+		});
+	</script>
 
 </body>
 
