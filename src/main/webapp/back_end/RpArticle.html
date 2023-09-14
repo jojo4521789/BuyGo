@@ -327,7 +327,7 @@
                     const articleRow = `
                 <tr>
         <td class="rpArticle-no">${rpArticleNo}</td>
-        <td >${articleNo}</td>
+        <td class="forumArticle-no">${articleNo}</td>
         <td>${rpmemberNo}</td>
         <td class="report_Content">${reportContent}</td>
         <td><span class="formatted-date">${reportDate}</span></td>
@@ -382,10 +382,12 @@
 
 
                     const rparticleNo = $(this).closest("tr").find(".rpArticle-no").text();
-                    console.log(rparticleNo);
+                    const forumArticleNo = $(this).closest("tr").find(".forumArticle-no").text();
+                    console.log("rparticleNo:" + rparticleNo);
+                    console.log("forumarticleNo:" + forumArticleNo);
 
                     // 調用載入文章函數
-                    loadArticle(rparticleNo);
+                    loadArticle(forumArticleNo);
 
                     // 顯示彈出對話框
                     //$("#dialog").show();
@@ -400,8 +402,8 @@
 
 
                 // 向後端發送請求載入論壇文章
-                function loadArticle(rparticleNo) {
-                    console.log("rparticleNo:" + rparticleNo);
+                function loadArticle(forumArticleNo) {
+                    console.log("forumArticleNo:" + forumArticleNo);
 
                     // 使用Fetch API發送HTTP POST請求來更新 "論壇文章的狀態"
                     fetch('/BuyGo/api/forumArticle/loadarticlelList', {
@@ -412,7 +414,7 @@
                         },
                         //前端傳後端(articleNo(後端對應欄位) : rparticleNo(前端要回傳給後端的值))
                         body: JSON.stringify({
-                            articleNo: rparticleNo
+                            articleNo: forumArticleNo
                         })
                     })
                         //後端回傳後端
@@ -425,7 +427,7 @@
                 // 處理載入的文章
                 function processArticle(formarticles) {
                     const reviseArticle_el = $("#re");
-
+                    console.log(formarticles);
                     console.log('re:');
                     console.log(reviseArticle_el);
 
@@ -534,6 +536,7 @@
                             'Accept': 'application/json;charset=UTF-8'
                         },
                         body: JSON.stringify({
+                            articleNo: articleNo,
                             rpArticleNo: articleRqNo,
                             articleStatus: selectedStatus,
                             auditResult: selectResult

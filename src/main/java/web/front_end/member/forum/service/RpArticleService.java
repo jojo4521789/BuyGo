@@ -15,5 +15,5 @@ public interface RpArticleService extends CoreService {
 
 	boolean remove(Integer reportArticleNo);
 	
-	boolean updateByRpArticleNo(Integer rpArticleNo, Integer articleStatus, Integer auditResult);
+	boolean updateByRpArticleNo(Integer rpArticleNo, Integer articleNo, Integer articleStatus, Integer auditResult);
 }
