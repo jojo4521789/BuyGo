@@ -150,6 +150,13 @@ public class ArticleCollListServiceImpl implements ArticleCollListService {
 					dto.setArticleNo(matchingArticle.getArticleNo());
 					dto.setMemberNo(matchingArticle.getMemberNo());
 					dto.setArticleContent(collList.getArticleContent());
+					dto.setArticleDislike(collList.getArticleDislike());
+					dto.setArticleLike(collList.getArticleLike());
+					dto.setArticlePublish(collList.getArticlePublish());
+					dto.setArticleStatus(collList.getArticleStatus());
+					dto.setArticleTitle(collList.getArticleTitle());
+					dto.setArticleUpdate(collList.getArticleUpdate());
+		
 
 					dto.setLstForumArticle(lstArticleData);
 					dto.setLstCollLists(articleCollList);
@@ -170,6 +177,11 @@ public class ArticleCollListServiceImpl implements ArticleCollListService {
 	        }
 	    }
 	    return null; // 如果找不到匹配的ForumArticle，返回null
+	}
+
+	@Override
+	public boolean select(Integer memberNo, Integer articleNo) {
+		return dao.selectById(memberNo, articleNo) > 0;
 	}
 	
 	
