@@ -438,7 +438,7 @@
                     },
                 ],
             });
-            fetch("/BuyGo/back_end/gpa/report/ProdRpServlet", {
+            fetch("/BuyGo/api/back_end/gpa/report/ProdRpServlet", {
                 method: "POST",
                 headers: { "Content-Type": "application/json; charset=utf-8" },
                 body: JSON.stringify({
@@ -461,7 +461,7 @@
         const select = document.getElementById("select");
         select.addEventListener("change", function () {
             console.log(select.value);
-            fetch("/BuyGo/back_end/gpa/report/ProdRpServlet", {
+            fetch("/BuyGo/api/back_end/gpa/report/ProdRpServlet", {
                 method: "POST",
                 headers: { "Content-Type": "application/json; charset=utf-8" },
                 body: JSON.stringify({
@@ -476,76 +476,8 @@
         })
 
     </script>
-    <script>
-        function getToggleStatusStr(opaProdStatus) {
-            let toggleClass = "";
-            let toggleStyle = `style="clip-path: inset(0px 50% 0px 0px); background-color: dodgerblue;"`;
-            if (opaProdStatus === 0) {
-                toggleStyle = `style="clip-path: inset(0px 0px 0px 50%); background-color: rgb(215, 64, 70);"`;
-                toggleClass = "-off";
-            }
-            let toggle_status_str = `
-                <div id="container" onclick="toggleStatusClick(this)">
-                    <div class="inner-container">
-                        <div class="toggle">
-                            <p>下架</p>
-                        </div>
-                        <div class="toggle">
-                            <p>上架</p>
-                        </div>
-                    </div>
-                    <div class="inner-container ${toggleClass}" id='toggle-container' ${toggleStyle}>
-                        <div class="toggle">
-                            <p>下架</p>
-                        </div>
-                        <div class="toggle">
-                            <p>上架</p>
-                        </div>
-                    </div>
-                </div>
-            `;
-            return toggle_status_str;
-        }
-
-        function toggleStatusClick(container) {
-            let opaProdStatus;
-            const toggleContainer = container.querySelector('#toggle-container');
-            toggleContainer.classList.toggle("-off");
-            if (toggleContainer.classList.contains("-off")) {
-                toggleContainer.style.clipPath = 'inset(0 0 0 50%)';
-                toggleContainer.style.backgroundColor = '#D74046';
-                opaProdStatus = 0;
-            } else {
-                toggleContainer.style.clipPath = 'inset(0 50% 0 0)';
-                toggleContainer.style.backgroundColor = 'dodgerblue';
-                opaProdStatus = 1;
-            }
-
-            if (opaProdStatus != null) {
-                let opaProdNo = container.closest("tr").querySelector(".p_opaProdNo").textContent;
-                fetch("/BuyGo/api/opa/prod/prodUpdateStatus", {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json; charset=utf-8",
-                    },
-                    body: JSON.stringify({
-                        opaProdNo: opaProdNo,
-                        opaProdStatus: opaProdStatus,
-                    })
-                })
-                    .then(resp => resp.json())
-                    .then(body => {
-                        const { successful } = body;
-                        const msg = document.querySelector("#msg");
-                        if (successful) {
-                            console.log("更新成功");
-                        } else {
-                            console.log("更新失敗");
-                        }
-                    });
-            }
-        }
-    </script>
+  
+    
 
 
 </body>
