@@ -31,4 +31,6 @@ public interface ProdService extends CoreService{
 	int getProdTotalQtySelectByOpaProdName(String opaProdName);
 	
 	List<Prod> getRandomProdsByPrcatsWithLimit(Integer opaProdNo, Integer opaPrcatsNo, Integer limit);
+	
+	List<Prod> getRandomProdsWithLimit(Integer limit);
 }
