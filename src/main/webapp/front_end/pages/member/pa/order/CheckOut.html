@@ -659,9 +659,13 @@
 											<form class="form-horizontal" role="form">
 												<div class="row">
 													<div class="col-xs-12 col-sm-12 col-md-6">
-														<div class="form-group stylish-input" style="vertical-align: middle;">
-															<input type="checkbox" id="checkShipInfo" style="margin: 5px 0 0 10px;" onclick="shipCheckClick()"/>
-															<label for="checkShipInfo" class="control-label" style="display: inline-block;">同帳單資訊</label>
+														<div class="form-group stylish-input"
+															style="vertical-align: middle;">
+															<input type="checkbox" id="checkShipInfo"
+																style="margin: 5px 0 0 10px;"
+																onclick="shipCheckClick()" />
+															<label for="checkShipInfo" class="control-label"
+																style="display: inline-block;">同帳單資訊</label>
 														</div>
 														<div class="form-group stylish-input">
 															<label for="inputShipName"
@@ -1048,6 +1052,7 @@
 
 	<!-- Essential Javascripts -->
 	<script src="../../../../js/common/minified.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 	<!-- // Essential Javascripts -->
 
 	<!-- Particular Page Javascripts -->
@@ -1211,10 +1216,15 @@
 		// .inputState 縣市
 		// 先代入縣市資訊
 		for (let city of Object.keys(data)) {
-			const option = $('<option>');
-			option.text(city);
-			option.val(city);
-			$(".inputState1").append(option);
+			const option1 = $('<option>');
+			option1.text(city);
+			option1.val(city);
+			$(".inputState1").append(option1);
+
+			const option2 = $('<option>');
+			option2.text(city);
+			option2.val(city);
+			$(".inputState2").append(option2);
 		}
 		// 依照縣市產生鄉鎮
 		$(".inputState1").on('change', function () {
@@ -1232,12 +1242,6 @@
 			}
 		});
 
-		for (let city of Object.keys(data)) {
-			const option = $('<option>');
-			option.text(city);
-			option.val(city);
-			$(".inputState2").append(option);
-		}
 		// 依照縣市產生鄉鎮
 		$(".inputState2").on('change', function () {
 			console.log(this);
@@ -1263,7 +1267,7 @@
 
 		let cartData = JSON.parse(sessionStorage.getItem("cart_data"));
 		console.log(cartData);
-		
+
 
 		$("#prodTotal").text(cartData.cartSubTTL);
 		// $("#discount").text(cartData.opaDiscountAmo);
@@ -1344,10 +1348,24 @@
 				$("#inputShipName").val($("#inputBillName").val());
 				$("#inputShipEmail").val($("#inputBillEmail").val());
 				$("#inputShipPhone").val($("#inputBillPhone").val());
-				$("#inputState2").val($("#inputState1").val());
-				$("#inputCountry2").val($("#inputCountry1").val());
+				// $("#inputState2").val($("#inputState1").val());
+				// $("#inputCountry2").val($("#inputCountry1").val());
 				$("#inputAddress2").val($("#inputAddress1").val());
 				$("#inputPostcode2").val($("#inputPostcode1").val());
+
+				// 设置所需的縣市和鄉鎮
+				const selectedCity = $("select.inputState1").val(); 
+				const selectedCountry = $("select.inputCountry1").val(); 
+
+				// 设置縣市選項
+				$("select.inputState2").val(selectedCity);
+				// 觸發縣市選項的 change 事件，以便更新鄉鎮選項
+				$("select.inputState2").trigger('change');
+
+				// 延遲一點時間再設定鄉鎮選項，以確保鄉鎮選項已經被更新
+				setTimeout(function () {
+					$(".inputCountry2").val(selectedCountry);
+				}, 100);
 			} else {
 				$("#inputShipName").val("");
 				$("#inputShipEmail").val("");
@@ -1390,17 +1408,18 @@
 			}
 		}
 
-		// 按下結帳，產生訂單
+		// 如果是選擇信用卡付款 按下結帳，產生訂單
+
 		$('#checkout_btn').click(function () {
 			checkAllData();
 
 			const paTotalAmount = parseInt($("#prodTotal").text());
 			const paRecName = $(inputShipName).val();
-			const paSendAddress = $("#inputPostcode2").val() + $("select.inputState2").val() + $("select.inputCountry2").val() + $("#inputAddress2").val(); 
+			const paSendAddress = $("#inputPostcode2").val() + $("select.inputState2").val() + $("select.inputCountry2").val() + $("#inputAddress2").val();
 			const paRecTel = $(inputShipPhone).val();
 			const paDeliverMethod = $("form.deliveryMethod").find("input[name='deliveryMethod']:checked").attr("data-label");
 			let paSoDetails = [];
-			for ( let prod of cartData.paProds) {
+			for (let prod of cartData.paProds) {
 				delete prod.paProdName; // 先移除paProdName屬性
 				paSoDetails.push(prod);
 			}
@@ -1431,7 +1450,9 @@
 					newPaSoNo = data;
 					alert('訂單已產生！訂單ID = ' + data + "請進行付款作業");
 					cart = []; // 清空購物車
-					EcPay(); // 進行綠界支付
+					if ($('input[name=paymethod]:checked').attr("id") === "paymethod2") { // 如果是選擇信用卡付款
+						EcPay(); // 進行綠界支付
+					}
 				})
 				.catch(error => {
 					console.error('錯誤：', error);
@@ -1442,7 +1463,7 @@
 
 		// 綠界支付
 		const full = location.protocol + '//' + location.host;
-		let clientBackURL = full + "/BuyGo/front_end/pages/member/pa/ListOrders.html";
+		let clientBackURL = full + "/BuyGo/front_end/pages/member/pa/order/ListOrders.html";
 		function EcPay() {
 			let AioCheckOutALL = {
 				TotalAmount: parseInt($("#prodTotal").text()),
@@ -1466,7 +1487,7 @@
 				.then(response => response.json())
 				.then(data => {
 					console.log(data);
-					window.open(data); //開啟綠界付款網址
+					window.location.href = data; //開啟綠界付款網址
 				})
 				.catch(error => {
 					alert("付款發生錯誤");

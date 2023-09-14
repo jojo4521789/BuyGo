@@ -19,21 +19,12 @@ public class UpdateOrderServlet extends HttpServlet {
 	private PaSoService service = new PaSoServiceImpl();
 	
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		System.out.println("執行更新訂單servlet 1");
 		doPost(req, resp); 
 	}
 	
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) {
-		System.out.println("執行更新訂單servlet 2");
 		UpdateOrderDTO updateOrderDTO = CommonUtil.json2Pojo(req, UpdateOrderDTO.class);
-		if (updateOrderDTO == null) { // 如果不是從前端傳來updateOrderDTO, 是從綠界傳來付款成功
-			UpdateOrderDTO newDTO = new UpdateOrderDTO();
-			newDTO.setPaSoNo(Integer.parseInt(req.getParameter("paSoNo")) );
-			newDTO.setNewStatus((byte)1);
-			service.updateOrder(newDTO);
-		} else {
 			service.updateOrder(updateOrderDTO);
-		}
 	}
 	
 	private void fixHeaders(HttpServletResponse resp) {
