@@ -9,8 +9,6 @@ import java.io.PrintWriter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.google.gson.Gson;
-
 public class CommonUtil {
 	
 	public static <P> P json2Pojo(HttpServletRequest request, Class<P> classOfPojo) {
@@ -23,8 +21,7 @@ public class CommonUtil {
 	}
 
 	public static <P> void writePojo2Json(HttpServletResponse response, P pojo) {
-		
-		response.setContentType(JSON_MIME_TYPE);
+		response.setContentType(JSON_MIME_TYPE + "; charset=UTF-8");
 		try (PrintWriter pw = response.getWriter()) {
 			pw.print(GSON.toJson(pojo));
 		} catch (Exception e) {
