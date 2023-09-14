@@ -14,5 +14,7 @@ public interface ArticleCollListDao extends CoreDao<ArticleCollList, Integer>  {
 	int deleteById(Integer memberNo , Integer articleNo);
 	
 	int selectById(Integer memberNo , Integer articleNo);
+	
+	int deleteByIdAll(Integer articleNo);
 
 }

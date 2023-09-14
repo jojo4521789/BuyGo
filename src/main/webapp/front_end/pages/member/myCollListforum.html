@@ -963,7 +963,7 @@
 
 			} = forum;
 
-
+			const formattedPublishDate = new Date(articlePublish).toLocaleString();
 			// const { articleTitle } = forumArticle;
 			// const { articleContent } = forumArticle;
 			// const { articlePublish } = forumArticle;
@@ -986,7 +986,7 @@
   						</div>
 						</td>
                         <td class="hidden-cell" style="display: none;">${articleStatus}</td>
-                        <td style="white-space: nowrap;">${articlePublish}</td>
+                        <td style="white-space: nowrap;">${formattedPublishDate}</td>
                         <td class="hidden-cell" style="display: none;">${articleUpdate}</td>
                         <td class="hidden-cell" style="display: none;">${articleLike !== undefined ? articleLike : 0}</td>
                         <td class="hidden-cell" style="display: none;">${articleDislike !== undefined ? articleDislike : 0}</td>
@@ -997,40 +997,10 @@
 			ForumArticle_el.append(articleRow);
 		});
 
-		// 新增刪除按鈕點擊事件
-		// $(".delete-btn").click(function () {
-		// 	const articleNo = $(this).closest("td").siblings("td.article-no").text();//取得文章編號
-		// 	const memberNo = $(this).closest("td").siblings("td.member-no").text();//取得發文者的會員編號
-		// 	console.log("移除articleNo：" + articleNo);
-		// 	console.log("移除memberNo：" + memberNo);
-		// 	const modal = $("#deleteModal");
-		// 	modal.show();
 
 
-		// 	// 確認刪除按鈕點擊事件
-		// 	$("#confirmDeleteBtn").click(function () {
-		// 		$(document).ready(() => {
-		// 			// 呼叫函式 fetchForumArticle，將當前畫面動態刷新
-		// 			fetchForumArticles();
-		// 		});
 
-		// 		modal.hide();
-		// 		deleteArticle(articleNo);
-
-		// 		// 從表格中刪除對應行
-		// 		const row = $(this).closest("tr");
-		// 		row.remove();
-
-
-		// 	});
-
-		// 	// 取消刪除按鈕點擊事件
-		// 	$("#cancelDeleteBtn").click(function () {
-		// 		modal.hide();
-		// 	});
-
-		// });
-
+		//===================================移除按鈕===============================================================================================
 		$(".delete-btn").click(function () {
 			const articleNo = $(this).closest("tr").find("td.article-no").text(); // 取得文章編號
 			const memberNo = $(this).closest("tr").find("td.member-no").text(); // 取得發文者的會員編號
@@ -1041,7 +1011,7 @@
 
 			// 確認刪除按鈕點擊事件
 			$("#confirmDeleteBtn").off().click(function () {
-				
+
 				modal.hide();
 				deleteArticle(articleNo);
 
