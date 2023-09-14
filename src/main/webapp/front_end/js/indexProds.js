@@ -156,7 +156,7 @@ function updateCartItem() {
                 let cart_li = "";
                 let prodGrandTotal = 0;
                 for (let data of datas) {
-                    let prpics_url = "../../../../img/common/Image_not_available.png";
+                    let prpics_url = "img/common/Image_not_available.png";
                     if (data.prod.prpicsList.length !== 0) {
                         prpics_url = data.prod.prpicsList[0].opaProdPicture;
                     }
