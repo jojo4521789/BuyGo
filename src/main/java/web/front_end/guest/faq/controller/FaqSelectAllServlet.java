@@ -15,7 +15,7 @@ import static web.front_end.guest.faq.util.FaqConstants.SERVICE;
 
 import java.io.IOException;
 import java.util.List;
-@WebServlet("/front_end/guest/faq/SelectAll")
+@WebServlet("/api/front_end/guest/faq/SelectAll")
 
 public class FaqSelectAllServlet extends HttpServlet{
 	private static final long serialVersionUID = 1L;
