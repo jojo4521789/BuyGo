@@ -6,6 +6,7 @@ import web.front_end.member.gpa.order.Service.GpaProdRpService;
 import web.front_end.member.gpa.order.dao.GpaProdRpDao;
 import web.front_end.member.gpa.order.dao.impl.GpaProdRpDaoImpl;
 import web.front_end.member.gpa.order.entity.GpaProdRp;
+import web.front_end.member.gpa.order.entity.SelectProdRp;
 
 public class GpaProdRpServiceImpl implements GpaProdRpService{
 	private GpaProdRpDao dao;
@@ -26,7 +27,7 @@ public class GpaProdRpServiceImpl implements GpaProdRpService{
 
 	
 	@Override
-	public List<GpaProdRp> selectByProdRps(GpaProdRp gpaProdRp) {
+	public List<SelectProdRp> selectByProdRps() {
 		return dao.selectByProdNo();
 	}
 	
