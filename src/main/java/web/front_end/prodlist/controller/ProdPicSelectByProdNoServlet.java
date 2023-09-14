@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import web.front_end.member.pa.prodpic.entity.ProdPic;
+import web.front_end.member.pa.prodpic.entity.PaProdPic;
 
 @WebServlet("/api/front_end/prodDetailPic")
 public class ProdPicSelectByProdNoServlet extends HttpServlet{
@@ -26,7 +26,7 @@ public class ProdPicSelectByProdNoServlet extends HttpServlet{
 		
 		response.setContentType("text/html;charset=utf-8");
 		
-		List<ProdPic> paProdPicList = SERVICE.selectByPaProdId((Integer)(session.getAttribute("paProdNo")));
+		List<PaProdPic> paProdPicList = SERVICE.selectByPaProdId((Integer)(session.getAttribute("paProdNo")));
 		writePojo2Json(response, paProdPicList);
 	}
 	

@@ -3,11 +3,11 @@ package web.front_end.prodlist.dao;
 import java.util.List;
 
 import core.dao.CoreDao;
-import web.front_end.member.pa.prodpic.entity.ProdPic;
+import web.front_end.member.pa.prodpic.entity.PaProdPic;
 
-public interface PaProdPicDAO extends CoreDao<ProdPic, Integer>{
+public interface PaProdPicDAO extends CoreDao<PaProdPic, Integer>{
 	
-	List<ProdPic> SelectByPaProdNo(Integer paProdNo);
+	List<PaProdPic> SelectByPaProdNo(Integer paProdNo);
 	
 
 }

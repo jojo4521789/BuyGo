@@ -39,8 +39,8 @@ fetch("/BuyGo/needLoginApi/pa/cart/selectByMember", {
         console.log(datas);
         for (let data of datas) {
             let paPrpics_url = "../../../../img/common/Image_not_available.png";
-            if (data.paProd.prodPic.length !== 0) {
-                paPrpics_url = data.paProd.prodPic[0].paProdPic;
+            if (data.paProd.paProdPic.length !== 0) {
+                paPrpics_url = data.paProd.paProdPic[0].paProdPic;
             }
             let paProdSubTTL = data.paProd.paProdPrice * data.paOrdQty;
             let paProd_tr = `
