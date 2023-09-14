@@ -28,7 +28,7 @@ import javax.mail.internet.MimeMessage;
 public class AdminRequestNotificationServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	@Override
+@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		final Core core = new Core();
 		response.setCharacterEncoding("UTF-8");
@@ -62,14 +62,15 @@ public class AdminRequestNotificationServlet extends HttpServlet {
 			Properties props = new Properties();
 
 			props.put("mail.smtp.host", "smtp.gmail.com");
-			props.put("mail.smtp.starttls.enable","true");
-			props.put("mail.smtp.auth", "true");
-			props.put("mail.smtp.ssl.protocols", "TLSv1.2");
+			props.put("mail.smtp.socketFactory.port", "465");
+			props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+                        props.put("mail.smtp.auth", "true");
+                        props.put("mail.smtp.port", "465");
 			
 			final String myGmail = "tibamecha102g6@gmail.com";
 			final String myGmail_password = "vwnzqhlqdujkuhwz";
 
-			Session session = Session.getInstance(props, new Authenticator() {
+Session session = Session.getInstance(props, new Authenticator() {
 				protected PasswordAuthentication getPasswordAuthentication() {
 					return new PasswordAuthentication(myGmail, myGmail_password);
 				}
