@@ -696,6 +696,7 @@
 
 		// Image Slider js End (圖片滑動顯示)
 
+
 		window.addEventListener("load", function () {
 
 			//---------------------------------------元素-------------------------------------------------------
@@ -1054,7 +1055,7 @@
 						},
 						body: JSON.stringify({
 							paCartId: paCartId,
-							paProdSum: paProdSum,
+							paProdSum: 1200,
 							paOrdQty: paOrdQty
 						}),
 					})
@@ -1098,7 +1099,7 @@
 								if (data.paProd.paProdPic.length !== 0) {
 									prpics_url = data.paProd.paProdPic[0].paProdPic;
 								}
-								let prodSubTTL = data.paProd.paProdPrice * data.paOrdQty;
+								let prodSubTTL = data.paProdSum * data.paOrdQty;
 								prodGrandTotal += prodSubTTL;
 								cart_li += `
                         <li id="li_${data.paProd.paProdNo}">
@@ -1108,7 +1109,7 @@
                                     <img src="${prpics_url}" alt="${data.paProd.paProdName}">
                                 </a>
                                 <h5 class="entry-title cart-entry-title"><a href="#">${data.paProd.paProdName}</a></h5>
-                                <span class="entry-price s-entry-price">$ <span class="s-price">${data.paProd.paProdPrice}</span> x <span class="s-qty">${data.paOrdQty}</span></span>
+                                <span class="entry-price s-entry-price">$ <span class="s-price">${data.paProdSum}</span> x <span class="s-qty">${data.paOrdQty}</span></span>
                             </div>
                         </li>
                     `;
