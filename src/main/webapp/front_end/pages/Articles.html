@@ -889,8 +889,8 @@
       	<p class="article-date">發布日期：${formattedPublishDate}</p>
       	<p class="article-content">${articleContent}</p>
       	<div class="buttons">
-        <button class="button fa-regular fa-thumbs-up">${articleLike !== undefined ? articleLike : ""}</button>
-        <button class="button fa-regular fa-thumbs-down">${articleDislike !== undefined ? articleDislike : ""}</button>
+        <button class="button fa-regular fa-thumbs-up hidden">${articleLike !== undefined ? articleLike : ""}</button>
+        <button class="button fa-regular fa-thumbs-down hidden">${articleDislike !== undefined ? articleDislike : ""}</button>
         <button class="button fa-regular fa-star" style="color: #000000;"></button>
 		<button class="button comment" id="commentButton1"><i class="fas fa-comment"></i> 留言</button>
 
@@ -931,7 +931,7 @@
 
 					// 定義文章收藏函數並呼叫它
 					function articleCollLis(articleNo) {
-						fetch('/BuyGo/api/articleCollLis/add', {
+						fetch('/BuyGo/needLoginApi/articleCollLis/add', {
 							method: 'POST',
 							headers: {
 								'Content-Type': 'application/json;charset:utf-8',
@@ -941,16 +941,27 @@
 								articleNo: articleNo
 							})
 						})
-							.then(response => response.json())
-							.then(data => {
-								// 在這裡處理後端返回的數據
-								
-								console.log(data);
+							.then(response => {
+								if (response.status === 401) { // 客戶未登入，執行頁面重定向到登入頁
+									alert('帳號未登入，將導轉至登入頁面');
+									window.location.href = '/BuyGo/front_end/pages/member/login.html'; // 登入頁面url
+								} else if (response.ok) { // 通常 200
+									// 請求成功，顯示燈箱
+									//notLoggedInAction();
+									return response.json();
+								} else {
+									alert("錯誤狀態:" + response.status);
+									return;
+								}
 							})
-							.catch(error => {
-								console.error("Error:", error);
-							});
+							.then(data => processForumArticles(data))
+							.catch(error => console.log(data));
+						
 					}
+					$(document).ready(() => {
+							fetchForumArticles();
+						});
+
 
 					// 調用文章收藏函數
 					articleCollLis(articleNo);

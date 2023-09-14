@@ -4,7 +4,7 @@ import java.util.List;
 
 import web.front_end.member.pa.prodpic.dao.ProdPicDAO;
 import web.front_end.member.pa.prodpic.dao.impl.ProdPicDAOImpl;
-import web.front_end.member.pa.prodpic.entity.ProdPic;
+import web.front_end.member.pa.prodpic.entity.PaProdPic;
 import web.front_end.member.pa.prodpic.service.ProdPicService;
 
 public class ProdPicServiceImpl implements ProdPicService {
@@ -16,7 +16,7 @@ public class ProdPicServiceImpl implements ProdPicService {
 	}
 	
 	@Override
-	public ProdPic insert(ProdPic prodpic) {
+	public PaProdPic insert(PaProdPic prodpic) {
 //		if(prodpic.getPaProdNo() == null) {
 //			prodpic.setMessage("商品編號未輸入");
 //			prodpic.setSuccessful(false);
@@ -39,7 +39,7 @@ public class ProdPicServiceImpl implements ProdPicService {
 	}
 
 	@Override
-	public ProdPic update(ProdPic prodpic) {
+	public PaProdPic update(PaProdPic prodpic) {
 		final int resultCount = dao.update(prodpic);
 		prodpic.setMessage(resultCount > 0 ? "修改成功" : "修改失敗");
 		prodpic.setSuccessful(resultCount > 0);
@@ -47,12 +47,12 @@ public class ProdPicServiceImpl implements ProdPicService {
 	}
 
 	@Override
-	public List<ProdPic> SelectByProdId(Integer prodpicno) {
+	public List<PaProdPic> SelectByProdId(Integer prodpicno) {
 		return null;
 	}
 
 	@Override
-	public List<ProdPic> findAll() {
+	public List<PaProdPic> findAll() {
 		return dao.selectAll();
 	}
 

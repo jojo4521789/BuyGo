@@ -33,13 +33,15 @@ public class ArticleCollListRemoveServlet extends HttpServlet {
 		// System.out.print("memberNo : " + memberNo);
 
 		// 測試用"登入功能加進來"(記得刪)
-		if (memberNo == null) {
-			memberNo = 2;
-		}
-		System.out.println(articleNo);
-
+//		if (memberNo == null) {
+//			memberNo = 2;
+//		}
+		
+		System.out.println("articleNo" + articleNo);
+		System.out.println("memberNo" + memberNo);
+		
 		final Core core = new Core();
-		if (articleNo == null) {
+		if (memberNo == null) {
 			core.setMessage("查無論壇文章ID，無法刪除");
 			core.setSuccessful(false);
 

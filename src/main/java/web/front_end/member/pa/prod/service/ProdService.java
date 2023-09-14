@@ -11,7 +11,7 @@ public interface ProdService extends CoreService {
 	
 	PaProd updata (PaProd prod);
 	
-	List<PaProd> findAll(Integer paprodno);
+	List<PaProd> findAll();
 
 	boolean remove (Integer paprodno);
 }

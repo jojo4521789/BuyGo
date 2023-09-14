@@ -23,7 +23,7 @@ public class ProdLoadServlet extends HttpServlet {
 		response.setCharacterEncoding("UTF-8");
 		PaProd prod = json2Pojo(request, PaProd.class);
 
-		List<PaProd> loadProds = SERVICE.findAll(prod.getPaProdNo());
+		List<PaProd> loadProds = SERVICE.findAll();
 		if(loadProds.size() != 0) {
 			writePojo2Json(response, loadProds);
 		}

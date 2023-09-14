@@ -16,7 +16,7 @@ import web.front_end.member.util.SHA256EncoderUtil;
 import web.front_end.member.acc.entity.Member;
 import static web.front_end.member.util.SHA256EncoderUtil.SHA256Encode;;
 
-@WebServlet("/front_end/guest/register/MemberRegister")
+@WebServlet("/api/front_end/guest/register/MemberRegister")
 public class MemberRegisterServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
