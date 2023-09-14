@@ -9,6 +9,7 @@ import web.front_end.member.notification.entity.Notification;
 
 public interface OpaOrderService extends CoreService {
 	public List<OpaOrder> findAll();
+	public OpaOrder findById(int id);
 	
 	public List<OpaOrder> [] findAllSoGroupByStatusByMember(int memberNo);
 	

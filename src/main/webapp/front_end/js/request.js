@@ -2,6 +2,7 @@ jQuery(function($) {
     var table = $("#request-table");
     table.bootstrapTable({
         url: ROOT_URL + "/needLoginApi/member/opa/request",
+        pagination: true,
         columns: [{
             field: "opaRequestNo",
             title: "平台委託單編號"

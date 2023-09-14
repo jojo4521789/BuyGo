@@ -24,6 +24,10 @@ public class OpaOrderServiceImpl implements OpaOrderService {
         return opaOrderDao.selectAll();
     }
 
+	public OpaOrder findById(int id) {
+        return opaOrderDao.selectById(id);
+    }
+
     public Notification getCancelNotification(int id) throws RuntimeException {
         OpaOrder order = opaOrderDao.selectById(id);
         if(order == null)
