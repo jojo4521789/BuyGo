@@ -19,6 +19,7 @@ jQuery(function($) {
                 panels.append(div);
                 table.bootstrapTable({
                     url: ROOT_URL + "/needLoginApi/member/orders?type=order&id=" + i,
+                    pagination: true,
                     columns: [{
                         field: "opaSoNo",
                         title: "平台訂單編號"

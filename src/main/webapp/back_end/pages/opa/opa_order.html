@@ -56,7 +56,11 @@
                 },
                 success: function (data) {
                     if (data.successful) {
-                        alert("發送成功");
+                        if(data.message) {
+                            alert(data.message);
+                        } else {
+                            alert("發送成功");
+                        }
                     } else {
                         if(data.message)
                             alert(data.message);

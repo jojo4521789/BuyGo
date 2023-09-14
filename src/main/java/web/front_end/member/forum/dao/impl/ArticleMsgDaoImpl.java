@@ -42,11 +42,18 @@ public class ArticleMsgDaoImpl implements ArticleMsgDao {
 	}
 
 	@Override
-	//針對文章編號做查詢的動作進行降冪(只"狀態是0"的留言才會回傳list出去)
+	// 針對文章編號做查詢的動作進行降冪(只"狀態是0"的留言才會回傳list出去)
 	public List<ArticleMsg> selectByArticleNo(Integer articleNo) {
-	    final String hql = "FROM ArticleMsg WHERE articleNo = :articleNo AND messageStatus = 0 ORDER BY messageNumber";
-	    return getSession().createQuery(hql, ArticleMsg.class).setParameter("articleNo", articleNo).getResultList();
+		final String hql = "FROM ArticleMsg WHERE articleNo = :articleNo AND messageStatus = 0 ORDER BY messageNumber";
+		return getSession().createQuery(hql, ArticleMsg.class).setParameter("articleNo", articleNo).getResultList();
 	}
 
+	@Override
+	public int deleteByIdAll(Integer articleNo) {
+		final String hql = "DELETE FROM ArticleMsg WHERE articleNo = :articleNo";
+		int rowsUpdated = getSession().createQuery(hql).setParameter("articleNo", articleNo).executeUpdate();
+		return rowsUpdated;
+
+	}
 
 }
