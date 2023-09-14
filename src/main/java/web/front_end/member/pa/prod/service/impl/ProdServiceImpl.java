@@ -71,7 +71,7 @@ public class ProdServiceImpl implements ProdService {
 	}
 
 	@Override
-	public List<PaProd> findAll(Integer paprodno) {
+	public List<PaProd> findAll() {
 		return dao.selectAll();
 	}
 
