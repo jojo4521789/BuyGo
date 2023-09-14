@@ -107,12 +107,12 @@ public class ArticleCollListServiceImpl implements ArticleCollListService {
 	@Override
 	public ArticleCollList add(Integer memberNo, ArticleCollList articleCollList) {
 		if (articleCollList.getArticleNo() == null) {
-			articleCollList.setMessage("文章留言未輸入");
+			articleCollList.setMessage("此無文章編號");
 			articleCollList.setSuccessful(false);
 			return articleCollList;
 		}
 		articleCollList.setMemberNo(memberNo);
-		articleCollList.setMessage("留言新增成功");
+		articleCollList.setMessage("收藏新增成功");
 		articleCollList.setSuccessful(true);
 
 		dao.insert(articleCollList);
