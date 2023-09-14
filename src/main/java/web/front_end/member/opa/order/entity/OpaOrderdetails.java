@@ -11,12 +11,13 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import core.entity.Core;
 import web.front_end.guest.prod.entity.OpaProducts;
 
 
 @Entity
 @Table(name = "opa_orderdetails", catalog = "buygo")
-public class OpaOrderdetails implements java.io.Serializable {
+public class OpaOrderdetails extends Core implements java.io.Serializable {
 
 	private static final long serialVersionUID = 5461408637317149354L;
 	private OpaOrderdetailsId id;
