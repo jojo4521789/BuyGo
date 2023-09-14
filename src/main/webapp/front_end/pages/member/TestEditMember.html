@@ -578,6 +578,10 @@
 												</select>
 											</div>
 											<div>
+												<label for="memberWallet">會員錢包餘額:</label>
+												<input id="memberWallet" readonly>
+											</div>
+											<div>
 												<button type="button" id="button">送出資料</button>
 											</div>
 											<div id="errorMessages" style="color: red;"></div>
@@ -828,6 +832,7 @@
 		const proofEmail_el = document.querySelector('#proofEmail');
 		const checkmemberEmail_el = document.querySelector('#checkmemberEmail')
 		const errorMessages_el = document.querySelector('#errorMessages');
+		const memberWallet_el = document.querySelector('#memberWallet');
 		const url = "/BuyGo/front_end/member/acc/MemberEdit";
 		function togglePassword() {
 			var passwordField = document.getElementById("memberPw");
@@ -987,7 +992,6 @@
 				method: "POST",
 				headers: { "content-type": "application/json;charset=utf-8" },
 				body: JSON.stringify({
-					memberNo: 1,
 					action: "show"
 				})
 			}).then(resp => resp.json())
@@ -1002,7 +1006,7 @@
 					memberEmail_el.value = body.memberEmail;
 					memberAddress_el.value = body.memberAdd;
 					memberGender_el.value = body.memberGender;
-
+					memberWallet_el.value = body.memberWalletAmount
 				})
 		}
 		checkmemberEmail_el.addEventListener("input", function () {
