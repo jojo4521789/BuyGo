@@ -11,6 +11,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import core.service.ECPayCheckoutService;
 import ecpay.payment.integration.domain.AioCheckOutALL;
@@ -24,6 +25,8 @@ public class ECPayCheckoutServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		resp.setContentType("text/html;charset=utf-8");
+		HttpSession session = req.getSession(); // 取得當前請求的Session
+		Integer memberNo = (Integer) (session.getAttribute("memberNo")); // 取得登入的會員編號
 		// 接收前端傳來的AioCheckOutALL物件
 		AioCheckOutALL obj = json2Pojo(req, AioCheckOutALL.class);
 		// 取得action
@@ -32,15 +35,14 @@ public class ECPayCheckoutServlet extends HttpServlet {
 		if ("opaOrderFirstCheckout".equals(action)) {
 			// 設定綠界付款成功的回傳網址(放付款成功要執行的Controller路徑)
 			// CustomField2為要傳給Controller更新用的OrderId
-			returnURL = SERVER_URL + req.getContextPath() + "/api/opa/ECPayUpdateOrder?BuyGoOrderId="
-					+ obj.getCustomField2() + "&CouponId=" + obj.getCustomField3();
+			returnURL = SERVER_URL + req.getContextPath() + "/api/opa/ECPayUpdateOrder?memberNo=" + memberNo
+					+ "&BuyGoOrderId=" + obj.getCustomField2() + "&CouponId=" + obj.getCustomField3();
 		}
-		
+
 		if ("paCheckout".equals(action)) {
 			// 設定綠界付款成功的回傳網址(放付款成功要執行的Controller路徑)
 			// CustomField2為要傳給Controller更新用的OrderId
-			returnURL = SERVER_URL + req.getContextPath() + "/api/UpdateOrder?paSoNo="
-					+ obj.getCustomField2();
+			returnURL = SERVER_URL + req.getContextPath() + "/api/UpdateOrder?paSoNo=" + obj.getCustomField2();
 			System.out.println(returnURL);
 		}
 
