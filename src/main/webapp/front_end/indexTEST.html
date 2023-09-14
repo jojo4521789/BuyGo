@@ -168,7 +168,7 @@
 							<!-- USER RELATED MENU -->
 							<nav id="tiny-menu" class="clearfix">
 								<ul class="user-menu">
-									<li><a href="pages/member/myaccount.html" class="personal">個人資料<img
+									<li><a href="pages/member/myaccount.html" class="personal">我的帳戶<img
 												src="https://drive.google.com/uc?id=1EkcTLzseH_atgAiJ78ymmJoyuVUasGb7"></a></li>
 									<!-- <li><a href="pages/member/opa/cart/cart.html" class="paymoney">結帳<img
 												src="../front_end/img/common/paymoney.png"></a></li> -->
@@ -244,7 +244,7 @@
 
 			<script>
 				jQuery(function ($) {
-					fetch("/BuyGo/front_end/guest/news/NewsSelectAll", {
+					fetch("/BuyGo/api/front_end/guest/news/NewsSelectAll", {
 						method: "POST",
 						headers: { "Content-Type": "application/json;charset=utf-8" }
 					}).then(resp => resp.json())
