@@ -18,7 +18,7 @@ import static core.util.CommonUtil.json2Pojo;
 import static core.util.CommonUtil.writePojo2Json;
 import static web.front_end.member.forum.util.ArticleCollListConstants.SERVICE;
 
-@WebServlet("/api/articleCollLis/add")
+@WebServlet("/needLoginApi/articleCollLis/add")
 public class ArticleCollListByAddServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -28,16 +28,14 @@ public class ArticleCollListByAddServlet extends HttpServlet {
 		response.setContentType("text/html;charset=UTF-8");
 		ArticleCollList articleCollList_el = json2Pojo(request, ArticleCollList.class);
 		Integer articleNo = articleCollList_el.getArticleNo();
-		
+
 		HttpSession session = request.getSession();
 		Integer memberNo = (Integer) (session.getAttribute("memberNo"));
 
-		// 測試用"登入功能加進來"(記得刪)
-		if (memberNo == null) {
-			memberNo = 3;
-		}
-
 		boolean articleCollList = SERVICE.select(memberNo, articleNo);
+		System.out.println("memberNo:" + memberNo);
+		
+		
 		
 		if (!articleCollList) {
 			System.out.println("文章收藏成功");
@@ -45,7 +43,7 @@ public class ArticleCollListByAddServlet extends HttpServlet {
 			writePojo2Json(response, articleCollList_el);
 		} else {
 			System.out.println("此會員已收藏過文章");
-			//writePojo2Json(response, articleCollList_el);
+			writePojo2Json(response, articleCollList_el);
 		}
 	}
 

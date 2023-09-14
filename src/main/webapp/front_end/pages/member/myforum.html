@@ -254,6 +254,17 @@
 			margin-right: 5px;
 			/* 可以添加右边距，使图标与文本之间有一些间隔 */
 		}
+
+		.article-content-container {
+			max-height: 300px;
+			/* 设置最大高度，根据需要进行调整 */
+			overflow-y: auto;
+			/* 启用垂直滚动条 */
+			padding: 10px;
+			/* 可选的内边距，根据需要进行调整 */
+			border: 1px solid #ddd;
+			/* 可选的边框样式，根据需要进行调整 */
+		}
 	</style>
 	<meta name="description" content="" />
 	<meta name="keywords" content="" />
@@ -614,8 +625,8 @@
 									<li><a href="#">平台錢包</a></li>
 									<li><a href="#">聊天室</a></li>
 									<li><a href="../../pages/member/blacklist.html">黑名單</a></li>
-									<li><a href="../../pages/member/testform.html">我的收藏文章</a></li>
-									<li><a href="../../pages/member/testmyform.html">我的文章</a></li>
+									<li><a href="../../pages/member/myCollListforum.html">我的收藏文章</a></li>
+									<li><a href="../../pages/member/myforum.html">我的文章</a></li>
 									<br>
 									<li><a href="../../pages/member/myShop.html">我的賣場</a></li>
 								</ul>
@@ -641,7 +652,8 @@
 						<div class="m-t-lg clearfix">
 							<div class="row">
 								<div class="col-xs-12 col-sm-6" style="width: 74%;">
-									<h3 class="uppercase text-bold"><span class="text-xs">我的文章 <i class="fas fa-newspaper"></i></span></h3>
+									<h3 class="uppercase text-bold"><span class="text-xs">我的文章 <i
+												class="fas fa-newspaper"></i></span></h3>
 									<!--我的文章列表-->
 
 									<table style="width: 100%;">
@@ -657,13 +669,13 @@
 												<th style="width: 10%; text-align: center;font-weight: bold;">發文時間</th>
 												<!-- 设置宽度为10%（可以根据需要调整） -->
 												<th class="hidden-cell" style="display: none;">編輯時間</th>
-												<th
-													style="width: 10%; text-align: center; white-space: nowrap;font-weight: bold;">
+												<th class="hidden-cell"
+													style="width: 10%; text-align: center; white-space: nowrap;font-weight: bold; display: none;">
 													文章按讚數
 												</th>
 												<!-- 设置宽度为10%（可以根据需要调整） -->
-												<th
-													style="width: 10%;text-align: center; white-space: nowrap;font-weight: bold;">
+												<th class="hidden-cell"
+													style="width: 10%;text-align: center; white-space: nowrap;font-weight: bold; display: none;">
 													文章倒讚數
 												</th>
 												<!-- 设置宽度为10%（可以根据需要调整） -->
@@ -904,7 +916,7 @@
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<script src="https://kit.fontawesome.com/f8d426f7f0.js" crossorigin="anonymous"></script>
 
-	
+
 	<script>
 		const ForumArticle_el = $("#articleList");
 
@@ -922,7 +934,7 @@
 						window.location.href = '/BuyGo/front_end/pages/member/login.html'; // 登入頁面url
 					} else if (response.ok) { // 通常 200
 						// 請求成功，顯示燈箱
-						//showLightbox();
+						//notLoggedInAction();
 						return response.json();
 					} else {
 						alert("錯誤狀態:" + response.status);
@@ -930,7 +942,7 @@
 					}
 				})
 				.then(data => processForumArticles(data))
-				.catch(error => console.error('Error fetching forum articles:', error));
+				.catch(error => console.error(data));
 		}
 
 		function processForumArticles(articles) {
@@ -956,12 +968,16 @@
                         <td class="hidden-cell article-no" style="display: none;" name="" value="${articleNo}">${articleNo}</td>
                         <td class="hidden-cell" style="display: none;">${memberNo}</td>
                         <td>${articleTitle}</td>
-                        <td>${articleContent}</td>
+                        <td>
+  						<div class="article-content-container">
+    					${articleContent}
+  						</div>
+						</td>
                         <td class="hidden-cell" style="display: none;">${articleStatus}</td>
                         <td style="white-space: nowrap;">${formattedPublishDate}</td>
                         <td class="hidden-cell" style="display: none;">${articleUpdate}</td>
-                        <td>${articleLike !== undefined ? articleLike : 0}</td>
-                        <td>${articleDislike !== undefined ? articleDislike : 0}</td>
+                        <td class="hidden-cell" style="display: none;">${articleLike !== undefined ? articleLike : 0}</td>
+                        <td class="hidden-cell" style="display: none;">${articleDislike !== undefined ? articleDislike : 0}</td>
                         <td><button class="delete-btn"><i class="fas fa-trash-alt"></i></button></td> <!-- 删除按钮 -->
                     </tr>
                 `;

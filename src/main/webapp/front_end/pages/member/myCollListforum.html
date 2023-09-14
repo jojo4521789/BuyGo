@@ -8,6 +8,265 @@
 <head>
 	<meta charset="UTF-8" />
 	<title>GFashion - Responsive e-commerce HTML Template</title>
+	<style>
+		/* Reset CSS */
+		body,
+		div,
+		p,
+		h1,
+		h2,
+		h3,
+		table,
+		tr,
+		th,
+		td {
+			margin: 0;
+			padding: 0;
+			border: 0;
+			font-size: 100%;
+			font-family: inherit;
+			vertical-align: baseline;
+		}
+
+		/* Basic styling */
+		body {
+			font-family: Arial, sans-serif;
+			background-color: #f5f5f5;
+		}
+
+		h1 {
+			text-align: center;
+			padding: 20px 0;
+		}
+
+		table {
+			width: 100%;
+			border-collapse: collapse;
+			margin-top: 20px;
+		}
+
+		th,
+		td {
+			padding: 10px;
+			border: 1px solid #ddd;
+		}
+
+		th {
+			background-color: #f2f2f2;
+		}
+
+		tr:nth-child(even) {
+			background-color: #f2f2f2;
+		}
+
+		table {
+			width: 100%;
+			border-collapse: collapse;
+			margin-top: 20px;
+			border: 1px solid #ddd;
+			/* 新增表格整体边框 */
+			background-color: #fff;
+			/* 背景色设为白色 */
+			box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+			/* 添加阴影效果 */
+		}
+
+		th,
+		td {
+			padding: 10px;
+			border: 1px solid #ddd;
+			text-align: center;
+			/* 文字置中对齐 */
+		}
+
+		th {
+			background-color: #f2f2f2;
+			font-weight: bold;
+		}
+
+		tr:nth-child(even) {
+			background-color: #f2f2f2;
+		}
+
+		.modal {
+			display: none;
+			position: fixed;
+			z-index: 1;
+			left: 0;
+			top: 0;
+			width: 100%;
+			height: 100%;
+			background-color: rgba(0, 0, 0, 0.5);
+			/* 背景遮罩 */
+		}
+
+		.modal-content {
+			background-color: white;
+			margin: 20% auto;
+			padding: 20px;
+			border: 1px solid #ddd;
+			width: 50%;
+			text-align: center;
+		}
+
+		button {
+			margin: 5px;
+			padding: 5px 10px;
+			cursor: pointer;
+		}
+
+		.hidden-cell {
+			visibility: hidden;
+		}
+
+		/* 删除按钮样式 */
+		.delete-btn {
+			background-color: transparent;
+			/* 将背景颜色设置为透明 */
+			color: #f44336;
+			/* 设置文本颜色为红色 */
+			border: none;
+			padding: 5px 10px;
+			cursor: pointer;
+			border-radius: 5px;
+			transition: background-color 0.3s ease, color 0.3s ease;
+		}
+
+		/* 鼠标悬停时的删除按钮样式 */
+		.delete-btn:hover {
+			background-color: rgba(211, 47, 47, 0.3);
+			color: #fff;
+			/* 悬停时也可修改文字颜色 */
+		}
+
+		/* 删除模态框 */
+		#deleteModal {
+			display: none;
+			position: fixed;
+			z-index: 1;
+			left: 0;
+			top: 0;
+			width: 100%;
+			height: 100%;
+			background-color: rgba(0, 0, 0, 0.5);
+			/* 背景遮罩 */
+		}
+
+		/* 删除模态框内容 */
+		.modal-content {
+			background-color: white;
+			margin: 20% auto;
+			padding: 20px;
+			border: 1px solid #ddd;
+			width: 50%;
+			text-align: center;
+			border-radius: 5px;
+			box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+			animation: zoomIn 0.3s ease;
+		}
+
+		/* 动画效果 - 弹出模态框时缩放 */
+		@keyframes zoomIn {
+			from {
+				transform: scale(0.5);
+			}
+
+			to {
+				transform: scale(1);
+			}
+		}
+
+		/* 修改删除按钮图标样式 */
+		.delete-btn i {
+			color: red;
+			/* 修改图标颜色为红色 */
+			font-size: 20px;
+			/* 修改图标大小为20像素 */
+			/* 添加其他样式属性 */
+		}
+
+		/* 修改确认按钮样式 */
+		#confirmDeleteBtn {
+			background-color: #f44336;
+			/* 设置背景颜色为红色 */
+			color: #fff;
+			/* 设置文本颜色为白色 */
+			border: none;
+			padding: 5px 10px;
+			cursor: pointer;
+			border-radius: 5px;
+			transition: background-color 0.3s ease, color 0.3s ease;
+			margin-right: 10px;
+			/* 可以添加右边距，使按钮之间有一些间隔 */
+		}
+
+		/* 鼠标悬停时的确认按钮样式 */
+		#confirmDeleteBtn:hover {
+			background-color: #d32f2f;
+			/* 鼠标悬停时的背景颜色 */
+		}
+
+		/* 修改取消按钮样式 */
+		#cancelDeleteBtn {
+			background-color: #ccc;
+			/* 设置背景颜色为灰色 */
+			color: #000;
+			/* 设置文本颜色为黑色 */
+			border: none;
+			padding: 5px 10px;
+			cursor: pointer;
+			border-radius: 5px;
+			transition: background-color 0.3s ease, color 0.3s ease;
+		}
+
+		/* 鼠标悬停时的取消按钮样式 */
+		#cancelDeleteBtn:hover {
+			background-color: #999;
+			/* 鼠标悬停时的背景颜色 */
+			color: #fff;
+			/* 鼠标悬停时的文本颜色 */
+		}
+
+		/* 修改新增按钮样式 */
+		#addArticleButton {
+			background-color: #4caf50;
+			/* 设置背景颜色为绿色 */
+			color: #fff;
+			/* 设置文本颜色为白色 */
+			border: none;
+			padding: 5px 10px;
+			cursor: pointer;
+			border-radius: 5px;
+			transition: background-color 0.3s ease, color 0.3s ease;
+		}
+
+		/* 鼠标悬停时的新增按钮样式 */
+		#addArticleButton:hover {
+			background-color: #45a049;
+			/* 鼠标悬停时的背景颜色 */
+		}
+
+		/* 使用Font Awesome图标替换文本 */
+		#addArticleButton::before {
+			content: "\f067";
+			/* 使用Font Awesome中的"fas fa-plus"图标 */
+			font-family: 'Font Awesome 5 Free';
+			margin-right: 5px;
+			/* 可以添加右边距，使图标与文本之间有一些间隔 */
+		}
+
+		.article-content-container {
+			max-height: 300px;
+			/* 设置最大高度，根据需要进行调整 */
+			overflow-y: auto;
+			/* 启用垂直滚动条 */
+			padding: 10px;
+			/* 可选的内边距，根据需要进行调整 */
+			border: 1px solid #ddd;
+			/* 可选的边框样式，根据需要进行调整 */
+		}
+	</style>
+
 	<meta name="description" content="" />
 	<meta name="keywords" content="" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -367,8 +626,8 @@
 									<li><a href="#">平台錢包</a></li>
 									<li><a href="#">聊天室</a></li>
 									<li><a href="../../pages/member/blacklist.html">黑名單</a></li>
-									<li><a href="../../pages/member/testform.html">我的收藏文章</a></li>
-									<li><a href="../../pages/member/testmyform.html">我的文章</a></li>
+									<li><a href="../../pages/member/myCollListforum.html">我的收藏文章</a></li>
+									<li><a href="../../pages/member/myforum.html">我的文章</a></li>
 									<br>
 									<li><a href="../../pages/member/myShop.html">我的賣場</a></li>
 								</ul>
@@ -393,23 +652,51 @@
 
 						<div class="m-t-lg clearfix">
 							<div class="row">
-								<div class="col-xs-12 col-sm-6">
+								<div class="col-xs-12 col-sm-6" style="width: 74%;">
 									<h3 class="uppercase text-bold"><span class="text-xs">我的收藏文章</span></h3>
-									<!--黑名單列表-->
-									<ul class="store-list unstyled" id="blacklist">
-										<!-- <li>
-											<h4 class="entry-title">
-												<div>#1</div>
-											</h4>
-											<div class="row">
-												<dl class="col-xs-7 col-sm-7">
-													<dt>黑名單會員編號</dt>
-													<dd>Lower Ground Suite 7<br>32a Oxford Street</dd>
-												</dl>
-											</div>
-											<button type="submit" class="btn btn-primary uppercase m-r-sm" onclick="this.closest('li').remove();">移除黑名單</button>
-										</li> -->
-									</ul>
+									<!--我的收藏文章列表-->
+									<table style="width: 100%;">
+										<thead>
+											<tr>
+												<th class="hidden-cell" style="display: none;">文章編號</th>
+												<th class="hidden-cell" style="display: none;">會員編號</th>
+												<th style="width: 20%; text-align: center;font-weight: bold;">文章標題</th>
+												<!-- 设置宽度为20%（可以根据需要调整） -->
+												<th style="width: 30%;text-align: center;font-weight: bold;">文章內容</th>
+												<!-- 设置宽度为30%（可以根据需要调整） -->
+												<th class="hidden-cell" style="display: none;">文章狀態</th>
+												<th style="width: 10%; text-align: center;font-weight: bold;">發文時間</th>
+												<!-- 设置宽度为10%（可以根据需要调整） -->
+												<th class="hidden-cell" style="display: none;">編輯時間</th>
+												<th class="hidden-cell"
+													style="width: 10%; text-align: center; white-space: nowrap;font-weight: bold; display: none;">
+													文章按讚數
+												</th>
+												<!-- 设置宽度为10%（可以根据需要调整） -->
+												<th class="hidden-cell"
+													style="width: 10%;text-align: center; white-space: nowrap;font-weight: bold; display: none;">
+													文章倒讚數
+												</th>
+												<!-- 设置宽度为10%（可以根据需要调整） -->
+												<th style="width: 5%;text-align: center;font-weight: bold;">移除</th>
+												<!-- 设置宽度为5%（可以根据需要调整） -->
+												<!-- 新增删除按钮列 -->
+												<div id="deleteModal" class="modal">
+													<div class="modal-content">
+														<p>確定要刪除這篇文章嗎？</p>
+														<button id="confirmDeleteBtn"><i
+																class="fas fa-check"></i></button>
+														<button id="cancelDeleteBtn"><i
+																class="fas fa-times"></i></button>
+													</div>
+												</div>
+											</tr>
+										</thead>
+										<tbody id="articleList"></tbody>
+									</table>
+									<button id="addArticleButton">新增文章</button>
+
+
 								</div>
 							</div>
 						</div>
@@ -625,8 +912,194 @@
 	<!-- <script src="../../js/common/gmap3.min.js"></script> -->
 	<!-- // Particular Page Javascripts -->
 	<script src="../../js/login.js"></script>
-	
+
 
 </body>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://kit.fontawesome.com/f8d426f7f0.js" crossorigin="anonymous"></script>
+<script>
+	const ForumArticle_el = $("#articleList");
+
+	function fetchForumArticles() {
+		fetch('/BuyGo/needLoginApi/articleCollLis/loadByMemberNo', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json;charset=UTF-8',
+				'Accept': 'application/json;charset=UTF-8'
+			},
+		})
+			.then(response => {
+				if (response.status === 401) { // 客戶未登入，執行頁面重定向到登入頁
+					alert('帳號未登入，將導轉至登入頁面');
+					window.location.href = '/BuyGo/front_end/pages/member/login.html'; // 登入頁面url
+				} else if (response.ok) { // 通常 200
+					// 請求成功，顯示燈箱
+					//notLoggedInAction();
+					return response.json();
+				} else {
+					alert("錯誤狀態:" + response.status);
+					return;
+				}
+			})
+			.then(data => processForumArticles(data))
+			.catch(error => console.error('Error fetching forum articles:', error));
+	}
+
+	function processForumArticles(articles) {
+		ForumArticle_el.empty();
+		console.log(articles);
+
+		articles.forEach(forum => {
+			const {
+				articleNo,
+				memberNo,
+				articleContent,
+				articleDislike,
+				articlePublish,
+				articleStatus,
+				articleTitle,
+				articleUpdate,
+				articleLike
+
+			} = forum;
+
+
+			// const { articleTitle } = forumArticle;
+			// const { articleContent } = forumArticle;
+			// const { articlePublish } = forumArticle;
+			// const formattedPublishDate = new Date(articlePublish).toLocaleString();
+			// const { articleDislike } = forumArticle;
+			// const { articleLike } = forumArticle;
+			// const { articleStatus } = forumArticle;
+			// const { articleUpdate } = forumArticle;
+
+
+
+			const articleRow = `
+                    <tr>
+                        <td class="hidden-cell article-no" style="display: none;" name="" value="${articleNo}">${articleNo}</td>
+                        <td class="hidden-cell member-no" style="display: none;">${memberNo}</td>
+                        <td>${articleTitle}</td>
+                        <td>
+  						<div class="article-content-container">
+    					${articleContent}
+  						</div>
+						</td>
+                        <td class="hidden-cell" style="display: none;">${articleStatus}</td>
+                        <td style="white-space: nowrap;">${articlePublish}</td>
+                        <td class="hidden-cell" style="display: none;">${articleUpdate}</td>
+                        <td class="hidden-cell" style="display: none;">${articleLike !== undefined ? articleLike : 0}</td>
+                        <td class="hidden-cell" style="display: none;">${articleDislike !== undefined ? articleDislike : 0}</td>
+                        <td><button class="delete-btn"><i class="fas fa-times"></i></button></td> <!-- 移除按钮 -->
+                    </tr>
+                `;
+
+			ForumArticle_el.append(articleRow);
+		});
+
+		// 新增刪除按鈕點擊事件
+		// $(".delete-btn").click(function () {
+		// 	const articleNo = $(this).closest("td").siblings("td.article-no").text();//取得文章編號
+		// 	const memberNo = $(this).closest("td").siblings("td.member-no").text();//取得發文者的會員編號
+		// 	console.log("移除articleNo：" + articleNo);
+		// 	console.log("移除memberNo：" + memberNo);
+		// 	const modal = $("#deleteModal");
+		// 	modal.show();
+
+
+		// 	// 確認刪除按鈕點擊事件
+		// 	$("#confirmDeleteBtn").click(function () {
+		// 		$(document).ready(() => {
+		// 			// 呼叫函式 fetchForumArticle，將當前畫面動態刷新
+		// 			fetchForumArticles();
+		// 		});
+
+		// 		modal.hide();
+		// 		deleteArticle(articleNo);
+
+		// 		// 從表格中刪除對應行
+		// 		const row = $(this).closest("tr");
+		// 		row.remove();
+
+
+		// 	});
+
+		// 	// 取消刪除按鈕點擊事件
+		// 	$("#cancelDeleteBtn").click(function () {
+		// 		modal.hide();
+		// 	});
+
+		// });
+
+		$(".delete-btn").click(function () {
+			const articleNo = $(this).closest("tr").find("td.article-no").text(); // 取得文章編號
+			const memberNo = $(this).closest("tr").find("td.member-no").text(); // 取得發文者的會員編號
+			console.log("移除articleNo：" + articleNo);
+			console.log("移除memberNo：" + memberNo);
+			const modal = $("#deleteModal");
+			modal.show();
+
+			// 確認刪除按鈕點擊事件
+			$("#confirmDeleteBtn").off().click(function () {
+				
+				modal.hide();
+				deleteArticle(articleNo);
+
+				// 從表格中刪除對應行
+				const row = $(this).closest("tr");
+				row.remove();
+
+				// 呼叫函式 fetchForumArticles，將當前畫面動態刷新
+				fetchForumArticles();
+
+			});
+
+			// 取消刪除按鈕點擊事件
+			$("#cancelDeleteBtn").off().click(function () {
+				modal.hide();
+			});
+		});
+	}
+
+	// 向後端發送删除请求
+	function deleteArticle(articleNo) {
+		fetch('/BuyGo/api/articleCollList/remove', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json;charset=UTF-8',
+				'Accept': 'application/json;charset=UTF-8'
+			},
+			body: JSON.stringify({
+				articleNo: articleNo,
+
+			})
+		})
+			.then(response => response.json())
+			.then(data => {
+				// 在這裡處理後端返回的數據
+				console.log(data);
+
+			})
+			.catch(error => {
+				console.error("Error:", error);
+				console.log("移除memberNo：" + memberNo);
+			});
+
+	}
+	//===================================前畫面動態刷新===================
+	$(document).ready(() => {
+		// 呼叫函式 fetchForumArticle，將當前畫面動態刷新
+		fetchForumArticles();
+
+		// 新增文章按鈕的點擊事件
+		$("#addArticleButton").click(() => {
+			// 跳轉至指定的連結
+			window.location.href = "http://localhost:8081/BuyGo/front_end/pages/AddArticles.html";
+		});
+	});
+</script>
+</body>
+
+</html>
 
 </html>
