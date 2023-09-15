@@ -38,4 +38,21 @@ public class GpaProdServiceImpl implements GpaProdService{
 		}
 		return newGpaProdList;
 	}
+
+	@Override
+	public boolean changeGpaPreProdByGpaProdNo(Integer gpaProdNo, Integer gpaPreProd) {
+		int result = dao.updateGpaPreProdByGpaProdNo(gpaProdNo, gpaPreProd);
+		if(result == 1) {
+			return true;
+		}
+		else {
+			return false;
+		}
+		
+	}
+
+	@Override
+	public List<GpaProd> findAll() {
+		return dao.selectAll();
+	}
 }

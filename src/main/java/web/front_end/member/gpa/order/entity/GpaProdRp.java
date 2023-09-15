@@ -43,5 +43,7 @@ public class GpaProdRp extends Core {
 	//關連到PA_PROD_NO
 	@Column(name = "PROD_SELL")
 	private Integer prodSell;
+	
+	
 
 }

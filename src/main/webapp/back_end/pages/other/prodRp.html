@@ -230,7 +230,7 @@
             <!-- <label for="sOpaProdName" class="prod_label">商場: </label> -->
             <!-- <input type="text" name="sOpaProdName" id="sOpaProdName" class="find_input" style="width: 80px;"> -->
             <!-- <input type="button" value="搜尋" class="find_but" id="but_find" onClick="openSearchProd()"> -->
-            <select>
+            <select id="select">
                 <option value="0">商場</option>
                 <option value="1">一般商場</option>
                 <option value="2">揪團商場</option>
@@ -243,137 +243,7 @@
     <br>
     <div id="msg" class="error"></div>
 
-    <!-- <div id="addProd" class="lightbox div_form -none">
-        <article>
-            <h1 class="h1_style" style="font-size: 24px;">新增商品</h1>
-            <form id="form_demo">
-                <br>
-                <div class="div_addOption">
-                    <label for="slOpaPrcatsName" class="prod_label">商品類別: </label>
-                    <select name="slOpaPrcatsName" id="slOpaPrcatsName" class="form_input">
-                        <option disabled selected>--請選擇商品類別--</option>
-                    </select>
-                </div>
-                <div class="div_addOption">
-                    <label for="opaProdName" class="prod_label">商品名稱: </label>
-                    <input type="text" name="opaProdName" id="addOpaProdName" class="form_input">
-                </div>
-                <div class="div_addOption">
-                    <label for="opaProdStockQty" class="prod_label">庫存數量: </label>
-                    <input type="text" name="opaProdStockQty" id="addOpaProdStockQty" class="form_input">
-                </div>
-                <div class="div_addOption">
-                    <label for="opaProdPrice" class="prod_label">商品價格: </label>
-                    <input type="text" name="opaProdPrice" id="addOpaProdPrice" class="form_input">
-                </div>
-                <div class="div_addOption">
-                    <label for="opaProdContent" class="prod_label">商品內容: </label>
-                    <textarea name="opaProdContent" id="addOpaProdContent" class="form_input"
-                        style="max-width: 640px; height: 80px; overflow: auto; resize: none;"></textarea>
-                </div>
-                <div class="div_addOption">
-                    <label for="opaProdUrl" class="prod_label">商品網址: </label>
-                    <input type="text" name="opaProdUrl" id="addOpaProdUrl" class="form_input">
-                </div>
-                <div class="div_addOption">
-                    <div class="upload_box">
-                        <div class="upload_btn-box">
-                            <label class="upload_btn">
-                                <p style="margin: 0;">上傳商品圖片</p>
-                                <input type="file" name="opaProdPic" class="upload_inputfile"
-                                    accept="image/jpeg, image/png, image/jpg, image/gif" multiple>
-                            </label>
-                        </div>
-                        <div class="upload_img-wrap"></div>
-                    </div>
-                </div>
-                <div style="text-align: center;">
-                    <button id="btnAdd" type="button" class="find_but">新增</button>
-                    <button id="btnClose" type="button" class="find_but">關閉</button>
-                </div>
-                <div id="addMsg" class="error"></div>
-            </form>
-        </article>
-    </div> -->
 
-    <!-- <div id="viewProdDetail" class="lightbox div_form -none">
-        <article>
-            <h1 class="h1_style" style="font-size: 24px;">查看商品詳情</h1>
-            <form id="form_demo">
-                <br>
-                <div id="allDetailOption">
-                    <div class="div_detailOption">
-                        <label class="prod_label">商品編號: </label>
-                        <span id="span_opaProdNo_view"></span>
-                    </div>
-                    <div class="div_detailOption">
-                        <label class="prod_label">商品名稱: </label>
-                        <span id="span_opaProdName_view"></span>
-                        <input type="text" id="input_opaProdName_view" class="-none">
-                    </div>
-                    <div class="div_detailOption">
-                        <label class="prod_label">庫存數量: </label>
-                        <span id="span_opaProdStockQty_view"></span>
-                        <input type="text" id="input_opaProdStockQty_view" class="-none">
-                    </div>
-                    <div class="div_detailOption">
-                        <label class="prod_label">出貨數量: </label>
-                        <span id="span_opaProdShipQty_view"></span>
-                    </div>
-                    <div class="div_detailOption">
-                        <label class="prod_label">商品價格: </label>
-                        <span id="span_opaProdPrice_view"></span>
-                        <input type="text" id="input_opaProdPrice_view" class="-none">
-                    </div>
-                    <div class="div_detailOption">
-                        <label class="prod_label">商品內容: </label>
-                        <span id="span_opaProdContent_view"></span>
-                        <textarea id="textarea_opaProdContent_view" class="-none"></textarea>
-                    </div>
-                    <div class="div_detailOption">
-                        <label class="prod_label">商品網址: </label>
-                        <a id="a_opaProdUrl_view" href="#"></a>
-                        <input type="text" id="input_opaProdUrl_view" class="-none">
-                    </div>
-                    <div class="div_detailOption">
-                        <label class="prod_label">商品類別: </label>
-                        <span id="span_opaPrcatsName_view"></span>
-                        <select id="sl_opaPrcatsName_view" class="-none"></select>
-                    </div>
-                    <div class="div_detailOption">
-                        <label class="prod_label">商品狀態: </label>
-                        <span id="span_opaProdStatus_val" style="display: none;"></span>
-                        <span id="span_opaProdStatus_view"></span>
-                    </div>
-                    <div class="div_detailOption">
-                        <label class="prod_label">更新日期: </label>
-                        <span id="span_opaProdUpdate_view"></span>
-                    </div>
-                </div>
-                <div class="div_detailOption_img">
-                    <div id="img_view_box">
-                        <img id="img_main_view" src="" alt="無法載入圖片">
-                        <div id="thumbnails"></div>
-                    </div>
-                    <div class="upload_box img_upload_box -none">
-                        <div class="upload_btn-box">
-                            <label class="upload_btn">
-                                <p style="margin: 0;">上傳商品圖片</p>
-                                <input type="file" class="upload_inputfile"
-                                    accept="image/jpeg, image/png, image/jpg, image/gif" multiple>
-                            </label>
-                        </div>
-                        <div class="upload_img-wrap img_upload_img-wrap"></div>
-                    </div>
-                </div>
-
-                <div style="text-align: center;">
-                    <button id="btnEdit_viewProdDetail" type="button" class="find_but">編輯</button>
-                    <button id="btnClose_viewProdDetail" type="button" class="find_but">關閉</button>
-                </div>
-            </form>
-        </article>
-    </div> -->
 
     <script src="../../js/common/jquery/jQuery-2.2.0.min.js"></script>
     <script src="../../js/common/bstable/js/bootstrap.min.js"></script>
@@ -382,785 +252,234 @@
     <script src="../../js/common/date/js/laydate.js"></script>
 
     <script>
-        let editFlag = false;
-        let opaPrpicsNoArray = [];
-        function onDetailClick(opaProdNo) {
-            const viewProdDetail = document.querySelector("#viewProdDetail");
-            viewProdDetail.classList.remove("-none");
-            $(".img_upload_img-wrap").html("");
-            opaPrpicsNoArray = [];
-            fetch("/BuyGo/api/opa/prod/selectById",
-                {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json; charset=utf-8", },
-                    body: JSON.stringify({
-                        opaProdNo: opaProdNo
-                    })
-                })
-                .then(resp => resp.json())
-                .then(prod => {
-                    $("#span_opaProdNo_view").text(prod.opaProdNo);
-                    $("#span_opaProdName_view").text(prod.opaProdName);
-                    $("#span_opaProdStockQty_view").text(prod.opaProdStockQty);
-                    $("#span_opaProdShipQty_view").text(prod.opaProdShipQty);
-                    $("#span_opaProdPrice_view").text(prod.opaProdPrice);
-                    $("#span_opaProdContent_view").text(prod.opaProdContent);
-                    $("#a_opaProdUrl_view").attr("href", prod.opaProdUrl);
-                    $("#a_opaProdUrl_view").text(prod.opaProdUrl);
-                    $("#span_opaPrcatsName_view").text(prod.prcats.opaPrcatsName);
-                    $("#span_opaProdStatus_val").text(prod.opaProdStatus);
-                    $("#span_opaProdStatus_view").text(prod.opaProdStatus === 0 ? "未上架" : "已上架");
-                    $("#span_opaProdUpdate_view").text(prod.opaProdUpdate);
-                    if (prod.prpicsList.length !== 0) {
-                        $("#img_main_view").attr("src", prod.prpicsList[0].opaProdPicture);
-                        let prpics_el = "";
-                        for (let prpic of prod.prpicsList) {
-                            opaPrpicsNoArray.push(prpic.opaPrpicsNo);
-                            let img_id = "img_" + prpic.opaPrpicsNo;
-                            prpics_el += `<img id="img_${prpic.opaPrpicsNo}" src="${prpic.opaProdPicture}" onclick="viewImgs(this)">`;
-                            var html = `<div class='upload_img-box'><div id="${prpic.opaPrpicsNo}" style='background-image: url(${prpic.opaProdPicture})' data-number='${$(".upload_img-close").length}' data-file='img_${prpic.opaPrpicsNo}' class='img-bg old_img-bg'><div class='upload_img-close'></div></div></div>`;
-                            $(".img_upload_img-wrap").append(html);
-                        }
-                        $("#thumbnails").html(prpics_el);
-                    } else {
-                        $("#img_main_view").attr("src", "../../../img/common/Image_not_available.png");
-                    }
-                })
-        }
-
-        $("#btnClose_viewProdDetail").on("click", function () {
-            $("#viewProdDetail").addClass("-none");
-            $("#allDetailOption").html(allDetailOption_innerHtml);
-            $("#img_view_box").removeClass("-none");
-            $(".img_upload_box").addClass("-none")
-            $("#btnEdit_viewProdDetail").text("編輯");
-            $("#btnEdit_viewProdDetail").removeClass("-on");
-            if (editFlag) {
-                location.reload();
+        function prodCats(value, row) {
+            if (value === 1) {
+                return '女生衣著';
+            } else if (value === 2) {
+                return '美食';
             }
-        });
-
-        $("#btnEdit_viewProdDetail").on("click", function () {
-
-            $("#span_opaProdName_view").toggleClass("-none");
-            $("#input_opaProdName_view").toggleClass("-none");
-
-            $("#span_opaProdStockQty_view").toggleClass("-none");
-            $("#input_opaProdStockQty_view").toggleClass("-none");
-
-            $("#span_opaProdPrice_view").toggleClass("-none");
-            $("#input_opaProdPrice_view").toggleClass("-none");
-
-            $("#span_opaProdContent_view").toggleClass("-none");
-            $("#textarea_opaProdContent_view").toggleClass("-none");
-
-            $("#a_opaProdUrl_view").toggleClass("-none");
-            $("#input_opaProdUrl_view").toggleClass("-none");
-
-            $("#span_opaPrcatsName_view").toggleClass("-none");
-            $("#sl_opaPrcatsName_view").toggleClass("-none");
-
-            $("#img_view_box").toggleClass("-none");
-            $(".img_upload_box").toggleClass("-none");
-
-            $("#btnEdit_viewProdDetail").toggleClass("-on");
-            if ($("#btnEdit_viewProdDetail").hasClass("-on")) {
-                $("#btnEdit_viewProdDetail").text("儲存");
-                $("#sl_opaPrcatsName_view").html("");
-                fetch("/BuyGo/api/opa/prcats/manage", { headers: { "Content-Type": "application/json; charset=utf-8", } })
-                    .then(resp => resp.json())
-                    .then(prcats => {
-                        let selected_opaPrcatsNo;
-                        for (let i = 0; i < prcats.length; i++) {
-                            let option = `<option value="${prcats[i].opaPrcatsNo}">${prcats[i].opaPrcatsName}</option>`
-                            $("#sl_opaPrcatsName_view").append(option);
-                            if ($("#span_opaPrcatsName_view").text() === prcats[i].opaPrcatsName) {
-                                selected_opaPrcatsNo = prcats[i].opaPrcatsNo;
-                            }
-                        }
-                        $("#sl_opaPrcatsName_view").val(selected_opaPrcatsNo);
-                    });
-                $("#input_opaProdName_view").val($("#span_opaProdName_view").text());
-                $("#input_opaProdStockQty_view").val($("#span_opaProdStockQty_view").text());
-                $("#input_opaProdPrice_view").val($("#span_opaProdPrice_view").text());
-                $("#textarea_opaProdContent_view").val($("#span_opaProdContent_view").text());
-                $("#input_opaProdUrl_view").val($("#a_opaProdUrl_view").text());
-            } else {
-                $("#btnEdit_viewProdDetail").text("編輯");
-                let imgIdArray = [];
-                let img_els = document.querySelectorAll(".img-bg");
-                for (let el of img_els) {
-                    imgIdArray.push(parseInt(el.id));
-                }
-                for (let old_opaPrpicsNo of opaPrpicsNoArray) {
-                    if (imgIdArray.indexOf(old_opaPrpicsNo) < 0) {
-                        fetch("/BuyGo/api/opa/prpics/remove", {
-                            method: "POST",
-                            headers: { "Content-Type": "application/json" },
-                            body: JSON.stringify({ opaPrpicsNo: old_opaPrpicsNo })
-                        })
-                            .then(resp => resp.json())
-                            .then(body => {
-                                if (!body.successful) {
-                                    console.log("刪除圖片失敗");
-                                }
-                            });
-                    }
-                }
-
-                let opaProdNo = $("#span_opaProdNo_view").text();
-
-                let prpicsList = getImgBase64Array();
-                if (prpicsList !== null) {
-                    for (let prpics of prpicsList) {
-                        prpics.opaProdNo = opaProdNo;
-                        addProdImgs(prpics);
-                    }
-                }
-
-                $("#thumbnails").html("");
-                const img_upload_box_els = document.querySelectorAll(".img_upload_img-wrap > div");
-                if (img_upload_box_els !== null) {
-                    for (let img_upload_box_el of img_upload_box_els) {
-                        const img_el = img_upload_box_el.querySelector("div");
-                        let style = img_el.currentStyle || window.getComputedStyle(img_el, false);
-                        let img_url = style.backgroundImage.slice(4, -1).replace(/"/g, "");
-                        let edit_prpics_el = `<img src="${img_url}" onclick="viewImgs(this)">`;
-                        $("#thumbnails").append(edit_prpics_el);
-                    }
-                    $("#img_main_view").attr("src", $("#thumbnails > img").attr("src"));
-                } else {
-                    $("#img_main_view").attr("src", "../../../img/common/Image_not_available.png");
-                }
-
-                fetch("/BuyGo/api/opa/prod/update", {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json; charset=utf-8",
-                    },
-                    body: JSON.stringify({
-                        opaProdNo: opaProdNo,
-                        opaPrcatsNo: $("#sl_opaPrcatsName_view").val(),
-                        opaProdName: $("#input_opaProdName_view").val().trim(),
-                        opaProdStockQty: $("#input_opaProdStockQty_view").val().trim(),
-                        opaProdShipQty: $("#span_opaProdShipQty_view").text(),
-                        opaProdPrice: $("#input_opaProdPrice_view").val().trim(),
-                        opaProdContent: $("#textarea_opaProdContent_view").val().trim(),
-                        opaProdUrl: $("#input_opaProdUrl_view").val().trim(),
-                        opaProdStatus: $("#span_opaProdStatus_val").text(),
-                    })
-                })
-                    .then(resp => resp.json())
-                    .then(body => {
-                        const { successful } = body;
-                        const msg = document.querySelector("#msg");
-                        if (successful) {
-                            msg.className = "info";
-                            msg.textContent = "編號" + opaProdNo + "更新成功";
-                            $("#span_opaProdName_view").text($("#input_opaProdName_view").val().trim());
-                            $("#span_opaProdStockQty_view").text($("#input_opaProdStockQty_view").val().trim());
-                            $("#span_opaProdPrice_view").text($("#input_opaProdPrice_view").val().trim());
-                            $("#span_opaProdContent_view").text($("#textarea_opaProdContent_view").val().trim());
-                            $("#a_opaProdUrl_view").attr("href", $("#input_opaProdUrl_view").val().trim());
-                            $("#a_opaProdUrl_view").text($("#input_opaProdUrl_view").val().trim());
-                            $("#span_opaPrcatsName_view").text($("#sl_opaPrcatsName_view option:selected").text());
-                            editFlag = true;
-                        } else {
-                            msg.className = "error";
-                            msg.textContent = "編號" + opaProdNo + "更新失敗";
-                        }
-                    });
-
-                const add_img_els = document.querySelectorAll(".add_img-bg");
-                for (let add_img_el of add_img_els) {
-                    add_img_el.classList.remove("add_img-bg");
-                    add_img_el.classList.add("old_img-bg");
-                }
+            else if (value === 3) {
+                return '伴手禮';
             }
-        });
-
-        function datetimeLocal(datetime) {
-            const dt = new Date(datetime);
-            dt.setMinutes(dt.getMinutes() - dt.getTimezoneOffset());
-            return dt.toISOString().slice(0, 16);
+            else if (value === 4) {
+                return '手機平板與周邊';
+            }
+            else if (value === 5) {
+                return '文創用品';
+            }
+            else if (value === 6) {
+                return '書籍及雜誌期刊';
+            }
+            else if (value === 7) {
+                return '男女鞋';
+            }
+            else if (value === 8) {
+                return '娛樂、收藏';
+            }
+            else if (value === 9) {
+                return '男生包包與配件';
+            }
+            else if (value === 10) {
+                return '服務、票券';
+            }
+            else if (value === 11) {
+                return '男生衣著';
+            }
+            else if (value === 12) {
+                return '汽機車零件百貨';
+            }
+            else if (value === 13) {
+                return '嬰幼兒與母親';
+            }
+            else if (value === 14) {
+                return '3C與筆電';
+            }
+            else if (value === 15) {
+                return '居家生活';
+            }
+            else if (value === 16) {
+                return '女性配件/黃金';
+            }
+            else if (value === 17) {
+                return '寵物';
+            }
+            else if (value === 18) {
+                return '戶外/旅行';
+            }
+            else if (value === 19) {
+                return '運動/健身';
+            }
+            else if (value === 20) {
+                return '電玩遊戲';
+            }
+            else if (value === 21) {
+                return '女性包包/精品';
+            }
+            else if (value === 22) {
+                return '家電影音';
+            }
+            else{
+                return '其他類別';
+            }
         }
-
+        function reportCats(value, row) {
+            if (value === '0') {
+                return '藥品, 醫療器材';
+            } 
+            else if (value === 1) {
+                return '酒類 / 菸類商品';
+            } 
+            else if (value === 2) {
+                return '武器 / 彈藥 / 軍事用品';
+            } 
+            else if (value === 3) {
+                return '活體動物, 保育動物及其製品';
+            } 
+            else if (value === 4) {
+                return '導向外部資訊或交易';
+            } 
+            else if (value === 5) {
+                return '此商品可能令人感到不適或違反善良風俗';
+            } 
+            else if (value === 6) {
+                return '仿冒品';
+            } 
+            else if (value === 7) {
+                return '重覆刊登/複製他人商品圖文';
+            } 
+            else if (value === 8) {
+                return '違反鑑賞期';
+            } 
+            else if (value === 9) {
+                return '疫區/國外肉製, 蛋, 海鮮, 寵物食品';
+            } 
+            else if (value === 10) {
+                return '刷單製造不實銷量';
+            } 
+            else if (value === 11) {
+                return '濫用文字誤導搜尋';
+            } 
+            else if (value === 12) {
+                return 'NCC/BSMI認證字號未填寫';
+            } 
+            else if (value === 13) {
+                return '誇大不實療效/涉及醫療效能';
+            } 
+            else {
+                return '其他';
+            } 
+            
+        }
         $(function () {
-            let data = [];
-            fetch("/BuyGo/api/opa/prod/manage", { headers: { "Content-Type": "application/json; charset=utf-8", } })
-                .then(resp => resp.json())
-                .then(datas => {
-                    for (let i = 0; i < datas.length; i++) {
-                        let prpics_url = "../../../img/common/Image_not_available.png";
-                        if (datas[i].prpicsList.length !== 0) {
-                            prpics_url = datas[i].prpicsList[0].opaProdPicture;
-                        }
-                        let prod = {
-                            prpics: `<img src="${prpics_url}" alt="error" style="width: 50px; height: 50px;">`,
-                            opaProdNo: `<p class="p_opaProdNo">${datas[i].opaProdNo}</p>`,
-                            opaProdName: datas[i].opaProdName,
-                            opaProdStockQty: datas[i].opaProdStockQty,
-                            opaProdPrice: datas[i].opaProdPrice,
-                            opaPrcatsName: datas[i].prcats.opaPrcatsName,
-                            opaProdStatus: getToggleStatusStr(datas[i].opaProdStatus),
-                            opaProdUpdate: datas[i].opaProdUpdate,
-                            action: `<button id="btnDetail_${datas[i].opaProdNo}" class="find_but" onclick="onDetailClick(${datas[i].opaProdNo})">商品詳情</button>  <button id="btnDel_${datas[i].opaProdNo}" class="find_but" onclick="onRemoveClick(${datas[i].opaProdNo})">刪除</button>`
-                        }
-                        data.push(prod);
-                    }
-                    $('#table').bootstrapTable({
-                        method: "get",
-                        striped: true,
-                        singleSelect: false,
-                        pagination: true, //分頁
-                        pageSize: 10,
-                        pageNumber: 1,
-                        search: false, //顯示搜索框
-                        contentType: "application/x-www-form-urlencoded",
-                        queryParams: null,
-                        columns: [
-                            // {
-                            //     checkbox: "true",
-                            //     field: 'check',
-                            //     align: 'center',
-                            //     valign: 'middle'
-                            // },
-                            {
-                                title: "商品圖片",
-                                field: 'prpics',
-                                align: 'center',
-                                valign: 'middle'
-                            },
-                            {
-                                title: "商品編號",
-                                field: 'opaProdNo',
-                                align: 'center',
-                                valign: 'middle'
-                            },
-                            {
-                                title: "商品名稱",
-                                field: 'opaProdName',
-                                align: 'center',
-                                valign: 'middle'
-                            },
-                            {
-                                title: "庫存數量",
-                                field: 'opaProdStockQty',
-                                align: 'center',
-                                valign: 'middle'
-                            },
-                            {
-                                title: "商品價格",
-                                field: 'opaProdPrice',
-                                align: 'center',
-                                valign: 'middle'
-                            },
-                            {
-                                title: "商品類別",
-                                field: 'opaPrcatsName',
-                                align: 'center',
-                                valign: 'middle'
-                            },
-                            {
-                                title: "商品狀態",
-                                field: 'opaProdStatus',
-                                align: 'center',
-                                valign: 'middle'
-                            },
-                            {
-                                title: "更新日期",
-                                field: 'opaProdUpdate',
-                                align: 'center',
-                                valign: 'middle'
-                            },
-                            {
-                                title: "",
-                                field: 'action',
-                                align: 'center',
-                                valign: 'middle'
-                            }
-                        ],
-                        data: data
-                    });
-                });
-        });
+            // let data = [];
+            $('#table').bootstrapTable({
+                method: "get",
+                striped: true,
+                singleSelect: false,
+                pagination: true, //分頁
+                pageSize: 10,
+                pageNumber: 1,
+                search: false, //顯示搜索框
+                contentType: "application/x-www-form-urlencoded",
+                queryParams: null,
+                columns: [
 
-        let allDetailOption_innerHtml = `
-            <div class="div_detailOption">
-                <label class="prod_label">商品編號: </label>
-                <span id="span_opaProdNo_view"></span>
-            </div>
-            <div class="div_detailOption">
-                <label class="prod_label">商品名稱: </label>
-                <span id="span_opaProdName_view"></span>
-                <input type="text" id="input_opaProdName_view" class="-none">
-            </div>
-            <div class="div_detailOption">
-                <label class="prod_label">庫存數量: </label>
-                <span id="span_opaProdStockQty_view"></span>
-                <input type="text" id="input_opaProdStockQty_view" class="-none">
-            </div>
-            <div class="div_detailOption">
-                <label class="prod_label">出貨數量: </label>
-                <span id="span_opaProdShipQty_view"></span>
-            </div>
-            <div class="div_detailOption">
-                <label class="prod_label">商品價格: </label>
-                <span id="span_opaProdPrice_view"></span>
-                <input type="text" id="input_opaProdPrice_view" class="-none">
-            </div>
-            <div class="div_detailOption">
-                <label class="prod_label">商品內容: </label>
-                <span id="span_opaProdContent_view"></span>
-                <textarea id="textarea_opaProdContent_view" class="-none"></textarea>
-            </div>
-            <div class="div_detailOption">
-                <label class="prod_label">商品網址: </label>
-                <a id="a_opaProdUrl_view" href="#"></a>
-                <input type="text" id="input_opaProdUrl_view" class="-none">
-            </div>
-            <div class="div_detailOption">
-                <label class="prod_label">商品類別: </label>
-                <span id="span_opaPrcatsName_view"></span>
-                <select id="sl_opaPrcatsName_view" class="-none"></select>
-            </div>
-            <div class="div_detailOption">
-                <label class="prod_label">商品狀態: </label>
-                <span id="span_opaProdStatus_val" style="display: none;"></span>
-                <span id="span_opaProdStatus_view"></span>
-            </div>
-            <div class="div_detailOption">
-                <label class="prod_label">更新日期: </label>
-                <span id="span_opaProdUpdate_view"></span>
-            </div>
-        `;
-
-    </script>
-
-    <script>
-        function getToggleStatusStr(opaProdStatus) {
-            let toggleClass = "";
-            let toggleStyle = `style="clip-path: inset(0px 50% 0px 0px); background-color: dodgerblue;"`;
-            if (opaProdStatus === 0) {
-                toggleStyle = `style="clip-path: inset(0px 0px 0px 50%); background-color: rgb(215, 64, 70);"`;
-                toggleClass = "-off";
-            }
-            let toggle_status_str = `
-                <div id="container" onclick="toggleStatusClick(this)">
-                    <div class="inner-container">
-                        <div class="toggle">
-                            <p>下架</p>
-                        </div>
-                        <div class="toggle">
-                            <p>上架</p>
-                        </div>
-                    </div>
-                    <div class="inner-container ${toggleClass}" id='toggle-container' ${toggleStyle}>
-                        <div class="toggle">
-                            <p>下架</p>
-                        </div>
-                        <div class="toggle">
-                            <p>上架</p>
-                        </div>
-                    </div>
-                </div>
-            `;
-            return toggle_status_str;
-        }
-
-        function toggleStatusClick(container) {
-            let opaProdStatus;
-            const toggleContainer = container.querySelector('#toggle-container');
-            toggleContainer.classList.toggle("-off");
-            if (toggleContainer.classList.contains("-off")) {
-                toggleContainer.style.clipPath = 'inset(0 0 0 50%)';
-                toggleContainer.style.backgroundColor = '#D74046';
-                opaProdStatus = 0;
-            } else {
-                toggleContainer.style.clipPath = 'inset(0 50% 0 0)';
-                toggleContainer.style.backgroundColor = 'dodgerblue';
-                opaProdStatus = 1;
-            }
-
-            if (opaProdStatus != null) {
-                let opaProdNo = container.closest("tr").querySelector(".p_opaProdNo").textContent;
-                fetch("/BuyGo/api/opa/prod/prodUpdateStatus", {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json; charset=utf-8",
+                    {
+                        title: "賣家編號",
+                        field: 'memberNo',
+                        align: 'center',
+                        valign: 'middle'
                     },
-                    body: JSON.stringify({
-                        opaProdNo: opaProdNo,
-                        opaProdStatus: opaProdStatus,
-                    })
-                })
-                    .then(resp => resp.json())
-                    .then(body => {
-                        const { successful } = body;
-                        const msg = document.querySelector("#msg");
-                        if (successful) {
-                            console.log("更新成功");
-                        } else {
-                            console.log("更新失敗");
-                        }
-                    });
-            }
-        }
-    </script>
+                    {
+                        title: "商品編號",
+                        field: 'gpaProdNo',
+                        align: 'center',
+                        valign: 'middle'
+                    },
+                    {
+                        title: "商品名稱",
+                        field: 'gpaProdName',
+                        align: 'center',
+                        valign: 'middle'
+                    },
 
-    <script>
-        const addMsg = document.querySelector("#addMsg");
-        const slOpaPrcatsName = document.querySelector("#slOpaPrcatsName");
-        const addOpaProdName = document.querySelector("#addOpaProdName");
-        const addOpaProdStockQty = document.querySelector("#addOpaProdStockQty");
-        const addOpaProdPrice = document.querySelector("#addOpaProdPrice");
-        const addOpaProdContent = document.querySelector("#addOpaProdContent");
-        const addOpaProdUrl = document.querySelector("#addOpaProdUrl");
-        const btn_addProd_add_el = document.querySelector("#btnAdd");
-
-      
-
-        const btn_addProd_close_el = document.querySelector("#btnClose");
-        btn_addProd_close_el.addEventListener("click", function () {
-            let lightbox_el = document.querySelector("#addProd");
-            lightbox_el.classList.add("-none");
-            document.querySelector(".upload_img-wrap").innerHTML = "";
-        });
-
-        btn_addProd_add_el.addEventListener("click", async function () {
-            addMsg.textContent = "";
-            if (slOpaPrcatsName.selectedIndex === 0) {
-                addMsg.textContent = "請選擇商品類別";
-                return;
-            }
-            if (addOpaProdName.value.trim() === "") {
-                addMsg.textContent = "請輸入商品名稱";
-                return;
-            }
-            if (addOpaProdStockQty.value.trim() === "") {
-                addMsg.textContent = "請輸入庫存數量";
-                return;
-            }
-            if (isNaN(addOpaProdStockQty.value.trim())) {
-                addMsg.textContent = "庫存數量輸入錯誤";
-                return;
-            }
-            if (addOpaProdPrice.value.trim() === "") {
-                addMsg.textContent = "請輸入商品價格";
-                return;
-            }
-            if (isNaN(addOpaProdPrice.value.trim())) {
-                addMsg.textContent = "商品價格輸入錯誤";
-                return;
-            }
-            if (addOpaProdContent.value.trim() === "") {
-                addMsg.textContent = "請輸入商品內容";
-                return;
-            }
-            if (addOpaProdUrl.value.trim() === "") {
-                addMsg.textContent = "請輸入商品網址";
-                return;
-            }
-            let opaProdNo;
-            fetch("/BuyGo/api/opa/prod/add", {
+                    {
+                        title: "商品類別",
+                        field: 'gpaCatsNo',
+                        align: 'center',
+                        valign: 'middle',
+                        formatter: prodCats
+                    },
+                    // {
+                    //     title: "商品狀態",
+                    //     field: 'opaProdStatus',
+                    //     align: 'center',
+                    //     valign: 'middle'
+                        
+                    // },
+                    {
+                        title: "商品描述",
+                        field: 'gpaProdContent',
+                        align: 'center',
+                        valign: 'middle'
+                    },
+                    {
+                        title: "檢舉描述",
+                        field: 'gpaProdRpContent',
+                        align: 'center',
+                        valign: 'middle'
+                    },
+                    {
+                        title: "檢舉類別",
+                        field: 'gpaProdRpReason',
+                        align: 'center',
+                        valign: 'middle',
+                        formatter: reportCats
+                    },
+                ],
+            });
+            fetch("/BuyGo/api/back_end/gpa/report/ProdRpServlet", {
                 method: "POST",
-                headers: {
-                    "Content-Type": "application/json; charset=utf-8",
-                },
+                headers: { "Content-Type": "application/json; charset=utf-8" },
                 body: JSON.stringify({
-                    opaPrcatsNo: slOpaPrcatsName.value.trim(),
-                    opaProdName: addOpaProdName.value.trim(),
-                    opaProdStockQty: addOpaProdStockQty.value.trim(),
-                    opaProdPrice: addOpaProdPrice.value.trim(),
-                    opaProdContent: addOpaProdContent.value.trim(),
-                    opaProdUrl: addOpaProdUrl.value.trim(),
-                }),
-            })
-                .then(resp => resp.json())
+                    action: "show"
+                })
+            }).then(resp => resp.json())
                 .then(body => {
-                    const { successful } = body;
-                    if (successful) {
-                        let prpicsList = getImgBase64Array();
-                        if (prpicsList !== null) {
-                            for (let prpics of prpicsList) {
-                                prpics.opaProdNo = body.opaProdNo;
-                                addProdImgs(prpics);
-                            }
-                        }
-                        let lightbox_el = document.querySelector("#addProd");
-                        lightbox_el.classList.add("-none");
-                        location.reload();
-                    } else {
-                        addMsg.className = "error";
-                        addMsg.textContent = "新增商品失敗";
-                        document.querySelector(".upload_img-wrap").innerHTML = "";
-                    }
-                });
+                    console.log(body);
+
+                    $('#table').bootstrapTable('load', body);
+
+                })
         });
 
-        function addProdImgs(prpics) {
-            fetch("/BuyGo/api/opa/prpics/add",
-                {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json; charset=utf-8", },
-                    body: JSON.stringify(prpics)
-                })
-                .then(resp => resp.json())
-                .then(body => {
-                    const { successful } = body;
-                    if (!successful) {
-                        addMsg.className = "error";
-                        addMsg.textContent = "新增商品圖片失敗";
-                    }
-                });
-        }
+
+
+
     </script>
-
     <script>
-        function onRemoveClick(opaProdNo) {
-            if (!confirm("確定刪除編號" + opaProdNo + "?")) {
-                return;
-            }
-
-            fetch("/BuyGo/api/opa/prod/selectById", {
+        const select = document.getElementById("select");
+        select.addEventListener("change", function () {
+            console.log(select.value);
+            fetch("/BuyGo/api/back_end/gpa/report/ProdRpServlet", {
                 method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ opaProdNo })
-            })
-                .then(resp => resp.json())
+                headers: { "Content-Type": "application/json; charset=utf-8" },
+                body: JSON.stringify({
+                    action: "selectSell",
+                    prodSell: select.value
+                })
+            }).then(resp => resp.json())
                 .then(body => {
-                    console.log(body.prpicsList);
-                    for (let prpics of body.prpicsList) {
-                        fetch("/BuyGo/api/opa/prpics/remove", {
-                            method: "POST",
-                            headers: { "Content-Type": "application/json" },
-                            body: JSON.stringify({ opaPrpicsNo: prpics.opaPrpicsNo })
-                        })
-                            .then(resp => resp.json())
-                            .then(body => {
-                                if (!body.successful) {
-                                    console.log(body.message);
-                                }
-                            });
-                    }
+                    console.log(body);
+                    $('#table').bootstrapTable('load', body);
                 })
-                .then(() => {
-                    fetch("/BuyGo/api/opa/prod/remove", {
-                        method: "POST",
-                        headers: { "Content-Type": "application/json" },
-                        body: JSON.stringify({ opaProdNo })
-                    })
-                        .then(resp => resp.json())
-                        .then(body => {
-                            if (body.successful) {
-                                location.reload();
-                            } else {
-                                console.log(body.message);
-                            }
-                        });
-                });
-        }
+        })
+
     </script>
+  
+    
 
-    <script>
-        function openSearchProd() {
-            let data = [];
-            const sOpaProdName = document.querySelector("#sOpaProdName");
-            if (sOpaProdName.value.trim() === "") {
-                location.reload();
-            } else {
-                fetch("/BuyGo/api/opa/prod/selectByName", {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json; charset=utf-8",
-                    },
-                    body: JSON.stringify({
-                        opaProdName: sOpaProdName.value.trim(),
-                    }),
-                })
-                    .then(resp => resp.json())
-                    .then(datas => {
-                        for (let i = 0; i < datas.length; i++) {
-                            let prpics_url = datas[i].prpicsList[0].opaProdPicture !== null ? datas[i].prpicsList[0].opaProdPicture : "../ ../back_end/img/Image_not_availab le.png";
-                            let prod = {
-                                prpics: `<img src="${prpics_url}" alt="error" style="width: 50px; height: 50px;">`,
-                                opaProdNo: `<p class="p_opaProdNo">${datas[i].opaProdNo}</p>`,
-                                opaProdName: datas[i].opaProdName,
-                                opaProdStockQty: datas[i].opaProdStockQty,
-                                opaProdPrice: datas[i].opaProdPrice,
-                                opaPrcatsName: datas[i].prcats.opaPrcatsName,
-                                opaProdStatus: getToggleStatusStr(datas[i].opaProdStatus),
-                                opaProdUpdate: datas[i].opaProdUpdate,
-                                action: `<button id="btnDetail_${datas[i].opaProdNo}" class="find_but" onclick="onDetailClick(${datas[i].opaProdNo})">商品詳情</button>  <button id="btnDel_${datas[i].opaProdNo}" class="find_but" onclick="onRemoveClick(${datas[i].opaProdNo})">刪除</button>`
-                            }
-                            data.push(prod);
-                        }
-                        $('#prod_table').html(`<table id="table" class="table_style" style="margin: 0 auto"></table>`);
-                        $('#table').bootstrapTable({
-                            method: "get",
-                            striped: true,
-                            singleSelect: false,
-                            pagination: true, //分頁
-                            pageSize: 10,
-                            pageNumber: 1,
-                            search: false, //顯示搜索框
-                            contentType: "application/x-www-form-urlencoded",
-                            queryParams: null,
-                            columns: [
-                                // {
-                                //     checkbox: "true",
-                                //     field: 'check',
-                                //     align: 'center',
-                                //     valign: 'middle'
-                                // },
-                                {
-                                    title: "商品圖片",
-                                    field: 'prpics',
-                                    align: 'center',
-                                    valign: 'middle'
-                                },
-                                {
-                                    title: "商品編號",
-                                    field: 'opaProdNo',
-                                    align: 'center',
-                                    valign: 'middle'
-                                },
-                                {
-                                    title: "商品名稱",
-                                    field: 'opaProdName',
-                                    align: 'center',
-                                    valign: 'middle'
-                                },
-                                {
-                                    title: "庫存數量",
-                                    field: 'opaProdStockQty',
-                                    align: 'center',
-                                    valign: 'middle'
-                                },
-                                {
-                                    title: "商品價格",
-                                    field: 'opaProdPrice',
-                                    align: 'center',
-                                    valign: 'middle'
-                                },
-                                {
-                                    title: "商品類別",
-                                    field: 'opaPrcatsName',
-                                    align: 'center',
-                                    valign: 'middle'
-                                },
-                                {
-                                    title: "商品狀態",
-                                    field: 'opaProdStatus',
-                                    align: 'center',
-                                    valign: 'middle'
-                                },
-                                {
-                                    title: "更新日期",
-                                    field: 'opaProdUpdate',
-                                    align: 'center',
-                                    valign: 'middle'
-                                },
-                                {
-                                    title: "",
-                                    field: 'action',
-                                    align: 'center',
-                                    valign: 'middle'
-                                }
-                            ],
-                            data: data
-                        });
-                    });
-            }
-        }
-    </script>
 
-    <script>
-        var imgBase64Array = [];
-        function getImgBase64Array() {
-            const add_img_els = document.querySelectorAll(".add_img-bg");
-            imgBase64Array = [];
-            for (let add_img_el of add_img_els) {
-                let style = add_img_el.currentStyle || window.getComputedStyle(add_img_el, false);
-                let img_url = style.backgroundImage.slice(4, -1).replace(/"/g, "");
-                let prpics = {
-                    opaProdNo: null,
-                    opaProdPicture: img_url
-                }
-                imgBase64Array.push(prpics);
-            }
-            return imgBase64Array;
-        }
-    </script>
-
-    <script>
-        $(document).ready(function () {
-            ImgUpload();
-        });
-
-        function ImgUpload() {
-            var imgWrap = "";
-            var imgArray = [];
-
-            $('.upload_inputfile').each(function () {
-                $(this).on('change', function (e) {
-                    imgWrap = $(this).closest('.upload_box').find('.upload_img-wrap');
-                    var maxLength = $(this).attr('data-max_length');
-
-                    var files = e.target.files;
-                    var filesArr = Array.prototype.slice.call(files);
-                    var iterator = 0;
-                    filesArr.forEach(function (f, index) {
-
-                        if (!f.type.match('image.*')) {
-                            return;
-                        }
-
-                        if (imgArray.length > maxLength) {
-                            return false;
-                        } else {
-                            var len = 0;
-                            for (var i = 0; i < imgArray.length; i++) {
-                                if (imgArray[i] !== undefined) {
-                                    len++;
-                                }
-                            }
-                            if (len > maxLength) {
-                                return false;
-                            } else {
-                                imgArray.push(f);
-
-                                var reader = new FileReader();
-                                reader.onload = function (e) {
-                                    var html = "<div class='upload_img-box'><div style='background-image: url(" + e.target.result + ")' data-number='" + $(".upload_img-close").length + "' data-file='" + f.name + "' class='img-bg add_img-bg'><div class='upload_img-close'></div></div></div>";
-                                    imgWrap.append(html);
-                                    iterator++;
-                                }
-                                reader.readAsDataURL(f);
-                            }
-                        }
-                    });
-                });
-            });
-
-            $('body').on('click', ".upload_img-close", function (e) {
-                var file = $(this).parent().data("file");
-                for (var i = 0; i < imgArray.length; i++) {
-                    if (imgArray[i].name === file) {
-                        imgArray.splice(i, 1);
-                        break;
-                    }
-                }
-                $(this).parent().parent().remove();
-            });
-        }
-    </script>
-    <script>
-        function viewImgs(img_id) {
-            var main = document.getElementById("img_main_view");
-            main.src = img_id.src;
-        }
-    </script>
 </body>
 
 </html>

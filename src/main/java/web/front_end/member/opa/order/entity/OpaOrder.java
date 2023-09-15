@@ -15,10 +15,12 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import core.entity.Core;
+
 
 @Entity
 @Table(name = "opa_so", catalog = "buygo")
-public class OpaOrder implements java.io.Serializable {
+public class OpaOrder extends Core implements java.io.Serializable {
 
 	private static final long serialVersionUID = 4459406926089661360L;
 	private Integer opaSoNo;
@@ -75,7 +77,7 @@ public class OpaOrder implements java.io.Serializable {
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
 
-	@Column(name = "OPA_SO_NO", unique = true, nullable = false)
+	@Column(name = "OPA_SO_NO", unique = true, nullable = false, insertable = false, updatable = false)
 	public Integer getOpaSoNo() {
 		return this.opaSoNo;
 	}
@@ -84,7 +86,7 @@ public class OpaOrder implements java.io.Serializable {
 		this.opaSoNo = opaSoNo;
 	}
 
-	@Column(name = "MEMBER_NO", nullable = false)
+	@Column(name = "MEMBER_NO", nullable = false, updatable = false)
 	public int getMemberNo() {
 		return this.memberNo;
 	}
@@ -103,7 +105,7 @@ public class OpaOrder implements java.io.Serializable {
 	}
 
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "OPA_SO_DATE", length = 19)
+	@Column(name = "OPA_SO_DATE", length = 19, insertable = false)
 	public Date getOpaSoDate() {
 		return this.opaSoDate;
 	}
@@ -139,7 +141,7 @@ public class OpaOrder implements java.io.Serializable {
 		this.opaFirAmount = opaFirAmount;
 	}
 
-	@Column(name = "OPA_SEC_AMOUNT")
+	@Column(name = "OPA_SEC_AMOUNT", insertable = false)
 	public Integer getOpaSecAmount() {
 		if(this.opaSecAmount == null)
 			return 0;
@@ -150,7 +152,7 @@ public class OpaOrder implements java.io.Serializable {
 		this.opaSecAmount = opaSecAmount;
 	}
 
-	@Column(name = "OPA_TOTAL")
+	@Column(name = "OPA_TOTAL", insertable = false)
 	public Integer getOpaTotal() {
 		return this.opaTotal;
 	}
@@ -159,7 +161,7 @@ public class OpaOrder implements java.io.Serializable {
 		this.opaTotal = opaTotal;
 	}
 
-	@Column(name = "OPA_REAL_TOTAL")
+	@Column(name = "OPA_REAL_TOTAL", insertable = false)
 	public Integer getOpaRealTotal() {
 		return this.opaRealTotal;
 	}
@@ -213,7 +215,7 @@ public class OpaOrder implements java.io.Serializable {
 		this.opaOrderdetailses = opaOrderdetailses;
 	}
 
-	@Column(name = "OPA_FAILED_REASON", nullable = true)
+	@Column(name = "OPA_FAILED_REASON", nullable = true, insertable = false)
 	public Integer getOpaFailedReason() {
         return this.opaFailedReason;
     }

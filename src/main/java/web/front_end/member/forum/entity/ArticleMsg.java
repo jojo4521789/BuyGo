@@ -1,7 +1,6 @@
 package web.front_end.member.forum.entity;
 
 import javax.persistence.*;
-
 import core.entity.Core;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -24,7 +23,7 @@ public class ArticleMsg extends Core {
 	private Integer messageNumber;
 
 	@Column(name = "ARTICLE_NO")
-	private Integer article;
+	private Integer articleNo;
 
 	@Column(name = "MEMBER_NO")
 	private Integer member;
@@ -32,10 +31,10 @@ public class ArticleMsg extends Core {
 	@Column(name = "MSG_CONTENT")
 	private String content;
 
-	@Column(name = "MSG_TIME", insertable = false)
+	@Column(name = "MSG_TIME", insertable = false, updatable = false)
 	private Timestamp messageTime;
 
-	@Column(name = "MSG_STAT", nullable = false, columnDefinition = "TINYINT default 0")
+	@Column(name = "MSG_STAT", insertable = false, columnDefinition = "TINYINT default 0")
 	private Integer messageStatus;
 
 	@Column(name = "MSG_UPDATE", insertable = false)

@@ -11,11 +11,11 @@ import web.front_end.member.acc.entity.Member;
 import web.front_end.member.pa.prod.entity.PaProd;
 
 @Entity
-@Table(name = "pa_so")
 @Setter
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
+@Table(name = "pa_so")
 public class PaSo extends Core{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -1,26 +1,38 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
-                                         "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
-    <session-factory>
-    	<!--JDBC -->
-        <property name="hibernate.connection.driver_class">com.mysql.cj.jdbc.Driver</property>
-        <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/buygo?serverTimezone=Asia/Taipei</property>
-        <property name="hibernate.connection.username">root</property>
-        <property name="hibernate.connection.password">root</property>
-        
-        <!-- JNDI -->
-<!-- 		<property name="hibernate.connection.datasource">java:comp/env/jdbc/buyGo</property>  -->
-
+	<session-factory>
+		<!-- JDBC -->
+		<property name="hibernate.connection.driver_class">com.mysql.cj.jdbc.Driver</property>
+		<property name="hibernate.connection.url">jdbc:mysql://localhost:3306/buygo?serverTimezone=Asia/Taipei
+		</property>
+		<property name="hibernate.connection.username">root</property>
+		<property name="hibernate.connection.password">root</property>
+		<!-- JNDI -->
+		<!-- <property name="hibernate.connection.datasource">java:comp/env/jdbc/buyGo</property> -->
 		<property name="hibernate.current_session_context_class">thread</property>
-        
-        <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
-        <property name="hibernate.show_sql">true</property>
-        <property name="hibernate.format_sql">true</property>
-        <property name="hibernate.highlight_sql">true</property>
-        
-        <mapping class="web.back_end.lpa.order.entity.Lpa_Prod" />
-        <mapping class="web.back_end.lpa.order.entity.Lpa_SO" />
-        
-    </session-factory>
+		<property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+		<property name="hibernate.show_sql">true</property>
+		<property name="hibernate.format_sql">true</property>
+		<property name="hibernate.highlight_sql">true</property>
+
+		<mapping class="web.front_end.member.pa.req.entity.MPaReq" />
+
+		<mapping class="web.front_end.member.pa.prod.entity.PaProd" />
+		<mapping class="web.front_end.member.pa.prodpic.entity.ProdPic" />
+
+		<mapping class="web.back_end.opa.prod.entity.Prcats" />
+		<mapping class="web.back_end.opa.prod.entity.Prod" />
+		<mapping class="web.back_end.opa.prod.entity.Prpics" />
+		
+		<mapping class="web.front_end.member.acc.entity.Member" />
+		
+		<mapping class="web.front_end.member.opa.cart.entity.OpaCart" />
+		
+		<mapping class="web.front_end.member.pa.cart.entity.PaCart" />
+		<mapping class="web.front_end.member.pa.cart.entity.PaCartId" />
+
+		<!-- <mapping class="web.front_end.homepage.exchange.Exchange" /> -->
+		<!-- <mapping class="web.front_end.member.pa.cart.PaCart" /> -->
+		<!-- <mapping class="web.front_end.seller.pa.req.PaReq" /> -->
+
+	</session-factory>
 </hibernate-configuration>

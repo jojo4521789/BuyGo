@@ -20,3 +20,10 @@ BuyGo/.settings/
 Servers/.settings/
 .settings/
 src/main/java/Test_DataSource.java
+src/main/java/app/TestApp.java
+src/main/webapp/front_end/pages/guest/pa/paProds/other/common/font/
+src/main/webapp/front_end/pages/guest/pa/paProds/other/common/fonts/glyphicons-halflings-regular.html
+src/main/webapp/front_end/pages/guest/pa/paProds/other/common/_menu.json
+src/main/webapp/front_end/pages/guest/pa/paProds/other/common/_tree.json
+src/main/webapp/front_end/pages/guest/pa/paProds/other/common/fonts/glyphicons-halflings-regular-2.html
+src/main/webapp/front_end/pages/guest/pa/paProds/other/common/

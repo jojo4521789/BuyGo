@@ -4,9 +4,9 @@ $().ready(function () {
         type: "GET",
         success: function (data) {
             if (!data.successful) {
-                data.total = "Error";
-                data.current = "Error";
-                data.pending = "Error";
+                data.totalBalance = "Error";
+                data.currentBalance = "Error";
+                data.pendingTransaction = "Error";
             }
             $("#total").text(data.totalBalance);
             $("#current").text(data.currentBalance);

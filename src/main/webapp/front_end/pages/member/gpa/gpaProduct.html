@@ -157,7 +157,8 @@
 
 		/* Image Slider CSS End */
 		/*-----------------燈箱css開始-----------------*/
-		#lightbox {
+		#lightbox,
+		#orderNowLightbox {
 			/*   border: 1px solid red; */
 			position: fixed;
 			top: 0;
@@ -172,7 +173,8 @@
 		}
 
 		/* 元素 article 置中及基本樣式 */
-		#lightbox>article {
+		#lightbox>article,
+		#orderNowLightbox>article {
 			background-color: white;
 			width: 90%;
 			max-width: 350px;
@@ -551,15 +553,14 @@
 										</ul>
 
 										<ul class="inline-li li-m-r-l m-t-lg">
-											<li><a id="rpProd" href="#"
-													class="btn btn-default btn-lg btn-round add-to-cart"
-													style="background: #be3232">檢舉商品</a>
+											<li><button id="Rp_btn" class="btn btn-default btn-lg btn-round add-to-cart"
+													style="background: #be3232">檢舉商品</button>
 											</li>
 											<li><a id="track" href="#"
 													class="btn btn-warning btn-lg btn-round add-to-cart">加入追蹤</a>
 											</li>
 											<li><a id="orderNow" href="#" class="btn btn-default btn-lg btn-round"
-													onclick="orderNow()">立即預定</a>
+													onclick="showOrderNow()">立即預定</a>
 											</li>
 										</ul>
 
@@ -570,6 +571,49 @@
 
 									</figure>
 								</article>
+								<!-- 燈箱開始 -->
+								<!-- <div id="lightbox" class="none" style="z-index:9999;">
+									<article id="lightboxContentArea">
+										<div id="gpaReachList"></div>
+										<button id="lightbox_close">關閉</button>
+									</article>
+								</div> -->
+								<!-- 燈箱結束 -->
+								<!-- 燈箱表單 -->
+								<div id="lightbox" class="none" style="z-index:9999;">
+									<article id="lightboxContentArea">
+										<button id="lightbox_close" class="close-button">關閉</button>
+
+										<select id="selectSausage">
+											<option value="1">一般商場</option>
+											<option value="2">揪團商場</option>
+										</select><br>
+										<span>商品編號:</span><input type="text"><br>
+										<span>檢舉人編號:</span><input type="text"><br>
+										<select id="reportReason">
+											<option value="0">0: 藥品, 醫療器材</option>
+											<option value="1">1: 酒類 / 菸類商品</option>
+											<option value="2">2: 武器 / 彈藥 / 軍事用品</option>
+											<option value="3">3: 活體動物, 保育動物及其製品</option>
+											<option value="4">4: 導向外部資訊或交易</option>
+											<option value="5">5: 此商品可能令人感到不適或違反善良風俗</option>
+											<option value="6">6: 仿冒品</option>
+											<option value="7">7: 重覆刊登/複製他人商品圖文</option>
+											<option value="8">8: 違反鑑賞期</option>
+											<option value="9">9: 疫區/國外肉製, 蛋, 海鮮, 寵物食品</option>
+											<option value="10">10: 刷單製造不實銷量</option>
+											<option value="11">11: 濫用文字誤導搜尋</option>
+											<option value="12">12: NCC/BSMI認證字號未填寫</option>
+											<option value="13">13: 誇大不實療效/涉及醫療效能</option>
+											<option value="14">14:其他</option>
+										</select>
+										<label for="reportContent">檢舉理由：</label>
+										<textarea id="reportContent" name="reportContent" required></textarea>
+										<button type="button" id="submit_report">提交檢舉</button>
+
+									</article>
+								</div>
+								<!-- 燈箱結束-->
 							</section>
 						</div>
 						<!-- // PRODUCT DETAILS -->
@@ -710,14 +754,68 @@
 
 	</div>
 	<!-- // PAGE WRAPPER -->
-	<!-- 燈箱開始 -->
+	<!-- 達標燈箱開始 -->
 	<div id="lightbox" class="none" style="z-index:9999;">
 		<article id="lightboxContentArea">
 			<div id="gpaReachList"></div>
 			<button id="lightbox_close">關閉</button>
 		</article>
 	</div>
-	<!-- 燈箱結束 -->
+	<!-- 達標燈箱結束 -->
+	<!-- 預定燈箱開始 -->
+	<div id="orderNowLightbox" class="none" style="z-index:9999;">
+		<article id="orderNowLightboxContentArea">
+			<h3>運送資訊</h3>
+			<div style="margin: 10px 0px;">
+				<label for="shippingSelect" style="width: 100px" class="required">運送方式：</label>
+				<select id="shippingSelect" class="form-control" style="width: 150px; display: inline-block;">
+					<option>黑貓宅急便</option>
+				</select>
+			</div>
+			<div style="margin: 10px 0px;">
+				<label for="gpaBuyName" style="width: 100px" class="required">收貨人：</label>
+				<!-- <input id="gpaBuyName" type="text"> -->
+				<input type="text" class="form-control" id="gpaBuyName" style="width: 100px; display: inline-block;">
+				<span id="gpaBuyNameCheck" style="color: red; visibility: hidden;">此欄位必須輸入</span>
+			</div>
+			<div style="margin: 10px 0px;">
+				<label for="gpaBuyTel" style="width: 100px" class="required">收貨人電話：</label>
+				<input type="text" class="form-control" id="gpaBuyTel" style="width: 100px; display: inline-block;">
+				<span id="gpaBuyTelCheck" style="color: red; visibility: hidden;">此欄位必須輸入</span>
+			</div>
+			<div style="margin: 10px 0px;">
+				<label for="gpaBuyAdd" style="width: 100px" class="required">收貨人地址：</label>
+				<input type="text" class="form-control" id="gpaBuyAdd" style="width: 100px; display: inline-block;">
+				<span id="gpaBuyAddCheck" style="color: red; visibility: hidden;">此欄位必須輸入</span>
+			</div>
+			<div>
+				<h5>運費：<span>100</span></h5>
+				<h4 style="color: red;">總金額：<span id="orderNowLightbox_totoalPrice"></span></h4>
+			</div>
+
+			<h3>付款方式</h3>
+
+			<div>
+				<input type="radio" id="contactChoice1" name="paymentMethodRadio" checked onclick="$('button#orderNowLightbox_walletconfirm').css('display', 'none'); $('button#orderNowLightbox_confirm').css('display', '');" />
+				<label for="contactChoice1">線上刷卡</label>
+			</div>
+			<div>
+				<input type="radio" id="contactChoice2" name="paymentMethodRadio" onclick="$('button#orderNowLightbox_walletconfirm').css('display', ''); $('button#orderNowLightbox_confirm').css('display', 'none');" />
+				<label for="contactChoice2">平台錢包</label>
+			</div>
+
+			<span id="gpaPreProdCheck" style="color: red; visibility: hidden;">該商品庫存量為0，不可預定</span>
+
+			<br>
+			
+			<button id="orderNowLightbox_confirm" type="button" class="btn btn-success"
+				onclick="orderNowByCreditCard()">進入結帳頁面</button>
+			<button id="orderNowLightbox_walletconfirm" type="button" class="btn btn-success"
+				onclick="orderNowByWallet()" style="display: none;">使用錢包支付</button>
+			<button id="orderNowLightbox_close" type="button" class="btn btn-danger">關閉</button>
+		</article>
+	</div>
+	<!-- 預定燈箱結束 -->
 
 	<!-- Essential Javascripts -->
 	<script src="../../../js/common/minified.js"></script>
@@ -752,13 +850,21 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
 
 	<script>
-		checkLoginStatusShowMemberAcct(); // 檢查客戶帳號是否登入，修改頁面右上方Log In/Log Out按鈕，顯示登入者帳號名稱
+		const loginData = checkLoginStatusShowMemberAcct(); // 檢查客戶帳號是否登入，修改頁面右上方Log In/Log Out按鈕，顯示登入者帳號名稱
 
+		let currentBuyerMemberNo = ""; // 全域變數，用以保存買家的memberNo
 		let currentSelectOfPic = 0; // 全域變數，用以記錄當前商品的照片選擇
 		let maxPicNumOfProd = 0; // 全域變數，用以記錄當前商品照片的最大數量
 		let currentGpaProdNo = 0; // 全域變數，用以記錄當前頁面的GpaProdNo
 		let currentGpaProdName = ""; // 全域變數，用以記錄當前頁面的商品名稱
 		let currentGpaProdPrice = 0; // 全域變數，用以記錄當前頁面的商品價格
+
+		loginData.then(function (memberDetail) { // 因取得memberNo為非同步(fetch後再收到伺服器返回值)，故須將有使用到memberDetail(矩陣[0]為memberNo, 矩陣[1]為memberAcct)的程式包在loginData內，確保程式是在memberNo收到值後才執行
+			let memberNo = memberDetail[0];
+			let memberAcct = memberDetail[1];
+
+			currentBuyerMemberNo = memberNo;
+		});
 
 		window.addEventListener("load", function () {
 
@@ -823,6 +929,10 @@
 						$("span#gpaEndDate").css("color", "red");
 					}
 
+					// if (gpaPreProd <= 0) { // 如果庫存數量小於等於0時，將預訂按鈕失效
+					// 	$("a#orderNow").attr("disabled", "disabled");
+					// }
+
 					$("button#addChatroom").attr("onclick", `addChatroom(${memberNo})`); // 於加入聊天室增加onclick事件，並回傳當前賣家的memberNo
 					$("button#addBlacklist").attr("onclick", `addBlacklist(${memberNo})`); // 於加入黑名單增加onclick事件，並回傳當前賣家的memberNo
 					$("button#gpaReach").attr("onclick", `showGpaReach()`); // 於加入黑名單增加onclick事件，並回傳當前賣家的memberNo
@@ -868,6 +978,7 @@
 							$("span#beforeProdPrice").css("text-decoration", "line-through"); // 新增刪除線
 							$("span#beforeProdPrice").css("display", ""); // 刪除隱藏(顯示出來)
 
+							
 							currentGpaProdPrice = gpaLevelPrice; // 將優惠價設置進全域變數
 
 							// 將已完成的達標條件依序印至燈箱內
@@ -882,6 +993,7 @@
 							`);
 						}
 					})
+					$("#orderNowLightbox_totoalPrice").text(Number(currentGpaProdPrice) + 100); // 將商品價格+運費100元顯示於預定燈箱的總金額
 					setRecommendedGpaProd(gpaCatsNo, currentParameterValue_gpaProdNo); // 設置推薦商品
 				});
 		});
@@ -1076,15 +1188,11 @@
 						<div class="entry-media">
 							<div class="hover" style="overflow: hidden">
 								<img src="data:image/jpeg;base64,${gpaProdPicToBase64}" class="entry-url">
-								<ul class="icons unstyled">
-									<li><a href="/BuyGo/front_end/pages/member/gpa/gpaProduct.html?gpaProdNo=${gpaProdNo}" class="circle" data-toggle="lightbox"> <i class="iconfont-search"></i>
-										</a></li>
-								</ul>
 							</div>
 						</div>
 						<div class="entry-main" style="border-bottom-left-radius: 10px; border-bottom-right-radius: 10px;">
 							<h5 class="entry-title">
-								<a href="../../product.html">${gpaProdName}</a>
+								<a href="/BuyGo/front_end/pages/member/gpa/gpaProduct.html?gpaProdNo=${gpaProdNo}">${gpaProdName}</a>
 							</h5>
 							<div class="entry-price">
 								<strong class="price" style="color: #fa6f57; margin: 0px 3px; font-weight: bold; ${specialPrice != 0 ? "" : "display: none;"}">$ ${specialPrice}</strong>
@@ -1166,22 +1274,246 @@
 			dots[index].classList.add("active_dot");
 		}
 
-		function orderNow() {
-			console.log("currentGpaProdNo:" + currentGpaProdNo);
-			console.log("currentGpaProdName:" + currentGpaProdName);
-			fetch("/BuyGo/ecpay/checkout",
+		function orderNowByCreditCard() {
+			let isCheckOK = true; // 用以判定輸入框是否都有輸入字
+			if ($("input#gpaBuyName").val() === "") {
+				$("span#gpaBuyNameCheck").css("visibility", "visible");
+				isCheckOK = false;
+			}
+			else {
+				$("span#gpaBuyNameCheck").css("visibility", "hidden");
+			}
+
+			if ($("input#gpaBuyTel").val() === "") {
+				$("span#gpaBuyTelCheck").css("visibility", "visible");
+				isCheckOK = false;
+			}
+			else {
+				$("span#gpaBuyTelCheck").css("visibility", "hidden");
+			}
+
+			if ($("input#gpaBuyAdd").val() === "") {
+				$("span#gpaBuyAddCheck").css("visibility", "visible");
+				isCheckOK = false;
+			}
+			else {
+				$("span#gpaBuyAddCheck").css("visibility", "hidden");
+			}
+
+			if (isCheckOK) { // 確認輸入框是否都有輸入字，若都有輸入則放行
+				// 信用卡付款
+				fetch("/BuyGo/api/front_end/gpaProd", // 判斷當前商品庫存是否為0
+					{
+						method: "POST",
+						headers: { "Content-Type": "application/json; charset=utf-8", },
+						body: JSON.stringify({
+							action: "loadGpaPreProdByGpaProdNo",
+							gpaProdNo: currentGpaProdNo
+						})
+					})
+					.then(resp => resp.json())
+					.then(newGpaProd => {
+						let { gpaPreProd } = newGpaProd;
+						console.log("gpaPreProd:" + gpaPreProd);
+						if (gpaPreProd > 0) {
+							ecpayCheckout(); // 呼叫綠界付款function(該function內含訂單建立)
+						}
+						else {
+							$("span#gpaPreProdCheck").css("visibility", "visible"); // 顯示錯誤訊息
+						}
+					})
+			}
+		}
+
+		function orderNowByWallet() { // 使用錢包付款
+			let isCheckOK = true; // 用以判定輸入框是否都有輸入字
+			if ($("input#gpaBuyName").val() === "") {
+				$("span#gpaBuyNameCheck").css("visibility", "visible");
+				isCheckOK = false;
+			}
+			else {
+				$("span#gpaBuyNameCheck").css("visibility", "hidden");
+			}
+
+			if ($("input#gpaBuyTel").val() === "") {
+				$("span#gpaBuyTelCheck").css("visibility", "visible");
+				isCheckOK = false;
+			}
+			else {
+				$("span#gpaBuyTelCheck").css("visibility", "hidden");
+			}
+
+			if ($("input#gpaBuyAdd").val() === "") {
+				$("span#gpaBuyAddCheck").css("visibility", "visible");
+				isCheckOK = false;
+			}
+			else {
+				$("span#gpaBuyAddCheck").css("visibility", "hidden");
+			}
+
+			if (isCheckOK) { // 確認輸入框是否都有輸入字，若都有輸入則放行
+				fetch("/BuyGo/api/front_end/gpaProd", // 判斷當前商品庫存是否為0
+					{
+						method: "POST",
+						headers: { "Content-Type": "application/json; charset=utf-8", },
+						body: JSON.stringify({
+							action: "loadGpaPreProdByGpaProdNo",
+							gpaProdNo: currentGpaProdNo
+						})
+					})
+					.then(resp => resp.json())
+					.then(newGpaProd => {
+						let { gpaPreProd } = newGpaProd;
+						console.log("gpaPreProd:" + gpaPreProd);
+						if (gpaPreProd > 0) {
+							deductionWalletAmount(); // 呼叫錢包扣款function(該function內含訂單建立)
+						}
+						else {
+							$("span#gpaPreProdCheck").css("visibility", "visible"); // 顯示錯誤訊息
+						}
+					})
+			}
+		}
+
+		function createGpaOrder() {
+			let shippingDetail = currentBuyerMemberNo + "," + currentGpaProdNo + "," + "1" + "," + Number(currentGpaProdPrice) + "," + "100" + "," + $("input#gpaBuyName").val() + "," + $("input#gpaBuyTel").val() + "," + $("input#gpaBuyAdd").val();
+			// shippingDetailArray[0]為下單購買商品的買家會員編號
+			// shippingDetailArray[1]為欲購買的商品編號
+			// shippingDetailArray[2]為欲購買的商品數量
+			// shippingDetailArray[3]為欲購買的商品金額(單價)
+			// shippingDetailArray[4]為運費
+			// shippingDetailArray[5]為買家設定的收貨人
+			// shippingDetailArray[6]為買家設定的收貨電話
+			// shippingDetailArray[7]為買家設定的收貨地址
+			fetch(`/BuyGo/api/front_end/ECPayUpdateGpaOrder?ShippingDetail=${shippingDetail}`,
+				{
+					method: "GET",
+					headers: { "Content-Type": "application/json; charset=utf-8", },
+				})
+				.then(resp => resp.json())
+				.then(gpaSo => {
+					let { successful } = gpaSo;
+					console.log("successful:" + successful);
+				})
+		}
+
+		function deductionWalletAmount() {
+			// 電子錢包付款
+			fetch("/BuyGo/needLoginApi/front_end/deductionWalletAmount",
 				{
 					method: "POST",
 					headers: { "Content-Type": "application/json; charset=utf-8", },
 					body: JSON.stringify({
-						TotalAmount: currentGpaProdPrice,
+						memberNo: currentBuyerMemberNo,
+						walletDetail: "購買" + currentGpaProdName,
+						deductionAmount: (Number(currentGpaProdPrice) + 100)
+					})
+				})
+				.then(response => {
+					if (response.status === 401) {
+						// 客戶未登入，執行頁面重定向到登入頁
+						notLoggedInAction();
+					} else if (response.ok) {
+						// 請求成功
+						return response.json();
+					} else {
+						alert("錯誤狀態:" + response.status);
+						return;
+					}
+				})
+				.then(deductionWalletAmountDTO => {
+					let { successful, message } = deductionWalletAmountDTO;
+					if (successful) {
+						createGpaOrder(); // 建立訂單
+						// decreaseGpaPreProdByGpaProdNo(); // 庫存量-1
+						$("span#gpaPreProd").text(Number($("span#gpaPreProd").text()) + 1); // 動態將畫面上的已預定數量+1
+						$("span#stockQty").text(Number($("span#stockQty").text()) - 1); // 動態將畫面上的庫存數量-1
+
+						orderNowLightbox_el.classList.add("none"); // 關閉燈箱
+
+						const swalWithBootstrapButtons = Swal.mixin({
+							customClass: {
+								confirmButton: 'btn btn-success',
+								cancelButton: 'btn btn-danger'
+							},
+							buttonsStyling: false
+						})
+
+						swalWithBootstrapButtons.fire({
+							title: '商品預定成功',
+							text: `${message}，是否進入訂單追蹤頁面?`,
+							icon: 'success',
+							showCancelButton: true,
+							confirmButtonText: '好的，現在進入',
+							cancelButtonText: '先不用',
+							reverseButtons: true
+						}).then((result) => {
+							if (result.isConfirmed) {
+								// 同意
+								window.location.href = '/BuyGo/front_end/pages/member/gpa/gpaOrder.html'; // 跳轉至聊天室頁面url
+							}
+						})
+					}
+					else {
+						orderNowLightbox_el.classList.add("none"); // 關閉燈箱
+
+						// sweetalert
+						Swal.fire({
+							icon: 'error',
+							title: `商品預定失敗`,
+							text: `${message}`
+						})
+					}
+				});
+		}
+
+		function decreaseGpaPreProdByGpaProdNo() { // 將指定的商品No的庫存數量-1，保存至資料庫
+			fetch("/BuyGo/api/front_end/gpaProd",
+				{
+					method: "POST",
+					headers: { "Content-Type": "application/json; charset=utf-8", },
+					body: JSON.stringify({
+						action: "decreaseGpaPreProdByGpaProdNo",
+						gpaProdNo: currentGpaProdNo
+					})
+				})
+		}
+
+		function ecpayCheckout() { // 綠界付款動作，將呼叫綠界付款畫面
+			fetch("/BuyGo/needLoginApi/ecpay/checkout",
+				{
+					method: "POST",
+					headers: { "Content-Type": "application/json; charset=utf-8", },
+					body: JSON.stringify({
+						TotalAmount: Number(currentGpaProdPrice) + 100,
 						TradeDesc: "交易描述",
 						ItemName: currentGpaProdName,
+						ClientBackURL: location.protocol + "//" + location.hostname + ":" + location.port + "/BuyGo/front_end/pages/member/gpa/gpaOrder.html", // 成功付款後導到訂單追蹤頁面
 						CustomField1: "gpaOrderCheckout",
 						CustomField2: "orderId",
-						CustomField3: "Alan" + "," + "0974185296" + "," + "Taipei"
+						CustomField3: currentBuyerMemberNo + "," + currentGpaProdNo + "," + "1" + "," + Number(currentGpaProdPrice) + "," + "100" + "," + $("input#gpaBuyName").val() + "," + $("input#gpaBuyTel").val() + "," + $("input#gpaBuyAdd").val()
+						// CustomField3[0]為下單購買商品的買家會員編號
+						// CustomField3[1]為欲購買的商品編號
+						// CustomField3[2]為欲購買的商品數量
+						// CustomField3[3]為欲購買的商品金額(單價)
+						// CustomField3[4]為運費
+						// CustomField3[5]為買家設定的收貨人
+						// CustomField3[6]為買家設定的收貨電話
+						// CustomField3[7]為買家設定的收貨地址
 					})
-				}).then(resp => resp.json())
+				})
+				.then(response => {
+					if (response.status === 401) {
+						// 客戶未登入，執行頁面重定向到登入頁
+						notLoggedInAction();
+					} else if (response.ok) {
+						// 請求成功
+						return response.json();
+					} else {
+						alert("錯誤狀態:" + response.status);
+						return;
+					}
+				})
 				.then(data => {
 					console.log(data);
 					window.open(data); //開啟綠界付款網址
@@ -1191,26 +1523,86 @@
 		function showGpaReach() {
 			$("#lightbox").removeClass("none"); // 顯示燈箱
 		}
+		function showOrderNow() {
+			$("#orderNowLightbox").removeClass("none"); // 顯示燈箱
+		}
 
 		// 燈箱事件開始
-		// 點擊 modal 中的半透明黑色區域，關閉燈箱
+		// 點擊 modal 中的半透明黑色區域，關閉達標燈箱
 		let lightbox_el = document.getElementById("lightbox");
-		let lightbox_close_el = document.getElementById("lightbox_close");
 		lightbox_el.addEventListener("click", function () {
 			this.classList.add("none");
 		});
+		// 點擊 modal 中的半透明黑色區域，關閉預定燈箱
+		let orderNowLightbox_el = document.getElementById("orderNowLightbox");
+		orderNowLightbox_el.addEventListener("click", function () {
+			this.classList.add("none");
+		});
 
-		// 點擊燈箱內的關閉按鈕，關閉燈箱
+
+		// 點擊達標燈箱內的關閉按鈕，關閉達標燈箱
+		let lightbox_close_el = document.getElementById("lightbox_close");
 		lightbox_close_el.addEventListener("click", function () {
 			lightbox_el.classList.add("none");
 		})
+		// 點擊預定燈箱內的關閉按鈕，關閉預定燈箱
+		let orderNowLightbox_close_el = document.getElementById("orderNowLightbox_close");
+		orderNowLightbox_close_el.addEventListener("click", function () {
+			orderNowLightbox_el.classList.add("none");
+		})
 
-		// 點擊 lightbox 中的白色區域，不會關掉 modal
+
+		// 點擊達標燈箱中的白色區域，不會關掉 modal
 		lightbox_el.querySelector("article").addEventListener("click", function (e) {
 			e.stopPropagation();
 		});
+		// 點擊預定燈箱中的白色區域，不會關掉 modal
+		orderNowLightbox_el.querySelector("article").addEventListener("click", function (e) {
+			e.stopPropagation();
+		});
 		// 燈箱事件結束
+		//=============檢舉功能================
 
+		document.getElementById('Rp_btn').addEventListener('click', function () {
+			showGpaReach();
+			const reportReason = document.getElementById("reportReason");
+			const reportContent = document.getElementById("reportContent");
+			const selectSausage = document.getElementById("selectSausage");
+			lightbox.style.display = 'block';
+			document.getElementById("submit_report").addEventListener("click", function () {
+				let gpaProdNo = "";
+				let paProdNo = "";
+				if(selectSausage.value === 1){
+					gpaProdNo = currentParameterValue_gpaProdNo;
+				}else if(selectSausage.value === 2){
+					paProdNo = "2";//一般賣場詳細頁面的商品編號
+				}
+				fetch("/BuyGo/api/front_end/member/gpa/order/GpaProdRpIncrease", {
+					method: "POST",
+					headers: { 'Content-Type': 'application/json;charset:utf-8' },
+					body: JSON.stringify({
+						gpaProdNo: gpaProdNo,
+						memberNo: sellerMemberNo,
+						gpaProdRpContent: reportContent.value,
+						gpaProdRpReason: reportReason.value,
+						paProdNo: paProdNo,
+						prodSell: selectSausage.value
+					})
+				}).then(resp => resp.json())
+					.then(body => {
+						console.log(body);
+						Swal.fire(
+							'感謝您的建議!',
+							'已成功送出'
+						)
+						lightbox_el.classList.add("none");
+					})
+
+
+			})
+
+		});
+		//=============檢舉結束================
 	</script>
 
 </body>

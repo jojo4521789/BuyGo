@@ -178,13 +178,7 @@ if ( typeof Object.create !== "function" ) {
 			}, 500);
 		},
 
-		wrapItems : function(){
-			var base = this;
-			base.$userItems.wrapAll("<div class=\"owl-wrapper\">").wrap("<div class=\"owl-item\"></div>");
-			base.$elem.find(".owl-wrapper").wrap("<div class=\"owl-wrapper-outer\">");
-			base.wrapperOuter = base.$elem.find(".owl-wrapper-outer");
-			base.$elem.css("display","block");
-		},
+
 
 		baseClass : function(){
 			var base = this;

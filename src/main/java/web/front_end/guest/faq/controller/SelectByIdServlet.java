@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 import core.entity.Core;
 import web.front_end.guest.faq.entity.Faq;
 
-@WebServlet("/front_end/guest/faq/SelectById")
+@WebServlet("/api/front_end/guest/faq/SelectById")
 public class SelectByIdServlet extends HttpServlet{
 	private static final long serialVersionUID = 1L;
 	

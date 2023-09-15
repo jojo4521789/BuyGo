@@ -18,4 +18,5 @@ public interface GpaSoService extends CoreService{
 	Integer loadGpaSoCountBySellerMemberNoAndSoStatAndSearchStr(Integer memberNo, Integer soStat, String searchStr);
 	List<GpaSo> loadByMemberNoAndSoStatAndLimitAndOffsetAndSearchStr(Integer memberNo, Integer soStat, Integer limit, Integer offset, String searchStr);
 	List<GpaSo> loadBySellerMemberNoAndSoStatAndLimitAndOffsetAndSearchStr(Integer memberNo, Integer soStat, Integer limit, Integer offset, String searchStr);
+	Boolean addGpaSo(GpaSo gpaSo);
 }

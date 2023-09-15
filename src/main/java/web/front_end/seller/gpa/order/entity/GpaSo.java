@@ -59,10 +59,10 @@ public class GpaSo extends Core{
     @Column(name = "GPA_BUY_ADD")
     private String gpaBuyAdd;
 
-    @Column(name = "GPA_EVA_SELLER")
+    @Column(name = "GPA_EVA_SELLER", insertable = false)
     private Integer gpaEvaSeller;
 
-    @Column(name = "GPA_EVA_MEMBER")
+    @Column(name = "GPA_EVA_MEMBER", insertable = false)
     private Integer gpaEvaMember;
     
     @ManyToOne

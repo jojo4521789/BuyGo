@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import web.back_end.member.wallet.entity.WalletTransHist;
+import web.back_end.member.wallet.entity.BackEndWalletTransHist;
 import web.front_end.member.acc.entity.Member;
 
 @WebServlet("/api/back_end/modifyWalletAmount") // 後台會員登入加入後記得改
@@ -31,7 +31,7 @@ public class ModifyWalletAmountServlet extends HttpServlet{
 		Member member = json2Pojo(request, Member.class);
 		
 		// 新增資料進WalletTransHist Table開始
-		WalletTransHist walletTransHist = new WalletTransHist();
+		BackEndWalletTransHist walletTransHist = new BackEndWalletTransHist();
 		walletTransHist.setMemberNo(member.getMemberNo());
 		walletTransHist.setWalletDetail(member.getMessage()); // 設置備註內容
 		

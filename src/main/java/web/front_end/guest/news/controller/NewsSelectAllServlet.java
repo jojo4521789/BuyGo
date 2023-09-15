@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import web.front_end.guest.news.entity.News;
-@WebServlet("/front_end/guest/news/NewsSelectAll")
+@WebServlet("/api/front_end/guest/news/NewsSelectAll")
 public class NewsSelectAllServlet extends HttpServlet{
 	private static final long serialVersionUID = 1L;
 

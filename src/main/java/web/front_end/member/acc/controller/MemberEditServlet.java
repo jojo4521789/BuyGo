@@ -31,9 +31,9 @@ public class MemberEditServlet extends HttpServlet{
 		Member member = json2Pojo(req, Member.class);
 		String action = member.getAction();
 //		System.out.println(action +"AAAAAAAAAAAA");
+		HttpSession session = req.getSession(); // 取得當前請求的Session
+		member.setMemberNo((Integer)session.getAttribute("memberNo"));
 		if("show".equals(action)) {
-			HttpSession session = req.getSession(); // 取得當前請求的Session
-			member.setMemberNo((Integer)session.getAttribute("memberNo"));
 			member = SERVICE.selectById(member.getMemberNo());
 			writePojo2Json(resp, member);
 		}else if("checkPassword".equals(action)) {

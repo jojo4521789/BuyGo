@@ -48,7 +48,7 @@ public class GpaSoServiceImpl implements GpaSoService{
 		List<GpaSo> newGpaSoList = new LinkedList<GpaSo>(); 
 		for(GpaSo gpaSo : gpaSoList) {
 			Integer sellerMemberNo = gpaSo.getGpaProd().getMemberNo(); // 取得該訂單商品所屬賣家的memberNo
-			if(sellerMemberNo == memberNo) { // 如果該訂單所屬賣家的memberNo等於指定的賣家memberNo
+			if(sellerMemberNo.equals(memberNo)) { // 如果該訂單所屬賣家的memberNo等於指定的賣家memberNo
 				newGpaSoList.add(gpaSo);
 			}
 		}
@@ -77,5 +77,16 @@ public class GpaSoServiceImpl implements GpaSoService{
 			Integer offset, String searchStr) {
 		List<GpaSo> gpaSoList = dao.selectBySellerMemberNoAndSoStatAndLimitAndOffsetAndSearchStr(memberNo, soStat, limit, offset, searchStr);
 		return gpaSoList;
+	}
+
+	@Override
+	public Boolean addGpaSo(GpaSo gpaSo) {
+		int resultNum = dao.insert(gpaSo);
+		if(resultNum == 1) {
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 }

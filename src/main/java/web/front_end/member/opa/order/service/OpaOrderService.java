@@ -9,6 +9,7 @@ import web.front_end.member.notification.entity.Notification;
 
 public interface OpaOrderService extends CoreService {
 	public List<OpaOrder> findAll();
+	public OpaOrder findById(int id);
 	
 	public List<OpaOrder> [] findAllSoGroupByStatusByMember(int memberNo);
 	
@@ -20,6 +21,11 @@ public interface OpaOrderService extends CoreService {
     public List<OpaOrder> findAllOrderByStatus(int memberNo, List<Integer> status);
     public Notification getCancelNotification(int id);
 
-	public Integer save(OpaOrder order);
+	public OpaOrder save(OpaOrder order);
 	public OpaOrderdetailsId save(OpaOrderdetails orderdetails);
+	
+	OpaOrderdetails addOpaOrderdetails(OpaOrderdetails opaOrderdetails);
+	List<OpaOrderdetails> selectOrderdetailsByOpaSoNo(Integer opaSoNo);
+	OpaOrder update(OpaOrder opaOrder);
+	OpaOrder selectById(Integer opaSoNo);
 }
