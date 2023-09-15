@@ -38,6 +38,27 @@
 	<link rel="stylesheet" href="../../css/common/owl.theme.css">
 	<!-- // PARTICULAR PAGES CSS FILES -->
 	<link rel="stylesheet" href="../../css/common/responsive.css">
+	<style>
+		.logo img {
+			max-width: 200px;
+			max-height: 150px;
+		}
+
+		.user-menu a img {
+			max-width: 20px;
+			max-height: 20px;
+		}
+
+		ul.user-menu > li > a {
+			color: #ef7700;
+			font-weight: bold;
+			font-size: 25px;
+		}
+
+		a:hover {
+			color: #0150ed;
+		}
+	</style>
 </head>
 <body>
 			
@@ -54,9 +75,9 @@
 						<!-- CONTACT INFO -->
 						<div class="contact-info">
 							<i class="iconfont-headphones round-icon"></i>
-							<strong>+444 (100) 1234</strong>
+							<strong>(03)425-1108</strong>
 							<span>(Mon- Fri: 09.00 - 21.00)</span>
-							</div>
+						</div>
 						<!-- // CONTACT INFO -->
 					</div>
 					<div class="col-xs-12 col-sm-6 col-md-5">
@@ -68,7 +89,8 @@
 										<div class="input-iconed prepend">
 											<button class="input-icon"><i class="iconfont-search"></i></button>
 											<label for="input-search" class="placeholder">Search here…</label>
-											<input type="text" name="q" id="input-search" class="round-input full-width" required />
+											<input type="text" name="q" id="input-search"
+												class="round-input full-width" required />
 										</div>
 									</form>
 								</div>
@@ -79,7 +101,7 @@
 								<a href="javascript:void(0);" id="social-icons">
 									<i class="iconfont-share round-icon"></i>
 								</a>
-								
+
 								<div id="sub-social" class="sub-header">
 									<ul class="social-list unstyled text-center">
 										<li><a href="#"><i class="iconfont-facebook round-icon"></i></a></li>
@@ -96,20 +118,26 @@
 								<a href="javascript:void(0);" id="total-cart">
 									<i class="iconfont-shopping-cart round-icon"></i>
 								</a>
-								
+
 								<div id="sub-cart" class="sub-header">
 									<div class="cart-header">
 										<span>Your cart is currently empty.</span>
-										<small><a href="../../pages/member/cart.html">(See All)</a></small>
+										<small><a href="pages/member/opa/cart/cart.html">(See All)</a></small>
 									</div>
-									<ul class="cart-items product-medialist unstyled clearfix"></ul>
+									<!-- <ul class="cart-items product-medialist unstyled clearfix"></ul> -->
+									<ul class="s-cart-items product-medialist unstyled clearfix"></ul>
 									<div class="cart-footer">
-										<div class="cart-total clearfix">
+										<!-- <div class="cart-total clearfix">
+											<span class="pull-left uppercase">Total</span>
+											<span class="pull-right total">$ 0</span>
+										</div> -->
+										<div class="s-cart-total clearfix">
 											<span class="pull-left uppercase">Total</span>
 											<span class="pull-right total">$ 0</span>
 										</div>
 										<div class="text-right">
-											<a href="../../pages/member/cart.html" class="btn btn-default btn-round view-cart">View Cart</a>
+											<a href="pages/member/opa/cart/cart.html"
+												class="btn btn-default btn-round view-cart">查看購物車</a>
 										</div>
 									</div>
 								</div>
@@ -119,7 +147,7 @@
 					</div>
 				</div>
 			</div>
-			
+
 			<!-- ADD TO CART MESSAGE -->
 			<div class="cart-notification">
 				<ul class="unstyled"></ul>
@@ -133,13 +161,30 @@
 				<div class="main-header">
 					<!-- CURRENCY / LANGUAGE / USER MENU -->
 					<div class="actions">
-						<!-- 頁面右上功能區 -->
+						<div class="center-xs">
+
+						</div>
+						<div class="clearfix"></div><br>
+						<!-- USER RELATED MENU -->
+						<nav id="tiny-menu" class="clearfix">
+							<ul class="user-menu">
+								<li><a href="pages/member/myaccount.html" class="personal">我的帳戶<img
+											src="https://drive.google.com/uc?id=1EkcTLzseH_atgAiJ78ymmJoyuVUasGb7"></a>
+								</li>
+								<!-- <li><a href="pages/member/opa/cart/cart.html" class="paymoney">結帳<img
+											src="../front_end/img/common/paymoney.png"></a></li> -->
+								<li id="logInAndLogOut"><a href="pages/member/login.html" class="loginOut">登入<img
+											src="https://drive.google.com/uc?id=1uViDGF7OBfvCpNZp8pEcKFm5CmtAE8Pg"></a>
+								</li>
+							</ul><br>
+						</nav>
+						<!-- // USER RELATED MENU -->
 					</div>
 					<!-- // CURRENCY / LANGUAGE / USER MENU -->
 					<!-- SITE LOGO -->
 					<div class="logo-wrapper">
-						<a href="../../index-2.html" class="logo" title="GFashion - Responsive e-commerce HTML Template">
-							<img src="../../img/common/logo.png" alt="GFashion - Responsive e-commerce HTML Template" />
+						<a href="index-2.html" class="logo">
+							<img src="https://drive.google.com/uc?id=1fJM8iEd6uvE037YCUduSNE2Enm_2OUmW" />
 						</a>
 					</div>
 					<!-- // SITE LOGO -->
@@ -147,139 +192,26 @@
 					<nav id="site-menu" role="navigation">
 						<ul class="main-menu hidden-sm hidden-xs">
 							<li class="active">
-								<a href="../../index.html">Home</a>
+								<a href="index.html">首頁</a>
 							</li>
 							<li>
-								<a href="../../pages/guest/products.html">Women</a>
+								<a href="/BuyGo/front_end/pages/guest/pa/prods/prods.html">一般賣場</a>
 							</li>
 							<li>
-								<a href="../../pages/guest/products.html">Men</a>
-								
-								<!-- MEGA MENU -->
-								<div class="mega-menu" data-col-lg="9" data-col-md="12">
-									<div class="row">
-									
-										<div class="col-md-3">
-											<h4 class="menu-title">Clothing</h4>
-											<ul class="mega-sub">
-												<li><a href="../../pages/guest/products.html">Casual Wear</a></li>
-												<li><a href="../../pages/guest/products.html">Evening Wear</a></li>
-												<li><a href="../../pages/guest/products.html">Formal Attire</a></li>
-												<li><a href="../../pages/guest/products.html">Womens Jeans</a></li>
-												<li><a href="../../pages/guest/products.html">Mens Jeans</a></li>
-												<li><a href="../../pages/guest/products.html">Fall Styles</a></li>
-											</ul>
-										</div>
-										
-										<div class="col-md-3">
-											<h4 class="menu-title">Accessories</h4>
-											<ul class="mega-sub">
-												<li><a href="../../pages/guest/products.html">Casual Wear</a></li>
-												<li><a href="../../pages/guest/products.html">Evening Wear</a></li>
-												<li><a href="../../pages/guest/products.html">Formal Attire</a></li>
-												<li><a href="../../pages/guest/products.html">Womens Jeans</a></li>
-												<li><a href="../../pages/guest/products.html">Mens Jeans</a></li>
-												<li><a href="../../pages/guest/products.html">Fall Styles</a></li>
-											</ul>
-										</div>
-										
-										<div class="col-md-3">
-											<h4 class="menu-title">Brands</h4>
-											<ul class="mega-sub">
-												<li><a href="../../pages/guest/products.html">Casual Wear</a></li>
-												<li><a href="../../pages/guest/products.html">Evening Wear</a></li>
-												<li><a href="../../pages/guest/products.html">Formal Attire</a></li>
-												<li><a href="../../pages/guest/products.html">Womens Jeans</a></li>
-												<li><a href="../../pages/guest/products.html">Mens Jeans</a></li>
-												<li><a href="../../pages/guest/products.html">Fall Styles</a></li>
-											</ul>
-										</div>
-										
-										<div class="col-md-3">
-											<div class="carousel slide m-b" data-ride="carousel">
-												<div class="carousel-inner">
-													<div class="item active">
-														<img src="../../img/common/men/slide1.jpg" alt="" />
-													</div>
-													<div class="item">
-														<img src="../../img/common/men/slide2.jpg" alt="" />
-													</div>
-												</div>
-											</div>
-											<h5 class="text-semibold uppercase m-b-sm">Featured Products</h5>
-											<p>Lorem ipsum dolor sit, consectetur adipiscing elit. Etiam neque velit, blandit sed scelerisque.</p>
-											<a href="../../pages/guest/products.html" class="btn btn-default btn-round">Go to Shop →</a>
-										</div>
-										
-									</div>
-								</div>
-								<!-- // MEGA MENU -->
-								
+								<a href="pages/guest/opa/prods/prods.html">官方賣場</a>
 							</li>
 							<li>
-								<a href="../../pages/components.html">Components</a>
+								<a href="pages/components.html">揪團商場</a>
 							</li>
 							<li>
-								<a href="../../pages/guest/store-locator.html">Store Locator</a>
-							</li>
-							<li>
-								<a href="../../pages/guest/contact-us.html">Contact Us</a>
-							</li>
-							<li>
-								<a href="#">Buy Me!</a>
+								<a href="pages/components.html">論壇</a>
 							</li>
 						</ul>
-						
+
 						<!-- MOBILE MENU -->
 						<div id="mobile-menu" class="dl-menuwrapper visible-xs visible-sm">
 							<button class="dl-trigger"><i class="iconfont-reorder round-icon"></i></button>
-							<ul class="dl-menu">
-								<li class="active">
-									<a href="javsacript:void(0);">Home</a>
-								</li>
-								<li>
-									<a href="javsacript:void(0);">Women</a>
-								</li>
-								<li>
-									<a href="javsacript:void(0);">Men</a>
-									
-									<ul class="dl-submenu">
-										<li>
-											<a href="../../pages/guest/products.html">Clothing</a>
-											<ul class="dl-submenu">
-												<li><a href="../../pages/guest/products.html">Casual Wear</a></li>
-												<li><a href="../../pages/guest/products.html">Evening Wear</a></li>
-												<li><a href="../../pages/guest/products.html">Formal Attire</a></li>
-												<li><a href="../../pages/guest/products.html">Womens Jeans</a></li>
-												<li><a href="../../pages/guest/products.html">Mens Jeans</a></li>
-												<li><a href="../../pages/guest/products.html">Fall Styles</a></li>
-											</ul>
-										</li>
-										<li>
-											<a href="../../pages/guest/products.html">Accessories</a>
-											<ul class="dl-submenu">
-												<li><a href="../../pages/guest/products.html">Casual Wear</a></li>
-												<li><a href="../../pages/guest/products.html">Evening Wear</a></li>
-												<li><a href="../../pages/guest/products.html">Formal Attire</a></li>
-												<li><a href="../../pages/guest/products.html">Womens Jeans</a></li>
-												<li><a href="../../pages/guest/products.html">Mens Jeans</a></li>
-												<li><a href="../../pages/guest/products.html">Fall Styles</a></li>
-											</ul>
-										</li>
-										<li>
-											<a href="../../pages/guest/products.html">Brands</a>
-											<ul class="dl-submenu">
-												<li><a href="../../pages/guest/products.html">Casual Wear</a></li>
-												<li><a href="../../pages/guest/products.html">Evening Wear</a></li>
-												<li><a href="../../pages/guest/products.html">Formal Attire</a></li>
-												<li><a href="../../pages/guest/products.html">Womens Jeans</a></li>
-												<li><a href="../../pages/guest/products.html">Mens Jeans</a></li>
-												<li><a href="../../pages/guest/products.html">Fall Styles</a></li>
-											</ul>
-										</li>
-									</ul>
-								</li>
-							</ul>
+
 						</div>
 						<!-- // MOBILE MENU -->
 
@@ -318,17 +250,19 @@
 								<h3 class="uppercase text-bold"><span class="text-xs">我的帳戶</span></h3>
 								
 								<ul class="nav nav-tabs nav-stacked">
-									<li><a href="../../pages/member/TestEditMember.html">個人資料</a></li>
-									<li><a href="../../pages/member/gpa/gpaOrder.html">訂單追蹤</a></li>
-									<li><a href="../../pages/member/pa/req/MemberAllPaReq.html">我的委託單</a></li>
-									<li><a href="../../pages/member/mycoupon.html">優惠券</a></li>
-									<li><a href="../../pages/member/wallet.html">平台錢包</a></li>
-									<li><a href="../../pages/member/chatroom.html">聊天室</a></li>
-									<li><a href="../../pages/member/blacklist.html">黑名單</a></li>
-									<li><a href="../../pages/member/myCollListforum.html">我的收藏文章</a></li>
-									<li><a href="../../pages/member/myforum.html">我的文章</a></li>
+									<li><a href="/BuyGo/front_end/pages/member/TestEditMember.html">個人資料</a></li>
+									<li><a href="/BuyGo/front_end/pages/member/pa/order/ListOrders.html">訂單追蹤</a></li>
+									<li><a href="/BuyGo/front_end/pages/member/pa/req/MemberAllPaReq.html">一般代購委託單查詢</a></li>
+									<li><a href="/BuyGo/front_end/pages/member/opa/add_request.html">官方平台委託單申請</a></li>
+									<li><a href="/BuyGo/front_end/pages/member/opa/request.html">官方平台委託單查詢</a></li>
+									<li><a href="/BuyGo/front_end/pages/member/mycoupon.html">優惠券</a></li>
+									<li><a href="/BuyGo/front_end/pages/member/wallet.html">平台錢包</a></li>
+									<li><a href="/BuyGo/front_end/pages/member/chatroom.html">聊天室</a></li>
+									<li><a href="/BuyGo/front_end/pages/member/blacklist.html">黑名單</a></li>
+									<li><a href="/BuyGo/front_end/pages/member/myCollListforum.html">我的收藏文章</a></li>
+									<li><a href="/BuyGo/front_end/pages/member/myforum.html">我的文章</a></li>
 									<br>
-									<li><a href="../../pages/member/myShop.html">我的賣場</a></li>
+									<li><a href="/BuyGo/front_end/pages/member/myShop.html">我的賣場</a></li>
 								</ul>
 							</section>
 								
@@ -366,174 +300,85 @@
 		<!-- // SITE MAIN CONTENT -->
 		
 		<!-- SITE FOOTER -->
-	<footer class="page-footer">
-		
-		<!-- WIDGET AREA -->
-		<div class="widgets">
-		
-			<!-- FIRST ROW -->
-			<div class="section">
-				<div class="container">
-					<div class="row">
-						
-						<div class="col-xs-12 col-sm-6 col-md-3">
-							<section class="widget widget-text">
-								<h5 class="widget-title">our store</h5>
-								<div class="widget-content">
-									<p>Sed ornare cras donec litora integer curabitur orci, at nullam aliquam libero nam himenaeos, amet massa amet ut ipsum viverra mauris rhoncus neque aenean rhoncus gravida orci facilisis quis dui consectetur.</p>
-									<p>Nisi porttitor inceptos consectetur donec orci, dui ipsum leo class gravida, felis primis viverra placerat.</p>
-								</div>
-							</section>
-						</div>
-						
-						<div class="col-xs-12 col-sm-6 col-md-3">
-							<section class="widget widget-text">
-								<h5 class="widget-title">Opening Time</h5>
-								<div class="widget-content">
-									<p>Monday-Friday:-------------------------9.00 to 18.00</p>
-									<p>Saturday:--------------------------------10.00 to 16.00</p>
-									<p>Sunday:----------------------------------10.00 to 16.00</p>
-									<br/>
-									<p>Every 30 day of month Lorem ipsum dolor sit amet, consectetur adipiscing.</p>
-								</div>
-							</section>
-						</div>
-						
-						<div class="space40 visible-sm clearfix"></div>
-						
-						<div class="col-xs-12 col-sm-6 col-md-3">
-							<section class="widget widget-menu">
-								<h5 class="widget-title">information</h5>
-								<div class="widget-content">
-									<ul class="menu iconed-menu unstyled">
-										<li><a href="#"><i class="iconfont-circle-blank menu-icon"></i>Affiliate</a></li>
-										<li><a href="#"><i class="iconfont-circle-blank menu-icon"></i>Shipping</a></li>
-										<li><a href="#"><i class="iconfont-circle-blank menu-icon"></i>Shop support</a></li>
-										<li><a href="#"><i class="iconfont-circle-blank menu-icon"></i>Customer Service</a></li>
-										<li><a href="#"><i class="iconfont-circle-blank menu-icon"></i>Payment & Return</a></li>
-										<li><a href="#"><i class="iconfont-circle-blank menu-icon"></i>Terms & Conditions</a></li>
-									</ul>
-								</div>
-							</section>
-						</div>
-						
-						<div class="col-xs-12 col-sm-6 col-md-3">
-							facebook
-						</div>
-						
-					</div>
-				</div>
-			</div>
-			<!-- // FIRST ROW -->
-			
-			<!-- SECOND ROW -->
-			<div class="section">
-				<div class="container">
-					<div class="row">
-						
-						<div class="col-xs-12 col-sm-12 col-md-3">
-							<section class="widget widget-menu">
-								<h5 class="widget-title">Contact info</h5>
-								<div class="widget-content">
-									<ul class="menu iconed-list unstyled">
-										<li>
-											<span class="list-icon"><i class="round-icon iconfont-map-marker"></i></span>
-											<div class="list-content">Lorem ipsum maecenas dapibus luctus euismod 133/2 New York City</div>
-										</li>
-										<li>
-											<span class="list-icon"><i class="round-icon iconfont-phone"></i></span>
-											<div class="list-content">(+00)1344356-675</div>
-										</li>
-										<li>
-											<span class="list-icon"><i class="round-icon iconfont-envelope-alt"></i></span>
-											<div class="list-content">support@themina.net</div>
-										</li>
-									</ul>
-								</div>
-							</section>
-						</div>
-						
-						<div class="col-xs-12 col-sm-12 col-md-6">
-							<section class="widget widget-ads">
-								<div class="widget-content">
-									<div class="center-xs">
-										<div class="ads">
-											<a href="#">
-												<img src="../../img/common/demo/images-footer.jpg" alt="" />
-											</a>
-											<div class="ads-caption bottom-right">
-												<a href="#" class="btn btn-default btn-round">
-													<i class="round-icon iconfont-angle-right"></i>
-													<span class="inline-middle">Show More</span>
+		<footer class="page-footer">
+
+			<!-- WIDGET AREA -->
+			<div class="widgets">
+
+				<!-- FIRST ROW -->
+
+				<!-- // FIRST ROW -->
+
+				<!-- SECOND ROW -->
+				<div class="section">
+					<div class="container">
+						<div class="row">
+
+							<div class="col-xs-12 col-sm-12 col-md-5">
+								<section class="widget widget-menu">
+									<h5 class="widget-title">Contact info</h5>
+									<div class="widget-content">
+										<ul class="menu iconed-list unstyled">
+											<li><span class="list-icon"><i
+														class="round-icon iconfont-map-marker"></i></span>
+												<div class="list-content">中壢區復興路 46 號緯育 TibaMe 附設中壢職訓中心 9 樓</div>
+											</li>
+											<li><span class="list-icon"><i class="round-icon iconfont-phone"></i></span>
+												<div class="list-content">(03) 425-1108</div>
+											</li>
+											<li><span class="list-icon"><i
+														class="round-icon iconfont-envelope-alt"></i></span>
+												<div class="list-content">tibamecha102g6@gmail.com</div>
+											</li>
+										</ul>
+									</div>
+								</section>
+							</div>
+
+							<div class="col-xs-12 col-sm-12 col-md-6">
+								<section class="widget widget-ads">
+									<div class="widget-content">
+										<div class="center-xs">
+											<div class="ads">
+												<a href="#"> <img src="../../../img/common/demo/images-footer.jpg"
+														alt="" />
 												</a>
 											</div>
 										</div>
 									</div>
-								</div>
-							</section>
-						</div>
-						
-						<div class="col-xs-12 col-sm-12 col-md-3">
-							<section class="widget widget-subscription">
-								<h5 class="widget-title">Newletter</h5>
-								<div class="widget-content">
-									<p>Subscribe to be the first to know about Sales, Events, and Exclusive Offers!</p>
-									<form action="#" method="post">
-										<div class="input-group">
-											<label for="subscription-email" class="placeholder">Enter Your Email</label>
-											<input type="email" id="subscription-email" name="email" class="form-control" required />
-											<span class="input-group-btn">
-												<button class="btn btn-primary">Subscribe</button>
-											</span>
-										</div>
-									</form>
-								</div>
-							</section>
-						</div>
-						
-					</div>
-				</div>
-			</div>
-			<!-- // SECOND ROW -->
-			
-		</div>
-		<!-- // WIDGET AREA -->
-		
-		<div class="footer-sub">
-			<div class="container">
-				<div class="row">
-					<div class="col-xs-12 col-sm-6">
-						<div class="footer-links center-xs clearfix">
-							<ul class="unstyled">
-								<li><a href="#">Site Map</a></li>
-								<li><a href="#">FAQ</a></li>
-								<li><a href="#">Work for us</a></li>
-								<li><a href="#">Contact Us</a></li>
-							</ul>
-						</div>
-						<div class="space10"></div>
-						<div class="copyright center-xs">
-							<p>(c) 2013 More Templates <a href="http://www.cssmoban.com/" target="_blank" title="模板之家">模板之家</a> - Collect from <a href="http://www.cssmoban.com/" title="网页模板" target="_blank">网页模板</a>. All Rights Reserved.</p>
-						</div>
-					</div>
-					
-					<div class="space40 visible-xs"></div>
-					
-					<div class="col-xs-12 col-sm-6 center-xs">
-						<div class="pull-right">
-							<div class="vmid">
-								<span class="uppercase">Payment Accept&emsp;</span>
-								<a href="#"><img src="../../img/common/visacard.png" alt="" width="40" /></a>
-								<a href="#"><img src="../../img/common/mastercard.png" alt="" width="40" /></a>
-								<a href="#"><img src="../../img/common/paypal.png" alt="" width="40" /></a>
+								</section>
 							</div>
 						</div>
 					</div>
 				</div>
+				<!-- // SECOND ROW -->
+
 			</div>
-		</div>
-		
-	</footer>
+			<!-- // WIDGET AREA -->
+
+			<div class="footer-sub">
+				<div class="container">
+					<div class="row">
+						<div class="col-xs-12 col-sm-6">
+							<div class="footer-links center-xs clearfix">
+								<ul class="unstyled">
+									<li><a href="/BuyGo/front_end/pages/guest/selectFirstFAQ.html">FAQ</a></li>
+								</ul>
+							</div>
+							<div class="space10"></div>
+							<div class="copyright center-xs">
+								<p>(c) 2023</p>
+							</div>
+						</div>
+
+						<div class="space40 visible-xs"></div>
+
+
+					</div>
+				</div>
+			</div>
+
+		</footer>
 	<!-- // SITE FOOTER -->
 		
 </div>
