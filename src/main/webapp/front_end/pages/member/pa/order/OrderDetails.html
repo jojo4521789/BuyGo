@@ -7,7 +7,7 @@
 
 <head>
     <meta charset="UTF-8" />
-    <title>GFashion - Responsive e-commerce HTML Template</title>
+    <title>BuyGO - 買家訂單詳情</title>
     <meta name="description" content="" />
     <meta name="keywords" content="" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -543,8 +543,8 @@
                                         </tbody>
                                     </table>
                                     <p id="originalAmount">💠原始訂單總金額: <span></span></p>
-                                    <p id="receivable">💠賣家應收總金額: <span></span></p>
-                                    <p id="refund">💠應退還金額: <span></span></p>
+                                    <p id="receivable">💠賣家實收總金額: <span></span></p>
+                                    <p id="refund">💠退還金額: <span></span></p>
 
                                     <button id="confirmReceive_btn"
                                         style="display:none ; background-color: lightgreen">確認收貨</button>
@@ -847,7 +847,7 @@
                     let base64_str = await getProdPicBase64(order.paSoDetails[i].paProdNo);
                     let html = "";
                     // html += `<td><img class="prodPic" src="${URL.createObjectURL(blob)}"></td>`;
-                    html += `<td><img class="prodPic" src="${base64_str}"></td>`;
+                    html += `<td><img class="prodPic" src="${base64_str}" style="height: 150px;"></td>`;
                     html += `<td>${order.paSoDetails[i].paProd.paProdName}</td>`;
                     html += `<td>${a = order.paSoDetails[i].paOrdQty}</td>`;
                     html += `<td>${b = order.paSoDetails[i].paProdPrice}</td>`;
@@ -933,7 +933,7 @@
             let Data = {
                 newStatus: 3, // 將狀態改為3:已完成
                 buyerNo: order.memberNo,
-                refundToBuyer: 0,
+                refundToBuyer: parseInt($("#refund > span").text()), // 之前沒追加到商品而退還的錢
                 paSoNo: order.paSoNo
             }
 

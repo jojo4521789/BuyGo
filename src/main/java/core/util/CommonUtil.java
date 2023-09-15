@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 public class CommonUtil {
-	
+
 	public static <P> P json2Pojo(HttpServletRequest request, Class<P> classOfPojo) {
 		try (BufferedReader br = request.getReader()) {
 			return GSON.fromJson(br, classOfPojo);
@@ -28,6 +28,7 @@ public class CommonUtil {
 			e.printStackTrace();
 		}
 	}
+
 	public static <P> void jsonStringWirter(HttpServletResponse response, String resultString) {
 		response.setContentType(JSON_MIME_TYPE);
 		try (PrintWriter pw = response.getWriter()) {

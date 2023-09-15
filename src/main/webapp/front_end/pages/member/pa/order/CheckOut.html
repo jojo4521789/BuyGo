@@ -7,7 +7,7 @@
 
 <head>
 	<meta charset="UTF-8" />
-	<title>GFashion - Responsive e-commerce HTML Template</title>
+	<title>BuyGO - 結帳頁面</title>
 	<meta name="description" content="" />
 	<meta name="keywords" content="" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -576,7 +576,7 @@
 															<label for="inputBillName"
 																class="col-sm-4 col-lg-4 control-label required">姓名</label>
 															<div class="col-sm-8 col-lg-8">
-																<input type="text" class="form-control"
+																<input type="text" class="form-control bill-required"
 																	id="inputBillName" />
 															</div>
 														</div>
@@ -586,15 +586,15 @@
 															<label for="inputBillEmail"
 																class="col-sm-4 col-lg-4 control-label required">E-Mail</label>
 															<div class="col-sm-8 col-lg-8">
-																<input type="email" class="form-control"
+																<input type="email" class="form-control bill-required"
 																	id="inputBillEmail" />
 															</div>
 														</div>
 														<div class="form-group stylish-input">
 															<label for="inputBillPhone"
-																class="col-sm-4 col-lg-4 control-label required">電話</label>
+																class="col-sm-4 col-lg-4 control-label required ">電話</label>
 															<div class="col-sm-8 col-lg-8">
-																<input type="text" class="form-control"
+																<input type="tel" class="form-control bill-required"
 																	id="inputBillPhone" />
 															</div>
 														</div>
@@ -622,7 +622,7 @@
 															<label for="inputAddress1"
 																class="col-sm-4 col-lg-4 control-label required">地址</label>
 															<div class="col-sm-8 col-lg-8">
-																<input type="text" class="form-control"
+																<input type="text" class="form-control bill-required"
 																	id="inputAddress1" />
 															</div>
 														</div>
@@ -630,7 +630,7 @@
 															<label for="inputPostcode1"
 																class="col-sm-4 col-lg-4 control-label required">郵遞區號</label>
 															<div class="col-sm-8 col-lg-8">
-																<input type="text" class="form-control"
+																<input type="text" class="form-control bill-required"
 																	id="inputPostcode1" />
 															</div>
 														</div>
@@ -671,7 +671,7 @@
 															<label for="inputShipName"
 																class="col-sm-4 col-lg-4 control-label required">姓名</label>
 															<div class="col-sm-8 col-lg-8">
-																<input type="text" class="form-control"
+																<input type="text" class="form-control ship-required"
 																	id="inputShipName" />
 															</div>
 														</div>
@@ -681,7 +681,7 @@
 															<label for="inputShipEmail"
 																class="col-sm-4 col-lg-4 control-label required">E-Mail</label>
 															<div class="col-sm-8 col-lg-8">
-																<input type="email" class="form-control"
+																<input type="email" class="form-control ship-required"
 																	id="inputShipEmail" />
 															</div>
 														</div>
@@ -689,7 +689,7 @@
 															<label for="inputShipPhone"
 																class="col-sm-4 col-lg-4 control-label required">電話</label>
 															<div class="col-sm-8 col-lg-8">
-																<input type="text" class="form-control"
+																<input type="tel" class="form-control ship-required"
 																	id="inputShipPhone" />
 															</div>
 														</div>
@@ -718,7 +718,7 @@
 															<label for="inputAddress2"
 																class="col-sm-4 col-lg-4 control-label required">地址</label>
 															<div class="col-sm-8 col-lg-8">
-																<input type="text" class="form-control"
+																<input type="text" class="form-control ship-required"
 																	id="inputAddress2" />
 															</div>
 														</div>
@@ -726,7 +726,7 @@
 															<label for="inputPostcode2"
 																class="col-sm-4 col-lg-4 control-label required">郵遞區號</label>
 															<div class="col-sm-8 col-lg-8">
-																<input type="text" class="form-control"
+																<input type="text" class="form-control ship-required"
 																	id="inputPostcode2" />
 															</div>
 														</div>
@@ -1261,8 +1261,8 @@
 
 		let buyerNo;
 		checkLoginStatusShowMemberAcct().then(response => {
-			// console.log(response);
-			response[0] = buyerNo;
+			console.log(response[0]);
+			buyerNo = response[0];
 		})
 
 		let cartData = JSON.parse(sessionStorage.getItem("cart_data"));
@@ -1297,7 +1297,7 @@
                         <h3>
                             ${prod.paProdName}
                         </h3>
-                        <p class="product-text genre" style="margin: 10px 0 10px 0;">${"種類名稱"}</p>
+                        <p class="product-text genre" style="margin: 10px 0 10px 0;">${"商品"}</p>
                         <div style="margin-right: 10px;">
                             <span class="product-text price">$${prod.paProdPrice}</span>
                             <h3 class="pull-right"><small>×${prod.paOrdQty}</small></h3>
@@ -1354,8 +1354,8 @@
 				$("#inputPostcode2").val($("#inputPostcode1").val());
 
 				// 设置所需的縣市和鄉鎮
-				const selectedCity = $("select.inputState1").val(); 
-				const selectedCountry = $("select.inputCountry1").val(); 
+				const selectedCity = $("select.inputState1").val();
+				const selectedCountry = $("select.inputCountry1").val();
 
 				// 设置縣市選項
 				$("select.inputState2").val(selectedCity);
@@ -1377,19 +1377,45 @@
 			}
 		}
 
+		// 讓電話號碼只能輸入數字
+		$("#inputBillPhone").on('input', function (event) {
+			let inputValue = this.value;
+			let numericValue = inputValue.replace(/[^0-9]/g, ''); // 移除非数字字符
+			this.value = numericValue; 
+			if(this.value.length > 10) {
+				alert("電話號碼最多10碼");
+				this.value = this.value.slice(0, 10); // 如果長度超過10, 擷取前10個字元
+			} 
+		})
+		$("#inputShipPhone").on('input', function (event) {
+			let inputValue = this.value;
+			let numericValue = inputValue.replace(/[^0-9]/g, ''); // 移除非数字字符
+			this.value = numericValue; 
+			if(this.value.length > 10) {
+				alert("電話號碼最多10碼");
+				this.value = this.value.slice(0, 10); // 如果長度超過10, 擷取前10個字元
+			} 
+		})
+
 		// 判斷必填欄位
 		function checkAllData() {
 			let msg = "";
 			let billRequired_els = document.querySelectorAll(".bill-required");
 			let shipRequired_els = document.querySelectorAll(".ship-required");
 			for (let billRequired_el of billRequired_els) {
-				if (billRequired_el.value === "") {
+				if (billRequired_el.value === "" ||
+					$(".inputState1").val() == '請選擇縣市' ||
+					$(".inputCountry1").val() == '請選擇鄉鎮區'
+					) {
 					msg += "帳單資訊未填寫完整\n";
 					break;
 				}
 			}
 			for (let shipRequired_el of shipRequired_els) {
-				if (shipRequired_el.value === "") {
+				if (shipRequired_el.value === "" ||
+				$(".inputState2").val() == '請選擇縣市' ||
+				$(".inputCountry2").val() == '請選擇鄉鎮區'
+				) {
 					msg += "運送資訊未填寫完整\n";
 					break;
 				}
@@ -1448,10 +1474,14 @@
 				.then(response => response.json())
 				.then(data => {
 					newPaSoNo = data;
-					alert('訂單已產生！訂單ID = ' + data + "請進行付款作業");
+					alert('訂單已產生，訂單ID=' + data + " 進行付款作業");
 					cart = []; // 清空購物車
-					if ($('input[name=paymethod]:checked').attr("id") === "paymethod2") { // 如果是選擇信用卡付款
+					if ($('input[name=paymethod]:checked').attr("id") === "paymethod1") { // 如果是選擇信用卡付款
 						EcPay(); // 進行綠界支付
+					} else if ($('input[name=paymethod]:checked').attr("id") === "paymethod2") { // 如果是選擇信用卡付款
+						EcPay(); // 進行綠界支付
+					} else if ($('input[name=paymethod]:checked').attr("id") === "paymethod3") {
+						WalletPay(); // 進行錢包支付
 					}
 				})
 				.catch(error => {
@@ -1488,6 +1518,38 @@
 				.then(data => {
 					console.log(data);
 					window.location.href = data; //開啟綠界付款網址
+				})
+				.catch(error => {
+					alert("付款發生錯誤");
+					console.error('付款錯誤：', error);
+				});
+		}
+
+		function WalletPay() {
+			let Data = {
+				newStatus: 1, // 將狀態改為1:已付款
+				buyerNo: buyerNo,
+				refundToBuyer: parseInt($("#prodTotal").text()) + parseInt($("#freight").text()), // 訂單總額
+				paSoNo: newPaSoNo
+			}
+			console.log(Data);
+			fetch('/BuyGo/needLoginApi/UpdateOrder', {
+				method: 'POST',
+				body: JSON.stringify(Data),
+				headers: {
+					'Content-Type': 'application/json;charset=utf-8'
+				}
+			})
+				.then(response => {
+					Swal.fire(
+						'付款成功!',
+						'已從錢包付款!',
+						'success'
+					).then((result) => {
+						if (result.isConfirmed) {
+							window.location.href = "ListOrders.html"
+						}
+					})
 				})
 				.catch(error => {
 					alert("付款發生錯誤");
