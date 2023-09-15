@@ -8,11 +8,6 @@ import org.hibernate.query.Query;
 
 import web.back_end.member.wallet.dao.WalletMemberDao;
 import web.front_end.member.acc.entity.Member;
-import web.front_end.member.eva.dao.EvaPaSoDao;
-import web.front_end.member.eva.entity.PaSo;
-import web.front_end.member.eva.entity.PaSoDetails;
-import web.front_end.seller.gpa.order.entity.GpaSo;
-import web.front_end.seller.gpa.prod.entity.GpaProd;
 
 public class WalletMemberDaoImpl implements WalletMemberDao {
 	public static void main(String[] args) {
@@ -56,7 +51,7 @@ public class WalletMemberDaoImpl implements WalletMemberDao {
 
 		Transaction transaction = session.beginTransaction(); // 開始交易
 		
-		Member member = walletMemberDaoImpl.selectMemberByMemberNo(2);
+		Member member = walletMemberDaoImpl.selectMemberByMemberNo(3);
 		System.out.println("member.getMemberNo():" + member.getMemberNo());
 		System.out.println("member.getMemberAcct():" + member.getMemberAcct());
 		System.out.println("member.getMemberWalletAmount():" + member.getMemberWalletAmount());
