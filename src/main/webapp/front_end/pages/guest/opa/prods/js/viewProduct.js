@@ -231,6 +231,22 @@ function addToCart(opaProdNo) {
                     const { successful } = body;
                     if (successful) {
                         updateCartItem();
+                        const Toast = Swal.mixin({
+                            toast: true,
+                            position: 'top-end',
+                            showConfirmButton: false,
+                            timer: 2000,
+                            timerProgressBar: true,
+                            didOpen: (toast) => {
+                                toast.addEventListener('mouseenter', Swal.stopTimer)
+                                toast.addEventListener('mouseleave', Swal.resumeTimer)
+                            }
+                        })
+
+                        Toast.fire({
+                            icon: 'success',
+                            title: '已加入購物車'
+                        })
                     }
                 });
         });
