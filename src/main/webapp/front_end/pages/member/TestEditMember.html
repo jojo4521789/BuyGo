@@ -508,7 +508,8 @@
 											<div>
 												<label for="memberWallet">會員錢包餘額:</label>
 												<input id="memberWallet" readonly>
-											</div>
+											</div><br>
+											<div><a href="https://forms.gle/3WiQPvv4xvZqrjd48" style="color: red;">想成為賣家，請點此</a></div>
 											<div>
 												<button type="button" id="button">送出資料</button>
 											</div>
@@ -909,7 +910,7 @@
 					headers: { "content-type": "application/json;charset=utf-8" },
 					body: JSON.stringify({
 						action: "editMember",
-						memberNo: 38,
+						
 						memberPw: passwordToSend,
 						memberName: memberName_el.value,
 						memberPhone: memberPhone_el.value,
