@@ -52,7 +52,6 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="js/common/modernizr.min.js"></script>
     <script src="js/const.js"></script>
-    <script src="js/wallet.js"></script>
     <style>
 		.logo img {
 			max-width: 200px;
@@ -329,25 +328,26 @@
                                     什麼是錢包
                                 </div>
                             </div>
-                            <div class="row text-center">
-                                <div class="col-sm-4">
+                            <!-- <div class="row text-center"> -->
+                            <div class="row text-center" style="display: flex; justify-content: center;">
+                                <!-- <div class="col-sm-4">
                                     <h3>
                                         當前總餘額
                                     </h3>
                                     <span id="total">--</span>
-                                </div>
+                                </div> -->
                                 <div class="col-sm-4">
                                     <h3>
                                         目前可動用總餘額
                                     </h3>
                                     <span id="current">--</span>
                                 </div>
-                                <div class="col-sm-4">
+                                <!-- <div class="col-sm-4">
                                     <h3>
                                         待處理交易金額
                                     </h3>
                                     <span id="pending">--</span>
-                                </div>
+                                </div> -->
                             </div>
                         </section>
                         <section class="section">
@@ -382,7 +382,7 @@
                                                     <input type="hidden" name="action" value="withdraw" />
                                                     <div class="form-group stylish-input">
                                                         <label for="input1">請輸入欲提款金額</label>
-                                                        <input type="text" id="input1" class="form-control" name="value"
+                                                        <input type="text" id="input2" class="form-control" name="value"
                                                             required />
                                                     </div>
                                                     <button type="submit" class="btn btn-primary">下一步</button>
@@ -609,6 +609,82 @@
     <script src="js/common/products.js"></script>
     <script src="js/common/owl.carousel.js"></script>
     <!-- // Particular Page Javascripts -->
+    <script>
+        fetch('/BuyGo/needLoginApi/member/wallet/loadMemberWalletAmountByMemberNo', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json;charset:utf-8' },
+        })
+            .then(response => {
+                if (response.status === 401) {
+                    // 客戶未登入，執行頁面重定向到登入頁
+                    notLoggedInAction();
+                } else if (response.ok) {
+                    // 請求成功
+                    return response.json();
+                } else {
+                    alert("錯誤狀態:" + response.status);
+                    return;
+                }
+            })
+            .then(body => {
+                let { memberWalletAmount } = body;
+                console.log("memberWalletAmount:" + memberWalletAmount);
+                $("span#current").text(memberWalletAmount);
+            });
+
+        function walletAdd(amount) {
+            fetch('/BuyGo/needLoginApi/member/wallet/changeWalletAmount', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json;charset:utf-8' },
+                body: JSON.stringify({
+                    walletAmount: amount
+                })
+            })
+                .then(response => {
+                    if (response.status === 401) {
+                        // 客戶未登入，執行頁面重定向到登入頁
+                        notLoggedInAction();
+                    } else if (response.ok) {
+                        // 請求成功
+                        return response.json();
+                    } else {
+                        alert("錯誤狀態:" + response.status);
+                        return;
+                    }
+                })
+                .then(body => {
+                    let { successful } = body;
+                    console.log("successful:");
+                    console.log(successful);
+                });
+        }
+
+        function walletWithdraw() {
+            console.log("Withdraw");
+            // fetch('/BuyGo/needLoginApi/member/wallet/loadMemberWalletAmountByMemberNo', {
+            //     method: 'POST',
+            //     headers: { 'Content-Type': 'application/json;charset:utf-8' },
+            // })
+            //     .then(response => {
+            //         if (response.status === 401) {
+            //             // 客戶未登入，執行頁面重定向到登入頁
+            //             notLoggedInAction();
+            //         } else if (response.ok) {
+            //             // 請求成功
+            //             return response.json();
+            //         } else {
+            //             alert("錯誤狀態:" + response.status);
+            //             return;
+            //         }
+            //     })
+            //     .then(body => {
+            //         let { memberWalletAmount } = body;
+            //         console.log("memberWalletAmount:" + memberWalletAmount);
+            //         $("span#current").text(memberWalletAmount);
+            //     });
+        }
+    </script>
+    <script src="/BuyGo/front_end/js/wallet.js"></script>
     <script src="js/login.js"></script>
     <script>
         checkLoginStatusShowMemberAcct(); // 檢查客戶帳號是否登入，修改頁面右上方Log In/Log Out按鈕，顯示登入者帳號名稱

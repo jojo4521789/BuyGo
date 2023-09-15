@@ -1,11 +1,14 @@
 package web.front_end.member.wallet.controller;
 
+import static core.util.CommonUtil.json2Pojo;
+import static core.util.CommonUtil.writePojo2Json;
+import static web.front_end.member.util.SHA256EncoderUtil.SHA256Encode;
+
 import java.io.IOException;
-import java.util.List;
+import java.io.UnsupportedEncodingException;
 import java.util.Calendar;
 import java.util.Date;
-
-import static core.util.CommonUtil.writePojo2Json;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,11 +17,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import core.util.CommonUtil;
 import static web.front_end.member.wallet.util.OpaWalletConstants.SERVICE;
-import web.front_end.member.wallet.entity.WalletTransHist;
+
+import web.back_end.member.wallet.service.WalletMemberService;
+import web.back_end.member.wallet.service.impl.WalletMemberServiceImpl;
 import web.front_end.member.acc.entity.Member;
-import static web.front_end.member.util.SHA256EncoderUtil.SHA256Encode;
+import web.front_end.member.wallet.dto.ChangeWalletAmountDTO;
+import web.front_end.member.wallet.entity.WalletTransHist;
 
 
 @WebServlet("/needLoginApi/member/wallet/history")
@@ -124,6 +129,10 @@ public class WalletHistoryServlet extends HttpServlet {
         walletTransHist.setWalletStatus((byte) 1);
         walletTransHist.setWalletAmount(value);
         SERVICE.saveOrUpdate(walletTransHist);
+        
+        changeWalletAmount(request, response, (double)value);
+        System.out.println("執行至此1");
+        
         response.sendRedirect(request.getContextPath() + PAGE_URL + "?message=%E5%8A%A0%E5%80%BC%E6%88%90%E5%8A%9F");
     }
 
@@ -148,7 +157,28 @@ public class WalletHistoryServlet extends HttpServlet {
             walletTransHist.setWalletStatus((byte) 2);
             walletTransHist.setWalletAmount(-value);
             SERVICE.saveOrUpdate(walletTransHist);
+            changeWalletAmount(request, response, (double)-value);
         }
         response.sendRedirect(request.getContextPath() + PAGE_URL + "?message=%E6%8F%90%E6%AC%BE%E6%88%90%E5%8A%9F");
+    }
+    private void changeWalletAmount(HttpServletRequest request, HttpServletResponse response, Double amount) throws UnsupportedEncodingException {
+		HttpSession session = request.getSession(); // 取得當前請求的Session
+		response.setCharacterEncoding("UTF-8");
+		request.setCharacterEncoding("UTF-8");
+		
+		ChangeWalletAmountDTO changeWalletAmountDTO = json2Pojo(request, ChangeWalletAmountDTO.class);
+		Integer memberNo = ((Integer)session.getAttribute("memberNo"));
+		
+		WalletMemberService walletMemberService = new WalletMemberServiceImpl();
+		
+		Double memberCurrentWalletAmount = walletMemberService.loadMemberWalletAmountByMemberNo(memberNo); // 查詢前端欲更改錢包金額的會員的目前錢包金額
+		
+		// 修改錢包金額至member Table
+		boolean modifyWalletAmountIsSuccess = walletMemberService.modifyWalletAmountByMemberNoAndWalletAmount(memberNo, (memberCurrentWalletAmount + amount));
+		System.out.println("執行至此2");
+//		if(modifyWalletAmountIsSuccess) {
+//			changeWalletAmountDTO.setSuccessful(true); // 若處理動作皆成功，傳送true至前端
+//			changeWalletAmountDTO.setMessage("交易後的錢包餘額：" + (memberCurrentWalletAmount + changeWalletAmountDTO.getWalletAmount()));
+//		}
     }
 }
