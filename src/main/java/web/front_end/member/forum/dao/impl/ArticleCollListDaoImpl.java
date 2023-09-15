@@ -78,4 +78,13 @@ public class ArticleCollListDaoImpl implements ArticleCollListDao {
 		return null;
 	}
 
+	@Override
+	public int deleteByIdAll(Integer articleNo) {
+		final String hql = "DELETE FROM ArticleCollList WHERE articleNo = :articleNo";
+		int rowsUpdated = getSession().createQuery(hql)
+				.setParameter("articleNo", articleNo).executeUpdate();
+		return rowsUpdated;
+	}
+	
+
 }

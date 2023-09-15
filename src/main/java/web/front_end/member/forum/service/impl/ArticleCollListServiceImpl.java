@@ -127,7 +127,6 @@ public class ArticleCollListServiceImpl implements ArticleCollListService {
 //		return null;
 //	}
 
-	// =========================================ok的頭=================================================
 	@Override
 	public List<ArticleCollListDto> loadAllArticleInfo(int selfMemberNo) {
 		// 获取原始数据
@@ -184,7 +183,6 @@ public class ArticleCollListServiceImpl implements ArticleCollListService {
 		return dao.selectById(memberNo, articleNo) > 0;
 	}
 
-	// =========================================ok的尾=================================================
 
 //	@Override
 //	public List<ArticleCollListDto> loadAllArticleInfo(int selfMemberNo) {

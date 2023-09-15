@@ -47,33 +47,29 @@ public class ArticleRecordDaoImpl implements ArticleRecordDao {
 		return null;
 	}
 
-
 	@Override
 	public Integer queryCountByArticleNoAndRcordStat(int articleNo, int stat) {
-		// select count(*) from acticle_record where ARTICLE_NO = 1 and ACTICLE_RECORD_STAT = 0;
+		// select count(*) from acticle_record where ARTICLE_NO = 1 and
+		// ACTICLE_RECORD_STAT = 0;
 		final String hql = "Select count(*) FROM ArticleRecord WHERE articleNo = :articleNo and ACTICLE_RECORD_STAT = :stat";
-		Query<Long> query = getSession()
-			.createQuery(hql, Long.class) // 載入 HQL
- 			.setParameter("articleNo", articleNo) // 子句 條件
- 			.setParameter("stat", stat);
+		Query<Long> query = getSession().createQuery(hql, Long.class) // 載入 HQL
+				.setParameter("articleNo", articleNo) // 子句 條件
+				.setParameter("stat", stat);
 		Integer count = query.uniqueResult().intValue();
 		return count;
 	}
 
 	@Override
-	public ArticleRecord queryCountByArticleNoAndMemeberNo(int articleNo , int memberNo) {
+	public ArticleRecord queryCountByArticleNoAndMemeberNo(int articleNo, int memberNo) {
 		final String hql = "FROM ArticleRecord WHERE articleNo = :articleNo and memberNo = :memberNo ";
-	
+
 		try {
-			Query<ArticleRecord> query = getSession()
-					.createQuery(hql, ArticleRecord.class)
-					.setParameter("articleNo", articleNo)
-					.setParameter("memberNo", memberNo);
+			Query<ArticleRecord> query = getSession().createQuery(hql, ArticleRecord.class)
+					.setParameter("articleNo", articleNo).setParameter("memberNo", memberNo);
 			return query.getSingleResult();
 		} catch (NoResultException e) {
 			return null;
 		}
 	}
-
 
 }

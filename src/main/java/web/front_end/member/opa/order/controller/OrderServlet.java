@@ -17,7 +17,7 @@ import web.front_end.member.opa.order.entity.OpaOrder;
 import web.front_end.member.opa.order.entity.Order;
 import web.front_end.member.opa.order.service.OpaOrderService;
 
-@WebServlet("/needLoginApi/member/orders")
+@WebServlet("/needLoginApi/member/order")
 public class OrderServlet extends HttpServlet {
     private static int [] statusMapping = new int[] { 0, 1, 2, 3, 1, 1, 3, 4, 3, 5, 6 };
     private static String [] ORDER_STATUS_MAPPING = new String []{ "訂單成立", "第一次付款通知", "海外賣家出貨", "官方海外收貨、發貨", "商品抵台", "第二次付款通知", "官方出貨", "買家完成訂單", "未完成取貨", "取消訂單", "訂單委託失敗"};
@@ -28,58 +28,20 @@ public class OrderServlet extends HttpServlet {
             throws ServletException, IOException {
 		HttpSession session = request.getSession();
         int memberNo = (Integer)session.getAttribute("memberNo");
-        String type = request.getParameter("type");
-		response.setCharacterEncoding("UTF-8");
-        if (type == null) {
-            response.sendRedirect(request.getContextPath() + "/front_end/order.html");
+        String _id = request.getParameter("id");
+        Integer id;
+        response.setCharacterEncoding("UTF-8");
+        if (_id == null) {
+            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             return;
         }
-        if (type.equals("order")) {
-            getOrder(request, response, memberNo);
-        } else if (type.equals("map")) {
-            getMap(request, response);
-        } else {
-            response.sendRedirect(request.getContextPath() + "/front_end/order.html");
-        }
-    }
-
-    void getOrder(HttpServletRequest request, HttpServletResponse response, int memberNo) throws IOException {
-        String id = request.getParameter("id");
-        if (id == null) {
-            response.sendRedirect(request.getContextPath() + "/front_end/order.html");
+        id = Integer.parseInt(_id);
+        OpaOrder order = SERVICE.findById(id);
+        if (order == null || order.getMemberNo() != memberNo) {
+            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
             return;
         }
-        int query = Integer.parseInt(id);
-        ArrayList<Integer> statusList = new ArrayList<>();
-        for (int i = 0; i < statusMapping.length; i++) {
-            if(statusMapping[i] == query || query == 0) {
-                statusList.add(i);
-            }
-        }
-        List<OpaOrder> orders = SERVICE.findAllOrderByStatus(memberNo, statusList);
-        Order[] ordersArray = new Order[orders.size()];
-        for (int i = 0; i < orders.size(); i++) {
-            ordersArray[i] = new Order();
-            ordersArray[i].setOpaSoNo(orders.get(i).getOpaSoNo());
-            ordersArray[i].setOpaSoStatus(ORDER_STATUS_MAPPING[orders.get(i).getOpaSoStatus()]);
-            ordersArray[i].setOpaSoDate(orders.get(i).getOpaSoDate());
-            ordersArray[i].setOpaProdTotal(orders.get(i).getOpaProdTotal());
-            ordersArray[i].setOpaDiscount(orders.get(i).getOpaDiscount());
-            ordersArray[i].setOpaFirAmount(orders.get(i).getOpaFirAmount());
-            ordersArray[i].setOpaSecAmount(orders.get(i).getOpaSecAmount());
-            ordersArray[i].setOpaTotal(orders.get(i).getOpaTotal());
-            ordersArray[i].setOpaRealTotal(orders.get(i).getOpaRealTotal());
-            ordersArray[i].setOpaRealStatus(ORDER_PAY_STATUS_MAPPING[orders.get(i).getOpaRealStatus()]);
-            if(orders.get(i).getOpaFailedReason() != null)
-                ordersArray[i].setOpaFailedReason(OpaOrderServiceImpl.failedReasonMap[orders.get(i).getOpaFailedReason()]);
-            else
-                ordersArray[i].setOpaFailedReason("-");
-        }
-        CommonUtil.writePojo2Json(response, ordersArray);
-    }
-
-    void getMap(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        String[] statusMap = SERVICE.getStatusMap();
-        CommonUtil.writePojo2Json(response, statusMap);
+        order.setOpaOrderdetailses(null);
+        CommonUtil.writePojo2Json(response, order);
     }
 }

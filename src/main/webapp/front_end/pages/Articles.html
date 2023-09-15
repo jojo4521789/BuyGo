@@ -1022,6 +1022,8 @@
 					.then(data => {
 						// 在這裡處理後端返回的數據
 						console.log(data);
+						location.reload();
+
 					})
 					.catch(error => {
 						console.error("錯誤:", error);

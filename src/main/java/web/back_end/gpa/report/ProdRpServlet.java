@@ -22,7 +22,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
-@WebServlet("/back_end/gpa/report/ProdRpServlet")
+@WebServlet("/api/back_end/gpa/report/ProdRpServlet")
 public class ProdRpServlet extends HttpServlet{
 	private static final long serialVersionUID = 1L;
 

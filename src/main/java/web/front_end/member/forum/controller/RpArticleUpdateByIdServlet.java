@@ -27,6 +27,7 @@ public class RpArticleUpdateByIdServlet extends HttpServlet {
 
         if (rpArticle != null) {
             Integer rpArticleNo = rpArticle.getRpArticleNo();
+            Integer articleNo = rpArticle.getArticleNo();
             Integer articleStatus = rpArticle.getArticleStatus();
             Integer auditResult = rpArticle.getAuditResult();
 
@@ -37,7 +38,7 @@ public class RpArticleUpdateByIdServlet extends HttpServlet {
                 core.setMessage("查無檢舉文章ID，無法更新");
                 core.setSuccessful(false);
             } else {
-                core.setSuccessful(SERVICE.updateByRpArticleNo(rpArticleNo, articleStatus, auditResult));
+                core.setSuccessful(SERVICE.updateByRpArticleNo(articleNo, rpArticleNo, articleStatus, auditResult));
             }
             writePojo2Json(response, core);
         } else {

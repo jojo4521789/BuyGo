@@ -52,4 +52,9 @@ public class CpOwnerServiceImpl implements CpOwnerService{
 		return dao.deleteById(cpOwnerId) > 0;
 	}
 
+	@Override
+	public CpOwner selectByMemberAndCouponNo(CpOwnerId cpOwnerId) {
+		return dao.selectById(cpOwnerId);
+	}
+
 }

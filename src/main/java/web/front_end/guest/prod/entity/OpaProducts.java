@@ -56,7 +56,7 @@ public class OpaProducts implements java.io.Serializable {
 
 	public OpaProducts(OpaPrcats opaPrcats, String opaProdName, int opaProdStockQty, int opaProdShipQty,
 			double opaProdPrice, String opaProdContent, String opaProdUrl, byte opaProdStatus, Date opaProdUpdate,
-			Set<OpaOrderdetails> opaOrderdetailses, Set<OpaPrpics> opaPrpicses, Set<OpaCart> opaCarts) {
+			Set<OpaOrderdetails> opaOrderdetailses, Set<OpaPrpics> opaPrpicses) {
 		this.opaPrcats = opaPrcats;
 		this.opaProdName = opaProdName;
 		this.opaProdStockQty = opaProdStockQty;
