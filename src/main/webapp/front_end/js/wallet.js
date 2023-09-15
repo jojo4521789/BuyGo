@@ -8,18 +8,18 @@ $().ready(function () {
                 data.currentBalance = "Error";
                 data.pendingTransaction = "Error";
             }
-            $("#total").text(data.totalBalance);
-            $("#current").text(data.currentBalance);
+            // $("#total").text(data.totalBalance);
+            // $("#current").text(data.currentBalance);
             $("#pending").text(data.pendingTransaction);
         },
         error: function (e) {
-            if(e.status == 401) {
+            if (e.status == 401) {
                 alert("帳號未登入，將導轉置登入頁面");
                 window.location.href = LOGIN_PAGE;
                 return;
             }
-            $("#total").text("Error");
-            $("#current").text("Error");
+            // $("#total").text("Error");
+            // $("#current").text("Error");
             $("#pending").text("Error");
         }
     });
@@ -40,8 +40,8 @@ $().ready(function () {
                 title: 'Wallet Amount',
             }
         ],
-        onLoadError: function(status, jqXHR) {
-            if(status == 401) {
+        onLoadError: function (status, jqXHR) {
+            if (status == 401) {
                 alert("帳號未登入，將導轉置登入頁面");
                 window.location.href = LOGIN_PAGE;
             }
@@ -65,11 +65,12 @@ $().ready(function () {
     });
     var url = window.location.href;
     var params = url.split('?');
-    if(params.length > 1) {
+    if (params.length > 1) {
         var message = params[1].split('=');
-        if(message[0] =='message') {
+        if (message[0] == 'message') {
             alert(decodeURIComponent(message[1]));
             window.location.href = params[0];
         }
     }
 });
+
