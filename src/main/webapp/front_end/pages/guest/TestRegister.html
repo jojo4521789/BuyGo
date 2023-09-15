@@ -938,7 +938,7 @@
 			clearTimeout(typingTimer);
             p1_el.innerHTML = "";
 			var typingTimer = setTimeout(function () {
-				fetch("http://localhost:8081/BuyGo/front_end/guest/register/MemberRegister", {
+				fetch("/BuyGo/api/front_end/guest/register/MemberRegister", {
 					method: "POST",
 					headers: { "content-type": "application/json;charset=utf-8" },
 					body: JSON.stringify({
@@ -958,7 +958,7 @@
 			clearTimeout(typingTimer);
             p5_el.innerHTML = "";
 			var typingTimer = setTimeout(function () {
-				fetch("http://localhost:8081/BuyGo/front_end/guest/register/MemberRegister", {
+				fetch("/BuyGo/api/front_end/guest/register/MemberRegister", {
 					method: "POST",
 					headers: { "content-type": "application/json;charset=utf-8" },
 					body: JSON.stringify({
@@ -978,7 +978,7 @@
 			clearTimeout(typingTimer);
             p6_el.innerHTML = "";
 			var typingTimer = setTimeout(function () {
-				fetch("http://localhost:8081/BuyGo/front_end/guest/register/MemberRegister", {
+				fetch("/BuyGo/api/front_end/guest/register/MemberRegister", {
 					method: "POST",
 					headers: { "content-type": "application/json;charset=utf-8" },
 					body: JSON.stringify({
@@ -998,7 +998,7 @@
 			clearTimeout(typingTimer);
             p9_el.innerHTML = "";
 			var typingTimer = setTimeout(function () {
-				fetch("http://localhost:8081/BuyGo/front_end/guest/register/MemberRegister", {
+				fetch("/BuyGo/api/front_end/guest/register/MemberRegister", {
 					method: "POST",
 					headers: { "content-type": "application/json;charset=utf-8" },
 					body: JSON.stringify({
@@ -1056,7 +1056,7 @@
             // return;
         } else {
             //送出驗證信
-            fetch("http://localhost:8081/BuyGo/api/front_end/guest/register/MemberRegisterCheckMailServlet", {
+            fetch("/BuyGo/api/front_end/guest/register/MemberRegisterCheckMailServlet", {
                 method: "POST",
                 header: { "content-type": "application/json;charset=utf-8" },
                 body: JSON.stringify({
@@ -1073,7 +1073,7 @@
                 preConfirm: (verificationCode) => {
                     // console.log(verificationCode);
                     // const data1 = {verificationCode};
-                    return fetch("http://localhost:8081/BuyGo/api/front_end/guest/register/RegisterCheckMailAuthCode", {
+                    return fetch("/BuyGo/api/front_end/guest/register/RegisterCheckMailAuthCode", {
                         method: "POST",
                         header: { "content-type": "application/json;charset=utf-8" },
                         body: JSON.stringify(
@@ -1085,7 +1085,7 @@
                             if (!response.ok) {
                                 throw new Error(response.statusText);
                             }
-                        }).then(fetch("http://localhost:8081/BuyGo/front_end/guest/register/MemberRegister", {
+                        }).then(fetch("/BuyGo/api/front_end/guest/register/MemberRegister", {
 
                             method: "POST",
                             header: { "content-type": "application/json;charset=utf-8" },

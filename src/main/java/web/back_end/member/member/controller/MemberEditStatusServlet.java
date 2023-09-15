@@ -11,6 +11,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import web.front_end.member.acc.entity.Member;
 @WebServlet("/back_end/member/MemberEditStatus")
@@ -26,7 +27,10 @@ public class MemberEditStatusServlet extends HttpServlet{
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
 		resp.setCharacterEncoding("UTF-8");
+		
 		Member member = json2Pojo(req, Member.class);
+//		HttpSession session = req.getSession(); // 取得當前請求的Session
+//		member.setMemberNo((Integer)session.getAttribute("memberNo"));
 //		System.out.println(member.getMemberStatus());		
 //		System.out.println(member.getMemberNo());	
 		

@@ -21,4 +21,6 @@ public interface ProdDao extends CoreDao<Prod, Integer> {
 	int getProdTotalQtySelectByOpaProdName(String opaProdName);
 
 	List<Prod> getRandomProdsByPrcatsWithLimit(Integer opaProdNo, Integer opaPrcatsNo, Integer limit);
+	
+	List<Prod> getRandomProdsWithLimit(Integer limit);
 }

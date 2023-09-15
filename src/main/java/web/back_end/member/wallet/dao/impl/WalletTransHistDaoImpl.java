@@ -9,7 +9,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import web.back_end.member.wallet.dao.WalletTransHistDao;
-import web.back_end.member.wallet.entity.WalletTransHist;
+import web.back_end.member.wallet.entity.BackEndWalletTransHist;
 
 public class WalletTransHistDaoImpl implements WalletTransHistDao {
 	public static void main(String[] args) {
@@ -17,7 +17,7 @@ public class WalletTransHistDaoImpl implements WalletTransHistDao {
 		// 新增 insert
 		Session session = walletTransHistDaoImpl.getSession();
 
-		WalletTransHist walletTransHist = new WalletTransHist();
+		BackEndWalletTransHist walletTransHist = new BackEndWalletTransHist();
 		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); // 指定日期格式
 		String currentTimeString = dateFormat.format(new Date());
 		Timestamp currentTime = Timestamp.valueOf(currentTimeString);
@@ -35,7 +35,7 @@ public class WalletTransHistDaoImpl implements WalletTransHistDao {
 	}
 
 	@Override
-	public int insert(WalletTransHist walletTransHist) {
+	public int insert(BackEndWalletTransHist walletTransHist) {
 		getSession().persist(walletTransHist);
 		return 1;
 	}

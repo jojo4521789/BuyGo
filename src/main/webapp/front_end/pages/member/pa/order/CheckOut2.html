@@ -93,65 +93,128 @@
         // 初始化时计算一次总金额
         calculateTotal();
 
-        
-        // 結帳
+
+        let newPaSoNo;
+
+        // 按下結帳，產生訂單
         $('#checkout').click(function () {
 
-            const lpaTotalAmount = $("#total-price").text().substring(1, $("#total-price").text().length);
-            const lpaRecName = $("#recipient-name").val();
-            const lpaSendAddress = $("#recipient-address").val();
-            const lpaRecTel = $("#recipient-phone").val();
-            const lpaDeliverMethod = "711店到店"
-            console.log(lpaDeliverMethod);
+            const paTotalAmount = $("#total-price").text().substring(1, $("#total-price").text().length);
+            const paRecName = $("#recipient-name").val();
+            const paSendAddress = $("#recipient-address").val();
+            const paRecTel = $("#recipient-phone").val();
+            const paDeliverMethod = "711店到店"
 
-
-            let Data = {
-                lpaSo: {
-                    lpaTotalAmount: 700,
-                    lpaRecName: lpaRecName,
-                    lpaSendAddress: lpaSendAddress,
-                    lpaRecTel: lpaRecTel,
-                    lpaDeliverMethod: lpaDeliverMethod
+            let paSoData = {
+                action: "aaa",
+                paSo: {
+                    paTotalAmount: 700,
+                    paRecName: paRecName,
+                    paSendAddress: paSendAddress,
+                    paRecTel: paRecTel,
+                    paDeliverMethod: paDeliverMethod
                 },
-                lpaSoDetails: [
+                paSoDetails: [
                     {
-                        lpaProdNo: 1,
-                        lpaProdPrice: 200,
-                        lpaOrdQty: 2
+                        paProdNo: 1,
+                        paProdPrice: 200,
+                        paOrdQty: 2
                     },
                     {
-                        lpaProdNo: 2,
-                        lpaProdPrice: 300,
-                        lpaOrdQty: 1
+                        paProdNo: 2,
+                        paProdPrice: 300,
+                        paOrdQty: 1
                     }
                 ]
             }
 
-            console.log(Data);
-        	
+            console.log(paSoData);
+
             fetch('/BuyGo/needLoginApi/newOrder', {
                 method: 'POST',
-                body: JSON.stringify(Data),
+                body: JSON.stringify(paSoData),
                 headers: {
                     'Content-Type': 'application/json;charset=utf-8'
                 }
             })
                 .then(response => response.json())
                 .then(data => {
-                    alert('訂單已提交！' + data);
+                    newPaSoNo = data;
+                    alert('訂單已產生！訂單ID = ' + data + "請進行付款作業");
                     cart = []; // 清空購物車
-                    // updateCart();
+                    EcPay(); // 進行綠界支付
                 })
                 .catch(error => {
                     console.error('錯誤：', error);
                 });
+
         });
 
 
-        function returnToCart() {
-            // 返回到购物车页面的逻辑
-            // 可以使用JavaScript的window.location来跳转到购物车页面
+        // 綠界支付
+        const full = location.protocol + '//' + location.host;
+        let clientBackURL = full + "/BuyGo/front_end/pages/member/pa/ListOrders.html";
+        function EcPay() {
+            let AioCheckOutALL = {
+                TotalAmount: 700,
+                TradeDesc: "交易描述",
+                ItemName: "商品名稱",
+                ClientBackURL: ,
+                CustomField1: "paCheckout", // 傳到後端的action
+                CustomField2: newPaSoNo, // 付款成功後要更新的paSoNo
+
+            }
+
+            console.log(AioCheckOutALL);
+
+            fetch('/BuyGo/ecpay/checkout', {
+                method: 'POST',
+                body: JSON.stringify(AioCheckOutALL),
+                headers: {
+                    'Content-Type': 'application/json;charset=utf-8'
+                }
+            })
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data);
+                    window.open(data); //開啟綠界付款網址
+                })
+                .catch(error => {
+                    alert("付款發生錯誤");
+                    console.error('付款錯誤：', error);
+                });
         }
+
+        function checkAllData() {
+            let msg = "";
+            let billRequired_els = document.querySelectorAll(".bill-required");
+            let shipRequired_els = document.querySelectorAll(".ship-required");
+            for (let billRequired_el of billRequired_els) {
+                if (billRequired_el.value === "") {
+                    msg += "帳單資訊未填寫完整\n";
+                    break;
+                }
+            }
+            for (let shipRequired_el of shipRequired_els) {
+                if (shipRequired_el.value === "") {
+                    msg += "運送資訊未填寫完整\n";
+                    break;
+                }
+            }
+            if ($('input[name=deliveryMethod]:checked').length === 0) {
+                msg += "未選擇運送方式\n";
+            }
+            if ($('input[name=paymethod]:checked').length === 0) {
+                msg += "未選擇付款方式";
+            }
+            if (msg !== "") {
+                Swal.fire(msg);
+                return true;
+            } else {
+                return false;
+            }
+        }
+
     </script>
 </body>
 

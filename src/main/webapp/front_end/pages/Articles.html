@@ -229,6 +229,14 @@
 			font-size: 40px;
 
 		}
+
+		.article-content {
+			margin-top: 5px;
+			max-height: 200px;
+			/* 设置最大高度 */
+			overflow-y: auto;
+			/* 添加垂直滚动条 */
+		}
 	</style>
 	<meta charset="UTF-8" />
 	<title>GFashion - Responsive e-commerce HTML Template</title>
@@ -881,8 +889,8 @@
       	<p class="article-date">發布日期：${formattedPublishDate}</p>
       	<p class="article-content">${articleContent}</p>
       	<div class="buttons">
-        <button class="button fa-regular fa-thumbs-up">${articleLike !== undefined ? articleLike : ""}</button>
-        <button class="button fa-regular fa-thumbs-down">${articleDislike !== undefined ? articleDislike : ""}</button>
+        <button class="button fa-regular fa-thumbs-up hidden">${articleLike !== undefined ? articleLike : ""}</button>
+        <button class="button fa-regular fa-thumbs-down hidden">${articleDislike !== undefined ? articleDislike : ""}</button>
         <button class="button fa-regular fa-star" style="color: #000000;"></button>
 		<button class="button comment" id="commentButton1"><i class="fas fa-comment"></i> 留言</button>
 
@@ -910,6 +918,61 @@
 			// 獲取對話框和按鈕元素
 			const reportDialog = document.getElementById("reportDialog");
 			const reportButtons = document.querySelectorAll(".button.report"); // 修正選擇器以匹配多個按鈕
+			//=========================收藏(按鈕)=======================================================================
+
+			// 查找所有星星按鈕並添加點擊事件監聽器
+			const starButtons = document.querySelectorAll(".button.fa-regular.fa-star");
+
+			starButtons.forEach(starButton => {
+				starButton.addEventListener("click", function () {
+					// 獲取與點擊的星星按鈕相關聯的文章編號
+					const articleNo = $(this).closest(".article-item").find(".article-no").text();
+					console.log("文章編號：" + articleNo);
+
+					// 定義文章收藏函數並呼叫它
+					function articleCollLis(articleNo) {
+						fetch('/BuyGo/needLoginApi/articleCollLis/add', {
+							method: 'POST',
+							headers: {
+								'Content-Type': 'application/json;charset:utf-8',
+								'Accept': 'application/json;charset:utf-8'
+							},
+							body: JSON.stringify({
+								articleNo: articleNo
+							})
+						})
+							.then(response => {
+								if (response.status === 401) { // 客戶未登入，執行頁面重定向到登入頁
+									alert('帳號未登入，將導轉至登入頁面');
+									window.location.href = '/BuyGo/front_end/pages/member/login.html'; // 登入頁面url
+								} else if (response.ok) { // 通常 200
+									// 請求成功，顯示燈箱
+									//notLoggedInAction();
+									return response.json();
+								} else {
+									alert("錯誤狀態:" + response.status);
+									return;
+								}
+							})
+							.then(data => processForumArticles(data))
+							.catch(error => console.log(data));
+						
+					}
+					$(document).ready(() => {
+							fetchForumArticles();
+						});
+
+
+					// 調用文章收藏函數
+					articleCollLis(articleNo);
+
+					if (this.style.color === "black") {
+						this.style.color = "#0000FF"; // 更改為藍色（或您喜歡的顏色）
+					} else {
+						this.style.color = "black"; // 變回黑色
+					}
+				});
+			});
 
 			//=========================留言新增(按鈕)=======================================================================
 
@@ -949,7 +1012,7 @@
 						} else if (response.ok) { // 通常 200
 							$(this).closest(".article-item").find("#commentText").val("");
 							// 請求成功，顯示燈箱
-							//showLightbox();
+							notLoggedInAction();
 							return response.json();
 						} else {
 							alert("錯誤狀態:" + response.status);
@@ -959,6 +1022,8 @@
 					.then(data => {
 						// 在這裡處理後端返回的數據
 						console.log(data);
+						location.reload();
+
 					})
 					.catch(error => {
 						console.error("錯誤:", error);
@@ -1031,7 +1096,7 @@
 									window.location.href = '/BuyGo/front_end/pages/member/login.html'; // 登入頁面url
 								} else if (response.ok) { // 通常 200
 									// 請求成功，顯示燈箱
-									//showLightbox();
+									notLoggedInAction();
 									return response.json();
 								} else {
 									alert("錯誤狀態:" + response.status);
@@ -1114,6 +1179,6 @@
 		});
 	</script>
 
-	</body>
+</body>
 
 </html>

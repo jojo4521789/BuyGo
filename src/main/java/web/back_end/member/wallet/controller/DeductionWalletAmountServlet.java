@@ -16,8 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import web.back_end.member.wallet.dto.DeductionWalletAmountDTO;
-import web.back_end.member.wallet.entity.WalletTransHist;
-import web.front_end.member.acc.entity.Member;
+import web.back_end.member.wallet.entity.BackEndWalletTransHist;
 
 @WebServlet("/needLoginApi/front_end/deductionWalletAmount") // 後台會員登入加入後記得改
 public class DeductionWalletAmountServlet extends HttpServlet{
@@ -32,7 +31,7 @@ public class DeductionWalletAmountServlet extends HttpServlet{
 		DeductionWalletAmountDTO deductionWalletAmountDTO = json2Pojo(request, DeductionWalletAmountDTO.class);
 		
 		// 新增資料進WalletTransHist Table開始
-		WalletTransHist walletTransHist = new WalletTransHist();
+		BackEndWalletTransHist walletTransHist = new BackEndWalletTransHist();
 		walletTransHist.setMemberNo(deductionWalletAmountDTO.getMemberNo());
 		walletTransHist.setWalletDetail(deductionWalletAmountDTO.getWalletDetail()); // 設置備註內容
 		walletTransHist.setWalletAmount(deductionWalletAmountDTO.getDeductionAmount());

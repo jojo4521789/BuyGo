@@ -14,11 +14,10 @@ import javax.servlet.http.HttpSession;
 import web.front_end.member.forum.dto.ArticleCollListDto;
 import web.front_end.member.forum.entity.ArticleCollList_In;
 
-
 import static core.util.CommonUtil.writePojo2Json;
 import static web.front_end.member.forum.util.ArticleCollListConstants.SERVICE;
 
-@WebServlet("/api/articleCollLis/loadByMemberNo")
+@WebServlet("/needLoginApi/articleCollLis/loadByMemberNo")
 public class ArticleCollListByMemberNoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -34,17 +33,18 @@ public class ArticleCollListByMemberNoServlet extends HttpServlet {
 		if (memberNo == null) {
 			memberNo = 3;
 		}
-
+		
+		System.out.println("memberNo:" + memberNo);
 		List<ArticleCollListDto> articleCollList_Ins = SERVICE.loadAllArticleInfo(memberNo);
-	
+
 		if (articleCollList_Ins.size() != 0) {
 			System.out.println("取得成功");
+			System.out.println("memberNo" + memberNo);
 			writePojo2Json(response, articleCollList_Ins);
 		} else {
 			System.out.println("取得失敗");
+			writePojo2Json(response, articleCollList_Ins);
 		}
 	}
 
 }
-
-

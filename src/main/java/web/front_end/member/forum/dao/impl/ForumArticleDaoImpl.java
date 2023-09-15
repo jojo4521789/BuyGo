@@ -36,7 +36,7 @@ public class ForumArticleDaoImpl implements ForumArticleDao {
 	@Override
 	// 只改變文章狀態0 變 1
 	public int deleteById(Integer articleNo) {
-		final String hql = "UPDATE ForumArticle SET articleStatus = 1 WHERE articleNo = :articleNo";
+		final String hql = "DELETE ForumArticle WHERE articleNo = :articleNo";
 		int rowsUpdated = getSession().createQuery(hql).setParameter("articleNo", articleNo).executeUpdate();
 		return rowsUpdated;
 

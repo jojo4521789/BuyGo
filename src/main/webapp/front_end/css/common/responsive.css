@@ -114,7 +114,7 @@
 /* col-md */
 @media only screen and (min-width: 992px) and (max-width: 1170px) {
 	.main-menu > li > a {
-		padding: 25px 10px;
+		/* padding: 25px 10px; */
 	}
 }
 /* col-xs , col-sm */

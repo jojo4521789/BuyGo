@@ -1,8 +1,12 @@
 sessionStorage.removeItem("store_data");
-//checkLoginStatusShowMemberAcct();
+let buyerNo;
+checkLoginStatusShowMemberAcct().then(response => {
+    // console.log(response);
+    response[0] = buyerNo;
+})
 
-//假設登入的是1號會員
- let memberNo = 1;
+//代入登入會員
+ let memberNo = buyerNo;
  let paCartId = {
      memberNo: memberNo,
      paProdNo: null
@@ -23,7 +27,8 @@ fetch("/BuyGo/needLoginApi/pa/cart/selectByMember", {
             window.location.href = '/BuyGo/front_end/pages/member/login.html'; // 登入頁面url
         } else if (resp.ok) {
             // 請求成功
-            return resp.json();
+            data = resp.json();
+            return data;
         } else {
             alert("錯誤狀態" + resp.status);
             return;
@@ -31,10 +36,11 @@ fetch("/BuyGo/needLoginApi/pa/cart/selectByMember", {
     })
     
     .then(datas => {
+        console.log(datas);
         for (let data of datas) {
             let paPrpics_url = "../../../../img/common/Image_not_available.png";
-            if (data.paProd.prodPic.length !== 0) {
-                paPrpics_url = data.paProd.prodPic[0].paProdPic;
+            if (data.paProd.paProdPic.length !== 0) {
+                paPrpics_url = data.paProd.paProdPic[0].paProdPic;
             }
             let paProdSubTTL = data.paProd.paProdPrice * data.paOrdQty;
             let paProd_tr = `
@@ -216,10 +222,12 @@ function checkoutClick() {
     for (let check_el of check_els) {
 
         let paProdNo = check_el.closest("tr").id.substring(3);
+        let paProdName = $(`#${paProdNo}`).text();
         let paProdPrice = check_el.closest("tr").querySelector(".unit-price").textContent.substring(1);
         let paOrdQty = check_el.closest("tr").querySelector(".qty-btn-group > input").value;
         let paProd = {
             paProdNo: paProdNo,
+            paProdName: paProdName,
             paProdPrice: paProdPrice,
             paOrdQty: paOrdQty
         }
@@ -232,5 +240,5 @@ function checkoutClick() {
     }
     console.log(cartData);
     sessionStorage.setItem("cart_data", JSON.stringify(cartData));
-    // window.location = "http://localhost:8081/BuyGo/front_end/pages/member/opa/checkout/checkout.html";
+    window.open("../order/CheckOut.html");
 }

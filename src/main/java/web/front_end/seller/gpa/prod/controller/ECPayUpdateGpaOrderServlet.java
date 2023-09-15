@@ -70,12 +70,12 @@ public class ECPayUpdateGpaOrderServlet extends HttpServlet{
 	    
 	    boolean resultBoolean = SERVICE.addGpaSo(gpaSo); // 新增訂單於資料庫
 	    
-	    // 將商品的庫存數量-1開始
+	    // 將商品的預定數量+1開始
 	    GpaProdConstants gpaProdConstants = new GpaProdConstants();
 	    GpaProd currentGpaProd = gpaProdConstants.SERVICE.loadByGpaProdNo(Integer.parseInt(shippingDetailArray[1]));
 	    Integer currentGpaPreProd = currentGpaProd.getGpaPreProd(); // 取得當前商品目前的庫存數量
-	    boolean result = gpaProdConstants.SERVICE.changeGpaPreProdByGpaProdNo(Integer.parseInt(shippingDetailArray[1]), currentGpaPreProd - 1); // 將該商品庫存數量-1並保存至資料庫
-	    // 將商品的庫存數量-1結束
+	    boolean result = gpaProdConstants.SERVICE.changeGpaPreProdByGpaProdNo(Integer.parseInt(shippingDetailArray[1]), currentGpaPreProd + 1); // 將商品的預定數量+1並保存至資料庫
+	    // 將商品的預定數量+1結束
 	    
 	    gpaSo.setSuccessful(resultBoolean);
 	    writePojo2Json(response, gpaSo);

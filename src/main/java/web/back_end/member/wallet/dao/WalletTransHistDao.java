@@ -5,10 +5,10 @@ import static core.util.HibernateUtil.getSessionFactory;
 
 import org.hibernate.Session;
 
-import web.back_end.member.wallet.entity.WalletTransHist;
+import web.back_end.member.wallet.entity.BackEndWalletTransHist;
 
 public interface WalletTransHistDao{
-	int insert(WalletTransHist walletTransHist);
+	int insert(BackEndWalletTransHist walletTransHist);
 	
 	default Session getSession() {
 		return getSessionFactory().getCurrentSession();

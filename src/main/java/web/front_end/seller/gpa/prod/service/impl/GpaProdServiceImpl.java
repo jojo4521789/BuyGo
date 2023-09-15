@@ -50,4 +50,9 @@ public class GpaProdServiceImpl implements GpaProdService{
 		}
 		
 	}
+
+	@Override
+	public List<GpaProd> findAll() {
+		return dao.selectAll();
+	}
 }

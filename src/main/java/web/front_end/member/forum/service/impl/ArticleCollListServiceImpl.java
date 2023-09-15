@@ -107,12 +107,12 @@ public class ArticleCollListServiceImpl implements ArticleCollListService {
 	@Override
 	public ArticleCollList add(Integer memberNo, ArticleCollList articleCollList) {
 		if (articleCollList.getArticleNo() == null) {
-			articleCollList.setMessage("文章留言未輸入");
+			articleCollList.setMessage("此無文章編號");
 			articleCollList.setSuccessful(false);
 			return articleCollList;
 		}
 		articleCollList.setMemberNo(memberNo);
-		articleCollList.setMessage("留言新增成功");
+		articleCollList.setMessage("收藏新增成功");
 		articleCollList.setSuccessful(true);
 
 		dao.insert(articleCollList);
@@ -127,7 +127,6 @@ public class ArticleCollListServiceImpl implements ArticleCollListService {
 //		return null;
 //	}
 
-	// =========================================ok的頭=================================================
 	@Override
 	public List<ArticleCollListDto> loadAllArticleInfo(int selfMemberNo) {
 		// 获取原始数据
@@ -138,43 +137,52 @@ public class ArticleCollListServiceImpl implements ArticleCollListService {
 		List<ArticleCollListDto> result = new ArrayList<>();
 
 		// 遍历articleCollList，并将对应的ForumArticle数据找到并合并到结果列表中
-		for (ForumArticle collList : lstArticleData) {
-			for (ArticleCollList articleColl : articleCollList) {
+		for (ArticleCollList articleColl : articleCollList) {
+//			for (ForumArticle collList : lstArticleData) {
 				// 在lstArticleData中查找与articleColl相关的ForumArticle
 				ForumArticle matchingArticle = findMatchingArticle(lstArticleData, articleColl);
 				// 如果找到了匹配的ForumArticle，则将数据合并到新的ArticleCollListDto中
-				if (articleColl.getMemberNo() == collList.getMemberNo()
-						&& articleColl.getArticleNo() == collList.getArticleNo()) {
-					ArticleCollListDto dto = new ArticleCollListDto();
-					// 将相关的数据复制到dto中
-					dto.setArticleNo(matchingArticle.getArticleNo());
-					dto.setMemberNo(matchingArticle.getMemberNo());
-					dto.setArticleContent(collList.getArticleContent());
+//				if (articleColl.getMemberNo() == collList.getMemberNo()
+//						&& articleColl.getArticleNo() == collList.getArticleNo()) {
+				ArticleCollListDto dto = new ArticleCollListDto();
+				// 将相关的数据复制到dto中
+				dto.setMemberNo(articleColl.getMemberNo());
+				dto.setArticleNo(articleColl.getArticleNo());
+				dto.setArticleContent(matchingArticle.getArticleContent());
+				dto.setArticleDislike(matchingArticle.getArticleDislike());
+				dto.setArticleLike(matchingArticle.getArticleLike());
+				dto.setArticlePublish(matchingArticle.getArticlePublish());
+				dto.setArticleStatus(matchingArticle.getArticleStatus());
+				dto.setArticleTitle(matchingArticle.getArticleTitle());
+				dto.setArticleUpdate(matchingArticle.getArticleUpdate());
 
-					dto.setLstForumArticle(lstArticleData);
-					dto.setLstCollLists(articleCollList);
-					// dto.setForumArticle(matchingArticle);
-					result.add(dto);
-				}
-				
+				// dto.setLstForumArticle(lstArticleData);
+				dto.setLstCollLists(articleCollList);
+				// dto.setForumArticle(matchingArticle);
+				result.add(dto);
+				dto = null;
+//				}
+
 			}
-		}
+//		}
 
 		return result;
 	}
 
 	private ForumArticle findMatchingArticle(List<ForumArticle> lstArticleData, ArticleCollList articleColl) {
-	    for (ForumArticle forumArticle : lstArticleData) {
-	        if (forumArticle.getArticleNo() == articleColl.getArticleNo()) {
-	            return forumArticle;
-	        }
-	    }
-	    return null; // 如果找不到匹配的ForumArticle，返回null
+		for (ForumArticle forumArticle : lstArticleData) {
+			if (forumArticle.getArticleNo() == articleColl.getArticleNo()) {
+				return forumArticle;
+			}
+		}
+		return null; // 如果找不到匹配的ForumArticle，返回null
 	}
-	
-	
 
-	// =========================================ok的尾=================================================
+	@Override
+	public boolean select(Integer memberNo, Integer articleNo) {
+		return dao.selectById(memberNo, articleNo) > 0;
+	}
+
 
 //	@Override
 //	public List<ArticleCollListDto> loadAllArticleInfo(int selfMemberNo) {

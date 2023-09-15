@@ -6,21 +6,26 @@ async function checkLoginStatusShowMemberAcct() {
         .then(resp => resp.json())
         .then(body => {
             const { memberNo, memberAcct, loginState } = body;
-            $("nav#tiny-menu").html(`
-                <ul class="user-menu">
-                    <li><a href="/BuyGo/front_end/pages/member/myaccount.html">My Account</a></li>
-                    <li><a href="/BuyGo/front_end/pages/member/cart.html">My Wishlist</a></li>
-                    <li><a href="/BuyGo/front_end/pages/member/checkout.html">Checkout</a></li>
-                </ul>
+            $("div.actions").css("text-align", "right");
+            $("div.actions").html(`
+                <strong id="showMemberAcct" style="font-weight: bold; white-space:nowrap;"></strong>
+                <nav id="tiny-menu" class="clearfix">
+                    <ul class="user-menu">
+                        <li><a href="/BuyGo/front_end/pages/member/myaccount.html">我的帳戶<img
+                        src="/BuyGo/front_end/img/common/head.png"></a></li>
+                    </ul>
+                </nav>
                 `);
             if (loginState) { // 如果已為登入狀態
-                $("nav#tiny-menu > ul.user-menu").append(`<li id="logInAndLogOut"><a href="/BuyGo/api/front_end/logOut">Log Out</a></li>`); // 修改登入登出按鈕為Log Out
-                $("header#site-header").find("div.clearfix").html(`<strong style="font-weight: bold; position: absolute; right: 150px">您好, ` + memberAcct + `</strong>`); // 顯示登入者帳號資訊
+                $("nav#tiny-menu > ul.user-menu").append(`<li id="logInAndLogOut"><a href="/BuyGo/api/front_end/logOut">登出<img
+                src="/BuyGo/front_end/img/common/login.png"></a></li>`); // 修改登入登出按鈕為Log Out
+                $("strong#showMemberAcct").html(`您好, ${memberAcct}`); // 顯示登入者帳號資訊
                 let memberDetail = [memberNo, memberAcct];
                 return memberDetail; // 回傳會員詳細資訊(矩陣0為memberNo,矩陣1為memberAcct)
             }
             else { // 如果為未登入狀態
-                $("nav#tiny-menu > ul.user-menu").append(`<li id="logInAndLogOut"><a href="/BuyGo/front_end/pages/member/login.html">Log In</a></li>`); // 修改登入登出按鈕為Log In
+                $("nav#tiny-menu > ul.user-menu").append(`<li id="logInAndLogOut"><a href="/BuyGo/front_end/pages/member/login.html">登入<img
+                src="/BuyGo/front_end/img/common/login.png"></a></li>`); // 修改登入登出按鈕為Log In
             }
         });
     return response; // 將收到的會員詳細資訊回傳給呼叫方
