@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-@WebServlet("/api/back_end/EmpLogout")
+@WebServlet("/EmpLoginApi/back_end/EmpLogout")
 public class EmpLogoutServlet extends HttpServlet{
 
 	private static final long serialVersionUID = 1L;

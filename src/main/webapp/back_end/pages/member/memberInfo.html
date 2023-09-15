@@ -28,7 +28,7 @@
             background-color: #f2f2f2;
             text-align: left;
         }
-        input[type="text"], input[type="password"], select {
+        td.form {
             width: 100%;
             padding: 8px;
             box-sizing: border-box;
@@ -51,9 +51,9 @@
         <div class="container">
             <h1 style="font-size: 20px;">個人資訊</h1>
             <form>
-                <table style="margin-top:20px;">
+                <table style="margin-top:20px;" id="empInfo">
 
-                    <tr>
+                    <!-- <tr>
                         <th>員工編號:</th>
                         <td><input type="text" name="編號" id="empno"></td>
                     </tr>
@@ -95,7 +95,7 @@
                                 <option value="3">賣場管理員</option>
                             </select>
                         </td>
-                    </tr>
+                    </tr> -->
                 </table>
 			<!-- <button id="btn1" type="submit" class="btn btn-primary" onclick="addemp()" style="margin-top: 10px;">確認新增</button> -->
 		</div>
@@ -120,34 +120,105 @@
 
     async function loademp () {
 
-        let nickname = document.getElementById('nickname');
-        let gender = document.getElementById('gender');
-        let emptel = document.getElementById('emptel');
-        let empmail = document.getElementById('empmail');
-        let empacct = document.getElementById('acct');
-        let password = document.getElementById('password');
-        let empfun = document.getElementById('empfun');
-        let empno = document.getElementById('empno');
+        // let nickname = document.getElementById('nickname');
+        // let gender = document.getElementById('gender');
+        // let emptel = document.getElementById('emptel');
+        // let empmail = document.getElementById('empmail');
+        // let empacct = document.getElementById('acct');
+        // let password = document.getElementById('password');
+        // let empfun = document.getElementById('empfun');
+        // let empno = document.getElementById('empno');
 
 
-        let empId = body.empno;
+        // let empId = body.empno;
 
-        let getEmpAttri = {
+        // let getEmpAttri = {
 
-            empNo: empno.value,
-	        empName: nickname.value,
-            empGender: gender.value,
-            empTel: emptel.value,
-            empMail: empmail.value,
-            empAcct: acct.value,
-            empPw: password.value,
-            empfun: empfun.value
-        }
+        //     empNo: empno.value,
+	    //     empName: nickname.value,
+        //     empGender: gender.value,
+        //     empTel: emptel.value,
+        //     empMail: empmail.value,
+        //     empAcct: acct.value,
+        //     empPw: password.value,
+        //     empfun: empfun.value
+        // }
 
         await fetch('/BuyGo/EmpLoginApi/back_end/LoadEmpServlet', {
             method: 'POST',
-            body: JSON.stringify(getEmpAttri)
-        })
+            headers: { 'Content-Type': 'application/json;charset:utf-8' }
+        }).then(resp => resp.json())
+            .then(getEmpAttri => {
+                // let getEmpAttri = {empNo, empName, empGender, empTel, empMail, empAcct, empPw, empfun};
+                let {empNo, empName, empGender, empTel, empMail, empAcct, empPw, empfun} = getEmpAttri;
+                console.log(getEmpAttri);
+
+                        switch (empfun) {
+                            case 3: {
+                                empfun = "經理";
+                                break;
+                            }
+                            case 2: {
+                                empfun = "後台管理員";
+                                break;
+                            }
+                            case 1: {
+                                empfun = "賣場管理員";
+                                break;
+                            }
+                        }
+                
+                        switch (empGender) {
+                            case 1: {
+                                empGender = "男";
+                                break;
+                            }
+                            case 2: {
+                                empGender = "女";
+                                break;
+                            }
+                        }        
+
+                $("table#empInfo").append(`
+                <tr>
+                        <th>員工編號:</th>
+                        <td id='form'>${empNo}</td>
+                    </tr>
+                    <tr>
+                        <th>帳號:</th>
+                        <td id='form'>${empAcct}</td>
+                    </tr>
+                    <tr>
+                        <th>密碼:</th>
+                        <td id='form'>${empPw}</td>
+                    </tr>
+                    <tr>
+                        <th>暱稱:</th>
+                        <td id='form'>${empName}</td>
+                    </tr>
+                    <tr>
+                        <th>性別:</th>
+                        <td id='form'>
+                            ${empGender}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>電話:</th>
+                        <td id='form'>${empTel}</td>
+                    </tr>
+                    <tr>
+                        <th>信箱:</th>
+                        <td id='form'>${empMail}</td>
+                    </tr>
+                    <tr>
+                        <th>權限:</th>
+                        <td id='form'>
+                            ${empfun}
+                        </td>
+                    </tr>
+                `)
+
+            })
     }
 </script>
 </body>

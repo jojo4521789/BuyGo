@@ -1,7 +1,7 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-    <title>委员综合服务平台</title>
+    <title>BuyGo後台管理系統</title>
     <link rel="stylesheet" href="../back_end/js/common/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="../back_end/css/common/font-awesome.min.css">
     <link rel="stylesheet" href="../back_end/css/common/index.css">
@@ -20,7 +20,7 @@
         <!--头部信息-->
         <header class="main-header">
             <a href="#" target="_blank" class="logo">
-                <span class="logo-mini">服务平台</span>
+                <span class="logo-mini">服務平台</span>
                 <!-- <span class="logo-lg"><img src="../back_end/img/common/top_logo.png" style="margin-bottom: 5px"/> </span> -->
             </a>
             <nav class="navbar navbar-static-top">
@@ -50,14 +50,14 @@
                         <li class="dropdown user user-menu">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                 <img src="../back_end/img/common/user2-160x160.jpg" class="user-image" alt="User Image">
-                                <span class="hidden-xs">acct001</span>
+                                <span class="hidden-xs">個人資訊</span>
                             </a>
                             <ul class="dropdown-menu pull-right">
-                                <li><a class="menuItem" data-id="userInfo" href="/SystemManage/User/Info"><i class="fa fa-user"></i>個人資訊</a></li>
+                                <li><a class="menuItem" data-id="userInfo" href="./pages/member/memberInfo.html"><i class="fa fa-user"></i>個人資訊</a></li>
                                 <li><a href="javascript:void();"><i class="fa fa-trash-o"></i>清空缓存</a></li>
                                 <li><a href="javascript:void();"><i class="fa fa-paint-brush"></i>更換大頭照</a></li>
                                 <li class="divider"></li>
-                                <li><a href="../back_end/pages/member/login/login_test.html"><i class="ace-icon fa fa-power-off"></i>登出</a></li>
+                                <li><a href="../back_end/pages/member/login/login_test.html" onclick="EmpLogout()"><i class="ace-icon fa fa-power-off"></i>登出</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -135,26 +135,32 @@
 
             let empfun = body.empFun;
             let empacct = body.empAcct;
+
+            // if(empfun == null) {
+                
+            // }
             
 
             switch(empfun) {
-            case 3:
-                $('p#checkMsg').css('visibility', 'visible');
-                // $('li#sidebar-item-6').css('display', 'none');
-                $('li#sidebar-item-7').css('display', 'none');
-                break;
             case 2:
-                console.log('dddd');
+                $('li#sidebar-item-4').css('display', 'none');
+                $('li#sidebar-item-5').css('display', 'none');
+                $('li#sidebar-item-6').css('display', 'none');
                 break;
             case 1:
                 $('li#sidebar-item-6').css('display', 'none');
-                $('li#sidebar-item-7').css('display', 'none');
                 break;
         }
     });
         return response;
     }
     
+    </script>
+    <script>
+
+        function EmpLogout () {
+            fetch('/BuyGo/EmpLoginApi/back_end/EmpLogout')
+        }
     </script>
     <script src="../back_end/js/common/jquery/jQuery-2.2.0.min.js"></script>
     <script src="../back_end/js/common/bootstrap/js/bootstrap.min.js"></script>
