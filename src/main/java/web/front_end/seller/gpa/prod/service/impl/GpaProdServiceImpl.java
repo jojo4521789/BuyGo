@@ -16,4 +16,9 @@ public class GpaProdServiceImpl implements GpaProdService{
 	public GpaProd loadByGpaProdNo(Integer gpaProdNo) {
 		return dao.selectById(gpaProdNo);
 	}
+
+	@Override
+	public GpaProd insert(GpaProd gpaProd) {
+		return gpaProd;
+	}
 }

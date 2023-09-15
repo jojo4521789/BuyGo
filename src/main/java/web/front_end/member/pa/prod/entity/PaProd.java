@@ -17,7 +17,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import web.front_end.member.pa.prodpic.entity.ProdPic;
+import web.front_end.member.pa.prodpic.entity.PaProdPic;
 
 @Entity
 @Setter
@@ -54,5 +54,5 @@ public class PaProd extends Core {
 
 	@OneToMany
 	@JoinColumn(name = "PA_PROD_NO", referencedColumnName = "PA_PROD_NO")
-	private List<ProdPic> paProdPic;
+	private List<PaProdPic> paProdPic;
 }
