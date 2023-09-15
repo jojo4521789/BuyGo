@@ -588,8 +588,8 @@
 											<option value="1">一般商場</option>
 											<option value="2">揪團商場</option>
 										</select><br>
-										<span>商品編號:</span><input type="text"><br>
-										<span>檢舉人編號:</span><input type="text"><br>
+										<span>商品編號:</span><input type="text" id="prodNo"><br>
+										<span>賣家編號:</span><input type="text" id="sellerNo"><br>
 										<select id="reportReason">
 											<option value="0">0: 藥品, 醫療器材</option>
 											<option value="1">1: 酒類 / 菸類商品</option>
@@ -1568,24 +1568,19 @@
 			const reportReason = document.getElementById("reportReason");
 			const reportContent = document.getElementById("reportContent");
 			const selectSausage = document.getElementById("selectSausage");
-			lightbox.style.display = 'block';
+			const sellerNo_el = document.getElementById("sellerNo");
+			$('input#prodNo').val(currentGpaProdNo);
+			// lightbox.style.display = 'block';
 			document.getElementById("submit_report").addEventListener("click", function () {
-				let gpaProdNo = "";
-				let paProdNo = "";
-				if(selectSausage.value === 1){
-					gpaProdNo = currentParameterValue_gpaProdNo;
-				}else if(selectSausage.value === 2){
-					paProdNo = "2";//一般賣場詳細頁面的商品編號
-				}
+				
 				fetch("/BuyGo/api/front_end/member/gpa/order/GpaProdRpIncrease", {
 					method: "POST",
 					headers: { 'Content-Type': 'application/json;charset:utf-8' },
 					body: JSON.stringify({
-						gpaProdNo: gpaProdNo,
-						memberNo: sellerMemberNo,
+						gpaProdNo: currentGpaProdNo,
+						memberNo: sellerNo_el.value,
 						gpaProdRpContent: reportContent.value,
 						gpaProdRpReason: reportReason.value,
-						paProdNo: paProdNo,
 						prodSell: selectSausage.value
 					})
 				}).then(resp => resp.json())
