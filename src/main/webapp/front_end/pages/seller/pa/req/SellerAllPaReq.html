@@ -7,73 +7,85 @@
 <!--<![endif]-->
 
 <head>
-<meta charset="UTF-8" />
-<title>GFashion - Responsive e-commerce HTML Template</title>
-<meta name="description" content="" />
-<meta name="keywords" content="" />
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, maximum-scale=1">
+	<meta charset="UTF-8" />
+	<title>GFashion - Responsive e-commerce HTML Template</title>
+	<meta name="description" content="" />
+	<meta name="keywords" content="" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-<!-- Favorite Icons -->
-<link rel="icon" href="../../../../img/common/favicon/favicon.html"
-	type="image/x-icon" />
-<link rel="apple-touch-icon-precomposed" sizes="144x144"
-	href="../../../../img/common/favicon/apple-touch-icon-144x144-precomposed.html">
-<link rel="apple-touch-icon-precomposed" sizes="72x72"
-	href="../../../../img/common/favicon/apple-touch-icon-72x72-precomposed.html">
-<link rel="apple-touch-icon-precomposed"
-	href="../../../../img/common/favicon/apple-touch-icon-precomposed.html">
-<!-- // Favorite Icons -->
+	<!-- Favorite Icons -->
+	<link rel="icon" href="../../../../img/common/favicon/favicon.html" type="image/x-icon" />
+	<link rel="apple-touch-icon-precomposed" sizes="144x144"
+		href="../../../../img/common/favicon/apple-touch-icon-144x144-precomposed.html">
+	<link rel="apple-touch-icon-precomposed" sizes="72x72"
+		href="../../../../img/common/favicon/apple-touch-icon-72x72-precomposed.html">
+	<link rel="apple-touch-icon-precomposed" href="../../../../img/common/favicon/apple-touch-icon-precomposed.html">
+	<!-- // Favorite Icons -->
 
-<!--<link href='http://fonts.useso.com/css?family=Open+Sans:300,400,600,700' rel='stylesheet' type='text/css'>-->
+	<!--<link href='http://fonts.useso.com/css?family=Open+Sans:300,400,600,700' rel='stylesheet' type='text/css'>-->
 
-<!-- GENERAL CSS FILES -->
-<link rel="stylesheet" href="../../../../css/common/minified.css">
-<!-- // GENERAL CSS FILES -->
+	<!-- GENERAL CSS FILES -->
+	<link rel="stylesheet" href="../../../../css/common/minified.css">
+	<!-- // GENERAL CSS FILES -->
 
-<!--[if IE 8]>
+	<!--[if IE 8]>
 		<script src="js/respond.min.js"></script>
 		<script src="js/selectivizr-min.js"></script>
 	<![endif]-->
 
-<script src="../../../../js/common/jquery.min.js"></script>
+	<script src="../../../../js/common/jquery.min.js"></script>
 
-<script>window.jQuery || document.write('<script src="../../../../js/common/jquery.min.js"><\/script>');</script>
-<script src="../../../../js/common/modernizr.min.js"></script>
-<!-- PARTICULAR PAGES CSS FILES -->
-<link rel="stylesheet" href="../../../../css/common/innerpage.css">
-<link rel="stylesheet" href="../../../../css/common/owl.carousel.css">
-<link rel="stylesheet" href="../../../../css/common/owl.theme.css">
-<!-- // PARTICULAR PAGES CSS FILES -->
-<link rel="stylesheet" href="../../../../css/common/responsive.css">
+	<script>window.jQuery || document.write('<script src="../../../../js/common/jquery.min.js"><\/script>');</script>
+	<script src="../../../../js/common/modernizr.min.js"></script>
+	<!-- PARTICULAR PAGES CSS FILES -->
+	<link rel="stylesheet" href="../../../../css/common/innerpage.css">
+	<link rel="stylesheet" href="../../../../css/common/owl.carousel.css">
+	<link rel="stylesheet" href="../../../../css/common/owl.theme.css">
+	<!-- // PARTICULAR PAGES CSS FILES -->
+	<link rel="stylesheet" href="../../../../css/common/responsive.css">
 
-<!-- Data-Table -->
+	<!-- Data-Table -->
 	<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-	
-	<link rel="stylesheet"
-	href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
-	
-	<script
-		src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
-		
+
+	<link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
+
+	<script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+
 	<script>
 		$(document).ready(function () {
-		    $('#table_id').DataTable();
-		    ordering: false
+			$('#table_id').DataTable();
+			ordering: false
 		});
 	</script>
 
-<style>
-th {
-	border: 1px solid rgb(130, 81, 81);
-	background-color: lightsalmon;
-	white-space: nowrap;
-}
+	<style>
+		th {
+			border: 1px solid rgb(130, 81, 81);
+			background-color: lightsalmon;
+			white-space: nowrap;
+		}
+	</style>
+	<style>
+		.logo img {
+			max-width: 200px;
+			max-height: 150px;
+		}
 
+		.user-menu a img {
+			max-width: 20px;
+			max-height: 20px;
+		}
 
-</style>
+		ul.user-menu>li>a {
+			color: #ef7700;
+			font-weight: bold;
+			font-size: 25px;
+		}
 
-
+		a:hover {
+			color: #0150ed;
+		}
+	</style>
 </head>
 
 <body>
@@ -90,8 +102,9 @@ th {
 						<div class="col-xs-12 col-sm-6 col-md-7">
 							<!-- CONTACT INFO -->
 							<div class="contact-info">
-								<i class="iconfont-headphones round-icon"></i> <strong>+444
-									(100) 1234</strong> <span>(Mon- Fri: 09.00 - 21.00)</span>
+								<i class="iconfont-headphones round-icon"></i>
+								<strong>(03)425-1108</strong>
+								<span>(Mon- Fri: 09.00 - 21.00)</span>
 							</div>
 							<!-- // CONTACT INFO -->
 						</div>
@@ -102,58 +115,61 @@ th {
 									<div class="search-box">
 										<form action="#" method="post">
 											<div class="input-iconed prepend">
-												<button class="input-icon">
-													<i class="iconfont-search"></i>
-												</button>
-												<label for="input-search" class="placeholder">Search
-													here…</label> <input type="text" name="q" id="input-search"
+												<button class="input-icon"><i class="iconfont-search"></i></button>
+												<label for="input-search" class="placeholder">Search here…</label>
+												<input type="text" name="q" id="input-search"
 													class="round-input full-width" required />
 											</div>
 										</form>
-									</div> <!-- // SEARCH BOX -->
+									</div>
+									<!-- // SEARCH BOX -->
 								</li>
 								<li data-toggle="sub-header" data-target="#sub-social">
-									<!-- SOCIAL ICONS --> <a href="javascript:void(0);"
-									id="social-icons"> <i class="iconfont-share round-icon"></i>
-								</a>
+									<!-- SOCIAL ICONS -->
+									<a href="javascript:void(0);" id="social-icons">
+										<i class="iconfont-share round-icon"></i>
+									</a>
 
 									<div id="sub-social" class="sub-header">
 										<ul class="social-list unstyled text-center">
-											<li><a href="#"><i
-													class="iconfont-facebook round-icon"></i></a></li>
-											<li><a href="#"><i
-													class="iconfont-twitter round-icon"></i></a></li>
-											<li><a href="#"><i
-													class="iconfont-google-plus round-icon"></i></a></li>
-											<li><a href="#"><i
-													class="iconfont-pinterest round-icon"></i></a></li>
+											<li><a href="#"><i class="iconfont-facebook round-icon"></i></a></li>
+											<li><a href="#"><i class="iconfont-twitter round-icon"></i></a></li>
+											<li><a href="#"><i class="iconfont-google-plus round-icon"></i></a></li>
+											<li><a href="#"><i class="iconfont-pinterest round-icon"></i></a></li>
 											<li><a href="#"><i class="iconfont-rss round-icon"></i></a></li>
 										</ul>
-									</div> <!-- // SOCIAL ICONS -->
+									</div>
+									<!-- // SOCIAL ICONS -->
 								</li>
 								<li data-toggle="sub-header" data-target="#sub-cart">
-									<!-- SHOPPING CART --> <a href="javascript:void(0);"
-									id="total-cart"> <i
-										class="iconfont-shopping-cart round-icon"></i>
-								</a>
+									<!-- SHOPPING CART -->
+									<a href="javascript:void(0);" id="total-cart">
+										<i class="iconfont-shopping-cart round-icon"></i>
+									</a>
 
 									<div id="sub-cart" class="sub-header">
 										<div class="cart-header">
-											<span>Your cart is currently empty.</span> <small><a
-												href="../../pages/member/cart.html">(See All)</a></small>
+											<span>Your cart is currently empty.</span>
+											<small><a href="pages/member/opa/cart/cart.html">(See All)</a></small>
 										</div>
-										<ul class="cart-items product-medialist unstyled clearfix"></ul>
+										<!-- <ul class="cart-items product-medialist unstyled clearfix"></ul> -->
+										<ul class="s-cart-items product-medialist unstyled clearfix"></ul>
 										<div class="cart-footer">
-											<div class="cart-total clearfix">
-												<span class="pull-left uppercase">Total</span> <span
-													class="pull-right total">$ 0</span>
+											<!-- <div class="cart-total clearfix">
+                                                <span class="pull-left uppercase">Total</span>
+                                                <span class="pull-right total">$ 0</span>
+                                            </div> -->
+											<div class="s-cart-total clearfix">
+												<span class="pull-left uppercase">Total</span>
+												<span class="pull-right total">$ 0</span>
 											</div>
 											<div class="text-right">
-												<a href="../../pages/member/cart.html"
-													class="btn btn-default btn-round view-cart">View Cart</a>
+												<a href="pages/member/opa/cart/cart.html"
+													class="btn btn-default btn-round view-cart">查看購物車</a>
 											</div>
 										</div>
-									</div> <!-- // SHOPPING CART -->
+									</div>
+									<!-- // SHOPPING CART -->
 								</li>
 							</ul>
 						</div>
@@ -173,174 +189,57 @@ th {
 					<div class="main-header">
 						<!-- CURRENCY / LANGUAGE / USER MENU -->
 						<div class="actions">
-							<!-- 頁面右上功能區 -->
+							<div class="center-xs">
+
+							</div>
+							<div class="clearfix"></div><br>
+							<!-- USER RELATED MENU -->
+							<nav id="tiny-menu" class="clearfix">
+								<ul class="user-menu">
+									<li><a href="pages/member/myaccount.html" class="personal">我的帳戶<img
+												src="https://drive.google.com/uc?id=1EkcTLzseH_atgAiJ78ymmJoyuVUasGb7"></a>
+									</li>
+									<!-- <li><a href="pages/member/opa/cart/cart.html" class="paymoney">結帳<img
+												src="../front_end/img/common/paymoney.png"></a></li> -->
+									<li id="logInAndLogOut"><a href="pages/member/login.html" class="loginOut">登入<img
+												src="https://drive.google.com/uc?id=1uViDGF7OBfvCpNZp8pEcKFm5CmtAE8Pg"></a>
+									</li>
+								</ul><br>
+							</nav>
+							<!-- // USER RELATED MENU -->
 						</div>
 						<!-- // CURRENCY / LANGUAGE / USER MENU -->
 						<!-- SITE LOGO -->
 						<div class="logo-wrapper">
-							<a href="../../../../index-2.html" class="logo"
-								title="GFashion - Responsive e-commerce HTML Template"> <img
-								src="../../../../img/common/logo.png"
-								alt="GFashion - Responsive e-commerce HTML Template" />
+							<a href="index-2.html" class="logo">
+								<img src="https://drive.google.com/uc?id=1fJM8iEd6uvE037YCUduSNE2Enm_2OUmW" />
 							</a>
 						</div>
 						<!-- // SITE LOGO -->
 						<!-- SITE NAVIGATION MENU -->
 						<nav id="site-menu" role="navigation">
 							<ul class="main-menu hidden-sm hidden-xs">
-								<li class="active"><a href="../../index.html">Home</a></li>
-								<li><a href="../../../../pages/guest/products.html">Women</a>
+								<li class="active">
+									<a href="index.html">首頁</a>
 								</li>
-								<li><a href="../../../../pages/guest/products.html">Men</a>
-
-									<!-- MEGA MENU -->
-									<div class="mega-menu" data-col-lg="9" data-col-md="12">
-										<div class="row">
-
-											<div class="col-md-3">
-												<h4 class="menu-title">Clothing</h4>
-												<ul class="mega-sub">
-													<li><a href="../../../../pages/guest/products.html">Casual
-															Wear</a></li>
-													<li><a href="../../../../pages/guest/products.html">Evening
-															Wear</a></li>
-													<li><a href="../../../../pages/guest/products.html">Formal
-															Attire</a></li>
-													<li><a href="../../../../pages/guest/products.html">Womens
-															Jeans</a></li>
-													<li><a href="../../../../pages/guest/products.html">Mens
-															Jeans</a></li>
-													<li><a href="../../../../pages/guest/products.html">Fall
-															Styles</a></li>
-												</ul>
-											</div>
-
-											<div class="col-md-3">
-												<h4 class="menu-title">Accessories</h4>
-												<ul class="mega-sub">
-													<li><a href="../../../../pages/guest/products.html">Casual
-															Wear</a></li>
-													<li><a href="../../../../pages/guest/products.html">Evening
-															Wear</a></li>
-													<li><a href="../../../../pages/guest/products.html">Formal
-															Attire</a></li>
-													<li><a href="../../../../pages/guest/products.html">Womens
-															Jeans</a></li>
-													<li><a href="../../../../pages/guest/products.html">Mens
-															Jeans</a></li>
-													<li><a href="../../../../pages/guest/products.html">Fall
-															Styles</a></li>
-												</ul>
-											</div>
-
-											<div class="col-md-3">
-												<h4 class="menu-title">Brands</h4>
-												<ul class="mega-sub">
-													<li><a href="../../../../pages/guest/products.html">Casual
-															Wear</a></li>
-													<li><a href="../../../../pages/guest/products.html">Evening
-															Wear</a></li>
-													<li><a href="../../../../pages/guest/products.html">Formal
-															Attire</a></li>
-													<li><a href="../../../../pages/guest/products.html">Womens
-															Jeans</a></li>
-													<li><a href="../../../../pages/guest/products.html">Mens
-															Jeans</a></li>
-													<li><a href="../../../../pages/guest/products.html">Fall
-															Styles</a></li>
-												</ul>
-											</div>
-
-											<div class="col-md-3">
-												<div class="carousel slide m-b" data-ride="carousel">
-													<div class="carousel-inner">
-														<div class="item active">
-															<img src="../../../../img/common/men/slide1.jpg" alt="" />
-														</div>
-														<div class="item">
-															<img src="../../../../img/common/men/slide2.jpg" alt="" />
-														</div>
-													</div>
-												</div>
-												<h5 class="text-semibold uppercase m-b-sm">Featured
-													Products</h5>
-												<p>Lorem ipsum dolor sit, consectetur adipiscing elit.
-													Etiam neque velit, blandit sed scelerisque.</p>
-												<a href="../../../../pages/guest/products.html"
-													class="btn btn-default btn-round">Go to Shop →</a>
-											</div>
-
-										</div>
-									</div> <!-- // MEGA MENU --></li>
-								<li><a href="../../../../pages/components.html">Components</a>
+								<li>
+									<a href="/BuyGo/front_end/pages/guest/pa/prods/prods.html">一般賣場</a>
 								</li>
-								<li><a href="../../../../pages/guest/store-locator.html">Store
-										Locator</a></li>
-								<li><a href="../../../../pages/guest/contact-us.html">Contact
-										Us</a></li>
-								<li><a href="#">Buy Me!</a></li>
+								<li>
+									<a href="pages/guest/opa/prods/prods.html">官方賣場</a>
+								</li>
+								<li>
+									<a href="pages/components.html">揪團商場</a>
+								</li>
+								<li>
+									<a href="pages/components.html">論壇</a>
+								</li>
 							</ul>
 
 							<!-- MOBILE MENU -->
-							<div id="mobile-menu"
-								class="dl-menuwrapper visible-xs visible-sm">
-								<button class="dl-trigger">
-									<i class="iconfont-reorder round-icon"></i>
-								</button>
-								<ul class="dl-menu">
-									<li class="active"><a href="javsacript:void(0);">Home</a>
-									</li>
-									<li><a href="javsacript:void(0);">Women</a></li>
-									<li><a href="javsacript:void(0);">Men</a>
+							<div id="mobile-menu" class="dl-menuwrapper visible-xs visible-sm">
+								<button class="dl-trigger"><i class="iconfont-reorder round-icon"></i></button>
 
-										<ul class="dl-submenu">
-											<li><a href="../../pages/guest/products.html">Clothing</a>
-												<ul class="dl-submenu">
-													<li><a href="../../../../pages/guest/products.html">Casual
-															Wear</a></li>
-													<li><a href="../../../../pages/guest/products.html">Evening
-															Wear</a></li>
-													<li><a href="../../../../pages/guest/products.html">Formal
-															Attire</a></li>
-													<li><a href="../../../../pages/guest/products.html">Womens
-															Jeans</a></li>
-													<li><a href="../../../../pages/guest/products.html">Mens
-															Jeans</a></li>
-													<li><a href="../../../../pages/guest/products.html">Fall
-															Styles</a></li>
-												</ul></li>
-											<li><a href="../../pages/guest/products.html">Accessories</a>
-												<ul class="dl-submenu">
-													<li><a href="../../../../pages/guest/products.html">Casual
-															Wear</a></li>
-													<li><a href="../../../../pages/guest/products.html">Evening
-															Wear</a></li>
-													<li><a href="../../../../pages/guest/products.html">Formal
-															Attire</a></li>
-													<li><a href="../../../../pages/guest/products.html">Womens
-															Jeans</a></li>
-													<li><a href="../../../../pages/guest/products.html">Mens
-															Jeans</a></li>
-													<li><a href="../../../../pages/guest/products.html">Fall
-															Styles</a></li>
-												</ul></li>
-											<li><a href="../../../../pages/guest/products.html">Brands</a>
-												<ul class="dl-submenu">
-													<li><a href="../../../../pages/guest/products.html">Casual
-															Wear</a></li>
-													<li><a href="../../../../pages/guest/products.html">Evening
-															Wear</a></li>
-													<li><a href="../../../../pages/guest/products.html">Formal
-															Attire</a></li>
-													<li><a href="../../../../pages/guest/products.html">Womens
-															Jeans</a></li>
-													<li><a href="../../../../pages/guest/products.html">Mens
-															Jeans</a></li>
-													<li><a href="../../../../pages/guest/products.html">Fall
-															Styles</a></li>
-												</ul></li>
-										</ul></li>
-								</ul>
 							</div>
 							<!-- // MOBILE MENU -->
 
@@ -398,8 +297,8 @@ th {
 										<h5 class="text-semibold uppercase nmb">Leather Fashion</h5>
 										<div class="space10"></div>
 										<a href="../../../../pages/guest/products.html"
-											class="with-icon prepend-icon"><i
-											class="iconfont-caret-right"></i><span> Shop Now</span></a>
+											class="with-icon prepend-icon"><i class="iconfont-caret-right"></i><span>
+												Shop Now</span></a>
 									</div>
 								</div>
 							</div>
@@ -497,20 +396,17 @@ th {
 									<h5 class="widget-title">information</h5>
 									<div class="widget-content">
 										<ul class="menu iconed-menu unstyled">
-											<li><a href="#"><i
-													class="iconfont-circle-blank menu-icon"></i>Affiliate</a></li>
-											<li><a href="#"><i
-													class="iconfont-circle-blank menu-icon"></i>Shipping</a></li>
-											<li><a href="#"><i
-													class="iconfont-circle-blank menu-icon"></i>Shop support</a></li>
-											<li><a href="#"><i
-													class="iconfont-circle-blank menu-icon"></i>Customer
+											<li><a href="#"><i class="iconfont-circle-blank menu-icon"></i>Affiliate</a>
+											</li>
+											<li><a href="#"><i class="iconfont-circle-blank menu-icon"></i>Shipping</a>
+											</li>
+											<li><a href="#"><i class="iconfont-circle-blank menu-icon"></i>Shop
+													support</a></li>
+											<li><a href="#"><i class="iconfont-circle-blank menu-icon"></i>Customer
 													Service</a></li>
-											<li><a href="#"><i
-													class="iconfont-circle-blank menu-icon"></i>Payment &
+											<li><a href="#"><i class="iconfont-circle-blank menu-icon"></i>Payment &
 													Return</a></li>
-											<li><a href="#"><i
-													class="iconfont-circle-blank menu-icon"></i>Terms &
+											<li><a href="#"><i class="iconfont-circle-blank menu-icon"></i>Terms &
 													Conditions</a></li>
 										</ul>
 									</div>
@@ -535,15 +431,17 @@ th {
 									<div class="widget-content">
 										<ul class="menu iconed-list unstyled">
 											<li><span class="list-icon"><i
-													class="round-icon iconfont-map-marker"></i></span>
+														class="round-icon iconfont-map-marker"></i></span>
 												<div class="list-content">Lorem ipsum maecenas dapibus
-													luctus euismod 133/2 New York City</div></li>
+													luctus euismod 133/2 New York City</div>
+											</li>
+											<li><span class="list-icon"><i class="round-icon iconfont-phone"></i></span>
+												<div class="list-content">(+00)1344356-675</div>
+											</li>
 											<li><span class="list-icon"><i
-													class="round-icon iconfont-phone"></i></span>
-												<div class="list-content">(+00)1344356-675</div></li>
-											<li><span class="list-icon"><i
-													class="round-icon iconfont-envelope-alt"></i></span>
-												<div class="list-content">support@themina.net</div></li>
+														class="round-icon iconfont-envelope-alt"></i></span>
+												<div class="list-content">support@themina.net</div>
+											</li>
 										</ul>
 									</div>
 								</section>
@@ -554,13 +452,13 @@ th {
 									<div class="widget-content">
 										<div class="center-xs">
 											<div class="ads">
-												<a href="#"> <img
-													src="../../img/common/demo/images-footer.jpg" alt="" />
+												<a href="#"> <img src="../../img/common/demo/images-footer.jpg"
+														alt="" />
 												</a>
 												<div class="ads-caption bottom-right">
 													<a href="#" class="btn btn-default btn-round"> <i
-														class="round-icon iconfont-angle-right"></i> <span
-														class="inline-middle">Show More</span>
+															class="round-icon iconfont-angle-right"></i> <span
+															class="inline-middle">Show More</span>
 													</a>
 												</div>
 											</div>
@@ -618,10 +516,9 @@ th {
 							<div class="pull-right">
 								<div class="vmid">
 									<span class="uppercase">Payment Accept&emsp;</span> <a href="#"><img
-										src="../../img/common/visacard.png" alt="" width="40" /></a> <a
-										href="#"><img src="../../img/common/mastercard.png" alt=""
-										width="40" /></a> <a href="#"><img
-										src="../../img/common/paypal.png" alt="" width="40" /></a>
+											src="../../img/common/visacard.png" alt="" width="40" /></a> <a
+										href="#"><img src="../../img/common/mastercard.png" alt="" width="40" /></a> <a
+										href="#"><img src="../../img/common/paypal.png" alt="" width="40" /></a>
 								</div>
 							</div>
 						</div>
@@ -653,88 +550,88 @@ th {
 
 	<script>
 		checkLoginStatusShowMemberAcct(); // 檢查客戶帳號是否登入，修改頁面右上方Log In/Log Out按鈕，顯示登入者帳號名稱
-		
-        window.addEventListener('load', function () {
-            const paReqList_el = document.querySelector('#paReqList');
-            const paReqListTable = document.getElementById("paReqListTable");
 
-            loadPaReqList(10);//測試用寫死，記得修改
+		window.addEventListener('load', function () {
+			const paReqList_el = document.querySelector('#paReqList');
+			const paReqListTable = document.getElementById("paReqListTable");
 
-            //讀取該會員的所有委託單
-            function loadPaReqList(memberNoSeller) {
-                fetch('/BuyGo/api/front_end/seller/getSellerPaReqs', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json; charset=utf-8',
-                    },
-                    body: JSON.stringify({
-                        memberNoSeller: memberNoSeller,
-                    }),
-                })
-                    .then((resp) => resp.json())
-                    .then((data) => {
-                    	
-                    	$('#table_id').DataTable().destroy();
-                    	
-                    	const table = $('#table_id').DataTable({
-                            data: data,
-                            columns: [
-                            	{ 
-                                    data: null,
-                                    render: function (data, type, row, meta) {
-                                        if (type === 'display') {
-                                            return meta.row + 1;
-                                        }
-                                        return data;
-                                    }
-                                },
-                                { data: 'paRqNo' },
-                                { data: 'memberNoMember' },
-                                { data: 'paRqProdName' },
-                                { 
-                                    data: 'paRqUrl',
-                                    render: function (data, type, row, meta) {
-                                        if (type === 'display') {
-                                            const maxUrlLength = 50; // 限制url的最大長度
-                                            if (data.length > maxUrlLength) {
-                                                // 超過的部分改用刪節號
-                                                const truncatedUrl = data.substring(0, maxUrlLength) + '...';
-                                                return '<a href="' + data + '" target="_blank" title="' + data + '">' + truncatedUrl + '</a>';
-                                            } else {
-                                                return '<a href="' + data + '" target="_blank">' + data + '</a>';
-                                            }
-                                        }
-                                        return data;
-                                    }
-                                },
-                                { data: 'paRqPrice' },
-                                { data: 'paRqQty' },
-                                { data: 'paRqNote' },
-                                { 
-                                    data: 'paRqStat',
-                                    render: function (data, type, row, meta) {
-                                        if (type === 'display') {
-                                            const selectHtml = `
+			loadPaReqList(10);//測試用寫死，記得修改
+
+			//讀取該會員的所有委託單
+			function loadPaReqList(memberNoSeller) {
+				fetch('/BuyGo/api/front_end/seller/getSellerPaReqs', {
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/json; charset=utf-8',
+					},
+					body: JSON.stringify({
+						memberNoSeller: memberNoSeller,
+					}),
+				})
+					.then((resp) => resp.json())
+					.then((data) => {
+
+						$('#table_id').DataTable().destroy();
+
+						const table = $('#table_id').DataTable({
+							data: data,
+							columns: [
+								{
+									data: null,
+									render: function (data, type, row, meta) {
+										if (type === 'display') {
+											return meta.row + 1;
+										}
+										return data;
+									}
+								},
+								{ data: 'paRqNo' },
+								{ data: 'memberNoMember' },
+								{ data: 'paRqProdName' },
+								{
+									data: 'paRqUrl',
+									render: function (data, type, row, meta) {
+										if (type === 'display') {
+											const maxUrlLength = 50; // 限制url的最大長度
+											if (data.length > maxUrlLength) {
+												// 超過的部分改用刪節號
+												const truncatedUrl = data.substring(0, maxUrlLength) + '...';
+												return '<a href="' + data + '" target="_blank" title="' + data + '">' + truncatedUrl + '</a>';
+											} else {
+												return '<a href="' + data + '" target="_blank">' + data + '</a>';
+											}
+										}
+										return data;
+									}
+								},
+								{ data: 'paRqPrice' },
+								{ data: 'paRqQty' },
+								{ data: 'paRqNote' },
+								{
+									data: 'paRqStat',
+									render: function (data, type, row, meta) {
+										if (type === 'display') {
+											const selectHtml = `
                                                 <select>
                                                     <option value="0" ${data === 0 ? 'selected' : ''}>未處理</option>
                                                     <option value="1" ${data === 1 ? 'selected' : ''}>接受委託</option>
                                                     <option value="2" ${data === 2 ? 'selected' : ''}>拒絕委託</option>
                                                 </select>
                                             `;
-                                            return selectHtml;
-                                        }
-                                        return data;
-                                    }
-                                },
-                                { data: 'paRqStartDate' }
-                            ]
-                        });
+											return selectHtml;
+										}
+										return data;
+									}
+								},
+								{ data: 'paRqStartDate' }
+							]
+						});
 
-	                        
-                    });
-            }
-        });
-    </script>
+
+					});
+			}
+		});
+	</script>
 
 </body>
 
