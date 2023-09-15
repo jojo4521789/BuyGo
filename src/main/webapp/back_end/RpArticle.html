@@ -99,11 +99,17 @@
 
         .modal-content {
             background-color: white;
-            margin: 20% auto;
             padding: 20px;
             border: 1px solid #ddd;
-            width: 50%;
+            width: 60%;
+            max-width: 600px;
             text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            border-radius: 4px;
+            overflow-y: auto;
+            /* 启用垂直滚动条 */
+            max-height: 80vh;
+            /* 限制最大高度为视窗高度的80% */
         }
 
         button {
@@ -174,6 +180,13 @@
         .red-text {
             color: red;
         }
+
+        .scrollable-content {
+            max-height: 500px;
+            /* 根據需要調整最大高度 */
+            overflow-y: auto;
+            /* 啟用垂直滾動 */
+        }
     </style>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -203,6 +216,7 @@
             <h1>修改狀態</h1>
             <h2 style="text-align: left;">檢舉文章摘要：</h2>
             <!-- 在這里添加彈出對話框的內容 -->
+            <div class="scrollable-content"></div>
             <table>
                 <tr>
                     <th>檢舉文章編號:</th>
@@ -219,40 +233,41 @@
             </table>
             <br><br>
             <h2 style="text-align: left;">論壇文章詳細資訊：</h2>
-            <p id="re"></p>
-            <br>
-            <h2 style="text-align: left;">修改文章狀態：</h2>
-            <table>
-                <tr>
-                    <th>變更文章狀態:</th>
-                    <td>
-                        <select id="forumSelect">
-                            <option value="0">0：顯示</option>
-                            <option value="1">1：不顯示</option>
-                        </select>
-                    </td>
-                </tr>
-                <tr>
-                    <th>變更檢舉文章狀態:</th>
-                    <td>
-                        <select id="statusSelect">
-                            <option value="0">待審核</option>
-                            <option value="1">已審核</option>
-                        </select>
-                    </td>
-                </tr>
-                <tr>
-                    <th>變更檢舉文章審核結果:</th>
-                    <td>
-                        <select id="resultSelect">
-                            <option value="0">尚未審核完畢</option>
-                            <option value="1">檢舉屬實</option>
-                            <option value="2">檢舉不屬實</option>
-                        </select>
-                    </td>
-                </tr>
-            </table>
-            <!-- <tr>
+            <div class="scrollable-content">
+                <p id="re"></p>
+                <br>
+                <h2 style="text-align: left;">修改文章狀態：</h2>
+                <table>
+                    <tr>
+                        <th>變更文章狀態:</th>
+                        <td>
+                            <select id="forumSelect">
+                                <option value="0">0：顯示</option>
+                                <option value="1">1：不顯示</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>變更檢舉文章狀態:</th>
+                        <td>
+                            <select id="statusSelect">
+                                <option value="0">待審核</option>
+                                <option value="1">已審核</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>變更檢舉文章審核結果:</th>
+                        <td>
+                            <select id="resultSelect">
+                                <option value="0">尚未審核完畢</option>
+                                <option value="1">檢舉屬實</option>
+                                <option value="2">檢舉不屬實</option>
+                            </select>
+                        </td>
+                    </tr>
+                </table>
+                <!-- <tr>
                 <th>目前文章狀態:</th>
                 <td>
                     ${articleStatus=== 0 ? '0：顯示' :
@@ -261,179 +276,181 @@
                     }
                 </td>
             </tr> -->
-            <br>
-            <button id="saveButton">確認修改</button>
-            <button class="close-button" id="closeButton">關閉</button>
+                <br>
+                <button id="saveButton">確認修改</button>
+                <button class="close-button" id="closeButton">關閉</button>
+            </div>
         </div>
-    </div>
 
-    <script>
-        function showDialog() {
-            // 顯示彈出對話框
-            $("#dialog").show();
-        }
+        <script>
+            function showDialog() {
+                // 顯示彈出對話框
+                $("#dialog").show();
+            }
 
 
-        //========================檢舉文章全部列表(載入)=============================================================
-        const RpArticle_el = $("#rpArticleList");
+            //========================檢舉文章全部列表(載入)=============================================================
+            const RpArticle_el = $("#rpArticleList");
 
-        function fetchRpArticles() {
-            fetch('/BuyGo/api/rpArticle/manage', {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json;charset=UTF-8',
-                    'Accept': 'application/json;charset=UTF-8'
-                },
-            })
-                .then(response => response.json())
-                .then(data => processRpArticle(data))
-                .catch(error => console.error('Error fetching forum articles:', error));
-        }
+            function fetchRpArticles() {
+                fetch('/BuyGo/api/rpArticle/manage', {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json;charset=UTF-8',
+                        'Accept': 'application/json;charset=UTF-8'
+                    },
+                })
+                    .then(response => response.json())
+                    .then(data => processRpArticle(data))
+                    .catch(error => console.error('Error fetching forum articles:', error));
+            }
 
-        function processRpArticle(articles) {
-            RpArticle_el.empty();
+            function processRpArticle(articles) {
+                RpArticle_el.empty();
 
-            articles.forEach(forum => {
-                const {
-                    rpArticleNo,
-                    articleNo,
-                    rpmemberNo,
-                    reportContent,
-                    reportDate,
-                    articleStatus,
-                    auditResult,
-                    articleTitle,
-                    IstMsg
-                } = forum;
-                // IstMsg.forEach(perIstMsg =>{
-                //     const{ content } = perIstMsg;
-                // })
+                articles.forEach(forum => {
+                    const {
+                        rpArticleNo,
+                        articleNo,
+                        rpmemberNo,
+                        reportContent,
+                        reportDate,
+                        articleStatus,
+                        auditResult,
+                        articleTitle,
+                        IstMsg
+                    } = forum;
+                    // IstMsg.forEach(perIstMsg =>{
+                    //     const{ content } = perIstMsg;
+                    // })
 
-                const articleRow = `
+                    const articleRow = `
                 <tr>
         <td class="rpArticle-no">${rpArticleNo}</td>
-        <td >${articleNo}</td>
+        <td class="forumArticle-no">${articleNo}</td>
         <td>${rpmemberNo}</td>
         <td class="report_Content">${reportContent}</td>
         <td><span class="formatted-date">${reportDate}</span></td>
         <td class="${articleStatus === 0 ? 'red-text' : 'green-text'}">
             ${articleStatus === 0 ? '待審核' :
-                        articleStatus === 1 ? '已審核' :
-                            ''
-                    }
+                            articleStatus === 1 ? '已審核' :
+                                ''
+                        }
         </td>
         <td>
             ${auditResult === 0 ? '尚未審核完畢' :
-                        auditResult === 1 ? '檢舉屬實' :
-                            auditResult === 2 ? '檢舉不屬實' :
-                                '未知審核結果'
-                    }
+                            auditResult === 1 ? '檢舉屬實' :
+                                auditResult === 2 ? '檢舉不屬實' :
+                                    '未知審核結果'
+                        }
         </td>
         <td><button class="myButton">修改狀態</button></td>
     </tr>
     `;
 
-                RpArticle_el.append(articleRow);
-            });
+                    RpArticle_el.append(articleRow);
+                });
 
-            // 獲取所有帶有類名 "formatted-date" 的元素
-            const formattedDateElements = document.querySelectorAll(".formatted-date");
+                // 獲取所有帶有類名 "formatted-date" 的元素
+                const formattedDateElements = document.querySelectorAll(".formatted-date");
 
-            // 遍歷所有元素並格式化日期時間
-            formattedDateElements.forEach(element => {
-                const originalDate = element.textContent; // 獲取原始日期時間
-                const formattedDate = new Date(originalDate).toLocaleString(); // 格式化日期時間
-                element.textContent = formattedDate; // 更新元素內容為格式化後的日期時間
-            });
-
-
-
-            //========================修改狀態(按鈕)================================================================
-            $(".myButton").click(function (e) {
-
-                console.log(`$(e).closest("td").siblings("td.rpArticle-no"):`);
-                console.log($(e.target).closest("td").siblings("td.rpArticle-no"));
-                console.log(`$(e).closest("td").siblings("td.rpArticle-no").text()`);
-                console.log($(e.target).closest("td").siblings("td.rpArticle-no").text());//按鈕按下去動態印出,文章檢舉編號
-
-                console.log($(e.target).closest("td").siblings("td.report_Content").text());//按鈕按下去動態印出,文章檢舉內容
-
-                let articleRqNo = $(e.target).closest("td").siblings("td.rpArticle-no").text();
-                let reportContent_el = $(e.target).closest("td").siblings("td.report_Content").text();
-                let article_el = $(e.target).closest("td").siblings("td.article-no").text();
-                //$("tr.td#articleRqNo").text(articleRqNo);//按鈕按下去取得"檢舉文章編號"
-                $("#articleRqNo").text(articleRqNo);
-                $("#reportContent_el").text(reportContent_el);
-
-
-                const rparticleNo = $(this).closest("tr").find(".rpArticle-no").text();
-                console.log(rparticleNo);
-
-                // 調用載入文章函數
-                loadArticle(rparticleNo);
-
-                // 顯示彈出對話框
-                //$("#dialog").show();
-                showDialog(); // 顯示對話框
-            });
-
-            // 關閉彈出對話框
-            $("#closeButton").click(function () {
-                $("#dialog").hide();
-            });
+                // 遍歷所有元素並格式化日期時間
+                formattedDateElements.forEach(element => {
+                    const originalDate = element.textContent; // 獲取原始日期時間
+                    const formattedDate = new Date(originalDate).toLocaleString(); // 格式化日期時間
+                    element.textContent = formattedDate; // 更新元素內容為格式化後的日期時間
+                });
 
 
 
-            // 向後端發送請求載入論壇文章
-            function loadArticle(rparticleNo) {
-                console.log("rparticleNo:" + rparticleNo);
+                //========================修改狀態(按鈕)================================================================
+                $(".myButton").click(function (e) {
 
-                // 使用Fetch API發送HTTP POST請求來更新 "論壇文章的狀態"
-                fetch('/BuyGo/api/forumArticle/loadarticlelList', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json;charset=UTF-8',
-                        'Accept': 'application/json;charset=UTF-8'
-                    },
-                    //前端傳後端(articleNo(後端對應欄位) : rparticleNo(前端要回傳給後端的值))
-                    body: JSON.stringify({
-                        articleNo: rparticleNo
+                    console.log(`$(e).closest("td").siblings("td.rpArticle-no"):`);
+                    console.log($(e.target).closest("td").siblings("td.rpArticle-no"));
+                    console.log(`$(e).closest("td").siblings("td.rpArticle-no").text()`);
+                    console.log($(e.target).closest("td").siblings("td.rpArticle-no").text());//按鈕按下去動態印出,文章檢舉編號
+
+                    console.log($(e.target).closest("td").siblings("td.report_Content").text());//按鈕按下去動態印出,文章檢舉內容
+
+                    let articleRqNo = $(e.target).closest("td").siblings("td.rpArticle-no").text();
+                    let reportContent_el = $(e.target).closest("td").siblings("td.report_Content").text();
+                    let article_el = $(e.target).closest("td").siblings("td.article-no").text();
+                    //$("tr.td#articleRqNo").text(articleRqNo);//按鈕按下去取得"檢舉文章編號"
+                    $("#articleRqNo").text(articleRqNo);
+                    $("#reportContent_el").text(reportContent_el);
+
+
+                    const rparticleNo = $(this).closest("tr").find(".rpArticle-no").text();
+                    const forumArticleNo = $(this).closest("tr").find(".forumArticle-no").text();
+                    console.log("rparticleNo:" + rparticleNo);
+                    console.log("forumarticleNo:" + forumArticleNo);
+
+                    // 調用載入文章函數
+                    loadArticle(forumArticleNo);
+
+                    // 顯示彈出對話框
+                    //$("#dialog").show();
+                    showDialog(); // 顯示對話框
+                });
+
+                // 關閉彈出對話框
+                $("#closeButton").click(function () {
+                    $("#dialog").hide();
+                });
+
+
+
+                // 向後端發送請求載入論壇文章
+                function loadArticle(forumArticleNo) {
+                    console.log("forumArticleNo:" + forumArticleNo);
+
+                    // 使用Fetch API發送HTTP POST請求來更新 "論壇文章的狀態"
+                    fetch('/BuyGo/api/forumArticle/loadarticlelList', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json;charset=UTF-8',
+                            'Accept': 'application/json;charset=UTF-8'
+                        },
+                        //前端傳後端(articleNo(後端對應欄位) : rparticleNo(前端要回傳給後端的值))
+                        body: JSON.stringify({
+                            articleNo: forumArticleNo
+                        })
                     })
-                })
-                    //後端回傳後端
-                    .then(response => response.json())
-                    .then(data =>
-                        processArticle(data))
-                    .catch(error => console.error('Error fetching forum articles:', error));
-            }
+                        //後端回傳後端
+                        .then(response => response.json())
+                        .then(data =>
+                            processArticle(data))
+                        .catch(error => console.error('Error fetching forum articles:', error));
+                }
 
-            // 處理載入的文章
-            function processArticle(formarticles) {
-                const reviseArticle_el = $("#re");
+                // 處理載入的文章
+                function processArticle(formarticles) {
+                    const reviseArticle_el = $("#re");
+                    console.log(formarticles);
+                    console.log('re:');
+                    console.log(reviseArticle_el);
 
-                console.log('re:');
-                console.log(reviseArticle_el);
+                    console.log('formarticles');
+                    console.log(formarticles);
 
-                console.log('formarticles');
-                console.log(formarticles);
+                    reviseArticle_el.empty();
 
-                reviseArticle_el.empty();
-
-                formarticles.forEach(forum => {
-                    const { forumArticle } = forum;
-                    const {
-                        articleNo,
-                        memberNo,
-                        articleTitle,
-                        articleContent,
-                        articleStatus,
-                        articlePublish,
-                    } = forumArticle;
+                    formarticles.forEach(forum => {
+                        const { forumArticle } = forum;
+                        const {
+                            articleNo,
+                            memberNo,
+                            articleTitle,
+                            articleContent,
+                            articleStatus,
+                            articlePublish,
+                        } = forumArticle;
 
 
-                    const formattedPublishDate = new Date(articlePublish).toLocaleString();
-                    
-                    const articleRow = `
+                        const formattedPublishDate = new Date(articlePublish).toLocaleString();
+
+                        const articleRow = `
                     <table class="article-table">
                        
         <tr>
@@ -460,117 +477,118 @@
           <th>目前文章狀態:</th>
           <td>
             ${articleStatus === 0 ? '0：顯示' :
-                            articleStatus === 1 ? '1：不顯示' :
-                                '未知審核結果'
-                        }
+                                articleStatus === 1 ? '1：不顯示' :
+                                    '未知審核結果'
+                            }
         </td>
         </tr>
        
       </table>
     `;
 
-                    reviseArticle_el.append(articleRow);
-                });
-            }
-        }
-
-        //===================================確認修改"按鈕" (修改狀態(按鈕))===================================
-        $("#saveButton").click(function () {
-            // 獲取選擇的狀態值
-            const articleNo = $("#re").find("td.article-no").text();
-            const selectedStatus = $("#statusSelect").val();
-            const selectResult = $("#resultSelect").val();
-            const selectForum = $("#forumSelect").val();
-            // 獲取檢舉文章編號
-            const articleRqNo = $("#articleRqNo").text();
-            const articleStatus = $("#rpArticleList").find("td.rpArticle-no:contains(" + articleRqNo + ")")
-                .siblings("td.green-text").length ? "1" : "0"; // Get articleStatus based on class
-
-            // 這里需要重新判斷
-            // if (selectedStatus !== articleStatus || selectForum === articleStatus) {
-            // alert("!! 1");
-            //return false; // 不關閉對話框
-            // }
-
-            // 檢查下拉選單的值
-            if ((selectResult === "1" || selectResult === "2") && selectedStatus !== "1") {
-                // 如果選擇的是檢舉屬實或檢舉不屬實，但狀態不是已審核
-                alert("!! 變更檢舉文章狀態:待審核 !! 不可修改");
-                return false; // 不關閉對話框
-            } else if (selectedStatus === "1" && selectResult === "0") {
-                alert("!! 變更檢舉文章審核結果:尚未審核完畢 !! 不可修改");
-                return false; // 不關閉對話框
-            } else {
-                // 在這里處理選定狀態的邏輯，例如發送到伺服器保存等
-                console.log("審核的狀態:", selectedStatus);
-                console.log("審核的結果:", selectResult);
-                console.log("檢舉文章編號:", articleRqNo);
-                console.log("論壇文章的狀態:", selectForum);
-                console.log("論壇文章編號:", articleNo);
-
-                // 在這里可以執行相關操作，例如向伺服器發送請求更新狀態
-
-
-                // 使用Fetch API發送HTTP POST請求來更新 "檢舉文章的狀態"
-                fetch('/BuyGo/api/rpArticle/updateById', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json;charset=UTF-8',
-                        'Accept': 'application/json;charset=UTF-8'
-                    },
-                    body: JSON.stringify({
-                        rpArticleNo: articleRqNo,
-                        articleStatus: selectedStatus,
-                        auditResult: selectResult
-                    })
-                })
-                    .then(response => response.json())
-                    .then(data => {
-                        // 處理來自服務器的響應
-                        console.log("檢舉文章數據:", data);
-                        // 根據需要執行其他操作
-                    })
-                    .catch(error => {
-                        // 處理錯誤
-                        console.error('Error updating data:', error);
+                        reviseArticle_el.append(articleRow);
                     });
-
-
-                // 使用Fetch API發送HTTP POST請求來更新 "論壇文章的狀態"
-                fetch('/BuyGo/api/forumArticle/updateById', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json;charset=UTF-8',
-                        'Accept': 'application/json;charset=UTF-8'
-                    },
-                    body: JSON.stringify({
-                        articleNo: articleNo,
-                        articleStatus: selectForum
-                    })
-                })
-                    .then(response => response.json())
-                    .then(data => {
-                        // 處理來自服務器的響應
-                        console.log("論壇文章數據:", data);
-                        // 根據需要執行其他操作
-                    })
-                    .catch(error => {
-                        // 處理錯誤
-                        console.error('Error updating forum article data:', error);
-                    });
-
-                // 關閉彈出對話框
-                $("#dialog").hide();
+                }
             }
-        });
 
-        //===================================前畫面動態刷新=====================================
-        $(document).ready(() => {
-            // 呼叫函式 fetchRpArticles，將當前畫面動態刷新
-            fetchRpArticles();
-        });
+            //===================================確認修改"按鈕" (修改狀態(按鈕))===================================
+            $("#saveButton").click(function () {
+                // 獲取選擇的狀態值
+                const articleNo = $("#re").find("td.article-no").text();
+                const selectedStatus = $("#statusSelect").val();
+                const selectResult = $("#resultSelect").val();
+                const selectForum = $("#forumSelect").val();
+                // 獲取檢舉文章編號
+                const articleRqNo = $("#articleRqNo").text();
+                const articleStatus = $("#rpArticleList").find("td.rpArticle-no:contains(" + articleRqNo + ")")
+                    .siblings("td.green-text").length ? "1" : "0"; // Get articleStatus based on class
 
-    </script>
+                // 這里需要重新判斷
+                // if (selectedStatus !== articleStatus || selectForum === articleStatus) {
+                // alert("!! 1");
+                //return false; // 不關閉對話框
+                // }
+
+                // 檢查下拉選單的值
+                if ((selectResult === "1" || selectResult === "2") && selectedStatus !== "1") {
+                    // 如果選擇的是檢舉屬實或檢舉不屬實，但狀態不是已審核
+                    alert("!! 變更檢舉文章狀態:待審核 !! 不可修改");
+                    return false; // 不關閉對話框
+                } else if (selectedStatus === "1" && selectResult === "0") {
+                    alert("!! 變更檢舉文章審核結果:尚未審核完畢 !! 不可修改");
+                    return false; // 不關閉對話框
+                } else {
+                    // 在這里處理選定狀態的邏輯，例如發送到伺服器保存等
+                    console.log("審核的狀態:", selectedStatus);
+                    console.log("審核的結果:", selectResult);
+                    console.log("檢舉文章編號:", articleRqNo);
+                    console.log("論壇文章的狀態:", selectForum);
+                    console.log("論壇文章編號:", articleNo);
+
+                    // 在這里可以執行相關操作，例如向伺服器發送請求更新狀態
+
+
+                    // 使用Fetch API發送HTTP POST請求來更新 "檢舉文章的狀態"
+                    fetch('/BuyGo/api/rpArticle/updateById', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json;charset=UTF-8',
+                            'Accept': 'application/json;charset=UTF-8'
+                        },
+                        body: JSON.stringify({
+                            articleNo: articleNo,
+                            rpArticleNo: articleRqNo,
+                            articleStatus: selectedStatus,
+                            auditResult: selectResult
+                        })
+                    })
+                        .then(response => response.json())
+                        .then(data => {
+                            // 處理來自服務器的響應
+                            console.log("檢舉文章數據:", data);
+                            // 根據需要執行其他操作
+                        })
+                        .catch(error => {
+                            // 處理錯誤
+                            console.error('Error updating data:', error);
+                        });
+
+
+                    // 使用Fetch API發送HTTP POST請求來更新 "論壇文章的狀態"
+                    fetch('/BuyGo/api/forumArticle/updateById', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json;charset=UTF-8',
+                            'Accept': 'application/json;charset=UTF-8'
+                        },
+                        body: JSON.stringify({
+                            articleNo: articleNo,
+                            articleStatus: selectForum
+                        })
+                    })
+                        .then(response => response.json())
+                        .then(data => {
+                            // 處理來自服務器的響應
+                            console.log("論壇文章數據:", data);
+                            // 根據需要執行其他操作
+                        })
+                        .catch(error => {
+                            // 處理錯誤
+                            console.error('Error updating forum article data:', error);
+                        });
+
+                    // 關閉彈出對話框
+                    $("#dialog").hide();
+                }
+            });
+
+            //===================================前畫面動態刷新=====================================
+            $(document).ready(() => {
+                // 呼叫函式 fetchRpArticles，將當前畫面動態刷新
+                fetchRpArticles();
+            });
+
+        </script>
 </body>
 
 </html>

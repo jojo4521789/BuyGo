@@ -8375,7 +8375,7 @@ tr.visible-print {
 * Licensed under http://www.apache.org/licenses/LICENSE-2.0
 *
 * Designed and built with all the love in the world by @mdo and @fat.
-/* */
+*/
 .btn {
     font-size: 14px;
     padding: .5em 1em;
@@ -14761,7 +14761,7 @@ a:hover {
 
 .main-menu a {
     display: block;
-    line-height: 0.3;
+    line-height: 0.3
 }
 
 .main-menu>li>a {
@@ -14770,7 +14770,7 @@ a:hover {
     font-weight: 600;
     padding: .75em 1.25em;
     border-radius: 2px;
-    margin: 0.25em 0.25em 0.75em;
+    margin: .25em .25em .75em
 }
 
 .main-menu>li.active>a,
@@ -16355,13 +16355,12 @@ a:hover {
     display: block;
     font-size: 12px;
     line-height: 1.5;
-    margin-bottom: 1em;
+    margin-bottom: 3px;
     margin-right: 20px
 }
 
 .product-medialist .item .entry-thumbnail {
     width: 55px;
-    height: 66px;
     background: #f2f2f2;
     margin-right: 10px;
     float: left
@@ -16493,4 +16492,3 @@ a:hover {
     font-size: 0;
     overflow: hidden;
 }
-

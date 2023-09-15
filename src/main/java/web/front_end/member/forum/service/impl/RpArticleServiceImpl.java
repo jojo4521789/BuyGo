@@ -2,7 +2,9 @@ package web.front_end.member.forum.service.impl;
 
 import java.util.List;
 
+import web.front_end.member.forum.dao.ArticleCollListDao;
 import web.front_end.member.forum.dao.RpArticleDao;
+import web.front_end.member.forum.dao.impl.ArticleCollListDaoImpl;
 import web.front_end.member.forum.dao.impl.RpArticleDaoImpl;
 import web.front_end.member.forum.entity.ForumArticle;
 import web.front_end.member.forum.entity.RpArticle;
@@ -11,8 +13,11 @@ import web.front_end.member.forum.service.RpArticleService;
 public class RpArticleServiceImpl implements RpArticleService {
 	private RpArticleDao dao;
 
+	private ArticleCollListDao articleCollListDao;
+
 	public RpArticleServiceImpl() {
 		dao = new RpArticleDaoImpl();
+		articleCollListDao = new ArticleCollListDaoImpl();
 	}
 
 	@Override
@@ -35,7 +40,11 @@ public class RpArticleServiceImpl implements RpArticleService {
 
 	@Override
 	// 針對"檢舉文章編號",更新檢舉文章狀態、檢舉文章結果動作
-	public boolean updateByRpArticleNo(Integer rpArticleNo, Integer articleStatus, Integer auditResult) {
+	public boolean updateByRpArticleNo(Integer articleNo, Integer rpArticleNo, Integer articleStatus, Integer auditResult) {
+		if(auditResult == 1) {
+		int articleCollList = articleCollListDao.deleteByIdAll(articleNo);
+		return dao.updateByRpArticleNo(rpArticleNo, articleStatus, auditResult) + articleCollList > 0;
+		}
 		return dao.updateByRpArticleNo(rpArticleNo, articleStatus, auditResult) > 0;
 	}
 

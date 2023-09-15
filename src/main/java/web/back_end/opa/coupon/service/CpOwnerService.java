@@ -16,4 +16,6 @@ public interface CpOwnerService extends CoreService{
 	List<CpOwner> selectByMember(Integer memberNo);
 	
 	boolean remove(CpOwnerId cpOwnerId);
+	
+	CpOwner selectByMemberAndCouponNo(CpOwnerId cpOwnerId);
 }

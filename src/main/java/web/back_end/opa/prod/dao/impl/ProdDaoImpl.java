@@ -139,4 +139,13 @@ public class ProdDaoImpl implements ProdDao {
 		return prods;
 	}
 
+	@Override
+	public List<Prod> getRandomProdsWithLimit(Integer limit) {
+		final String nativeSql = "SELECT * FROM OPA_PRODUCTS2 WHERE OPA_PROD_STATUS = 1 ORDER BY RAND() LIMIT :limit";
+		List<Prod> prods = getSession().createNativeQuery(nativeSql, Prod.class)
+				.setParameter("limit", limit)
+				.getResultList();
+		return prods;
+	}
+
 }

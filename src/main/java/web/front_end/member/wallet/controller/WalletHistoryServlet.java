@@ -2,6 +2,8 @@ package web.front_end.member.wallet.controller;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Calendar;
+import java.util.Date;
 
 import static core.util.CommonUtil.writePojo2Json;
 
@@ -66,17 +68,62 @@ public class WalletHistoryServlet extends HttpServlet {
         }
     }
 
+    private boolean isExpired(String expiryDate) {
+        if (expiryDate == null) {
+            return true;
+        }
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(new Date());
+        int currentYear = calendar.get(Calendar.YEAR);
+        currentYear = currentYear % 100;
+        int currentMonth = calendar.get(Calendar.MONTH) + 1;
+        String[] split = expiryDate.split("/");
+        int expiryYear = Integer.parseInt(split[1]);
+        int expiryMonth = Integer.parseInt(split[0]);
+        if (expiryYear < currentYear) {
+            return true;
+        }
+        if (expiryYear == currentYear && expiryMonth < currentMonth) {
+            return true;
+        }
+        return false;
+    }
+
+    private boolean checkCreditCard(String cardNumber, String expiryDate, String cvv) {
+        if (cardNumber == null || expiryDate == null || cvv == null) {
+            return false;
+        }
+        if (cardNumber.length()!= 16) {
+            return false;
+        }
+        if (expiryDate.length()!= 5) {
+            return false;
+        }
+        if (isExpired(expiryDate)) {
+            return false;
+        }
+        if (cvv.length()!= 3) {
+            return false;
+        }
+        return true;
+    }
+
     private void add(HttpServletRequest request, HttpServletResponse response, String action, int value, int memberNo)
             throws ServletException, IOException {
         String cardNumber = request.getParameter("cardNumber");
-        if (cardNumber != null) {
-            WalletTransHist walletTransHist = new WalletTransHist();
-            walletTransHist.setMemberNo(memberNo);
-            walletTransHist.setWalletDetail("儲值" + value + "元");
-            walletTransHist.setWalletStatus((byte) 1);
-            walletTransHist.setWalletAmount(value);
-            SERVICE.saveOrUpdate(walletTransHist);
+        String expiryDate = request.getParameter("expiryDate");
+        String cvv = request.getParameter("cvv");
+        if (!checkCreditCard(cardNumber, expiryDate, cvv)) {
+            response.sendRedirect(request.getContextPath() + PAGE_URL + "?message=%E4%BF%A1%E7%94%A8%E5%8D%A1%E8%AA%8D%E8%AD%89%E5%A4%B1%E6%95%97");
+            return;
         }
+
+        WalletTransHist walletTransHist = new WalletTransHist();
+        walletTransHist.setMemberNo(memberNo);
+        walletTransHist.setWalletDetail("儲值" + value + "元");
+        walletTransHist.setWalletStatus((byte) 1);
+        walletTransHist.setWalletAmount(value);
+        SERVICE.saveOrUpdate(walletTransHist);
         response.sendRedirect(request.getContextPath() + PAGE_URL + "?message=%E5%8A%A0%E5%80%BC%E6%88%90%E5%8A%9F");
     }
 
@@ -84,7 +131,7 @@ public class WalletHistoryServlet extends HttpServlet {
             int memberNo) throws ServletException, IOException {
         String password = request.getParameter("password");
         
-        if (password != null) { 
+        if (password != null) {
             Member member = web.front_end.member.login.util.LoginConstants.SERVICE.LoadMemberAcctByMemberNo(memberNo);
 		    boolean b = web.front_end.member.login.util.LoginConstants.SERVICE.CheckMemberAcctAndPassword(member.getMemberAcct(), SHA256Encode(password));
             if(!b) {

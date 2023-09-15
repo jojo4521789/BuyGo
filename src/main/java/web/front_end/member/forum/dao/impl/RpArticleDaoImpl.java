@@ -51,4 +51,12 @@ public class RpArticleDaoImpl implements RpArticleDao {
 		return rowsUpdated;
 	}
 
+	@Override
+	public int deleteByIdAll(Integer articleNo) {
+		final String hql = "DELETE FROM RpArticle WHERE articleNo = :articleNo";
+		int rowsUpdated = getSession().createQuery(hql)
+				.setParameter("articleNo", articleNo).executeUpdate();
+		return rowsUpdated;
+	}
+
 }
