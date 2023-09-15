@@ -22,12 +22,16 @@ public class UpdateOrderServlet2 extends HttpServlet {
 		fixHeaders(resp);
 		System.out.println(req.getServerName());
 		
-		UpdateOrderDTO newDTO = new UpdateOrderDTO();
+		try {
+			UpdateOrderDTO newDTO = new UpdateOrderDTO();
 		newDTO.setPaSoNo(Integer.parseInt(req.getParameter("paSoNo")));
 		newDTO.setNewStatus((byte) 1);
 		newDTO.setRefundToBuyer(0);
 		newDTO.setBuyerNo((Integer)req.getSession().getAttribute("memberNo"));
 		service.updateOrder(newDTO);
+		} catch (Exception e){
+			e.printStackTrace();
+		}
 	}
 
 	private void fixHeaders(HttpServletResponse resp) {

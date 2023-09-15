@@ -7,7 +7,7 @@
 
 <head>
 	<meta charset="UTF-8" />
-	<title>GFashion - Responsive e-commerce HTML Template</title>
+	<title>BuyGO - 賣家訂單查詢</title>
 	<meta name="description" content="" />
 	<meta name="keywords" content="" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -458,7 +458,7 @@
 									<!--訂單分類列表-->
 									<ul class="nav nav-tabs">
 										<li class="active"><a href="javascript:void(0)" onclick="changePage(0)"
-												data-toggle="tab" id="orderPageBtn0">待付款<span></span></a></li>
+												data-toggle="tab" id="orderPageBtn0" style="display: none;">待付款<span></span></a></li>
 										<li><a href="javascript:void(0)" onclick="changePage(1)"
 												data-toggle="tab" id="orderPageBtn1">追加中<span></span></a></li>
 										<li><a href="javascript:void(0)" onclick="changePage(2)"
@@ -757,7 +757,7 @@
 		// 載入網頁時判斷要點選哪個狀態的訂單
 		let selectedPage = sessionStorage.getItem("selectedPage");
 		if (selectedPage == null) {
-			$("#orderPageBtn0").click();
+			$("#orderPageBtn1").click();
 		} else {
 			$(`#orderPageBtn${selectedPage}`).click();
 		}

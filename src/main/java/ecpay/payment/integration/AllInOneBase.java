@@ -37,8 +37,9 @@ public class AllInOneBase {
 //			String configPath = URLDecoder.decode(classLoader.getResource("/payment_conf.xml").getPath(), "UTF-8");
 //			doc = EcpayFunction.xmlParser(configPath);
 			/* when using testing code*/
-//			String paymentConfPath = "./src/main/resources/payment_conf.xml";
-			String paymentConfPath = "C:\\CHA102G6\\G6-workspace\\BuyGo\\src\\main\\resources\\payment_conf.xml";
+//			String paymentConfPath = "../../../../resources/payment_conf.xml";
+			// C:\BuyGo_Workspace\BuyGo\src\main\java\ecpay\payment\integration\AllInOneBase.java(現在此檔)
+			String paymentConfPath = "C:\\BuyGo_Workspace\\BuyGo\\src\\main\\resources\\payment_conf.xml";
 			doc = EcpayFunction.xmlParser(paymentConfPath);
 			
 			doc.getDocumentElement().normalize();

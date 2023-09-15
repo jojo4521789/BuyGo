@@ -36,7 +36,7 @@ public class OpaProducts implements java.io.Serializable {
 	private Date opaProdUpdate;
 	private Set<OpaOrderdetails> opaOrderdetailses = new HashSet<OpaOrderdetails>(0);
 	private Set<OpaPrpics> opaPrpicses = new HashSet<OpaPrpics>(0);
-	private Set<OpaCart> opaCarts = new HashSet<OpaCart>(0);
+//	private Set<OpaCart> opaCarts = new HashSet<OpaCart>(0);
 
 	public OpaProducts() {
 	}
@@ -68,7 +68,7 @@ public class OpaProducts implements java.io.Serializable {
 		this.opaProdUpdate = opaProdUpdate;
 		this.opaOrderdetailses = opaOrderdetailses;
 		this.opaPrpicses = opaPrpicses;
-		this.opaCarts = opaCarts;
+//		this.opaCarts = opaCarts;
 	}
 
 	@Id
@@ -184,14 +184,14 @@ public class OpaProducts implements java.io.Serializable {
 		this.opaPrpicses = opaPrpicses;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "opaProducts")
-	public Set<OpaCart> getOpaCarts() {
-		return this.opaCarts;
-	}
-
-	public void setOpaCarts(Set<OpaCart> opaCarts) {
-		this.opaCarts = opaCarts;
-	}
+//	@OneToMany(fetch = FetchType.LAZY, mappedBy = "opaProducts")
+//	public Set<OpaCart> getOpaCarts() {
+//		return this.opaCarts;
+//	}
+//
+//	public void setOpaCarts(Set<OpaCart> opaCarts) {
+//		this.opaCarts = opaCarts;
+//	}
 
 	public static String getPreviewURL(OpaProducts opaProduct) {
 		Set<OpaPrpics> opaPrpicses = opaProduct.getOpaPrpicses();
