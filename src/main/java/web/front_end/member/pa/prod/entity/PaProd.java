@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -17,6 +18,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import web.front_end.member.acc.entity.Member;
 import web.front_end.member.pa.prodpic.entity.PaProdPic;
 
 @Entity
@@ -56,4 +58,8 @@ public class PaProd extends Core {
 	@OneToMany
 	@JoinColumn(name = "PA_PROD_NO", referencedColumnName = "PA_PROD_NO")
 	private List<PaProdPic> paProdPic;
+	
+	@ManyToOne
+	@JoinColumn(name = "MEMBER_NO", insertable = false, updatable = false)
+	private Member member;
 }

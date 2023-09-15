@@ -7,7 +7,7 @@
 
 <head>
 	<meta charset="UTF-8" />
-	<title>GFashion - Responsive e-commerce HTML Template</title>
+	<title>BuyGo - 賣家訂單列表</title>
 	<meta name="description" content="" />
 	<meta name="keywords" content="" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -40,6 +40,7 @@
 	<link rel="stylesheet" href="../../../../css/common/innerpage.css">
 	<link rel="stylesheet" href="../../../../css/common/owl.carousel.css">
 	<link rel="stylesheet" href="../../../../css/common/owl.theme.css">
+	<link rel="stylesheet" href="../../../../css/common/headerview.css">
 	<!-- // PARTICULAR PAGES CSS FILES -->
 	<link rel="stylesheet" href="../../../../css/common/responsive.css">
 	<style>
@@ -358,19 +359,6 @@
 							</section>
 
 							<!-- PROMO -->
-							<div class="promo inverse-background"
-								style="background: url('../../../../img/common/demo/Barn-Dress-Girl_t.jpg') no-repeat; background-size: auto 100%;">
-								<div class="inner text-center np">
-									<div class="ribbon">
-										<h6 class="nmb">New Arrivals</h6>
-										<h5 class="text-semibold uppercase nmb">Leather Fashion</h5>
-										<div class="space10"></div>
-										<a href="../../../../pages/guest/products.html"
-											class="with-icon prepend-icon"><i class="iconfont-caret-right"></i><span>
-												Shop Now</span></a>
-									</div>
-								</div>
-							</div>
 							<!-- // PROMO -->
 						</aside>
 						<!-- // SIDEBAR -->
@@ -387,7 +375,7 @@
 									<!--訂單分類列表-->
 									<ul class="nav nav-tabs">
 										<li class="active"><a href="javascript:void(0)" onclick="changePage(0)"
-												data-toggle="tab" id="orderPageBtn0">待付款<span></span></a></li>
+												data-toggle="tab" id="orderPageBtn0" style="display: none;">待付款<span></span></a></li>
 										<li><a href="javascript:void(0)" onclick="changePage(1)" data-toggle="tab"
 												id="orderPageBtn1">追加中<span></span></a></li>
 										<li><a href="javascript:void(0)" onclick="changePage(2)" data-toggle="tab"
@@ -579,7 +567,7 @@
 		// 載入網頁時判斷要點選哪個狀態的訂單
 		let selectedPage = sessionStorage.getItem("selectedPage");
 		if (selectedPage == null) {
-			$("#orderPageBtn0").click();
+			$("#orderPageBtn1").click();
 		} else {
 			$(`#orderPageBtn${selectedPage}`).click();
 		}
