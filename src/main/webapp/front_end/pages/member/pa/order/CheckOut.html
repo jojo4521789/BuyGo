@@ -1144,18 +1144,17 @@
 			}
 			if (msg !== "") {
 				Swal.fire(msg);
-				return true;
-			} else {
 				return false;
+			} else {
+				return true;
 			}
 		}
 
 		// 如果是選擇信用卡付款 按下結帳，產生訂單
 
 		$('#checkout_btn').click(function () {
-			checkAllData();
-
-			const paTotalAmount = parseInt($("#prodTotal").text());
+			if (checkAllData()) {
+				const paTotalAmount = parseInt($("#prodTotal").text());
 			const paRecName = $(inputShipName).val();
 			const paSendAddress = $("#inputPostcode2").val() + $("select.inputState2").val() + $("select.inputCountry2").val() + $("#inputAddress2").val();
 			const paRecTel = $(inputShipPhone).val();
@@ -1203,6 +1202,7 @@
 				.catch(error => {
 					console.error('錯誤：', error);
 				});
+			}
 
 		});
 
