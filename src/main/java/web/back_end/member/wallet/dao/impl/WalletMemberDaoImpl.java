@@ -51,7 +51,7 @@ public class WalletMemberDaoImpl implements WalletMemberDao {
 
 		Transaction transaction = session.beginTransaction(); // 開始交易
 		
-		Member member = walletMemberDaoImpl.selectMemberByMemberNo(2);
+		Member member = walletMemberDaoImpl.selectMemberByMemberNo(3);
 		System.out.println("member.getMemberNo():" + member.getMemberNo());
 		System.out.println("member.getMemberAcct():" + member.getMemberAcct());
 		System.out.println("member.getMemberWalletAmount():" + member.getMemberWalletAmount());
