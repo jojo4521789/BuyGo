@@ -76,7 +76,7 @@ function getBillInfo() {
             $("#inputBillEmail").val(data.memberEmail);
             $("#inputBillPhone").val(data.memberPhone);
             $("#inputBillAddress").val(data.memberAdd);
-            $("#memberWalletAmount").text("$ " + data.memberWalletAmount);
+            $("#memberWalletAmount").text(data.memberWalletAmount);
         });
 }
 getBillInfo();
@@ -119,6 +119,11 @@ function checkAllData() {
     if ($('input[name=paymethod]:checked').length === 0) {
         msg += "未選擇付款方式";
     }
+    if ($('input[name=paymethod]:checked').attr("id") === "paymethod3"){
+        if(parseInt($("#memberWalletAmount").text()) < parseInt($("#total").text())){
+            msg += "錢包餘額不足";
+        }
+    }
     if (msg !== "") {
         Swal.fire(msg);
         return true;
@@ -132,6 +137,7 @@ $("#confirmCheckoutBtn").on("click", function () {
     if (checkAllData()) {
         return;
     }
+    
     //新增訂單
     createNewOrder();
 });
@@ -164,8 +170,10 @@ function createNewOrder() {
                         //新增訂單明細
                         createNewOrderdetails(opaOrderdetail);
                     }
-                    //信用卡付款，轉綠界
-                    ecpay(data.opaSoNo);
+                    if ($('input[name=paymethod]:checked').attr("id") === "paymethod2") {
+                        //信用卡付款，轉綠界
+                        ecpay(data.opaSoNo);
+                    }
                 }
             } else {
                 Swal.fire("訂單未成立");
@@ -203,25 +211,23 @@ function ecpay(opaSoNo) {
     const full = location.protocol + '//' + location.host;
     let clientBackURL = full + "/BuyGo/front_end/pages/member/opa/order.html";
 
-    if ($('input[name=paymethod]:checked').attr("id") === "paymethod2") {
-        //CustomField1=給後端判斷用的action，CustomField2=專案的orderId
-        fetch("/BuyGo/ecpay/checkout",
-            {
-                method: "POST",
-                headers: { "Content-Type": "application/json; charset=utf-8", },
-                body: JSON.stringify({
-                    TotalAmount: totalAmount,
-                    TradeDesc: "BuyGo官方代購",
-                    ItemName: itemName,
-                    ClientBackURL: clientBackURL,
-                    CustomField1: "opaOrderFirstCheckout",
-                    CustomField2: opaSoNo,
-                    CustomField3: opaCouponNo
-                })
-            }).then(resp => resp.json())
-            .then(data => {
-                window.location.href = data;
-                // window.open(data);
-            });
-    }
+    //CustomField1=給後端判斷用的action，CustomField2=專案的orderId
+    fetch("/BuyGo/ecpay/checkout",
+        {
+            method: "POST",
+            headers: { "Content-Type": "application/json; charset=utf-8", },
+            body: JSON.stringify({
+                TotalAmount: totalAmount,
+                TradeDesc: "BuyGo官方代購",
+                ItemName: itemName,
+                ClientBackURL: clientBackURL,
+                CustomField1: "opaOrderFirstCheckout",
+                CustomField2: opaSoNo,
+                CustomField3: opaCouponNo
+            })
+        }).then(resp => resp.json())
+        .then(data => {
+            window.location.href = data;
+            // window.open(data);
+        });
 }

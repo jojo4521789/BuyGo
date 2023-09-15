@@ -31,7 +31,7 @@ function getRanRecommendProds() {
                             <div class="hover">
                                 <img src="${img_url}" class="entry-url" style="height: 100%">
                                 <ul class="icons unstyled">
-                                    <li><a href="${full}/BuyGo/front_end/pages/guest/opa/prods/viewProduct.html?prodId=${data.opaProdNo}" class="circle" data-toggle="lightbox"> <i class="iconfont-search"></i>
+                                    <li><a href="${full}/BuyGo/front_end/pages/guest/opa/prods/viewProduct.html?prodId=${data.opaProdNo}" class="circle"> <i class="iconfont-search"></i>
                                         </a></li>
                                     <li><a href="#" class="circle add-to-cart" onclick="addToCart(${data.opaProdNo});"> <i
                                                 class="iconfont-shopping-cart"></i>

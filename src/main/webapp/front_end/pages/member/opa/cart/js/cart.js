@@ -1,78 +1,91 @@
 sessionStorage.removeItem("store_data");
 checkLoginStatusShowMemberAcct();
 
-//假設登入的是1號會員
-// let memberNo = 1;
-// let opaCartId = {
-//     memberNo: memberNo,
-//     opaProdNo: null
-// }
-fetch("/BuyGo/needLoginApi/opa/cart/selectByMember", {
-    method: "POST",
-    headers: {
-        "Content-Type": "application/json; charset=utf-8",
-    },
-    // body: JSON.stringify({ opaCartId }),
-})
-    .then(resp => {
-        if (resp.status === 401) {
-            // 客戶未登入，執行頁面重定向到登入頁
-            notLoggedInAction();
-        } else if (resp.ok) {
-            // 請求成功
-            return resp.json();
-        } else {
-            alert("錯誤狀態" + resp.status);
-            return;
-        }
+const full = location.protocol + '//' + location.host;
+
+function loadCartItems() {
+
+    let emptyCart = `
+        <tr class="empty-cart">
+            <td colspan="5">
+                購物車還空蕩蕩的，<a
+                    href="../../../guest/opa/prods/prods.html">請點此去購物</a>。
+            </td>
+        </tr>
+    `;
+
+    fetch("/BuyGo/needLoginApi/opa/cart/selectByMember", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json; charset=utf-8",
+        },
+        // body: JSON.stringify({ opaCartId }),
     })
-    .then(datas => {
-        for (let data of datas) {
-            let prpics_url = "../../../../img/common/Image_not_available.png";
-            if (data.prod.prpicsList.length !== 0) {
-                prpics_url = data.prod.prpicsList[0].opaProdPicture;
+        .then(resp => {
+            if (resp.status === 401) {
+                // 客戶未登入，執行頁面重定向到登入頁
+                notLoggedInAction();
+            } else if (resp.ok) {
+                // 請求成功
+                return resp.json();
+            } else {
+                alert("錯誤狀態" + resp.status);
+                return;
             }
-            let prodSubTTL = data.prod.opaProdPrice * data.opaCartProductsQty;
-            let prod_tr = `
-                <tr id="tr_${data.prod.opaProdNo}">
-                    <td>
-                        <input type="checkbox" class="prod-check" onclick="prodCheckBtn()">
-                        <a class="entry-thumbnail"
-                            href="${prpics_url}"
-                            data-toggle="lightbox">
-                            <img src="${prpics_url}" alt="" />
-                        </a>
-                        <a id="${data.prod.opaProdNo}" class="cart-entry-title" href="../../../guest/product.html">${data.prod.opaProdName}</a>
-                    </td>
-                    <td><span class="unit-price">$${data.prod.opaProdPrice}</span></td>
-                    <td>
-                        <div class="qty-btn-group">
-                            <button type="button" class="down" onclick="minusQty(this)" onfocus="focusQtyInput(this)" onblur="blurQtyInput(this)"><i
-                                    class="iconfont-caret-down inline-middle"></i></button>
-                            <input type="text" value="${data.opaCartProductsQty}" onfocus="focusQtyInput(this)" onblur="blurQtyInput(this)"/>
-                            <button type="button" class="up" onclick="addQty(this)" onfocus="focusQtyInput(this)" onblur="blurQtyInput(this)"><i
-                                    class="iconfont-caret-up inline-middle"></i></button>
-                        </div>
-                    </td>
-                    <td class="hidden-xs"><strong class="text-bold row-total">$${prodSubTTL}</strong></td>
-                    <td class="hidden-xs"><button type="button" class="close" aria-hidden="true" onclick="cartProdRemove(${data.prod.opaProdNo})">×</button>
-                    </td>
-                </tr>`;
+        })
+        .then(datas => {
+            if (datas && datas.length > 0) {
+                $(".tbl-cart > tbody").html("");
+            }else{
+                $(".tbl-cart > tbody").html(emptyCart);
+            }
+            for (let data of datas) {
+                let prpics_url = "../../../../img/common/Image_not_available.png";
+                if (data.prod.prpicsList.length !== 0) {
+                    prpics_url = data.prod.prpicsList[0].opaProdPicture;
+                }
+                let prodSubTTL = data.prod.opaProdPrice * data.opaCartProductsQty;
+                let prod_tr = `
+                    <tr id="tr_${data.prod.opaProdNo}">
+                        <td>
+                            <input type="checkbox" class="prod-check" onclick="prodCheckBtn()">
+                            <a class="entry-thumbnail"
+                                href="${prpics_url}"
+                                data-toggle="lightbox">
+                                <img src="${prpics_url}" alt="" />
+                            </a>
+                            <a id="${data.prod.opaProdNo}" class="cart-entry-title" href="${full}/BuyGo/front_end/pages/guest/opa/prods/viewProduct.html?prodId=${data.prod.opaProdNo}">${data.prod.opaProdName}</a>
+                        </td>
+                        <td><span class="unit-price">$${data.prod.opaProdPrice}</span></td>
+                        <td>
+                            <div class="qty-btn-group">
+                                <button type="button" class="down" onclick="minusQty(this)" onfocus="focusQtyInput(this)" onblur="blurQtyInput(this)"><i
+                                        class="iconfont-caret-down inline-middle"></i></button>
+                                <input type="text" value="${data.opaCartProductsQty}" onfocus="focusQtyInput(this)" onblur="blurQtyInput(this)"/>
+                                <button type="button" class="up" onclick="addQty(this)" onfocus="focusQtyInput(this)" onblur="blurQtyInput(this)"><i
+                                        class="iconfont-caret-up inline-middle"></i></button>
+                            </div>
+                        </td>
+                        <td class="hidden-xs"><strong class="text-bold row-total">$${prodSubTTL}</strong></td>
+                        <td class="hidden-xs"><button type="button" class="close" aria-hidden="true" onclick="cartProdRemove(${data.prod.opaProdNo})">×</button>
+                        </td>
+                    </tr>`;
 
-            $(".tbl-cart > tbody").append(prod_tr);
-        }
-    });
-
+                $(".tbl-cart > tbody").append(prod_tr);
+            }
+        });
+}
+// loadCartItems();
 
 function addQty(el) {
     let input = el.closest(".qty-btn-group").querySelector("input");
-    input.value = parseInt(input.value) + 1;
-    let qty = parseInt(input.value);
+    // input.value = parseInt(input.value) + 1;
+    let qty = parseInt(input.value) + 1;
 
     let price = parseInt(el.closest("tr").querySelector(".unit-price").textContent.substring(1));
 
     let subTotal = el.closest("tr").querySelector(".row-total");
-    subTotal.textContent = "$" + qty * price;
+    // subTotal.textContent = "$" + qty * price;
 
     let opaProdNo = el.closest("tr").querySelector(".cart-entry-title").id;
     cartProdQtyUpdate(opaProdNo, qty);
@@ -80,15 +93,14 @@ function addQty(el) {
 }
 
 function minusQty(el) {
-
     let input = el.closest(".qty-btn-group").querySelector("input");
-    input.value = parseInt(input.value) - 1;
-    let qty = parseInt(input.value);
+    // input.value = parseInt(input.value) - 1;
+    let qty = parseInt(input.value) - 1;
 
     let price = parseInt(el.closest("tr").querySelector(".unit-price").textContent.substring(1));
 
     let subTotal = el.closest("tr").querySelector(".row-total");
-    subTotal.textContent = "$" + qty * price;
+    // subTotal.textContent = "$" + qty * price;
 
     let opaProdNo = el.closest("tr").querySelector(".cart-entry-title").id;
     if (qty === 0) {
@@ -120,6 +132,7 @@ function cartProdQtyUpdate(opaProdNo, opaCartProductsQty) {
             const { successful } = body;
             if (successful) {
                 console.log("更新購物車成功");
+                updateCartItem();
             } else {
                 console.log("更新購物車失敗");
             }
@@ -188,6 +201,10 @@ function cartProdRemove(opaProdNo) {
             if (body.successful) {
                 $("#tr_" + opaProdNo).fadeOut(1000, function () {
                     $(this).remove();
+                });
+                $("#li_" + opaProdNo).fadeOut(500, function () {
+                    $(this).remove();
+                    calcuCartGrandTotal();
                 });
             }
         });
@@ -306,7 +323,7 @@ function selectCouponClose() {
 function checkoutClick() {
     let cartSubTTL = parseInt($(".shopcart-total > .cart-subtotal > span.pull-right").text().substring(1));
     let cartGrandTTL = parseInt($(".shopcart-total > .cart-total > span.pull-right").text().substring(1));
-    if(cartSubTTL === 0){
+    if (cartSubTTL === 0) {
         $("#noCheckoutItemMsg").removeClass("-none");
         return;
     }
@@ -331,5 +348,198 @@ function checkoutClick() {
         cartGrandTTL: cartGrandTTL
     }
     sessionStorage.setItem("cart_data", JSON.stringify(cartData));
-    window.location = "http://localhost:8081/BuyGo/front_end/pages/member/opa/checkout/checkout.html";
+    window.location = full + "/BuyGo/front_end/pages/member/opa/checkout/checkout.html";
+}
+
+function getRanRecommendProds() {
+    const feature_products_el = $("#feature_products");
+    let count = 0;
+
+    fetch("/BuyGo/api/opa/prod", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+            action: "getRandomProdsWithLimit",
+            limit: 5,
+        })
+    })
+        .then(resp => resp.json())
+        .then(datas => {
+            for (let data of datas) {
+                count++;
+
+                let img_url = "../../../../img/common/Image_not_available.png";
+                if (data.prpicsList.length !== 0) {
+                    img_url = data.prpicsList[0].opaProdPicture;
+                }
+
+                //這邊有幾項記得改成點選可以跳轉該商品
+                let productDiv = `
+                    <div class="product" data-product-id="${count}" data-category="${data.opaPrcatsNo}" data-brand="BuyGo"
+                        data-price="${data.opaProdPrice}">
+                        <div class="entry-media" style=" min-height: 220px; overflow: hidden">
+                            <div class="hover">
+                                <img src="${img_url}" class="entry-url" style="height: 100%">
+                                <ul class="icons unstyled">
+                                    <li><a href="${full}/BuyGo/front_end/pages/guest/opa/prods/viewProduct.html?prodId=${data.opaProdNo}" class="circle"> <i class="iconfont-search"></i>
+                                        </a></li>
+                                    <li><a href="#" class="circle add-to-cart" onclick="addToCart(${data.opaProdNo});"> <i
+                                                class="iconfont-shopping-cart"></i>
+                                        </a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="entry-main">
+                            <h5 class="entry-title rec-entry-title">
+                                <a href="${full}/BuyGo/front_end/pages/guest/opa/prods/viewProduct.html?prodId=${data.opaProdNo}">${data.opaProdName}</a>
+                            </h5>
+                            <div class="entry-price">
+                                <strong class="price" style="color: #fa6f57; font-weight: bold;">$ ${data.opaProdPrice}</strong>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                feature_products_el.append(productDiv);
+            }
+        });
+}
+getRanRecommendProds();
+
+
+function addToCart(opaProdNo) {
+    if (opaProdNo === 0) {
+        opaProdNo = prodId;
+    }
+    checkLoginStatusShowMemberAcct();
+    let opaCartId = {
+        memberNo: null,
+        opaProdNo: opaProdNo
+    }
+
+    fetch("/BuyGo/needLoginApi/opa/cart/selectById", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json; charset=utf-8",
+        },
+        body: JSON.stringify({ opaCartId }),
+    })
+        .then(resp => {
+            if (resp.status === 401) {
+                // 客戶未登入，執行頁面重定向到登入頁
+                notLoggedInAction();
+            } else if (resp.ok) {
+                // 請求成功
+                return resp.json();
+            } else {
+                alert("錯誤狀態" + resp.status);
+                return;
+            }
+        })
+        .then(data => {
+            let opaCartProductsQty = 1;
+            if (data !== null) {
+                opaCartProductsQty = data.opaCartProductsQty + 1;
+            }
+
+            fetch("/BuyGo/needLoginApi/opa/cart/update", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json; charset=utf-8",
+                },
+                body: JSON.stringify({
+                    opaCartId: opaCartId,
+                    opaCartProductsQty: opaCartProductsQty
+                }),
+            })
+                .then(resp => resp.json())
+                .then(body => {
+                    const { successful } = body;
+                    if (successful) {
+                        updateCartItem();
+                        const Toast = Swal.mixin({
+                            toast: true,
+                            position: 'top-end',
+                            showConfirmButton: false,
+                            timer: 2000,
+                            timerProgressBar: true,
+                            didOpen: (toast) => {
+                                toast.addEventListener('mouseenter', Swal.stopTimer)
+                                toast.addEventListener('mouseleave', Swal.resumeTimer)
+                            }
+                        })
+
+                        Toast.fire({
+                            icon: 'success',
+                            title: '已加入購物車'
+                        })
+                    }
+                });
+        });
+}
+
+function updateCartItem() {
+    fetch("/BuyGo/needLoginApi/opa/cart/selectByMember", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json; charset=utf-8",
+        },
+        // body: JSON.stringify({ opaCartId }),
+    })
+        .then(resp => {
+            if (resp.status === 401) {
+                // 客戶未登入，不撈取購物車資料
+                return;
+            } else if (resp.ok) {
+                // 請求成功
+                return resp.json();
+            } else {
+                alert("錯誤狀態" + resp.status);
+                return;
+            }
+        })
+        .then(datas => {
+            if (datas && datas.length > 0) {
+                $(".cart-header").addClass("-none");
+                let cart_li = "";
+                let prodGrandTotal = 0;
+                for (let data of datas) {
+                    let prpics_url = "img/common/Image_not_available.png";
+                    if (data.prod.prpicsList.length !== 0) {
+                        prpics_url = data.prod.prpicsList[0].opaProdPicture;
+                    }
+                    let prodSubTTL = data.prod.opaProdPrice * data.opaCartProductsQty;
+                    prodGrandTotal += prodSubTTL;
+                    cart_li += `
+                        <li id="li_${data.prod.opaProdNo}">
+                            <div class="item clearfix" data-product-id="${data.prod.opaProdNo}">
+                                <button type="button" class="s-close" aria-hidden="true" onclick="cartProdRemove(${data.prod.opaProdNo})">×</button>
+                                <a href="${full}/BuyGo/front_end/pages/guest/opa/prods/viewProduct.html?prodId=${data.prod.opaProdNo}" data-toggle="lightbox" class="entry-thumbnail">
+                                    <img src="${prpics_url}" alt="${data.prod.opaProdName}">
+                                </a>
+                                <h5 class="entry-title cart-entry-title"><a href="${full}/BuyGo/front_end/pages/guest/opa/prods/viewProduct.html?prodId=${data.prod.opaProdNo}">${data.prod.opaProdName}</a></h5>
+                                <span class="entry-price s-entry-price">$ <span class="s-price">${data.prod.opaProdPrice}</span> x <span class="s-qty">${data.opaCartProductsQty}</span></span>
+                            </div>
+                        </li>
+                    `;
+
+                }
+                $(".s-cart-items").html(cart_li);
+                $(".s-cart-total > .total").html("$ " + prodGrandTotal);
+
+                loadCartItems(); //重新載入購物車品項
+            }
+        });
+}
+updateCartItem();
+
+
+function calcuCartGrandTotal() {
+    let prodEls = document.querySelectorAll(".s-entry-price");
+    let grandTotal = 0
+    for (let prodEl of prodEls) {
+        let price = parseInt(prodEl.querySelector(".s-price").textContent);
+        let qty = parseInt(prodEl.querySelector(".s-qty").textContent);
+        grandTotal += price * qty;
+    }
+    $(".s-cart-total > .total").html("$ " + grandTotal);
 }
