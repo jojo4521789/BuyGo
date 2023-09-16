@@ -21,8 +21,8 @@ public class PaCart extends Core{
 	@EmbeddedId
 	private PaCartId paCartId;
 	
-//	@Column(name = "PA_PROD_SUM")
-//	private Integer paProdSum;
+	@Column(name = "PA_PROD_SUM")
+	private Integer paProdSum;
 	@Column(name = "PA_ORD_QTY")
 	private Integer paOrdQty;
 	

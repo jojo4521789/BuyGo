@@ -1,5 +1,3 @@
-const full = location.protocol + '//' + location.host;
-
 function loadPrcats() {
     $("#category-list").html("");
     fetch("/BuyGo/api/opa/prcats/manage", { headers: { "Content-Type": "application/json; charset=utf-8", } })
@@ -63,22 +61,6 @@ function addToCart(opaProdNo) {
                     const { successful } = body;
                     if (successful) {
                         updateCartItem();
-                        const Toast = Swal.mixin({
-                            toast: true,
-                            position: 'top-end',
-                            showConfirmButton: false,
-                            timer: 2000,
-                            timerProgressBar: true,
-                            didOpen: (toast) => {
-                                toast.addEventListener('mouseenter', Swal.stopTimer)
-                                toast.addEventListener('mouseleave', Swal.resumeTimer)
-                            }
-                        })
-
-                        Toast.fire({
-                            icon: 'success',
-                            title: '已加入購物車'
-                        })
                     }
                 });
         });
@@ -120,10 +102,10 @@ function updateCartItem() {
                         <li id="li_${data.prod.opaProdNo}">
                             <div class="item clearfix" data-product-id="${data.prod.opaProdNo}"> 
                                 <button type="button" class="s-close" aria-hidden="true" onclick="removeCartProd(this)">×</button> 
-                                <a href="${full}/BuyGo/front_end/pages/guest/opa/prods/viewProduct.html?prodId=${data.prod.opaProdNo}" class="entry-thumbnail">
+                                <a href="#" data-toggle="lightbox" class="entry-thumbnail">
                                     <img src="${prpics_url}" alt="${data.prod.opaProdName}">
                                 </a>
-                                <h5 class="entry-title"><a href="${full}/BuyGo/front_end/pages/guest/opa/prods/viewProduct.html?prodId=${data.prod.opaProdNo}">${data.prod.opaProdName}</a></h5>
+                                <h5 class="entry-title"><a href="#">${data.prod.opaProdName}</a></h5>
                                 <span class="entry-price s-entry-price">$ <span class="s-price">${data.prod.opaProdPrice}</span> x <span class="s-qty">${data.opaCartProductsQty}</span></span>
                             </div>
                         </li>
@@ -302,7 +284,7 @@ function loadProds(displayItemQty, offset) {
                             <img data-src="${prpics_url}"
                                 alt="" class="lazyLoad thumb" />
                             <div class="hover">
-                                <a href="${full}/BuyGo/front_end/pages/guest/opa/prods/viewProduct.html?prodId=${data.opaProdNo}" class="entry-url"></a>
+                                <a href="../../product.html" class="entry-url"></a>
                                 <ul class="icons unstyled">
                                     <li>
                                         <div class="circle ribbon ribbon-sale">Sale</div>
@@ -322,7 +304,7 @@ function loadProds(displayItemQty, offset) {
                         </div>
                         <div class="entry-main">
                             <h5 class="entry-title">
-                                <a href="${full}/BuyGo/front_end/pages/guest/opa/prods/viewProduct.html?prodId=${data.opaProdNo}">${data.opaProdName}</a>
+                                <a href="../../product.html">${data.opaProdName}</a>
                             </h5>
                             <div class="entry-description visible-list">
                                 <p>${data.opaProdContent}</p>
@@ -369,9 +351,9 @@ function changePage(pageEl) {
     let displayItemQty = $("#displayItemQty").find(":selected").val();
     let offset = (pageNo - 1) * displayItemQty;
     loadPrcats();
-    if (document.querySelector("#input-search").value === "") {
+    if(document.querySelector("#input-search").value === ""){
         loadProds(displayItemQty, offset);
-    } else {
+    }else{
         loadSearchProds(displayItemQty, offset);
     }
 }
@@ -384,9 +366,9 @@ function previewPage() {
         let displayItemQty = $("#displayItemQty").find(":selected").val();
         let offset = (new_pageNo - 1) * displayItemQty;
         loadPrcats();
-        if (document.querySelector("#input-search").value === "") {
+        if(document.querySelector("#input-search").value === ""){
             loadProds(displayItemQty, offset);
-        } else {
+        }else{
             loadSearchProds(displayItemQty, offset);
         }
     }
@@ -400,9 +382,9 @@ function nextPage() {
         let displayItemQty = $("#displayItemQty").find(":selected").val();
         let offset = (new_pageNo - 1) * displayItemQty;
         loadPrcats();
-        if (document.querySelector("#input-search").value === "") {
+        if(document.querySelector("#input-search").value === ""){
             loadProds(displayItemQty, offset);
-        } else {
+        }else{
             loadSearchProds(displayItemQty, offset);
         }
     }
@@ -428,19 +410,19 @@ $("#displayItemQty").on("change", function () {
     let offset = (new_pageNo - 1) * displayItemQty;
     createPaginator(new_pageNo);
     loadPrcats();
-    if (document.querySelector("#input-search").value === "") {
+    if(document.querySelector("#input-search").value === ""){
         loadProds(displayItemQty, offset);
-    } else {
+    }else{
         loadSearchProds(displayItemQty, offset);
     }
     oldDisplayItemQty = displayItemQty;
 });
 
-function searchBtnClick() {
+function searchBtnClick(){
     let opaProdName = document.querySelector("#input-search").value;
-    if (opaProdName === "") {
+    if(opaProdName === ""){
         loadAllPages();
-    } else {
+    }else{
         loadSearchPages(opaProdName);
     }
 }
@@ -493,7 +475,7 @@ function loadSearchProds(displayItemQty, offset) {
                             <img data-src="${prpics_url}"
                                 alt="" class="lazyLoad thumb" />
                             <div class="hover">
-                                <a href="${full}/BuyGo/front_end/pages/guest/opa/prods/viewProduct.html?prodId=${data.opaProdNo}" class="entry-url"></a>
+                                <a href="../../product.html" class="entry-url"></a>
                                 <ul class="icons unstyled">
                                     <li>
                                         <div class="circle ribbon ribbon-sale">Sale</div>
@@ -513,7 +495,7 @@ function loadSearchProds(displayItemQty, offset) {
                         </div>
                         <div class="entry-main">
                             <h5 class="entry-title">
-                                <a href="${full}/BuyGo/front_end/pages/guest/opa/prods/viewProduct.html?prodId=${data.opaProdNo}">${data.opaProdName}</a>
+                                <a href="../../product.html">${data.opaProdName}</a>
                             </h5>
                             <div class="entry-description visible-list">
                                 <p>${data.opaProdContent}</p>

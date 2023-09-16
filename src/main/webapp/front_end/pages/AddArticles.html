@@ -5,7 +5,11 @@
 <!--[if (gt IE 9)|!(IE)]><!-->
 <html class="noIE" lang="en-US"><!--<![endif]-->
 
+
 <head>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.0/dist/sweetalert2.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.0/dist/sweetalert2.all.min.js"></script>
+
 	<style>
 		/* 燈箱樣式 */
 		.lightbox {
@@ -729,9 +733,12 @@
 				var title = $("#title").val(); //把文章標題的值,指定給title變數
 				var content = $("#content").val(); //把文章內容的值,指定給content變數
 
-				// 檢查標題和內容是否為空
 				if (title.trim() === '' || content.trim() === '') {
-					alert('標題和內容不能為空');
+					Swal.fire({
+						icon: 'error',
+						title: '錯誤',
+						text: '標題和內容不能為空',
+					});
 					return; // 阻止表單提交
 				}
 
@@ -750,13 +757,11 @@
 				})
 					//後端回傳到前端
 					.then(response => {
-						if (response.status === 401) { // 客戶未登入，執行頁面重定向到登入頁
-							alert('帳號未登入，將導轉至登入頁面');
-							window.location.href = '/BuyGo/front_end/pages/member/login.html'; // 登入頁面url
-						} else if (response.ok) { // 通常 200
-							// 請求成功，顯示燈箱和提示框
-							showLightbox();
-							$("#successBox").css("display", "block"); // 显示提示框
+						if (response.status === 401) {
+							// 客戶未登入，執行頁面重定向到登入頁
+							notLoggedInAction();
+						} else if (response.ok) {
+							// 請求成功
 							return response.json();
 						} else {
 							alert("錯誤狀態:" + response.status);

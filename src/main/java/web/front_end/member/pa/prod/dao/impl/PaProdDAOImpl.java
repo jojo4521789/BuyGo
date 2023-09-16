@@ -28,7 +28,7 @@ public class PaProdDAOImpl implements PaProdDAO {
 
 	@Override
 	public int update(PaProd prod) {
-		final StringBuilder hql = new StringBuilder().append("UPDATE paProd SET ");
+		final StringBuilder hql = new StringBuilder().append("UPDATE PaProd SET ");
 		hql.append("paProdName= :paProdName, ")
 				.append("paProdStockQty= :paProdStockQty, ")
 				.append("paProdShipQty= :paProdShipQty, ")
@@ -56,14 +56,14 @@ public class PaProdDAOImpl implements PaProdDAO {
 
 	@Override
 	public List<PaProd> selectAll() {
-		final String hql = "FROM paProd ORDER BY paProdNo";
+		final String hql = "FROM PaProd ORDER BY paProdNo";
 		return getSession().createQuery(hql, PaProd.class).getResultList();
 	}
 
 	@Override
 	public List<PaProd> selectByProdNo(String paProdNo) {
 		try {
-			Query<PaProd> query = getSession().createQuery("FROM paProd WHERE paProdNo = :paProdNo", PaProd.class)
+			Query<PaProd> query = getSession().createQuery("FROM PaProd WHERE paProdNo = :paProdNo", PaProd.class)
 					.setParameter("paProdNo", paProdNo);
 			return query.getResultList();
 		} catch (NoResultException e) {

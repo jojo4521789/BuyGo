@@ -13,5 +13,7 @@ public interface PaCartDAO extends CoreDao<PaCart, Integer>{
 	PaCart selectById(PaCartId paCartId);
 	
 	List<PaCart> selectByMemberNo(Integer memberNo);
+	
+	List<PaCart> selectBySellerNo(Integer memberNo);
 
 }

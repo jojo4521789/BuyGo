@@ -30,7 +30,7 @@ public class GpaProdRpIncreaseServlet extends HttpServlet{
 		resp.setContentType("text/html:charset=utf-8");
 		
 		GpaProdRp gpaProdRp = json2Pojo(req, GpaProdRp.class);
-//		System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAA");
+		System.out.println(gpaProdRp);
 		
 		writePojo2Json(resp, SERVICE.increse(gpaProdRp));
 	}

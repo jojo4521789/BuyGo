@@ -271,8 +271,8 @@ function loadProds() {
             $(".products-layout").html("");
             for (let data of datas) {
                 let prpics_url = "../../../../img/common/Image_not_available.png";
-                if (data.prodPic.length !== 0) {
-                    prpics_url = data.prodPic[0].paProdPic;
+                if (data.paProdPic.length !== 0) {
+                    prpics_url = data.paProdPic[0].paProdPic;
                 }
                 let prod_div = `
                     <div class="product" data-product-id="${data.paProdNo}"
