@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import web.front_end.member.pa.req.entity.MPaReq;
 
-@WebServlet("/api/front_end/member/AddPaReq")
+@WebServlet("/needLoginApi/front_end/member/AddPaReq")
 
 public class AddServlet extends HttpServlet{
 
@@ -31,10 +31,12 @@ public class AddServlet extends HttpServlet{
 			mPaReq = new MPaReq();
 			mPaReq.setMessage("訂單有誤");
 			mPaReq.setSuccessful(false);
+			System.out.println("mPaReq.getMemberNoSeller()1:" + mPaReq.getMemberNoSeller());
 			writePojo2Json(response, mPaReq);
 
 		}
-		
+		System.out.println("節點");
+		System.out.println("mPaReq.getMemberNoSeller()2:" + mPaReq.getMemberNoSeller());
 		mPaReq = SERVICE.add(mPaReq);
 		writePojo2Json(response, mPaReq);
 		

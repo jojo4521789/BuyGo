@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import web.front_end.member.pa.req.dto.JoinSellerNameDTO;
 import web.front_end.member.pa.req.entity.MPaReq;
 
-@WebServlet("/api/front_end/member/getAllPaReq")
+@WebServlet("/needLoginApi/front_end/member/getAllPaReq")
 public class GetAllPaReqServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;

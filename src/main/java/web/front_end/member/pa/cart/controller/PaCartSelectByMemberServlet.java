@@ -27,7 +27,6 @@ public class PaCartSelectByMemberServlet extends HttpServlet{
 		Integer memberNo = (Integer)(session.getAttribute("memberNo"));
 		List<PaCart> paCartList = SERVICE.selectByMemberNo(memberNo);
 		writePojo2Json(resp, paCartList);
-//		System.out.println(paCartList);
 	}
 
 }

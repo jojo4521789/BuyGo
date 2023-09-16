@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import web.front_end.member.pa.req.entity.MPaReq;
 
-@WebServlet("/api/front_end/seller/getSellerPaReqs")
+@WebServlet("/needLoginApi/front_end/seller/getSellerPaReqs")
 public class GetSellerReqServlet extends HttpServlet{
 
 	private static final long serialVersionUID = 1L;

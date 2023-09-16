@@ -2,15 +2,14 @@ sessionStorage.removeItem("store_data");
 let buyerNo;
 checkLoginStatusShowMemberAcct().then(response => {
     // console.log(response);
-    response[0] = buyerNo;
 })
 
 //代入登入會員
- let memberNo = buyerNo;
- let paCartId = {
-     memberNo: memberNo,
-     paProdNo: null
- }
+//  let memberNo = buyerNo;
+//  let paCartId = {
+//      memberNo: memberNo,
+//      paProdNo: null
+//  }
 
 //用會員編號取得該會員的購物車資訊
 fetch("/BuyGo/needLoginApi/pa/cart/selectByMember", {
@@ -20,23 +19,23 @@ fetch("/BuyGo/needLoginApi/pa/cart/selectByMember", {
     },
     // body: JSON.stringify({ paCartId }),
 })
-    .then(resp => {
-        if (resp.status === 401) {
+    .then(response => {
+        if (response.status === 401) {
             // 客戶未登入，執行頁面重定向到登入頁
-            alert('未登入帳號，將導向至登入頁面');
-            window.location.href = '/BuyGo/front_end/pages/member/login.html'; // 登入頁面url
-        } else if (resp.ok) {
+            notLoggedInAction();
+        } else if (response.ok) {
             // 請求成功
-            data = resp.json();
+            data = response.json();
             return data;
         } else {
-            alert("錯誤狀態" + resp.status);
+            alert("錯誤狀態:" + response.status);
             return;
         }
     })
-    
     .then(datas => {
-        console.log(datas);
+        if (datas.length > 0) {
+            $(".tbl-cart > tbody").html("");
+        }
         for (let data of datas) {
             let paPrpics_url = "../../../../img/common/Image_not_available.png";
             if (data.paProd.paProdPic.length !== 0) {
@@ -199,7 +198,7 @@ function cartProdRemove(paProdNo) {
         .then(resp => resp.json())
         .then(body => {
             if (body.successful) {
-                
+
                 $("#tr_" + paProdNo).fadeOut(1000, function () {
                     $(this).remove();
                 });
@@ -212,7 +211,7 @@ function cartProdRemove(paProdNo) {
 function checkoutClick() {
     let cartSubTTL = parseInt($(".shopcart-total > .cart-subtotal > span.pull-right").text().substring(1));
     // let cartGrandTTL = parseInt($(".shopcart-total > .cart-total > span.pull-right").text().substring(1));
-    if(cartSubTTL === 0){
+    if (cartSubTTL === 0) {
         $("#noCheckoutItemMsg").removeClass("-none");
         return;
     }

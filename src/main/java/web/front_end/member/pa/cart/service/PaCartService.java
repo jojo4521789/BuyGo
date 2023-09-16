@@ -20,4 +20,6 @@ public interface PaCartService extends CoreService{
 
 	List<PaCart> selectByMemberNo(Integer memberNo);
 	
+	List<PaCart> selectBySellerNo(Integer memberNo);
+	
 }

@@ -1,26 +1,27 @@
 <!DOCTYPE html>
 <!--[if IE 7 ]><html class="ie ie7 lte9 lte8 lte7" lang="en-US"><![endif]-->
-<!--[if IE 8]><html class="ie ie8 lte9 lte8" lang="en-US">	<![endif]-->
+<!--[if IE 8]><html class="ie ie8 lte9 lte8" lang="en-US"> <![endif]-->
 <!--[if IE 9]><html class="ie ie9 lte9" lang="en-US"><![endif]-->
 <!--[if (gt IE 9)|!(IE)]><!-->
-<html class="noIE" lang="en-US">
+<html class="noIE" lang="zh-Hant">
 <!--<![endif]-->
 
 <head>
 	<meta charset="UTF-8" />
-	<title>GFashion - Responsive e-commerce HTML Template</title>
+	<title>BuyGo - 一般代購委託單確認</title>
 	<meta name="description" content="" />
 	<meta name="keywords" content="" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 	<!-- Favorite Icons -->
-	<link rel="icon" href="../../../../img/common/favicon/favicon.html" type="image/x-icon" />
+	<link rel="icon" href="img/common/favicon/favicon.html" type="image/x-icon" />
 	<link rel="apple-touch-icon-precomposed" sizes="144x144"
-		href="../../../../img/common/favicon/apple-touch-icon-144x144-precomposed.html">
+		href="img/common/favicon/apple-touch-icon-144x144-precomposed.html">
 	<link rel="apple-touch-icon-precomposed" sizes="72x72"
-		href="../../../../img/common/favicon/apple-touch-icon-72x72-precomposed.html">
-	<link rel="apple-touch-icon-precomposed" href="../../../../img/common/favicon/apple-touch-icon-precomposed.html">
+		href="img/common/favicon/apple-touch-icon-72x72-precomposed.html">
+	<link rel="apple-touch-icon-precomposed" href="img/common/favicon/apple-touch-icon-precomposed.html">
 	<!-- // Favorite Icons -->
+
 
 	<!--<link href='http://fonts.useso.com/css?family=Open+Sans:300,400,600,700' rel='stylesheet' type='text/css'>-->
 
@@ -29,18 +30,20 @@
 	<!-- // GENERAL CSS FILES -->
 
 	<!--[if IE 8]>
-		<script src="js/respond.min.js"></script>
-		<script src="js/selectivizr-min.js"></script>
+	<script src="js/respond.min.js"></script>
+	<script src="js/selectivizr-min.js"></script>
 	<![endif]-->
+	<!--
+	<script src="js/jquery.min.js"></script>
+	-->
 
-	<script src="../../../../js/common/jquery.min.js"></script>
-
-	<script>window.jQuery || document.write('<script src="../../../../js/common/jquery.min.js"><\/script>');</script>
-	<script src="../../../../js/common/modernizr.min.js"></script>
+	<script>window.jQuery || document.write('<script src="js/common/jquery.min.js"><\/script>');</script>
+	<script src="js/common/modernizr.min.js"></script>
 	<!-- PARTICULAR PAGES CSS FILES -->
 	<link rel="stylesheet" href="../../../../css/common/innerpage.css">
 	<link rel="stylesheet" href="../../../../css/common/owl.carousel.css">
 	<link rel="stylesheet" href="../../../../css/common/owl.theme.css">
+	<link href="../../../../css/common/flexslider.css" rel="stylesheet" />
 	<!-- // PARTICULAR PAGES CSS FILES -->
 	<link rel="stylesheet" href="../../../../css/common/responsive.css">
 
@@ -59,6 +62,104 @@
 	</script>
 
 	<style>
+		.logo img {
+			max-width: 200px;
+			max-height: 150px;
+		}
+
+		.user-menu a img {
+			max-width: 20px;
+			max-height: 20px;
+		}
+
+		ul.user_menu>ul>a {
+			color: #ef7700;
+			font-weight: bold;
+			font-size: 25px;
+		}
+
+		a:hover {
+			color: #0150ed;
+		}
+
+		.rec-entry-title {
+			overflow: hidden;
+			white-space: nowrap;
+			text-overflow: ellipsis;
+		}
+
+		.rec-entry-title>a {
+			font-size: 20px;
+		}
+
+		.product {
+			width: 220px;
+		}
+
+		#feature_products {
+			display: flex;
+			justify-content: space-around;
+		}
+
+		#new_products {
+			display: flex;
+			justify-content: space-around;
+		}
+
+		.cart-entry-title {
+			overflow: hidden;
+			white-space: nowrap;
+			text-overflow: ellipsis;
+		}
+
+		.cart-entry-title>a {
+			font-size: 12px;
+		}
+
+		.cart-footer .s-cart-total {
+			background: #fff;
+			font-size: 12px;
+			font-weight: 700;
+			padding: 1em;
+			color: #1f1f1f;
+		}
+
+		.product-medialist .item .s-close {
+			background: #1f1f1f;
+			opacity: 1;
+			color: #FFF;
+			text-shadow: none;
+			width: 16px;
+			height: 16px;
+			font-size: 14px;
+			text-align: center;
+			margin: 0 0 4px 4px;
+			-webkit-transition: all .1s ease;
+			-moz-transition: all .1s ease;
+			-o-transition: all .1s ease;
+			-ms-transition: all .1s ease;
+			transition: all .1s ease;
+		}
+
+		button.s-close {
+			padding: 0;
+			cursor: pointer;
+			background: 0 0;
+			border: 0;
+			/* -webkit-appearance: none; */
+		}
+
+		.s-close {
+			float: right;
+			font-size: 21px;
+			font-weight: 700;
+			line-height: 1;
+			color: #000;
+			text-shadow: 0 1px 0 #fff;
+			opacity: .2;
+			filter: alpha(opacity=20);
+		}
+
 		th {
 			border: 1px solid rgb(130, 81, 81);
 			background-color: lightsalmon;
@@ -129,7 +230,7 @@
 									<a href="javascript:void(0);" id="social-icons">
 										<i class="iconfont-share round-icon"></i>
 									</a>
-	
+
 									<div id="sub-social" class="sub-header">
 										<ul class="social-list unstyled text-center">
 											<li><a href="#"><i class="iconfont-facebook round-icon"></i></a></li>
@@ -146,19 +247,20 @@
 									<a href="javascript:void(0);" id="total-cart">
 										<i class="iconfont-shopping-cart round-icon"></i>
 									</a>
-	
+
 									<div id="sub-cart" class="sub-header">
 										<div class="cart-header">
 											<span>Your cart is currently empty.</span>
-											<small><a href="/BuyGo/front_end/pages/member/opa/cart/cart.html">(See All)</a></small>
+											<small><a href="/BuyGo/front_end/pages/member/opa/cart/cart.html">(See
+													All)</a></small>
 										</div>
 										<!-- <ul class="cart-items product-medialist unstyled clearfix"></ul> -->
 										<ul class="s-cart-items product-medialist unstyled clearfix"></ul>
 										<div class="cart-footer">
 											<!-- <div class="cart-total clearfix">
-												<span class="pull-left uppercase">Total</span>
-												<span class="pull-right total">$ 0</span>
-											</div> -->
+											<span class="pull-left uppercase">Total</span>
+											<span class="pull-right total">$ 0</span>
+										</div> -->
 											<div class="s-cart-total clearfix">
 												<span class="pull-left uppercase">Total</span>
 												<span class="pull-right total">$ 0</span>
@@ -175,7 +277,7 @@
 						</div>
 					</div>
 				</div>
-	
+
 				<!-- ADD TO CART MESSAGE -->
 				<div class="cart-notification">
 					<ul class="unstyled"></ul>
@@ -190,19 +292,19 @@
 						<!-- CURRENCY / LANGUAGE / USER MENU -->
 						<div class="actions">
 							<div class="center-xs">
-	
+
 							</div>
 							<div class="clearfix"></div><br>
 							<!-- USER RELATED MENU -->
 							<nav id="tiny-menu" class="clearfix">
 								<ul class="user-menu">
-									<li><a href="pages/member/myaccount.html" class="personal">我的帳戶<img
+									<li><a href="/BuyGo/front_end/pages/member/myaccount.html" class="personal">我的帳戶<img
 												src="/BuyGo/front_end/img/common/head.png"></a>
 									</li>
 									<!-- <li><a href="pages/member/opa/cart/cart.html" class="paymoney">結帳<img
-												src="../front_end/img/common/paymoney.png"></a></li> -->
-									<li id="logInAndLogOut"><a href="pages/member/login.html" class="loginOut">登入<img
-												src="/BuyGo/front_end/img/common/login.png"></a>
+		src="../front_end/img/common/paymoney.png"></a></li> -->
+									<li id="logInAndLogOut"><a href="/BuyGo/front_end/pages/member/login.html"
+											class="loginOut">登入<img src="/BuyGo/front_end/img/common/login.png"></a>
 									</li>
 								</ul><br>
 							</nav>
@@ -211,7 +313,7 @@
 						<!-- // CURRENCY / LANGUAGE / USER MENU -->
 						<!-- SITE LOGO -->
 						<div class="logo-wrapper">
-							<a href="/BuyGo/front_end/index.html" class="logo">
+							<a href="index-2.html" class="logo">
 								<img src="/BuyGo/front_end/img/common/buygo.png" />
 							</a>
 						</div>
@@ -229,20 +331,20 @@
 									<a href="/BuyGo/front_end/pages/guest/opa/prods/prods.html">官方賣場</a>
 								</li>
 								<li>
-									<a href="/BuyGo/front_end/pages/guest/gpa/prods/prods.html">揪團商場</a>
+									<a href="/BuyGo/front_end/pages/components.html">揪團商場</a>
 								</li>
 								<li>
 									<a href="/BuyGo/front_end/pages/Articles.html">論壇</a>
 								</li>
 							</ul>
-	
+
 							<!-- MOBILE MENU -->
 							<div id="mobile-menu" class="dl-menuwrapper visible-xs visible-sm">
 								<button class="dl-trigger"><i class="iconfont-reorder round-icon"></i></button>
-	
+
 							</div>
 							<!-- // MOBILE MENU -->
-	
+
 						</nav>
 						<!-- // SITE NAVIGATION MENU -->
 					</div>
@@ -289,7 +391,7 @@
 							</section>
 
 							<!-- PROMO -->
-							<!-- <div class="promo inverse-background"
+							<div class="promo inverse-background"
 								style="background: url('../../../../img/common/demo/Barn-Dress-Girl_t.jpg') no-repeat; background-size: auto 100%;">
 								<div class="inner text-center np">
 									<div class="ribbon">
@@ -301,7 +403,7 @@
 												Shop Now</span></a>
 									</div>
 								</div>
-							</div> -->
+							</div>
 							<!-- // PROMO -->
 						</aside>
 						<!-- // SIDEBAR -->
@@ -357,67 +459,7 @@
 			<div class="widgets">
 
 				<!-- FIRST ROW -->
-				<div class="section">
-					<div class="container">
-						<div class="row">
 
-							<div class="col-xs-12 col-sm-6 col-md-3">
-								<section class="widget widget-text">
-									<h5 class="widget-title">our store</h5>
-									<div class="widget-content">
-										<p>Sed ornare cras donec litora integer curabitur orci, at
-											nullam aliquam libero nam himenaeos, amet massa amet ut ipsum
-											viverra mauris rhoncus neque aenean rhoncus gravida orci
-											facilisis quis dui consectetur.</p>
-										<p>Nisi porttitor inceptos consectetur donec orci, dui
-											ipsum leo class gravida, felis primis viverra placerat.</p>
-									</div>
-								</section>
-							</div>
-
-							<div class="col-xs-12 col-sm-6 col-md-3">
-								<section class="widget widget-text">
-									<h5 class="widget-title">Opening Time</h5>
-									<div class="widget-content">
-										<p>Monday-Friday:-------------------------9.00 to 18.00</p>
-										<p>Saturday:--------------------------------10.00 to 16.00</p>
-										<p>Sunday:----------------------------------10.00 to 16.00</p>
-										<br />
-										<p>Every 30 day of month Lorem ipsum dolor sit amet,
-											consectetur adipiscing.</p>
-									</div>
-								</section>
-							</div>
-
-							<div class="space40 visible-sm clearfix"></div>
-
-							<div class="col-xs-12 col-sm-6 col-md-3">
-								<section class="widget widget-menu">
-									<h5 class="widget-title">information</h5>
-									<div class="widget-content">
-										<ul class="menu iconed-menu unstyled">
-											<li><a href="#"><i class="iconfont-circle-blank menu-icon"></i>Affiliate</a>
-											</li>
-											<li><a href="#"><i class="iconfont-circle-blank menu-icon"></i>Shipping</a>
-											</li>
-											<li><a href="#"><i class="iconfont-circle-blank menu-icon"></i>Shop
-													support</a></li>
-											<li><a href="#"><i class="iconfont-circle-blank menu-icon"></i>Customer
-													Service</a></li>
-											<li><a href="#"><i class="iconfont-circle-blank menu-icon"></i>Payment &
-													Return</a></li>
-											<li><a href="#"><i class="iconfont-circle-blank menu-icon"></i>Terms &
-													Conditions</a></li>
-										</ul>
-									</div>
-								</section>
-							</div>
-
-							<div class="col-xs-12 col-sm-6 col-md-3">facebook</div>
-
-						</div>
-					</div>
-				</div>
 				<!-- // FIRST ROW -->
 
 				<!-- SECOND ROW -->
@@ -425,22 +467,21 @@
 					<div class="container">
 						<div class="row">
 
-							<div class="col-xs-12 col-sm-12 col-md-3">
+							<div class="col-xs-12 col-sm-12 col-md-5">
 								<section class="widget widget-menu">
 									<h5 class="widget-title">Contact info</h5>
 									<div class="widget-content">
 										<ul class="menu iconed-list unstyled">
 											<li><span class="list-icon"><i
 														class="round-icon iconfont-map-marker"></i></span>
-												<div class="list-content">Lorem ipsum maecenas dapibus
-													luctus euismod 133/2 New York City</div>
+												<div class="list-content">中壢區復興路 46 號緯育 TibaMe 附設中壢職訓中心 9 樓</div>
 											</li>
 											<li><span class="list-icon"><i class="round-icon iconfont-phone"></i></span>
-												<div class="list-content">(+00)1344356-675</div>
+												<div class="list-content">(03) 425-1108</div>
 											</li>
 											<li><span class="list-icon"><i
 														class="round-icon iconfont-envelope-alt"></i></span>
-												<div class="list-content">support@themina.net</div>
+												<div class="list-content">tibamecha102g6@gmail.com</div>
 											</li>
 										</ul>
 									</div>
@@ -452,41 +493,14 @@
 									<div class="widget-content">
 										<div class="center-xs">
 											<div class="ads">
-												<a href="#"> <img src="../../img/common/demo/images-footer.jpg"
+												<a href="#"> <img src="../../../../img/common/demo/images-footer.jpg"
 														alt="" />
 												</a>
-												<div class="ads-caption bottom-right">
-													<a href="#" class="btn btn-default btn-round"> <i
-															class="round-icon iconfont-angle-right"></i> <span
-															class="inline-middle">Show More</span>
-													</a>
-												</div>
 											</div>
 										</div>
 									</div>
 								</section>
 							</div>
-
-							<div class="col-xs-12 col-sm-12 col-md-3">
-								<section class="widget widget-subscription">
-									<h5 class="widget-title">Newletter</h5>
-									<div class="widget-content">
-										<p>Subscribe to be the first to know about Sales, Events,
-											and Exclusive Offers!</p>
-										<form action="#" method="post">
-											<div class="input-group">
-												<label for="subscription-email" class="placeholder">Enter
-													Your Email</label> <input type="email" id="subscription-email"
-													name="email" class="form-control" required /> <span
-													class="input-group-btn">
-													<button class="btn btn-primary">Subscribe</button>
-												</span>
-											</div>
-										</form>
-									</div>
-								</section>
-							</div>
-
 						</div>
 					</div>
 				</div>
@@ -501,27 +515,18 @@
 						<div class="col-xs-12 col-sm-6">
 							<div class="footer-links center-xs clearfix">
 								<ul class="unstyled">
-									<li><a href="#">Site Map</a></li>
-									<li><a href="#">FAQ</a></li>
-									<li><a href="#">Work for us</a></li>
-									<li><a href="#">Contact Us</a></li>
+									<li><a href="/BuyGo/front_end/pages/guest/selectFirstFAQ.html">FAQ</a></li>
 								</ul>
 							</div>
 							<div class="space10"></div>
+							<div class="copyright center-xs">
+								<p>(c) 2023</p>
+							</div>
 						</div>
 
 						<div class="space40 visible-xs"></div>
 
-						<div class="col-xs-12 col-sm-6 center-xs">
-							<div class="pull-right">
-								<div class="vmid">
-									<span class="uppercase">Payment Accept&emsp;</span> <a href="#"><img
-											src="../../img/common/visacard.png" alt="" width="40" /></a> <a
-										href="#"><img src="../../img/common/mastercard.png" alt="" width="40" /></a> <a
-										href="#"><img src="../../img/common/paypal.png" alt="" width="40" /></a>
-								</div>
-							</div>
-						</div>
+
 					</div>
 				</div>
 			</div>
@@ -549,17 +554,25 @@
 	<ul class="store-list unstyled" id="paReqList"></ul>
 
 	<script>
-		checkLoginStatusShowMemberAcct(); // 檢查客戶帳號是否登入，修改頁面右上方Log In/Log Out按鈕，顯示登入者帳號名稱
-
 		window.addEventListener('load', function () {
+
+			sessionStorage.removeItem("store_data");
+			let memberNoId;
+
+			checkLoginStatusShowMemberAcct().then(response => {
+				memberNoId = response[0];
+				console.log("3/" + memberNoId);
+
+				loadPaReqList(memberNoId);//測試用寫死，記得修改
+			})
+
 			const paReqList_el = document.querySelector('#paReqList');
 			const paReqListTable = document.getElementById("paReqListTable");
 
-			loadPaReqList(10);//測試用寫死，記得修改
-
 			//讀取該會員的所有委託單
 			function loadPaReqList(memberNoSeller) {
-				fetch('/BuyGo/api/front_end/seller/getSellerPaReqs', {
+				fetch('/BuyGo/needLoginApi/front_end/seller/getSellerPaReqs', {
+
 					method: 'POST',
 					headers: {
 						'Content-Type': 'application/json; charset=utf-8',
@@ -568,7 +581,19 @@
 						memberNoSeller: memberNoSeller,
 					}),
 				})
-					.then((resp) => resp.json())
+					.then(response => {
+						if (response.status === 401) {
+							// 客戶未登入，執行頁面重定向到登入頁
+							alert('未登入帳號，將導向至登入頁面');
+							window.location.href = '/BuyGo/front_end/pages/member/login.html'; // 登入頁面url
+						} else if (response.ok) {
+							// 請求成功
+							return response.json();
+						} else {
+							alert("錯誤狀態:" + response.status);
+							return;
+						}
+					})
 					.then((data) => {
 
 						$('#table_id').DataTable().destroy();
@@ -612,11 +637,12 @@
 									render: function (data, type, row, meta) {
 										if (type === 'display') {
 											const selectHtml = `
-                                                <select>
+                                                <select id="roleId">
                                                     <option value="0" ${data === 0 ? 'selected' : ''}>未處理</option>
                                                     <option value="1" ${data === 1 ? 'selected' : ''}>接受委託</option>
                                                     <option value="2" ${data === 2 ? 'selected' : ''}>拒絕委託</option>
                                                 </select>
+												<button class="edit-button" id="btnEdit_ProdDetailS">修改</button>
                                             `;
 											return selectHtml;
 										}
@@ -625,12 +651,41 @@
 								},
 								{ data: 'paRqStartDate' }
 							]
-						});
 
+						});
 
 					});
 			}
+
+			// $("#btnEdit_ProdDetail").on("click", function () {
+			// 	const statChange = document.querySelector(`#roleId`).value;
+
+			// 	fetch('/BuyGo/needLoginApi/front_end/seller/getSellerPaReqs', {
+			// 		method: 'POST',
+			// 		headers: { 'Content-Type': 'application/json; charset=utf-8' },
+			// 		body: JSON.stringify({
+			// 			id,
+			// 			username,
+			// 			password,
+			// 			nickname,
+			// 			pass,
+			// 			roleId,
+			// 			updater
+			// 		})
+			// 	})
+			// 		.then(resp => resp.json())
+			// 		.then(body => {
+			// 			const { successful, message } = body;
+			// 			if (successful) {
+			// 				alert('存檔成功!');
+			// 				location.reload();
+			// 			} else {
+			// 				alert(message ?? '存檔失敗');
+			// 			}
+			// 		});
+			// })
 		});
+
 	</script>
 
 </body>

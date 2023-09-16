@@ -70,8 +70,8 @@ public class MPaReqServiceImpl implements MPaReqService {
 	
 	@Override
 	//用會員ID查詢屬於該會員的委託資料
-	public List<MPaReq> loadReqListByMemberNo(Integer memberNoMember) {
-		return dao.selectByMemberNo(memberNoMember);
+	public List<MPaReq> loadReqListByMemberNo(Integer memberNo) {
+		return dao.selectByMemberNo(memberNo);
 	}
 	
 	@Override
