@@ -57,6 +57,17 @@ public class PaCartDAOImpl implements PaCartDAO{
 			return null;
 		}
 	}
+	
+	@Override
+	public List<PaCart> selectBySellerNo(Integer memberNo) {
+		final String hql = "FROM PaCart WHERE paProd.memberNo = :memberNo";
+		try {
+			Query<PaCart> query = getSession().createQuery(hql, PaCart.class).setParameter("memberNo", memberNo);
+			return query.getResultList();
+		} catch (NoResultException e) {
+			return null;
+		}
+	}
 
 	@Override
 	public int deleteById(Integer id) {
