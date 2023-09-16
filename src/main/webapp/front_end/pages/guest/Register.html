@@ -383,87 +383,86 @@
         </main>
         <!-- // SITE MAIN CONTENT -->
 
-      		<!-- SITE FOOTER -->
-		<footer class="page-footer">
+        <!-- SITE FOOTER -->
+        <footer class="page-footer">
 
-			<!-- WIDGET AREA -->
-			<div class="widgets">
+            <!-- WIDGET AREA -->
+            <div class="widgets">
 
-				<!-- FIRST ROW -->
+                <!-- FIRST ROW -->
 
-				<!-- // FIRST ROW -->
+                <!-- // FIRST ROW -->
 
-				<!-- SECOND ROW -->
-				<div class="section">
-					<div class="container">
-						<div class="row">
+                <!-- SECOND ROW -->
+                <div class="section">
+                    <div class="container">
+                        <div class="row">
 
-							<div class="col-xs-12 col-sm-12 col-md-5">
-								<section class="widget widget-menu">
-									<h5 class="widget-title">Contact info</h5>
-									<div class="widget-content">
-										<ul class="menu iconed-list unstyled">
-											<li><span class="list-icon"><i
-														class="round-icon iconfont-map-marker"></i></span>
-												<div class="list-content">中壢區復興路 46 號緯育 TibaMe 附設中壢職訓中心 9 樓</div>
-											</li>
-											<li><span class="list-icon"><i class="round-icon iconfont-phone"></i></span>
-												<div class="list-content">(03) 425-1108</div>
-											</li>
-											<li><span class="list-icon"><i
-														class="round-icon iconfont-envelope-alt"></i></span>
-												<div class="list-content">tibamecha102g6@gmail.com</div>
-											</li>
-										</ul>
-									</div>
-								</section>
-							</div>
+                            <div class="col-xs-12 col-sm-12 col-md-5">
+                                <section class="widget widget-menu">
+                                    <h5 class="widget-title">Contact info</h5>
+                                    <div class="widget-content">
+                                        <ul class="menu iconed-list unstyled">
+                                            <li><span class="list-icon"><i
+                                                        class="round-icon iconfont-map-marker"></i></span>
+                                                <div class="list-content">中壢區復興路 46 號緯育 TibaMe 附設中壢職訓中心 9 樓</div>
+                                            </li>
+                                            <li><span class="list-icon"><i class="round-icon iconfont-phone"></i></span>
+                                                <div class="list-content">(03) 425-1108</div>
+                                            </li>
+                                            <li><span class="list-icon"><i
+                                                        class="round-icon iconfont-envelope-alt"></i></span>
+                                                <div class="list-content">tibamecha102g6@gmail.com</div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </section>
+                            </div>
 
-							<div class="col-xs-12 col-sm-12 col-md-6">
-								<section class="widget widget-ads">
-									<div class="widget-content">
-										<div class="center-xs">
-											<div class="ads">
-												<a href="#"> <img src=""
-														alt="" />
-												</a>
-											</div>
-										</div>
-									</div>
-								</section>
-							</div>
-						</div>
-					</div>
-				</div>
-				<!-- // SECOND ROW -->
+                            <div class="col-xs-12 col-sm-12 col-md-6">
+                                <section class="widget widget-ads">
+                                    <div class="widget-content">
+                                        <div class="center-xs">
+                                            <div class="ads">
+                                                <a href="#"> <img src="" alt="" />
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </section>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- // SECOND ROW -->
 
-			</div>
-			<!-- // WIDGET AREA -->
+            </div>
+            <!-- // WIDGET AREA -->
 
-			<div class="footer-sub">
-				<div class="container">
-					<div class="row">
-						<div class="col-xs-12 col-sm-6">
-							<div class="footer-links center-xs clearfix">
-								<ul class="unstyled">
-									<li><a href="/BuyGo/front_end/pages/guest/selectFirstFAQ.html">FAQ</a></li>
-								</ul>
-							</div>
-							<div class="space10"></div>
-							<div class="copyright center-xs">
-								<p>(c) 2023</p>
-							</div>
-						</div>
+            <div class="footer-sub">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-6">
+                            <div class="footer-links center-xs clearfix">
+                                <ul class="unstyled">
+                                    <li><a href="/BuyGo/front_end/pages/guest/selectFirstFAQ.html">FAQ</a></li>
+                                </ul>
+                            </div>
+                            <div class="space10"></div>
+                            <div class="copyright center-xs">
+                                <p>(c) 2023</p>
+                            </div>
+                        </div>
 
-						<div class="space40 visible-xs"></div>
+                        <div class="space40 visible-xs"></div>
 
 
-					</div>
-				</div>
-			</div>
+                    </div>
+                </div>
+            </div>
 
-		</footer>
-		<!-- // SITE FOOTER -->
+        </footer>
+        <!-- // SITE FOOTER -->
 
     </div>
     <!-- // PAGE WRAPPER -->
@@ -829,97 +828,97 @@
 
     }
     memberAcct_el.addEventListener("change", function () {
-			clearTimeout(typingTimer);
-            p1_el.innerHTML = "";
-			var typingTimer = setTimeout(function () {
-				fetch("/BuyGo/api/front_end/guest/register/MemberRegister", {
-					method: "POST",
-					headers: { "content-type": "application/json;charset=utf-8" },
-					body: JSON.stringify({
-						action: "testmemberAcct",
-						memberAcct: memberAcct_el.value
-					})
-				}).then(resp => resp.json())
-					.then(body => {
-						console.log(body);
-						if (body === true) {
-							p1_el.innerHTML = "此帳號已有人使用";
-						}
-					})
-			}, 200)
-		})
+        clearTimeout(typingTimer);
+        p1_el.innerHTML = "";
+        var typingTimer = setTimeout(function () {
+            fetch("/BuyGo/api/front_end/guest/register/MemberRegister", {
+                method: "POST",
+                headers: { "content-type": "application/json;charset=utf-8" },
+                body: JSON.stringify({
+                    action: "testmemberAcct",
+                    memberAcct: memberAcct_el.value
+                })
+            }).then(resp => resp.json())
+                .then(body => {
+                    console.log(body);
+                    if (body === true) {
+                        p1_el.innerHTML = "此帳號已有人使用";
+                    }
+                })
+        }, 200)
+    })
     memberPhone_el.addEventListener("change", function () {
-			clearTimeout(typingTimer);
-            p5_el.innerHTML = "";
-			var typingTimer = setTimeout(function () {
-				fetch("/BuyGo/api/front_end/guest/register/MemberRegister", {
-					method: "POST",
-					headers: { "content-type": "application/json;charset=utf-8" },
-					body: JSON.stringify({
-						action: "testmemberPhone",
-						memberPhone: memberPhone_el.value
-					})
-				}).then(resp => resp.json())
-					.then(body => {
-						console.log(body);
-						if (body === true) {
-							p5_el.innerHTML = "此號碼已有人使用";
-						}
-					})
-			}, 200)
-		})
+        clearTimeout(typingTimer);
+        p5_el.innerHTML = "";
+        var typingTimer = setTimeout(function () {
+            fetch("/BuyGo/api/front_end/guest/register/MemberRegister", {
+                method: "POST",
+                headers: { "content-type": "application/json;charset=utf-8" },
+                body: JSON.stringify({
+                    action: "testmemberPhone",
+                    memberPhone: memberPhone_el.value
+                })
+            }).then(resp => resp.json())
+                .then(body => {
+                    console.log(body);
+                    if (body === true) {
+                        p5_el.innerHTML = "此號碼已有人使用";
+                    }
+                })
+        }, 200)
+    })
     memberEmail_el.addEventListener("change", function () {
-			clearTimeout(typingTimer);
-            p6_el.innerHTML = "";
-			var typingTimer = setTimeout(function () {
-				fetch("/BuyGo/api/front_end/guest/register/MemberRegister", {
-					method: "POST",
-					headers: { "content-type": "application/json;charset=utf-8" },
-					body: JSON.stringify({
-						action: "testmemberEmail",
-						memberEmail: memberEmail_el.value
-					})
-				}).then(resp => resp.json())
-					.then(body => {
-						console.log(body);
-						if (body === true) {
-							p6_el.innerHTML = "此信箱已有人使用";
-						}
-					})
-			}, 200)
-		})
+        clearTimeout(typingTimer);
+        p6_el.innerHTML = "";
+        var typingTimer = setTimeout(function () {
+            fetch("/BuyGo/api/front_end/guest/register/MemberRegister", {
+                method: "POST",
+                headers: { "content-type": "application/json;charset=utf-8" },
+                body: JSON.stringify({
+                    action: "testmemberEmail",
+                    memberEmail: memberEmail_el.value
+                })
+            }).then(resp => resp.json())
+                .then(body => {
+                    console.log(body);
+                    if (body === true) {
+                        p6_el.innerHTML = "此信箱已有人使用";
+                    }
+                })
+        }, 200)
+    })
     memberId_el.addEventListener("change", function () {
-			clearTimeout(typingTimer);
-            p9_el.innerHTML = "";
-			var typingTimer = setTimeout(function () {
-				fetch("/BuyGo/api/front_end/guest/register/MemberRegister", {
-					method: "POST",
-					headers: { "content-type": "application/json;charset=utf-8" },
-					body: JSON.stringify({
-						action: "testmemberId",
-						memberId: memberId_el.value
-					})
-				}).then(resp => resp.json())
-					.then(body => {
-						console.log(body);
-						if (body === true) {
-							p9_el.innerHTML = "此身分證號碼已有人使用";
-						}
-					})
-			}, 200)
-		})
+        clearTimeout(typingTimer);
+        p9_el.innerHTML = "";
+        var typingTimer = setTimeout(function () {
+            fetch("/BuyGo/api/front_end/guest/register/MemberRegister", {
+                method: "POST",
+                headers: { "content-type": "application/json;charset=utf-8" },
+                body: JSON.stringify({
+                    action: "testmemberId",
+                    memberId: memberId_el.value
+                })
+            }).then(resp => resp.json())
+                .then(body => {
+                    console.log(body);
+                    if (body === true) {
+                        p9_el.innerHTML = "此身分證號碼已有人使用";
+                    }
+                })
+        }, 200)
+    })
 
     //註冊判斷+驗證信箱
     button_el.addEventListener("click", () => {
         errorMessages_el.innerHTML = "";
-        // p1_el.innerHTML = "";
-        // p2_el.innerHTML = "";
-        // p3_el.innerHTML = "";
-        // p4_el.innerHTML = "";
-        // p5_el.innerHTML = "";
-        // p6_el.innerHTML = "";
-        // p8_el.innerHTML = "";
-        // p9_el.innerHTML = "";
+        p1_el.innerHTML = "";
+        p2_el.innerHTML = "";
+        p3_el.innerHTML = "";
+        p4_el.innerHTML = "";
+        p5_el.innerHTML = "";
+        p6_el.innerHTML = "";
+        p8_el.innerHTML = "";
+        p9_el.innerHTML = "";
         if (!checkAcct(memberAcct_el.value)) {
             errorMessages_el.innerHTML += "<p>會員帳號格式錯誤</p>";
         }
@@ -974,60 +973,63 @@
                             verificationCode
                         )
                     })
-                        .then(response => {
-                            // console.log(response);
-                            if (!response.ok) {
+                        .then(resp => resp.json())
+                        .then(body=>{
+                            console.log(body);
+                            if (body !== true) {
                                 throw new Error(response.statusText);
-                            }
-                        }).then(fetch("/BuyGo/api/front_end/guest/register/MemberRegister", {
+                            } else {
+                                fetch("/BuyGo/api/front_end/guest/register/MemberRegister", {
 
-                            method: "POST",
-                            header: { "content-type": "application/json;charset=utf-8" },
-                            body: JSON.stringify({
-                                action:"register",
-                                memberAcct: memberAcct_el.value,
-                                memberPw: memberPw_el.value,
-                                memberStatus: memberStatus_el.value,
-                                memberName: memberName_el.value,
-                                memberAdd: getAddress(),
-                                memberPhone: memberPhone_el.value,
-                                memberEmail: memberEmail_el.value,
-                                memberGender: getGender(),
-                                memberBirthday: memberBirthday_el.value,
-                                memberId: memberId_el.value
+                                    method: "POST",
+                                    header: { "content-type": "application/json;charset=utf-8" },
+                                    body: JSON.stringify({
+                                        action: "register",
+                                        memberAcct: memberAcct_el.value,
+                                        memberPw: memberPw_el.value,
+                                        memberStatus: memberStatus_el.value,
+                                        memberName: memberName_el.value,
+                                        memberAdd: getAddress(),
+                                        memberPhone: memberPhone_el.value,
+                                        memberEmail: memberEmail_el.value,
+                                        memberGender: getGender(),
+                                        memberBirthday: memberBirthday_el.value,
+                                        memberId: memberId_el.value
 
-                            })
-                        }).then(resp => resp.json())
-                            .then(body => {
-                                console.log(body);
-                                if (body === true) {
-                                    Swal.fire(
-                                        '註冊成功!',
-                                        'success'
+                                    })
+                                }).then(resp => resp.json())
+                                    .then(body => {
+                                        console.log(body);
+                                        if (body === true) {
+                                            Swal.fire(
+                                                '註冊成功!',
+                                                'success'
 
-                                    ).then((result) => {
-                                        if (result.isConfirmed) {
-                                            window.location.href = "../member/login.html";
+                                            ).then((result) => {
+                                                if (result.isConfirmed) {
+                                                    window.location.href = "../member/login.html";
+                                                }
+                                            });
+                                        } else if (body === false) {
+                                            Swal.fire({
+                                                icon: 'error',
+                                                title: 'Oops...',
+                                                text: '請確認輸入的資料!',
+                                            })
+                                        } else {
+                                            Swal.fire({
+                                                icon: 'error',
+                                                title: 'Oops...',
+                                                text: '似乎發生了什麼錯誤!',
+                                            })
                                         }
-                                    });
-                                }else if(body=== false){
-                                    Swal.fire({
-                                        icon: 'error',
-                                        title: 'Oops...',
-                                        text: '請確認輸入的資料!',
-                                    })
-                                } else {
-                                    Swal.fire({
-                                        icon: 'error',
-                                        title: 'Oops...',
-                                        text: '似乎發生了什麼錯誤!',
-                                    })
-                                }
+                                    }
+                                    )
                             }
-                            ))
+                        })
                         .catch(error => {
                             Swal.showValidationMessage(
-                                `驗證失敗：${error}`
+                                `驗證失敗，請確認驗證碼`
                             );
                         });
                 },
@@ -1043,18 +1045,18 @@
     });
 
 
-    // window.onload = function () {
-    //     memberAcct_el.value = "chuntingliu0403";
-    //     memberPw_el.value = "qqq123456";
-    //     memberPw1_el.value = "qqq123456";
-    //     memberStatus_el.value = "u1";
-    //     memberName_el.value = "liu";
-    //     memberPhone_el.value = "0921442101";
-    //     memberEmail_el.value = "chuntingliu0403@gmail.com";
-    //     memberGender_el.value = "男生";
-    //     memberBirthday_el.value = "2000-05-20";
-    //     memberId_el.value = "M123345456";
-    // }
+    window.onload = function () {
+        memberAcct_el.value = "chuntingliu0403";
+        memberPw_el.value = "qqq123456";
+        memberPw1_el.value = "qqq123456";
+        memberStatus_el.value = "u1";
+        memberName_el.value = "liu";
+        memberPhone_el.value = "0921442101";
+        memberEmail_el.value = "chuntingliu0403@gmail.com";
+        memberGender_el.value = "男生";
+        memberBirthday_el.value = "2000-05-20";
+        memberId_el.value = "M123345456";
+    }
 
 
 
