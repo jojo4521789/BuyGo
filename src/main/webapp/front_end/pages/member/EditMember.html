@@ -1,0 +1,936 @@
+<!DOCTYPE html>
+<!--[if IE 7 ]><html class="ie ie7 lte9 lte8 lte7" lang="en-US"><![endif]-->
+<!--[if IE 8]><html class="ie ie8 lte9 lte8" lang="en-US">	<![endif]-->
+<!--[if IE 9]><html class="ie ie9 lte9" lang="en-US"><![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!-->
+<html class="noIE" lang="en-US"><!--<![endif]-->
+
+<head>
+	<meta charset="UTF-8" />
+	<title>GFashion - Responsive e-commerce HTML Template</title>
+	<meta name="description" content="" />
+	<meta name="keywords" content="" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<!-- Favorite Icons -->
+	<link rel="icon" href="../../img/common/favicon/favicon.html" type="image/x-icon" />
+	<link rel="apple-touch-icon-precomposed" sizes="144x144"
+		href="../../img/common/favicon/apple-touch-icon-144x144-precomposed.html">
+	<link rel="apple-touch-icon-precomposed" sizes="72x72"
+		href="../../img/common/favicon/apple-touch-icon-72x72-precomposed.html">
+	<link rel="apple-touch-icon-precomposed" href="../../img/common/favicon/apple-touch-icon-precomposed.html">
+	<!-- // Favorite Icons -->
+
+	<!--<link href='http://fonts.useso.com/css?family=Open+Sans:300,400,600,700' rel='stylesheet' type='text/css'>-->
+
+	<!-- GENERAL CSS FILES -->
+	<link rel="stylesheet" href="../../css/common/minified.css">
+	<!-- // GENERAL CSS FILES -->
+
+	<!--[if IE 8]>
+		<script src="js/respond.min.js"></script>
+		<script src="js/selectivizr-min.js"></script>
+	<![endif]-->
+	<!--
+	<script src="js/jquery.min.js"></script>
+	-->
+	<script>window.jQuery || document.write('<script src="../../js/common/jquery.min.js"><\/script>');</script>
+	<script src="../../js/common/modernizr.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+	<!-- PARTICULAR PAGES CSS FILES -->
+	<link rel="stylesheet" href="../../css/common/innerpage.css">
+	<link rel="stylesheet" href="../../css/common/owl.carousel.css">
+	<link rel="stylesheet" href="../../css/common/owl.theme.css">
+	<!-- // PARTICULAR PAGES CSS FILES -->
+	<link rel="stylesheet" href="../../css/common/responsive.css">
+	<style>
+		button[type="button"] {
+			background-color: #007BFF;
+			color: #fff;
+			border: none;
+			padding: 10px 20px;
+			cursor: pointer;
+			border-radius: 4px;
+			margin-top: 20px;
+		}
+
+		/* Style the error messages */
+		.error-message {
+			color: red;
+			margin-top: 5px;
+		}
+
+		/* 添加一個外部容器框 */
+		#form-container {
+			width: 60%;
+			margin: 30px;
+			padding: 50px;
+			border: 2px solid #ccc;
+			border-radius: 10px;
+			box-shadow: 0 0 10px 5px rgba(210, 84, 11, 0.546);
+			background: linear-gradient(to bottom, #ebe3bec6, #ffffb7b2);
+		}
+
+
+		/* 選項樣式 */
+		select {
+			appearance: none;
+			-webkit-appearance: none;
+			-moz-appearance: none;
+			padding: 10px;
+			background: transparent;
+			background-image: url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css");
+			background-repeat: no-repeat;
+			background-position: right center;
+		}
+
+		/* 按鈕樣式 */
+		button {
+			background-color: #007bff;
+			color: #fff;
+			border: none;
+			border-radius: 5px;
+			cursor: pointer;
+			transition: background-color 0.3s ease;
+		}
+
+		button:hover {
+			background-color: #0056b3;
+		}
+
+		.address-section {
+			color: #056831;
+			display: flex;
+			flex-direction: column;
+			margin-bottom: 10px;
+		}
+
+		.address-section label,
+		.address-section p {
+			margin-bottom: 5px;
+		}
+
+		.address-section select,
+		.address-section input[type="text"] {
+			margin-top: 5px;
+			width: 100px;
+		}
+
+		input {
+			background-color: transparent;
+			border: none;
+			border-bottom: 1px solid var(--input-color);
+			color: var(--input-color);
+			font-size: 1.5em;
+			padding: .5em .5em .5em;
+			width: 50%;
+		}
+
+		input:focus+label,
+		input+label.show {
+			border-radius: 4px;
+			color: var(--label-color);
+			font-size: 1em;
+			left: .5em;
+			padding: 0 .15em;
+			text-transform: uppercase;
+			top: -1em;
+		}
+
+		:root {
+			--input-color: #056831;
+			--label-color: #f61d62;
+		}
+
+		*,
+		*::before,
+		*::after {
+			box-sizing: border-box;
+		}
+
+		.field {
+			color: var(--input-color);
+			margin-bottom: 2em;
+			position: relative;
+		}
+
+		input:focus {
+			border-color: var(--label-color);
+			outline: 0;
+		}
+
+		/* ===== */
+		div.logo-wrapper {
+			position: relative;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+		}
+
+		h1 {
+			color: #056831;
+		}
+
+		h2 {
+			color: #056831;
+		}
+	</style>
+	</style>
+	<style>
+		.logo img {
+			max-width: 200px;
+			max-height: 150px;
+		}
+
+		.user-menu a img {
+			max-width: 20px;
+			max-height: 20px;
+		}
+
+		ul.user-menu > li > a {
+			color: #ef7700;
+			font-weight: bold;
+			font-size: 25px;
+		}
+
+		a:hover {
+			color: #0150ed;
+		}
+	</style>
+</head>
+
+<body>
+
+	<!-- PAGE WRAPPER -->
+	<div id="page-wrapper">
+
+		<!-- SITE HEADER -->
+		<header id="site-header" role="banner">
+			<!-- HEADER TOP -->
+			<div class="header-top">
+				<div class="container">
+					<div class="row">
+						<div class="col-xs-12 col-sm-6 col-md-7">
+							<!-- CONTACT INFO -->
+							<div class="contact-info">
+								<i class="iconfont-headphones round-icon"></i>
+								<strong>(03)425-1108</strong>
+								<span>(Mon- Fri: 09.00 - 21.00)</span>
+							</div>
+							<!-- // CONTACT INFO -->
+						</div>
+						<div class="col-xs-12 col-sm-6 col-md-5">
+							<ul class="actions unstyled clearfix">
+								<li>
+									<!-- SEARCH BOX -->
+									<div class="search-box">
+										<form action="#" method="post">
+											<div class="input-iconed prepend">
+												<button class="input-icon"><i class="iconfont-search"></i></button>
+												<label for="input-search" class="placeholder">Search here…</label>
+												<input type="text" name="q" id="input-search"
+													class="round-input full-width" required />
+											</div>
+										</form>
+									</div>
+									<!-- // SEARCH BOX -->
+								</li>
+								<li data-toggle="sub-header" data-target="#sub-social">
+									<!-- SOCIAL ICONS -->
+									<a href="javascript:void(0);" id="social-icons">
+										<i class="iconfont-share round-icon"></i>
+									</a>
+	
+									<div id="sub-social" class="sub-header">
+										<ul class="social-list unstyled text-center">
+											<li><a href="#"><i class="iconfont-facebook round-icon"></i></a></li>
+											<li><a href="#"><i class="iconfont-twitter round-icon"></i></a></li>
+											<li><a href="#"><i class="iconfont-google-plus round-icon"></i></a></li>
+											<li><a href="#"><i class="iconfont-pinterest round-icon"></i></a></li>
+											<li><a href="#"><i class="iconfont-rss round-icon"></i></a></li>
+										</ul>
+									</div>
+									<!-- // SOCIAL ICONS -->
+								</li>
+								<li data-toggle="sub-header" data-target="#sub-cart">
+									<!-- SHOPPING CART -->
+									<a href="javascript:void(0);" id="total-cart">
+										<i class="iconfont-shopping-cart round-icon"></i>
+									</a>
+	
+									<div id="sub-cart" class="sub-header">
+										<div class="cart-header">
+											<span>Your cart is currently empty.</span>
+											<small><a href="/BuyGo/front_end/pages/member/opa/cart/cart.html">(See All)</a></small>
+										</div>
+										<!-- <ul class="cart-items product-medialist unstyled clearfix"></ul> -->
+										<ul class="s-cart-items product-medialist unstyled clearfix"></ul>
+										<div class="cart-footer">
+											<!-- <div class="cart-total clearfix">
+												<span class="pull-left uppercase">Total</span>
+												<span class="pull-right total">$ 0</span>
+											</div> -->
+											<div class="s-cart-total clearfix">
+												<span class="pull-left uppercase">Total</span>
+												<span class="pull-right total">$ 0</span>
+											</div>
+											<div class="text-right">
+												<a href="/BuyGo/front_end/pages/member/opa/cart/cart.html"
+													class="btn btn-default btn-round view-cart">查看購物車</a>
+											</div>
+										</div>
+									</div>
+									<!-- // SHOPPING CART -->
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+	
+				<!-- ADD TO CART MESSAGE -->
+				<div class="cart-notification">
+					<ul class="unstyled"></ul>
+				</div>
+				<!-- // ADD TO CART MESSAGE -->
+			</div>
+			<!-- // HEADER TOP -->
+			<!-- MAIN HEADER -->
+			<div class="main-header-wrapper">
+				<div class="container">
+					<div class="main-header">
+						<!-- CURRENCY / LANGUAGE / USER MENU -->
+						<div class="actions">
+							<div class="center-xs">
+	
+							</div>
+							<div class="clearfix"></div><br>
+							<!-- USER RELATED MENU -->
+							<nav id="tiny-menu" class="clearfix">
+								<ul class="user-menu">
+									<li><a href="pages/member/myaccount.html" class="personal">我的帳戶<img
+												src="/BuyGo/front_end/img/common/head.png"></a>
+									</li>
+									<!-- <li><a href="pages/member/opa/cart/cart.html" class="paymoney">結帳<img
+												src="../front_end/img/common/paymoney.png"></a></li> -->
+									<li id="logInAndLogOut"><a href="pages/member/login.html" class="loginOut">登入<img
+												src="/BuyGo/front_end/img/common/login.png"></a>
+									</li>
+								</ul><br>
+							</nav>
+							<!-- // USER RELATED MENU -->
+						</div>
+						<!-- // CURRENCY / LANGUAGE / USER MENU -->
+						<!-- SITE LOGO -->
+						<div class="logo-wrapper" style="left: 100px;">
+							<a href="/BuyGo/front_end/index.html" class="logo">
+								<img src="/BuyGo/front_end/img/common/buygo.png" />
+							</a>
+						</div>
+						<!-- // SITE LOGO -->
+						<!-- SITE NAVIGATION MENU -->
+						<nav id="site-menu" role="navigation">
+							<ul class="main-menu hidden-sm hidden-xs">
+								<li class="active">
+									<a href="/BuyGo/front_end/index.html">首頁</a>
+								</li>
+								<li>
+									<a href="/BuyGo/front_end/pages/guest/pa/prods/prods.html">一般賣場</a>
+								</li>
+								<li>
+									<a href="/BuyGo/front_end/pages/guest/opa/prods/prods.html">官方賣場</a>
+								</li>
+								<li>
+									<a href="/BuyGo/front_end/pages/guest/gpa/prods/prods.html">揪團商場</a>
+								</li>
+								<li>
+									<a href="/BuyGo/front_end/pages/Articles.html">論壇</a>
+								</li>
+							</ul>
+	
+							<!-- MOBILE MENU -->
+							<div id="mobile-menu" class="dl-menuwrapper visible-xs visible-sm">
+								<button class="dl-trigger"><i class="iconfont-reorder round-icon"></i></button>
+	
+							</div>
+							<!-- // MOBILE MENU -->
+	
+						</nav>
+						<!-- // SITE NAVIGATION MENU -->
+					</div>
+				</div>
+			</div>
+			<!-- // MAIN HEADER -->
+		</header>
+		<!-- // SITE HEADER -->
+
+		<!-- BREADCRUMB -->
+		<div class="breadcrumb-container">
+			<div class="container">
+				<div class="relative">
+					<ul class="bc unstyled clearfix">
+						<li><a href="/BuyGo/front_end/index.html">首頁</a></li>
+						<li class="active">我的帳戶</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<!-- // BREADCRUMB -->
+
+		<!-- SITE MAIN CONTENT -->
+		<main id="main-content" role="main">
+
+			<div class="container">
+				<div class="row">
+
+					<div class="m-t-b clearfix">
+						<!-- SIDEBAR -->
+						<aside class="col-xs-12 col-sm-4 col-md-3">
+							<section class="side-section">
+								<h3 class="uppercase text-bold"><span class="text-xs">我的帳戶</span></h3>
+								
+								<ul class="nav nav-tabs nav-stacked">
+									<li><a href="/BuyGo/front_end/pages/member/EditMember.html">個人資料</a></li>
+									<li><a href="/BuyGo/front_end/pages/member/pa/order/ListOrders.html">訂單追蹤</a></li>
+									<li><a href="/BuyGo/front_end/pages/member/pa/req/MemberAllPaReq.html">一般代購委託單查詢</a></li>
+									<li><a href="/BuyGo/front_end/pages/member/opa/add_request.html">官方平台委託單申請</a></li>
+									<li><a href="/BuyGo/front_end/pages/member/opa/request.html">官方平台委託單查詢</a></li>
+									<li><a href="/BuyGo/front_end/pages/member/mycoupon.html">優惠券</a></li>
+									<li><a href="/BuyGo/front_end/pages/member/wallet.html">平台錢包</a></li>
+									<li><a href="/BuyGo/front_end/pages/member/chatroom.html">聊天室</a></li>
+									<li><a href="/BuyGo/front_end/pages/member/blacklist.html">黑名單</a></li>
+									<li><a href="/BuyGo/front_end/pages/member/myCollListforum.html">我的收藏文章</a></li>
+									<li><a href="/BuyGo/front_end/pages/member/myforum.html">我的文章</a></li>
+									<br>
+									<li><a href="/BuyGo/front_end/pages/member/myShop.html">我的賣場</a></li>
+								</ul>
+							</section>
+
+							<!-- PROMO -->
+							<!-- <div class="promo inverse-background"
+								style="background: url('../../img/common/demo/Barn-Dress-Girl_t.jpg') no-repeat; background-size: auto 100%;">
+								<div class="inner text-center np">
+									<div class="ribbon">
+										<h6 class="nmb">New Arrivals</h6>
+										<h5 class="text-semibold uppercase nmb">Leather Fashion</h5>
+										<div class="space10"></div>
+										<a href="../../pages/guest/products.html" class="with-icon prepend-icon"><i
+												class="iconfont-caret-right"></i><span> Shop Now</span></a>
+									</div>
+								</div>
+							</div> -->
+							<!-- // PROMO -->
+						</aside>
+						<!-- // SIDEBAR -->
+
+						<section class="col-xs-12 col-sm-8 col-md-9">
+							<!-- 在此新增 -->
+
+							<main id="main-content" role="main">
+
+								<div class="container">
+									<div id="form-container">
+										<h2>您的個人資料</h2>
+										<div>
+											<div class="field">
+												<label for="memberAcct">會員帳號:</label>
+												<input type="text" id="memberAcct" placeholder="開頭為英文，長度為8-20..."
+													readonly>
+												<p id="p1" style="color: red"></p>
+											</div>
+											<div class="field">
+												<label for="memberPw">輸入舊密碼:</label>
+												<input type="password" id="memberPw" placeholder="必須包含字母、數字，長度為6-16">
+												<button type="button" onclick="togglePassword()">顯示密碼</button>
+												<p id="p2" style="color: red"></p>
+											</div>
+											<div class="field">
+												<label for="new_memberPw">輸入新密碼:</label>
+												<input type="password" id="new_memberPw"
+													placeholder="必須包含字母、數字，長度為6-16">
+												<button type="button" onclick="togglePassword1()">顯示密碼</button>
+												<p id="p3" style="color: red"></p>
+											</div>
+											<div class="field">
+												<label for="new_memberPw1">確認密碼:</label>
+												<input type="password" id="new_memberPw1"
+													placeholder="必須包含字母、數字，長度為6-16">
+												<button type="button" onclick="togglePassword2()">顯示密碼</button>
+												<p id="p3_1" style="color: red"></p>
+											</div>
+											<div class="field">
+												<label for="memberName">會員姓名:</label>
+												<input type="text" id="memberName">
+												<p id="p4" style="color: red"></p>
+											</div>
+											<div class="field">
+												<label for="memberPhone">會員電話:</label>
+												<input type="text" id="memberPhone">
+												<p id="p5" style="color: red"></p>
+											</div>
+											<div class="field">
+												<label for="memberEmail">會員電子信箱:</label>
+												<input type="text" id="memberEmail"><br>
+												<input type="text" id="checkmemberEmail" placeholder="請輸入驗證碼"
+													style="display: none;">
+												<button type="button" id="proofEmail">信箱驗證</button>
+												<p id="p6" style="color: red"></p>
+											</div>
+
+											<div class="field">
+												<select id="memberGender">
+													<p id="p7" style="color: red"></p>
+													<option>請輸入您的性別</option>
+													<option value="1">男生</option>
+													<option value="2">女生</option>
+												</select>
+											</div>
+											<div class="field">
+												<p>請輸入您的生日</p>
+												<p id="p8" style="color: red"></p>
+												<input type="date" id="memberBirthday">
+											</div>
+											<div class="field">
+												<label for="memberId">會員身分證:</label>
+												<input type="text" id="memberId">
+												<p id="p9" style="color: red"></p>
+											</div>
+											<div class="address-section">
+												<label for="slCity">會員居住地址:</label>
+												<p id="p10" style="color: red"></p>
+												<input id="memberAddress">
+											</div>
+											<div>
+												<select id="memberStatus" disabled>
+													<option value="1">一般會員</option>
+													<option value="2">賣家</option>
+												</select>
+											</div>
+											<div>
+												<label for="memberWallet">會員錢包餘額:</label>
+												<input id="memberWallet" readonly>
+											</div><br>
+											<div><a href="https://forms.gle/3WiQPvv4xvZqrjd48" style="color: red;">想成為賣家，請點此</a></div>
+											<div>
+												<button type="button" id="button">送出資料</button>
+											</div>
+											<div id="errorMessages" style="color: red;"></div>
+										</div>
+									</div>
+							</main>
+						</section>
+
+					</div>
+
+				</div>
+			</div>
+
+		</main>
+		<!-- // SITE MAIN CONTENT -->
+
+		<!-- SITE FOOTER -->
+		<footer class="page-footer">
+
+			<!-- WIDGET AREA -->
+			<div class="widgets">
+
+				<!-- FIRST ROW -->
+
+				<!-- // FIRST ROW -->
+
+				<!-- SECOND ROW -->
+				<div class="section">
+					<div class="container">
+						<div class="row">
+
+							<div class="col-xs-12 col-sm-12 col-md-5">
+								<section class="widget widget-menu">
+									<h5 class="widget-title">Contact info</h5>
+									<div class="widget-content">
+										<ul class="menu iconed-list unstyled">
+											<li><span class="list-icon"><i
+														class="round-icon iconfont-map-marker"></i></span>
+												<div class="list-content">中壢區復興路 46 號緯育 TibaMe 附設中壢職訓中心 9 樓</div>
+											</li>
+											<li><span class="list-icon"><i class="round-icon iconfont-phone"></i></span>
+												<div class="list-content">(03) 425-1108</div>
+											</li>
+											<li><span class="list-icon"><i
+														class="round-icon iconfont-envelope-alt"></i></span>
+												<div class="list-content">tibamecha102g6@gmail.com</div>
+											</li>
+										</ul>
+									</div>
+								</section>
+							</div>
+
+							<div class="col-xs-12 col-sm-12 col-md-6">
+								<section class="widget widget-ads">
+									<div class="widget-content">
+										<div class="center-xs">
+											<div class="ads">
+												<a href="#"> <img src="../../../img/common/demo/images-footer.jpg"
+														alt="" />
+												</a>
+											</div>
+										</div>
+									</div>
+								</section>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- // SECOND ROW -->
+
+			</div>
+			<!-- // WIDGET AREA -->
+
+			<div class="footer-sub">
+				<div class="container">
+					<div class="row">
+						<div class="col-xs-12 col-sm-6">
+							<div class="footer-links center-xs clearfix">
+								<ul class="unstyled">
+									<li><a href="/BuyGo/front_end/pages/guest/selectFirstFAQ.html">FAQ</a></li>
+								</ul>
+							</div>
+							<div class="space10"></div>
+							<div class="copyright center-xs">
+								<p>(c) 2023</p>
+							</div>
+						</div>
+
+						<div class="space40 visible-xs"></div>
+
+
+					</div>
+				</div>
+			</div>
+
+		</footer>
+		<!-- // SITE FOOTER -->
+
+	</div>
+	<!-- // PAGE WRAPPER -->
+
+	<!-- Essential Javascripts -->
+	<script src="../../js/common/minified.js"></script>
+	<!-- // Essential Javascripts -->
+
+	<!-- Particular Page Javascripts -->
+	<script src="../../js/common/products.js"></script>
+	<script src="../../js/common/owl.carousel.js"></script>
+	<script src="../../js/common/contact.js"></script>
+	<script src="../../js/login.js"></script>
+	<!--<script src="http://maps.googleapis.com/maps/api/js?sensor=false" type="text/javascript"></script>-->
+	<!-- <script src="../../js/common/gmap3.min.js"></script> -->
+	<!-- // Particular Page Javascripts -->
+	<script>
+		checkLoginStatusShowMemberAcct(); // 檢查客戶帳號是否登入，修改頁面右上方Log In/Log Out按鈕，顯示登入者帳號名稱
+	</script>
+	<script>
+		const p1_el = document.querySelector('#p1'); //帳號
+		const p2_el = document.querySelector('#p2'); //密碼
+		const p3_el = document.querySelector('#p3'); //確認密碼
+		const p3_1_el = document.querySelector('#p3_1'); //確認密碼
+		const p4_el = document.querySelector('#p4'); //會員名稱
+		const p5_el = document.querySelector('#p5'); //會員電話
+		const p6_el = document.querySelector('#p6'); //電子信箱
+		const p7_el = document.querySelector('#p7'); //性別
+		const p8_el = document.querySelector('#p8'); //生日
+		const p9_el = document.querySelector('#p9'); //Id
+		const p10_el = document.querySelector('#p10'); //身分
+		const memberAcct_el = document.querySelector('#memberAcct');
+		const memberPw_el = document.querySelector('#memberPw');
+		const new_memberPw_el = document.querySelector('#new_memberPw');
+		const new_memberPw1_el = document.querySelector('#new_memberPw1');
+		const memberName_el = document.querySelector('#memberName');
+		const memberPhone_el = document.querySelector('#memberPhone');
+		const memberEmail_el = document.querySelector('#memberEmail');
+		const memberGender_el = document.querySelector('#memberGender');
+		const memberBirthday_el = document.querySelector('#memberBirthday');
+		const memberAddress_el = document.querySelector('#memberAddress');
+		const memberId_el = document.querySelector('#memberId');
+		const memberStatus_el = document.querySelector('#memberStatus');
+		const button_el = document.querySelector('#button');
+		const proofEmail_el = document.querySelector('#proofEmail');
+		const checkmemberEmail_el = document.querySelector('#checkmemberEmail')
+		const errorMessages_el = document.querySelector('#errorMessages');
+		const memberWallet_el = document.querySelector('#memberWallet');
+		const url = "/BuyGo/needLoginApi/front_end/member/acc/MemberEdit";
+		function togglePassword() {
+			var passwordField = document.getElementById("memberPw");
+			if (passwordField.type === "password") {
+				passwordField.type = "text";
+			} else {
+				passwordField.type = "password";
+			}
+		}
+		function togglePassword1() {
+			var passwordField = document.getElementById("new_memberPw");
+			if (passwordField.type === "password") {
+				passwordField.type = "text";
+			} else {
+				passwordField.type = "password";
+			}
+		}
+		function togglePassword2() {
+			var passwordField = document.getElementById("new_memberPw1");
+			if (passwordField.type === "password") {
+				passwordField.type = "text";
+			} else {
+				passwordField.type = "password";
+			}
+		}
+
+		function checkPassword(password) {
+			// const re = /^(?=.*[a-zA-Z])(?=.*\d)[A-Za-z\d]{8,20}$/;
+			var re = /^(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z0-9!@#$%^&*]{6,16}$/;
+			if (!re.test(password)) {
+				p3_el.innerHTML += "密碼必須包含字母、數字，長度須為6-16";
+				return false;
+			}
+
+			p3_el.innerHTML == "";
+			return true;
+		}
+
+		function checkPasswordConfirm(confirmPassword) {
+			if (confirmPassword === '') {
+				p3_1_el.innerHTML += "確認密碼為必填欄位！";
+				return false;
+			}
+			if (confirmPassword !== new_memberPw_el.value) {
+				p3_1_el.innerHTML += "請再次確認密碼是否相符！";
+				return false;
+			}
+			p3_1_el.innerHTML = "";
+			return true;
+		}
+
+		function checkName(string) {
+
+			if (string === '') {
+				p4_el.innerHTML += "會員名稱為必填欄位！";
+				return false;
+			}
+			p4_el.innerHTML == " ";
+			return true;
+		}
+		function checkPhone(string) {
+			const re = /^(?:\+8869|09)\d{8}$/;
+			if (string === '') {
+				p5_el.innerHTML += "電話為必填欄位";
+				return false;
+			}
+			if (!re.test(string)) {
+				p5_el.innerHTML += "錯誤的電話格式";
+				return false;
+			}
+			p5_el.innerHTML == " ";
+			return true;
+		}
+		function checkEmail(string) {
+			re1 = /^[a-zA-Z][a-z0-9_]+@[a-zA-Z0-9]*\.[a-zA-Z]{2,3}$/;
+			re2 = /^[a-zA-Z][a-z0-9_]+@[a-zA-Z0-9]*\.[a-zA-Z]{2,}\.[a-zA-Z]{2,3}$/;
+			re3 = /^[a-zA-Z][a-z0-9_]+@[a-zA-Z0-9]*\.[a-zA-Z]{2,}\.[a-zA-Z]{2,}\.[a-zA-Z]{2,3}$/;
+			if ((string === '')) {
+				p6_el.innerHTML += "Email為必填欄位！";
+				return false;
+			}
+			if ((!re1.test(string)) && (!re2.test(string)) && (!re3.test(string))) {
+				p6_el.innerHTML += "不符合e-mail的格式！";
+				return false;
+			}
+			p6_el.innerHTML == "";
+			return true;
+		}
+
+		function getGender(integer) {
+			if (memberGender_el.value === "男生") {
+				return 1;
+			}
+			if (memberGender_el.value === "女生") {
+				return 2;
+			}
+		}
+		function checkBirthday(date) {
+			if (memberBirthday_el.value === " ") {
+				p8_el.innerHTML += "請輸入您的生日日期";
+				return false;
+			}
+			p8_el.innerHTML == "";
+			return true;
+		}
+
+		function checkId(string) {
+			const re = /^[A-Z][1-2]\d{8}$/;
+			if (string === '') {
+				p9_el.innerHTML += "此欄不能為空白";
+				return false;
+			}
+			if (!re.test(string)) {
+				p9_el.innerHTML += "輸入格式錯誤";
+				return false;
+			}
+			p9_el.innerHTML == "";
+			return true;
+
+		}
+
+		memberPw_el.addEventListener("input", function () {
+			clearTimeout(typingTimer);
+			var typingTimer = setTimeout(function () {
+				fetch(url, {
+					method: "POST",
+					headers: { "content-type": "application/json;charset=utf-8" },
+					body: JSON.stringify({
+						action: "checkPassword",
+						
+						memberPw: memberPw_el.value
+					})
+				}).then(resp => resp.json())
+					.then(body => {
+						console.log(body);
+						if (body === false) {
+							p2_el.innerHTML = "輸入錯誤";
+						} else {
+							p2_el.innerHTML = "";
+						}
+					})
+			}, 3000)
+		})
+		proofEmail_el.addEventListener("click", function () {
+			fetch("/BuyGo/api/front_end/guest/register/MemberRegisterCheckMailServlet", {
+				method: "POST",
+				header: { "content-type": "application/json;charset=utf-8" },
+				body: JSON.stringify({
+					memberEmail: memberEmail_el.value
+				})
+			})
+			checkmemberEmail_el.style.display = "block";
+		})
+		window.onload = function () {
+
+			fetch(url, {
+				method: "POST",
+				headers: { "content-type": "application/json;charset=utf-8" },
+				body: JSON.stringify({
+					action: "show"
+				})
+			}).then(resp => resp.json())
+				.then(body => {
+					console.log(body);
+					memberAcct_el.value = body.memberAcct;
+					memberBirthday_el.value = body.memberBirthday;
+					memberName_el.value = body.memberName;
+					memberStatus_el.value = body.memberStatus;
+					memberPhone_el.value = body.memberPhone;
+					memberId_el.value = body.memberId;
+					memberEmail_el.value = body.memberEmail;
+					memberAddress_el.value = body.memberAdd;
+					memberGender_el.value = body.memberGender;
+					memberWallet_el.value = body.memberWalletAmount
+				})
+		}
+		checkmemberEmail_el.addEventListener("input", function () {
+			fetch("/BuyGo/api/front_end/guest/register/RegisterCheckMailAuthCode", {
+				method: "POST",
+				header: { "content-type": "application/json;charset=utf-8" },
+				body: JSON.stringify(
+					checkmemberEmail_el.value
+				)
+			})
+				.then(resp => resp.json())
+				.then(body => {
+					if (body === true) {
+						p6_el.innerHTML = "";
+					} else {
+						p6_el.innerHTML = "驗證碼錯誤";
+
+					}
+
+				})
+
+		})
+		button_el.addEventListener("click", () => {
+			errorMessages_el.innerHTML = "";
+			p1_el.innerHTML = "";
+			p2_el.innerHTML = "";
+			p3_el.innerHTML = "";
+			p3_1_el.innerHTML = "";
+			p4_el.innerHTML = "";
+			p5_el.innerHTML = "";
+			p6_el.innerHTML = "";
+			p8_el.innerHTML = "";
+			p9_el.innerHTML = "";
+			if (checkmemberEmail_el.style.display === "block") {
+				if (checkmemberEmail_el.value === "") {
+					errorMessages_el.innerHTML += "<p>請輸入驗證碼</p>";
+				}
+			}
+			if (memberPw_el.value === "" && new_memberPw_el.value === "" && new_memberPw1_el.value === "") {
+				errorMessages_el.innerHTML += "<p>請輸入密碼</p>";
+			}
+			if (new_memberPw_el.value != "") {
+				if (!checkPassword(new_memberPw_el.value)) {
+					errorMessages_el.innerHTML += "<p>密碼格式錯誤</p>";
+				}
+				if (!checkPasswordConfirm(new_memberPw_el.value)) {
+					errorMessages_el.innerHTML += "<p>確認密碼錯誤</p>";
+				}
+			}
+			if (!checkName(memberName_el.value)) {
+				errorMessages_el.innerHTML += "<p>會員名稱錯誤</p>";
+			}
+			if (!checkPhone(memberPhone_el.value)) {
+				errorMessages_el.innerHTML += "<p>電話錯誤</p>";
+			}
+			if (!checkEmail(memberEmail_el.value)) {
+				errorMessages_el.innerHTML += "<p>Email格式錯誤</p>";
+			}
+			if (!checkBirthday(memberBirthday_el.value)) {
+				errorMessages_el.innerHTML += "<p>生日錯誤</p>";
+			}
+			if (!checkId(memberId_el.value)) {
+				errorMessages_el.innerHTML += "<p>會員身分證錯誤</p>";
+			}
+			var passwordToSend = '';
+			if (new_memberPw_el.value !== '') {
+				passwordToSend = new_memberPw_el.value;
+			} else {
+				passwordToSend = memberPw_el.value;
+			}
+
+			if (errorMessages_el.innerHTML !== "" ) {
+				event.preventDefault();
+				// return;
+			} else {
+				fetch(url, {
+					method: "POST",
+					headers: { "content-type": "application/json;charset=utf-8" },
+					body: JSON.stringify({
+						action: "editMember",
+						
+						memberPw: passwordToSend,
+						memberName: memberName_el.value,
+						memberPhone: memberPhone_el.value,
+						memberEmail: memberEmail_el.value,
+						memberBirthday: memberBirthday_el.value,
+						memberGender: memberGender_el.value,
+						memberAdd: memberAddress_el.value,
+						memberId: memberId_el.value
+					})
+				}).then(resp => resp.json())
+					.then(body => {
+						console.log(body);
+						Swal.fire(
+							'修改成功!',
+						)
+					})
+			}
+		})
+
+	</script>
+</body>
+
+</html>

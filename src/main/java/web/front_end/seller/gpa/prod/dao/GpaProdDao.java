@@ -10,4 +10,8 @@ public interface GpaProdDao extends CoreDao<GpaProd, Integer> {
 	List<GpaProd> selectByMemberNo(Integer memberNo);
 	
 	List<GpaProd> selectByProdName(String prodName);
+	
+	List<GpaProd> randomSelectByGpaCatsNo(Integer gpaCatsNo);
+	
+	int updateGpaPreProdByGpaProdNo(Integer gpaProdNo, Integer gpaPreProd);
 }

@@ -1,0 +1,867 @@
+<!DOCTYPE html>
+<!--[if IE 7 ]><html class="ie ie7 lte9 lte8 lte7" lang="en-US"><![endif]-->
+<!--[if IE 8]><html class="ie ie8 lte9 lte8" lang="en-US">	<![endif]-->
+<!--[if IE 9]><html class="ie ie9 lte9" lang="en-US"><![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!-->
+<html class="noIE" lang="en-US"><!--<![endif]-->
+
+<head>
+	<meta charset="UTF-8" />
+	<title>GFashion - Responsive e-commerce HTML Template</title>
+	<style>
+		/* Reset CSS */
+		body,
+		div,
+		p,
+		h1,
+		h2,
+		h3,
+		table,
+		tr,
+		th,
+		td {
+			margin: 0;
+			padding: 0;
+			border: 0;
+			font-size: 100%;
+			font-family: inherit;
+			vertical-align: baseline;
+		}
+
+		/* Basic styling */
+		body {
+			font-family: Arial, sans-serif;
+			background-color: #f5f5f5;
+		}
+
+		h1 {
+			text-align: center;
+			padding: 20px 0;
+		}
+
+		table {
+			width: 100%;
+			border-collapse: collapse;
+			margin-top: 20px;
+		}
+
+		th,
+		td {
+			padding: 10px;
+			border: 1px solid #ddd;
+		}
+
+		th {
+			background-color: #f2f2f2;
+		}
+
+		tr:nth-child(even) {
+			background-color: #f2f2f2;
+		}
+
+		table {
+			width: 100%;
+			border-collapse: collapse;
+			margin-top: 20px;
+			border: 1px solid #ddd;
+			/* 新增表格整体边框 */
+			background-color: #fff;
+			/* 背景色设为白色 */
+			box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+			/* 添加阴影效果 */
+		}
+
+		th,
+		td {
+			padding: 10px;
+			border: 1px solid #ddd;
+			text-align: center;
+			/* 文字置中对齐 */
+		}
+
+		th {
+			background-color: #f2f2f2;
+			font-weight: bold;
+		}
+
+		tr:nth-child(even) {
+			background-color: #f2f2f2;
+		}
+
+		.modal {
+			display: none;
+			position: fixed;
+			z-index: 1;
+			left: 0;
+			top: 0;
+			width: 100%;
+			height: 100%;
+			background-color: rgba(0, 0, 0, 0.5);
+			/* 背景遮罩 */
+		}
+
+		.modal-content {
+			background-color: white;
+			margin: 20% auto;
+			padding: 20px;
+			border: 1px solid #ddd;
+			width: 50%;
+			text-align: center;
+		}
+
+		button {
+			margin: 5px;
+			padding: 5px 10px;
+			cursor: pointer;
+		}
+
+		.hidden-cell {
+			visibility: hidden;
+		}
+
+		/* 删除按钮样式 */
+		.delete-btn {
+			background-color: transparent;
+			/* 将背景颜色设置为透明 */
+			color: #f44336;
+			/* 设置文本颜色为红色 */
+			border: none;
+			padding: 5px 10px;
+			cursor: pointer;
+			border-radius: 5px;
+			transition: background-color 0.3s ease, color 0.3s ease;
+		}
+
+		/* 鼠标悬停时的删除按钮样式 */
+		.delete-btn:hover {
+			background-color: rgba(211, 47, 47, 0.3);
+			color: #fff;
+			/* 悬停时也可修改文字颜色 */
+		}
+
+		/* 删除模态框 */
+		#deleteModal {
+			display: none;
+			position: fixed;
+			z-index: 1;
+			left: 0;
+			top: 0;
+			width: 100%;
+			height: 100%;
+			background-color: rgba(0, 0, 0, 0.5);
+			/* 背景遮罩 */
+		}
+
+		/* 删除模态框内容 */
+		.modal-content {
+			background-color: white;
+			margin: 20% auto;
+			padding: 20px;
+			border: 1px solid #ddd;
+			width: 50%;
+			text-align: center;
+			border-radius: 5px;
+			box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+			animation: zoomIn 0.3s ease;
+		}
+
+		/* 动画效果 - 弹出模态框时缩放 */
+		@keyframes zoomIn {
+			from {
+				transform: scale(0.5);
+			}
+
+			to {
+				transform: scale(1);
+			}
+		}
+
+		/* 修改删除按钮图标样式 */
+		.delete-btn i {
+			color: red;
+			/* 修改图标颜色为红色 */
+			font-size: 20px;
+			/* 修改图标大小为20像素 */
+			/* 添加其他样式属性 */
+		}
+
+		/* 修改确认按钮样式 */
+		#confirmDeleteBtn {
+			background-color: #f44336;
+			/* 设置背景颜色为红色 */
+			color: #fff;
+			/* 设置文本颜色为白色 */
+			border: none;
+			padding: 5px 10px;
+			cursor: pointer;
+			border-radius: 5px;
+			transition: background-color 0.3s ease, color 0.3s ease;
+			margin-right: 10px;
+			/* 可以添加右边距，使按钮之间有一些间隔 */
+		}
+
+		/* 鼠标悬停时的确认按钮样式 */
+		#confirmDeleteBtn:hover {
+			background-color: #d32f2f;
+			/* 鼠标悬停时的背景颜色 */
+		}
+
+		/* 修改取消按钮样式 */
+		#cancelDeleteBtn {
+			background-color: #ccc;
+			/* 设置背景颜色为灰色 */
+			color: #000;
+			/* 设置文本颜色为黑色 */
+			border: none;
+			padding: 5px 10px;
+			cursor: pointer;
+			border-radius: 5px;
+			transition: background-color 0.3s ease, color 0.3s ease;
+		}
+
+		/* 鼠标悬停时的取消按钮样式 */
+		#cancelDeleteBtn:hover {
+			background-color: #999;
+			/* 鼠标悬停时的背景颜色 */
+			color: #fff;
+			/* 鼠标悬停时的文本颜色 */
+		}
+
+		/* 修改新增按钮样式 */
+		#addArticleButton {
+			background-color: #4caf50;
+			/* 设置背景颜色为绿色 */
+			color: #fff;
+			/* 设置文本颜色为白色 */
+			border: none;
+			padding: 5px 10px;
+			cursor: pointer;
+			border-radius: 5px;
+			transition: background-color 0.3s ease, color 0.3s ease;
+		}
+
+		/* 鼠标悬停时的新增按钮样式 */
+		#addArticleButton:hover {
+			background-color: #45a049;
+			/* 鼠标悬停时的背景颜色 */
+		}
+
+		/* 使用Font Awesome图标替换文本 */
+		#addArticleButton::before {
+			content: "\f067";
+			/* 使用Font Awesome中的"fas fa-plus"图标 */
+			font-family: 'Font Awesome 5 Free';
+			margin-right: 5px;
+			/* 可以添加右边距，使图标与文本之间有一些间隔 */
+		}
+
+		.article-content-container {
+			max-height: 300px;
+			/* 设置最大高度，根据需要进行调整 */
+			overflow-y: auto;
+			/* 启用垂直滚动条 */
+			padding: 10px;
+			/* 可选的内边距，根据需要进行调整 */
+			border: 1px solid #ddd;
+			/* 可选的边框样式，根据需要进行调整 */
+		}
+	</style>
+
+	<meta name="description" content="" />
+	<meta name="keywords" content="" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<!-- Favorite Icons -->
+	<link rel="icon" href="../../img/common/favicon/favicon.html" type="image/x-icon" />
+	<link rel="apple-touch-icon-precomposed" sizes="144x144"
+		href="../../img/common/favicon/apple-touch-icon-144x144-precomposed.html">
+	<link rel="apple-touch-icon-precomposed" sizes="72x72"
+		href="../../img/common/favicon/apple-touch-icon-72x72-precomposed.html">
+	<link rel="apple-touch-icon-precomposed" href="../../img/common/favicon/apple-touch-icon-precomposed.html">
+	<!-- // Favorite Icons -->
+
+	<!--<link href='http://fonts.useso.com/css?family=Open+Sans:300,400,600,700' rel='stylesheet' type='text/css'>-->
+
+	<!-- GENERAL CSS FILES -->
+	<link rel="stylesheet" href="../../css/common/minified.css">
+	<!-- // GENERAL CSS FILES -->
+
+	<!--[if IE 8]>
+		<script src="js/respond.min.js"></script>
+		<script src="js/selectivizr-min.js"></script>
+	<![endif]-->
+
+	<script src="../../js/common/jquery.min.js"></script>
+
+	<script>window.jQuery || document.write('<script src="../../js/common/jquery.min.js"><\/script>');</script>
+	<script src="../../js/common/modernizr.min.js"></script>
+	<!-- PARTICULAR PAGES CSS FILES -->
+	<link rel="stylesheet" href="../../css/common/innerpage.css">
+	<link rel="stylesheet" href="../../css/common/owl.carousel.css">
+	<link rel="stylesheet" href="../../css/common/owl.theme.css">
+	<!-- // PARTICULAR PAGES CSS FILES -->
+	<link rel="stylesheet" href="../../css/common/responsive.css">
+	<style>
+		.logo img {
+			max-width: 200px;
+			max-height: 150px;
+		}
+
+		.user-menu a img {
+			max-width: 20px;
+			max-height: 20px;
+		}
+
+		ul.user-menu > li > a {
+			color: #ef7700;
+			font-weight: bold;
+			font-size: 25px;
+		}
+
+		a:hover {
+			color: #0150ed;
+		}
+	</style>
+</head>
+
+<body>
+
+	<!-- PAGE WRAPPER -->
+	<div id="page-wrapper">
+
+		<!-- SITE HEADER -->
+		<header id="site-header" role="banner">
+			<!-- HEADER TOP -->
+			<div class="header-top">
+				<div class="container">
+					<div class="row">
+						<div class="col-xs-12 col-sm-6 col-md-7">
+							<!-- CONTACT INFO -->
+							<div class="contact-info">
+								<i class="iconfont-headphones round-icon"></i>
+								<strong>(03)425-1108</strong>
+								<span>(Mon- Fri: 09.00 - 21.00)</span>
+							</div>
+							<!-- // CONTACT INFO -->
+						</div>
+						<div class="col-xs-12 col-sm-6 col-md-5">
+							<ul class="actions unstyled clearfix">
+								<li>
+									<!-- SEARCH BOX -->
+									<div class="search-box">
+										<form action="#" method="post">
+											<div class="input-iconed prepend">
+												<button class="input-icon"><i class="iconfont-search"></i></button>
+												<label for="input-search" class="placeholder">Search here…</label>
+												<input type="text" name="q" id="input-search"
+													class="round-input full-width" required />
+											</div>
+										</form>
+									</div>
+									<!-- // SEARCH BOX -->
+								</li>
+								<li data-toggle="sub-header" data-target="#sub-social">
+									<!-- SOCIAL ICONS -->
+									<a href="javascript:void(0);" id="social-icons">
+										<i class="iconfont-share round-icon"></i>
+									</a>
+	
+									<div id="sub-social" class="sub-header">
+										<ul class="social-list unstyled text-center">
+											<li><a href="#"><i class="iconfont-facebook round-icon"></i></a></li>
+											<li><a href="#"><i class="iconfont-twitter round-icon"></i></a></li>
+											<li><a href="#"><i class="iconfont-google-plus round-icon"></i></a></li>
+											<li><a href="#"><i class="iconfont-pinterest round-icon"></i></a></li>
+											<li><a href="#"><i class="iconfont-rss round-icon"></i></a></li>
+										</ul>
+									</div>
+									<!-- // SOCIAL ICONS -->
+								</li>
+								<li data-toggle="sub-header" data-target="#sub-cart">
+									<!-- SHOPPING CART -->
+									<a href="javascript:void(0);" id="total-cart">
+										<i class="iconfont-shopping-cart round-icon"></i>
+									</a>
+	
+									<div id="sub-cart" class="sub-header">
+										<div class="cart-header">
+											<span>Your cart is currently empty.</span>
+											<small><a href="/BuyGo/front_end/pages/member/opa/cart/cart.html">(See All)</a></small>
+										</div>
+										<!-- <ul class="cart-items product-medialist unstyled clearfix"></ul> -->
+										<ul class="s-cart-items product-medialist unstyled clearfix"></ul>
+										<div class="cart-footer">
+											<!-- <div class="cart-total clearfix">
+												<span class="pull-left uppercase">Total</span>
+												<span class="pull-right total">$ 0</span>
+											</div> -->
+											<div class="s-cart-total clearfix">
+												<span class="pull-left uppercase">Total</span>
+												<span class="pull-right total">$ 0</span>
+											</div>
+											<div class="text-right">
+												<a href="/BuyGo/front_end/pages/member/opa/cart/cart.html"
+													class="btn btn-default btn-round view-cart">查看購物車</a>
+											</div>
+										</div>
+									</div>
+									<!-- // SHOPPING CART -->
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+	
+				<!-- ADD TO CART MESSAGE -->
+				<div class="cart-notification">
+					<ul class="unstyled"></ul>
+				</div>
+				<!-- // ADD TO CART MESSAGE -->
+			</div>
+			<!-- // HEADER TOP -->
+			<!-- MAIN HEADER -->
+			<div class="main-header-wrapper">
+				<div class="container">
+					<div class="main-header">
+						<!-- CURRENCY / LANGUAGE / USER MENU -->
+						<div class="actions">
+							<div class="center-xs">
+	
+							</div>
+							<div class="clearfix"></div><br>
+							<!-- USER RELATED MENU -->
+							<nav id="tiny-menu" class="clearfix">
+								<ul class="user-menu">
+									<li><a href="pages/member/myaccount.html" class="personal">我的帳戶<img
+												src="/BuyGo/front_end/img/common/head.png"></a>
+									</li>
+									<!-- <li><a href="pages/member/opa/cart/cart.html" class="paymoney">結帳<img
+												src="../front_end/img/common/paymoney.png"></a></li> -->
+									<li id="logInAndLogOut"><a href="pages/member/login.html" class="loginOut">登入<img
+												src="/BuyGo/front_end/img/common/login.png"></a>
+									</li>
+								</ul><br>
+							</nav>
+							<!-- // USER RELATED MENU -->
+						</div>
+						<!-- // CURRENCY / LANGUAGE / USER MENU -->
+						<!-- SITE LOGO -->
+						<div class="logo-wrapper">
+							<a href="/BuyGo/front_end/index.html" class="logo">
+								<img src="/BuyGo/front_end/img/common/buygo.png" />
+							</a>
+						</div>
+						<!-- // SITE LOGO -->
+						<!-- SITE NAVIGATION MENU -->
+						<nav id="site-menu" role="navigation">
+							<ul class="main-menu hidden-sm hidden-xs">
+								<li class="active">
+									<a href="/BuyGo/front_end/index.html">首頁</a>
+								</li>
+								<li>
+									<a href="/BuyGo/front_end/pages/guest/pa/prods/prods.html">一般賣場</a>
+								</li>
+								<li>
+									<a href="/BuyGo/front_end/pages/guest/opa/prods/prods.html">官方賣場</a>
+								</li>
+								<li>
+									<a href="/BuyGo/front_end/pages/guest/gpa/prods/prods.html">揪團商場</a>
+								</li>
+								<li>
+									<a href="/BuyGo/front_end/pages/Articles.html">論壇</a>
+								</li>
+							</ul>
+	
+							<!-- MOBILE MENU -->
+							<div id="mobile-menu" class="dl-menuwrapper visible-xs visible-sm">
+								<button class="dl-trigger"><i class="iconfont-reorder round-icon"></i></button>
+	
+							</div>
+							<!-- // MOBILE MENU -->
+	
+						</nav>
+						<!-- // SITE NAVIGATION MENU -->
+					</div>
+				</div>
+			</div>
+			<!-- // MAIN HEADER -->
+		</header>
+		<!-- // SITE HEADER -->
+
+		<!-- BREADCRUMB -->
+		<div class="breadcrumb-container">
+			<div class="container">
+				<div class="relative">
+					<ul class="bc unstyled clearfix">
+						<li><a href="/BuyGo/front_end/index.html">首頁</a></li>
+						<li class="active">我的帳戶</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<!-- // BREADCRUMB -->
+
+		<!-- SITE MAIN CONTENT -->
+		<main id="main-content" role="main">
+
+			<div class="container">
+				<div class="row">
+
+					<div class="m-t-b clearfix">
+						<!-- SIDEBAR -->
+						<aside class="col-xs-12 col-sm-4 col-md-3">
+							<section class="side-section">
+								<h3 class="uppercase text-bold"><span class="text-xs">我的帳戶</span></h3>
+								
+								<ul class="nav nav-tabs nav-stacked">
+									<li><a href="/BuyGo/front_end/pages/member/EditMember.html">個人資料</a></li>
+									<li><a href="/BuyGo/front_end/pages/member/pa/order/ListOrders.html">訂單追蹤</a></li>
+									<li><a href="/BuyGo/front_end/pages/member/pa/req/MemberAllPaReq.html">一般代購委託單查詢</a></li>
+									<li><a href="/BuyGo/front_end/pages/member/opa/add_request.html">官方平台委託單申請</a></li>
+									<li><a href="/BuyGo/front_end/pages/member/opa/request.html">官方平台委託單查詢</a></li>
+									<li><a href="/BuyGo/front_end/pages/member/mycoupon.html">優惠券</a></li>
+									<li><a href="/BuyGo/front_end/pages/member/wallet.html">平台錢包</a></li>
+									<li><a href="/BuyGo/front_end/pages/member/chatroom.html">聊天室</a></li>
+									<li><a href="/BuyGo/front_end/pages/member/blacklist.html">黑名單</a></li>
+									<li><a href="/BuyGo/front_end/pages/member/myCollListforum.html">我的收藏文章</a></li>
+									<li><a href="/BuyGo/front_end/pages/member/myforum.html">我的文章</a></li>
+									<br>
+									<li><a href="/BuyGo/front_end/pages/member/myShop.html">我的賣場</a></li>
+								</ul>
+							</section>
+
+							<!-- PROMO -->
+							<!-- <div class="promo inverse-background"
+								style="background: url('../../img/common/demo/Barn-Dress-Girl_t.jpg') no-repeat; background-size: auto 100%;">
+								<div class="inner text-center np">
+									<div class="ribbon">
+										<h6 class="nmb">New Arrivals</h6>
+										<h5 class="text-semibold uppercase nmb">Leather Fashion</h5>
+										<div class="space10"></div>
+										<a href="../../pages/guest/products.html" class="with-icon prepend-icon"><i
+												class="iconfont-caret-right"></i><span> Shop Now</span></a>
+									</div>
+								</div>
+							</div> -->
+							<!-- // PROMO -->
+						</aside>
+						<!-- // SIDEBAR -->
+
+						<div class="m-t-lg clearfix">
+							<div class="row">
+								<div class="col-xs-12 col-sm-6" style="width: 74%;">
+									<h3 class="uppercase text-bold"><span class="text-xs">我的收藏文章</span></h3>
+									<!--我的收藏文章列表-->
+									<table style="width: 100%;">
+										<thead>
+											<tr>
+												<th class="hidden-cell" style="display: none;">文章編號</th>
+												<th class="hidden-cell" style="display: none;">會員編號</th>
+												<th style="width: 20%; text-align: center;font-weight: bold;">文章標題</th>
+												<!-- 设置宽度为20%（可以根据需要调整） -->
+												<th style="width: 30%;text-align: center;font-weight: bold;">文章內容</th>
+												<!-- 设置宽度为30%（可以根据需要调整） -->
+												<th class="hidden-cell" style="display: none;">文章狀態</th>
+												<th style="width: 10%; text-align: center;font-weight: bold;">發文時間</th>
+												<!-- 设置宽度为10%（可以根据需要调整） -->
+												<th class="hidden-cell" style="display: none;">編輯時間</th>
+												<th class="hidden-cell"
+													style="width: 10%; text-align: center; white-space: nowrap;font-weight: bold; display: none;">
+													文章按讚數
+												</th>
+												<!-- 设置宽度为10%（可以根据需要调整） -->
+												<th class="hidden-cell"
+													style="width: 10%;text-align: center; white-space: nowrap;font-weight: bold; display: none;">
+													文章倒讚數
+												</th>
+												<!-- 设置宽度为10%（可以根据需要调整） -->
+												<th style="width: 5%;text-align: center;font-weight: bold;">移除</th>
+												<!-- 设置宽度为5%（可以根据需要调整） -->
+												<!-- 新增删除按钮列 -->
+												<div id="deleteModal" class="modal">
+													<div class="modal-content">
+														<p>確定要刪除這篇文章嗎？</p>
+														<button id="confirmDeleteBtn"><i
+																class="fas fa-check"></i></button>
+														<button id="cancelDeleteBtn"><i
+																class="fas fa-times"></i></button>
+													</div>
+												</div>
+											</tr>
+										</thead>
+										<tbody id="articleList"></tbody>
+									</table>
+									<button id="addArticleButton">新增文章</button>
+
+
+								</div>
+							</div>
+						</div>
+
+					</div>
+
+				</div>
+			</div>
+
+		</main>
+		<!-- // SITE MAIN CONTENT -->
+
+		<!-- SITE FOOTER -->
+		<footer class="page-footer">
+
+			<!-- WIDGET AREA -->
+			<div class="widgets">
+
+				<!-- FIRST ROW -->
+
+				<!-- // FIRST ROW -->
+
+				<!-- SECOND ROW -->
+				<div class="section">
+					<div class="container">
+						<div class="row">
+
+							<div class="col-xs-12 col-sm-12 col-md-5">
+								<section class="widget widget-menu">
+									<h5 class="widget-title">Contact info</h5>
+									<div class="widget-content">
+										<ul class="menu iconed-list unstyled">
+											<li><span class="list-icon"><i
+														class="round-icon iconfont-map-marker"></i></span>
+												<div class="list-content">中壢區復興路 46 號緯育 TibaMe 附設中壢職訓中心 9 樓</div>
+											</li>
+											<li><span class="list-icon"><i class="round-icon iconfont-phone"></i></span>
+												<div class="list-content">(03) 425-1108</div>
+											</li>
+											<li><span class="list-icon"><i
+														class="round-icon iconfont-envelope-alt"></i></span>
+												<div class="list-content">tibamecha102g6@gmail.com</div>
+											</li>
+										</ul>
+									</div>
+								</section>
+							</div>
+
+							<div class="col-xs-12 col-sm-12 col-md-6">
+								<section class="widget widget-ads">
+									<div class="widget-content">
+										<div class="center-xs">
+											<div class="ads">
+												<a href="#"> <img src="../../../img/common/demo/images-footer.jpg"
+														alt="" />
+												</a>
+											</div>
+										</div>
+									</div>
+								</section>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- // SECOND ROW -->
+
+			</div>
+			<!-- // WIDGET AREA -->
+
+			<div class="footer-sub">
+				<div class="container">
+					<div class="row">
+						<div class="col-xs-12 col-sm-6">
+							<div class="footer-links center-xs clearfix">
+								<ul class="unstyled">
+									<li><a href="/BuyGo/front_end/pages/guest/selectFirstFAQ.html">FAQ</a></li>
+								</ul>
+							</div>
+							<div class="space10"></div>
+							<div class="copyright center-xs">
+								<p>(c) 2023</p>
+							</div>
+						</div>
+
+						<div class="space40 visible-xs"></div>
+
+
+					</div>
+				</div>
+			</div>
+
+		</footer>
+		<!-- // SITE FOOTER -->
+
+	</div>
+	<!-- // PAGE WRAPPER -->
+
+	<!-- Essential Javascripts -->
+	<script src="../../js/common/minified.js"></script>
+	<!-- // Essential Javascripts -->
+
+	<!-- Particular Page Javascripts -->
+	<script src="../../js/common/products.js"></script>
+	<script src="../../js/common/owl.carousel.js"></script>
+	<script src="../../js/common/contact.js"></script>
+	<!--<script src="http://maps.googleapis.com/maps/api/js?sensor=false" type="text/javascript"></script>-->
+	<!-- <script src="../../js/common/gmap3.min.js"></script> -->
+	<!-- // Particular Page Javascripts -->
+	<script src="../../js/login.js"></script>
+
+
+</body>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://kit.fontawesome.com/f8d426f7f0.js" crossorigin="anonymous"></script>
+<script src="/BuyGo/front_end/js/login.js"></script>
+<script>
+	checkLoginStatusShowMemberAcct(); // 檢查客戶帳號是否登入，修改頁面右上方Log In/Log Out按鈕，顯示登入者帳號名稱
+
+	const ForumArticle_el = $("#articleList");
+
+	function fetchForumArticles() {
+		fetch('/BuyGo/needLoginApi/articleCollLis/loadByMemberNo', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json;charset=UTF-8',
+				'Accept': 'application/json;charset=UTF-8'
+			},
+		})
+			.then(response => {
+				if (response.status === 401) { // 客戶未登入，執行頁面重定向到登入頁
+					notLoggedInAction();
+				} else if (response.ok) { // 通常 200
+					// 請求成功，顯示燈箱
+					return response.json();
+				} else {
+					alert("錯誤狀態:" + response.status);
+					return;
+				}
+			})
+			.then(data => processForumArticles(data))
+			.catch(error => console.error('Error fetching forum articles:', error));
+	}
+
+	function processForumArticles(articles) {
+		ForumArticle_el.empty();
+		console.log(articles);
+
+		articles.forEach(forum => {
+			const {
+				articleNo,
+				memberNo,
+				articleContent,
+				articleDislike,
+				articlePublish,
+				articleStatus,
+				articleTitle,
+				articleUpdate,
+				articleLike
+
+			} = forum;
+
+			const formattedPublishDate = new Date(articlePublish).toLocaleString();
+			// const { articleTitle } = forumArticle;
+			// const { articleContent } = forumArticle;
+			// const { articlePublish } = forumArticle;
+			// const formattedPublishDate = new Date(articlePublish).toLocaleString();
+			// const { articleDislike } = forumArticle;
+			// const { articleLike } = forumArticle;
+			// const { articleStatus } = forumArticle;
+			// const { articleUpdate } = forumArticle;
+
+
+
+			const articleRow = `
+                    <tr>
+                        <td class="hidden-cell article-no" style="display: none;" name="" value="${articleNo}">${articleNo}</td>
+                        <td class="hidden-cell member-no" style="display: none;">${memberNo}</td>
+                        <td>${articleTitle}</td>
+                        <td>
+  						<div class="article-content-container">
+    					${articleContent}
+  						</div>
+						</td>
+                        <td class="hidden-cell" style="display: none;">${articleStatus}</td>
+                        <td style="white-space: nowrap;">${formattedPublishDate}</td>
+                        <td class="hidden-cell" style="display: none;">${articleUpdate}</td>
+                        <td class="hidden-cell" style="display: none;">${articleLike !== undefined ? articleLike : 0}</td>
+                        <td class="hidden-cell" style="display: none;">${articleDislike !== undefined ? articleDislike : 0}</td>
+                        <td><button class="delete-btn"><i class="fas fa-times"></i></button></td> <!-- 移除按钮 -->
+                    </tr>
+                `;
+
+			ForumArticle_el.append(articleRow);
+		});
+
+
+
+
+		//===================================移除按鈕===============================================================================================
+		$(".delete-btn").click(function () {
+			const articleNo = $(this).closest("tr").find("td.article-no").text(); // 取得文章編號
+			const memberNo = $(this).closest("tr").find("td.member-no").text(); // 取得發文者的會員編號
+			console.log("移除articleNo：" + articleNo);
+			console.log("移除memberNo：" + memberNo);
+			const modal = $("#deleteModal");
+			modal.show();
+
+			// 確認刪除按鈕點擊事件
+			$("#confirmDeleteBtn").off().click(function () {
+
+				modal.hide();
+				deleteArticle(articleNo);
+
+				// 從表格中刪除對應行
+				const row = $(this).closest("tr");
+				row.remove();
+
+				// 呼叫函式 fetchForumArticles，將當前畫面動態刷新
+				fetchForumArticles();
+
+			});
+
+			// 取消刪除按鈕點擊事件
+			$("#cancelDeleteBtn").off().click(function () {
+				modal.hide();
+			});
+		});
+	}
+
+	// 向後端發送删除请求
+	function deleteArticle(articleNo) {
+		fetch('/BuyGo/api/articleCollList/remove', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json;charset=UTF-8',
+				'Accept': 'application/json;charset=UTF-8'
+			},
+			body: JSON.stringify({
+				articleNo: articleNo,
+
+			})
+		})
+			.then(response => response.json())
+			.then(data => {
+				// 在這裡處理後端返回的數據
+				console.log(data);
+
+			})
+			.catch(error => {
+				console.error("Error:", error);
+				console.log("移除memberNo：" + memberNo);
+			});
+
+	}
+	//===================================前畫面動態刷新===================
+	$(document).ready(() => {
+		// 呼叫函式 fetchForumArticle，將當前畫面動態刷新
+		fetchForumArticles();
+
+		// 新增文章按鈕的點擊事件
+		$("#addArticleButton").click(() => {
+			// 跳轉至指定的連結
+			window.location.href = "http://localhost:8081/BuyGo/front_end/pages/AddArticles.html";
+		});
+	});
+</script>
+</body>
+
+</html>
+
+</html>

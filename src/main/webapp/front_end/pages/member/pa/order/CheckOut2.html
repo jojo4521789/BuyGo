@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>結帳</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+
+<body>
+    <h1>購物車結帳</h1>
+
+    <!-- 购物车明细 -->
+    <div id="cart-details">
+        <h2>購物車明細</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>商品名稱</th>
+                    <th>數量</th>
+                    <th>價格</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- 这里将购物车中的明细动态显示 -->
+                <tr>
+                    <td>商品1</td>
+                    <td>3</td>
+                    <td>$20.00</td>
+                </tr>
+                <tr>
+                    <td>商品2</td>
+                    <td>1</td>
+                    <td>$15.00</td>
+                </tr>
+                <!-- 可以根据购物车内容添加更多行 -->
+            </tbody>
+        </table>
+    </div>
+
+    <!-- 收件人信息 -->
+    <div id="shipping-info">
+        <h2>收件人信息</h2>
+        <form>
+            <label for="recipient-name">收件人名稱</label>
+            <input type="text" id="recipient-name" name="recipient-name" required><br>
+
+            <label for="recipient-address">收件人地址</label>
+            <input type="text" id="recipient-address" name="recipient-address" required><br>
+
+            <label for="recipient-phone">收件人電話</label>
+            <input type="tel" id="recipient-phone" name="recipient-phone" required><br>
+
+            <label for="payment-method">付款方式</label>
+            <select id="payment-method" name="payment-method" required>
+                <option value="credit-card">信用卡</option>
+                <option value="paypal">PayPal</option>
+                <!-- 添加更多付款方式选项 -->
+            </select><br>
+        </form>
+    </div>
+
+    <!-- 总金额 -->
+    <div id="total-amount">
+        <p><strong>總金額: <span id="total-price">0</span></strong></p>
+    </div>
+
+    <!-- 结账按钮和返回修改按钮 -->
+    <div id="checkout-buttons">
+        <button onclick="returnToCart()">返回修改購物車</button>
+        <button id="checkout">確認結帳</button>
+    </div>
+
+    <script>
+        function calculateTotal() {
+            // 获取所有商品行
+            const rows = $("#cart-details tbody tr");
+
+            let total = 0;
+
+            // 遍历每一行，计算小计并累加到总金额
+            rows.each(function () {
+                const price = parseFloat($(this).find("td:nth-child(3)").text().replace("$", ""));
+                const quantity = parseInt($(this).find("td:nth-child(2)").text());
+                total += price * quantity;
+            });
+
+            // 更新总金额显示
+            $("#total-price").text("$" + total.toFixed(2));
+        }
+
+        // 初始化时计算一次总金额
+        calculateTotal();
+
+
+        let newPaSoNo;
+
+        // 按下結帳，產生訂單
+        $('#checkout').click(function () {
+
+            const paTotalAmount = $("#total-price").text().substring(1, $("#total-price").text().length);
+            const paRecName = $("#recipient-name").val();
+            const paSendAddress = $("#recipient-address").val();
+            const paRecTel = $("#recipient-phone").val();
+            const paDeliverMethod = "711店到店"
+
+            let paSoData = {
+                action: "aaa",
+                paSo: {
+                    paTotalAmount: 700,
+                    paRecName: paRecName,
+                    paSendAddress: paSendAddress,
+                    paRecTel: paRecTel,
+                    paDeliverMethod: paDeliverMethod
+                },
+                paSoDetails: [
+                    {
+                        paProdNo: 1,
+                        paProdPrice: 200,
+                        paOrdQty: 2
+                    },
+                    {
+                        paProdNo: 2,
+                        paProdPrice: 300,
+                        paOrdQty: 1
+                    }
+                ]
+            }
+
+            console.log(paSoData);
+
+            fetch('/BuyGo/needLoginApi/newOrder', {
+                method: 'POST',
+                body: JSON.stringify(paSoData),
+                headers: {
+                    'Content-Type': 'application/json;charset=utf-8'
+                }
+            })
+                .then(response => response.json())
+                .then(data => {
+                    newPaSoNo = data;
+                    alert('訂單已產生！訂單ID = ' + data + "請進行付款作業");
+                    cart = []; // 清空購物車
+                    EcPay(); // 進行綠界支付
+                })
+                .catch(error => {
+                    console.error('錯誤：', error);
+                });
+
+        });
+
+
+        // 綠界支付
+        const full = location.protocol + '//' + location.host;
+        let clientBackURL = full + "/BuyGo/front_end/pages/member/pa/ListOrders.html";
+        function EcPay() {
+            let AioCheckOutALL = {
+                TotalAmount: 700,
+                TradeDesc: "交易描述",
+                ItemName: "商品名稱",
+                ClientBackURL: ,
+                CustomField1: "paCheckout", // 傳到後端的action
+                CustomField2: newPaSoNo, // 付款成功後要更新的paSoNo
+
+            }
+
+            console.log(AioCheckOutALL);
+
+            fetch('/BuyGo/ecpay/checkout', {
+                method: 'POST',
+                body: JSON.stringify(AioCheckOutALL),
+                headers: {
+                    'Content-Type': 'application/json;charset=utf-8'
+                }
+            })
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data);
+                    window.open(data); //開啟綠界付款網址
+                })
+                .catch(error => {
+                    alert("付款發生錯誤");
+                    console.error('付款錯誤：', error);
+                });
+        }
+
+        function checkAllData() {
+            let msg = "";
+            let billRequired_els = document.querySelectorAll(".bill-required");
+            let shipRequired_els = document.querySelectorAll(".ship-required");
+            for (let billRequired_el of billRequired_els) {
+                if (billRequired_el.value === "") {
+                    msg += "帳單資訊未填寫完整\n";
+                    break;
+                }
+            }
+            for (let shipRequired_el of shipRequired_els) {
+                if (shipRequired_el.value === "") {
+                    msg += "運送資訊未填寫完整\n";
+                    break;
+                }
+            }
+            if ($('input[name=deliveryMethod]:checked').length === 0) {
+                msg += "未選擇運送方式\n";
+            }
+            if ($('input[name=paymethod]:checked').length === 0) {
+                msg += "未選擇付款方式";
+            }
+            if (msg !== "") {
+                Swal.fire(msg);
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+    </script>
+</body>
+
+</html>

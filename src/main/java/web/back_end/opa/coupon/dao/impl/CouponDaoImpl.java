@@ -72,4 +72,15 @@ public class CouponDaoImpl implements CouponDao{
 		}
 	}
 
+	@Override
+	public List<Coupon> selectByOpaCouponNameList(String input) {
+		try {
+			Query<Coupon> query = getSession().createQuery("FROM Coupon WHERE opaCouponName LIKE :opaCouponName", Coupon.class).setParameter("opaCouponName", "%" + input + "%");
+			return query.getResultList();
+		} catch (NoResultException e) {
+//			e.printStackTrace();
+			return null;
+		}
+	}
+
 }

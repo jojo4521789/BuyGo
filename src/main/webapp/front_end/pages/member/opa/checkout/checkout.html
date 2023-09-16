@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<!--[if IE 7 ]><html class="ie ie7 lte9 lte8 lte7" lang="en-US"><![endif]-->
+<!--[if IE 8]><html class="ie ie8 lte9 lte8" lang="en-US">	<![endif]-->
+<!--[if IE 9]><html class="ie ie9 lte9" lang="en-US"><![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!-->
+<html class="noIE" lang="zh-Hant"><!--<![endif]-->
+
+<head>
+	<meta charset="UTF-8" />
+	<title>BuyGo - 結帳</title>
+	<meta name="description" content="" />
+	<meta name="keywords" content="" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<!-- Favorite Icons -->
+	<link rel="icon" href="../../../../img/common/favicon/favicon.html" type="image/x-icon" />
+	<link rel="apple-touch-icon-precomposed" sizes="144x144"
+		href="../../../../img/common/favicon/apple-touch-icon-144x144-precomposed.html">
+	<link rel="apple-touch-icon-precomposed" sizes="72x72"
+		href="../../../../img/common/favicon/apple-touch-icon-72x72-precomposed.html">
+	<link rel="apple-touch-icon-precomposed" href="../../../../img/common/favicon/apple-touch-icon-precomposed.html">
+	<!-- // Favorite Icons -->
+
+	<!--<link href='http://fonts.useso.com/css?family=Open+Sans:300,400,600,700' rel='stylesheet' type='text/css'>-->
+
+	<!-- GENERAL CSS FILES -->
+	<link rel="stylesheet" href="../../../../css/common/minified.css">
+	<!-- // GENERAL CSS FILES -->
+
+	<!--[if IE 8]>
+		<script src="js/respond.min.js"></script>
+		<script src="js/selectivizr-min.js"></script>
+	<![endif]-->
+	<!--
+	<script src="js/jquery.min.js"></script>
+	-->
+	<script>window.jQuery || document.write('<script src="../../../../js/common/jquery.min.js"><\/script>');</script>
+	<script src="../../../../js/common/modernizr.min.js"></script>
+	<!-- PARTICULAR PAGES CSS FILES -->
+	<link rel="stylesheet" href="../../../../css/common/innerpage.css">
+	<!-- // PARTICULAR PAGES CSS FILES -->
+	<link rel="stylesheet" href="../../../../css/common/responsive.css">
+
+	<style>
+		.products {
+			width: 100%;
+			/* font-family: Raleway; */
+		}
+
+		.product {
+			display: inline-block;
+			width: calc(24% - 13px);
+			margin: 10px 10px 30px 10px;
+			vertical-align: top;
+		}
+
+		.product img {
+			display: block;
+			margin: 0 auto;
+			width: auto;
+			height: 200px;
+			max-width: calc(100% - 20px);
+			/* background-cover: fit; */
+			box-shadow: 0px 0px 7px 0px rgba(0, 0, 0, 0.8);
+			border-radius: 2px;
+		}
+
+		.product-content {
+			text-align: center;
+		}
+
+		.product h3 {
+			font-size: 20px;
+			font-weight: 600;
+			margin: 10px 0 0 0;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			white-space: nowrap;
+		}
+
+		.product h3 small {
+			display: block;
+			font-size: 16px;
+			font-weight: 400;
+			font-style: italic;
+			margin: 7px 0 0 0;
+		}
+
+		.product .product-text {
+			margin: 7px 0 0 0;
+			color: #777;
+		}
+
+		.product .price {
+			font-family: sans-serif;
+			font-size: 16px;
+			font-weight: 700;
+		}
+
+		.product .genre {
+			font-size: 14px;
+		}
+
+
+		@media screen and (max-width:1150px) {
+			.product {
+				width: calc(33% - 23px);
+			}
+		}
+
+		@media screen and (max-width:700px) {
+			.product {
+				width: calc(50% - 43px);
+			}
+		}
+
+		@media screen and (max-width:400px) {
+			.product {
+				width: 100%;
+			}
+		}
+
+		/* TABLE VIEW */
+		@media screen and (min-width:401px) {
+			.settings {
+				display: block;
+			}
+
+			#view {
+				display: inline;
+			}
+
+			.products-table .product {
+				display: block;
+				width: auto;
+				margin: 10px 10px 30px 10px;
+			}
+
+			.products-table .product .product-img {
+				display: inline-block;
+				margin: 0;
+				width: 120px;
+				height: 120px;
+				vertical-align: middle;
+			}
+
+			.products-table .product img {
+				width: auto;
+				height: 120px;
+				max-width: 120px;
+			}
+
+			.products-table .product-content {
+				text-align: left;
+				display: inline-block;
+				margin-left: 20px;
+				vertical-align: middle;
+				width: calc(100% - 145px);
+			}
+
+			.products-table .product h3 {
+				margin: 0;
+			}
+
+			.logo img {
+				max-width: 200px;
+				max-height: 150px;
+			}
+
+			.user-menu a img {
+				max-width: 20px;
+				max-height: 20px;
+			}
+
+			ul.user_menu>ul>a {
+				color: #ef7700;
+				font-weight: bold;
+				font-size: 25px;
+			}
+
+			a:hover {
+				color: #0150ed;
+			}
+		}
+	</style>
+</head>
+
+<body>
+
+	<!-- PAGE WRAPPER -->
+	<div id="page-wrapper">
+
+		<!-- SITE HEADER -->
+		<header id="site-header" role="banner">
+			<!-- HEADER TOP -->
+			<div class="header-top">
+				<div class="container">
+					<div class="row">
+						<div class="col-xs-12 col-sm-6 col-md-7">
+							<!-- CONTACT INFO -->
+							<div class="contact-info">
+								<i class="iconfont-headphones round-icon"></i>
+								<strong>(03)425-1108</strong>
+								<span>(Mon- Fri: 09.00 - 21.00)</span>
+							</div>
+							<!-- // CONTACT INFO -->
+						</div>
+						<div class="col-xs-12 col-sm-6 col-md-5">
+							<ul class="actions unstyled clearfix">
+								<li>
+									<!-- SEARCH BOX -->
+									<div class="search-box">
+										<form action="#" method="post">
+											<div class="input-iconed prepend">
+												<button class="input-icon"><i class="iconfont-search"></i></button>
+												<label for="input-search" class="placeholder">Search here…</label>
+												<input type="text" name="q" id="input-search"
+													class="round-input full-width" required />
+											</div>
+										</form>
+									</div>
+									<!-- // SEARCH BOX -->
+								</li>
+								<li data-toggle="sub-header" data-target="#sub-social">
+									<!-- SOCIAL ICONS -->
+									<a href="javascript:void(0);" id="social-icons">
+										<i class="iconfont-share round-icon"></i>
+									</a>
+
+									<div id="sub-social" class="sub-header">
+										<ul class="social-list unstyled text-center">
+											<li><a href="#"><i class="iconfont-facebook round-icon"></i></a></li>
+											<li><a href="#"><i class="iconfont-twitter round-icon"></i></a></li>
+											<li><a href="#"><i class="iconfont-google-plus round-icon"></i></a></li>
+											<li><a href="#"><i class="iconfont-pinterest round-icon"></i></a></li>
+											<li><a href="#"><i class="iconfont-rss round-icon"></i></a></li>
+										</ul>
+									</div>
+									<!-- // SOCIAL ICONS -->
+								</li>
+								<li data-toggle="sub-header" data-target="#sub-cart">
+									<!-- SHOPPING CART -->
+									<a href="javascript:void(0);" id="total-cart">
+										<i class="iconfont-shopping-cart round-icon"></i>
+									</a>
+
+									<!-- <div id="sub-cart" class="sub-header">
+										<div class="cart-header">
+											<span>Your cart is currently empty.</span>
+											<small><a href="../../../../pages/member/cart.html">(See All)</a></small>
+										</div>
+										<ul class="cart-items product-medialist unstyled clearfix"></ul>
+										<div class="cart-footer">
+											<div class="cart-total clearfix">
+												<span class="pull-left uppercase">Total</span>
+												<span class="pull-right total">$ 0</span>
+											</div>
+											<div class="text-right">
+												<a href="../../../../pages/member/cart.html"
+													class="btn btn-default btn-round view-cart">View Cart</a>
+											</div>
+										</div>
+									</div> -->
+									<!-- // SHOPPING CART -->
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+
+				<!-- ADD TO CART MESSAGE -->
+				<!-- <div class="cart-notification">
+					<ul class="unstyled"></ul>
+				</div> -->
+				<!-- // ADD TO CART MESSAGE -->
+			</div>
+			<!-- // HEADER TOP -->
+			<!-- MAIN HEADER -->
+			<div class="main-header-wrapper">
+				<div class="container">
+					<div class="main-header">
+						<!-- CURRENCY / LANGUAGE / USER MENU -->
+						<div class="actions">
+							<div class="center-xs">
+
+							</div>
+							<div class="clearfix"></div><br>
+							<!-- USER RELATED MENU -->
+							<nav id="tiny-menu" class="clearfix">
+								<ul class="user-menu">
+									<li><a href="../../myaccount.html" class="personal">我的帳戶<img
+												src="../../../../img/common/head.png"></a>
+									</li>
+									<!-- <li><a href="pages/member/opa/cart/cart.html" class="paymoney">結帳<img
+						src="../front_end/img/common/paymoney.png"></a></li> -->
+									<li id="logInAndLogOut"><a href="../../login.html" class="loginOut">登入<img
+												src="../../../../img/common/login.png"></a>
+									</li>
+								</ul><br>
+							</nav>
+							<!-- // USER RELATED MENU -->
+						</div>
+						<!-- // CURRENCY / LANGUAGE / USER MENU -->
+						<!-- SITE LOGO -->
+						<div class="logo-wrapper">
+							<a href="../../../../indexTEST.html" class="logo">
+								<img src="../../../../img/common/buygo.png" />
+							</a>
+						</div>
+						<!-- // SITE LOGO -->
+						<!-- SITE NAVIGATION MENU -->
+						<nav id="site-menu" role="navigation">
+							<ul class="main-menu hidden-sm hidden-xs">
+								<li class="active">
+									<a href="../../../../indexTEST.html">首頁</a>
+								</li>
+								<li>
+									<a href="../../../guest/pa/prods/prods.html">一般賣場</a>
+								</li>
+								<li>
+									<a href="../../../guest/opa/prods/prods.html">官方賣場</a>
+								</li>
+								<li>
+									<a href="../../../guest/gpa/prods/prods.html">揪團商場</a>
+								</li>
+								<li>
+									<a href="../../../Articles.html">論壇</a>
+								</li>
+							</ul>
+
+							<!-- MOBILE MENU -->
+							<div id="mobile-menu" class="dl-menuwrapper visible-xs visible-sm">
+								<button class="dl-trigger"><i class="iconfont-reorder round-icon"></i></button>
+
+							</div>
+							<!-- // MOBILE MENU -->
+
+						</nav>
+						<!-- // SITE NAVIGATION MENU -->
+					</div>
+				</div>
+			</div>
+			<!-- // MAIN HEADER -->
+		</header>
+		<!-- // SITE HEADER -->
+
+		<!-- BREADCRUMB -->
+		<div class="breadcrumb-container">
+			<div class="container">
+				<div class="relative">
+					<ul class="bc unstyled clearfix">
+						<li><a href="../../../../indexTEST.html">首頁</a></li>
+						<li class="active">結帳</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<!-- // BREADCRUMB -->
+
+		<!-- SITE MAIN CONTENT -->
+		<main id="main-content" role="main">
+
+			<div class="container">
+				<div class="row">
+
+					<div class="m-t-b clearfix">
+						<!-- SIDEBAR -->
+						<aside class="col-xs-12 col-sm-4 col-md-3">
+							<section class="side-section">
+								<h3 class="uppercase text-bold"><span class="text-xs">結帳</span></h3>
+
+								<ul class="nav nav-tabs nav-stacked">
+									<li><a href="../cart/cart.html">回到購物車</a></li>
+								</ul>
+							</section>
+
+						</aside>
+						<!-- // SIDEBAR -->
+
+						<section class="col-xs-12 col-sm-8 col-md-9">
+							<div class="panel-group checkout">
+								<!-- 第一列 -->
+								<div class="panel panel-default">
+									<div class="panel-heading">
+										<h4 class="panel-title">
+											<a data-toggle="collapse" data-parent="#checkout-collapse"
+												href="#checkout-collapse1">
+												<span class="step">01</span>
+												結帳資訊
+											</a>
+										</h4>
+									</div>
+									<div id="checkout-collapse1" class="panel-collapse collapse in">
+										<div class="panel-body">
+											<div class="products products-table">
+
+											</div>
+										</div>
+									</div>
+								</div>
+								<!-- 第二列 -->
+								<div class="panel panel-default">
+									<div class="panel-heading">
+										<h4 class="panel-title">
+											<a data-toggle="collapse" data-parent="#checkout-collapse"
+												href="#checkout-collapse2">
+												<span class="step">02</span>
+												帳單資訊
+											</a>
+										</h4>
+									</div>
+									<div id="checkout-collapse2" class="panel-collapse collapse">
+										<div class="panel-body">
+											<form class="form-horizontal" role="form">
+												<div class="row">
+													<div class="col-xs-12 col-sm-12 col-md-8">
+														<div class="form-group stylish-input">
+															<label for="inputBillName"
+																class="col-sm-4 col-lg-4 control-label required">姓名</label>
+															<div class="col-sm-8 col-lg-8">
+																<input type="text" class="form-control bill-required"
+																	id="inputBillName" />
+															</div>
+														</div>
+														<div class="form-group stylish-input">
+															<label for="inputBillEmail"
+																class="col-sm-4 col-lg-4 control-label required">E-Mail</label>
+															<div class="col-sm-8 col-lg-8">
+																<input type="email" class="form-control bill-required"
+																	id="inputBillEmail" />
+															</div>
+														</div>
+														<div class="form-group stylish-input">
+															<label for="inputBillPhone"
+																class="col-sm-4 col-lg-4 control-label required">電話</label>
+															<div class="col-sm-8 col-lg-8">
+																<input type="text" class="form-control bill-required"
+																	id="inputBillPhone" />
+															</div>
+														</div>
+														<div class="form-group stylish-input">
+															<label for="inputBillAddress"
+																class="col-sm-4 col-lg-4 control-label required">地址</label>
+															<div class="col-sm-8 col-lg-8">
+																<input type="text" class="form-control bill-required"
+																	id="inputBillAddress" />
+															</div>
+														</div>
+													</div>
+												</div>
+												<!-- <div class="space20 clearfix"></div> -->
+												<!-- <button class="btn btn-primary">繼續</button> -->
+											</form>
+										</div>
+									</div>
+								</div>
+								<!-- 第三列 -->
+								<div class="panel panel-default">
+									<div class="panel-heading">
+										<h4 class="panel-title">
+											<a data-toggle="collapse" data-parent="#checkout-collapse"
+												href="#checkout-collapse3">
+												<span class="step">03</span>
+												運送資訊
+											</a>
+										</h4>
+									</div>
+									<div id="checkout-collapse3" class="panel-collapse collapse">
+										<div class="panel-body">
+											<form class="form-horizontal" role="form">
+												<div class="row">
+													<div class="col-xs-12 col-sm-12 col-md-8">
+														<div class="form-group stylish-input"
+															style="vertical-align: middle;">
+															<input type="checkbox" id="checkShipInfo"
+																style="margin: 5px 0 0 10px;"
+																onclick="shipCheckClick()" />
+															<label for="checkShipInfo" class="control-label"
+																style="display: inline-block;">同帳單資訊</label>
+														</div>
+														<div class="form-group stylish-input">
+															<label for="inputShipName"
+																class="col-sm-4 col-lg-4 control-label required">姓名</label>
+															<div class="col-sm-8 col-lg-8">
+																<input type="text" class="form-control ship-required"
+																	id="inputShipName" />
+															</div>
+														</div>
+														<div class="form-group stylish-input">
+															<label for="inputShipEmail"
+																class="col-sm-4 col-lg-4 control-label required">E-Mail</label>
+															<div class="col-sm-8 col-lg-8">
+																<input type="email" class="form-control ship-required"
+																	id="inputShipEmail" />
+															</div>
+														</div>
+														<div class="form-group stylish-input">
+															<label for="inputShipPhone"
+																class="col-sm-4 col-lg-4 control-label required">電話</label>
+															<div class="col-sm-8 col-lg-8">
+																<input type="text" class="form-control ship-required"
+																	id="inputShipPhone" />
+															</div>
+														</div>
+														<div class="form-group stylish-input">
+															<label for="inputShipAddress"
+																class="col-sm-4 col-lg-4 control-label required">地址</label>
+															<div class="col-sm-8 col-lg-8">
+																<input type="text" class="form-control ship-required"
+																	id="inputShipAddress" />
+															</div>
+														</div>
+													</div>
+												</div>
+												<!-- <div class="space20 clearfix"></div>
+												<button class="btn btn-primary">繼續</button> -->
+											</form>
+										</div>
+									</div>
+								</div>
+								<!-- 第四列 -->
+								<div class="panel panel-default">
+									<div class="panel-heading">
+										<h4 class="panel-title">
+											<a data-toggle="collapse" data-parent="#checkout-collapse"
+												href="#checkout-collapse4">
+												<span class="step">04</span>
+												運送方式
+											</a>
+										</h4>
+									</div>
+									<div id="checkout-collapse4" class="panel-collapse collapse">
+										<div class="panel-body">
+											<form class="deliveryMethod" role="form">
+												<div class="form-group stylish-input">
+													<input type="radio" id="deliveryMethod1" class="prettyCheckable"
+														name="deliveryMethod" data-label="黑貓宅急便"
+														onchange="checkFreight(0)" />
+													<p>限本島寄送</p>
+												</div>
+												<div class="form-group stylish-input">
+													<input type="radio" id="deliveryMethod3" class="prettyCheckable"
+														name="deliveryMethod" data-label="郵寄"
+														onchange="checkFreight(2)" />
+													<p>可提供外島，寄件時間會比預計出貨日晚2~3天</p>
+												</div>
+												<!-- <div class="space20 clearfix"></div>
+												<button class="btn btn-primary">Continue</button> -->
+											</form>
+										</div>
+									</div>
+								</div>
+								<!-- 第五列 -->
+								<div class="panel panel-default">
+									<div class="panel-heading">
+										<h4 class="panel-title">
+											<a data-toggle="collapse" data-parent="#checkout-collapse"
+												href="#checkout-collapse5">
+												<span class="step">05</span>
+												付款方式
+											</a>
+										</h4>
+									</div>
+									<div id="checkout-collapse5" class="panel-collapse collapse">
+										<div class="panel-body">
+											<form class="paymethod" role="form">
+												<p>郵資皆是另外計算，請務必確認有選擇出貨方式顯示郵資再付款 </p>
+												<div class="form-group stylish-input">
+													<input type="radio" id="paymethod2" class="prettyCheckable"
+														name="paymethod" data-label="線上刷卡" />
+													<p>填單完成後，系統將引導您至信用卡認證頁面</p>
+												</div>
+												<div class="form-group stylish-input">
+													<input type="radio" id="paymethod3" class="prettyCheckable"
+														name="paymethod" data-label="平台錢包" />
+													<p>平台錢包餘額: $<span id="memberWalletAmount"></span></p>
+												</div>
+												<!-- <div class="space20 clearfix"></div>
+												<button class="btn btn-primary">繼續</button> -->
+											</form>
+										</div>
+									</div>
+								</div>
+								<!-- 第六列 -->
+								<div class="panel panel-default">
+									<div class="panel-heading">
+										<h4 class="panel-title">
+											<a data-toggle="collapse" data-parent="#checkout-collapse"
+												href="#checkout-collapse6">
+												<span class="step">06</span>
+												確認訂單資料
+											</a>
+										</h4>
+									</div>
+									<div id="checkout-collapse6" class="panel-collapse collapse">
+										<div class="panel-body">
+											<div class="row">
+												<div class="col-xs-12 col-sm-6 pull-right center-sm">
+													<table class="shop-summary">
+														<tr>
+															<th>商品總金額:</th>
+															<td id="prodTotal"></td>
+														</tr>
+														<tr>
+															<th>訂單折抵:</th>
+															<td id="discount"></td>
+														</tr>
+														<tr>
+															<th>運費:</th>
+															<td id="freight"></td>
+														</tr>
+														<tr class="total">
+															<th>總金額:</th>
+															<td><span id="total">---</span>元</td>
+														</tr>
+														<tr>
+															<th>
+																<!-- <a href="#" class="btn btn-default btn-round uppercase">確認結帳</a> -->
+																<button id="confirmCheckoutBtn"
+																	class="btn btn-default btn-round">確認結帳</button>
+															</th>
+															<td><a href="../../../guest/opa/prods/prods.html"
+																	class="btn btn-primary btn-round uppercase">繼續購物</a>
+															</td>
+														</tr>
+													</table>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</section>
+
+					</div>
+
+				</div>
+			</div>
+
+		</main>
+		<!-- // SITE MAIN CONTENT -->
+
+		<!-- SITE FOOTER -->
+		<footer class="page-footer">
+
+			<!-- WIDGET AREA -->
+			<div class="widgets">
+
+				<!-- FIRST ROW -->
+
+				<!-- // FIRST ROW -->
+
+				<!-- SECOND ROW -->
+				<div class="section">
+					<div class="container">
+						<div class="row">
+
+							<div class="col-xs-12 col-sm-12 col-md-5">
+								<section class="widget widget-menu">
+									<h5 class="widget-title">Contact info</h5>
+									<div class="widget-content">
+										<ul class="menu iconed-list unstyled">
+											<li><span class="list-icon"><i
+														class="round-icon iconfont-map-marker"></i></span>
+												<div class="list-content">中壢區復興路 46 號緯育 TibaMe 附設中壢職訓中心 9 樓</div>
+											</li>
+											<li><span class="list-icon"><i class="round-icon iconfont-phone"></i></span>
+												<div class="list-content">(03) 425-1108</div>
+											</li>
+											<li><span class="list-icon"><i
+														class="round-icon iconfont-envelope-alt"></i></span>
+												<div class="list-content">tibamecha102g6@gmail.com</div>
+											</li>
+										</ul>
+									</div>
+								</section>
+							</div>
+
+							<div class="col-xs-12 col-sm-12 col-md-6">
+								<section class="widget widget-ads">
+									<div class="widget-content">
+										<div class="center-xs">
+											<div class="ads">
+												<a href="#"> <img src="../../../../img/common/demo/images-footer.jpg"
+														alt="" />
+												</a>
+											</div>
+										</div>
+									</div>
+								</section>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- // SECOND ROW -->
+
+			</div>
+			<!-- // WIDGET AREA -->
+
+			<div class="footer-sub">
+				<div class="container">
+					<div class="row">
+						<div class="col-xs-12 col-sm-6">
+							<div class="footer-links center-xs clearfix">
+								<ul class="unstyled">
+									<li><a href="#">FAQ</a></li>
+								</ul>
+							</div>
+							<div class="space10"></div>
+							<div class="copyright center-xs">
+								<p>(c) 2023</p>
+							</div>
+						</div>
+
+						<div class="space40 visible-xs"></div>
+
+
+					</div>
+				</div>
+			</div>
+
+		</footer>
+		<!-- // SITE FOOTER -->
+
+	</div>
+	<!-- // PAGE WRAPPER -->
+
+	<!-- Essential Javascripts -->
+	<script src="../../../../js/common/minified.js"></script>
+	<!-- // Essential Javascripts -->
+
+	<!-- Particular Page Javascripts -->
+	<script src="../../../../js/common/products.js"></script>
+	<!-- // Particular Page Javascripts -->
+
+	<script>
+		// 代入商品總額
+
+
+		// 依運送方式代入運費金額
+		function checkFreight(choice) {
+			switch (choice) {
+				case 0: $("#freight").text(100); break;
+				case 1: $("#freight").text(60); break;
+				case 2: $("#freight").text(90);
+			}
+			checkOrderTotal();
+		}
+
+		// 代入訂單總額
+		function checkOrderTotal() {
+			let discount = 0;
+			if ($("#discount").text() !== null) {
+				discount = parseInt($("#discount").text());
+			}
+			if ($("#freight").text() != "0" && $("#prodTotal").text() != "0") {
+				$("#total").text(parseInt($("#prodTotal").text()) + parseInt($("#freight").text()) - discount);
+			}
+		}
+
+
+
+	</script>
+
+	<!-- 載入sweetalert -->
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+	<script type="text/javascript" src="js/checkout.js"></script>
+</body>
+
+</html>

@@ -42,6 +42,7 @@
 	<link rel="stylesheet" href="../../css/common/owl.theme.css">
 	<!-- // PARTICULAR PAGES CSS FILES -->
 	<link rel="stylesheet" href="../../css/common/responsive.css">
+
 	<style>
 		/* -------------------登入功能css開始------------------- */
 		body {
@@ -141,6 +142,10 @@
 			transform: translate(-50%, -50%);
 		}
 	</style>
+	<!-- 我不是機器人功能 -->
+	<span style="font-size:14px;">
+		<script src="https://www.google.com/recaptcha/api.js"></script>
+	</span>
 </head>
 
 <body>
@@ -214,7 +219,8 @@
 												<span class="pull-right total">$ 0</span>
 											</div>
 											<div class="text-right">
-												<a href="../../pages/member/cart.html" class="btn btn-default btn-round view-cart">View
+												<a href="../../pages/member/cart.html"
+													class="btn btn-default btn-round view-cart">View
 													Cart</a>
 											</div>
 										</div>
@@ -239,9 +245,10 @@
 					<div class="main-header">
 						<!-- SITE LOGO -->
 						<div class="logo-wrapper">
-							<a href="../../index-2.html" class="logo" title="GFashion - Responsive e-commerce HTML Template">
-								<img src="../../img/common/logo.png" alt="GFashion - Responsive e-commerce HTML Template"
-									style="height: 120px" />
+							<a href="../../index.html" class="logo"
+								title="GFashion - Responsive e-commerce HTML Template">
+								<img src="../../img/common/logo.png"
+									alt="GFashion - Responsive e-commerce HTML Template" style="height: 120px" />
 							</a>
 						</div>
 					</div>
@@ -257,31 +264,55 @@
 
 			<div class="container">
 				<!-- -------------------登入功能開始--------------------->
-				<div class="login_page" style="height: 620px;">
-					<div id="container1" style="top: 20px;">
-						<div class="login" style="display: flex;flex-direction: column;align-items: center;">
+				<div class="login_page" style="height: 710px;">
+					<div id="container1" style="top: 20px;height : 650px;">
+						<div class="login"
+							style="display: flex;flex-direction: column;align-items: left;width: 80%;transform: translate(15%);">
 							<!-- 撐版面用 -->
-							<div style="margin-top:100px;"></div>
+							<div style="margin-top:30px;"></div>
 							<h3>登入 Login</h3>
 
-							<!-- <form action="用戶管理.php"> -->
-							<input type="text" id="username" name="username" placeholder="帳號" required value="peter123"
-								style="font-size: 16px;">
-							<div class="tab"></div>
-							<input type="text" id="password" name="password" placeholder="密碼" required value="123456"
-								style="font-size: 16px;">
-							<div class="tab"></div>
-							<!-- <button class="submit">登入</button> -->
+							<div>
+								<label for="username">帳號：</label>
+								<input type="text" id="username" name="username" placeholder="帳號" required
+									value="peter123" style="font-size: 16px;">
+								<span id="usernameMsg" style="visibility: hidden;color: red;">需輸入</span>
+							</div>
+							<div>
+								<label for="password">密碼：</label>
+								<input type="password" id="password" name="password" placeholder="密碼" required
+									value="123456" style="font-size: 16px;">
+								<span id="passwordMsg" style="visibility: hidden;color: red;">需輸入</span>
+							</div>
+							<div>
+								<input type="checkbox" id="showPassword"
+									onclick="$(this).is(':checked') ? $('input#password').attr('type', 'text') : $('input#password').attr('type', 'password')">
+								<label for="showPassword">顯示密碼</label>
+							</div>
+							<!-- <div>
+								<input type="checkbox" id="rememberPassword" onclick="console.log($(this))">
+								<label for="rememberPassword">記住密碼</label>
+							</div> -->
+
 							<button class="btn btn-primary btn-round padder loginSubmit"
-								style="margin-top:20px;">登入</button>
+								style="margin-top:20px; width: 50%; transform: translate(50%)">登入</button>
 							<!-- <input type="submit" value="登入" class="submit"> -->
 							<!-- </form> -->
-							<p id="checkMsg" style="visibility: hidden;color: red;font-size: 10px;margin-top: 30px;">
+							<!-- 我不是機器人 -->
+							<div class="g-recaptcha" data-sitekey="6Ldrpu4nAAAAAJc8GV-8C3QZ8f4f1Q6MTtZvWBUC"
+								style="margin-top: 20px;"></div>
+							<p id="checkMsg1" style="visibility: hidden;color: red;font-size: 10px;margin-top: 30px;">
 								你的帳號或密碼不正確，請再試一次</p>
-							<h5>註冊帳號</h5>
-							<h5>忘記密碼</h5>
-
-
+							<p id="checkMsg2" style="visibility: hidden;color: red;font-size: 10px;margin-top: 30px;">
+								請通過機器人驗證</p>
+							<div style="text-align: center;">
+								<a href="#" style="width: fit-content;">
+									<h5>註冊帳號</h5>
+								</a>
+								<a href="forgetPassword.html" style="width: fit-content;">
+									<h5>忘記密碼</h5>
+								</a>
+							</div>
 						</div><!-- login end-->
 					</div><!-- container1 end-->
 				</div><!-- login_page end-->
@@ -491,7 +522,7 @@
 	<script src="../../js/common/owl.carousel.js"></script>
 	<script src="../../js/common/contact.js"></script>
 	<!--<script src="http://maps.googleapis.com/maps/api/js?sensor=false" type="text/javascript"></script>-->
-	<script src="../../js/common/gmap3.min.js"></script>
+	<!-- <script src="../../js/common/gmap3.min.js"></script> -->
 	<!-- // Particular Page Javascripts -->
 
 	<!-- -------------------登入功能開始--------------------->
@@ -502,49 +533,65 @@
 	<script>
 		$(document).on("click", "button.loginSubmit", function (e) {
 			let inputPass = true; // 判斷是否有成功輸入帳號密碼
-			console.log($.trim($("input#username").val()));
-			console.log($.trim($("input#password").val()));
 			if ($.trim($("input#username").val()) === "") {
-				console.log('username為空');
 				inputPass = false;
+				$("span#usernameMsg").css("visibility", "visible"); // 將錯誤提示顯示
+				$('p#checkMsg1').css('visibility', 'hidden');
+			}
+			else {
+				$("span#usernameMsg").css("visibility", "hidden"); // 將錯誤提示隱藏
 			}
 			if ($.trim($("input#password").val()) === "") {
-				console.log('password為空');
 				inputPass = false;
+				$("span#passwordMsg").css("visibility", "visible"); // 將錯誤提示顯示
+				$('p#checkMsg1').css('visibility', 'hidden');
+			}
+			else {
+				$("span#passwordMsg").css("visibility", "hidden"); // 將錯誤提示隱藏
+			}
+			// 機器人驗證
+			// 取得 reCAPTCHA 驗證的回應 token
+			var response = grecaptcha.getResponse();
+			if (response.length === 0) {
+				inputPass = false;
+				$("p#checkMsg2").css("visibility", "visible"); // 將未驗證機器人的錯誤提示顯示
+			}
+			else {
+				$("p#checkMsg2").css("visibility", "hidden"); // 將未驗證機器人的錯誤提示隱藏
 			}
 			if (inputPass) {
-				console.log("登入請求發出成功");
-			}
-			// 向後端發出fetch，確認帳號密碼是否輸入正確
-			fetch('member/login/checkMember', {
-				method: 'POST',
-				headers: { 'Content-Type': 'application/json;charset:utf-8' },
-				body: JSON.stringify({
-					memberAcct: $('input#username').val(),
-					memberPw: $('input#password').val()
+				$("span#usernameMsg").css("visibility", "hidden"); // 將錯誤提示隱藏
+				$("span#passwordMsg").css("visibility", "hidden"); // 將錯誤提示隱藏
+
+				// 向後端發出fetch，確認帳號密碼是否輸入正確
+				fetch('/BuyGo/api/front_end/loginFunction', {
+					method: 'POST',
+					headers: { 'Content-Type': 'application/json;charset:utf-8' },
+					body: JSON.stringify({
+						memberAcct: $('input#username').val(),
+						memberPw: $('input#password').val()
+					})
 				})
-			})
-				.then(resp => resp.json())
-				.then(body => {
-					const { successful } = body;
-					console.log('get:' + successful);
-					if (successful) {
-						$('p#checkMsg').css('visibility', 'hidden');
+					.then(resp => resp.json())
+					.then(body => {
+						const { successful } = body;
+						if (successful) {
+							$('p#checkMsg1').css('visibility', 'hidden');
 
-						const allCookies = document.cookie; // 取得前端目前所有cookie
-						var cookieArray = allCookies.split('; '); // 將所有cookie依;切割，產生陣列
-						console.log('cookieArray:' + cookieArray);
-						cookieArray.forEach(cookie => {
-							console.log("cookie:" + cookie);
-						});
-						// console.log("allCookies:" + allCookies);
-
-						localStorage.setItem('testMessage', 'testtest'); // 將JsessionID存入localStorage，記得回來改
-					}
-					else {
-						$('p#checkMsg').css('visibility', 'visible');
-					}
-				});
+							const redirectURL = sessionStorage.getItem('redirectURL');
+							if (redirectURL != null) { // 如果登入前是因未登入而被強制導轉過來登入頁，則sessionStorage的redirectURL不會為null
+								sessionStorage.removeItem("redirectURL"); // 於刪除sessionStorage刪除redirectURL記錄
+								window.location.href = redirectURL; // 導轉至強制導轉前的訪問頁面
+							}
+							else{ // 未被強制導轉登入頁，則登入後正常導轉至首頁
+								window.location.href = '/BuyGo/front_end/index.html'; // 導轉至主頁
+							}
+						}
+						else {
+							$('p#checkMsg1').css('visibility', 'visible');
+						}
+					});
+			}
 		});
 	</script>
 	<!-- -------------------登入功能結束--------------------->

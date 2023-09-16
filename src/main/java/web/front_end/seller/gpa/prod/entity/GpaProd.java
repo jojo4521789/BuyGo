@@ -1,12 +1,18 @@
 package web.front_end.seller.gpa.prod.entity;
 
 import java.sql.Timestamp;
+import java.util.LinkedList;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import core.entity.Core;
@@ -14,6 +20,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import web.front_end.member.acc.entity.Member;
+import web.front_end.seller.gpa.order.entity.GpaSo;
 
 @Entity
 @Setter
@@ -55,4 +63,27 @@ public class GpaProd extends Core{
 
     @Column(name = "GPA_END_DATE")
     private Timestamp gpaEndDate;
+    
+    @ManyToOne
+    @JoinColumn(name = "MEMBER_NO",
+    insertable = false, updatable = false)
+    private Member member;
+    
+    @OneToMany
+    @JoinColumn(name = "GPA_PROD_NO",
+    referencedColumnName = "GPA_PROD_NO")
+    private List<GpaProdPics> gpaProdPics = new LinkedList<GpaProdPics>();
+    
+    @OneToMany(mappedBy = "gpaProd")
+    private List<GpaSo> gpaSo;
+    
+    @OneToMany
+    @JoinColumn(name = "GPA_PROD_NO",
+    referencedColumnName = "GPA_PROD_NO")
+    private List<GpaReach> gpaReach = new LinkedList<GpaReach>();
+    
+//    @OneToMany
+//    @JoinColumn(name = "GPA_PROD_NO",
+//    referencedColumnName = "GPA_PROD_NO")
+//    private List<GpaSo> gpaSo;
 }

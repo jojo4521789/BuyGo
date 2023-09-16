@@ -12,7 +12,7 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "OPA_PRPICS")
+@Table(name = "OPA_PRPICS2")
 public class Prpics extends Core{
 	private static final long serialVersionUID = -8021442954129156916L;
 	@Id
@@ -22,5 +22,5 @@ public class Prpics extends Core{
 	@Column(name = "OPA_PROD_NO")
 	private Integer opaProdNo;
 	@Column(name = "OPA_PROD_PICTURE")
-	private byte[] opaProdPicture;
+	private String opaProdPicture;
 }

@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<!--[if IE 7 ]><html class="ie ie7 lte9 lte8 lte7" lang="en-US"><![endif]-->
+<!--[if IE 8]><html class="ie ie8 lte9 lte8" lang="en-US">	<![endif]-->
+<!--[if IE 9]><html class="ie ie9 lte9" lang="en-US"><![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!-->
+<html class="noIE" lang="en-US"><!--<![endif]-->
+
+<head>
+	<meta charset="UTF-8" />
+	<title>BuyGo - 我的優惠券</title>
+	<meta name="description" content="" />
+	<meta name="keywords" content="" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<!-- Favorite Icons -->
+	<link rel="icon" href="../../img/common/favicon/favicon.html" type="image/x-icon" />
+	<link rel="apple-touch-icon-precomposed" sizes="144x144"
+		href="../../img/common/favicon/apple-touch-icon-144x144-precomposed.html">
+	<link rel="apple-touch-icon-precomposed" sizes="72x72"
+		href="../../img/common/favicon/apple-touch-icon-72x72-precomposed.html">
+	<link rel="apple-touch-icon-precomposed" href="../../img/common/favicon/apple-touch-icon-precomposed.html">
+	<!-- // Favorite Icons -->
+
+	<!--<link href='http://fonts.useso.com/css?family=Open+Sans:300,400,600,700' rel='stylesheet' type='text/css'>-->
+
+	<!-- GENERAL CSS FILES -->
+	<link rel="stylesheet" href="../../css/common/minified.css">
+	<!-- // GENERAL CSS FILES -->
+
+	<!--[if IE 8]>
+		<script src="js/respond.min.js"></script>
+		<script src="js/selectivizr-min.js"></script>
+	<![endif]-->
+	<!--
+	<script src="js/jquery.min.js"></script>
+	-->
+	<script>window.jQuery || document.write('<script src="../../js/common/jquery.min.js"><\/script>');</script>
+	<script src="../../js/common/modernizr.min.js"></script>
+	<!-- PARTICULAR PAGES CSS FILES -->
+	<link rel="stylesheet" href="../../css/common/innerpage.css">
+	<link rel="stylesheet" href="../../css/common/owl.carousel.css">
+	<link rel="stylesheet" href="../../css/common/owl.theme.css">
+	<!-- // PARTICULAR PAGES CSS FILES -->
+	<link rel="stylesheet" href="../../css/common/responsive.css">
+
+	<style>
+		.-none {
+			display: none;
+		}
+
+		.s-coupons {
+			margin: 10px 0 10px 0;
+			padding: 20px;
+			background-color: #d9d9d9;
+			/* width: 500px; */
+		}
+
+		.s-coupon {
+			margin-bottom: 20px;
+			display: flex;
+			align-items: stretch;
+			justify-content: stretch;
+			text-align: left;
+		}
+
+		.s-coupon>div {
+			padding: 10px 20px;
+			border-radius: 12px;
+		}
+
+		.s-coupon-intro {
+			position: relative;
+			background: #fff;
+			flex: 3;
+			width: 430px;
+		}
+
+		.s-coupon-intro ul {
+			color: #aaa;
+			padding-left: 20px;
+		}
+
+		.s-coupon-intro:after {
+			content: ' ';
+			border: 2px dashed #d9d9d9;
+			height: 100%;
+			position: absolute;
+			top: 0;
+			right: -2px;
+			z-index: 2;
+		}
+
+		.s-coupon-value {
+			display: flex;
+			flex: 1;
+			position: relative;
+			background: #fa6f57;
+			color: #fff;
+			font-size: 24px;
+			align-items: center;
+			justify-content: center;
+			width: 160px;
+		}
+
+		.history-coupons>div>.s-coupon-value {
+			display: flex;
+			flex: 1;
+			position: relative;
+			background: #6f6d6c;
+			color: #fff;
+			font-size: 24px;
+			align-items: center;
+			justify-content: center;
+			width: 160px;
+		}
+
+		.s-coupon-value:before {
+			content: ' ';
+			width: 24px;
+			height: 24px;
+			position: absolute;
+			top: -12px;
+			left: -12px;
+			border-radius: 100%;
+			background: #d9d9d9;
+		}
+
+		.s-coupon-value:after {
+			content: ' ';
+			width: 24px;
+			height: 24px;
+			position: absolute;
+			bottom: -12px;
+			left: -12px;
+			border-radius: 100%;
+			background: #d9d9d9;
+		}
+
+		.logo img {
+			max-width: 200px;
+			max-height: 150px;
+		}
+
+		.user-menu a img {
+			max-width: 20px;
+			max-height: 20px;
+		}
+
+		ul.user_menu>ul>a {
+			color: #ef7700;
+			font-weight: bold;
+			font-size: 25px;
+		}
+
+		a:hover {
+			color: #0150ed;
+		}
+	</style>
+	<style>
+		.logo img {
+			max-width: 200px;
+			max-height: 150px;
+		}
+
+		.user-menu a img {
+			max-width: 20px;
+			max-height: 20px;
+		}
+
+		ul.user-menu>li>a {
+			color: #ef7700;
+			font-weight: bold;
+			font-size: 25px;
+		}
+
+		a:hover {
+			color: #0150ed;
+		}
+	</style>
+</head>
+
+<body>
+
+	<!-- PAGE WRAPPER -->
+	<div id="page-wrapper">
+
+		<!-- SITE HEADER -->
+		<header id="site-header" role="banner">
+			<!-- HEADER TOP -->
+			<div class="header-top">
+				<div class="container">
+					<div class="row">
+						<div class="col-xs-12 col-sm-6 col-md-7">
+							<!-- CONTACT INFO -->
+							<div class="contact-info">
+								<i class="iconfont-headphones round-icon"></i>
+								<strong>(03)425-1108</strong>
+								<span>(Mon- Fri: 09.00 - 21.00)</span>
+							</div>
+							<!-- // CONTACT INFO -->
+						</div>
+						<div class="col-xs-12 col-sm-6 col-md-5">
+							<ul class="actions unstyled clearfix">
+								<li>
+									<!-- SEARCH BOX -->
+									<div class="search-box">
+										<form action="#" method="post">
+											<div class="input-iconed prepend">
+												<button class="input-icon"><i class="iconfont-search"></i></button>
+												<label for="input-search" class="placeholder">Search here…</label>
+												<input type="text" name="q" id="input-search"
+													class="round-input full-width" required />
+											</div>
+										</form>
+									</div>
+									<!-- // SEARCH BOX -->
+								</li>
+								<li data-toggle="sub-header" data-target="#sub-social">
+									<!-- SOCIAL ICONS -->
+									<a href="javascript:void(0);" id="social-icons">
+										<i class="iconfont-share round-icon"></i>
+									</a>
+	
+									<div id="sub-social" class="sub-header">
+										<ul class="social-list unstyled text-center">
+											<li><a href="#"><i class="iconfont-facebook round-icon"></i></a></li>
+											<li><a href="#"><i class="iconfont-twitter round-icon"></i></a></li>
+											<li><a href="#"><i class="iconfont-google-plus round-icon"></i></a></li>
+											<li><a href="#"><i class="iconfont-pinterest round-icon"></i></a></li>
+											<li><a href="#"><i class="iconfont-rss round-icon"></i></a></li>
+										</ul>
+									</div>
+									<!-- // SOCIAL ICONS -->
+								</li>
+								<li data-toggle="sub-header" data-target="#sub-cart">
+									<!-- SHOPPING CART -->
+									<a href="javascript:void(0);" id="total-cart">
+										<i class="iconfont-shopping-cart round-icon"></i>
+									</a>
+	
+									<div id="sub-cart" class="sub-header">
+										<div class="cart-header">
+											<span>Your cart is currently empty.</span>
+											<small><a href="/BuyGo/front_end/pages/member/opa/cart/cart.html">(See All)</a></small>
+										</div>
+										<!-- <ul class="cart-items product-medialist unstyled clearfix"></ul> -->
+										<ul class="s-cart-items product-medialist unstyled clearfix"></ul>
+										<div class="cart-footer">
+											<!-- <div class="cart-total clearfix">
+												<span class="pull-left uppercase">Total</span>
+												<span class="pull-right total">$ 0</span>
+											</div> -->
+											<div class="s-cart-total clearfix">
+												<span class="pull-left uppercase">Total</span>
+												<span class="pull-right total">$ 0</span>
+											</div>
+											<div class="text-right">
+												<a href="/BuyGo/front_end/pages/member/opa/cart/cart.html"
+													class="btn btn-default btn-round view-cart">查看購物車</a>
+											</div>
+										</div>
+									</div>
+									<!-- // SHOPPING CART -->
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+	
+				<!-- ADD TO CART MESSAGE -->
+				<div class="cart-notification">
+					<ul class="unstyled"></ul>
+				</div>
+				<!-- // ADD TO CART MESSAGE -->
+			</div>
+			<!-- // HEADER TOP -->
+			<!-- MAIN HEADER -->
+			<div class="main-header-wrapper">
+				<div class="container">
+					<div class="main-header">
+						<!-- CURRENCY / LANGUAGE / USER MENU -->
+						<div class="actions">
+							<div class="center-xs">
+	
+							</div>
+							<div class="clearfix"></div><br>
+							<!-- USER RELATED MENU -->
+							<nav id="tiny-menu" class="clearfix">
+								<ul class="user-menu">
+									<li><a href="pages/member/myaccount.html" class="personal">我的帳戶<img
+												src="/BuyGo/front_end/img/common/head.png"></a>
+									</li>
+									<!-- <li><a href="pages/member/opa/cart/cart.html" class="paymoney">結帳<img
+												src="../front_end/img/common/paymoney.png"></a></li> -->
+									<li id="logInAndLogOut"><a href="pages/member/login.html" class="loginOut">登入<img
+												src="/BuyGo/front_end/img/common/login.png"></a>
+									</li>
+								</ul><br>
+							</nav>
+							<!-- // USER RELATED MENU -->
+						</div>
+						<!-- // CURRENCY / LANGUAGE / USER MENU -->
+						<!-- SITE LOGO -->
+						<div class="logo-wrapper">
+							<a href="/BuyGo/front_end/index.html" class="logo">
+								<img src="/BuyGo/front_end/img/common/buygo.png" />
+							</a>
+						</div>
+						<!-- // SITE LOGO -->
+						<!-- SITE NAVIGATION MENU -->
+						<nav id="site-menu" role="navigation">
+							<ul class="main-menu hidden-sm hidden-xs">
+								<li class="active">
+									<a href="/BuyGo/front_end/index.html">首頁</a>
+								</li>
+								<li>
+									<a href="/BuyGo/front_end/pages/guest/pa/prods/prods.html">一般賣場</a>
+								</li>
+								<li>
+									<a href="/BuyGo/front_end/pages/guest/opa/prods/prods.html">官方賣場</a>
+								</li>
+								<li>
+									<a href="/BuyGo/front_end/pages/guest/gpa/prods/prods.html">揪團商場</a>
+								</li>
+								<li>
+									<a href="/BuyGo/front_end/pages/Articles.html">論壇</a>
+								</li>
+							</ul>
+	
+							<!-- MOBILE MENU -->
+							<div id="mobile-menu" class="dl-menuwrapper visible-xs visible-sm">
+								<button class="dl-trigger"><i class="iconfont-reorder round-icon"></i></button>
+	
+							</div>
+							<!-- // MOBILE MENU -->
+	
+						</nav>
+						<!-- // SITE NAVIGATION MENU -->
+					</div>
+				</div>
+			</div>
+			<!-- // MAIN HEADER -->
+		</header>
+		<!-- // SITE HEADER -->
+
+		<!-- BREADCRUMB -->
+		<div class="breadcrumb-container">
+			<div class="container">
+				<div class="relative">
+					<ul class="bc unstyled clearfix">
+						<li><a href="../../indexTEST.html">首頁</a></li>
+						<li class="active">我的帳戶</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<!-- // BREADCRUMB -->
+
+		<!-- SITE MAIN CONTENT -->
+		<main id="main-content" role="main">
+
+			<div class="container">
+				<div class="row">
+
+					<div class="m-t-b clearfix">
+						<!-- SIDEBAR -->
+						<aside class="col-xs-12 col-sm-4 col-md-3">
+							<section class="side-section">
+								<h3 class="uppercase text-bold"><span class="text-xs">我的帳戶</span></h3>
+
+								<ul class="nav nav-tabs nav-stacked">
+									<li><a href="/BuyGo/front_end/pages/member/EditMember.html">個人資料</a></li>
+									<li><a href="/BuyGo/front_end/pages/member/pa/order/ListOrders.html">訂單追蹤</a></li>
+									<li><a href="/BuyGo/front_end/pages/member/pa/req/MemberAllPaReq.html">一般代購委託單查詢</a>
+									</li>
+									<li><a href="/BuyGo/front_end/pages/member/opa/add_request.html">官方平台委託單申請</a></li>
+									<li><a href="/BuyGo/front_end/pages/member/opa/request.html">官方平台委託單查詢</a></li>
+									<li><a href="/BuyGo/front_end/pages/member/mycoupon.html">優惠券</a></li>
+									<li><a href="/BuyGo/front_end/pages/member/wallet.html">平台錢包</a></li>
+									<li><a href="/BuyGo/front_end/pages/member/chatroom.html">聊天室</a></li>
+									<li><a href="/BuyGo/front_end/pages/member/blacklist.html">黑名單</a></li>
+									<li><a href="/BuyGo/front_end/pages/member/myCollListforum.html">我的收藏文章</a></li>
+									<li><a href="/BuyGo/front_end/pages/member/myforum.html">我的文章</a></li>
+									<br>
+									<li><a href="/BuyGo/front_end/pages/member/myShop.html">我的賣場</a></li>
+								</ul>
+							</section>
+
+						</aside>
+						<!-- // SIDEBAR -->
+
+						<section class="col-xs-12 col-sm-8 col-md-9">
+							<!-- 在此新增 -->
+							<h3 class="uppercase text-bold"><span class="text-xs">優惠券</span></h3>
+							<button type="button" id="unusedBtn" class="btn btn-success"
+								onclick="unusedCouponBtn()">未使用</button>
+							<button type="button" id="historyBtn" class="btn btn-primary"
+								onclick="historyCouponBtn()">歷史紀錄</button>
+							<div class="s-coupons unused-coupons">
+								<!-- 這邊放未使用優惠券 -->
+							</div>
+							<div class="s-coupons history-coupons -none">
+								<!-- 這邊放歷史優惠券 -->
+							</div>
+						</section>
+
+					</div>
+
+				</div>
+			</div>
+
+		</main>
+		<!-- // SITE MAIN CONTENT -->
+
+		<!-- SITE FOOTER -->
+		<footer class="page-footer">
+
+			<!-- WIDGET AREA -->
+			<div class="widgets">
+
+				<!-- FIRST ROW -->
+
+				<!-- // FIRST ROW -->
+
+				<!-- SECOND ROW -->
+				<div class="section">
+					<div class="container">
+						<div class="row">
+
+							<div class="col-xs-12 col-sm-12 col-md-5">
+								<section class="widget widget-menu">
+									<h5 class="widget-title">Contact info</h5>
+									<div class="widget-content">
+										<ul class="menu iconed-list unstyled">
+											<li><span class="list-icon"><i
+														class="round-icon iconfont-map-marker"></i></span>
+												<div class="list-content">中壢區復興路 46 號緯育 TibaMe 附設中壢職訓中心 9 樓</div>
+											</li>
+											<li><span class="list-icon"><i class="round-icon iconfont-phone"></i></span>
+												<div class="list-content">(03) 425-1108</div>
+											</li>
+											<li><span class="list-icon"><i
+														class="round-icon iconfont-envelope-alt"></i></span>
+												<div class="list-content">tibamecha102g6@gmail.com</div>
+											</li>
+										</ul>
+									</div>
+								</section>
+							</div>
+
+							<div class="col-xs-12 col-sm-12 col-md-6">
+								<section class="widget widget-ads">
+									<div class="widget-content">
+										<div class="center-xs">
+											<div class="ads">
+												<a href="#"> <img src="../../../img/common/demo/images-footer.jpg"
+														alt="" />
+												</a>
+											</div>
+										</div>
+									</div>
+								</section>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- // SECOND ROW -->
+
+			</div>
+			<!-- // WIDGET AREA -->
+
+			<div class="footer-sub">
+				<div class="container">
+					<div class="row">
+						<div class="col-xs-12 col-sm-6">
+							<div class="footer-links center-xs clearfix">
+								<ul class="unstyled">
+									<li><a href="../guest/selectFirstFAQ.html">FAQ</a></li>
+								</ul>
+							</div>
+							<div class="space10"></div>
+							<div class="copyright center-xs">
+								<p>(c) 2023</p>
+							</div>
+						</div>
+
+						<div class="space40 visible-xs"></div>
+
+
+					</div>
+				</div>
+			</div>
+
+		</footer>
+		<!-- // SITE FOOTER -->
+
+	</div>
+	<!-- // PAGE WRAPPER -->
+
+	<!-- Essential Javascripts -->
+	<script src="../../js/common/minified.js"></script>
+	<!-- // Essential Javascripts -->
+
+	<!-- Particular Page Javascripts -->
+	<script src="../../js/common/products.js"></script>
+	<script src="../../js/common/owl.carousel.js"></script>
+	<script src="../../js/common/contact.js"></script>
+	<script src="../../js/login.js"></script>
+	<!--<script src="http://maps.googleapis.com/maps/api/js?sensor=false" type="text/javascript"></script>-->
+	<!-- <script src="../../js/common/gmap3.min.js"></script> -->
+	<!-- // Particular Page Javascripts -->
+	<script>
+		checkLoginStatusShowMemberAcct(); // 檢查客戶帳號是否登入，修改頁面右上方Log In/Log Out按鈕，顯示登入者帳號名稱
+	</script>
+
+	<script>
+		fetch("/BuyGo/needLoginApi/opa/coupon/getMemberCoupon", {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json; charset=utf-8",
+			},
+		})
+			.then(resp => {
+				if (resp.status === 401) {
+					// 客戶未登入，執行頁面重定向到登入頁
+					alert('帳號未登入，將導轉至登入頁面');
+					window.location.href = '/BuyGo/front_end/pages/member/login.html'; // 登入頁面url
+				} else if (resp.ok) {
+					// 請求成功
+					return resp.json();
+				} else {
+					alert("錯誤狀態" + resp.status);
+					return;
+				}
+			})
+			.then(datas => {
+				let hasCoupon = false;
+				let hasHisCoupon = false;
+				if (datas) {
+					for (let data of datas) {
+						let opaExpDate = new Date(data.coupon.opaExpDate);
+						const options = {
+							year: 'numeric',    // 年: 使用4位數
+							month: '2-digit',   // 月: 使用2數位
+							day: '2-digit',     // 日: 使用2數位
+							hour12: false,      // 12小時制: 不使用
+							hour: '2-digit',    // 時: 使用2數位
+							minute: '2-digit',  // 分: 使用2數位
+							second: '2-digit'   // 秒: 使用2數位
+						};
+						let status_str = "";
+						if (opaExpDate < new Date()) {
+							status_str = "已過期";
+						}
+						if (data.opaCpownerStatus === 1) {
+							status_str = "已使用";
+						}
+
+						let coupon_str = `
+							<div class="s-coupon">
+								<div class="s-coupon-intro">
+									<h4>${data.coupon.opaCouponName}</h4>
+									<span class="pull-right">${status_str}</span>
+									<ul>
+										<li>訂單滿 <span class="coupon_opaMinAmount">${data.coupon.opaMinAmount}</span> 元可用</li>
+										<li>限 ${new Intl.DateTimeFormat('zh-TW', options).format(opaExpDate)} 前使用</li>
+									</ul>
+								</div>
+								<div class="s-coupon-value">
+									$ <span class="coupon_opaDiscountAmo">${data.coupon.opaDiscountAmo}</span>
+								</div>
+							</div>
+						`;
+
+						if (data.opaCpownerStatus === 0 && opaExpDate > new Date()) {
+							hasCoupon = true;
+							$(".unused-coupons").append(coupon_str);
+						} else {
+							hasHisCoupon = true;
+							$(".history-coupons").append(coupon_str);
+						}
+					}
+				}
+				if (!hasCoupon) {
+					let coupon_str = `
+						<div>
+							<p>您的優惠券匣目前是空的唷</p>
+						</div>
+					`;
+					$(".unused-coupons").append(coupon_str);
+				}
+				if (!hasHisCoupon) {
+					let coupon_str = `
+						<div>
+							<p>尚無歷史紀錄</p>
+						</div>
+					`;
+					$(".history-coupons").append(coupon_str);
+				}
+			});
+
+		function unusedCouponBtn() {
+			$(".unused-coupons").removeClass("-none");
+			$("#unusedBtn").removeClass("btn-primary").addClass("btn-success");
+			$(".history-coupons").addClass("-none");
+			$("#historyBtn").removeClass("btn-success").addClass("btn-primary");
+		}
+		function historyCouponBtn() {
+			$(".history-coupons").removeClass("-none");
+			$("#historyBtn").removeClass("btn-primary").addClass("btn-success");
+			$(".unused-coupons").addClass("-none");
+			$("#unusedBtn").removeClass("btn-success").addClass("btn-primary");
+		}
+	</script>
+</body>
+
+</html>

@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .container {
+      width: 500px;
+      margin: 0 auto;
+      border-radius: 20px;
+      padding: 5px;
+    }
+
+    /* 邊框樣式 */
+    .border {
+      border: grey 1px solid;
+    }
+
+    .center {
+      text-align: center;
+      margin: 5px;
+    }
+
+    /* (列表中的) 項目樣式 */
+    .todo-item {
+      margin: 5px;
+      padding: 5px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    /* 外保留距離樣式 */
+    .m-1 {
+      margin: 5px;
+    }
+
+    /* button {
+            width: 30px;
+            height: 30px;
+            border-radius: 15px;
+        } */
+
+    /* (列表中的) 已完成項目樣式 */
+    .isCompleted {
+      text-decoration: line-through;
+    }
+
+    input {
+      width: 440px;
+      height: 40px;
+      font-size: 16px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    ul.list {
+      margin: 24px 0 0 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    ul.list>li {
+      margin-bottom: 30px;
+    }
+
+    ul.list>li:last-child {
+      margin-bottom: 0;
+    }
+
+    ul.list>li>a.link_title {
+      display: block;
+      width: 100%;
+      color: white;
+      background-color: #dd2836;
+      box-shadow: 2px 2px 8px 0 rgba(56, 55, 53, 0.33);
+      border-radius: 26px;
+      padding: 8px 40px;
+      text-decoration: none;
+      font-size: 24px;
+      font-weight: normal;
+    }
+
+    ul.list>li>a.link_title::after {
+      content: "";
+      display: block;
+      clear: both;
+    }
+
+    ul.list>li>a.link_title button.switch_btn {
+      float: right;
+      display: inline-block;
+      background: none;
+      border: 0;
+      outline: none;
+      color: white;
+      font-size: 24px;
+    }
+
+    ul.list>li>a.link_title button.switch_btn span.-minus {
+      display: none;
+    }
+
+    ul.list>li>div.inner_block {
+      font-size: 18px;
+      color: #4a4a4a;
+      margin-top: 8px;
+      padding: 0 40px;
+      line-height: 1.6;
+      display: none;
+    }
+
+    ul.list>li.-on>a.link_title button.switch_btn span.-plus {
+      display: none;
+    }
+
+    ul.list>li.-on>a.link_title button.switch_btn span.-minus {
+      display: inline-block
+    }
+
+
+    body {
+      font-family: "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="border container">
+    <h2 class="center">新增FAQ</h2>
+    <div class="m-1">
+      faqTitle:<input type="text" id="title" placeholder="請輸入FAQ標題..."><br>
+      faqContent:<input type="text" id="content" placeholder="請輸入FAQ內容..."><br>
+      <button type="button" id="add">送出請求</button>
+    </div>
+    <p id="p1">:尚無資料</p>
+    <p id="p2">:尚無資料</p>
+    <p id="p3">:尚無資料</p>
+    <p id="p4">:尚無資料</p>
+
+    <div id="todo-list">
+      <div>
+        seletTitle<input type="text" id="select_id" placeholder="請輸入關鍵字...">
+        <button type="button" id="selectid">搜尋id</button>
+
+        <div id=faqList>
+
+        </div>
+      </div>
+      <!-- <div>
+        <button id="delete">❌</button>
+        <button id="update">✏️</button>
+        <button id="save">✔️</button>
+      </div> -->
+    </div>
+  </div>
+
+
+  <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+
+  <script>
+    //FAQ展開收藏
+    $("a.link_title").on("click", function (e) {
+      e.preventDefault();
+      console.log(this);
+      $(this).closest("li").toggleClass("-on");
+      $(this).closest("li").find("div.inner_block").slideToggle(100);
+    });
+    //增加FAQ並顯示
+    const p1_el = document.getElementById("p1")
+    const p2_el = document.getElementById("p2")
+    const p3_el = document.getElementById("p3")
+    const p4_el = document.getElementById("p4")
+    const p5_el = document.getElementById("p5")
+    const p6_el = document.getElementById("p6")
+    const p7_el = document.getElementById("p7")
+    const p8_el = document.getElementById("p8")
+    const p9_el = document.getElementById("p9")
+    const title_el = document.getElementById("title")
+    const content_el = document.getElementById("content")
+    const select_id_el = document.getElementById("select_id")
+    const selectid_el = document.getElementById("selectid")
+
+    document.getElementById("add").addEventListener("click", () => {
+      fetch("/BuyGo/front_end/guest/faq/IncreaseFaq", {
+        method: "POST",
+        headers: { "Content-Type": "application/json;charset=utf-8" },
+        body: JSON.stringify({
+          faqTitle: title_el.value,
+          faqContent: content_el.value
+        })
+      })
+        .then(resp => resp.json())
+        .then(body => {
+          const { faqTitle, faqContent, successful, message } = body;
+          p1_el.innerHTML = "faqTitle:" + faqTitle;
+          p2_el.innerHTML = "faqContent:" + faqContent;
+          p3_el.innerHTML = "successful:" + successful;
+          p4_el.innerHTML = "message:" + message;
+
+        });
+
+    });
+    //當輸入查詢時清除上一筆查詢的資料
+    const faqList = document.getElementById("faqList");
+    //查詢
+    document.getElementById("selectid").addEventListener("click", () => {
+      faqList.innerHTML = "";
+
+      fetch("/BuyGo/front_end/guest/faq/SelectById", {
+        method: "POST",
+        headers: { "Content-Type": "application/json;charset=utf-8" },
+        body: JSON.stringify({
+          faqTitle: select_id_el.value
+
+        })
+      })
+        .then(resp => resp.json())
+        .then(body => {
+
+          body.forEach(element => {
+
+            var div = document.getElementById("faqList");
+            // for(let i=0;i<=element.length;i++){}
+            var br = document.createElement("br");
+            div.appendChild(br);
+            const item = document.createElement("div");
+            item.id = element.faqNo;
+            const titleDiv = document.createElement("div");
+            titleDiv.textContent = "FAQ No:";
+            item.appendChild(titleDiv);
+            var div2 = document.createElement("input");
+            div2.setAttribute("type", "text");
+            div2.setAttribute("ReadOnly", "True");
+            div2.id = "input_id";
+            div2.value = element.faqNo;
+            const titleDiv1 = document.createElement("div");
+            item.appendChild(div2);
+            titleDiv1.textContent = "FAQ Title:";
+            item.appendChild(titleDiv1);
+            var div3 = document.createElement("input");
+            div3.setAttribute("type", "text");
+            div3.value = element.faqTitle;
+            item.appendChild(div3);
+            const titleDiv2 = document.createElement("div");
+            titleDiv2.textContent = "FAQ Content:";
+            item.appendChild(titleDiv2);
+            var div4 = document.createElement("input");
+            div4.setAttribute("type", "text");
+            div4.value = element.faqContent;
+            item.appendChild(div4);
+            item.appendChild(br);
+
+            const where = document.createElement("div");
+            where.textContent = "";
+            item.appendChild(where);
+            const deleteButton = document.createElement("button");
+            deleteButton.textContent = "刪除❌";
+            deleteButton.id = "delete";
+            item.appendChild(deleteButton);
+
+            // const updateButton = document.createElement("button");
+            // updateButton.textContent = "✏️";
+            // updateButton.id = "update";
+            // item.appendChild(updateButton);
+
+            const saveButton = document.createElement("button");
+            saveButton.textContent = "儲存✔️";
+            saveButton.id = "save";
+            item.appendChild(saveButton);
+            item.appendChild(br);
+            div.appendChild(item);
+
+            deleteButton.addEventListener("click", () => {
+              // 向後端發送刪除請求
+              fetch("/BuyGo/front_end/guest/faq/DeletFaq", {
+                method: "POST",
+                headers: { "Content-Type": "application/json;charset=utf-8" },
+                body: JSON.stringify({
+                  faqNo: element.faqNo
+                })
+              })
+                .then(resp => resp.json())
+                .then(body => {
+                  // 在成功刪除後，從界面中移除該行資料
+                  if (body == "yes") {
+                    item.remove();
+                  } else {
+                    console.log("刪除失敗");
+                  }
+                })
+
+            });
+
+
+            saveButton.addEventListener("click",()=>{
+              fetch("/BuyGo/front_end/guest/faq/EditFaq",{
+                method:"POST",
+                headers: { "Content-Type": "application/json;charset=utf-8" },
+                body:JSON.stringify({
+                  faqNo:element.faqNo,
+                  faqTitle:div3.value,
+                  faqContent:div4.value
+                  
+                })
+              })
+              .then(resp => resp.json())
+              .then(body => {
+                div3.value = body.faqTitle,
+                div4.value = body.faqContent;
+                if(body.successful == true){
+                  alert("完成修改");
+                }else{
+                  alert("修改失敗");
+                }
+              })
+ 
+            });
+
+          });
+        });
+    });
+
+//     Swal.fire({
+//   title: '<strong>確認刪除此FAQ?</strong>',
+//   icon: 'info',
+//   showCloseButton: true,
+//   showCancelButton: true,
+//   focusConfirm: false,
+//   confirmButtonText:
+//     '<i class="fa fa-thumbs-up"></i> YES!',
+//   confirmButtonAriaLabel: 'Thumbs up, great!',
+//   cancelButtonText:
+//     '<i class="fa fa-thumbs-down">NO</i>',
+//   cancelButtonAriaLabel: 'Thumbs down'
+// })
+
+  </script>
+</body>
+
+</html>

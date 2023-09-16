@@ -2,9 +2,12 @@ package web.front_end.seller.gpa.order.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import core.entity.Core;
@@ -12,6 +15,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import web.front_end.member.acc.entity.Member;
+import web.front_end.seller.gpa.prod.entity.GpaProd;
 
 @Entity
 @Setter
@@ -54,9 +59,19 @@ public class GpaSo extends Core{
     @Column(name = "GPA_BUY_ADD")
     private String gpaBuyAdd;
 
-    @Column(name = "GPA_EVA_SELLER")
+    @Column(name = "GPA_EVA_SELLER", insertable = false)
     private Integer gpaEvaSeller;
 
-    @Column(name = "GPA_EVA_MEMBER")
+    @Column(name = "GPA_EVA_MEMBER", insertable = false)
     private Integer gpaEvaMember;
+    
+    @ManyToOne
+    @JoinColumn(name = "GPA_PROD_NO",
+    insertable = false, updatable = false)
+    private GpaProd gpaProd = new GpaProd();
+    
+    @ManyToOne
+    @JoinColumn(name = "MEMBER_NO",
+    insertable = false, updatable = false)
+    private Member member = new Member();
 }
