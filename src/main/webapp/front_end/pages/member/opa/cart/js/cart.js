@@ -75,7 +75,7 @@ function loadCartItems() {
             }
         });
 }
-// loadCartItems();
+loadCartItems();
 
 function addQty(el) {
     let input = el.closest(".qty-btn-group").querySelector("input");
