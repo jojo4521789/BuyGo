@@ -193,6 +193,7 @@ function loadAllPages() {
 }
 loadAllPages();
 
+//建立分頁
 function createPaginator(nowPageNo) {
     let page_li = "";
     if (totalPages <= 8) {
@@ -276,6 +277,7 @@ function createPaginator(nowPageNo) {
     $("#page_" + nowPageNo).addClass("pageSelected");
 }
 
+//載入商品(不分類)
 function loadProds(displayItemQty, offset) {
     fetch("/BuyGo/api/opa/prod", {
         method: "POST",
@@ -445,6 +447,7 @@ function searchBtnClick() {
     }
 }
 
+//載入搜尋的商品分頁標籤
 function loadSearchPages(opaProdName) {
     fetch("/BuyGo/api/opa/prod", {
         method: "POST",
@@ -465,6 +468,7 @@ function loadSearchPages(opaProdName) {
         });
 }
 
+//載入搜尋的商品
 function loadSearchProds(displayItemQty, offset) {
     let opaProdName = document.querySelector("#input-search").value;
     fetch("/BuyGo/api/opa/prod", {
