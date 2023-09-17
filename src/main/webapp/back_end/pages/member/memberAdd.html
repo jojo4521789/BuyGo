@@ -1,0 +1,146 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>manager</title>
+
+
+    <link href="../../css/common/all.css" rel="stylesheet" type="text/css">
+    <link href="../../js/common/editor/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="../../js/common/editor/css/froala_editor.min.css" rel="stylesheet" type="text/css">
+    <style>
+         body {
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            max-width: 400px;
+            margin: 0 auto;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        th, td {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #f2f2f2;
+            text-align: left;
+        }
+        input[type="text"], input[type="password"], select {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+        }
+        button[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+        }
+        button[type="submit"]:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+
+<body style="background-color: #e6ecf5">
+<div class="book_con01">
+        <div class="container">
+            <h1 style="font-size: 20px;">新增員工</h1>
+            <form>
+                <table style="margin-top:20px;">
+                    <tr>
+                        <th>帳號:</th>
+                        <td><input type="text" name="帳號" id="acct"></td>
+                    </tr>
+                    <tr>
+                        <th>密碼:</th>
+                        <td><input type="password" name="密碼" id="password"></td>
+                    </tr>
+                    <tr>
+                        <th>暱稱:</th>
+                        <td><input type="text" name="暱稱" id="nickname"></td>
+                    </tr>
+                    <tr>
+                        <th>性別:</th>
+                        <td>
+                            <select name="性別" id="gender">
+                                <option value="1">男</option>
+                                <option value="2">女</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>電話:</th>
+                        <td><input type="text" name="電話" id="emptel"></td>
+                    </tr>
+                    <tr>
+                        <th>信箱:</th>
+                        <td><input type="text" name="信箱" id="empmail"></td>
+                    </tr>
+                    <tr>
+                        <th>權限:</th>
+                        <td>
+                            <select name="權限" id="empfun">
+                                <option value="3">經理</option>
+                                <option value="2">後臺管理員</option>
+                                <option value="1">賣場管理員</option>
+                            </select>
+                        </td>
+                    </tr>
+                </table>
+			<button id="btn1" type="submit" class="btn btn-primary" onclick="addemp()" style="margin-top: 10px;">確認新增</button>
+		</div>
+    </div>
+	</div>
+    
+</div>
+<script  src="../../js/common/jquery/jQuery-2.2.0.min.js"></script>
+<script src="../../js/common/editor/js/froala_editor.min.js"></script>
+
+<script src="../../js/common/editor/js/plugins/tables.min.js"></script>
+<script src="../../js/common/editor/js/plugins/lists.min.js"></script>
+<script src="../../js/common/editor/js/plugins/colors.min.js"></script>
+<script src="../../js/common/editor/js/plugins/media_manager.min.js"></script>
+<script src="../../js/common/editor/js/plugins/font_family.min.js"></script>
+<script src="../../js/common/editor/js/plugins/font_size.min.js"></script>
+<script src="../../js/common/editor/js/plugins/block_styles.min.js"></script>
+<script src="../../js/common/editor/js/plugins/video.min.js"></script>
+<script src="../../js/common/date/js/laydate.js"></script>
+<script>
+    async function addemp () {
+
+        let nickname = document.getElementById('nickname');
+        let gender = document.getElementById('gender');
+        let emptel = document.getElementById('emptel');
+        let empmail = document.getElementById('empmail');
+        let empacct = document.getElementById('acct');
+        let password = document.getElementById('password');
+        let empfun = document.getElementById('empfun');
+
+        let getEmpAttri = {
+
+	        empName: nickname.value,
+            empGender: gender.value,
+            empTel: emptel.value,
+            empMail: empmail.value,
+            empAcct: acct.value,
+            empPw: password.value,
+            empfun: empfun.value
+        }
+
+        await fetch('/BuyGo/EmpLoginApi/back_end/AddEmpServlet', {
+            method: 'POST',
+            body: JSON.stringify(getEmpAttri)
+        })
+    }
+</script>
+<script>
+    $('#btn1').click(function() {
+			alert('新增會員成功')})
+</script>
+</body>
+</html>

@@ -178,6 +178,7 @@
 		/* Image Slider CSS End */
 		/*-----------------燈箱css開始-----------------*/
 		#lightbox,
+		#gpaReach_lightbox,
 		#orderNowLightbox {
 			/*   border: 1px solid red; */
 			position: fixed;
@@ -194,6 +195,7 @@
 
 		/* 元素 article 置中及基本樣式 */
 		#lightbox>article,
+		#gpaReach_lightbox>article,
 		#orderNowLightbox>article {
 			background-color: white;
 			width: 90%;
@@ -269,11 +271,12 @@
 									<a href="javascript:void(0);" id="total-cart">
 										<i class="iconfont-shopping-cart round-icon"></i>
 									</a>
-	
+
 									<div id="sub-cart" class="sub-header">
 										<div class="cart-header">
 											<span>Your cart is currently empty.</span>
-											<small><a href="/BuyGo/front_end/pages/member/opa/cart/cart.html">(See All)</a></small>
+											<small><a href="/BuyGo/front_end/pages/member/opa/cart/cart.html">(See
+													All)</a></small>
 										</div>
 										<!-- <ul class="cart-items product-medialist unstyled clearfix"></ul> -->
 										<ul class="s-cart-items product-medialist unstyled clearfix"></ul>
@@ -492,9 +495,6 @@
 											<li><button id="Rp_btn" class="btn btn-default btn-lg btn-round add-to-cart"
 													style="background: #be3232">檢舉商品</button>
 											</li>
-											<li><a id="track" href="#"
-													class="btn btn-warning btn-lg btn-round add-to-cart">加入追蹤</a>
-											</li>
 											<li><a id="orderNow" href="#" class="btn btn-default btn-lg btn-round"
 													onclick="showOrderNow()">立即預定</a>
 											</li>
@@ -508,10 +508,10 @@
 									</figure>
 								</article>
 								<!-- 燈箱開始 -->
-								<!-- <div id="lightbox" class="none" style="z-index:9999;">
-									<article id="lightboxContentArea">
+								<!-- <div id="gpaReach_lightbox" class="none" style="z-index:9999;">
+									<article id="gpaReach_lightboxContentArea">
 										<div id="gpaReachList"></div>
-										<button id="lightbox_close">關閉</button>
+										<button id="gpaReach_lightbox_close">關閉</button>
 									</article>
 								</div> -->
 								<!-- 燈箱結束 -->
@@ -617,7 +617,8 @@
 									<div class="widget-content">
 										<div class="center-xs">
 											<div class="ads">
-												<a href="#"> <img src="/BuyGo/front_end/img/common/demo/images-footer.jpg"
+												<a href="#"> <img
+														src="/BuyGo/front_end/img/common/demo/images-footer.jpg"
 														alt="" />
 												</a>
 											</div>
@@ -661,10 +662,10 @@
 	</div>
 	<!-- // PAGE WRAPPER -->
 	<!-- 達標燈箱開始 -->
-	<div id="lightbox" class="none" style="z-index:9999;">
-		<article id="lightboxContentArea">
+	<div id="gpaReach_lightbox" class="none" style="z-index:9999;">
+		<article id="gpaReach_lightboxContentArea">
 			<div id="gpaReachList"></div>
-			<button id="lightbox_close">關閉</button>
+			<button id="gpaReach_lightbox_close">關閉</button>
 		</article>
 	</div>
 	<!-- 達標燈箱結束 -->
@@ -830,16 +831,11 @@
 					let gpaEndDateToDate = new Date(gpaEndDate);
 					let currentDate = new Date();
 					if (currentDate >= gpaEndDateToDate) { // 如果揪團已經截止，關閉按鈕的使用
-						$("a#rpProd").attr("disabled", "disabled");
 						$("a#orderNow").attr("disabled", "disabled");
-						$("a#track").attr("disabled", "disabled");
+						$("button#Rp_btn").attr("disabled", "disabled");
 						$("span#gpaEndDate").text(gpaEndDateToformatted + " (已截止)");
 						$("span#gpaEndDate").css("color", "red");
 					}
-
-					// if (gpaPreProd <= 0) { // 如果庫存數量小於等於0時，將預訂按鈕失效
-					// 	$("a#orderNow").attr("disabled", "disabled");
-					// }
 
 					$("button#addChatroom").attr("onclick", `addChatroom(${memberNo})`); // 於加入聊天室增加onclick事件，並回傳當前賣家的memberNo
 					$("button#addBlacklist").attr("onclick", `addBlacklist(${memberNo})`); // 於加入黑名單增加onclick事件，並回傳當前賣家的memberNo
@@ -1429,6 +1425,9 @@
 		}
 
 		function showGpaReach() {
+			$("#gpaReach_lightbox").removeClass("none"); // 顯示燈箱
+		}
+		function showGpaProdRp() {
 			$("#lightbox").removeClass("none"); // 顯示燈箱
 		}
 		function showOrderNow() {
@@ -1437,8 +1436,8 @@
 
 		// 燈箱事件開始
 		// 點擊 modal 中的半透明黑色區域，關閉達標燈箱
-		let lightbox_el = document.getElementById("lightbox");
-		lightbox_el.addEventListener("click", function () {
+		let gpaReach_lightbox_el = document.getElementById("gpaReach_lightbox");
+		gpaReach_lightbox_el.addEventListener("click", function () {
 			this.classList.add("none");
 		});
 		// 點擊 modal 中的半透明黑色區域，關閉預定燈箱
@@ -1446,33 +1445,46 @@
 		orderNowLightbox_el.addEventListener("click", function () {
 			this.classList.add("none");
 		});
+		// 點擊 modal 中的半透明黑色區域，關閉檢舉燈箱
+		let lightbox_el = document.getElementById("lightbox");
+		lightbox_el.addEventListener("click", function () {
+			this.classList.add("none");
+		});
 
 
 		// 點擊達標燈箱內的關閉按鈕，關閉達標燈箱
-		let lightbox_close_el = document.getElementById("lightbox_close");
-		lightbox_close_el.addEventListener("click", function () {
-			lightbox_el.classList.add("none");
+		let gpaReach_lightbox_close_el = document.getElementById("gpaReach_lightbox_close");
+		gpaReach_lightbox_close_el.addEventListener("click", function () {
+			gpaReach_lightbox_el.classList.add("none");
 		})
 		// 點擊預定燈箱內的關閉按鈕，關閉預定燈箱
 		let orderNowLightbox_close_el = document.getElementById("orderNowLightbox_close");
 		orderNowLightbox_close_el.addEventListener("click", function () {
 			orderNowLightbox_el.classList.add("none");
 		})
-
+		// 點擊檢舉燈箱內的關閉按鈕，關閉檢舉燈箱
+		let lightbox_close_el = document.getElementById("lightbox_close");
+		lightbox_close_el.addEventListener("click", function () {
+			lightbox_el.classList.add("none");
+		})
 
 		// 點擊達標燈箱中的白色區域，不會關掉 modal
-		lightbox_el.querySelector("article").addEventListener("click", function (e) {
+		gpaReach_lightbox_el.querySelector("article").addEventListener("click", function (e) {
 			e.stopPropagation();
 		});
 		// 點擊預定燈箱中的白色區域，不會關掉 modal
 		orderNowLightbox_el.querySelector("article").addEventListener("click", function (e) {
 			e.stopPropagation();
 		});
+		// 點擊達標燈箱中的白色區域，不會關掉 modal
+		lightbox_el.querySelector("article").addEventListener("click", function (e) {
+			e.stopPropagation();
+		});
 		// 燈箱事件結束
 		//=============檢舉功能================
 
 		document.getElementById('Rp_btn').addEventListener('click', function () {
-			showGpaReach();
+			showGpaProdRp();
 			const reportReason = document.getElementById("reportReason");
 			const reportContent = document.getElementById("reportContent");
 			const selectSausage = document.getElementById("selectSausage");
