@@ -27,7 +27,6 @@ public class ForumArticleManageServlet extends HttpServlet {
 		int memberNo = 1;
 		List<ForumArticleDTO> forumArticleslList = SERVICE.loadAllArticleInfo(memberNo);
 		
-		//List<ForumArticle> forumArticleslList = SERVICE.finAll();
 		
 		writePojo2Json(response, forumArticleslList);
 	}

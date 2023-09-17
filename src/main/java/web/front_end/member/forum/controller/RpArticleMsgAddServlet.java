@@ -27,12 +27,7 @@ public class RpArticleMsgAddServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		Integer memberNo = (Integer) (session.getAttribute("memberNo"));
 		
-		//測試用"登入功能加進來"(記得刪)
-		if (memberNo == null) {
-			memberNo = 1;
-		}
-		
-		
+	
 		if (rpArticleMsg == null) {
 			rpArticleMsg = new RpArticleMsg();
 			rpArticleMsg.setMessage("無論壇文章留言");

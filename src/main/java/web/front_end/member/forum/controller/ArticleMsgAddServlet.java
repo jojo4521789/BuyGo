@@ -28,16 +28,12 @@ public class ArticleMsgAddServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		Integer memberNo = (Integer) (session.getAttribute("memberNo"));
 		
-		//測試用"登入功能加進來"(記得刪)
-		if (memberNo == null) {
-			memberNo = 1;
-		}
 		
 		// 測試用的
 		System.out.println("articleMsg：" + articleMsg);
 		System.out.println("memberNo：" + memberNo);
 		
-		if (articleMsg == null) {
+		if (articleMsg == null || memberNo == null) {
 			articleMsg = new ArticleMsg();
 			articleMsg.setMessage("無論壇文章留言");
 			articleMsg.setSuccessful(false);

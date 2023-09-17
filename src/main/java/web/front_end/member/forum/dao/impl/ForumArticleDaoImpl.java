@@ -34,7 +34,6 @@ public class ForumArticleDaoImpl implements ForumArticleDao {
 	}
 
 	@Override
-	// 只改變文章狀態0 變 1
 	public int deleteById(Integer articleNo) {
 		final String hql = "DELETE ForumArticle WHERE articleNo = :articleNo";
 		int rowsUpdated = getSession().createQuery(hql).setParameter("articleNo", articleNo).executeUpdate();
@@ -87,7 +86,7 @@ public class ForumArticleDaoImpl implements ForumArticleDao {
 
 	@Override
 	public List<ForumArticle> selectAll() {
-		final String hq1 = "FROM ForumArticle WHERE articleStatus = 0";
+		final String hq1 = "FROM ForumArticle WHERE articleStatus = 0 ORDER BY articlePublish DESC";
 		return getSession().createQuery(hq1, ForumArticle.class).getResultList();
 
 	}
