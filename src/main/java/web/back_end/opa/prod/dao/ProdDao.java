@@ -16,11 +16,15 @@ public interface ProdDao extends CoreDao<Prod, Integer> {
 
 	List<Prod> selectByOpaProdNameWithLimit(String opaProdName, Integer limit, Integer offset);
 
+	List<Prod> selectByOpaPrcatsNoWithLimit(List<Integer> opaPrcatsNoList, Integer limit, Integer offset);
+
 	int getProdTotalQty();
 
 	int getProdTotalQtySelectByOpaProdName(String opaProdName);
 
+	int getProdTotalQtySelectByOpaPrcatsNo(List<Integer> opaPrcatsNoList);
+
 	List<Prod> getRandomProdsByPrcatsWithLimit(Integer opaProdNo, Integer opaPrcatsNo, Integer limit);
-	
+
 	List<Prod> getRandomProdsWithLimit(Integer limit);
 }

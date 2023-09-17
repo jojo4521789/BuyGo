@@ -100,4 +100,14 @@ public class ProdServiceImpl implements ProdService{
 		return dao.getRandomProdsWithLimit(limit);
 	}
 
+	@Override
+	public List<Prod> findByOpaPrcatsNoWithLimit(List<Integer> opaPrcatsNoList, Integer limit, Integer offset) {
+		return dao.selectByOpaPrcatsNoWithLimit(opaPrcatsNoList, limit, offset);
+	}
+
+	@Override
+	public int getProdTotalQtySelectByOpaPrcatsNo(List<Integer> opaPrcatsNoList) {
+		return dao.getProdTotalQtySelectByOpaPrcatsNo(opaPrcatsNoList);
+	}
+
 }

@@ -29,15 +29,11 @@ public class ProdDaoImpl implements ProdDao {
 	@Override
 	public int update(Prod prod) {
 		final StringBuilder hql = new StringBuilder().append("UPDATE Prod SET ");
-		hql.append("opaPrcatsNo= :opaPrcatsNo, ")
-			.append("opaProdName= :opaProdName, ")
-			.append("opaProdStockQty= :opaProdStockQty, ")
-			.append("opaProdShipQty= :opaProdShipQty, ")
-			.append("opaProdPrice= :opaProdPrice, ")
-			.append("opaProdContent= :opaProdContent, ")
-			.append("opaProdUrl= :opaProdUrl, ")
-			.append("opaProdStatus= :opaProdStatus ")
-			.append("WHERE opaProdNo= :opaProdNo");
+		hql.append("opaPrcatsNo= :opaPrcatsNo, ").append("opaProdName= :opaProdName, ")
+				.append("opaProdStockQty= :opaProdStockQty, ").append("opaProdShipQty= :opaProdShipQty, ")
+				.append("opaProdPrice= :opaProdPrice, ").append("opaProdContent= :opaProdContent, ")
+				.append("opaProdUrl= :opaProdUrl, ").append("opaProdStatus= :opaProdStatus ")
+				.append("WHERE opaProdNo= :opaProdNo");
 		Query<?> query = getSession().createQuery(hql.toString());
 		return query.setParameter("opaPrcatsNo", prod.getOpaPrcatsNo())
 				.setParameter("opaProdName", prod.getOpaProdName())
@@ -45,10 +41,8 @@ public class ProdDaoImpl implements ProdDao {
 				.setParameter("opaProdShipQty", prod.getOpaProdShipQty())
 				.setParameter("opaProdPrice", prod.getOpaProdPrice())
 				.setParameter("opaProdContent", prod.getOpaProdContent())
-				.setParameter("opaProdUrl", prod.getOpaProdUrl())
-				.setParameter("opaProdStatus", prod.getOpaProdStatus())
-				.setParameter("opaProdNo", prod.getOpaProdNo())
-				.executeUpdate();
+				.setParameter("opaProdUrl", prod.getOpaProdUrl()).setParameter("opaProdStatus", prod.getOpaProdStatus())
+				.setParameter("opaProdNo", prod.getOpaProdNo()).executeUpdate();
 	}
 
 	@Override
@@ -78,7 +72,7 @@ public class ProdDaoImpl implements ProdDao {
 		Session session = getSession();
 		Prod oldProd = session.get(Prod.class, prod.getOpaProdNo());
 		final Integer opaProdStatus = prod.getOpaProdStatus();
-		if(opaProdStatus != null) {
+		if (opaProdStatus != null) {
 			oldProd.setOpaProdStatus(opaProdStatus);
 		}
 		return 1;
@@ -98,10 +92,8 @@ public class ProdDaoImpl implements ProdDao {
 	@Override
 	public List<Prod> selectProdWithLimit(Integer limit, Integer offset) {
 		final String nativeSql = "SELECT * FROM OPA_PRODUCTS2 WHERE OPA_PROD_STATUS = 1 LIMIT :limit OFFSET :offset";
-		List<Prod> prods = getSession().createNativeQuery(nativeSql, Prod.class)
-				.setParameter("limit", limit)
-				.setParameter("offset", offset)
-				.getResultList();
+		List<Prod> prods = getSession().createNativeQuery(nativeSql, Prod.class).setParameter("limit", limit)
+				.setParameter("offset", offset).getResultList();
 		return prods;
 	}
 
@@ -109,10 +101,8 @@ public class ProdDaoImpl implements ProdDao {
 	public List<Prod> selectByOpaProdNameWithLimit(String opaProdName, Integer limit, Integer offset) {
 		final String nativeSql = "SELECT * FROM OPA_PRODUCTS2 WHERE OPA_PROD_STATUS = 1 AND OPA_PROD_NAME LIKE :opaProdName LIMIT :limit OFFSET :offset";
 		List<Prod> prods = getSession().createNativeQuery(nativeSql, Prod.class)
-				.setParameter("opaProdName", "%" + opaProdName + "%")
-				.setParameter("limit", limit)
-				.setParameter("offset", offset)
-				.getResultList();
+				.setParameter("opaProdName", "%" + opaProdName + "%").setParameter("limit", limit)
+				.setParameter("offset", offset).getResultList();
 		return prods;
 	}
 
@@ -124,28 +114,61 @@ public class ProdDaoImpl implements ProdDao {
 
 	@Override
 	public int getProdTotalQtySelectByOpaProdName(String opaProdName) {
-		Query<?> query = getSession().createNativeQuery("SELECT COUNT(*) FROM OPA_PRODUCTS2 WHERE OPA_PROD_STATUS = 1 AND OPA_PROD_NAME LIKE :opaProdName").setParameter("opaProdName", "%" + opaProdName + "%");
+		Query<?> query = getSession().createNativeQuery(
+				"SELECT COUNT(*) FROM OPA_PRODUCTS2 WHERE OPA_PROD_STATUS = 1 AND OPA_PROD_NAME LIKE :opaProdName")
+				.setParameter("opaProdName", "%" + opaProdName + "%");
 		return Integer.parseInt(query.getSingleResult().toString());
 	}
 
 	@Override
 	public List<Prod> getRandomProdsByPrcatsWithLimit(Integer opaProdNo, Integer opaPrcatsNo, Integer limit) {
 		final String nativeSql = "SELECT * FROM OPA_PRODUCTS2 WHERE OPA_PROD_STATUS = 1 AND OPA_PROD_NO <> :opaProdNo AND OPA_PRCATS_NO = :opaPrcatsNo ORDER BY RAND() LIMIT :limit";
-		List<Prod> prods = getSession().createNativeQuery(nativeSql, Prod.class)
-				.setParameter("opaProdNo", opaProdNo)
-				.setParameter("opaPrcatsNo", opaPrcatsNo)
-				.setParameter("limit", limit)
-				.getResultList();
+		List<Prod> prods = getSession().createNativeQuery(nativeSql, Prod.class).setParameter("opaProdNo", opaProdNo)
+				.setParameter("opaPrcatsNo", opaPrcatsNo).setParameter("limit", limit).getResultList();
 		return prods;
 	}
 
 	@Override
 	public List<Prod> getRandomProdsWithLimit(Integer limit) {
 		final String nativeSql = "SELECT * FROM OPA_PRODUCTS2 WHERE OPA_PROD_STATUS = 1 ORDER BY RAND() LIMIT :limit";
-		List<Prod> prods = getSession().createNativeQuery(nativeSql, Prod.class)
-				.setParameter("limit", limit)
+		List<Prod> prods = getSession().createNativeQuery(nativeSql, Prod.class).setParameter("limit", limit)
 				.getResultList();
 		return prods;
+	}
+
+	@Override
+	public List<Prod> selectByOpaPrcatsNoWithLimit(List<Integer> opaPrcatsNoList, Integer limit, Integer offset) {
+		StringBuffer sb = new StringBuffer("SELECT * FROM OPA_PRODUCTS2 WHERE OPA_PRCATS_NO IN (");
+		int count = 0;
+		int listSize = opaPrcatsNoList.size();
+		for (Integer opaPrcatsNo : opaPrcatsNoList) {
+			count++;
+			if (count < listSize) {
+				sb.append(opaPrcatsNo + ",");
+			} else {
+				sb.append(opaPrcatsNo + ") AND OPA_PROD_STATUS = 1 LIMIT :limit OFFSET :offset");
+			}
+		}
+		List<Prod> prods = getSession().createNativeQuery(sb.toString(), Prod.class).setParameter("limit", limit)
+				.setParameter("offset", offset).getResultList();
+		return prods;
+	}
+
+	@Override
+	public int getProdTotalQtySelectByOpaPrcatsNo(List<Integer> opaPrcatsNoList) {
+		StringBuffer sb = new StringBuffer("SELECT COUNT(*) FROM OPA_PRODUCTS2 WHERE OPA_PRCATS_NO IN (");
+		int count = 0;
+		int listSize = opaPrcatsNoList.size();
+		for (Integer opaPrcatsNo : opaPrcatsNoList) {
+			count++;
+			if (count < listSize) {
+				sb.append(opaPrcatsNo + ",");
+			} else {
+				sb.append(opaPrcatsNo + ") AND OPA_PROD_STATUS = 1");
+			}
+		}
+		Query<?> query = getSession().createNativeQuery(sb.toString());
+		return Integer.parseInt(query.getSingleResult().toString());
 	}
 
 }
