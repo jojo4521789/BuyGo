@@ -131,7 +131,7 @@ public class GpaProdDaoImpl implements GpaProdDao{
 
 	@Override
 	public int insert(GpaProd gpaProd) {
-		getSession().persist(gpaProd);
+		getSession().save(gpaProd);
 		return 1;
 	}
 	

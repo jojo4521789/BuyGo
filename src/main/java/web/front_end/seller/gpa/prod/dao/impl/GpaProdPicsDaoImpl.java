@@ -108,7 +108,7 @@ public class GpaProdPicsDaoImpl implements GpaProdPicsDao{
 
 	@Override
 	public int insert(GpaProdPics gpaProdPics) {
-		getSession().persist(gpaProdPics);
+		getSession().save(gpaProdPics);
 		return 1;
 	}
 
