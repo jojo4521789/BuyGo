@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <meta charset="UTF-8">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.0/dist/sweetalert2.all.min.js"></script>
 
 <head>
     <meta charset="UTF-8">
@@ -193,7 +194,6 @@
 </head>
 
 <body>
-    <h1>文章檢舉列表</h1>
     <table>
         <thead>
             <tr>
@@ -502,21 +502,25 @@
                 const articleRqNo = $("#articleRqNo").text();
                 const articleStatus = $("#rpArticleList").find("td.rpArticle-no:contains(" + articleRqNo + ")")
                     .siblings("td.green-text").length ? "1" : "0"; // Get articleStatus based on class
-
-                // 這里需要重新判斷
-                // if (selectedStatus !== articleStatus || selectForum === articleStatus) {
-                // alert("!! 1");
-                //return false; // 不關閉對話框
-                // }
-
                 // 檢查下拉選單的值
-                if ((selectResult === "1" || selectResult === "2") && selectedStatus !== "1") {
-                    // 如果選擇的是檢舉屬實或檢舉不屬實，但狀態不是已審核
-                    alert("!! 變更檢舉文章狀態:待審核 !! 不可修改");
+                // 檢查下拉選單的值
+                // 檢查下拉選單的值
+                if (
+                    (selectForum === "0" && selectedStatus === "0" && selectResult === "0") ||
+                    (selectForum === "0" && selectedStatus === "0" && selectResult === "1") ||
+                    (selectForum === "0" && selectedStatus === "0" && selectResult === "2")
+                ) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: '錯誤',
+                        text: '請確認變更狀態',
+                    });
                     return false; // 不關閉對話框
-                } else if (selectedStatus === "1" && selectResult === "0") {
-                    alert("!! 變更檢舉文章審核結果:尚未審核完畢 !! 不可修改");
-                    return false; // 不關閉對話框
+
+
+
+
+
                 } else {
                     // 在這里處理選定狀態的邏輯，例如發送到伺服器保存等
                     console.log("審核的狀態:", selectedStatus);
@@ -544,13 +548,27 @@
                     })
                         .then(response => response.json())
                         .then(data => {
-                            // 處理來自服務器的響應
+                            // 处理来自服务器的响应
                             console.log("檢舉文章數據:", data);
-                            // 根據需要執行其他操作
+
+                            Swal.fire({
+                                icon: 'success',
+                                title: '成功',
+                                text: '檢舉文章已成功更新',
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    $("#dialog").hide();
+                                    location.reload();
+                                }
+                            });
                         })
                         .catch(error => {
-                            // 處理錯誤
-                            console.error('Error updating data:', error);
+                            console.error('錯誤:', error);
+                            Swal.fire({
+                                icon: 'error',
+                                title: '錯誤',
+                                text: '更新檢舉文章失敗',
+                            });
                         });
 
 
@@ -575,6 +593,7 @@
                         .catch(error => {
                             // 處理錯誤
                             console.error('Error updating forum article data:', error);
+
                         });
 
                     // 關閉彈出對話框
