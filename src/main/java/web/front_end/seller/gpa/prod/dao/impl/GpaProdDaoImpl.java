@@ -1,23 +1,18 @@
 package web.front_end.seller.gpa.prod.dao.impl;
 
-import java.sql.Timestamp;
-import java.time.LocalDateTime;
 import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
-import web.front_end.member.black.dao.impl.BlacklistDaoImpl;
-import web.front_end.member.black.entity.Blacklist;
-import web.front_end.member.chat.entity.ChatroomMessage;
 import web.front_end.seller.gpa.prod.dao.GpaProdDao;
 import web.front_end.seller.gpa.prod.entity.GpaProd;
 
-public class GpaProdDaoImpl implements GpaProdDao{
+public class GpaProdDaoImpl implements GpaProdDao {
 	public static void main(String[] args) {
 		GpaProdDaoImpl gpaProdDaoImpl = new GpaProdDaoImpl();
-		
+
 		// 測試
 		// 新增insert
 //		Session session = gpaProdDaoImpl.getSession();
@@ -44,8 +39,8 @@ public class GpaProdDaoImpl implements GpaProdDao{
 //			session.getTransaction().rollback(); // 還原，同時會結束交易
 //			System.out.println("失敗");
 //		}
-		
-		//刪除deleteById
+
+		// 刪除deleteById
 //		Session session = gpaProdDaoImpl.getSession();
 //		
 //		try {
@@ -59,7 +54,7 @@ public class GpaProdDaoImpl implements GpaProdDao{
 //			session.getTransaction().rollback(); // 還原，同時會結束交易
 //			System.out.println("失敗");
 //		}
-		
+
 		// 修改update
 //		Session session = gpaProdDaoImpl.getSession();
 //		
@@ -78,18 +73,19 @@ public class GpaProdDaoImpl implements GpaProdDao{
 //		Transaction transaction = session.beginTransaction(); // 開始交易
 //		System.out.println(gpaProdDaoImpl.update(gpaProd));
 //		transaction.commit(); // 送交，同時會結束交易
-		
+
 		// 查詢selectById
 //		Session session = gpaProdDaoImpl.getSession();
 //		
 //		Transaction transaction = session.beginTransaction(); // 開始交易
-//		GpaProd gpaProd = gpaProdDaoImpl.selectById(3);
+//		GpaProd gpaProd = gpaProdDaoImpl.selectById(1);
 //		System.out.println("getGpaProdNo:" + gpaProd.getGpaProdNo());
 //		System.out.println("getMemberNo:" + gpaProd.getMemberNo());
 //		System.out.println("getGpaProdName:" + gpaProd.getGpaProdName());
 //		System.out.println("getGpaFirstPrice:" + gpaProd.getGpaFirstPrice());
+//		System.out.println("getGpaPreProd:" + gpaProd.getGpaPreProd());
 //		transaction.commit(); // 送交，同時會結束交易
-		
+
 		// 查詢selectAll
 //		Session session = gpaProdDaoImpl.getSession();
 //		
@@ -101,7 +97,7 @@ public class GpaProdDaoImpl implements GpaProdDao{
 //			System.out.println("GPA_PROD_NAME:" + gpaProd.getGpaProdName());
 //		}
 //		transaction.commit(); // 送交，同時會結束交易
-		
+
 		// 查詢selectByMemberNo
 //		Session session = gpaProdDaoImpl.getSession();
 //		
@@ -114,7 +110,7 @@ public class GpaProdDaoImpl implements GpaProdDao{
 //			System.out.println("gpaPreProd:" + gpaProd.getGpaPreProd());
 //		}
 //		transaction.commit(); // 送交，同時會結束交易
-		
+
 		// 查詢selectByProdName
 //		Session session = gpaProdDaoImpl.getSession();
 //		
@@ -127,6 +123,30 @@ public class GpaProdDaoImpl implements GpaProdDao{
 //			System.out.println("gpaPreProd:" + gpaProd.getGpaPreProd());
 //		}
 //		transaction.commit(); // 送交，同時會結束交易
+
+		// 查詢randomSelectByGpaCatsNo
+//		Session session = gpaProdDaoImpl.getSession();
+//
+//		Transaction transaction = session.beginTransaction(); // 開始交易
+//		List<GpaProd> gpaProdList = gpaProdDaoImpl.randomSelectByGpaCatsNo(18);
+//		System.out.println("gpaProdList.size():" + gpaProdList.size());
+//		for (GpaProd gpaProd : gpaProdList) {
+//			System.out.println("------------");
+//			System.out.print("gpaProdNo:" + gpaProd.getGpaProdNo() + ",");
+//			System.out.print("memberNo:" + gpaProd.getMemberNo() + ",");
+//			System.out.print("gpaProdName:" + gpaProd.getGpaProdName() + ",");
+//			System.out.println("gpaPreProd:" + gpaProd.getGpaPreProd());
+//			System.out.println("------------");
+//		}
+//		transaction.commit(); // 送交，同時會結束交易
+
+		// 修改updateGpaPreProdByGpaProdNo
+		Session session = gpaProdDaoImpl.getSession();
+
+		Transaction transaction = session.beginTransaction(); // 開始交易
+		int result = gpaProdDaoImpl.updateGpaPreProdByGpaProdNo(3, 150);
+		System.out.println("result:" + result);
+		transaction.commit();
 	}
 
 	@Override
@@ -134,7 +154,7 @@ public class GpaProdDaoImpl implements GpaProdDao{
 		getSession().persist(gpaProd);
 		return 1;
 	}
-	
+
 	@Override
 	public int deleteById(Integer id) {
 		Session session = getSession();
@@ -147,18 +167,13 @@ public class GpaProdDaoImpl implements GpaProdDao{
 	public int update(GpaProd entity) {
 		final String hql = "UPDATE GpaProd SET memberNo = :memberNo, gpaCatsNo = :gpaCatsNo, gpaProdName = :gpaProdName, gpaFirstPrice = :gpaFirstPrice, gpaMiniCount = :gpaMiniCount, gpaMaxCount = :gpaMaxCount, gpaPreProd = :gpaPreProd, gpaProdContent = :gpaProdContent, gpaEndDate = :gpaEndDate WHERE gpaProdNo = :gpaProdNo";
 		Query<?> query = getSession().createQuery(hql);
-		return query
-				.setParameter("gpaProdNo", entity.getGpaProdNo())
-				.setParameter("memberNo", entity.getMemberNo())
-				.setParameter("gpaCatsNo", entity.getGpaCatsNo())
-				.setParameter("gpaProdName", entity.getGpaProdName())
+		return query.setParameter("gpaProdNo", entity.getGpaProdNo()).setParameter("memberNo", entity.getMemberNo())
+				.setParameter("gpaCatsNo", entity.getGpaCatsNo()).setParameter("gpaProdName", entity.getGpaProdName())
 				.setParameter("gpaFirstPrice", entity.getGpaFirstPrice())
 				.setParameter("gpaMiniCount", entity.getGpaMiniCount())
-				.setParameter("gpaMaxCount", entity.getGpaMaxCount())
-				.setParameter("gpaPreProd", entity.getGpaPreProd())
+				.setParameter("gpaMaxCount", entity.getGpaMaxCount()).setParameter("gpaPreProd", entity.getGpaPreProd())
 				.setParameter("gpaProdContent", entity.getGpaProdContent())
-				.setParameter("gpaEndDate", entity.getGpaEndDate())
-				.executeUpdate();
+				.setParameter("gpaEndDate", entity.getGpaEndDate()).executeUpdate();
 	}
 
 	@Override
@@ -169,26 +184,31 @@ public class GpaProdDaoImpl implements GpaProdDao{
 	@Override
 	public List<GpaProd> selectAll() {
 		final String hql = "FROM GpaProd ORDER BY gpaProdNo";
-		return getSession()
-				.createQuery(hql, GpaProd.class)
-				.getResultList();
+		return getSession().createQuery(hql, GpaProd.class).getResultList();
 	}
-	
+
 	@Override
-	public List<GpaProd> selectByMemberNo(Integer memberNo){
+	public List<GpaProd> selectByMemberNo(Integer memberNo) {
 		final String hql = "FROM GpaProd WHERE memberNo = :memberNo ORDER BY gpaProdNo";
-		return getSession()
-				.createQuery(hql, GpaProd.class)
-				.setParameter("memberNo", memberNo)
-				.getResultList();
+		return getSession().createQuery(hql, GpaProd.class).setParameter("memberNo", memberNo).getResultList();
 	}
-	
+
 	@Override
-	public List<GpaProd> selectByProdName(String prodName){
+	public List<GpaProd> selectByProdName(String prodName) {
 		final String hql = "FROM GpaProd WHERE gpaProdName = :gpaProdName ORDER BY gpaProdNo";
-		return getSession()
-				.createQuery(hql, GpaProd.class)
-				.setParameter("gpaProdName", prodName)
-				.getResultList();
+		return getSession().createQuery(hql, GpaProd.class).setParameter("gpaProdName", prodName).getResultList();
+	}
+
+	@Override
+	public List<GpaProd> randomSelectByGpaCatsNo(Integer gpaCatsNo) {
+		final String hql = "FROM GpaProd WHERE gpaCatsNo = :gpaCatsNo ORDER BY RAND()";
+		return getSession().createQuery(hql, GpaProd.class).setParameter("gpaCatsNo", gpaCatsNo).getResultList();
+	}
+
+	@Override
+	public int updateGpaPreProdByGpaProdNo(Integer gpaProdNo, Integer gpaPreProd) {
+		final String hql = "UPDATE GpaProd SET gpaPreProd = :gpaPreProd WHERE gpaProdNo = :gpaProdNo";
+		Query<?> query = getSession().createQuery(hql);
+		return query.setParameter("gpaPreProd", gpaPreProd).setParameter("gpaProdNo", gpaProdNo).executeUpdate();
 	}
 }

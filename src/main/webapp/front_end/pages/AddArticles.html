@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<!--[if IE 7 ]><html class="ie ie7 lte9 lte8 lte7" lang="en-US"><![endif]-->
+<!--[if IE 8]><html class="ie ie8 lte9 lte8" lang="en-US">	<![endif]-->
+<!--[if IE 9]><html class="ie ie9 lte9" lang="en-US"><![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!-->
+<html class="noIE" lang="en-US"><!--<![endif]-->
+
+
+<head>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.0/dist/sweetalert2.min.css">
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.0/dist/sweetalert2.all.min.js"></script>
+
+	<style>
+		.logo img {
+			max-width: 200px;
+			max-height: 150px;
+		}
+
+		.user-menu a img {
+			max-width: 20px;
+			max-height: 20px;
+		}
+
+		ul.user_menu>ul>a {
+			color: #ef7700;
+			font-weight: bold;
+			font-size: 25px;
+		}
+
+		a:hover {
+			color: #0150ed;
+		}
+
+		/* 燈箱樣式 */
+		.lightbox {
+			display: none;
+			position: fixed;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			background-color: rgba(0, 0, 0, 0.7);
+			z-index: 1;
+		}
+
+		.lightbox-content {
+			background: color 0;
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+			padding: 20px;
+			box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+			text-align: center;
+		}
+
+		.close-button {
+			position: absolute;
+			top: 10px;
+			right: 10px;
+			font-size: 24px;
+			cursor: pointer;
+			color: #333;
+			/* 添加颜色样式 */
+		}
+
+		/* 隱藏 input file 樣式 */
+		input[type="file"] {
+			display: none;
+		}
+
+		.upload-button {
+			background-color: #007bff;
+			color: #fff;
+			padding: 10px 20px;
+			cursor: pointer;
+		}
+
+		/* 預覽圖片的樣式 */
+		.preview-image {
+			max-width: 300px;
+			max-height: 300px;
+			margin-top: 10px;
+		}
+
+		.center-inputs {
+			text-align: left;
+			/* 文字居中 */
+			width: 100%;
+			/* 宽度占满父容器 */
+			margin-bottom: 20px;
+			/* 可选的底部间距，根据需要进行调整 */
+		}
+
+		.center-inputs label {
+			display: block;
+			/* 将标签转换为块元素，以使其垂直居中 */
+			margin-bottom: 10px;
+			/* 可选的标签底部间距，根据需要进行调整 */
+		}
+
+		.center-inputs input[type="text"],
+		.center-inputs textarea {
+			width: 100%;
+			/* 输入框宽度占满父容器 */
+			padding: 10px;
+			/* 可选的填充，根据需要进行调整 */
+			box-sizing: border-box;
+			/* 防止填充和边框增加宽度 */
+		}
+
+		/* 修改按钮样式 */
+		.submit-button {
+			background-color: #4CAF50;
+			color: white;
+			border: none;
+			padding: 10px 20px;
+			text-align: center;
+			text-decoration: none;
+			display: inline-block;
+			font-size: 16px;
+			margin: 5px;
+			cursor: pointer;
+			border-radius: 5px;
+		}
+
+		.cancel-button {
+			background-color: #f44336;
+			color: white;
+			border: none;
+			padding: 10px 20px;
+			text-align: center;
+			text-decoration: none;
+			display: inline-block;
+			font-size: 16px;
+			margin: 5px;
+			cursor: pointer;
+			border-radius: 5px;
+		}
+
+		/* 提示框样式 */
+		.success-box {
+			background-color: #4CAF50;
+			color: white;
+			border: none;
+			font-size: 30px;
+			padding: 30px;
+			text-align: center;
+			display: none;
+			/* 默认隐藏 */
+		}
+	</style>
+	<meta charset="UTF-8" />
+	<title>GFashion - Responsive e-commerce HTML Template</title>
+	<meta name="description" content="" />
+	<meta name="keywords" content="" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<script src="https://kit.fontawesome.com/f8d426f7f0.js" crossorigin="anonymous"></script>
+	<!-- Favorite Icons -->
+	<link rel="icon" href="../img/common/favicon/favicon.html" type="image/x-icon" />
+	<link rel="apple-touch-icon-precomposed" sizes="144x144"
+		href="../img/common/favicon/apple-touch-icon-144x144-precomposed.html">
+	<link rel="apple-touch-icon-precomposed" sizes="72x72"
+		href="../img/common/favicon/apple-touch-icon-72x72-precomposed.html">
+	<link rel="apple-touch-icon-precomposed" href="../img/common/favicon/apple-touch-icon-precomposed.html">
+	<!-- // Favorite Icons -->
+
+	<!--<link href='http://fonts.useso.com/css?family=Open+Sans:300,400,600,700' rel='stylesheet' type='text/css'>-->
+
+	<!-- GENERAL CSS FILES -->
+	<link rel="stylesheet" href="../css/common/minified.css">
+	<!-- // GENERAL CSS FILES -->
+
+	<!--[if IE 8]>
+		<script src="js/respond.min.js"></script>
+		<script src="js/selectivizr-min.js"></script>
+	<![endif]-->
+	<!--
+	<script src="js/jquery.min.js"></script>
+	-->
+	<script>window.jQuery || document.write('<script src="../js/common/jquery.min.js"><\/script>');</script>
+	<script src="../js/common/modernizr.min.js"></script>
+	<!-- PARTICULAR PAGES CSS FILES -->
+	<link rel="stylesheet" href="../css/common/innerpage.css">
+	<!-- // PARTICULAR PAGES CSS FILES -->
+	<link rel="stylesheet" href="../css/common/responsive.css">
+</head>
+
+<body>
+
+	<!-- PAGE WRAPPER -->
+	<div id="page-wrapper">
+
+		<!-- SITE HEADER -->
+		<header id="site-header" role="banner">
+			<!-- HEADER TOP -->
+			<div class="header-top">
+				<div class="container">
+					<div class="row">
+						<div class="col-xs-12 col-sm-6 col-md-7">
+							<!-- CONTACT INFO -->
+							<div class="contact-info">
+								<i class="iconfont-headphones round-icon"></i>
+								<strong>(03)425-1108</strong>
+								<span>(Mon- Fri: 09.00 - 21.00)</span>
+							</div>
+							<!-- // CONTACT INFO -->
+						</div>
+						<div class="col-xs-12 col-sm-6 col-md-5">
+							<ul class="actions unstyled clearfix">
+								<li>
+									<!-- SEARCH BOX -->
+									<div class="search-box">
+										<form action="#" method="post">
+											<div class="input-iconed prepend">
+												<button class="input-icon"><i class="iconfont-search"></i></button>
+												<label for="input-search" class="placeholder">Search here…</label>
+												<input type="text" name="q" id="input-search"
+													class="round-input full-width" required />
+											</div>
+										</form>
+									</div>
+									<!-- // SEARCH BOX -->
+								</li>
+								<li data-toggle="sub-header" data-target="#sub-social">
+									<!-- SOCIAL ICONS -->
+									<a href="javascript:void(0);" id="social-icons">
+										<i class="iconfont-share round-icon"></i>
+									</a>
+
+									<div id="sub-social" class="sub-header">
+										<ul class="social-list unstyled text-center">
+											<li><a href="#"><i class="iconfont-facebook round-icon"></i></a></li>
+											<li><a href="#"><i class="iconfont-twitter round-icon"></i></a></li>
+											<li><a href="#"><i class="iconfont-google-plus round-icon"></i></a></li>
+											<li><a href="#"><i class="iconfont-pinterest round-icon"></i></a></li>
+											<li><a href="#"><i class="iconfont-rss round-icon"></i></a></li>
+										</ul>
+									</div>
+									<!-- // SOCIAL ICONS -->
+								</li>
+								<li data-toggle="sub-header" data-target="#sub-cart">
+									<!-- SHOPPING CART -->
+									<a href="javascript:void(0);" id="total-cart">
+										<i class="iconfont-shopping-cart round-icon"></i>
+									</a>
+
+									<div id="sub-cart" class="sub-header">
+										<div class="cart-header">
+											<span>Your cart is currently empty.</span>
+											<small><a href="/BuyGo/front_end/pages/member/opa/cart/cart.html">(See
+													All)</a></small>
+										</div>
+										<!-- <ul class="cart-items product-medialist unstyled clearfix"></ul> -->
+										<ul class="s-cart-items product-medialist unstyled clearfix"></ul>
+										<div class="cart-footer">
+											<!-- <div class="cart-total clearfix">
+                                                <span class="pull-left uppercase">Total</span>
+                                                <span class="pull-right total">$ 0</span>
+                                            </div> -->
+											<div class="s-cart-total clearfix">
+												<span class="pull-left uppercase">Total</span>
+												<span class="pull-right total">$ 0</span>
+											</div>
+											<div class="text-right">
+												<a href="/BuyGo/front_end/pages/member/opa/cart/cart.html"
+													class="btn btn-default btn-round view-cart">查看購物車</a>
+											</div>
+										</div>
+									</div>
+									<!-- // SHOPPING CART -->
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+
+				<!-- ADD TO CART MESSAGE -->
+				<div class="cart-notification">
+					<ul class="unstyled"></ul>
+				</div>
+				<!-- // ADD TO CART MESSAGE -->
+			</div>
+			<!-- // HEADER TOP -->
+			<!-- MAIN HEADER -->
+			<div class="main-header-wrapper">
+				<div class="container">
+					<div class="main-header">
+						<!-- CURRENCY / LANGUAGE / USER MENU -->
+						<div class="actions">
+							<div class="center-xs">
+
+							</div>
+							<div class="clearfix"></div><br>
+							<!-- USER RELATED MENU -->
+							<nav id="tiny-menu" class="clearfix">
+								<ul class="user-menu">
+									<li><a href="../pages/member/myaccount.html" class="personal">我的帳戶<img
+												src="/BuyGo/front_end/img/common/head.png"></a>
+									</li>
+									<!-- <li><a href="pages/member/opa/cart/cart.html" class="paymoney">結帳<img
+												src="../front_end/img/common/paymoney.png"></a></li> -->
+									<li id="logInAndLogOut"><a href="../pages/member/login.html" class="loginOut">登入<img
+												src="/BuyGo/front_end/img/common/login.png"></a>
+									</li>
+								</ul><br>
+							</nav>
+							<!-- // USER RELATED MENU -->
+						</div>
+						<!-- // CURRENCY / LANGUAGE / USER MENU -->
+						<!-- SITE LOGO -->
+						<div class="logo-wrapper">
+							<a href="/BuyGo/front_end/index.html" class="logo">
+								<img src="/BuyGo/front_end/img/common/buygo.png" />
+							</a>
+						</div>
+						<!-- // SITE LOGO -->
+						<!-- SITE NAVIGATION MENU -->
+						<nav id="site-menu" role="navigation">
+							<ul class="main-menu hidden-sm hidden-xs">
+								<li class="active">
+									<a href="/BuyGo/front_end/index.html">首頁</a>
+								</li>
+								<li>
+									<a href="/BuyGo/front_end/pages/guest/pa/prods/prods.html">一般賣場</a>
+								</li>
+								<li>
+									<a href="/BuyGo/front_end/pages/guest/opa/prods/prods.html">官方賣場</a>
+								</li>
+								<li>
+									<a href="/BuyGo/front_end/pages/guest/gpa/prods/prods.html">揪團賣場</a>
+								</li>
+								<li>
+									<a href="/BuyGo/front_end/pages/Articles.html">論壇</a>
+								</li>
+							</ul>
+
+							<!-- MOBILE MENU -->
+							<div id="mobile-menu" class="dl-menuwrapper visible-xs visible-sm">
+								<button class="dl-trigger"><i class="iconfont-reorder round-icon"></i></button>
+
+							</div>
+							<!-- // MOBILE MENU -->
+
+						</nav>
+						<!-- // SITE NAVIGATION MENU -->
+					</div>
+				</div>
+			</div>
+			<!-- // MAIN HEADER -->
+		</header>
+		<!-- // SITE HEADER -->
+
+		<!-- BREADCRUMB -->
+		<div class="breadcrumb-container">
+			<div class="container">
+				<div class="relative">
+					<ul class="bc push-up unstyled clearfix">
+						<li><a href="/BuyGo/front_end/index.html">首頁</a></li>
+						<li><a href="/BuyGo/front_end/pages/Articles.html">論壇</a></li>
+						<li class="active">新增文章</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<!-- // BREADCRUMB -->
+
+		<!-- SITE MAIN CONTENT -->
+		<main id="main-content" role="main">
+			<div class="container">
+				<h1>新增文章</h1>
+				<form id="articleForm" action="ForumServlet" method="post" enctype="multipart/form-data">
+					<div class="center-inputs">
+						<label for="title">標題:</label>
+						<input type="text" id="title" name="title">
+					</div>
+
+					<div class="center-inputs">
+						<label for="content">內容:</label>
+						<textarea id="content" name="content" rows="4" cols="50"></textarea>
+					</div>
+					<br><br>
+					<!-- 使用 Font Awesome 图标替代确认和取消按钮 -->
+					<button type="submit" class="submit-button"><i class="fas fa-check"></i> 送出</button>
+					<button type="button" class="cancel-button" onclick="cancelForm()"><i class="fas fa-times"></i>
+						取消</button>
+				</form>
+				<div id="lightbox" class="lightbox">
+					<div class="lightbox-content">
+						<!-- 使用 Font Awesome 图标替代关闭按钮 -->
+						<span class="close-button" onclick="closeLightbox()"><i class="fas fa-times"></i></span>
+						<!-- 提示框样式 -->
+						<div class="success-box" id="successBox">
+							<i class="fas fa-check-circle"></i> 提交成功！
+						</div>
+					</div>
+				</div>
+
+
+
+				</section>
+				<!-- // ACCORDION -->
+
+				</section>
+
+			</div>
+	</div>
+	</main>
+	<!-- // SITE MAIN CONTENT -->
+
+	<!-- SITE FOOTER -->
+	<footer class="page-footer">
+
+		<!-- WIDGET AREA -->
+		<div class="widgets">
+
+			<!-- FIRST ROW -->
+
+			<!-- // FIRST ROW -->
+
+			<!-- SECOND ROW -->
+			<div class="section">
+				<div class="container">
+					<div class="row">
+
+						<div class="col-xs-12 col-sm-12 col-md-5">
+							<section class="widget widget-menu">
+								<h5 class="widget-title">Contact info</h5>
+								<div class="widget-content">
+									<ul class="menu iconed-list unstyled">
+										<li><span class="list-icon"><i
+													class="round-icon iconfont-map-marker"></i></span>
+											<div class="list-content">中壢區復興路 46 號緯育 TibaMe 附設中壢職訓中心 9 樓</div>
+										</li>
+										<li><span class="list-icon"><i class="round-icon iconfont-phone"></i></span>
+											<div class="list-content">(03) 425-1108</div>
+										</li>
+										<li><span class="list-icon"><i
+													class="round-icon iconfont-envelope-alt"></i></span>
+											<div class="list-content">tibamecha102g6@gmail.com</div>
+										</li>
+									</ul>
+								</div>
+							</section>
+						</div>
+
+						<div class="col-xs-12 col-sm-12 col-md-6">
+							<section class="widget widget-ads">
+								<div class="widget-content">
+									<div class="center-xs">
+										<div class="ads">
+											<a href="#"> <img src="/BuyGo/front_end/img/common/demo/images-footer.jpg"
+													alt="" />
+											</a>
+										</div>
+									</div>
+								</div>
+							</section>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- // SECOND ROW -->
+
+		</div>
+		<!-- // WIDGET AREA -->
+
+		<div class="footer-sub">
+			<div class="container">
+				<div class="row">
+					<div class="col-xs-12 col-sm-6">
+						<div class="footer-links center-xs clearfix">
+							<ul class="unstyled">
+								<li><a href="/BuyGo/front_end/pages/guest/selectFirstFAQ.html">FAQ</a></li>
+							</ul>
+						</div>
+						<div class="space10"></div>
+						<div class="copyright center-xs">
+							<p>(c) 2023</p>
+						</div>
+					</div>
+
+					<div class="space40 visible-xs"></div>
+
+
+				</div>
+			</div>
+		</div>
+
+	</footer>
+	<!-- // SITE FOOTER -->
+
+	</div>
+	<!-- // PAGE WRAPPER -->
+
+	<!-- Essential Javascripts -->
+	<script src="../js/common/minified.js"></script>
+	<!-- // Essential Javascripts -->
+	<script src="../js/login.js"></script>
+
+	<script>
+		checkLoginStatusShowMemberAcct(); // 檢查客戶帳號是否登入，修改頁面右上方Log In/Log Out按鈕，顯示登入者帳號名稱
+		function cancelForm() {
+			// 清空標題和內容輸入框
+			$("#title").val('');
+			$("#content").val('');
+		}
+
+		function showLightbox() {
+			// 顯示燈箱
+			var lightbox = document.getElementById("lightbox");
+			lightbox.style.display = "block";
+		}
+
+		function closeLightbox() {
+			// 關閉燈箱並清空內容
+			var lightbox = document.getElementById("lightbox");
+			lightbox.style.display = "none";
+
+			// 清空標題和內容輸入框
+			$("#title").val('');
+			$("#content").val('');
+		}
+
+		$(document).ready(function () {
+			$("form").submit(function (event) {
+				event.preventDefault(); // 阻止表單自動提交
+
+				var title = $("#title").val(); //把文章標題的值,指定給title變數
+				var content = $("#content").val(); //把文章內容的值,指定給content變數
+
+				if (title.trim() === '' || content.trim() === '') {
+					Swal.fire({
+						icon: 'error',
+						title: '錯誤',
+						text: '標題和內容不能為空',
+					});
+					return; // 阻止表單提交
+				}
+
+				var formData = {
+					articleTitle: title,
+					articleContent: content
+				};
+
+				fetch("/BuyGo/needLoginApi/forumArticle/add", {
+					method: "POST",
+					headers: {
+						'Content-Type': 'application/json;charset=UTF-8' // 修正 Content-Type
+					},
+					//前端傳到後端
+					body: JSON.stringify(formData)
+				})
+					//後端回傳到前端
+					.then(response => {
+						if (response.status === 401) {
+							// 客戶未登入，執行頁面重定向到登入頁
+							notLoggedInAction();
+						} else if (response.ok) {
+							// 請求成功
+							return response.json();
+						} else {
+							alert("錯誤狀態:" + response.status);
+							return;
+						}
+					})
+					.then(data => {
+						// 在這裡處理後端返回的數據
+						console.log(data);
+						Swal.fire({
+							icon: 'success',
+							title: '成功',
+							text: '文章已成功提交',
+						});
+						$("#title").val('');
+						$("#content").val('');
+					})
+					.catch(error => {
+						console.error("錯誤:", error);
+					});
+			});
+		});
+	</script>
+</body>
+
+</html>

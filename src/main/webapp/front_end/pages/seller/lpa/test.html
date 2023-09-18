@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>取消訂單申請</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <h1>取消訂單申請</h1>
+
+    <form id="cancelOrderForm">
+        <label for="orderNumber">訂單編號：</label>
+        <input type="text" id="orderNumber" name="orderNumber" required><br><br>
+
+        <label for="reason">取消原因：</label>
+        <select id="reason" name="reason" required>
+            <option value="更改送貨地址">需要更改送貨地址</option>
+            <option value="買家未回應我的詢問">賣家未回應我的詢問</option>
+            <option value="修改現有訂單">修改現有訂單</option>
+            <option value="其他/改變主意">其他/改變主意</option>
+        </select><br><br>
+
+        <input type="submit" value="提交申請">
+    </form>
+
+    <div id="confirmationMessage" style="display:none;">
+        <p>您的取消訂單申請已提交。</p>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            $('#cancelOrderForm').submit(function (event) {
+                event.preventDefault();
+
+                // 獲取表單數據
+                const orderNumber = $('#orderNumber').val();
+                const reason = $('#reason').val();
+
+                // 在這裡執行提交取消訂單申請的邏輯
+                // 可以將數據發送到後端API並等待回應
+
+                // 顯示確認消息
+                $('#confirmationMessage').css('display', 'block');
+            });
+        });
+    </script>
+</body>
+</html>

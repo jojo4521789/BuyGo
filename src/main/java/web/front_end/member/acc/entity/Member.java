@@ -1,9 +1,5 @@
 package web.front_end.member.acc.entity;
 
-import java.sql.Date;
-import java.sql.Timestamp;
-import java.time.LocalDate;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -21,7 +17,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Member extends Core{
+public class Member extends Core {
 	private static final long serialVersionUID = 1457755989409740329L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -44,7 +40,7 @@ public class Member extends Core{
 	@Column(name = "MEMBER_GENDER")
 	private Integer memberGender;
 	@Column(name = "MEMBER_BIRTHDAY")
-	private Date memberBirthday;
+	private String memberBirthday;
 	@Column(name = "MEMBER_ID")
 	private String memberId;
 	@Column(name = "MEMBER_EVA_STAR", insertable = false)
@@ -55,7 +51,8 @@ public class Member extends Core{
 	private Integer sellerEvaStar;
 	@Column(name = "SELLER_EVA_COUNT", insertable = false)
 	private Integer sellerEvaCount;
-
+	@Column(name = "MEMBER_WALLET_AMOUNT", insertable = false)
+	private Double memberWalletAmount;
 	
-}
 
+}

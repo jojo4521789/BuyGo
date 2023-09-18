@@ -17,27 +17,6 @@ public class CouponServiceImpl implements CouponService{
 	
 	@Override
 	public Coupon add(Coupon coupon) {
-		if(coupon.getOpaCouponName() == null) {
-			coupon.setMessage("優惠券名稱未輸入");
-			coupon.setSuccessful(false);
-			return coupon;
-		}
-		if(coupon.getOpaDiscountAmo() == null) {
-			coupon.setMessage("優惠券折扣金額未輸入");
-			coupon.setSuccessful(false);
-			return coupon;
-		}
-		if(coupon.getOpaMinAmount() == null) {
-			coupon.setMessage("最低訂單金額未輸入");
-			coupon.setSuccessful(false);
-			return coupon;
-		}
-		if(coupon.getOpaExpDate() == null) {
-			coupon.setMessage("優惠券有效期限未輸入");
-			coupon.setSuccessful(false);
-			return coupon;
-		}
-		
 		if(dao.selectByOpaCouponName(coupon.getOpaCouponName()) != null) {
 			coupon.setMessage("優惠券名稱重複");
 			coupon.setSuccessful(false);
@@ -71,5 +50,10 @@ public class CouponServiceImpl implements CouponService{
 	@Override
 	public boolean remove(Integer opaCouponNo) {
 		return dao.deleteById(opaCouponNo) > 0;
+	}
+
+	@Override
+	public List<Coupon> findPart(String input) {
+		return dao.selectByOpaCouponNameList(input);
 	}
 }

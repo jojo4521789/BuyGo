@@ -7,7 +7,7 @@
 
 <head>
 	<meta charset="UTF-8" />
-	<title>GFashion - Responsive e-commerce HTML Template</title>
+	<title>BuyGo - 我的帳戶 - 揪團訂單追蹤</title>
 	<meta name="description" content="" />
 	<meta name="keywords" content="" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -16,7 +16,8 @@
 	<link rel="icon" href="../../../img/common/favicon/favicon.html" type="image/x-icon" />
 	<link rel="apple-touch-icon-precomposed" sizes="144x144"
 		href="../../../img/common/favicon/apple-touch-icon-144x144-precomposed.html">
-	<link rel="apple-touch-icon-precomposed" sizes="72x72" href="../../../img/common/favicon/apple-touch-icon-72x72-precomposed.html">
+	<link rel="apple-touch-icon-precomposed" sizes="72x72"
+		href="../../../img/common/favicon/apple-touch-icon-72x72-precomposed.html">
 	<link rel="apple-touch-icon-precomposed" href="../../../img/common/favicon/apple-touch-icon-precomposed.html">
 	<!-- // Favorite Icons -->
 
@@ -87,6 +88,27 @@
 
 		/*-----------------評價 & 燈箱css結束-----------------*/
 	</style>
+	<style>
+		.logo img {
+			max-width: 200px;
+			max-height: 150px;
+		}
+
+		.user-menu a img {
+			max-width: 20px;
+			max-height: 20px;
+		}
+
+		ul.user-menu>li>a {
+			color: #ef7700;
+			font-weight: bold;
+			font-size: 25px;
+		}
+
+		a:hover {
+			color: #0150ed;
+		}
+	</style>
 </head>
 
 <body>
@@ -104,7 +126,7 @@
 							<!-- CONTACT INFO -->
 							<div class="contact-info">
 								<i class="iconfont-headphones round-icon"></i>
-								<strong>+444 (100) 1234</strong>
+								<strong>(03)425-1108</strong>
 								<span>(Mon- Fri: 09.00 - 21.00)</span>
 							</div>
 							<!-- // CONTACT INFO -->
@@ -130,7 +152,7 @@
 									<a href="javascript:void(0);" id="social-icons">
 										<i class="iconfont-share round-icon"></i>
 									</a>
-
+	
 									<div id="sub-social" class="sub-header">
 										<ul class="social-list unstyled text-center">
 											<li><a href="#"><i class="iconfont-facebook round-icon"></i></a></li>
@@ -147,21 +169,26 @@
 									<a href="javascript:void(0);" id="total-cart">
 										<i class="iconfont-shopping-cart round-icon"></i>
 									</a>
-
+	
 									<div id="sub-cart" class="sub-header">
 										<div class="cart-header">
 											<span>Your cart is currently empty.</span>
-											<small><a href="../../../pages/member/cart.html">(See All)</a></small>
+											<small><a href="/BuyGo/front_end/pages/member/opa/cart/cart.html">(See All)</a></small>
 										</div>
-										<ul class="cart-items product-medialist unstyled clearfix"></ul>
+										<!-- <ul class="cart-items product-medialist unstyled clearfix"></ul> -->
+										<ul class="s-cart-items product-medialist unstyled clearfix"></ul>
 										<div class="cart-footer">
-											<div class="cart-total clearfix">
+											<!-- <div class="cart-total clearfix">
+												<span class="pull-left uppercase">Total</span>
+												<span class="pull-right total">$ 0</span>
+											</div> -->
+											<div class="s-cart-total clearfix">
 												<span class="pull-left uppercase">Total</span>
 												<span class="pull-right total">$ 0</span>
 											</div>
 											<div class="text-right">
-												<a href="../../../pages/member/cart.html" class="btn btn-default btn-round view-cart">View
-													Cart</a>
+												<a href="/BuyGo/front_end/pages/member/opa/cart/cart.html"
+													class="btn btn-default btn-round view-cart">查看購物車</a>
 											</div>
 										</div>
 									</div>
@@ -171,7 +198,7 @@
 						</div>
 					</div>
 				</div>
-
+	
 				<!-- ADD TO CART MESSAGE -->
 				<div class="cart-notification">
 					<ul class="unstyled"></ul>
@@ -186,39 +213,29 @@
 						<!-- CURRENCY / LANGUAGE / USER MENU -->
 						<div class="actions">
 							<div class="center-xs">
-								<!-- CURRENCY -->
-								<ul class="option-list unstyled">
-									<li class="active"><a href="#" data-toggle="tooltip" title="USD - US Dollar">$</a>
-									</li>
-									<li><a href="#" data-toggle="tooltip" title="GBP - British Pound">lb</a></li>
-									<li><a href="#" data-toggle="tooltip" title="EUR - Euro">EUR</a></li>
-								</ul>
-								<!-- // CURRENCY -->
-								<!-- LANGUAGES -->
-								<ul class="option-list unstyled">
-									<li class="active"><a href="#" data-toggle="tooltip" title="English">EN</a></li>
-									<li><a href="#" data-toggle="tooltip" title="French">FR</a></li>
-									<li><a href="#" data-toggle="tooltip" title="Deutsch">DE</a></li>
-								</ul>
-								<!-- // LANGUAGES -->
+	
 							</div>
-							<div class="clearfix"></div>
+							<div class="clearfix"></div><br>
 							<!-- USER RELATED MENU -->
 							<nav id="tiny-menu" class="clearfix">
 								<ul class="user-menu">
-									<li><a href="../../../pages/member/myaccount.html">My Account</a></li>
-									<li><a href="../../../pages/member/cart.html">My Wishlist</a></li>
-									<li><a href="../../../pages/member/checkout.html">Checkout</a></li>
-									<li><a href="#">Log Out</a></li>
-								</ul>
+									<li><a href="pages/member/myaccount.html" class="personal">我的帳戶<img
+												src="/BuyGo/front_end/img/common/head.png"></a>
+									</li>
+									<!-- <li><a href="pages/member/opa/cart/cart.html" class="paymoney">結帳<img
+												src="../front_end/img/common/paymoney.png"></a></li> -->
+									<li id="logInAndLogOut"><a href="pages/member/login.html" class="loginOut">登入<img
+												src="/BuyGo/front_end/img/common/login.png"></a>
+									</li>
+								</ul><br>
 							</nav>
 							<!-- // USER RELATED MENU -->
 						</div>
 						<!-- // CURRENCY / LANGUAGE / USER MENU -->
 						<!-- SITE LOGO -->
 						<div class="logo-wrapper">
-							<a href="../../../index-2.html" class="logo" title="GFashion - Responsive e-commerce HTML Template">
-								<img src="../../../img/common/logo.png" alt="GFashion - Responsive e-commerce HTML Template" />
+							<a href="/BuyGo/front_end/index.html" class="logo">
+								<img src="/BuyGo/front_end/img/common/buygo.png" />
 							</a>
 						</div>
 						<!-- // SITE LOGO -->
@@ -226,144 +243,29 @@
 						<nav id="site-menu" role="navigation">
 							<ul class="main-menu hidden-sm hidden-xs">
 								<li class="active">
-									<a href="../../../index.html">Home</a>
+									<a href="/BuyGo/front_end/index.html">首頁</a>
 								</li>
 								<li>
-									<a href="../../../pages/guest/products.html">Women</a>
+									<a href="/BuyGo/front_end/pages/guest/pa/prods/prods.html">一般賣場</a>
 								</li>
 								<li>
-									<a href="../../../pages/guest/products.html">Men</a>
-
-									<!-- MEGA MENU -->
-									<div class="mega-menu" data-col-lg="9" data-col-md="12">
-										<div class="row">
-
-											<div class="col-md-3">
-												<h4 class="menu-title">Clothing</h4>
-												<ul class="mega-sub">
-													<li><a href="../../../pages/guest/products.html">Casual Wear</a></li>
-													<li><a href="../../../pages/guest/products.html">Evening Wear</a></li>
-													<li><a href="../../../pages/guest/products.html">Formal Attire</a></li>
-													<li><a href="../../../pages/guest/products.html">Womens Jeans</a></li>
-													<li><a href="../../../pages/guest/products.html">Mens Jeans</a></li>
-													<li><a href="../../../pages/guest/products.html">Fall Styles</a></li>
-												</ul>
-											</div>
-
-											<div class="col-md-3">
-												<h4 class="menu-title">Accessories</h4>
-												<ul class="mega-sub">
-													<li><a href="../../../pages/guest/products.html">Casual Wear</a></li>
-													<li><a href="../../../pages/guest/products.html">Evening Wear</a></li>
-													<li><a href="../../../pages/guest/products.html">Formal Attire</a></li>
-													<li><a href="../../../pages/guest/products.html">Womens Jeans</a></li>
-													<li><a href="../../../pages/guest/products.html">Mens Jeans</a></li>
-													<li><a href="../../../pages/guest/products.html">Fall Styles</a></li>
-												</ul>
-											</div>
-
-											<div class="col-md-3">
-												<h4 class="menu-title">Brands</h4>
-												<ul class="mega-sub">
-													<li><a href="../../../pages/guest/products.html">Casual Wear</a></li>
-													<li><a href="../../../pages/guest/products.html">Evening Wear</a></li>
-													<li><a href="../../../pages/guest/products.html">Formal Attire</a></li>
-													<li><a href="../../../pages/guest/products.html">Womens Jeans</a></li>
-													<li><a href="../../../pages/guest/products.html">Mens Jeans</a></li>
-													<li><a href="../../../pages/guest/products.html">Fall Styles</a></li>
-												</ul>
-											</div>
-
-											<div class="col-md-3">
-												<div class="carousel slide m-b" data-ride="carousel">
-													<div class="carousel-inner">
-														<div class="item active">
-															<img src="../../../img/common/men/slide1.jpg" alt="" />
-														</div>
-														<div class="item">
-															<img src="../../../img/common/men/slide2.jpg" alt="" />
-														</div>
-													</div>
-												</div>
-												<h5 class="text-semibold uppercase m-b-sm">Featured Products</h5>
-												<p>Lorem ipsum dolor sit, consectetur adipiscing elit. Etiam neque
-													velit, blandit sed scelerisque.</p>
-												<a href="../../../pages/guest/products.html" class="btn btn-default btn-round">Go to Shop
-													→</a>
-											</div>
-
-										</div>
-									</div>
-									<!-- // MEGA MENU -->
-
+									<a href="/BuyGo/front_end/pages/guest/opa/prods/prods.html">官方賣場</a>
 								</li>
 								<li>
-									<a href="../../../pages/components.html">Components</a>
+									<a href="/BuyGo/front_end/pages/guest/gpa/prods/prods.html">揪團賣場</a>
 								</li>
 								<li>
-									<a href="../../../pages/guest/store-locator.html">Store Locator</a>
-								</li>
-								<li>
-									<a href="../../../pages/guest/contact-us.html">Contact Us</a>
-								</li>
-								<li>
-									<a href="#">Buy Me!</a>
+									<a href="/BuyGo/front_end/pages/Articles.html">論壇</a>
 								</li>
 							</ul>
-
+	
 							<!-- MOBILE MENU -->
 							<div id="mobile-menu" class="dl-menuwrapper visible-xs visible-sm">
 								<button class="dl-trigger"><i class="iconfont-reorder round-icon"></i></button>
-								<ul class="dl-menu">
-									<li class="active">
-										<a href="javsacript:void(0);">Home</a>
-									</li>
-									<li>
-										<a href="javsacript:void(0);">Women</a>
-									</li>
-									<li>
-										<a href="javsacript:void(0);">Men</a>
-
-										<ul class="dl-submenu">
-											<li>
-												<a href="../../../pages/guest/products.html">Clothing</a>
-												<ul class="dl-submenu">
-													<li><a href="../../../pages/guest/products.html">Casual Wear</a></li>
-													<li><a href="../../../pages/guest/products.html">Evening Wear</a></li>
-													<li><a href="../../../pages/guest/products.html">Formal Attire</a></li>
-													<li><a href="../../../pages/guest/products.html">Womens Jeans</a></li>
-													<li><a href="../../../pages/guest/products.html">Mens Jeans</a></li>
-													<li><a href="../../../pages/guest/products.html">Fall Styles</a></li>
-												</ul>
-											</li>
-											<li>
-												<a href="../../../pages/guest/products.html">Accessories</a>
-												<ul class="dl-submenu">
-													<li><a href="../../../pages/guest/products.html">Casual Wear</a></li>
-													<li><a href="../../../pages/guest/products.html">Evening Wear</a></li>
-													<li><a href="../../../pages/guest/products.html">Formal Attire</a></li>
-													<li><a href="../../../pages/guest/products.html">Womens Jeans</a></li>
-													<li><a href="../../../pages/guest/products.html">Mens Jeans</a></li>
-													<li><a href="../../../pages/guest/products.html">Fall Styles</a></li>
-												</ul>
-											</li>
-											<li>
-												<a href="../../../pages/guest/products.html">Brands</a>
-												<ul class="dl-submenu">
-													<li><a href="../../../pages/guest/products.html">Casual Wear</a></li>
-													<li><a href="../../../pages/guest/products.html">Evening Wear</a></li>
-													<li><a href="../../../pages/guest/products.html">Formal Attire</a></li>
-													<li><a href="../../../pages/guest/products.html">Womens Jeans</a></li>
-													<li><a href="../../../pages/guest/products.html">Mens Jeans</a></li>
-													<li><a href="../../../pages/guest/products.html">Fall Styles</a></li>
-												</ul>
-											</li>
-										</ul>
-									</li>
-								</ul>
+	
 							</div>
 							<!-- // MOBILE MENU -->
-
+	
 						</nav>
 						<!-- // SITE NAVIGATION MENU -->
 					</div>
@@ -378,8 +280,8 @@
 			<div class="container">
 				<div class="relative">
 					<ul class="bc unstyled clearfix">
-						<li><a href="#">Home</a></li>
-						<li class="active">MY ACCOUNT</li>
+						<li><a href="../../../index.html">首頁</a></li>
+						<li class="active">我的帳戶</li>
 					</ul>
 				</div>
 			</div>
@@ -396,23 +298,28 @@
 						<!-- SIDEBAR -->
 						<aside class="col-xs-12 col-sm-4 col-md-3">
 							<section class="side-section">
-								<h3 class="uppercase text-bold"><span class="text-xs">MyAccount Pages</span></h3>
+								<h3 class="uppercase text-bold"><span class="text-xs">我的帳戶</span></h3>
 
 								<ul class="nav nav-tabs nav-stacked">
-									<li><a href="#">個人資料</a></li>
-									<li><a href="#">最新消息</a></li>
-									<li><a href="gpaOrder.html">訂單追蹤</a></li>
-									<li><a href="#">已收藏的項目</a></li>
-									<li><a href="#">優惠券</a></li>
-									<li><a href="#">我的評價</a></li>
-									<li><a href="#">平台錢包</a></li>
-									<li><a href="#">聊天室</a></li>
-									<li><a href="../../../pages/member/blacklist.html">黑名單</a></li>
+									<li><a href="/BuyGo/front_end/pages/member/EditMember.html">個人資料</a></li>
+									<li><a href="/BuyGo/front_end/pages/member/pa/order/ListOrders.html">訂單追蹤</a></li>
+									<li><a href="/BuyGo/front_end/pages/member/pa/req/MemberAllPaReq.html">一般代購委託單查詢</a>
+									</li>
+									<li><a href="/BuyGo/front_end/pages/member/opa/add_request.html">官方平台委託單申請</a></li>
+									<li><a href="/BuyGo/front_end/pages/member/opa/request.html">官方平台委託單瀏覽</a></li>
+									<li><a href="/BuyGo/front_end/pages/member/mycoupon.html">優惠券</a></li>
+									<li><a href="/BuyGo/front_end/pages/member/wallet.html">平台錢包</a></li>
+									<li><a href="/BuyGo/front_end/pages/member/chatroom.html">聊天室</a></li>
+									<li><a href="/BuyGo/front_end/pages/member/blacklist.html">黑名單</a></li>
+									<li><a href="/BuyGo/front_end/pages/member/myCollListforum.html">我的收藏文章</a></li>
+									<li><a href="/BuyGo/front_end/pages/member/myforum.html">我的文章</a></li>
+									<br>
+									<li><a href="/BuyGo/front_end/pages/member/myShop.html">我的賣場</a></li>
 								</ul>
 							</section>
 
 							<!-- PROMO -->
-							<div class="promo inverse-background"
+							<!-- <div class="promo inverse-background"
 								style="background: url('../../../img/common/demo/Barn-Dress-Girl_t.jpg') no-repeat; background-size: auto 100%;">
 								<div class="inner text-center np">
 									<div class="ribbon">
@@ -423,7 +330,7 @@
 												class="iconfont-caret-right"></i><span> Shop Now</span></a>
 									</div>
 								</div>
-							</div>
+							</div> -->
 							<!-- // PROMO -->
 						</aside>
 						<!-- // SIDEBAR -->
@@ -434,13 +341,13 @@
 									<h3 class="uppercase text-bold"><span class="text-xs">訂單追蹤</span></h3>
 									<!-- 訂單分類的賣場選擇 -->
 									<button type="button" class="btn btn-primary"
-										onclick="window.location.href='../../../index.html'">一般代購</button>
-									<button type="button" class="btn btn-primary"
-										onclick="window.location.href='../../../index.html'">限時連線代購</button>
+										onclick="window.location.href='../../../pages/member/pa/order/ListOrders.html'">一般代購</button>
 									<button type="button" class="btn btn-success">揪團</button>
 									<button type="button" class="btn btn-primary"
-										onclick="window.location.href='../../../index.html'">平台代購</button>
+										onclick="window.location.href='../../../pages/member/opa/order.html'">平台代購</button>
 									<hr>
+									<input type="text" id="search" class="form-control" style="margin-bottom: 20px;"
+										placeholder="以商品名稱或訂單編號搜尋">
 									<!--訂單分類列表-->
 									<ul class="nav nav-tabs">
 										<li class="active"><a href="javascript:void(0)" onclick="changePage(0)"
@@ -461,37 +368,78 @@
 												data-toggle="tab">未完成取貨</a></li>
 									</ul>
 									<div id="showOrderArea">
-										<!-- <div class="tab-pane fade in active" id="tab-1">
-											<p>tab1</p>
+										<!-- 假資料開始 -->
+										<!-- <div class="tab-content" id="orderId1" style="position:relative;width:770px;height:190px;margin-bottom:20px;display:flex; flex-direction:column">
+											<a href="#" class="orderDetail" style="position:absolute;left:0px; top:0px;width:100%;height:120px;">
+												<div class="col-xs-12 col-sm-12" style="width:100%;height:120px;">
+													<img src="#" style="width:80px;height:80px;border:1.5px solid LightGray;position:absolute;left:20px; top:20px;" alt="GFashion - Responsive e-commerce HTML Template">
+													<h4 class="prodName" style="position:absolute;left:120px; top:20px;">雨傘</h4>
+													<span style="position:absolute;left:120px; top:80px;">x3</span>
+													<span style="position:absolute;right:10px; top:10px;">賣家名稱：雨傘王</span>
+													<span class="soNo" style="position:absolute;right:10px; top:35px;">訂單編號：1000</span>
+													<div style="position:absolute;right:10px; top:90px;">揪團截止時間：2023-08-19</div>
+												</div>
+												<hr style="margin:0px;border:1px solid lightgray">
+											</a>
+											<div class="col-xs-12 col-sm-12 orderPrice" style="width:770px;height:69px;position:absolute;left:0px; top:121px;">
+													<h4 style="position:absolute;right:10px; top:20px;">訂單金額：$900</h4>
+											</div>
 										</div>
-										<div class="tab-pane fade" id="tab-2">
-											<p>tab2</p>
+										<div class="tab-content" id="orderId2" style="position:relative;width:770px;height:190px;margin-bottom:20px;display:flex; flex-direction:column">
+											<a href="#" class="orderDetail" style="position:absolute;left:0px; top:0px;width:100%;height:120px;">
+												<div class="col-xs-12 col-sm-12" style="width:100%;height:120px;">
+													<img src="#" style="width:80px;height:80px;border:1.5px solid LightGray;position:absolute;left:20px; top:20px;" alt="GFashion - Responsive e-commerce HTML Template">
+													<h4 class="prodName" style="position:absolute;left:120px; top:20px;">小雨傘</h4>
+													<span style="position:absolute;left:120px; top:80px;">x6</span>
+													<span style="position:absolute;right:10px; top:10px;">賣家名稱：David</span>
+													<span class="soNo" style="position:absolute;right:10px; top:35px;">訂單編號：16</span>
+													<div style="position:absolute;right:10px; top:90px;">揪團截止時間：2023-08-19</div>
+												</div>
+												<hr style="margin:0px;border:1px solid lightgray">
+											</a>
+											<div class="col-xs-12 col-sm-12 orderPrice" style="width:770px;height:69px;position:absolute;left:0px; top:121px;">
+													<h4 style="position:absolute;right:10px; top:20px;">訂單金額：$1200</h4>
+											</div>
 										</div>
-										<div class="tab-pane fade" id="tab-3">
-											<p>tab3</p>
-										</div>
-										<div class="tab-pane fade" id="tab-4">
-											<p>tab4</p>
-										</div>
-										<div class="tab-pane fade" id="tab-5">
-											<p>tab5</p>
-										</div>
-										<div class="tab-pane fade" id="tab-6">
-											<p>tab6</p>
-										</div>
-										<div class="tab-pane fade" id="tab-7">
-											<p>tab7</p>
-										</div>
-										<div class="tab-pane fade" id="tab-8">
-											<p>tab8</p>
+										<div class="tab-content" id="orderId3" style="position:relative;width:770px;height:190px;margin-bottom:20px;display:flex; flex-direction:column">
+											<a href="#" class="orderDetail" style="position:absolute;left:0px; top:0px;width:100%;height:120px;">
+												<div class="col-xs-12 col-sm-12" style="width:100%;height:120px;">
+													<img src="#" style="width:80px;height:80px;border:1.5px solid LightGray;position:absolute;left:20px; top:20px;" alt="GFashion - Responsive e-commerce HTML Template">
+													<h4 class="prodName" style="position:absolute;left:120px; top:20px;">沐浴乳</h4>
+													<span style="position:absolute;left:120px; top:80px;">x1</span>
+													<span style="position:absolute;right:10px; top:10px;">賣家名稱：雨傘王</span>
+													<span class="soNo" style="position:absolute;right:10px; top:35px;">訂單編號：15</span>
+													<div style="position:absolute;right:10px; top:90px;">揪團截止時間：2023-08-19</div>
+												</div>
+												<hr style="margin:0px;border:1px solid lightgray">
+											</a>
+											<div class="col-xs-12 col-sm-12 orderPrice" style="width:770px;height:69px;position:absolute;left:0px; top:121px;">
+													<h4 style="position:absolute;right:10px; top:20px;">訂單金額：$100</h4>
+											</div>
 										</div> -->
+										<!-- 假資料結束 -->
 									</div>
+									<!-- 分頁 -->
+									<ul class="paginator li-m-r-l pull-right" id="pageBtnContainer">
+										<li id="previousPageBtn"><a class="round-icon" href="#" data-toggle="tooltip"
+												data-title="Previous Page"><i class="iconfont-angle-left"></i></a></li>
+										<li class="numOfPagesClass" id="pageBtn1" style="display: none"><a
+												href="#">1</a></li>
+										<li class="numOfPagesClass" id="pageBtn2" style="display: none"><a
+												href="#">2</a></li>
+										<li class="numOfPagesClass" id="pageBtn3" style="display: none"><a
+												href="#">3</a></li>
+										<li class="numOfPagesClass" id="pageBtn4" style="display: none"><a
+												href="#">4</a></li>
+										<li class="numOfPagesClass" id="pageBtn5" style="display: none"><a
+												href="#">5</a></li>
+										<li id="nextPageBtn"><a class="round-icon" href="#" data-toggle="tooltip"
+												data-title="Next Page"><i class="iconfont-angle-right"></i></a></li>
+									</ul>
 								</div>
 							</div>
 						</div>
-
 					</div>
-
 				</div>
 			</div>
 
@@ -505,67 +453,7 @@
 			<div class="widgets">
 
 				<!-- FIRST ROW -->
-				<div class="section">
-					<div class="container">
-						<div class="row">
 
-							<div class="col-xs-12 col-sm-6 col-md-3">
-								<section class="widget widget-text">
-									<h5 class="widget-title">our store</h5>
-									<div class="widget-content">
-										<p>Sed ornare cras donec litora integer curabitur orci, at nullam aliquam libero
-											nam himenaeos, amet massa amet ut ipsum viverra mauris rhoncus neque aenean
-											rhoncus gravida orci facilisis quis dui consectetur.</p>
-										<p>Nisi porttitor inceptos consectetur donec orci, dui ipsum leo class gravida,
-											felis primis viverra placerat.</p>
-									</div>
-								</section>
-							</div>
-
-							<div class="col-xs-12 col-sm-6 col-md-3">
-								<section class="widget widget-text">
-									<h5 class="widget-title">Opening Time</h5>
-									<div class="widget-content">
-										<p>Monday-Friday:-------------------------9.00 to 18.00</p>
-										<p>Saturday:--------------------------------10.00 to 16.00</p>
-										<p>Sunday:----------------------------------10.00 to 16.00</p>
-										<br />
-										<p>Every 30 day of month Lorem ipsum dolor sit amet, consectetur adipiscing.</p>
-									</div>
-								</section>
-							</div>
-
-							<div class="space40 visible-sm clearfix"></div>
-
-							<div class="col-xs-12 col-sm-6 col-md-3">
-								<section class="widget widget-menu">
-									<h5 class="widget-title">information</h5>
-									<div class="widget-content">
-										<ul class="menu iconed-menu unstyled">
-											<li><a href="#"><i class="iconfont-circle-blank menu-icon"></i>Affiliate</a>
-											</li>
-											<li><a href="#"><i class="iconfont-circle-blank menu-icon"></i>Shipping</a>
-											</li>
-											<li><a href="#"><i class="iconfont-circle-blank menu-icon"></i>Shop
-													support</a></li>
-											<li><a href="#"><i class="iconfont-circle-blank menu-icon"></i>Customer
-													Service</a></li>
-											<li><a href="#"><i class="iconfont-circle-blank menu-icon"></i>Payment &
-													Return</a></li>
-											<li><a href="#"><i class="iconfont-circle-blank menu-icon"></i>Terms &
-													Conditions</a></li>
-										</ul>
-									</div>
-								</section>
-							</div>
-
-							<div class="col-xs-12 col-sm-6 col-md-3">
-								facebook
-							</div>
-
-						</div>
-					</div>
-				</div>
 				<!-- // FIRST ROW -->
 
 				<!-- SECOND ROW -->
@@ -573,25 +461,21 @@
 					<div class="container">
 						<div class="row">
 
-							<div class="col-xs-12 col-sm-12 col-md-3">
+							<div class="col-xs-12 col-sm-12 col-md-5">
 								<section class="widget widget-menu">
 									<h5 class="widget-title">Contact info</h5>
 									<div class="widget-content">
 										<ul class="menu iconed-list unstyled">
-											<li>
-												<span class="list-icon"><i
+											<li><span class="list-icon"><i
 														class="round-icon iconfont-map-marker"></i></span>
-												<div class="list-content">Lorem ipsum maecenas dapibus luctus euismod
-													133/2 New York City</div>
+												<div class="list-content">中壢區復興路 46 號緯育 TibaMe 附設中壢職訓中心 9 樓</div>
 											</li>
-											<li>
-												<span class="list-icon"><i class="round-icon iconfont-phone"></i></span>
-												<div class="list-content">(+00)1344356-675</div>
+											<li><span class="list-icon"><i class="round-icon iconfont-phone"></i></span>
+												<div class="list-content">(03) 425-1108</div>
 											</li>
-											<li>
-												<span class="list-icon"><i
+											<li><span class="list-icon"><i
 														class="round-icon iconfont-envelope-alt"></i></span>
-												<div class="list-content">support@themina.net</div>
+												<div class="list-content">tibamecha102g6@gmail.com</div>
 											</li>
 										</ul>
 									</div>
@@ -603,42 +487,14 @@
 									<div class="widget-content">
 										<div class="center-xs">
 											<div class="ads">
-												<a href="#">
-													<img src="../../../img/common/demo/images-footer.jpg" alt="" />
+												<a href="#"> <img src="/BuyGo/front_end/img/common/demo/images-footer.jpg"
+														alt="" />
 												</a>
-												<div class="ads-caption bottom-right">
-													<a href="#" class="btn btn-default btn-round">
-														<i class="round-icon iconfont-angle-right"></i>
-														<span class="inline-middle">Show More</span>
-													</a>
-												</div>
 											</div>
 										</div>
 									</div>
 								</section>
 							</div>
-
-							<div class="col-xs-12 col-sm-12 col-md-3">
-								<section class="widget widget-subscription">
-									<h5 class="widget-title">Newletter</h5>
-									<div class="widget-content">
-										<p>Subscribe to be the first to know about Sales, Events, and Exclusive Offers!
-										</p>
-										<form action="#" method="post">
-											<div class="input-group">
-												<label for="subscription-email" class="placeholder">Enter Your
-													Email</label>
-												<input type="email" id="subscription-email" name="email"
-													class="form-control" required />
-												<span class="input-group-btn">
-													<button class="btn btn-primary">Subscribe</button>
-												</span>
-											</div>
-										</form>
-									</div>
-								</section>
-							</div>
-
 						</div>
 					</div>
 				</div>
@@ -653,32 +509,18 @@
 						<div class="col-xs-12 col-sm-6">
 							<div class="footer-links center-xs clearfix">
 								<ul class="unstyled">
-									<li><a href="#">Site Map</a></li>
-									<li><a href="#">FAQ</a></li>
-									<li><a href="#">Work for us</a></li>
-									<li><a href="#">Contact Us</a></li>
+									<li><a href="/BuyGo/front_end/pages/guest/selectFirstFAQ.html">FAQ</a></li>
 								</ul>
 							</div>
 							<div class="space10"></div>
 							<div class="copyright center-xs">
-								<p>(c) 2013 More Templates <a href="http://www.cssmoban.com/" target="_blank"
-										title="模板之家">模板之家</a> - Collect from <a href="http://www.cssmoban.com/"
-										title="网页模板" target="_blank">网页模板</a>. All Rights Reserved.</p>
+								<p>(c) 2023</p>
 							</div>
 						</div>
 
 						<div class="space40 visible-xs"></div>
 
-						<div class="col-xs-12 col-sm-6 center-xs">
-							<div class="pull-right">
-								<div class="vmid">
-									<span class="uppercase">Payment Accept&emsp;</span>
-									<a href="#"><img src="../../../img/common/visacard.png" alt="" width="40" /></a>
-									<a href="#"><img src="../../../img/common/mastercard.png" alt="" width="40" /></a>
-									<a href="#"><img src="../../../img/common/paypal.png" alt="" width="40" /></a>
-								</div>
-							</div>
-						</div>
+
 					</div>
 				</div>
 			</div>
@@ -700,52 +542,182 @@
 	<!--<script src="http://maps.googleapis.com/maps/api/js?sensor=false" type="text/javascript"></script>-->
 	<!-- <script src="js/gmap3.min.js"></script> -->
 	<!-- // Particular Page Javascripts -->
+	<script src="../../../js/login.js"></script>
 	<script>
-		$("#orderPageBtn1").click(); // 載入頁面時即觸發點即按鈕事件，以觸發撈取資料庫的動作
+		let currentgpaSoStat = 0; // 全域變數，用來記錄當前訂單狀態，每次切換訂單狀態時會更新此變數
+		checkLoginStatusShowMemberAcct(); // 檢查客戶帳號是否登入，修改頁面右上方Log In/Log Out按鈕，顯示登入者帳號名稱
+		changePage(0); // 載入頁面時即觸發更換頁面事件，以觸發撈取資料庫的動作
 
 		function changePage(selectPage) { // 點擊訂單狀態切換按鈕的觸發事件，依點擊按鈕的不同有不同的selectPage值
 			$("#showOrderArea").children().remove(); // 清空showOrderArea下的所有子元素
+			$("#search").val(""); // 清空搜尋框
+			currentgpaSoStat = selectPage; // 更新當前訂單狀態至全域變數
+			getPageData(1, ""); // 載入頁面時即觸發取得第一頁分頁資料的請求
+		}
+		//-----------------分頁功能開始-------------------
+		function getPageData(searchPageNum, searchStr) {
+			// 清空分頁按鈕
+			$("li#previousPageBtn").html("");
+			$("li#pageBtn1").html("");
+			$("li#pageBtn2").html("");
+			$("li#pageBtn3").html("");
+			$("li#pageBtn4").html("");
+			$("li#pageBtn5").html("");
+			$("li#nextPageBtn").html("");
 
+			// 使用fetch取得總訂單數
+			fetch('/BuyGo/needLoginApi/front_end/loadGpaSoCountByMemberNoAndSoStatAndSearchStr', {
+				method: 'POST',
+				headers: { 'Content-Type': 'application/json;charset:utf-8' },
+				body: JSON.stringify({
+					gpaSoStat: currentgpaSoStat,
+					searchStr: searchStr
+				})
+			})
+				.then(response => {
+					if (response.status === 401) {
+						// 客戶未登入，執行頁面重定向到登入頁
+						notLoggedInAction();
+					} else if (response.ok) {
+						// 請求成功
+						return response.json();
+					} else {
+						alert("錯誤狀態:" + response.status);
+						return;
+					}
+				})
+				.then(body => {
+					let { gpaSoCount } = body; // gpaSoCount為總訂單數
+
+					// 設定項開始
+					let limit = 5; // 設定每頁顯示的訂單筆數
+					// 設定項結束
+
+					let createNumOfPage = 1; // 更新最大需創建的頁面數，1為暫定，後續將計算後的最大創建頁面數設置於此變數
+					let offset = parseInt((searchPageNum - 1) * limit);
+
+					// 更新最大需創建的頁面數
+					if (gpaSoCount % limit === 0) { // 若總訂單數可被每頁顯示訂單數整除
+						createNumOfPage = parseInt(gpaSoCount / limit);
+					}
+					else {
+						createNumOfPage = parseInt(gpaSoCount / limit) + 1; // 若總訂單數不可被每頁顯示訂單數整除，再加1
+					}
+					// 新建分頁按鈕開始
+					// 視當前頁面頁數，顯示前後各2頁跳頁按鈕(頁數按鈕不為負數、頁數按鈕不超過最大頁數)，並於當前頁數加上底線
+					if (parseInt(createNumOfPage) < 5) {
+						for (let i = 1; i <= parseInt(createNumOfPage); i++) {
+							$(`li#pageBtn${i}`).append(`
+								<a href="#" onclick="getPageData(${i}, '${searchStr}')">${i}</a>
+							`);
+							$(`li#pageBtn${i}`).css("display", "inline-block"); // 顯示出有使用到的li標籤
+						}
+					}
+					else {
+						for (let i = 1; i <= 5; i++) {
+							if (searchPageNum < 3) {
+								$(`li#pageBtn${i}`).append(`
+									<a href="#" onclick="getPageData(${i}, '${searchStr}')">${i}</a>
+								`);
+								$(`li#pageBtn${i}`).css("display", "inline-block"); // 顯示出有使用到的li標籤
+							}
+							else if ((parseInt(i + searchPageNum - 3) <= createNumOfPage) && ((parseInt(createNumOfPage) - parseInt(searchPageNum)) >= 2)) {
+								$(`li#pageBtn${i}`).append(`
+									<a href="#" onclick="getPageData(${i + searchPageNum - 3}, '${searchStr}')">${i + searchPageNum - 3}</a>
+								`);
+								$(`li#pageBtn${i}`).css("display", "inline-block"); // 顯示出有使用到的li標籤
+							}
+							else {
+								$(`li#pageBtn${i}`).append(`
+									<a href="#" onclick="getPageData(${i + createNumOfPage - 5}, '${searchStr}')">${i + createNumOfPage - 5}</a>
+								`);
+								$(`li#pageBtn${i}`).css("display", "inline-block"); // 顯示出有使用到的li標籤
+							}
+						}
+					}
+					for (let i = 0; i < 5; i++) { // 將該分頁的數字按鈕加上底線
+						getPageBtn = $("ul#pageBtnContainer").find("li.numOfPagesClass").eq(i).find("a");
+						getPageBtnNum = getPageBtn.text();
+						if (searchPageNum === parseInt(getPageBtnNum)) {
+							getPageBtn.css("text-decoration", "underline");
+							break;
+						}
+					}
+					// 新建分頁按鈕結束
+					// 上一頁&下一頁按鈕開始
+					if (parseInt(createNumOfPage) != 1 && parseInt(createNumOfPage) != 0) {
+						if (parseInt(searchPageNum) === 1 || (parseInt(searchPageNum) != parseInt(createNumOfPage))) { // 建立下一頁按鈕
+							$("li#nextPageBtn").append(`
+								<a class="round-icon" href="#" data-toggle="tooltip" data-title="Next Page" onclick="getPageData(${searchPageNum + 1}, '${searchStr}')"><i class="iconfont-angle-right"></i></a>
+							`);
+						}
+						if (parseInt(searchPageNum) === parseInt(createNumOfPage) || (parseInt(searchPageNum) != 1)) { // 建立上一頁按鈕
+							$("li#previousPageBtn").append(`
+								<a class="round-icon" href="#" data-toggle="tooltip" data-title="Previous Page" onclick="getPageData(${searchPageNum - 1}, '${searchStr}')"><i class="iconfont-angle-left"></i></a>
+							`);
+						}
+					}
+					// 上一頁&下一頁按鈕結束
+					showPageDataAtPage(limit, offset, searchStr);
+				});
+		}
+		// 生成訂單於頁面上
+		function showPageDataAtPage(limit, offset, searchStr) {
 			const showOrderArea_el = $("#showOrderArea");
 			let orderCount = 0; // 計數生成的訂單數，將此數字用於div的id
-			fetch('/BuyGo/front_end/seller/order/loadGpaOrder?page=' + selectPage, {
-				method: 'Get',
-				headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset:utf-8' },
+			fetch('/BuyGo/needLoginApi/front_end/loadGpaOrderByLimitAndOffsetAndSearchStr', {
+				method: 'POST',
+				headers: { 'Content-Type': 'application/json;charset:utf-8' },
+				body: JSON.stringify({
+					limit: limit,
+					offset: offset,
+					gpaSoStat: currentgpaSoStat,
+					searchStr: searchStr
+				})
 			})
-				.then(resp => resp.json())
+				.then(response => {
+					if (response.status === 401) {
+						// 客戶未登入，執行頁面重定向到登入頁
+						notLoggedInAction();
+					} else if (response.ok) {
+						// 請求成功
+						return response.json();
+					} else {
+						alert("錯誤狀態:" + response.status);
+						return;
+					}
+				})
 				.then(body => {
-					body.forEach(gpaSo => {
-						let { gpaSoNo, gpaProdCount, gpaProdTotal, gpaProd, gpaEvaSeller } = gpaSo;
-						let { gpaProdName, gpaEndDate, member, gpaProdPics } = gpaProd;
-						let { memberName } = member;
-						let { gpaProdPicToBase64 } = gpaProdPics[0]; // 只取每項訂單商品查詢到的第一張圖
-						// 刪除按鈕回傳memberNoBlack來記錄每個按鈕創建時的memberNoBlack，以便後續deleteBlack取值
+					$("#showOrderArea").children().remove(); // 清空showOrderArea下的所有子元素
+					body.forEach(gpaOrderDTO => {
+						let { gpaSoNo, gpaProdCount, gpaProdTotal, gpaEvaSeller, gpaProdNo, gpaProdName, gpaEndDate, memberAcct } = gpaOrderDTO;
+						let { gpaProdPics } = gpaOrderDTO;
 
 						orderCount++; // 生成的訂單數+1
-						// 已完成的取值方法
-						showOrderArea_el.append(`
-						<div class="tab-content" id="orderId${orderCount}" style="position:relative;width:770px;height:190px;margin-bottom:20px;display:flex; flex-direction:column">
-							<a href="#" class="orderDetail" onclick="testA()" style="position:absolute;left:0px; top:0px;width:100%;height:120px;">
-								<div class="col-xs-12 col-sm-12" style="width:100%;height:120px;">
-									<img src="data:image/jpeg;base64,${gpaProdPicToBase64}" style="width:80px;height:80px;border:1.5px solid LightGray;position:absolute;left:20px; top:20px;" alt="GFashion - Responsive e-commerce HTML Template">
-									<h4 style="position:absolute;left:120px; top:20px;">${gpaProdName}</h4>
-									<span style="position:absolute;left:120px; top:80px;">x${gpaProdCount}</span>
-									<span style="position:absolute;right:10px; top:10px;">賣家名稱：${memberName}</span>
+						$("#showOrderArea").append(`
+							<div class="tab-content" id="orderId${orderCount}" style="width:770px;margin-bottom:20px;padding: 10px 10px;">
+								<div class="orderDetailArea" style="position: relative">
+									<span style="position:absolute;right:10px; top:10px;">買家名稱：${memberAcct}</span>
 									<span class="soNo" style="position:absolute;right:10px; top:35px;">訂單編號：${gpaSoNo}</span>
 									<div style="position:absolute;right:10px; top:90px;">揪團截止時間：${gpaEndDate}</div>
+									<a href="/BuyGo/front_end/pages/member/gpa/gpaProduct.html?gpaProdNo=${gpaProdNo}" class="orderLink">
+										<div class="col-xs-12 col-sm-12" style="width:100%;height:120px;">
+											<img src="data:image/jpeg;base64,${gpaProdPics[0]}" style="width:80px;height:80px;border:1.5px solid LightGray;position:absolute;left:20px; top:20px;" alt="GFashion - Responsive e-commerce HTML Template">
+											<h4 class="prodName" style="position:absolute;left:120px; top:20px;">${gpaProdName}</h4>
+											<span style="position:absolute;left:120px; top:80px;">x${gpaProdCount}</span>
+										</div>
+										<hr style="margin:0px;border:1px solid lightgray">
+									</a>
 								</div>
-								<hr style="margin:0px;border:1px solid lightgray">
-							</a>
-							<div class="col-xs-12 col-sm-12 orderPrice" style="width:770px;height:69px;position:absolute;left:0px; top:121px;">
-									<h4 style="position:absolute;right:10px; top:20px;">訂單金額：$${gpaProdTotal}</h4>
+								<div class="col-xs-12 col-sm-12 orderPrice" style="height:70px;">
+									<h4 style="position:relative;text-align:right;top:35%;">訂單金額：$${gpaProdTotal}</h4>
+								</div>
 							</div>
-						</div>
 						`);
 						// 判斷目前所在的page，可給出評價的頁面才顯示評價按鈕
 						// 若在"已完成"頁面
-						if (selectPage === 4) {
+						if (currentgpaSoStat === 4) {
 							// 加上給予評價按鈕 與 過往評價
-							// $("div.orderPrice").append(`
 							$(`#orderId${orderCount}`).find('div.orderPrice').append(`
 								<button type="button" class="btn btn-warning EvalBtn" style="position:absolute;left:15px; top:20px;visibility:visible;">給予評價</button>
 								<h5 class="pastEval" style="position:absolute;left:110px; top:25px; visibility:hidden;"></h5>
@@ -769,7 +741,7 @@
 									</article>
 								</div>
 							`);
-							if(gpaEvaSeller != 0){ // 若過往曾評價過該訂單
+							if (gpaEvaSeller != 0) { // 若過往曾評價過該訂單
 								$(`#orderId${orderCount}`).find('button.EvalBtn').removeClass("btn-warning"); // 刪除給予評價按鈕的class(按鈕顏色移除)
 								$(`#orderId${orderCount}`).find('button.EvalBtn').addClass("btn-success"); // 新增給予評價按鈕的class(按鈕顏色改為綠色)
 								$(`#orderId${orderCount}`).find('button.EvalBtn').text('評價完成');
@@ -781,12 +753,12 @@
 					});
 				})
 		}
+		//-----------------分頁功能結束-------------------
 		//-----------------評價 & 燈箱事件開始-----------------
 		// 開啟 Modal 彈跳視窗
 		$(document).on("click", "button.EvalBtn", function (e) {
 			$(this).closest("div.orderPrice").siblings("div.overlay").fadeIn();
 		});
-
 		// 關閉 燈箱Modal
 		$(document).on("click", "button.btn_modal_close, div.overlay, button.btn_modal_submit", function (e) {
 			$("div.overlay").fadeOut();
@@ -807,7 +779,7 @@
 		function submitEval(selectBtn, soNo) {
 			starNum = $(selectBtn).closest("article").find("p").text(); // 取得選取的星星數，供後續fetch使用
 			// 向後端發出fetch請求，到資料庫中將該訂單的評價修改成前端輸入的評價數
-			fetch('/BuyGo/front_end/seller/order/UpdateGpaEvaSeller', {
+			fetch('/BuyGo/needLoginApi/front_end/updateGpaEvaSeller', {
 				method: 'POST',
 				headers: { 'Content-Type': 'application/json;charset:utf-8' },
 				body: JSON.stringify({
@@ -815,14 +787,29 @@
 					gpaEvaSeller: starNum
 				})
 			})
-				.then(resp => resp.json())
+				.then(response => {
+					if (response.status === 401) {
+						// 客戶未登入，執行頁面重定向到登入頁
+						notLoggedInAction();
+					} else if (response.ok) {
+						// 請求成功
+						return response.json();
+					} else {
+						alert("錯誤狀態:" + response.status);
+						return;
+					}
+				})
 				.then(body => {
 					changePage(4); // 呼叫函式changePage，將當前畫面動態刷新
 				});
 		}
 		//-----------------評價 & 燈箱事件結束-----------------
+		//-----------------搜尋框開始-----------------
+		$('#search').on('keyup', function () {
+			getPageData(1, $("#search").val());
+		});
+		//-----------------搜尋框結束-----------------
 	</script>
-
 </body>
 
 </html>

@@ -17,6 +17,8 @@ public interface CpOwnerDao{
 	int update(CpOwner cpOwner);
 
 	CpOwner selectById(CpOwnerId cpOwnerId);
+	
+	List<CpOwner> selectByMember(Integer memberNo);
 
 	List<CpOwner> selectAll();
 

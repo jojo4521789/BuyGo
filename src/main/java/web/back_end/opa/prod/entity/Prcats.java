@@ -12,7 +12,7 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "OPA_PRCATS")
+@Table(name = "OPA_PRCATS2")
 public class Prcats extends Core{
 	private static final long serialVersionUID = 1329886329266797536L;
 	@Id

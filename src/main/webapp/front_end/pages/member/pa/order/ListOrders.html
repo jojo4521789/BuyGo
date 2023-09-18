@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<!--[if IE 7 ]><html class="ie ie7 lte9 lte8 lte7" lang="en-US"><![endif]-->
+<!--[if IE 8]><html class="ie ie8 lte9 lte8" lang="en-US">	<![endif]-->
+<!--[if IE 9]><html class="ie ie9 lte9" lang="en-US"><![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!-->
+<html class="noIE" lang="en-US"><!--<![endif]-->
+
+<head>
+	<meta charset="UTF-8" />
+	<title>BuyGo - 我的帳戶 - 一般代購訂單追蹤</title>
+	<meta name="description" content="" />
+	<meta name="keywords" content="" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<!-- Favorite Icons -->
+	<link rel="icon" href="img/favicon/favicon.html" type="image/x-icon" />
+	<link rel="apple-touch-icon-precomposed" sizes="144x144"
+		href="img/favicon/apple-touch-icon-144x144-precomposed.html">
+	<link rel="apple-touch-icon-precomposed" sizes="72x72" href="img/favicon/apple-touch-icon-72x72-precomposed.html">
+	<link rel="apple-touch-icon-precomposed" href="img/favicon/apple-touch-icon-precomposed.html">
+	<link rel="stylesheet" href="//cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+	<!-- // Favorite Icons -->
+
+	<!--<link href='http://fonts.useso.com/css?family=Open+Sans:300,400,600,700' rel='stylesheet' type='text/css'>-->
+
+	<!-- GENERAL CSS FILES -->
+	<link rel="stylesheet" href="../../../../css/common/minified.css">
+	<!-- // GENERAL CSS FILES -->
+
+	<!--[if IE 8]>
+		<script src="js/respond.min.js"></script>
+		<script src="js/selectivizr-min.js"></script>
+	<![endif]-->
+
+	<script src="../../../../js/common/jquery.min.js"></script>
+
+	<script>window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>');</script>
+	<script src="../../../../js/common/modernizr.min.js"></script>
+	<!-- PARTICULAR PAGES CSS FILES -->
+	<link rel="stylesheet" href="../../../../css/common/innerpage.css">
+	<link rel="stylesheet" href="../../../../css/common/owl.carousel.css">
+	<link rel="stylesheet" href="../../../../css/common/owl.theme.css">
+	<!-- // PARTICULAR PAGES CSS FILES -->
+	<link rel="stylesheet" href="../../../../css/common/responsive.css">
+	<style>
+		/*-----------------評價 & 燈箱css開始-----------------*/
+		div.overlay {
+			position: fixed;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100vh;
+			background-color: hsla(0, 0%, 90%, .5);
+
+			display: none;
+		}
+
+		/* 元素 article 置中及基本樣式 */
+		div.overlay>article {
+			background-color: white;
+			width: 90%;
+			max-width: 300px;
+			border-radius: 10px;
+			box-shadow: 0 0 10px #ddd;
+			padding: 10px;
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+		}
+
+		/* 燈箱的評價星星 */
+		div.star_block {
+			display: inline-block;
+		}
+
+		div.star_block>span.star {
+			cursor: pointer;
+			display: inline-block;
+			margin-right: 3px;
+			height: 30px;
+			width: 30px;
+		}
+
+		div.star_block>span.star.-on {
+			color: yellow;
+		}
+
+		/*-----------------評價 & 燈箱css結束-----------------*/
+	</style>
+	<style>
+		.logo img {
+			max-width: 200px;
+			max-height: 150px;
+		}
+
+		.user-menu a img {
+			max-width: 20px;
+			max-height: 20px;
+		}
+
+		ul.user-menu>li>a {
+			color: #ef7700;
+			font-weight: bold;
+			font-size: 25px;
+		}
+
+		a:hover {
+			color: #0150ed;
+		}
+	</style>
+</head>
+
+<body>
+
+	<!-- PAGE WRAPPER -->
+	<div id="page-wrapper">
+
+		<!-- SITE HEADER -->
+		<header id="site-header" role="banner">
+			<!-- HEADER TOP -->
+			<div class="header-top">
+				<div class="container">
+					<div class="row">
+						<div class="col-xs-12 col-sm-6 col-md-7">
+							<!-- CONTACT INFO -->
+							<div class="contact-info">
+								<i class="iconfont-headphones round-icon"></i>
+								<strong>(03)425-1108</strong>
+								<span>(Mon- Fri: 09.00 - 21.00)</span>
+							</div>
+							<!-- // CONTACT INFO -->
+						</div>
+						<div class="col-xs-12 col-sm-6 col-md-5">
+							<ul class="actions unstyled clearfix">
+								<li>
+									<!-- SEARCH BOX -->
+									<div class="search-box">
+										<form action="#" method="post">
+											<div class="input-iconed prepend">
+												<button class="input-icon"><i class="iconfont-search"></i></button>
+												<label for="input-search" class="placeholder">Search here…</label>
+												<input type="text" name="q" id="input-search"
+													class="round-input full-width" required />
+											</div>
+										</form>
+									</div>
+									<!-- // SEARCH BOX -->
+								</li>
+								<li data-toggle="sub-header" data-target="#sub-social">
+									<!-- SOCIAL ICONS -->
+									<a href="javascript:void(0);" id="social-icons">
+										<i class="iconfont-share round-icon"></i>
+									</a>
+	
+									<div id="sub-social" class="sub-header">
+										<ul class="social-list unstyled text-center">
+											<li><a href="#"><i class="iconfont-facebook round-icon"></i></a></li>
+											<li><a href="#"><i class="iconfont-twitter round-icon"></i></a></li>
+											<li><a href="#"><i class="iconfont-google-plus round-icon"></i></a></li>
+											<li><a href="#"><i class="iconfont-pinterest round-icon"></i></a></li>
+											<li><a href="#"><i class="iconfont-rss round-icon"></i></a></li>
+										</ul>
+									</div>
+									<!-- // SOCIAL ICONS -->
+								</li>
+								<li data-toggle="sub-header" data-target="#sub-cart">
+									<!-- SHOPPING CART -->
+									<a href="javascript:void(0);" id="total-cart">
+										<i class="iconfont-shopping-cart round-icon"></i>
+									</a>
+	
+									<div id="sub-cart" class="sub-header">
+										<div class="cart-header">
+											<span>Your cart is currently empty.</span>
+											<small><a href="/BuyGo/front_end/pages/member/opa/cart/cart.html">(See All)</a></small>
+										</div>
+										<!-- <ul class="cart-items product-medialist unstyled clearfix"></ul> -->
+										<ul class="s-cart-items product-medialist unstyled clearfix"></ul>
+										<div class="cart-footer">
+											<!-- <div class="cart-total clearfix">
+												<span class="pull-left uppercase">Total</span>
+												<span class="pull-right total">$ 0</span>
+											</div> -->
+											<div class="s-cart-total clearfix">
+												<span class="pull-left uppercase">Total</span>
+												<span class="pull-right total">$ 0</span>
+											</div>
+											<div class="text-right">
+												<a href="/BuyGo/front_end/pages/member/opa/cart/cart.html"
+													class="btn btn-default btn-round view-cart">查看購物車</a>
+											</div>
+										</div>
+									</div>
+									<!-- // SHOPPING CART -->
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+	
+				<!-- ADD TO CART MESSAGE -->
+				<div class="cart-notification">
+					<ul class="unstyled"></ul>
+				</div>
+				<!-- // ADD TO CART MESSAGE -->
+			</div>
+			<!-- // HEADER TOP -->
+			<!-- MAIN HEADER -->
+			<div class="main-header-wrapper">
+				<div class="container">
+					<div class="main-header">
+						<!-- CURRENCY / LANGUAGE / USER MENU -->
+						<div class="actions">
+							<div class="center-xs">
+	
+							</div>
+							<div class="clearfix"></div><br>
+							<!-- USER RELATED MENU -->
+							<nav id="tiny-menu" class="clearfix">
+								<ul class="user-menu">
+									<li><a href="pages/member/myaccount.html" class="personal">我的帳戶<img
+												src="/BuyGo/front_end/img/common/head.png"></a>
+									</li>
+									<!-- <li><a href="pages/member/opa/cart/cart.html" class="paymoney">結帳<img
+												src="../front_end/img/common/paymoney.png"></a></li> -->
+									<li id="logInAndLogOut"><a href="pages/member/login.html" class="loginOut">登入<img
+												src="/BuyGo/front_end/img/common/login.png"></a>
+									</li>
+								</ul><br>
+							</nav>
+							<!-- // USER RELATED MENU -->
+						</div>
+						<!-- // CURRENCY / LANGUAGE / USER MENU -->
+						<!-- SITE LOGO -->
+						<div class="logo-wrapper">
+							<a href="/BuyGo/front_end/index.html" class="logo">
+								<img src="/BuyGo/front_end/img/common/buygo.png" />
+							</a>
+						</div>
+						<!-- // SITE LOGO -->
+						<!-- SITE NAVIGATION MENU -->
+						<nav id="site-menu" role="navigation">
+							<ul class="main-menu hidden-sm hidden-xs">
+								<li class="active">
+									<a href="/BuyGo/front_end/index.html">首頁</a>
+								</li>
+								<li>
+									<a href="/BuyGo/front_end/pages/guest/pa/prods/prods.html">一般賣場</a>
+								</li>
+								<li>
+									<a href="/BuyGo/front_end/pages/guest/opa/prods/prods.html">官方賣場</a>
+								</li>
+								<li>
+									<a href="/BuyGo/front_end/pages/guest/gpa/prods/prods.html">揪團賣場</a>
+								</li>
+								<li>
+									<a href="/BuyGo/front_end/pages/Articles.html">論壇</a>
+								</li>
+							</ul>
+	
+							<!-- MOBILE MENU -->
+							<div id="mobile-menu" class="dl-menuwrapper visible-xs visible-sm">
+								<button class="dl-trigger"><i class="iconfont-reorder round-icon"></i></button>
+	
+							</div>
+							<!-- // MOBILE MENU -->
+	
+						</nav>
+						<!-- // SITE NAVIGATION MENU -->
+					</div>
+				</div>
+			</div>
+			<!-- // MAIN HEADER -->
+		</header>
+		<!-- // SITE HEADER -->
+
+		<!-- BREADCRUMB -->
+		<div class="breadcrumb-container">
+			<div class="container">
+				<div class="relative">
+					<ul class="bc unstyled clearfix">
+						<li><a href="../../../../index.html">首頁</a></li>
+						<li class="active">我的帳戶</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<!-- // BREADCRUMB -->
+
+		<!-- SITE MAIN CONTENT -->
+		<main id="main-content" role="main">
+
+			<div class="container">
+				<div class="row">
+
+					<div class="m-t-b clearfix">
+						<!-- SIDEBAR -->
+						<aside class="col-xs-12 col-sm-4 col-md-3">
+							<section class="side-section">
+								<h3 class="uppercase text-bold"><span class="text-xs">我的帳戶</span></h3>
+
+								<ul class="nav nav-tabs nav-stacked">
+									<li><a href="/BuyGo/front_end/pages/member/EditMember.html">個人資料</a></li>
+									<li><a href="/BuyGo/front_end/pages/member/pa/order/ListOrders.html">訂單追蹤</a></li>
+									<li><a href="/BuyGo/front_end/pages/member/pa/req/MemberAllPaReq.html">一般代購委託單查詢</a>
+									</li>
+									<li><a href="/BuyGo/front_end/pages/member/opa/add_request.html">官方平台委託單申請</a></li>
+									<li><a href="/BuyGo/front_end/pages/member/opa/request.html">官方平台委託單瀏覽</a></li>
+									<li><a href="/BuyGo/front_end/pages/member/mycoupon.html">優惠券</a></li>
+									<li><a href="/BuyGo/front_end/pages/member/wallet.html">平台錢包</a></li>
+									<li><a href="/BuyGo/front_end/pages/member/chatroom.html">聊天室</a></li>
+									<li><a href="/BuyGo/front_end/pages/member/blacklist.html">黑名單</a></li>
+									<li><a href="/BuyGo/front_end/pages/member/myCollListforum.html">我的收藏文章</a></li>
+									<li><a href="/BuyGo/front_end/pages/member/myforum.html">我的文章</a></li>
+									<br>
+									<li><a href="/BuyGo/front_end/pages/member/myShop.html">我的賣場</a></li>
+								</ul>
+							</section>
+
+							<!-- PROMO -->
+							<!-- // PROMO -->
+						</aside>
+						<!-- // SIDEBAR -->
+
+						<div class="m-t-lg clearfix">
+							<div class="row">
+								<div class="col-xs-12 col-sm-8">
+									<h3 class="uppercase text-bold"><span class="text-xs">訂單追蹤</span></h3>
+									<!-- 訂單分類的賣場選擇 -->
+									<button type="button" class="btn btn-success">一般代購</button>
+									<button type="button" class="btn btn-primary"
+										onclick="window.location.href='../../../../pages/member/gpa/gpaOrder.html'">揪團</button>
+									<button type="button" class="btn btn-primary"
+										onclick="window.location.href='../../../../pages/member/opa/order.html'">平台代購</button>
+									<hr>
+									<!--訂單分類列表-->
+									<ul class="nav nav-tabs">
+										<li class="active"><a href="javascript:void(0)" onclick="changePage(0)"
+												data-toggle="tab" id="orderPageBtn0" style="display: none;">待付款</a></li>
+										<li><a href="javascript:void(0)" onclick="changePage(1)" data-toggle="tab"
+												id="orderPageBtn1">追加中</a></li>
+										<li><a href="javascript:void(0)" onclick="changePage(2)" data-toggle="tab"
+												id="orderPageBtn2">運送中</a></li>
+										<li><a href="javascript:void(0)" onclick="changePage(3)" data-toggle="tab"
+												id="orderPageBtn3">已完成</a></li>
+										<li><a href="javascript:void(0)" onclick="changePage(4)" data-toggle="tab"
+												id="orderPageBtn4">已取消</a></li>
+										<li><a href="javascript:void(0)" onclick="changePage(5)" data-toggle="tab"
+												id="orderPageBtn5">退貨/退款</a></li>
+
+									</ul>
+
+									<!-- 商品列表區域 -->
+									<table id="ordersTable" align="center" width="1000">
+										<thead>
+											<tr>
+												<!-- <th>退貨進度</th> -->
+												<!-- <th>訂單縮圖</th> -->
+												<th>訂單編號</th>
+												<th>訂單時間</th>
+												<th>訂單商品</th>
+												<th>訂單總金額</th>
+												<th>訂單詳情</th>
+											</tr>
+										</thead>
+										<tbody id="showOrderArea">
+
+										</tbody>
+									</table>
+
+									<table id="ordersTable2" align="center" width="1000">
+										<thead>
+											<tr>
+												<th>退貨進度</th>
+												<!-- <th>訂單縮圖</th> -->
+												<th>訂單編號</th>
+												<th>訂單時間</th>
+												<th>訂單商品</th>
+												<th>訂單總金額</th>
+												<th>訂單詳情</th>
+											</tr>
+										</thead>
+										<tbody id="showOrderArea2">
+
+										</tbody>
+									</table>
+
+								</div>
+
+							</div>
+
+						</div>
+					</div>
+
+		</main>
+		<!-- // SITE MAIN CONTENT -->
+
+		<!-- SITE FOOTER -->
+		<footer class="page-footer">
+
+			<!-- WIDGET AREA -->
+			<div class="widgets">
+
+				<!-- FIRST ROW -->
+
+				<!-- // FIRST ROW -->
+
+				<!-- SECOND ROW -->
+				<div class="section">
+					<div class="container">
+						<div class="row">
+
+							<div class="col-xs-12 col-sm-12 col-md-5">
+								<section class="widget widget-menu">
+									<h5 class="widget-title">Contact info</h5>
+									<div class="widget-content">
+										<ul class="menu iconed-list unstyled">
+											<li><span class="list-icon"><i
+														class="round-icon iconfont-map-marker"></i></span>
+												<div class="list-content">中壢區復興路 46 號緯育 TibaMe 附設中壢職訓中心 9 樓</div>
+											</li>
+											<li><span class="list-icon"><i class="round-icon iconfont-phone"></i></span>
+												<div class="list-content">(03) 425-1108</div>
+											</li>
+											<li><span class="list-icon"><i
+														class="round-icon iconfont-envelope-alt"></i></span>
+												<div class="list-content">tibamecha102g6@gmail.com</div>
+											</li>
+										</ul>
+									</div>
+								</section>
+							</div>
+
+							<div class="col-xs-12 col-sm-12 col-md-6">
+								<section class="widget widget-ads">
+									<div class="widget-content">
+										<div class="center-xs">
+											<div class="ads">
+												<a href="#"> <img src="/BuyGo/front_end/img/common/demo/images-footer.jpg"
+														alt="" />
+												</a>
+											</div>
+										</div>
+									</div>
+								</section>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- // SECOND ROW -->
+
+			</div>
+			<!-- // WIDGET AREA -->
+
+			<div class="footer-sub">
+				<div class="container">
+					<div class="row">
+						<div class="col-xs-12 col-sm-6">
+							<div class="footer-links center-xs clearfix">
+								<ul class="unstyled">
+									<li><a href="/BuyGo/front_end/pages/guest/selectFirstFAQ.html">FAQ</a></li>
+								</ul>
+							</div>
+							<div class="space10"></div>
+							<div class="copyright center-xs">
+								<p>(c) 2023</p>
+							</div>
+						</div>
+
+						<div class="space40 visible-xs"></div>
+
+
+					</div>
+				</div>
+			</div>
+
+		</footer>
+		<!-- // SITE FOOTER -->
+
+	</div>
+	<!-- // PAGE WRAPPER -->
+
+	<!-- Essential Javascripts -->
+	<script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+	<script src="../../../../js/common/minified.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+	<!-- // Essential Javascripts -->
+
+	<!-- Particular Page Javascripts -->
+	<script src="../../../../js/common/products.js"></script>
+	<script src="../../../../js/common/owl.carousel.js"></script>
+	<script src="../../../../js/common/contact.js"></script>
+	<script src="../../../../js/login.js"></script>
+	<!--<script src="http://maps.googleapis.com/maps/api/js?sensor=false" type="text/javascript"></script>-->
+	<!-- <script src="js/gmap3.min.js"></script> -->
+
+
+	<!-- // Particular Page Javascripts -->
+	<script>
+		let orders;
+
+		checkLoginStatusShowMemberAcct();
+
+		// 載入網頁時判斷要點選哪個狀態的訂單
+		let selectedPage = sessionStorage.getItem("selectedPage");
+		if (selectedPage == null) {
+			$("#orderPageBtn1").click();
+		} else {
+			$(`#orderPageBtn${selectedPage}`).click();
+		}
+
+		// 點擊訂單狀態切換按鈕的觸發事件，依點擊按鈕的不同有不同的selectPage值
+		function changePage(selectPage) {
+
+			fetch('/BuyGo/needLoginApi/loadPaBuyerOrder?page=' + selectPage, {
+				method: "Get",
+				headers: {
+					'Content-Type': 'application/x-www-form-urlencoded ; charset:utf-8',
+				},
+			})
+				.then(function (response) {
+					console.log(response);
+					return response.json();
+				})
+				.then(function (data) {
+					orders = data;
+					console.log(orders); // 印出傳入的JSON物件
+					$('#ordersTable').DataTable().clear().destroy(); // 先销毁之前的 DataTable 实例，然后再进行初始化
+					$('#ordersTable2').DataTable().clear().destroy(); // 先销毁之前的 DataTable 实例，然后再进行初始化
+					$('#ordersTable').hide();
+					$('#ordersTable2').hide();
+					showOrders(selectPage); // 依照訂單狀態分類 顯示訂單
+
+				})
+				.catch(function (error) {
+					console.log(error);
+				})
+		}
+
+		// 依照訂單狀態分類 顯示訂單
+		function showOrders(selectPage) {
+			const items = [];
+			sessionStorage.setItem("selectedPage", selectPage);
+
+			for (let i = 0; i < orders.length; i++) {
+				const paSoSeq = orders[i].paSoSeq;
+				const paSoTime = orders[i].paSoTime;
+				const paProdName = `${orders[i].paProds[0].paProdName}...`;
+				const paTotalAmount = orders[i].paTotalAmount;
+
+				if (selectPage == 5) {
+					let item = {
+						paSoSeq: paSoSeq,
+						paSoTime: paSoTime,
+						paProdName: paProdName,
+						paTotalAmount: paTotalAmount,
+						paRtnStat: paRtnStatus(orders[i].paReturn[0].paRtnStat) // 若是退貨單, 多加此欄
+					};
+					items.push(item);
+				} else {
+					let item = {
+						paSoSeq: paSoSeq,
+						paSoTime: paSoTime,
+						paProdName: paProdName,
+						paTotalAmount: paTotalAmount,
+					};
+					items.push(item);
+				}
+
+			}
+
+			// 如果是退貨訂單，顯示的欄位和其他狀態訂單有所不同
+			if (selectPage == 5) {
+				// 將items代入DataTable
+				$('#ordersTable2').DataTable({
+					"autoWidth": false,
+					order: [[1, 'desc']],
+					language: {
+						url: '//cdn.datatables.net/plug-ins/1.13.6/i18n/zh-HANT.json',
+					},
+					data: items,
+					columns: [
+						{ data: "paRtnStat", width: "90px" },
+						{ data: "paSoSeq", width: "95px" },
+						{ data: "paSoTime", width: "114px" },
+						{ data: "paProdName", width: "80px" },
+						{ data: "paTotalAmount", width: "90px" },
+						{
+							data: null, title: "操作", width: "90px",
+							render: function (data, type, row, meta) {
+								// 将行数据转换为 JSON 字符串并存储在按钮的 data-row 属性中
+								var rowData = JSON.stringify(row);
+								return '<button type="button" class="btn btn-warning btn-sm" data-row=\'' + rowData + '\' onclick="showReturnOrderDetails(' + meta.row + ')">退貨詳情</button>';
+							}
+						},
+					]
+				});
+				$("#ordersTable2").show();
+
+			} else {
+				// 將items代入DataTable
+				$('#ordersTable').DataTable({
+					"autoWidth": false,
+					order: [[0, 'desc']],
+					language: {
+						url: '//cdn.datatables.net/plug-ins/1.13.6/i18n/zh-HANT.json',
+					},
+					data: items,
+					columns: [
+						{ data: "paSoSeq", width: "100px" },
+						{ data: "paSoTime", width: "100px" },
+						{ data: "paProdName", width: "114px" },
+						{ data: "paTotalAmount", width: "80px" },
+						{
+							data: null, title: "操作", width: "130px",
+							render: function (data, type, row, meta) {
+								// 将行数据转换为 JSON 字符串并存储在按钮的 data-row 属性中
+								var rowData = JSON.stringify(row);
+								// 如果訂單狀態為運送中, 增加"確認收貨"按鈕
+								if (selectPage == 2) {
+									return '<button type="button" class="btn btn-warning btn-sm" data-row=\'' + rowData + '\' onclick="showOrderDetails(' + meta.row + ')">完成訂單 | 申請退款退貨</button>'
+								} else {
+									return '<button type="button" class="btn btn-warning btn-sm" data-row=\'' + rowData + '\' onclick="showOrderDetails(' + meta.row + ')">查看詳情</button>';
+								}
+							}
+						},
+					]
+				});
+				$("#ordersTable").show();
+			}
+		};
+
+		// 查看訂單詳情(已出貨/已完成/已取消)
+		function showOrderDetails(rowIndex) {
+			paSoNo = orders[rowIndex].paSoNo;
+			localStorage.setItem("paSoNo", paSoNo);
+			window.location.href = "OrderDetails.html"
+		}
+
+		function showReturnOrderDetails(rowIndex) {
+			paSoNo = orders[rowIndex].paSoNo;
+			localStorage.setItem("paSoNo", paSoNo);
+			window.location.href = "ReturnDetails.html"
+		}
+
+
+		// 將整筆訂單狀態(數字)轉成中文
+		function orderStatus(status) {
+			switch (status) {
+				case 0:
+					return "待付款";
+				case 1:
+					return "追加中";
+				case 2:
+					return "運送中";
+				case 3:
+					return "已完成";
+				case 4:
+					return "已取消";
+				case 5:
+					return "退貨/退款";
+				default:
+					return "未知狀態";
+			}
+		}
+
+		// 將訂單詳情追加狀態(數字)轉成中文
+		function orderDetailsStatus(status) {
+			switch (status) {
+				case 0:
+					return "⚠️備貨中";
+				case 1:
+					return "✅追加完成";
+				case 2:
+					return "❌追加失敗";
+				default:
+					return "未知狀態";
+			}
+		}
+
+		function paRtnStatus(paRtnStat) {
+			switch (paRtnStat) {
+				case 0:
+					return "賣家處理中";
+				case 1:
+					return "平台審核中";
+				case 2:
+					return "退貨/退款成立";
+				case 3:
+					return "退貨/退款不成立";
+				case 4:
+					return "已取消申請";
+				default:
+					return "未知狀態";
+			}
+		}
+
+
+
+	</script>
+
+</body>
+
+</html>

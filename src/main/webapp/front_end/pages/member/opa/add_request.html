@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<!--[if IE 7 ]><html class="ie ie7 lte9 lte8 lte7" lang="en-US"><![endif]-->
+<!--[if IE 8]><html class="ie ie8 lte9 lte8" lang="en-US">	<![endif]-->
+<!--[if IE 9]><html class="ie ie9 lte9" lang="en-US"><![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!-->
+<html class="noIE" lang="en-US"><!--<![endif]-->
+
+<head>
+	<meta charset="UTF-8" />
+	<title>BuyGo - 我的帳戶 - 官方平台委託單申請</title>
+	<meta name="description" content="" />
+	<meta name="keywords" content="" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<base href="/BuyGo/front_end/">
+	<!-- Favorite Icons -->
+	<link rel="icon" href="img/common/favicon/favicon.html" type="image/x-icon" />
+	<link rel="apple-touch-icon-precomposed" sizes="144x144"
+		href="img/common/favicon/apple-touch-icon-144x144-precomposed.html">
+	<link rel="apple-touch-icon-precomposed" sizes="72x72"
+		href="img/common/favicon/apple-touch-icon-72x72-precomposed.html">
+	<link rel="apple-touch-icon-precomposed" href="img/common/favicon/apple-touch-icon-precomposed.html">
+
+	<!-- GENERAL CSS FILES -->
+	<link rel="stylesheet" href="css/common/minified.css">
+	<!-- // GENERAL CSS FILES -->
+
+	<!-- PARTICULAR PAGES CSS FILES -->
+	<link rel="stylesheet" href="css/common/innerpage.css">
+	<link rel="stylesheet" href="css/common/owl.carousel.css">
+	<link rel="stylesheet" href="css/common/owl.theme.css">
+	<link rel="stylesheet" href="css/common/product.css">
+	<!-- // PARTICULAR PAGES CSS FILES -->
+	<link rel="stylesheet" href="css/common/responsive.css">
+
+	<link href="https://unpkg.com/bootstrap-table@1.22.1/dist/bootstrap-table.min.css" rel="stylesheet">
+	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+	<script src="https://code.jquery.com/jquery-3.7.0.min.js"
+		integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js"
+		integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/x-editable@1.5.1/dist/bootstrap3-editable/js/bootstrap-editable.min.js"></script>
+	<script src="https://unpkg.com/bootstrap-table@1.22.1/dist/bootstrap-table.min.js"></script>
+	<script
+		src="https://unpkg.com/bootstrap-table@1.22.1/dist/extensions/editable/bootstrap-table-editable.min.js"></script>
+	<script
+		src="https://unpkg.com/bootstrap-table@1.22.1/dist/extensions/filter-control/bootstrap-table-filter-control.min.js"></script>
+
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+	<script src="js/common/modernizr.min.js"></script>
+	<style>
+		.logo img {
+			max-width: 200px;
+			max-height: 150px;
+		}
+
+		.user-menu a img {
+			max-width: 20px;
+			max-height: 20px;
+		}
+
+		ul.user-menu>li>a {
+			color: #ef7700;
+			font-weight: bold;
+			font-size: 25px;
+		}
+
+		a:hover {
+			color: #0150ed;
+		}
+	</style>
+</head>
+
+<body>
+
+	<!-- PAGE WRAPPER -->
+	<div id="page-wrapper">
+
+		<!-- SITE HEADER -->
+		<header id="site-header" role="banner">
+			<!-- HEADER TOP -->
+			<div class="header-top">
+				<div class="container">
+					<div class="row">
+						<div class="col-xs-12 col-sm-6 col-md-7">
+							<!-- CONTACT INFO -->
+							<div class="contact-info">
+								<i class="iconfont-headphones round-icon"></i>
+								<strong>(03)425-1108</strong>
+								<span>(Mon- Fri: 09.00 - 21.00)</span>
+							</div>
+							<!-- // CONTACT INFO -->
+						</div>
+						<div class="col-xs-12 col-sm-6 col-md-5">
+							<ul class="actions unstyled clearfix">
+								<li>
+									<!-- SEARCH BOX -->
+									<div class="search-box">
+										<form action="#" method="post">
+											<div class="input-iconed prepend">
+												<button class="input-icon"><i class="iconfont-search"></i></button>
+												<label for="input-search" class="placeholder">Search here…</label>
+												<input type="text" name="q" id="input-search"
+													class="round-input full-width" required />
+											</div>
+										</form>
+									</div>
+									<!-- // SEARCH BOX -->
+								</li>
+								<li data-toggle="sub-header" data-target="#sub-social">
+									<!-- SOCIAL ICONS -->
+									<a href="javascript:void(0);" id="social-icons">
+										<i class="iconfont-share round-icon"></i>
+									</a>
+	
+									<div id="sub-social" class="sub-header">
+										<ul class="social-list unstyled text-center">
+											<li><a href="#"><i class="iconfont-facebook round-icon"></i></a></li>
+											<li><a href="#"><i class="iconfont-twitter round-icon"></i></a></li>
+											<li><a href="#"><i class="iconfont-google-plus round-icon"></i></a></li>
+											<li><a href="#"><i class="iconfont-pinterest round-icon"></i></a></li>
+											<li><a href="#"><i class="iconfont-rss round-icon"></i></a></li>
+										</ul>
+									</div>
+									<!-- // SOCIAL ICONS -->
+								</li>
+								<li data-toggle="sub-header" data-target="#sub-cart">
+									<!-- SHOPPING CART -->
+									<a href="javascript:void(0);" id="total-cart">
+										<i class="iconfont-shopping-cart round-icon"></i>
+									</a>
+	
+									<div id="sub-cart" class="sub-header">
+										<div class="cart-header">
+											<span>Your cart is currently empty.</span>
+											<small><a href="/BuyGo/front_end/pages/member/opa/cart/cart.html">(See All)</a></small>
+										</div>
+										<!-- <ul class="cart-items product-medialist unstyled clearfix"></ul> -->
+										<ul class="s-cart-items product-medialist unstyled clearfix"></ul>
+										<div class="cart-footer">
+											<!-- <div class="cart-total clearfix">
+												<span class="pull-left uppercase">Total</span>
+												<span class="pull-right total">$ 0</span>
+											</div> -->
+											<div class="s-cart-total clearfix">
+												<span class="pull-left uppercase">Total</span>
+												<span class="pull-right total">$ 0</span>
+											</div>
+											<div class="text-right">
+												<a href="/BuyGo/front_end/pages/member/opa/cart/cart.html"
+													class="btn btn-default btn-round view-cart">查看購物車</a>
+											</div>
+										</div>
+									</div>
+									<!-- // SHOPPING CART -->
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+	
+				<!-- ADD TO CART MESSAGE -->
+				<div class="cart-notification">
+					<ul class="unstyled"></ul>
+				</div>
+				<!-- // ADD TO CART MESSAGE -->
+			</div>
+			<!-- // HEADER TOP -->
+			<!-- MAIN HEADER -->
+			<div class="main-header-wrapper">
+				<div class="container">
+					<div class="main-header">
+						<!-- CURRENCY / LANGUAGE / USER MENU -->
+						<div class="actions">
+							<div class="center-xs">
+	
+							</div>
+							<div class="clearfix"></div><br>
+							<!-- USER RELATED MENU -->
+							<nav id="tiny-menu" class="clearfix">
+								<ul class="user-menu">
+									<li><a href="pages/member/myaccount.html" class="personal">我的帳戶<img
+												src="/BuyGo/front_end/img/common/head.png"></a>
+									</li>
+									<!-- <li><a href="pages/member/opa/cart/cart.html" class="paymoney">結帳<img
+												src="../front_end/img/common/paymoney.png"></a></li> -->
+									<li id="logInAndLogOut"><a href="pages/member/login.html" class="loginOut">登入<img
+												src="/BuyGo/front_end/img/common/login.png"></a>
+									</li>
+								</ul><br>
+							</nav>
+							<!-- // USER RELATED MENU -->
+						</div>
+						<!-- // CURRENCY / LANGUAGE / USER MENU -->
+						<!-- SITE LOGO -->
+						<div class="logo-wrapper">
+							<a href="/BuyGo/front_end/index.html" class="logo">
+								<img src="/BuyGo/front_end/img/common/buygo.png" />
+							</a>
+						</div>
+						<!-- // SITE LOGO -->
+						<!-- SITE NAVIGATION MENU -->
+						<nav id="site-menu" role="navigation">
+							<ul class="main-menu hidden-sm hidden-xs">
+								<li class="active">
+									<a href="/BuyGo/front_end/index.html">首頁</a>
+								</li>
+								<li>
+									<a href="/BuyGo/front_end/pages/guest/pa/prods/prods.html">一般賣場</a>
+								</li>
+								<li>
+									<a href="/BuyGo/front_end/pages/guest/opa/prods/prods.html">官方賣場</a>
+								</li>
+								<li>
+									<a href="/BuyGo/front_end/pages/guest/gpa/prods/prods.html">揪團賣場</a>
+								</li>
+								<li>
+									<a href="/BuyGo/front_end/pages/Articles.html">論壇</a>
+								</li>
+							</ul>
+	
+							<!-- MOBILE MENU -->
+							<div id="mobile-menu" class="dl-menuwrapper visible-xs visible-sm">
+								<button class="dl-trigger"><i class="iconfont-reorder round-icon"></i></button>
+	
+							</div>
+							<!-- // MOBILE MENU -->
+	
+						</nav>
+						<!-- // SITE NAVIGATION MENU -->
+					</div>
+				</div>
+			</div>
+			<!-- // MAIN HEADER -->
+		</header>
+		<!-- // SITE HEADER -->
+
+		<!-- BREADCRUMB -->
+		<div class="breadcrumb-container">
+			<div class="container">
+				<div class="relative">
+					<ul class="bc unstyled clearfix">
+						<li><a href="/BuyGo/front_end/index.html">首頁</a></li>
+						<li class="active">我的帳戶</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<!-- // BREADCRUMB -->
+
+		<!-- SITE MAIN CONTENT -->
+		<main id="main-content" role="main">
+			<div class="container">
+				<div class="row">
+					<!-- SIDEBAR -->
+					<aside class="col-xs-12 col-sm-4 col-md-3 affix-top">
+						<div class="sidebar">
+							<nav class="nav-side side-section">
+								<h3 class="uppercase text-bold"><span class="text-xs">我的帳戶</span></h3>
+
+								<ul class="nav nav-tabs nav-stacked">
+									<li><a href="/BuyGo/front_end/pages/member/EditMember.html">個人資料</a></li>
+									<li><a href="/BuyGo/front_end/pages/member/pa/order/ListOrders.html">訂單追蹤</a></li>
+									<li><a href="/BuyGo/front_end/pages/member/pa/req/MemberAllPaReq.html">一般代購委託單查詢</a>
+									</li>
+									<li><a href="/BuyGo/front_end/pages/member/opa/add_request.html">官方平台委託單申請</a></li>
+									<li><a href="/BuyGo/front_end/pages/member/opa/request.html">官方平台委託單瀏覽</a></li>
+									<li><a href="/BuyGo/front_end/pages/member/mycoupon.html">優惠券</a></li>
+									<li><a href="/BuyGo/front_end/pages/member/wallet.html">平台錢包</a></li>
+									<li><a href="/BuyGo/front_end/pages/member/chatroom.html">聊天室</a></li>
+									<li><a href="/BuyGo/front_end/pages/member/blacklist.html">黑名單</a></li>
+									<li><a href="/BuyGo/front_end/pages/member/myCollListforum.html">我的收藏文章</a></li>
+									<li><a href="/BuyGo/front_end/pages/member/myforum.html">我的文章</a></li>
+									<br>
+									<li><a href="/BuyGo/front_end/pages/member/myShop.html">我的賣場</a></li>
+								</ul>
+							</nav>
+						</div>
+					</aside>
+					<!-- // SIDEBAR -->
+
+					<section class="col-xs-12 col-sm-8 col-md-9">
+						<section class="section" id="order_tab">
+							<h3 class="uppercase text-bold">
+								<span class="text-xs">官方平台委託單申請</span>
+							</h3>
+							<div>
+								<form onsubmit="addRequest(event)">
+									<div class="form-group">
+										<label for="opaRequestProductsName">商品名稱:</label>
+										<input required type="text" class="form-control" id="opaRequestProductsName"
+											name="opaRequestProductsName" placeholder="請輸入商品名稱">
+									</div>
+									<div class="form-group">
+										<label for="opaRequestProductsUrl">商品網址:</label>
+										<input required type="url" class="form-control" id="opaRequestProductsUrl"
+											name="opaRequestProductsUrl" placeholder="請輸入商品網址">
+									</div>
+									<div class="form-group">
+										<label for="opaRequestProductsContent">商品內容:</label>
+										<textarea required class="form-control" id="opaRequestProductsContent"
+											name="opaRequestProductsContent" rows="4" placeholder="請輸入商品內容"></textarea>
+									</div>
+									<button class="btn btn-primary" type="submit">提交申請</button>
+								</form>
+							</div>
+						</section>
+					</section>
+				</div>
+			</div>
+		</main>
+		<!-- // SITE MAIN CONTENT -->
+
+		<!-- SITE FOOTER -->
+		<footer class="page-footer">
+
+			<!-- WIDGET AREA -->
+			<div class="widgets">
+
+				<!-- FIRST ROW -->
+
+				<!-- // FIRST ROW -->
+
+				<!-- SECOND ROW -->
+				<div class="section">
+					<div class="container">
+						<div class="row">
+
+							<div class="col-xs-12 col-sm-12 col-md-5">
+								<section class="widget widget-menu">
+									<h5 class="widget-title">Contact info</h5>
+									<div class="widget-content">
+										<ul class="menu iconed-list unstyled">
+											<li><span class="list-icon"><i
+														class="round-icon iconfont-map-marker"></i></span>
+												<div class="list-content">中壢區復興路 46 號緯育 TibaMe 附設中壢職訓中心 9 樓</div>
+											</li>
+											<li><span class="list-icon"><i class="round-icon iconfont-phone"></i></span>
+												<div class="list-content">(03) 425-1108</div>
+											</li>
+											<li><span class="list-icon"><i
+														class="round-icon iconfont-envelope-alt"></i></span>
+												<div class="list-content">tibamecha102g6@gmail.com</div>
+											</li>
+										</ul>
+									</div>
+								</section>
+							</div>
+
+							<div class="col-xs-12 col-sm-12 col-md-6">
+								<section class="widget widget-ads">
+									<div class="widget-content">
+										<div class="center-xs">
+											<div class="ads">
+												<a href="#"> <img src="/BuyGo/front_end/img/common/demo/images-footer.jpg"
+														alt="" />
+												</a>
+											</div>
+										</div>
+									</div>
+								</section>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- // SECOND ROW -->
+
+			</div>
+			<!-- // WIDGET AREA -->
+
+			<div class="footer-sub">
+				<div class="container">
+					<div class="row">
+						<div class="col-xs-12 col-sm-6">
+							<div class="footer-links center-xs clearfix">
+								<ul class="unstyled">
+									<li><a href="/BuyGo/front_end/pages/guest/selectFirstFAQ.html">FAQ</a></li>
+								</ul>
+							</div>
+							<div class="space10"></div>
+							<div class="copyright center-xs">
+								<p>(c) 2023</p>
+							</div>
+						</div>
+
+						<div class="space40 visible-xs"></div>
+
+
+					</div>
+				</div>
+			</div>
+
+		</footer>
+		<!-- // SITE FOOTER -->
+
+	</div>
+	<!-- // PAGE WRAPPER -->
+
+	<!-- Essential Javascripts -->
+	<!-- <script src="js/common/minified.js"></script> -->
+	<!-- // Essential Javascripts -->
+
+	<!-- Particular Page Javascripts -->
+	<script src="https://unpkg.com/bootstrap-table@1.22.1/dist/bootstrap-table.min.js"></script>
+	<script src="js/common/jquery.nouislider.js"></script>
+	<script src="js/common/jquery.isotope.min.js"></script>
+	<script src="js/const.js"></script>
+	<script src="js/common/products.js"></script>
+	<script src="js/request.js"></script>
+	<script src="js/common/owl.carousel.js"></script>
+	<!-- // Particular Page Javascripts -->
+	<script src="/BuyGo/front_end/js/login.js"></script>
+	<script>
+		checkLoginStatusShowMemberAcct(); // 檢查客戶帳號是否登入，修改頁面右上方Log In/Log Out按鈕，顯示登入者帳號名稱
+	</script>
+</body>
+
+</html>

@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<!--[if IE 7 ]><html class="ie ie7 lte9 lte8 lte7" lang="en-US"><![endif]-->
+<!--[if IE 8]><html class="ie ie8 lte9 lte8" lang="en-US">	<![endif]-->
+<!--[if IE 9]><html class="ie ie9 lte9" lang="en-US"><![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!-->
+<html class="noIE" lang="en-US"><!--<![endif]-->
+
+<head>
+	<meta charset="UTF-8" />
+	<title>BuyGo - 我的帳戶 - 聊天室</title>
+	<meta name="description" content="" />
+	<meta name="keywords" content="" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<!-- Favorite Icons -->
+	<link rel="icon" href="../../img/common/favicon/favicon.html" type="image/x-icon" />
+	<link rel="apple-touch-icon-precomposed" sizes="144x144"
+		href="../../img/common/favicon/apple-touch-icon-144x144-precomposed.html">
+	<link rel="apple-touch-icon-precomposed" sizes="72x72"
+		href="../../img/common/favicon/apple-touch-icon-72x72-precomposed.html">
+	<link rel="apple-touch-icon-precomposed" href="../../img/common/favicon/apple-touch-icon-precomposed.html">
+	<!-- // Favorite Icons -->
+
+	<!--<link href='http://fonts.useso.com/css?family=Open+Sans:300,400,600,700' rel='stylesheet' type='text/css'>-->
+
+	<!-- GENERAL CSS FILES -->
+	<link rel="stylesheet" href="../../css/common/minified.css">
+	<!-- // GENERAL CSS FILES -->
+
+	<!--[if IE 8]>
+		<script src="js/respond.min.js"></script>
+		<script src="js/selectivizr-min.js"></script>
+	<![endif]-->
+	<!--
+	<script src="js/jquery.min.js"></script>
+	-->
+	<script>window.jQuery || document.write('<script src="../../js/common/jquery.min.js"><\/script>');</script>
+
+	<script src="../../js/common/modernizr.min.js"></script>
+	<!-- PARTICULAR PAGES CSS FILES -->
+	<link rel="stylesheet" href="../../css/common/innerpage.css">
+	<link rel="stylesheet" href="../../css/common/owl.carousel.css">
+	<link rel="stylesheet" href="../../css/common/owl.theme.css">
+	<!-- // PARTICULAR PAGES CSS FILES -->
+	<link rel="stylesheet" href="../../css/common/responsive.css">
+	<style>
+		.msgDiv {
+			clear: both;
+		}
+
+		.timehrmin {
+			padding: 8px;
+		}
+
+		.timeymd {
+			padding: 8px;
+		}
+
+		.me,
+		.otherPerson {
+			/* clear: both; */
+			display: inline-block;
+			padding: 8px;
+			border-radius: 15px;
+			margin-bottom: 5px;
+		}
+
+		.me {
+			float: right;
+			background: #0084ff;
+			color: #fff;
+			margin-right: 10px;
+		}
+
+		.otherPerson {
+			float: left;
+			background: #d9d9d9;
+			margin-left: 3px;
+		}
+
+		/* 未讀訊息css */
+		#chatMemberUnreadMsgCount {
+			/* float: right; */
+			position: absolute;
+			right: 2px;
+			top: 18px;
+			padding: 2px 8px;
+			border-radius: 15px;
+			background: lightgreen;
+		}
+
+		#chatMemberAcct {
+			font-size: 16px;
+		}
+	</style>
+	<style>
+		.logo img {
+			max-width: 200px;
+			max-height: 150px;
+		}
+
+		.user-menu a img {
+			max-width: 20px;
+			max-height: 20px;
+		}
+
+		ul.user-menu>li>a {
+			color: #ef7700;
+			font-weight: bold;
+			font-size: 25px;
+		}
+
+		a:hover {
+			color: #0150ed;
+		}
+	</style>
+</head>
+
+<body>
+
+	<!-- PAGE WRAPPER -->
+	<div id="page-wrapper">
+
+		<!-- SITE HEADER -->
+		<header id="site-header" role="banner">
+			<!-- HEADER TOP -->
+			<div class="header-top">
+				<div class="container">
+					<div class="row">
+						<div class="col-xs-12 col-sm-6 col-md-7">
+							<!-- CONTACT INFO -->
+							<div class="contact-info">
+								<i class="iconfont-headphones round-icon"></i>
+								<strong>(03)425-1108</strong>
+								<span>(Mon- Fri: 09.00 - 21.00)</span>
+							</div>
+							<!-- // CONTACT INFO -->
+						</div>
+						<div class="col-xs-12 col-sm-6 col-md-5">
+							<ul class="actions unstyled clearfix">
+								<li>
+									<!-- SEARCH BOX -->
+									<div class="search-box">
+										<form action="#" method="post">
+											<div class="input-iconed prepend">
+												<button class="input-icon"><i class="iconfont-search"></i></button>
+												<label for="input-search" class="placeholder">Search here…</label>
+												<input type="text" name="q" id="input-search"
+													class="round-input full-width" required />
+											</div>
+										</form>
+									</div>
+									<!-- // SEARCH BOX -->
+								</li>
+								<li data-toggle="sub-header" data-target="#sub-social">
+									<!-- SOCIAL ICONS -->
+									<a href="javascript:void(0);" id="social-icons">
+										<i class="iconfont-share round-icon"></i>
+									</a>
+	
+									<div id="sub-social" class="sub-header">
+										<ul class="social-list unstyled text-center">
+											<li><a href="#"><i class="iconfont-facebook round-icon"></i></a></li>
+											<li><a href="#"><i class="iconfont-twitter round-icon"></i></a></li>
+											<li><a href="#"><i class="iconfont-google-plus round-icon"></i></a></li>
+											<li><a href="#"><i class="iconfont-pinterest round-icon"></i></a></li>
+											<li><a href="#"><i class="iconfont-rss round-icon"></i></a></li>
+										</ul>
+									</div>
+									<!-- // SOCIAL ICONS -->
+								</li>
+								<li data-toggle="sub-header" data-target="#sub-cart">
+									<!-- SHOPPING CART -->
+									<a href="javascript:void(0);" id="total-cart">
+										<i class="iconfont-shopping-cart round-icon"></i>
+									</a>
+	
+									<div id="sub-cart" class="sub-header">
+										<div class="cart-header">
+											<span>Your cart is currently empty.</span>
+											<small><a href="/BuyGo/front_end/pages/member/opa/cart/cart.html">(See All)</a></small>
+										</div>
+										<!-- <ul class="cart-items product-medialist unstyled clearfix"></ul> -->
+										<ul class="s-cart-items product-medialist unstyled clearfix"></ul>
+										<div class="cart-footer">
+											<!-- <div class="cart-total clearfix">
+												<span class="pull-left uppercase">Total</span>
+												<span class="pull-right total">$ 0</span>
+											</div> -->
+											<div class="s-cart-total clearfix">
+												<span class="pull-left uppercase">Total</span>
+												<span class="pull-right total">$ 0</span>
+											</div>
+											<div class="text-right">
+												<a href="/BuyGo/front_end/pages/member/opa/cart/cart.html"
+													class="btn btn-default btn-round view-cart">查看購物車</a>
+											</div>
+										</div>
+									</div>
+									<!-- // SHOPPING CART -->
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+	
+				<!-- ADD TO CART MESSAGE -->
+				<div class="cart-notification">
+					<ul class="unstyled"></ul>
+				</div>
+				<!-- // ADD TO CART MESSAGE -->
+			</div>
+			<!-- // HEADER TOP -->
+			<!-- MAIN HEADER -->
+			<div class="main-header-wrapper">
+				<div class="container">
+					<div class="main-header">
+						<!-- CURRENCY / LANGUAGE / USER MENU -->
+						<div class="actions">
+							<div class="center-xs">
+	
+							</div>
+							<div class="clearfix"></div><br>
+							<!-- USER RELATED MENU -->
+							<nav id="tiny-menu" class="clearfix">
+								<ul class="user-menu">
+									<li><a href="pages/member/myaccount.html" class="personal">我的帳戶<img
+												src="/BuyGo/front_end/img/common/head.png"></a>
+									</li>
+									<!-- <li><a href="pages/member/opa/cart/cart.html" class="paymoney">結帳<img
+												src="../front_end/img/common/paymoney.png"></a></li> -->
+									<li id="logInAndLogOut"><a href="pages/member/login.html" class="loginOut">登入<img
+												src="/BuyGo/front_end/img/common/login.png"></a>
+									</li>
+								</ul><br>
+							</nav>
+							<!-- // USER RELATED MENU -->
+						</div>
+						<!-- // CURRENCY / LANGUAGE / USER MENU -->
+						<!-- SITE LOGO -->
+						<div class="logo-wrapper">
+							<a href="/BuyGo/front_end/index.html" class="logo">
+								<img src="/BuyGo/front_end/img/common/buygo.png" />
+							</a>
+						</div>
+						<!-- // SITE LOGO -->
+						<!-- SITE NAVIGATION MENU -->
+						<nav id="site-menu" role="navigation">
+							<ul class="main-menu hidden-sm hidden-xs">
+								<li class="active">
+									<a href="/BuyGo/front_end/index.html">首頁</a>
+								</li>
+								<li>
+									<a href="/BuyGo/front_end/pages/guest/pa/prods/prods.html">一般賣場</a>
+								</li>
+								<li>
+									<a href="/BuyGo/front_end/pages/guest/opa/prods/prods.html">官方賣場</a>
+								</li>
+								<li>
+									<a href="/BuyGo/front_end/pages/guest/gpa/prods/prods.html">揪團賣場</a>
+								</li>
+								<li>
+									<a href="/BuyGo/front_end/pages/Articles.html">論壇</a>
+								</li>
+							</ul>
+	
+							<!-- MOBILE MENU -->
+							<div id="mobile-menu" class="dl-menuwrapper visible-xs visible-sm">
+								<button class="dl-trigger"><i class="iconfont-reorder round-icon"></i></button>
+	
+							</div>
+							<!-- // MOBILE MENU -->
+	
+						</nav>
+						<!-- // SITE NAVIGATION MENU -->
+					</div>
+				</div>
+			</div>
+			<!-- // MAIN HEADER -->
+		</header>
+		<!-- // SITE HEADER -->
+
+		<!-- BREADCRUMB -->
+		<div class="breadcrumb-container">
+			<div class="container">
+				<div class="relative">
+					<ul class="bc unstyled clearfix">
+						<li><a href="../../index.html">首頁</a></li>
+						<li class="active">我的帳戶</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<!-- // BREADCRUMB -->
+
+		<!-- SITE MAIN CONTENT -->
+		<main id="main-content" role="main">
+
+			<div class="container">
+				<div class="row">
+
+					<div class="m-t-b clearfix">
+						<!-- SIDEBAR -->
+						<aside class="col-xs-12 col-sm-4 col-md-3">
+							<section class="side-section">
+								<h3 class="uppercase text-bold"><span class="text-xs">我的帳戶</span></h3>
+
+								<ul class="nav nav-tabs nav-stacked">
+									<li><a href="/BuyGo/front_end/pages/member/EditMember.html">個人資料</a></li>
+									<li><a href="/BuyGo/front_end/pages/member/pa/order/ListOrders.html">訂單追蹤</a></li>
+									<li><a href="/BuyGo/front_end/pages/member/pa/req/MemberAllPaReq.html">一般代購委託單查詢</a>
+									</li>
+									<li><a href="/BuyGo/front_end/pages/member/opa/add_request.html">官方平台委託單申請</a></li>
+									<li><a href="/BuyGo/front_end/pages/member/opa/request.html">官方平台委託單瀏覽</a></li>
+									<li><a href="/BuyGo/front_end/pages/member/mycoupon.html">優惠券</a></li>
+									<li><a href="/BuyGo/front_end/pages/member/wallet.html">平台錢包</a></li>
+									<li><a href="/BuyGo/front_end/pages/member/chatroom.html">聊天室</a></li>
+									<li><a href="/BuyGo/front_end/pages/member/blacklist.html">黑名單</a></li>
+									<li><a href="/BuyGo/front_end/pages/member/myCollListforum.html">我的收藏文章</a></li>
+									<li><a href="/BuyGo/front_end/pages/member/myforum.html">我的文章</a></li>
+									<br>
+									<li><a href="/BuyGo/front_end/pages/member/myShop.html">我的賣場</a></li>
+								</ul>
+							</section>
+
+							<!-- PROMO -->
+							<!-- <div class="promo inverse-background"
+								style="background: url('../../img/common/demo/Barn-Dress-Girl_t.jpg') no-repeat; background-size: auto 100%;">
+								<div class="inner text-center np">
+									<div class="ribbon">
+										<h6 class="nmb">New Arrivals</h6>
+										<h5 class="text-semibold uppercase nmb">Leather Fashion</h5>
+										<div class="space10"></div>
+										<a href="../../pages/guest/products.html" class="with-icon prepend-icon"><i
+												class="iconfont-caret-right"></i><span> Shop Now</span></a>
+									</div>
+								</div>
+							</div> -->
+							<!-- // PROMO -->
+						</aside>
+						<!-- // SIDEBAR -->
+
+						<div class="m-t-lg clearfix">
+							<div class="row">
+								<div class="col-xs-12 col-sm-6">
+									<h3 class="uppercase text-bold"><span class="text-xs">聊天室</span></h3>
+									<!--聊天室功能-->
+									<div id="chatroom" style="width: 850px; border: 2px solid lightgray;">
+										<div style="float: left; background-color: #f2f2f2; max-width: 171px">
+											<input type="text" id="search" class="form-control" style="margin: 5px 0px;"
+												placeholder="搜尋">
+											<ul class="store-list unstyled" id="memberlist"
+												style="height: 470px; max-height: 470px;">
+												<!-- 假資料開始 -->
+												<!-- <li value="2" style="cursor: default; position: relative;" onclick="getMemberChatHistory(this)">
+													<p style="display: inline-block;" id="chatMemberAcct">嘿呵</p>
+													<p id="chatMemberUnreadMsgCount">10</p>
+												</li>
+												<li value="3" style="cursor: default; position: relative" onclick="getMemberChatHistory(this)">
+													<p style="display: inline-block;" id="chatMemberAcct">害羞幽靈</p>
+													<p id="chatMemberUnreadMsgCount">10</p>
+												</li> -->
+												<!-- 假資料結束 -->
+											</ul>
+										</div>
+										<div
+											style="float: right;height: 100%; width: 674px;border: 1px solid lightgray;">
+											<h3 id="chatroomHeadMemberAcct"
+												style="background-color: #f2f2f2; padding: 5px; margin: 0px; height: 46px;">
+											</h3>
+											<hr style="margin: 0px; border: 1px solid lightgray;">
+											<!-- <textarea
+												style="resize: none;width: 100%; height: 360px; background-color: #f2f2f2; border: 0px;"
+												readonly>訊息在此</textarea> -->
+											<div id="messagesContainer"
+												style="width: 100%; height: 360px; background-color: #f2f2f2;overflow: auto;">
+												<ul id="messageArea"></ul>
+												<!-- 假資料開始 -->
+												<!-- <div class="msgDiv">
+														<li class="me" timeymd="2023/09/05" timehrmin="09:00">測試123</li>
+														<span class="timehrmin" style="float: right;">789</span>
+														<span class="timehrmin" style="float: right;">111</span>
+													</div>
+													<div class="msgDiv">
+														<li class="otherPerson" timeymd="2023/09/06" timehrmin="01:35">測試2</li>
+														<span class="timehrmin" style="float: left;">123</span>
+														<span class="timehrmin" style="float: left;">111</span>
+													</div> -->
+												<!-- 假資料結束 -->
+											</div>
+											<hr style="margin: 0px; border: 1px solid lightgray;">
+											<div style="background-color: #f2f2f2;height: 103px; position: relative;">
+												<!-- 下方程式碼onclick使用event.preventDefault();確保按下Enter後textarea不會換行 -->
+												<textarea id="message"
+													style="resize: none; position: relative; left: 10px; top: 10px; width: 602px; height: 85px; background-color: #f2f2f2; border: 1px solid lightgray;"
+													placeholder="輸入文字"
+													onkeydown="if(event.keyCode == 13){sendMessage();event.preventDefault();}"
+													oninput="changeSendIcon();"></textarea>
+												<img id="sendIcon" src="../../img/member/chatroom/send_default.jpg"
+													style="position: relative; right: -20px; top: 35px;width: 30px;"
+													onclick="sendMessage()">
+											</div>
+										</div>
+										<div style="clear: both;"></div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<section class="col-xs-12 col-sm-8 col-md-9">
+							<!-- 在此新增 -->
+						</section>
+
+					</div>
+
+				</div>
+			</div>
+
+		</main>
+		<!-- // SITE MAIN CONTENT -->
+
+		<!-- SITE FOOTER -->
+		<footer class="page-footer">
+
+			<!-- WIDGET AREA -->
+			<div class="widgets">
+
+				<!-- FIRST ROW -->
+
+				<!-- // FIRST ROW -->
+
+				<!-- SECOND ROW -->
+				<div class="section">
+					<div class="container">
+						<div class="row">
+
+							<div class="col-xs-12 col-sm-12 col-md-5">
+								<section class="widget widget-menu">
+									<h5 class="widget-title">Contact info</h5>
+									<div class="widget-content">
+										<ul class="menu iconed-list unstyled">
+											<li><span class="list-icon"><i
+														class="round-icon iconfont-map-marker"></i></span>
+												<div class="list-content">中壢區復興路 46 號緯育 TibaMe 附設中壢職訓中心 9 樓</div>
+											</li>
+											<li><span class="list-icon"><i class="round-icon iconfont-phone"></i></span>
+												<div class="list-content">(03) 425-1108</div>
+											</li>
+											<li><span class="list-icon"><i
+														class="round-icon iconfont-envelope-alt"></i></span>
+												<div class="list-content">tibamecha102g6@gmail.com</div>
+											</li>
+										</ul>
+									</div>
+								</section>
+							</div>
+
+							<div class="col-xs-12 col-sm-12 col-md-6">
+								<section class="widget widget-ads">
+									<div class="widget-content">
+										<div class="center-xs">
+											<div class="ads">
+												<a href="#"> <img src="/BuyGo/front_end/img/common/demo/images-footer.jpg"
+														alt="" />
+												</a>
+											</div>
+										</div>
+									</div>
+								</section>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- // SECOND ROW -->
+
+			</div>
+			<!-- // WIDGET AREA -->
+
+			<div class="footer-sub">
+				<div class="container">
+					<div class="row">
+						<div class="col-xs-12 col-sm-6">
+							<div class="footer-links center-xs clearfix">
+								<ul class="unstyled">
+									<li><a href="/BuyGo/front_end/pages/guest/selectFirstFAQ.html">FAQ</a></li>
+								</ul>
+							</div>
+							<div class="space10"></div>
+							<div class="copyright center-xs">
+								<p>(c) 2023</p>
+							</div>
+						</div>
+
+						<div class="space40 visible-xs"></div>
+
+
+					</div>
+				</div>
+			</div>
+
+		</footer>
+		<!-- // SITE FOOTER -->
+
+	</div>
+	<!-- // PAGE WRAPPER -->
+
+	<!-- Essential Javascripts -->
+	<script src="../../js/common/minified.js"></script>
+	<!-- // Essential Javascripts -->
+
+	<!-- Particular Page Javascripts -->
+	<script src="../../js/common/products.js"></script>
+	<script src="../../js/common/owl.carousel.js"></script>
+	<script src="../../js/common/contact.js"></script>
+	<script src="../../js/login.js"></script>
+
+	<!-- 導入Moment.js -->
+	<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script> -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+
+	<!--<script src="http://maps.googleapis.com/maps/api/js?sensor=false" type="text/javascript"></script>-->
+	<!-- <script src="../../js/common/gmap3.min.js"></script> -->
+	<!-- // Particular Page Javascripts -->
+	<script>
+		let currentChatMemberNo = ""; // 全域變數，用以保存當前聊天室所選擇的聊天對象memberNo
+
+		const loginData = checkLoginStatusShowMemberAcct(); // 檢查客戶帳號是否登入，修改頁面右上方Log In/Log Out按鈕，顯示登入者帳號名稱，該函式回傳該登入者的memberNo(非同步，可能過一段時間才取得)
+
+		let self = ""; // 全域變數，保存當前登入者的memberNo
+
+		loginData.then(function (memberDetail) { // 因取得memberNo為非同步(fetch後再收到伺服器返回值)，故須將有使用到memberDetail(矩陣[0]為memberNo, 矩陣[1]為memberAcct)的程式包在loginData內，確保程式是在memberNo收到值後才執行
+			// websocket開始
+			let memberNo = memberDetail[0];
+			let memberAcct = memberDetail[1];
+
+			let MyPoint = `/ChatRoomWS/${memberNo}`;
+			let host = window.location.host;
+			let path = window.location.pathname;
+			let webCtx = path.substring(0, path.indexOf('/', 1));
+			let endPointURL = "ws://" + window.location.host + webCtx + MyPoint;
+			self = memberNo.toString(); // 將memberNo轉為字串，並設置至全域變數self
+			connect(endPointURL);
+		});
+
+		function connect(endPointURL) {
+			// create a websocket
+			webSocket = new WebSocket(endPointURL);
+
+			webSocket.onopen = function (event) {
+				console.log("Connect Success!");
+			};
+
+			webSocket.onmessage = function (event) {
+				let jsonObj = JSON.parse(event.data);
+				if ("open" === jsonObj.type) {
+					refreshMemberList(jsonObj);
+				}
+				else if ("history" === jsonObj.type) {
+					$("ul#messageArea").html(""); // 於對話文字區清空對話記錄
+					$(`li#memberLi${jsonObj.receiver}`).find("p#chatMemberUnreadMsgCount").text("0"); // 將未讀訊息改為0
+					$(`li#memberLi${jsonObj.receiver}`).find("p#chatMemberUnreadMsgCount").css("visibility", "hidden"); // 將未讀訊息隱藏
+					// 這行的jsonObj.message是從redis撈出跟好友的歷史訊息，再parse成JSON格式處理
+					let messages = JSON.parse(jsonObj.message);
+					for (let i = 0; i < messages.length; i++) { // 遍歷接收到的歷史記錄
+						let historyData = JSON.parse(messages[i]);
+						let showMsg = historyData.message;
+						let time = historyData.time;
+						let timeYMD = (time).substr(0, ((time).indexOf(`|`)));
+						let timeHrMin = (time).substr(((time).indexOf(`|`)) + 1, time.length);
+						let liClass = (historyData.sender === self ? 'me' : 'otherPerson'); // 判斷該訊息是自己的或對方的，於li加上不同的class
+						let liFloat = (historyData.sender === self ? 'right' : 'left');
+						$("ul#messageArea").append(`
+							<div class="msgDiv" onmouseenter="$(this).find('span.timeymd').css('visibility', 'visible')" onmouseleave="$(this).find('span.timeymd').css('visibility', 'hidden')">
+								<li class="${liClass}" timeYMD="${timeYMD}" timeHrMin="${timeHrMin}">${showMsg}</li>
+								<span class="timehrmin" style="float: ${liFloat};">${timeHrMin}</span>
+								<span class="timeymd" style="float: ${liFloat};visibility:hidden;">${timeYMD}</span>
+							</div>
+						`);
+					}
+					$("div#messagesContainer").scrollTop($("div#messagesContainer").prop('scrollHeight')); // 將對話框拉條拉到最底(最新)
+				}
+				else if ("chat" === jsonObj.type) {
+					if (jsonObj.unreadMsgCount != undefined) { // 如果後端傳來的unreadMsgCount不為空值(有未讀訊息數)
+						if ($("h3#chatroomHeadMemberAcct").attr("value") != jsonObj.sender) { // 如果現在的對話框對象不等於發來訊息的人(應將未讀訊息數量更新)
+							$(`li#memberLi${jsonObj.sender}`).find("p#chatMemberUnreadMsgCount").text(jsonObj.unreadMsgCount); // 對方發來訊息，將我方聊天室的未讀訊息更新
+							$(`li#memberLi${jsonObj.sender}`).find("p#chatMemberUnreadMsgCount").css("visibility", "visible"); // 將未讀訊息數顯示出來
+						}
+					}
+					let nowChatMember = $("#chatroomHeadMemberAcct").attr("value"); // 取得目前選定的對話對象
+					let timeYMD = (jsonObj.time).substr(0, ((jsonObj.time).indexOf(`|`)));
+					let timeHrMin = (jsonObj.time).substr(((jsonObj.time).indexOf(`|`)) + 1, jsonObj.time.length);
+
+					if (nowChatMember === jsonObj.sender || self === jsonObj.sender) { // 確認當前傳送chat的人是使用者於畫面已選定的對話對象或自己(非畫面已選定對話對象的訊息不應出現在對話框)
+						let liClass = (jsonObj.sender === self ? 'me' : 'otherPerson'); // 判斷該訊息是自己的或對方的，於li加上不同的class
+						let liFloat = (jsonObj.sender === self ? 'right' : 'left');
+						$("ul#messageArea").append(`
+							<div class="msgDiv" onmouseenter="$(this).find('span.timeymd').css('visibility', 'visible')" onmouseleave="$(this).find('span.timeymd').css('visibility', 'hidden')">
+								<li class="${liClass}" timeYMD="${timeYMD}" timeHrMin="${timeHrMin}">${jsonObj.message}</li>
+								<span class="timehrmin" style="float: ${liFloat};">${timeHrMin}</span>
+								<span class="timeymd" style="float: ${liFloat};visibility:hidden;">${timeYMD}</span>
+							</div>
+						`);
+						$("div#messagesContainer").scrollTop($("div#messagesContainer").prop('scrollHeight')); // 將對話框拉條拉到最底(最新)
+					}
+				}
+			};
+		}
+
+		function refreshMemberList(jsonObj) {
+			let members = jsonObj.members;
+			$("ul#memberlist").html("");
+			for (key in members) {
+				if (key === self) { continue; }
+				$("ul#memberlist").append(`
+					<li id="memberLi${key}" value="${key}" style="cursor: default; position: relative;" onclick="getMemberChatHistory(this)">
+						<p style="display: inline-block;" id="chatMemberAcct">${members[key][0]}</p>
+						<p id="chatMemberUnreadMsgCount" style="${members[key][1] == 0 ? "visibility:hidden" : "visibility: visible"}">${members[key][1]}</p>
+					</li>
+				`);
+			}
+		}
+
+		// 註冊列表點擊事件並抓取好友名字以取得歷史訊息
+		function getMemberChatHistory(obj) {
+			let otherPerson = $(obj).val(); // 取得點擊的會員
+			if (currentChatMemberNo != "") { // 如果currentChatMemberNo不為空字串，須將切換聊天對象前的聊天對象的未讀訊息數重置為0
+				var jsonResetUnreadMsg = {
+					"type": "resetUnreadMsg",
+					"sender": self,
+					"receiver": currentChatMemberNo
+				};
+				webSocket.send(JSON.stringify(jsonResetUnreadMsg));
+			}
+			currentChatMemberNo = $(obj).val(); // 將currentChatMemberNo更新為欲切換對象的memberNo
+			$("#chatroomHeadMemberAcct").text($(obj).find("p#chatMemberAcct").text()); // 更換聊天文字區上方對話對象的名稱
+			$("#chatroomHeadMemberAcct").attr("value", ($(obj).val())); // 在該標籤的value加上選定會員的memberNo
+
+			var jsonObj = {
+				"type": "history",
+				"sender": self,
+				"receiver": otherPerson,
+				"message": ""
+			};
+			webSocket.send(JSON.stringify(jsonObj));
+		}
+
+		// 發送訊息
+		function sendMessage() {
+			$("img#sendIcon").attr("src", "../../img/member/chatroom/send_default.jpg"); // 更換sendIcon至預設狀態
+
+			let inputMessage = $("textarea#message");
+			let selectedMember = $("h3#chatroomHeadMemberAcct").attr("value");
+			let message = inputMessage.val().trim();
+
+			if (message === "") {
+				inputMessage.focus();
+			}
+			else if (selectedMember.trim() === "") {
+				alert("請選擇欲發送訊息的會員");
+			}
+			else {
+				// 取得當前時間時間
+				let currentDateTime = moment().format('YYYY/MM/DD|HH:mm');
+
+				var jsonObj = {
+					"type": "chat",
+					"sender": self,
+					"receiver": selectedMember,
+					"message": message,
+					"time": currentDateTime
+				};
+				webSocket.send(JSON.stringify(jsonObj));
+				inputMessage.val(""); // 清空輸入欄位文字
+				inputMessage.focus();
+			}
+		}
+		//-----------------搜尋框開始-----------------
+		$('#search').on('keyup', function () {
+			let numberOfMember = $("#memberlist").children("li").length; // 取得當前會員數量
+			for (let i = 0; i < numberOfMember; i++) { // 遍歷所有會員
+				let memberAcct = $("#memberlist").children("li").eq(i).text();
+
+				if (memberAcct.includes($("#search").val())) {
+					$("#memberlist").children("li").eq(i).show(); // 將符合條件的會員顯示出來
+				}
+				else {
+					$("#memberlist").children("li").eq(i).hide(); // 將不符合條件的會員隱藏起來
+				}
+			}
+		});
+		//-----------------搜尋框結束-----------------
+		//-----------------SendIcon更換開始-----------------
+		function changeSendIcon() {
+			if ($("textarea#message").val() != "") {
+				$("img#sendIcon").attr("src", "../../img/member/chatroom/send_clickable.png");
+			}
+			else {
+				$("img#sendIcon").attr("src", "../../img/member/chatroom/send_default.jpg");
+			}
+		}
+		//-----------------SendIcon更換結束-----------------
+	</script>
+</body>
+
+</html>

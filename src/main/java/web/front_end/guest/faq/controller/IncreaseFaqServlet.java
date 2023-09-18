@@ -29,10 +29,11 @@ public class IncreaseFaqServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 	    resp.setCharacterEncoding("UTF-8");
+		resp.setContentType("text/html:charset=utf-8");
 	    Faq faq = json2Pojo(req, Faq.class);
 	    SERVICE.increase(faq);
 	    
-	    System.out.println("Faq.isSuccessful():" + faq.isSuccessful());
+//	    System.out.println("Faq.isSuccessful():" + faq.isSuccessful());
 	    if(faq.isSuccessful()) {
 	    	writePojo2Json(resp,faq);
 	    }else {

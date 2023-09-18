@@ -2,25 +2,92 @@
 <!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
                                          "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
-    <session-factory>
-    	<!--JDBC -->
-        <property name="hibernate.connection.driver_class">com.mysql.cj.jdbc.Driver</property>
-        <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/buygo?serverTimezone=Asia/Taipei</property>
-        <property name="hibernate.connection.username">root</property>
-        <property name="hibernate.connection.password">root</property>
-        
-        <!-- JNDI -->
-<!-- 		<property name="hibernate.connection.datasource">java:comp/env/jdbc/buyGo</property>  -->
+	<session-factory>
+		<!--JDBC -->
+		<property name="hibernate.connection.driver_class">com.mysql.cj.jdbc.Driver</property>
+		<property name="hibernate.connection.url">jdbc:mysql://localhost:3306/buygo?serverTimezone=Asia/Taipei</property>
+		<property name="hibernate.connection.username">root</property>
+		<property name="hibernate.connection.password">root</property>
+
+		<!-- JNDI -->
+		<!-- <property name="hibernate.connection.datasource">java:comp/env/jdbc/buyGo</property> -->
 
 		<property name="hibernate.current_session_context_class">thread</property>
-        
-        <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
-        <property name="hibernate.show_sql">true</property>
-        <property name="hibernate.format_sql">true</property>
-        <property name="hibernate.highlight_sql">true</property>
-        
-        <mapping class="web.back_end.lpa.order.entity.Lpa_Prod" />
-        <mapping class="web.back_end.lpa.order.entity.Lpa_SO" />
-        
-    </session-factory>
+
+		<property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+		<property name="hibernate.show_sql">true</property>
+		<property name="hibernate.format_sql">true</property>
+		<property name="hibernate.highlight_sql">true</property>
+
+		<mapping class="web.front_end.member.black.entity.Blacklist" />
+		<mapping
+			class="web.front_end.member.chat.entity.ChatroomMessage" />
+		<mapping class="web.front_end.seller.gpa.prod.entity.GpaProd" />
+		<mapping
+			class="web.front_end.member.gpa.order.entity.GpaProdRp" />
+		<mapping
+			class="web.front_end.seller.gpa.prod.entity.GpaProdPics" />
+		<mapping class="web.front_end.seller.gpa.prod.entity.GpaReach" />
+		<mapping class="web.front_end.seller.gpa.order.entity.GpaSo" />
+		<mapping class="web.front_end.member.acc.entity.Member" />
+		<mapping
+			class="web.back_end.member.wallet.entity.BackEndWalletTransHist" />
+		<mapping
+			class="web.front_end.seller.gpa.order.dto.GpaSoAndGpaProdDTO" />
+
+		<mapping class="web.back_end.opa.coupon.entity.Coupon" />
+		<mapping class="web.back_end.opa.coupon.entity.CpOwner" />
+		<mapping class="web.back_end.opa.coupon.entity.CpOwnerId" />
+		<mapping class="web.front_end.guest.faq.entity.Faq" />
+		<mapping class="web.front_end.member.opa.cart.entity.OpaCart" />
+		<mapping
+			class="web.front_end.member.opa.cart.entity.OpaCartId" />
+		<mapping class="web.back_end.opa.prod.entity.Prod" />
+		<mapping class="web.back_end.opa.prod.entity.Prcats" />
+		<mapping class="web.back_end.opa.prod.entity.Prpics" />
+		<mapping class="web.front_end.guest.news.entity.News" />
+		<mapping class="web.front_end.member.pa.prod.entity.PaProd" />
+		<mapping
+			class="web.front_end.member.pa.prodpic.entity.PaProdPic" />
+		<mapping class="web.front_end.member.pa.order.entity.PaSo" />
+		<mapping
+			class="web.front_end.member.pa.order.entity.PaSoDetails" />
+		<mapping class="web.front_end.member.pa.order.entity.PaReturn" />
+		<mapping
+			class="web.front_end.member.pa.order.entity.PaReturnDetails" />
+
+		<!-- <mapping class="web.front_end.prodlist.entity.PaProdPic" /> -->
+		<!-- <mapping class="web.front_end.prodlist.entity.PaProdlist" /> -->
+
+		<mapping
+			class="web.front_end.member.wallet.entity.WalletTransHist" />
+
+		<mapping class="web.front_end.member.pa.cart.entity.PaCart" />
+		<mapping class="web.front_end.member.pa.cart.entity.PaCartId" />
+
+		<mapping
+			class="web.front_end.member.opa.order.entity.OpaOrder" />
+		<mapping
+			class="web.front_end.member.opa.order.entity.OpaOrderdetails" />
+		<mapping
+			class="web.front_end.member.opa.order.entity.OpaOrderdetailsId" />
+		<mapping class="web.front_end.guest.prod.entity.OpaProducts" />
+		<mapping class="web.front_end.guest.prod.entity.OpaPrcats" />
+		<mapping class="web.front_end.guest.prod.entity.OpaPrpics" />
+		<mapping
+			class="web.front_end.member.forum.entity.ForumArticle" />
+		<mapping class="web.front_end.member.forum.entity.ArticlePic" />
+		<mapping class="web.front_end.member.forum.entity.ArticleMsg" />
+		<mapping class="web.front_end.member.forum.entity.RpArticle" />
+		<mapping
+			class="web.front_end.member.forum.entity.RpArticleMsg" />
+		<mapping
+			class="web.front_end.member.forum.entity.ArticleRecord" />
+		<mapping
+			class="web.front_end.member.forum.entity.ArticleCollList" />
+		<mapping class="web.back_end.opa.req.entity.OpaRequest" />
+		<mapping class="web.front_end.member.pa.req.entity.MPaReq" />
+
+
+	</session-factory>
 </hibernate-configuration>

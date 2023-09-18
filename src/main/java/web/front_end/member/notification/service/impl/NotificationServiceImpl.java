@@ -56,6 +56,11 @@ public class NotificationServiceImpl implements NotificationService{
 	}
 
 	@Override
+	public Integer insert(Notification notification) {
+		return notifi_dao.insert(notification);
+	}
+
+	@Override
 	public List<Notification> findall() {
 		return notifi_dao.selectAll();
 	}

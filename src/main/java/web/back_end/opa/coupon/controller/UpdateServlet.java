@@ -14,16 +14,12 @@ import javax.servlet.http.HttpSession;
 import web.back_end.opa.coupon.entity.Coupon;
 import static web.back_end.opa.coupon.util.CouponConstants.SERVICE;
 
-/**
- * Servlet implementation class EditServlet
- */
-@WebServlet("/coupon/update")
+@WebServlet("/api/opa/coupon/update")
 public class UpdateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html;charset=utf-8");
-		final HttpSession session = request.getSession();
 		Coupon coupon = json2Pojo(request, Coupon.class);
 		
 		writePojo2Json(response, SERVICE.update(coupon));

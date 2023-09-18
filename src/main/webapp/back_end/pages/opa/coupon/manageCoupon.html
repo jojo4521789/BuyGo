@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh-Hant">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>BuyGo - 優惠券管理</title>
+
+    <link href="../../../css/common/all.css" rel="stylesheet" type="text/css">
+    <link href="../../../js/common/bstable/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="../../../js/common/bstable/css/bootstrap-table.css" rel="stylesheet" type="text/css">
+    <link href="../../../css/common/from.css" rel="stylesheet" type="text/css">
+
+    <style>
+        .error {
+            color: blue;
+        }
+
+        .-none {
+            display: none;
+        }
+
+        #addCoupon {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background-color: hsla(0, 0%, 0%, .5);
+            margin: 0;
+        }
+
+        #addCoupon>article {
+            background-color: white;
+            width: 90%;
+            max-width: 820px;
+            max-height: 500px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px #ddd;
+            padding: 10px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            overflow: auto;
+        }
+
+        .form_p {
+            text-align: center;
+        }
+
+        .find_labela {
+            width: 100px;
+        }
+    </style>
+</head>
+
+<body>
+    <p class="p_but">
+        <i class="add_i"></i><a href="#" class="add_a" onClick="openAddCoupon()">新增</a>
+        <!-- <i class="del_i"></i><a href="#" class="del_a">删除</a> -->
+        <span style="position: absolute; right: 5px; text-align: right; white-space: nowrap;">
+            <label for="sOpaCouponName" class="find_labela">優惠券: </label>
+            <input type="text" name="sOpaCouponName" id="sOpaCouponName" class="find_input" style="width: 80px;">
+            <input type="button" value="搜尋" class="find_but" id="but_find" onClick="openSearchCoupon()">
+        </span>
+    </p>
+    <div id="coupon_table">
+        <table id="table" class="table_style" style="margin: 0 auto"></table>
+    </div>
+    <br>
+    <div id="msg" class="error"></div>
+
+    <div id="addCoupon" class="div_form -none">
+        <article>
+            <h1 class="h1_style" style="font-size: 24px;">新增優惠券</h1>
+            <form id="form_demo">
+                <p class="form_p">
+                    <label for="opaCouponName" class="find_labela">優惠券名稱: </label>
+                    <input type="text" name="opaCouponName" id="addOpaCouponName" class="form_input">
+                </p>
+                <p class="form_p">
+                    <label for="opaDiscountAmo" class="find_labela">優惠券折扣金額: </label>
+                    <input type="text" name="opaDiscountAmo" id="addOpaDiscountAmo" class="form_input">
+                </p>
+                <p class="form_p">
+                    <label for="opaMinAmount" class="find_labela">最低訂單金額: </label>
+                    <input type="text" name="opaMinAmount" id="addOpaMinAmount" class="form_input">
+                </p>
+                <p class="form_p">
+                    <label for="opaExpDate" class="find_labela">優惠券有效期: </label>
+                    <input type="datetime-local" name="opaExpDate" id="addOpaExpDate" class="form_input">
+                </p>
+                <div style="text-align: center;">
+                    <button id="btnAdd" type="button" class="find_but">新增</button>
+                    <button id="btnClose" type="button" class="find_but">關閉</button>
+                </div>
+                <div id="addMsg" class="error"></div>
+            </form>
+        </article>
+    </div>
+
+    <script src="../../../js/common/jquery/jQuery-2.2.0.min.js"></script>
+    <script src="../../../js/common/bstable/js/bootstrap.min.js"></script>
+    <script src="../../../js/common/bstable/js/bootstrap-table.js"></script>
+    <script src="../../../js/common/bstable/js/bootstrap-table-zh-TW.min.js"></script>
+    <script src="../../../js/common/date/js/laydate.js"></script>
+
+    <script>
+        function onEditClick(opaCouponNo) {
+            const btn_edit = document.querySelector("#btnEdit_" + opaCouponNo);
+            const inputs = document.querySelectorAll(`.input_${opaCouponNo}`);
+            const p_opaDiscountAmo = document.querySelector(`#p_opaDiscountAmo_${opaCouponNo}`);
+            const opaDiscountAmo = document.querySelector(`#opaDiscountAmo_${opaCouponNo}`);
+            const p_opaMinAmount = document.querySelector(`#p_opaMinAmount_${opaCouponNo}`);
+            const opaMinAmount = document.querySelector(`#opaMinAmount_${opaCouponNo}`);
+            const p_opaExpDate = document.querySelector(`#p_opaExpDate_${opaCouponNo}`);
+            const opaExpDate = document.querySelector(`#opaExpDate_${opaCouponNo}`);
+            const msg = document.querySelector("#msg");
+            btn_edit.classList.toggle("-on");
+
+            p_opaDiscountAmo.classList.toggle("-none");
+            opaDiscountAmo.classList.toggle("-none");
+            p_opaMinAmount.classList.toggle("-none");
+            opaMinAmount.classList.toggle("-none");
+            p_opaExpDate.classList.toggle("-none");
+            opaExpDate.classList.toggle("-none");
+
+            if (btn_edit.classList.contains("-on")) {
+                btn_edit.textContent = "儲存";
+            } else {
+                btn_edit.textContent = "編輯";
+                fetch("/BuyGo/api/opa/coupon/update", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json; charset=utf-8",
+                    },
+                    body: JSON.stringify({
+                        opaCouponNo: opaCouponNo,
+                        opaDiscountAmo: opaDiscountAmo.value.trim(),
+                        opaMinAmount: opaMinAmount.value.trim(),
+                        opaExpDate: new Date(opaExpDate.value),
+                    })
+                })
+                    .then(resp => resp.json())
+                    .then(body => {
+                        const { successful } = body;
+                        if (successful) {
+                            msg.className = 'info';
+                            msg.textContent = '編號' + opaCouponNo + '更新成功';
+                            p_opaDiscountAmo.textContent = opaDiscountAmo.value.trim();
+                            p_opaMinAmount.textContent = opaMinAmount.value.trim();
+                            p_opaExpDate.textContent = new Date(opaExpDate.value);
+                            location.reload();
+                        } else {
+                            msg.className = 'error';
+                            msg.textContent = '編號' + opaCouponNo + '更新失敗';
+                            opaDiscountAmo.value = p_opaDiscountAmo.textContent;
+                            opaMinAmount.value = p_opaMinAmount.textContent;
+                            opaExpDate.value = datetimeLocal(p_opaExpDate.textContent);
+                        }
+                    });
+            }
+        }
+
+        function onRemoveClick(opaCouponNo) {
+            if (!confirm("確定刪除編號" + opaCouponNo + "?")) {
+                return;
+            }
+            fetch("/BuyGo/api/opa/coupon/remove", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ opaCouponNo })
+            })
+                .then(resp => resp.json())
+                .then(body => {
+                    if (body.successful) {
+                        location.reload();
+                    }
+                });
+        }
+
+        function datetimeLocal(datetime) {
+            const dt = new Date(datetime);
+            dt.setMinutes(dt.getMinutes() - dt.getTimezoneOffset());
+            return dt.toISOString().slice(0, 16);
+        }
+
+        $(function () {
+            let data = [];
+            fetch("/BuyGo/api/opa/coupon/manage", { headers: { "Content-Type": "application/json; charset=utf-8", } })
+                .then(resp => resp.json())
+                .then(datas => {
+                    for (let i = 0; i < datas.length; i++) {
+                        let coupon = {
+                            opaCouponNo: datas[i].opaCouponNo,
+                            opaCouponName: datas[i].opaCouponName,
+                            opaDiscountAmo: `<p id="p_opaDiscountAmo_${datas[i].opaCouponNo}">${datas[i].opaDiscountAmo}</p><input type="text" id="opaDiscountAmo_${datas[i].opaCouponNo}" class="input_${datas[i].opaCouponNo} -none" value="${datas[i].opaDiscountAmo}">`,
+                            opaMinAmount: `<p id="p_opaMinAmount_${datas[i].opaCouponNo}">${datas[i].opaMinAmount}</p><input type="text" id="opaMinAmount_${datas[i].opaCouponNo}" class="input_${datas[i].opaCouponNo} -none" value="${datas[i].opaMinAmount}">`,
+                            opaExpDate: `<p id="p_opaExpDate_${datas[i].opaCouponNo}">${datas[i].opaExpDate}</p><input type="datetime-local" id="opaExpDate_${datas[i].opaCouponNo}" class="input_${datas[i].opaCouponNo} -none" value="${datetimeLocal(datas[i].opaExpDate)}">`,
+                            action: `<button id="btnEdit_${datas[i].opaCouponNo}" class="find_but" onclick="onEditClick(${datas[i].opaCouponNo})">編輯</button>  <button id="btnDel_${datas[i].opaCouponNo}" class="find_but" onclick="onRemoveClick(${datas[i].opaCouponNo})">刪除</button>`
+                        }
+                        data.push(coupon);
+                    }
+                    $('#table').bootstrapTable({
+                        method: "get",
+                        striped: true,
+                        singleSelect: false,
+                        pagination: true, //分頁
+                        pageSize: 10,
+                        pageNumber: 1,
+                        search: false, //顯示搜索框
+                        contentType: "application/x-www-form-urlencoded",
+                        queryParams: null,
+                        columns: [
+                            // {
+                            //     checkbox: "true",
+                            //     field: 'check',
+                            //     align: 'center',
+                            //     valign: 'middle'
+                            // }
+                            // ,
+                            {
+                                title: '優惠券編號',
+                                field: 'opaCouponNo',
+                                align: 'center',
+                                valign: 'middle'
+                            },
+                            {
+                                title: '優惠券名稱',
+                                field: 'opaCouponName',
+                                align: 'center',
+                                valign: 'middle'
+                            },
+                            {
+                                title: '折扣金額',
+                                field: 'opaDiscountAmo',
+                                align: 'center',
+                                valign: 'middle'
+                            },
+                            {
+                                title: '最低訂單金額',
+                                field: 'opaMinAmount',
+                                align: 'center',
+                                valign: 'middle'
+                            },
+                            {
+                                title: '優惠券有效期',
+                                field: 'opaExpDate',
+                                align: 'center',
+                                valign: 'middle'
+                            },
+                            {
+                                title: '',
+                                field: 'action',
+                                align: 'center',
+                                valign: 'middle'
+                            }
+                        ],
+                        data: data
+                    });
+                });
+
+        });
+    </script>
+
+    <script>
+        const addMsg = document.querySelector("#addMsg");
+        const opaCouponName = document.querySelector("#addOpaCouponName");
+        const opaDiscountAmo = document.querySelector("#addOpaDiscountAmo");
+        const opaMinAmount = document.querySelector("#addOpaMinAmount");
+        const opaExpDate = document.querySelector("#addOpaExpDate");
+        opaExpDate.min = new Date().toISOString().slice(0, new Date().toISOString().lastIndexOf(":")); //今天
+
+        function openAddCoupon() {
+            let lightbox_el = document.querySelector("#addCoupon");
+            lightbox_el.classList.remove("-none");
+            addMsg.textContent = "";
+        }
+
+        const btn_addCoupon_close_el = document.querySelector("#btnClose");
+        btn_addCoupon_close_el.addEventListener("click", function () {
+            let lightbox_el = document.querySelector("#addCoupon");
+            lightbox_el.classList.add("-none");
+        });
+
+
+        const btn_addCoupon_add_el = document.querySelector("#btnAdd");
+        btn_addCoupon_add_el.addEventListener("click", function () {
+            addMsg.textContent = "";
+            if (opaCouponName.value.trim() === "") {
+                addMsg.textContent = "請輸入優惠券名稱";
+                return;
+            }
+            if (opaDiscountAmo.value.trim() === "") {
+                addMsg.textContent = "請輸入優惠券折扣金額";
+                return;
+            }
+            if (isNaN(opaDiscountAmo.value.trim())) {
+                addMsg.textContent = "優惠券折扣金額輸入錯誤";
+                return;
+            }
+            if (opaMinAmount.value.trim() === "") {
+                addMsg.textContent = "請輸入最低訂單金額";
+                return;
+            }
+            if (isNaN(opaMinAmount.value.trim())) {
+                addMsg.textContent = "最低訂單金額輸入錯誤";
+                return;
+            }
+            if (opaExpDate.value === "") {
+                addMsg.textContent = "請輸入優惠券有效期";
+                return;
+            }
+            if (new Date(opaExpDate.value) < new Date()) {
+                addMsg.textContent = "優惠券有效期不得早於今天";
+                return;
+            }
+
+            addMsg.textContent = "";
+            fetch("/BuyGo/api/opa/coupon/add", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json; charset=utf-8",
+                },
+                body: JSON.stringify({
+                    opaCouponName: opaCouponName.value.trim(),
+                    opaDiscountAmo: opaDiscountAmo.value.trim(),
+                    opaMinAmount: opaMinAmount.value.trim(),
+                    opaExpDate: new Date(opaExpDate.value),
+                }),
+            })
+                .then(resp => resp.json())
+                .then(body => {
+                    const { successful } = body;
+                    if (successful) {
+                        addMsg.className = "info";
+                        addMsg.textContent = "新增成功";
+                        let lightbox_el = document.querySelector("#addCoupon");
+                        lightbox_el.classList.add("-none");
+                        location.reload();
+                    } else {
+                        addMsg.className = "error";
+                        addMsg.textContent = "新增失敗";
+                    }
+                });
+        });
+    </script>
+
+    <script>
+        function openSearchCoupon() {
+            let data = [];
+            const sOpaCouponName = document.querySelector("#sOpaCouponName");
+            if (sOpaCouponName.value.trim() === "") {
+                location.reload();
+            } else {
+                console.log(sOpaCouponName.value.trim());
+                fetch("/BuyGo/api/opa/coupon/search", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json; charset=utf-8",
+                    },
+                    body: JSON.stringify({
+                        opaCouponName: sOpaCouponName.value.trim(),
+                    }),
+                })
+                    .then(resp => resp.json())
+                    .then(datas => {
+                        for (let i = 0; i < datas.length; i++) {
+                            let coupon = {
+                                opaCouponNo: datas[i].opaCouponNo,
+                                opaCouponName: datas[i].opaCouponName,
+                                opaDiscountAmo: `<p id="p_opaDiscountAmo_${datas[i].opaCouponNo}">${datas[i].opaDiscountAmo}</p><input type="text" id="opaDiscountAmo_${datas[i].opaCouponNo}" class="input_${datas[i].opaCouponNo} -none" value="${datas[i].opaDiscountAmo}">`,
+                                opaMinAmount: `<p id="p_opaMinAmount_${datas[i].opaCouponNo}">${datas[i].opaMinAmount}</p><input type="text" id="opaMinAmount_${datas[i].opaCouponNo}" class="input_${datas[i].opaCouponNo} -none" value="${datas[i].opaMinAmount}">`,
+                                opaExpDate: `<p id="p_opaExpDate_${datas[i].opaCouponNo}">${datas[i].opaExpDate}</p><input type="datetime-local" id="opaExpDate_${datas[i].opaCouponNo}" class="input_${datas[i].opaCouponNo} -none" value="${datetimeLocal(datas[i].opaExpDate)}">`,
+                                action: `<button id="btnEdit_${datas[i].opaCouponNo}" class="find_but" onclick="onEditClick(${datas[i].opaCouponNo})">編輯</button>  <button id="btnDel_${datas[i].opaCouponNo}" class="find_but" onclick="onRemoveClick(${datas[i].opaCouponNo})">刪除</button>`
+                            }
+                            console.log(coupon);
+                            data.push(coupon);
+                        }
+                        console.log(data);
+                        $('#coupon_table').html(`<table id="table" class="table_style" style="margin: 0 auto"></table>`);
+                        $('#table').bootstrapTable({
+                            method: "get",
+                            striped: true,
+                            singleSelect: false,
+                            pagination: true, //分頁
+                            pageSize: 10,
+                            pageNumber: 1,
+                            search: false, //顯示搜索框
+                            contentType: "application/x-www-form-urlencoded",
+                            queryParams: null,
+                            columns: [
+                                // {
+                                //     checkbox: "true",
+                                //     field: 'check',
+                                //     align: 'center',
+                                //     valign: 'middle'
+                                // }
+                                // ,
+                                {
+                                    title: '優惠券編號',
+                                    field: 'opaCouponNo',
+                                    align: 'center',
+                                    valign: 'middle'
+                                },
+                                {
+                                    title: '優惠券名稱',
+                                    field: 'opaCouponName',
+                                    align: 'center',
+                                    valign: 'middle'
+                                },
+                                {
+                                    title: '折扣金額',
+                                    field: 'opaDiscountAmo',
+                                    align: 'center',
+                                    valign: 'middle'
+                                },
+                                {
+                                    title: '最低訂單金額',
+                                    field: 'opaMinAmount',
+                                    align: 'center',
+                                    valign: 'middle'
+                                },
+                                {
+                                    title: '優惠券有效期',
+                                    field: 'opaExpDate',
+                                    align: 'center',
+                                    valign: 'middle'
+                                },
+                                {
+                                    title: '',
+                                    field: 'action',
+                                    align: 'center',
+                                    valign: 'middle'
+                                }
+                            ],
+                            data: data
+                        });
+                    });
+            }
+        }
+    </script>
+
+</body>
+
+</html>

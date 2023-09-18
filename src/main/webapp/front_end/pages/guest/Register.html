@@ -1,0 +1,1065 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>BuyGo 註冊會員</title>
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!-- Favorite Icons -->
+    <link rel="icon" href="../../img/common/favicon/favicon.html" type="image/x-icon" />
+    <link rel="apple-touch-icon-precomposed" sizes="144x144"
+        href="../../img/common/favicon/apple-touch-icon-144x144-precomposed.html">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72"
+        href="../../img/common/favicon/apple-touch-icon-72x72-precomposed.html">
+    <link rel="apple-touch-icon-precomposed" href="../../img/common/favicon/apple-touch-icon-precomposed.html">
+    <!-- // Favorite Icons -->
+
+    <!--<link href='http://fonts.useso.com/css?family=Open+Sans:300,400,600,700' rel='stylesheet' type='text/css'>-->
+
+    <!-- GENERAL CSS FILES -->
+    <link rel="stylesheet" href="../../css/common/minified.css">
+    <!-- // GENERAL CSS FILES -->
+
+    <!--[if IE 8]>
+		<script src="js/respond.min.js"></script>
+		<script src="js/selectivizr-min.js"></script>
+	<![endif]-->
+    <!--
+	<script src="js/jquery.min.js"></script>
+	-->
+    <script>window.jQuery || document.write('<script src="../../js/common/jquery.min.js"><\/script>');</script>
+    <script src="../../js/common/modernizr.min.js"></script>
+    <!-- PARTICULAR PAGES CSS FILES -->
+    <link rel="stylesheet" href="../../css/common/innerpage.css">
+    <link rel="stylesheet" href="../../css/common/owl.carousel.css">
+    <link rel="stylesheet" href="../../css/common/owl.theme.css">
+    <!-- // PARTICULAR PAGES CSS FILES -->
+    <link rel="stylesheet" href="../../css/common/responsive.css">
+    <style>
+        /* Style the submit button */
+        button[type="button"] {
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 4px;
+            margin-top: 20px;
+        }
+
+        /* Style the error messages */
+        .error-message {
+            color: red;
+            margin-top: 5px;
+        }
+
+        /* 添加一個外部容器框 */
+        #form-container {
+            width: 100%;
+            margin: 30px;
+            padding: 50px;
+            border: 2px solid #ccc;
+            border-radius: 10px;
+            box-shadow: 0 0 30px 15px rgba(210, 84, 11, 0.546);
+            background: linear-gradient(to bottom, #ebe3bec6, #ffffb7b2);
+        }
+
+
+        /* 選項樣式 */
+        select {
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            padding: 10px;
+            background: transparent;
+            background-image: url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css");
+            background-repeat: no-repeat;
+            background-position: right center;
+        }
+
+        /* 按鈕樣式 */
+        button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .address-section {
+            color: #056831;
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 10px;
+        }
+
+        .address-section label,
+        .address-section p {
+            margin-bottom: 5px;
+        }
+
+        .address-section select,
+        .address-section input[type="text"] {
+            margin-top: 5px;
+            width: 100px;
+        }
+
+        input {
+            background-color: transparent;
+            border: none;
+            border-bottom: 1px solid var(--input-color);
+            color: var(--input-color);
+            font-size: 1.5em;
+            padding: .5em .5em .5em;
+            width: 50%;
+        }
+
+        input:focus+label,
+        input+label.show {
+            border-radius: 4px;
+            color: var(--label-color);
+            font-size: 1em;
+            left: .5em;
+            padding: 0 .15em;
+            text-transform: uppercase;
+            top: -1em;
+        }
+
+        :root {
+            --input-color: #056831;
+            --label-color: #f61d62;
+        }
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+        }
+
+        .field {
+            color: var(--input-color);
+            margin-bottom: 2em;
+            position: relative;
+        }
+
+        input:focus {
+            border-color: var(--label-color);
+            outline: 0;
+        }
+
+        /* ===== */
+        div.logo-wrapper {
+            position: relative;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        h1 {
+            color: #056831;
+        }
+
+        h2 {
+            color: #056831;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- PAGE WRAPPER -->
+    <div id="page-wrapper">
+
+        <!-- SITE HEADER -->
+        <header id="site-header" role="banner">
+            <!-- HEADER TOP -->
+            <div class="header-top">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-6 col-md-7">
+                            <!-- CONTACT INFO -->
+                            <div class="contact-info">
+                                <i class="iconfont-headphones round-icon"></i>
+                                <strong>+444 (100) 1234</strong>
+                                <span>(Mon- Fri: 09.00 - 21.00)</span>
+                            </div>
+                            <!-- // CONTACT INFO -->
+                        </div>
+                        <div class="col-xs-12 col-sm-6 col-md-5">
+                            <ul class="actions unstyled clearfix">
+                                <li>
+                                    <!-- SEARCH BOX -->
+                                    <div class="search-box">
+                                        <form action="#" method="post">
+                                            <div class="input-iconed prepend">
+                                                <button class="input-icon"><i class="iconfont-search"></i></button>
+                                                <label for="input-search" class="placeholder">Search here…</label>
+                                                <input type="text" name="q" id="input-search"
+                                                    class="round-input full-width" required />
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <!-- // SEARCH BOX -->
+                                </li>
+                                <li data-toggle="sub-header" data-target="#sub-social">
+                                    <!-- SOCIAL ICONS -->
+                                    <a href="javascript:void(0);" id="social-icons">
+                                        <i class="iconfont-share round-icon"></i>
+                                    </a>
+
+                                    <div id="sub-social" class="sub-header">
+                                        <ul class="social-list unstyled text-center">
+                                            <li><a href="#"><i class="iconfont-facebook round-icon"></i></a></li>
+                                            <li><a href="#"><i class="iconfont-twitter round-icon"></i></a></li>
+                                            <li><a href="#"><i class="iconfont-google-plus round-icon"></i></a></li>
+                                            <li><a href="#"><i class="iconfont-pinterest round-icon"></i></a></li>
+                                            <li><a href="#"><i class="iconfont-rss round-icon"></i></a></li>
+                                        </ul>
+                                    </div>
+                                    <!-- // SOCIAL ICONS -->
+                                </li>
+                                <li data-toggle="sub-header" data-target="#sub-cart">
+                                    <!-- SHOPPING CART -->
+                                    <a href="javascript:void(0);" id="total-cart">
+                                        <i class="iconfont-shopping-cart round-icon"></i>
+                                    </a>
+
+                                    <div id="sub-cart" class="sub-header">
+                                        <div class="cart-header">
+                                            <span>Your cart is currently empty.</span>
+                                            <small><a href="../../pages/member/cart.html">(See All)</a></small>
+                                        </div>
+                                        <ul class="cart-items product-medialist unstyled clearfix"></ul>
+                                        <div class="cart-footer">
+                                            <div class="cart-total clearfix">
+                                                <span class="pull-left uppercase">Total</span>
+                                                <span class="pull-right total">$ 0</span>
+                                            </div>
+                                            <div class="text-right">
+                                                <a href="../../pages/member/cart.html"
+                                                    class="btn btn-default btn-round view-cart">View
+                                                    Cart</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- // SHOPPING CART -->
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ADD TO CART MESSAGE -->
+                <div class="cart-notification">
+                    <ul class="unstyled"></ul>
+                </div>
+                <!-- // ADD TO CART MESSAGE -->
+            </div>
+            <!-- // HEADER TOP -->
+            <!-- MAIN HEADER -->
+            <div class="main-header-wrapper">
+                <div class="container">
+                    <div class="main-header">
+                        <!-- SITE LOGO -->
+                        <div class="logo-wrapper">
+                            <a href="../../index.html" class="logo"
+                                title="GFashion - Responsive e-commerce HTML Template">
+                                <img src="/BuyGo/front_end/img/common/buygo.png"
+                                    alt="GFashion - Responsive e-commerce HTML Template" style="height: 120px" />
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- // MAIN HEADER -->
+        </header>
+        <!-- // SITE HEADER -->
+
+
+        <!-- SITE MAIN CONTENT -->
+        <main id="main-content" role="main">
+
+            <div class="container">
+                <div id="form-container">
+                    <h1>===============註冊會員===============</h1>
+                    <h2>請輸入您的個人資料</h2>
+                    <div>
+                        <div class="field">
+                            <label for="memberAcct">會員帳號:</label>
+                            <input type="text" id="memberAcct" placeholder="開頭為英文，長度為8-20...">
+                            <p id="p1" style="color: red"></p>
+                        </div>
+                        <div class="field">
+                            <label for="memberPw">會員密碼:</label>
+                            <input type="password" id="memberPw" placeholder="必須包含字母、數字，長度為6-16">
+                            <button type="button" onclick="togglePassword()">顯示密碼</button>
+                            <p id="p2" style="color: red"></p>
+                        </div>
+                        <div class="field">
+                            <label for="memberPw1">確認密碼:</label>
+                            <input type="password" id="memberPw1">
+                            <button type="button" onclick="togglePassword1()">顯示密碼</button>
+                            <p id="p3" style="color: red"></p>
+                        </div>
+                        <div class="field">
+                            <label for="memberName">會員姓名:</label>
+                            <input type="text" id="memberName">
+                            <p id="p4" style="color: red"></p>
+                        </div>
+                        <div class="field">
+                            <label for="memberPhone">會員電話:</label>
+                            <input type="text" id="memberPhone">
+                            <p id="p5" style="color: red"></p>
+                        </div>
+                        <div class="field">
+                            <label for="memberEmail">會員電子信箱:</label>
+                            <input type="text" id="memberEmail">
+                            <p id="p6" style="color: red"></p>
+                        </div>
+
+                        <div class="field">
+                            <select id="memberGender">
+                                <p id="p7" style="color: red"></p>
+                                <option>請輸入您的性別</option>
+                                <option>男生</option>
+                                <option>女生</option>
+                            </select>
+                        </div>
+                        <div class="field">
+                            <p>請輸入您的生日</p>
+                            <p id="p8" style="color: red"></p>
+                            <input type="date" id="memberBirthday">
+                        </div>
+                        <div class="field">
+                            <label for="memberId">會員身分證:</label>
+                            <input type="text" id="memberId">
+                            <p id="p9" style="color: red"></p>
+                        </div>
+                        <div class="address-section">
+                            <label for="slCity">會員居住地址:</label>
+                            <p id="p10" style="color: red"></p>
+                            <p>請選擇縣市</p>
+                            <select id="slCity">
+                                <option disabled selected>--請選擇縣市--</option>
+                            </select>
+                            <br>
+                            <p>請選擇鄉鎮市區</p>
+                            <select id="slCountry"></select>
+                            <br>
+                            <table>
+                                <tr>
+                                    <td><input type="text" id="village">村/里</td>
+                                    <td><input type="text" id="adjacent">鄰</td>
+                                    <td><input type="text" id="road">路</td>
+                                    <td><input type="text" id="street">街</td>
+                                </tr>
+                                <tr>
+
+                                    <td><input type="text" id="section">段</td>
+                                    <td><input type="text" id="lane">巷</td>
+                                    <td><input type="text" id="add_num">號</td>
+                                    <td><input type="text" id="add_floor">樓</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div>
+                            <select id="memberStatus">
+                                <option value="1">一般會員</option>
+                            </select>
+                        </div>
+                        <div>
+                            <button type="button" id="button">送出資料</button>
+                        </div>
+                        <div id="errorMessages" style="color: red;"></div>
+                    </div>
+                </div>
+        </main>
+        <!-- // SITE MAIN CONTENT -->
+
+        <!-- SITE FOOTER -->
+        <footer class="page-footer">
+
+            <!-- WIDGET AREA -->
+            <div class="widgets">
+
+                <!-- FIRST ROW -->
+
+                <!-- // FIRST ROW -->
+
+                <!-- SECOND ROW -->
+                <div class="section">
+                    <div class="container">
+                        <div class="row">
+
+                            <div class="col-xs-12 col-sm-12 col-md-5">
+                                <section class="widget widget-menu">
+                                    <h5 class="widget-title">Contact info</h5>
+                                    <div class="widget-content">
+                                        <ul class="menu iconed-list unstyled">
+                                            <li><span class="list-icon"><i
+                                                        class="round-icon iconfont-map-marker"></i></span>
+                                                <div class="list-content">中壢區復興路 46 號緯育 TibaMe 附設中壢職訓中心 9 樓</div>
+                                            </li>
+                                            <li><span class="list-icon"><i class="round-icon iconfont-phone"></i></span>
+                                                <div class="list-content">(03) 425-1108</div>
+                                            </li>
+                                            <li><span class="list-icon"><i
+                                                        class="round-icon iconfont-envelope-alt"></i></span>
+                                                <div class="list-content">tibamecha102g6@gmail.com</div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </section>
+                            </div>
+
+                            <div class="col-xs-12 col-sm-12 col-md-6">
+                                <section class="widget widget-ads">
+                                    <div class="widget-content">
+                                        <div class="center-xs">
+                                            <div class="ads">
+                                                <a href="#"> <img src="" alt="" />
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </section>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- // SECOND ROW -->
+
+            </div>
+            <!-- // WIDGET AREA -->
+
+            <div class="footer-sub">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-6">
+                            <div class="footer-links center-xs clearfix">
+                                <ul class="unstyled">
+                                    <li><a href="/BuyGo/front_end/pages/guest/selectFirstFAQ.html">FAQ</a></li>
+                                </ul>
+                            </div>
+                            <div class="space10"></div>
+                            <div class="copyright center-xs">
+                                <p>(c) 2023</p>
+                            </div>
+                        </div>
+
+                        <div class="space40 visible-xs"></div>
+
+
+                    </div>
+                </div>
+            </div>
+
+        </footer>
+        <!-- // SITE FOOTER -->
+
+    </div>
+    <!-- // PAGE WRAPPER -->
+
+    <!-- Essential Javascripts -->
+    <script src="../../js/common/minified.js"></script>
+    <!-- // Essential Javascripts -->
+
+    <!-- Particular Page Javascripts -->
+    <script src="../../js/common/products.js"></script>
+    <script src="../../js/common/owl.carousel.js"></script>
+    <script src="../../js/common/contact.js"></script>
+    <!--<script src="http://maps.googleapis.com/maps/api/js?sensor=false" type="text/javascript"></script>-->
+    <!-- <script src="../../js/common/gmap3.min.js"></script> -->
+    <!-- // Particular Page Javascripts -->
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    function togglePassword() {
+        var passwordField = document.getElementById("memberPw");
+        if (passwordField.type === "password") {
+            passwordField.type = "text";
+        } else {
+            passwordField.type = "password";
+        }
+    }
+    function togglePassword1() {
+        var passwordField = document.getElementById("memberPw1");
+        if (passwordField.type === "password") {
+            passwordField.type = "text";
+        } else {
+            passwordField.type = "password";
+        }
+    }
+    //地址下拉選單===start
+    const data = {
+        宜蘭縣: [
+            '宜蘭市', '頭城鎮', '礁溪鄉', '壯圍鄉', '員山鄉',
+            '羅東鎮', '三星鄉', '大同鄉', '五結鄉', '冬山鄉',
+            '蘇澳鎮', '南澳鄉', '釣魚臺列嶼'
+        ],
+        基隆市: [
+            '仁愛區', '信義區', '中正區', '中山區', '安樂區',
+            '暖暖區', '七堵區'
+        ],
+        臺北市: [
+            '中正區', '大同區', '中山區', '松山區', '大安區',
+            '萬華區', '信義區', '士林區', '北投區', '內湖區',
+            '南港區', '文山區'
+        ],
+        新北市: [
+            '萬里區', '金山區', '板橋區', '汐止區', '深坑區',
+            '石碇區', '瑞芳區', '平溪區', '雙溪區', '貢寮區',
+            '新店區', '坪林區', '烏來區', '永和區', '中和區',
+            '土城區', '三峽區', '樹林區', '鶯歌區', '三重區',
+            '新莊區', '泰山區', '林口區', '蘆洲區', '五股區',
+            '八里區', '淡水區', '三芝區', '石門區'
+        ],
+        桃園市: [
+            '中壢區', '平鎮區', '龍潭區', '楊梅區', '新屋區',
+            '觀音區', '桃園區', '龜山區', '八德區', '大溪區',
+            '復興區', '大園區', '蘆竹區'
+        ],
+        新竹縣: [
+            '竹北市', '湖口鄉', '新豐鄉', '新埔鎮', '關西鎮',
+            '芎林鄉', '寶山鄉', '竹東鎮', '五峰鄉', '橫山鄉',
+            '尖石鄉', '北埔鄉', '峨眉鄉'
+        ],
+        新竹市: [
+            '東區', '北區', '香山區'
+        ],
+        苗栗縣: [
+            '竹南鎮', '頭份市', '三灣鄉', '南庄鄉', '獅潭鄉',
+            '後龍鎮', '通霄鎮', '苑裡鎮', '苗栗市', '造橋鄉',
+            '頭屋鄉', '公館鄉', '大湖鄉', '泰安鄉', '銅鑼鄉',
+            '三義鄉', '西湖鄉', '卓蘭鎮'
+        ],
+        臺中市: [
+            '中區', '東區', '南區', '西區', '北區', '北屯區',
+            '西屯區', '南屯區', '太平區', '大里區', '霧峰區',
+            '烏日區', '豐原區', '后里區', '石岡區', '東勢區',
+            '和平區', '新社區', '潭子區', '大雅區', '神岡區',
+            '大肚區', '沙鹿區', '龍井區', '梧棲區', '清水區',
+            '大甲區', '外埔區', '大安區'
+        ],
+        彰化縣: [
+            '彰化市', '芬園鄉', '花壇鄉', '秀水鄉', '鹿港鎮',
+            '福興鄉', '線西鄉', '和美鎮', '伸港鄉', '員林市',
+            '社頭鄉', '永靖鄉', '埔心鄉', '溪湖鎮', '大村鄉',
+            '埔鹽鄉', '田中鎮', '北斗鎮', '田尾鄉', '埤頭鄉',
+            '溪州鄉', '竹塘鄉', '二林鎮', '大城鄉', '芳苑鄉',
+            '二水鄉'
+        ],
+        南投縣: [
+            '南投市', '中寮鄉', '草屯鎮', '國姓鄉', '埔里鎮',
+            '仁愛鄉', '名間鄉', '集集鎮', '水里鄉', '魚池鄉',
+            '信義鄉', '竹山鎮', '鹿谷鄉'
+        ],
+        雲林縣: [
+            '斗南鎮', '大埤鄉', '虎尾鎮', '土庫鎮', '褒忠鄉',
+            '東勢鄉', '臺西鄉', '崙背鄉', '麥寮鄉', '斗六市',
+            '林內鄉', '古坑鄉', '莿桐鄉', '西螺鎮', '二崙鄉',
+            '北港鎮', '水林鄉', '口湖鄉', '四湖鄉', '元長鄉'
+        ],
+        嘉義市: [
+            '東區', '西區'
+        ],
+        嘉義縣: [
+            '番路鄉', '梅山鄉', '竹崎鄉', '阿里山鄉', '中埔鄉',
+            '大埔鄉', '水上鄉', '鹿草鄉', '太保市', '朴子市',
+            '東石鄉', '六腳鄉', '新港鄉', '民雄鄉', '大林鎮',
+            '溪口鄉', '義竹鄉', '布袋鎮'
+        ],
+        臺南市: [
+            '中西區', '東區', '南區', '北區', '安平區',
+            '安南區', '永康區', '歸仁區', '新化區', '左鎮區',
+            '玉井區', '楠西區', '南化區', '仁德區', '關廟區',
+            '龍崎區', '官田區', '麻豆區', '佳里區', '西港區',
+            '七股區', '將軍區', '學甲區', '北門區', '新營區',
+            '後壁區', '白河區', '東山區', '六甲區', '下營區',
+            '柳營區', '鹽水區', '善化區', '大內區', '山上區',
+            '新市區', '安定區'
+        ],
+        高雄市: [
+            '新興區', '前金區', '苓雅區', '鹽埕區', '鼓山區',
+            '旗津區', '前鎮區', '三民區', '楠梓區', '小港區',
+            '左營區', '仁武區', '大社區', '東沙群島', '南沙群島',
+            '岡山區', '路竹區', '阿蓮區', '田寮區', '燕巢區',
+            '橋頭區', '梓官區', '彌陀區', '永安區', '湖內區',
+            '鳳山區', '大寮區', '林園區', '鳥松區', '大樹區',
+            '旗山區', '美濃區', '六龜區', '內門區', '杉林區',
+            '甲仙區', '桃源區', '那瑪夏區', '茂林區', '茄萣區'
+        ],
+        屏東縣: [
+            '屏東市', '三地門鄉', '霧臺鄉', '瑪家鄉', '九如鄉',
+            '里港鄉', '高樹鄉', '鹽埔鄉', '長治鄉', '麟洛鄉',
+            '竹田鄉', '內埔鄉', '萬丹鄉', '潮州鎮', '泰武鄉',
+            '來義鄉', '萬巒鄉', '崁頂鄉', '新埤鄉', '南州鄉',
+            '林邊鄉', '東港鎮', '琉球鄉', '佳冬鄉', '新園鄉',
+            '枋寮鄉', '枋山鄉', '春日鄉', '獅子鄉', '車城鄉',
+            '牡丹鄉', '恆春鎮', '滿州鄉'
+        ],
+        臺東縣: [
+            '臺東市', '綠島鄉', '蘭嶼鄉', '延平鄉', '卑南鄉',
+            '鹿野鄉', '關山鎮', '海端鄉', '池上鄉', '東河鄉',
+            '成功鎮', '長濱鄉', '太麻里鄉', '金峰鄉', '大武鄉',
+            '達仁鄉'
+        ],
+        花蓮縣: [
+            '花蓮市', '新城鄉', '秀林鄉', '吉安鄉', '壽豐鄉',
+            '鳳林鎮', '光復鄉', '豐濱鄉', '瑞穗鄉', '萬榮鄉',
+            '玉里鎮', '卓溪鄉', '富里鄉'
+        ],
+        金門縣: [
+            '金沙鎮', '金湖鎮', '金寧鄉', '金城鎮', '烈嶼鄉',
+            '烏坵鄉'
+        ],
+        連江縣: [
+            '南竿鄉', '北竿鄉', '莒光鄉', '東引鄉'
+        ],
+        澎湖縣: [
+            '馬公市', '西嶼鄉', '望安鄉', '七美鄉', '白沙鄉',
+            '湖西鄉'
+        ]
+    };
+    const slCity = document.querySelector('#slCity');
+    for (let city of Object.keys(data)) {
+        const option = document.createElement('option')
+        option.textContent = city;
+        option.value = city;
+        slCity.insertAdjacentElement('beforeend', option);
+    }
+    const slCountry = document.querySelector('#slCountry');
+    slCity.addEventListener('change', () => {
+        slCountry.innerHTML = "";
+        const countrys = data[slCity.value];
+        for (let country of countrys) {
+            const option = document.createElement('option');
+            option.textContent = country;
+            slCountry.insertAdjacentElement('beforeend', option);
+        }
+    });
+    //地址下拉選單=====END
+
+    //註冊會員資料判斷=====start
+    const p1_el = document.querySelector('#p1'); //帳號
+    const p2_el = document.querySelector('#p2'); //密碼
+    const p3_el = document.querySelector('#p3'); //確認密碼
+    const p4_el = document.querySelector('#p4'); //會員名稱
+    const p5_el = document.querySelector('#p5'); //會員電話
+    const p6_el = document.querySelector('#p6'); //電子信箱
+    const p7_el = document.querySelector('#p7'); //性別
+    const p8_el = document.querySelector('#p8'); //生日
+    const p9_el = document.querySelector('#p9'); //Id
+    const p10_el = document.querySelector('#p10'); //身分
+    const memberAcct_el = document.querySelector('#memberAcct');
+    const memberPw_el = document.querySelector('#memberPw');
+    const memberPw1_el = document.querySelector('#memberPw1');
+    const memberName_el = document.querySelector('#memberName');
+    const memberPhone_el = document.querySelector('#memberPhone');
+    const memberEmail_el = document.querySelector('#memberEmail');
+    const memberGender_el = document.querySelector('#memberGender');
+    const memberBirthday_el = document.querySelector('#memberBirthday');
+    const memberId_el = document.querySelector('#memberId');
+    const memberStatus_el = document.querySelector('#memberStatus');
+    const button_el = document.querySelector('#button');
+    const slCity_el = document.querySelector('#slCity');
+    const slCountry_el = document.querySelector('#slCountry');
+    const village_el = document.querySelector('#village');
+    const adjacent_el = document.querySelector('#adjacent');
+    const road_el = document.querySelector('#road');
+    const lane_el = document.querySelector('#lane');
+    const add_num_el = document.querySelector('#add_num');
+    const add_floor_el = document.querySelector('#add_floor');
+    const section_el = document.querySelector('#section');
+    const street_el = document.querySelector('#street');
+
+    const errorMessages_el = document.querySelector('#errorMessages');
+
+    function getAddress() {
+        let add = slCity_el.value + slCountry_el.value;
+        let addressParts = [];
+        if (village_el.value) {
+            addressParts.push(village_el.value + "村/里");
+        }
+        if (adjacent_el.value) {
+            addressParts.push(adjacent_el.value + "鄰");
+        }
+        if (road_el.value) {
+            addressParts.push(road_el.value + "路");
+        }
+        if (lane_el.value) {
+            addressParts.push(lane_el.value + "巷");
+        }
+        if (street_el.value) {
+            addressParts.push(street_el.value + "街");
+        }
+        if (section_el.value) {
+            addressParts.push(section_el.value + "弄");
+        }
+        if (add_num_el.value) {
+            addressParts.push(add_num_el.value + "號");
+        }
+        if (add_floor_el.value) {
+            addressParts.push(add_floor_el.value + "樓");
+        }
+        if (addressParts.length > 0) {
+            add += " " + addressParts.join("");
+        }
+        return add;
+    }
+
+    function checkAcct(string) {
+        const re = /^[A-Za-z][A-Za-z0-9]{7,19}$/;
+
+        if (string === '') {
+            p1_el.innerHTML += ("會員帳號為必填欄位！");
+            return false;
+        }
+
+        if (!re.test(string)) {
+            p1_el.innerHTML += ("不符合帳號格式！開頭需為英文至少8位數，至多20位數");
+            return false;
+        }
+
+        p1_el.innerHTML += "";
+        return true;
+    }
+    function checkPassword(password) {
+        // const re = /^(?=.*[a-zA-Z])(?=.*\d)[A-Za-z\d]{8,20}$/;
+        var re = /^(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z0-9!@#$%^&*]{6,16}$/;
+        if (!re.test(password)) {
+            p2_el.innerHTML += "密碼必須包含字母、數字，長度須為6-16";
+            return false;
+        }
+
+        p2_el.innerHTML == "";
+        return true;
+    }
+
+    function checkPasswordConfirm(password) {
+        if (password === '') {
+            p3_el.innerHTML += "確認密碼為必填欄位！";
+            return false;
+        }
+        if (password !== memberPw_el.value) {
+            p3_el.innerHTML += "請再次確認密碼是否相符！";
+            return false;
+        }
+        p3_el.innerHTML == " ";
+        return true;
+    }
+
+    function checkName(string) {
+
+        if (string === '') {
+            p4_el.innerHTML += "會員名稱為必填欄位！";
+            return false;
+        }
+        p4_el.innerHTML == " ";
+        return true;
+    }
+    function checkPhone(string) {
+        const re = /^(?:\+8869|09)\d{8}$/;
+        if (string === '') {
+            p5_el.innerHTML += "電話為必填欄位";
+            return false;
+        }
+        if (!re.test(string)) {
+            p5_el.innerHTML += "錯誤的電話格式";
+            return false;
+        }
+        p5_el.innerHTML == " ";
+        return true;
+    }
+    function checkEmail(string) {
+        re1 = /^[a-zA-Z][a-z0-9_]+@[a-zA-Z0-9]*\.[a-zA-Z]{2,3}$/;
+        re2 = /^[a-zA-Z][a-z0-9_]+@[a-zA-Z0-9]*\.[a-zA-Z]{2,}\.[a-zA-Z]{2,3}$/;
+        re3 = /^[a-zA-Z][a-z0-9_]+@[a-zA-Z0-9]*\.[a-zA-Z]{2,}\.[a-zA-Z]{2,}\.[a-zA-Z]{2,3}$/;
+        if ((string === '')) {
+            p6_el.innerHTML += "Email為必填欄位！";
+            return false;
+        }
+        if ((!re1.test(string)) && (!re2.test(string)) && (!re3.test(string))) {
+            p6_el.innerHTML += "不符合e-mail的格式！";
+            return false;
+        }
+        p6_el.innerHTML == "";
+        return true;
+    }
+
+    function getGender(integer) {
+        if (memberGender_el.value === "男生") {
+            return 1;
+        }
+        if (memberGender_el.value === "女生") {
+            return 2;
+        }
+    }
+    function checkBirthday(date) {
+        if (memberBirthday_el.value === " ") {
+            p8_el.innerHTML += "請輸入您的生日日期";
+            return false;
+        }
+        p8_el.innerHTML == "";
+        return true;
+    }
+
+    function checkId(string) {
+        const re = /^[A-Z][1-2]\d{8}$/;
+        if (string === '') {
+            p9_el.innerHTML += "此欄不能為空白";
+            return false;
+        }
+        if (!re.test(string)) {
+            p9_el.innerHTML += "輸入格式錯誤";
+            return false;
+        }
+        p9_el.innerHTML == "";
+        return true;
+
+    }
+    memberAcct_el.addEventListener("change", function () {
+        clearTimeout(typingTimer);
+        p1_el.innerHTML = "";
+        var typingTimer = setTimeout(function () {
+            fetch("/BuyGo/api/front_end/guest/register/MemberRegister", {
+                method: "POST",
+                headers: { "content-type": "application/json;charset=utf-8" },
+                body: JSON.stringify({
+                    action: "testmemberAcct",
+                    memberAcct: memberAcct_el.value
+                })
+            }).then(resp => resp.json())
+                .then(body => {
+                    console.log(body);
+                    if (body === true) {
+                        p1_el.innerHTML = "此帳號已有人使用";
+                    }
+                })
+        }, 200)
+    })
+    memberPhone_el.addEventListener("change", function () {
+        clearTimeout(typingTimer);
+        p5_el.innerHTML = "";
+        var typingTimer = setTimeout(function () {
+            fetch("/BuyGo/api/front_end/guest/register/MemberRegister", {
+                method: "POST",
+                headers: { "content-type": "application/json;charset=utf-8" },
+                body: JSON.stringify({
+                    action: "testmemberPhone",
+                    memberPhone: memberPhone_el.value
+                })
+            }).then(resp => resp.json())
+                .then(body => {
+                    console.log(body);
+                    if (body === true) {
+                        p5_el.innerHTML = "此號碼已有人使用";
+                    }
+                })
+        }, 200)
+    })
+    memberEmail_el.addEventListener("change", function () {
+        clearTimeout(typingTimer);
+        p6_el.innerHTML = "";
+        var typingTimer = setTimeout(function () {
+            fetch("/BuyGo/api/front_end/guest/register/MemberRegister", {
+                method: "POST",
+                headers: { "content-type": "application/json;charset=utf-8" },
+                body: JSON.stringify({
+                    action: "testmemberEmail",
+                    memberEmail: memberEmail_el.value
+                })
+            }).then(resp => resp.json())
+                .then(body => {
+                    console.log(body);
+                    if (body === true) {
+                        p6_el.innerHTML = "此信箱已有人使用";
+                    }
+                })
+        }, 200)
+    })
+    memberId_el.addEventListener("change", function () {
+        clearTimeout(typingTimer);
+        p9_el.innerHTML = "";
+        var typingTimer = setTimeout(function () {
+            fetch("/BuyGo/api/front_end/guest/register/MemberRegister", {
+                method: "POST",
+                headers: { "content-type": "application/json;charset=utf-8" },
+                body: JSON.stringify({
+                    action: "testmemberId",
+                    memberId: memberId_el.value
+                })
+            }).then(resp => resp.json())
+                .then(body => {
+                    console.log(body);
+                    if (body === true) {
+                        p9_el.innerHTML = "此身分證號碼已有人使用";
+                    }
+                })
+        }, 200)
+    })
+
+    //註冊判斷+驗證信箱
+    button_el.addEventListener("click", () => {
+        errorMessages_el.innerHTML = "";
+        p1_el.innerHTML = "";
+        p2_el.innerHTML = "";
+        p3_el.innerHTML = "";
+        p4_el.innerHTML = "";
+        p5_el.innerHTML = "";
+        p6_el.innerHTML = "";
+        p8_el.innerHTML = "";
+        p9_el.innerHTML = "";
+        if (!checkAcct(memberAcct_el.value)) {
+            errorMessages_el.innerHTML += "<p>會員帳號格式錯誤</p>";
+        }
+        if (!checkPassword(memberPw_el.value)) {
+            errorMessages_el.innerHTML += "<p>密碼格式錯誤</p>";
+        }
+        if (!checkPasswordConfirm(memberPw1_el.value)) {
+            errorMessages_el.innerHTML += "<p>確認密碼錯誤</p>";
+        }
+        if (!checkName(memberName_el.value)) {
+            errorMessages_el.innerHTML += "<p>會員名稱錯誤</p>";
+        }
+        if (!checkPhone(memberPhone_el.value)) {
+            errorMessages_el.innerHTML += "<p>電話錯誤</p>";
+        }
+        if (!checkEmail(memberEmail_el.value)) {
+            errorMessages_el.innerHTML += "<p>Email格式錯誤</p>";
+        }
+        if (!checkBirthday(memberBirthday_el.value)) {
+            errorMessages_el.innerHTML += "<p>生日錯誤</p>";
+        }
+        if (!checkId(memberId_el.value)) {
+            errorMessages_el.innerHTML += "<p>會員身分證錯誤</p>";
+        }
+
+        if (errorMessages_el.innerHTML !== "") {
+            event.preventDefault();
+            // return;
+        } else {
+            //送出驗證信
+            fetch("/BuyGo/api/front_end/guest/register/MemberRegisterCheckMailServlet", {
+                method: "POST",
+                header: { "content-type": "application/json;charset=utf-8" },
+                body: JSON.stringify({
+                    memberEmail: memberEmail_el.value
+                })
+            })
+
+            Swal.fire({
+                title: '輸入驗證碼',
+                input: 'text',
+                showCancelButton: true,
+                confirmButtonText: '送出',
+                cancelButtonText: '取消',
+                preConfirm: (verificationCode) => {
+                    // console.log(verificationCode);
+                    // const data1 = {verificationCode};
+                    return fetch("/BuyGo/api/front_end/guest/register/RegisterCheckMailAuthCode", {
+                        method: "POST",
+                        header: { "content-type": "application/json;charset=utf-8" },
+                        body: JSON.stringify(
+                            verificationCode
+                        )
+                    })
+                        .then(resp => resp.json())
+                        .then(body=>{
+                            console.log(body);
+                            if (body !== true) {
+                                throw new Error(response.statusText);
+                            } else {
+                                fetch("/BuyGo/api/front_end/guest/register/MemberRegister", {
+
+                                    method: "POST",
+                                    header: { "content-type": "application/json;charset=utf-8" },
+                                    body: JSON.stringify({
+                                        action: "register",
+                                        memberAcct: memberAcct_el.value,
+                                        memberPw: memberPw_el.value,
+                                        memberStatus: memberStatus_el.value,
+                                        memberName: memberName_el.value,
+                                        memberAdd: getAddress(),
+                                        memberPhone: memberPhone_el.value,
+                                        memberEmail: memberEmail_el.value,
+                                        memberGender: getGender(),
+                                        memberBirthday: memberBirthday_el.value,
+                                        memberId: memberId_el.value
+
+                                    })
+                                }).then(resp => resp.json())
+                                    .then(body => {
+                                        console.log(body);
+                                        if (body === true) {
+                                            Swal.fire(
+                                                '註冊成功!',
+                                                'success'
+
+                                            ).then((result) => {
+                                                if (result.isConfirmed) {
+                                                    window.location.href = "../member/login.html";
+                                                }
+                                            });
+                                        } else if (body === false) {
+                                            Swal.fire({
+                                                icon: 'error',
+                                                title: 'Oops...',
+                                                text: '請確認輸入的資料!',
+                                            })
+                                        } else {
+                                            Swal.fire({
+                                                icon: 'error',
+                                                title: 'Oops...',
+                                                text: '似乎發生了什麼錯誤!',
+                                            })
+                                        }
+                                    }
+                                    )
+                            }
+                        })
+                        .catch(error => {
+                            Swal.showValidationMessage(
+                                `驗證失敗，請確認驗證碼`
+                            );
+                        });
+                },
+                allowOutsideClick: () => !Swal.isLoading()
+
+
+
+
+            })
+
+
+        }
+    });
+
+
+    window.onload = function () {
+        memberAcct_el.value = "chuntingliu0403";
+        memberPw_el.value = "qqq123456";
+        memberPw1_el.value = "qqq123456";
+        memberStatus_el.value = "u1";
+        memberName_el.value = "liu";
+        memberPhone_el.value = "0921442101";
+        memberEmail_el.value = "chuntingliu0403@gmail.com";
+        memberGender_el.value = "男生";
+        memberBirthday_el.value = "2000-05-20";
+        memberId_el.value = "M123345456";
+    }
+
+
+
+</script>
+
+</html>

@@ -28,6 +28,8 @@ public class News extends Core {
 	private String newsTitle;
 	@Column(name = "NEWS_CONTENT")
 	private String newsContent;
-	@Column(name = "NEWS_TIME")
+	@Column(name = "NEWS_TIME" ,insertable = false)
 	private Timestamp newsTime;
+	@Column(name = "NEWS_PICTURE")
+	private String newsPicture;
 }

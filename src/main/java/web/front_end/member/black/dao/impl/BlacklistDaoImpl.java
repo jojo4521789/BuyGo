@@ -102,37 +102,23 @@ public class BlacklistDaoImpl implements BlacklistDao{
 //		transaction.commit(); // 送交，同時會結束交易
 		
 		// 查詢selectByMemberNoAndMemberNoBlack
-		Session session = blacklistDaoImpl.getSession();
-		
-		Transaction transaction = session.beginTransaction(); // 開始交易
-		List<Blacklist> blacklistList = blacklistDaoImpl.selectByMemberNoAndMemberNoBlack(1, 9);
-		for (Blacklist blacklist : blacklistList) {
-			System.out.print("BlackNo:" + blacklist.getBlackNo() + ",");
-			System.out.print("MemberNo:" + blacklist.getMemberNo() + ",");
-			System.out.println("MemberNoBlack:" + blacklist.getMemberNoBlack());
-		}
-		System.out.println("blacklistList.size:" + blacklistList.size());
-		transaction.commit(); // 送交，同時會結束交易
+//		Session session = blacklistDaoImpl.getSession();
+//		
+//		Transaction transaction = session.beginTransaction(); // 開始交易
+//		List<Blacklist> blacklistList = blacklistDaoImpl.selectByMemberNoAndMemberNoBlack(1, 9);
+//		for (Blacklist blacklist : blacklistList) {
+//			System.out.print("BlackNo:" + blacklist.getBlackNo() + ",");
+//			System.out.print("MemberNo:" + blacklist.getMemberNo() + ",");
+//			System.out.println("MemberNoBlack:" + blacklist.getMemberNoBlack());
+//		}
+//		System.out.println("blacklistList.size:" + blacklistList.size());
+//		transaction.commit(); // 送交，同時會結束交易
 	}
 	
 	@Override
 	public int insert(Blacklist blacklist) {
 		getSession().persist(blacklist);
 		return 1;
-		
-//		SessionFactory sessionFactory = HibernateUtil.getSessionFactory(); // 取得連線⼯廠物件
-//		Session session = sessionFactory.openSession(); // 開啟一個新的Session
-//		try {
-//			Transaction transaction = session.beginTransaction(); // 開始交易
-//			session.persist(blacklist); // 將實體物件新增至對應資料表中
-//			transaction.commit(); // 送交，同時會結束交易
-//			return blacklist.getBlackNo();
-//		}
-//		catch (Exception e) {
-//			e.printStackTrace();
-//			session.getTransaction().rollback(); // 還原，同時會結束交易
-//			return -1;
-//		}
 	}
 	
 	@Override
@@ -141,20 +127,6 @@ public class BlacklistDaoImpl implements BlacklistDao{
 		Blacklist blacklist = session.get(Blacklist.class, id);
 		session.remove(blacklist);
 		return 1;
-		
-//		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
-//		Session session = sessionFactory.openSession();
-//		try {
-//			Transaction transaction = session.beginTransaction(); // 開始交易
-//			Blacklist blacklist= session.get(Blacklist.class, id); // 取得id對應的物件
-//			session.remove(blacklist); // 於資料庫刪除物件
-//			transaction.commit();
-//			return 1;
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//			session.getTransaction().rollback();
-//			return -1;
-//		}
 	}
 
 	@Override

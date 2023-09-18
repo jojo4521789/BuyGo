@@ -1,0 +1,1281 @@
+<!DOCTYPE html>
+<!--[if IE 7 ]><html class="ie ie7 lte9 lte8 lte7" lang="en-US"><![endif]-->
+<!--[if IE 8]><html class="ie ie8 lte9 lte8" lang="en-US">	<![endif]-->
+<!--[if IE 9]><html class="ie ie9 lte9" lang="en-US"><![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!-->
+<html class="noIE" lang="en-US"><!--<![endif]-->
+
+<head>
+	<meta charset="UTF-8" />
+	<title>BuyGo - 結帳頁面</title>
+	<meta name="description" content="" />
+	<meta name="keywords" content="" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<!-- Favorite Icons -->
+	<link rel="icon" href="../../../../img/common/favicon/favicon.html" type="image/x-icon" />
+	<link rel="apple-touch-icon-precomposed" sizes="144x144"
+		href="../../../../img/common/favicon/apple-touch-icon-144x144-precomposed.html">
+	<link rel="apple-touch-icon-precomposed" sizes="72x72"
+		href="../../../../img/common/favicon/apple-touch-icon-72x72-precomposed.html">
+	<link rel="apple-touch-icon-precomposed" href="../../../../img/common/favicon/apple-touch-icon-precomposed.html">
+	<!-- // Favorite Icons -->
+
+	<!--<link href='http://fonts.useso.com/css?family=Open+Sans:300,400,600,700' rel='stylesheet' type='text/css'>-->
+
+	<!-- GENERAL CSS FILES -->
+	<link rel="stylesheet" href="../../../../css/common/minified.css">
+	<!-- // GENERAL CSS FILES -->
+
+	<!--[if IE 8]>
+		<script src="js/respond.min.js"></script>
+		<script src="js/selectivizr-min.js"></script>
+	<![endif]-->
+	<!--
+	<script src="js/jquery.min.js"></script>
+	-->
+	<script>window.jQuery || document.write('<script src="../../../../js/common/jquery.min.js"><\/script>');</script>
+	<script src="../../../../js/common/modernizr.min.js"></script>
+	<!-- PARTICULAR PAGES CSS FILES -->
+	<link rel="stylesheet" href="../../../../css/common/innerpage.css">
+	<!-- // PARTICULAR PAGES CSS FILES -->
+	<link rel="stylesheet" href="../../../../css/common/responsive.css">
+	<link rel="stylesheet" href="../../../../css/common/headerview.css">
+	<style>
+		.products {
+			width: 100%;
+			/* font-family: Raleway; */
+		}
+
+		.product {
+			display: inline-block;
+			width: calc(24% - 13px);
+			margin: 10px 10px 30px 10px;
+			vertical-align: top;
+		}
+
+		.product img {
+			display: block;
+			margin: 0 auto;
+			width: auto;
+			height: 200px;
+			max-width: calc(100% - 20px);
+			/* background-cover: fit; */
+			box-shadow: 0px 0px 7px 0px rgba(0, 0, 0, 0.8);
+			border-radius: 2px;
+		}
+
+		.product-content {
+			text-align: center;
+		}
+
+		.product h3 {
+			font-size: 20px;
+			font-weight: 600;
+			margin: 10px 0 0 0;
+		}
+
+		.product h3 small {
+			display: block;
+			font-size: 16px;
+			font-weight: 400;
+			font-style: italic;
+			margin: 7px 0 0 0;
+		}
+
+		.product .product-text {
+			margin: 7px 0 0 0;
+			color: #777;
+		}
+
+		.product .price {
+			font-family: sans-serif;
+			font-size: 16px;
+			font-weight: 700;
+		}
+
+		.product .genre {
+			font-size: 14px;
+		}
+
+
+		@media screen and (max-width:1150px) {
+			.product {
+				width: calc(33% - 23px);
+			}
+		}
+
+		@media screen and (max-width:700px) {
+			.product {
+				width: calc(50% - 43px);
+			}
+		}
+
+		@media screen and (max-width:400px) {
+			.product {
+				width: 100%;
+			}
+		}
+
+		/* TABLE VIEW */
+		@media screen and (min-width:401px) {
+			.settings {
+				display: block;
+			}
+
+			#view {
+				display: inline;
+			}
+
+			.products-table .product {
+				display: block;
+				width: auto;
+				margin: 10px 10px 30px 10px;
+			}
+
+			.products-table .product .product-img {
+				display: inline-block;
+				margin: 0;
+				width: 120px;
+				height: 120px;
+				vertical-align: middle;
+			}
+
+			.products-table .product img {
+				width: auto;
+				height: 120px;
+				max-width: 120px;
+			}
+
+			.products-table .product-content {
+				text-align: left;
+				display: inline-block;
+				margin-left: 20px;
+				vertical-align: middle;
+				width: calc(100% - 145px);
+			}
+
+			.products-table .product h3 {
+				margin: 0;
+			}
+		}
+
+		.centered {
+			display: flex;
+			justify-content: center;
+			/* 水平居中 */
+		}
+	</style>
+</head>
+
+<body>
+
+	<!-- PAGE WRAPPER -->
+	<div id="page-wrapper">
+
+		<!-- SITE HEADER -->
+		<header id="site-header" role="banner">
+			<!-- HEADER TOP -->
+			<div class="header-top">
+				<div class="container">
+					<div class="row">
+						<div class="col-xs-12 col-sm-6 col-md-7">
+							<!-- CONTACT INFO -->
+							<div class="contact-info">
+								<i class="iconfont-headphones round-icon"></i>
+								<strong>(03)425-1108</strong>
+								<span>(Mon- Fri: 09.00 - 21.00)</span>
+							</div>
+							<!-- // CONTACT INFO -->
+						</div>
+						<div class="col-xs-12 col-sm-6 col-md-5">
+							<ul class="actions unstyled clearfix">
+								<li>
+									<!-- SEARCH BOX -->
+									<div class="search-box">
+										<form action="#" method="post">
+											<div class="input-iconed prepend">
+												<button class="input-icon"><i class="iconfont-search"></i></button>
+												<label for="input-search" class="placeholder">Search here…</label>
+												<input type="text" name="q" id="input-search"
+													class="round-input full-width" required />
+											</div>
+										</form>
+									</div>
+									<!-- // SEARCH BOX -->
+								</li>
+								<li data-toggle="sub-header" data-target="#sub-social">
+									<!-- SOCIAL ICONS -->
+									<a href="javascript:void(0);" id="social-icons">
+										<i class="iconfont-share round-icon"></i>
+									</a>
+
+									<div id="sub-social" class="sub-header">
+										<ul class="social-list unstyled text-center">
+											<li><a href="#"><i class="iconfont-facebook round-icon"></i></a></li>
+											<li><a href="#"><i class="iconfont-twitter round-icon"></i></a></li>
+											<li><a href="#"><i class="iconfont-google-plus round-icon"></i></a></li>
+											<li><a href="#"><i class="iconfont-pinterest round-icon"></i></a></li>
+											<li><a href="#"><i class="iconfont-rss round-icon"></i></a></li>
+										</ul>
+									</div>
+									<!-- // SOCIAL ICONS -->
+								</li>
+								<li data-toggle="sub-header" data-target="#sub-cart">
+									<!-- SHOPPING CART -->
+									<a href="javascript:void(0);" id="total-cart">
+										<i class="iconfont-shopping-cart round-icon"></i>
+									</a>
+
+									<div id="sub-cart" class="sub-header">
+										<div class="cart-header">
+											<span>Your cart is currently empty.</span>
+											<small><a href="pages/member/opa/cart/cart.html">(See All)</a></small>
+										</div>
+										<!-- <ul class="cart-items product-medialist unstyled clearfix"></ul> -->
+										<ul class="s-cart-items product-medialist unstyled clearfix"></ul>
+										<div class="cart-footer">
+											<!-- <div class="cart-total clearfix">
+                                                <span class="pull-left uppercase">Total</span>
+                                                <span class="pull-right total">$ 0</span>
+                                            </div> -->
+											<div class="s-cart-total clearfix">
+												<span class="pull-left uppercase">Total</span>
+												<span class="pull-right total">$ 0</span>
+											</div>
+											<div class="text-right">
+												<a href="pages/member/opa/cart/cart.html"
+													class="btn btn-default btn-round view-cart">查看購物車</a>
+											</div>
+										</div>
+									</div>
+									<!-- // SHOPPING CART -->
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+
+				<!-- ADD TO CART MESSAGE -->
+				<div class="cart-notification">
+					<ul class="unstyled"></ul>
+				</div>
+				<!-- // ADD TO CART MESSAGE -->
+			</div>
+			<!-- // HEADER TOP -->
+			<!-- MAIN HEADER -->
+			<div class="main-header-wrapper">
+				<div class="container">
+					<div class="main-header">
+						<!-- CURRENCY / LANGUAGE / USER MENU -->
+						<div class="actions">
+							<div class="center-xs">
+
+							</div>
+							<div class="clearfix"></div><br>
+							<!-- USER RELATED MENU -->
+							<nav id="tiny-menu" class="clearfix">
+								<ul class="user-menu">
+									<li><a href="pages/member/myaccount.html" class="personal">我的帳戶<img
+												src="https://drive.google.com/uc?id=1EkcTLzseH_atgAiJ78ymmJoyuVUasGb7"></a>
+									</li>
+									<!-- <li><a href="pages/member/opa/cart/cart.html" class="paymoney">結帳<img
+												src="../front_end/img/common/paymoney.png"></a></li> -->
+									<li id="logInAndLogOut"><a href="pages/member/login.html" class="loginOut">登入<img
+												src="https://drive.google.com/uc?id=1uViDGF7OBfvCpNZp8pEcKFm5CmtAE8Pg"></a>
+									</li>
+								</ul><br>
+							</nav>
+							<!-- // USER RELATED MENU -->
+						</div>
+						<!-- // CURRENCY / LANGUAGE / USER MENU -->
+						<!-- SITE LOGO -->
+						<div class="logo-wrapper">
+							<a href="index-2.html" class="logo">
+								<img src="https://drive.google.com/uc?id=1fJM8iEd6uvE037YCUduSNE2Enm_2OUmW" />
+							</a>
+						</div>
+						<!-- // SITE LOGO -->
+						<!-- SITE NAVIGATION MENU -->
+						<nav id="site-menu" role="navigation">
+							<ul class="main-menu hidden-sm hidden-xs">
+								<li class="active">
+									<a href="index.html">首頁</a>
+								</li>
+								<li>
+									<a href="/BuyGo/front_end/pages/guest/pa/prods/prods.html">一般賣場</a>
+								</li>
+								<li>
+									<a href="pages/guest/opa/prods/prods.html">官方賣場</a>
+								</li>
+								<li>
+									<a href="pages/components.html">揪團商場</a>
+								</li>
+								<li>
+									<a href="pages/components.html">論壇</a>
+								</li>
+							</ul>
+
+							<!-- MOBILE MENU -->
+							<div id="mobile-menu" class="dl-menuwrapper visible-xs visible-sm">
+								<button class="dl-trigger"><i class="iconfont-reorder round-icon"></i></button>
+
+							</div>
+							<!-- // MOBILE MENU -->
+
+						</nav>
+						<!-- // SITE NAVIGATION MENU -->
+					</div>
+				</div>
+			</div>
+			<!-- // MAIN HEADER -->
+		</header>
+		<!-- // SITE HEADER -->
+
+		<!-- BREADCRUMB -->
+		<div class="breadcrumb-container">
+			<div class="container">
+				<div class="relative">
+					<ul class="bc unstyled clearfix">
+						<li><a href="#">Home</a></li>
+						<li class="active">Checkout</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<!-- // BREADCRUMB -->
+
+		<!-- SITE MAIN CONTENT -->
+		<main id="main-content" role="main">
+
+			<div class="container">
+				<div class="row">
+
+					<div class="m-t-b clearfix centered">
+						<!-- SIDEBAR -->
+						<!-- // SIDEBAR -->
+
+						<section class="col-xs-12 col-sm-8 col-md-9">
+							<div class="panel-group checkout"> <!-- id="checkout-collapse" -->
+								<h3>訂單結帳</h3>
+								<!-- 第一列 -->
+								<div class="panel panel-default">
+									<div class="panel-heading">
+										<h4 class="panel-title">
+											<a data-toggle="collapse" data-parent="#checkout-collapse"
+												href="#checkout-collapse1">
+												<span class="step">01</span>
+												結帳資訊
+											</a>
+										</h4>
+									</div>
+									<div id="checkout-collapse1" class="panel-collapse collapse in">
+										<div class="panel-body">
+											<div class="products products-table">
+
+											</div>
+										</div>
+									</div>
+								</div>
+								<!-- 第二列 -->
+								<div class="panel panel-default">
+									<div class="panel-heading">
+										<h4 class="panel-title">
+											<a data-toggle="collapse" data-parent="#checkout-collapse"
+												href="#checkout-collapse2">
+												<span class="step">02</span>
+												帳單資訊
+											</a>
+										</h4>
+									</div>
+									<div id="checkout-collapse2" class="panel-collapse collapse">
+										<div class="panel-body">
+											<form class="form-horizontal" role="form">
+												<div class="row">
+													<div class="col-xs-12 col-sm-12 col-md-6">
+														<div class="form-group stylish-input">
+															<label for="inputBillName"
+																class="col-sm-4 col-lg-4 control-label required">姓名</label>
+															<div class="col-sm-8 col-lg-8">
+																<input type="text" class="form-control bill-required"
+																	id="inputBillName" />
+															</div>
+														</div>
+														<div class="form-group stylish-input">
+														</div>
+														<div class="form-group stylish-input">
+															<label for="inputBillEmail"
+																class="col-sm-4 col-lg-4 control-label required">E-Mail</label>
+															<div class="col-sm-8 col-lg-8">
+																<input type="email" class="form-control bill-required"
+																	id="inputBillEmail" />
+															</div>
+														</div>
+														<div class="form-group stylish-input">
+															<label for="inputBillPhone"
+																class="col-sm-4 col-lg-4 control-label required ">電話</label>
+															<div class="col-sm-8 col-lg-8">
+																<input type="tel" class="form-control bill-required"
+																	id="inputBillPhone" />
+															</div>
+														</div>
+													</div>
+													<div class="col-xs-12 col-sm-12 col-md-6">
+														<div class="form-group stylish-input">
+															<label for="inputState1"
+																class="col-sm-4 col-lg-4 control-label required">縣市</label>
+															<div class="col-sm-8 col-lg-8">
+																<select class="form-control inputState1">
+																	<option>請選擇縣市</option>
+																</select>
+															</div>
+														</div>
+														<div class="form-group stylish-input">
+															<label for="inputCountry1"
+																class="col-sm-4 col-lg-4 control-label required">鄉鎮區</label>
+															<div class="col-sm-8 col-lg-8">
+																<select class="form-control inputCountry1">
+																	<option>請選擇鄉鎮區</option>
+																</select>
+															</div>
+														</div>
+														<div class="form-group stylish-input">
+															<label for="inputAddress1"
+																class="col-sm-4 col-lg-4 control-label required">地址</label>
+															<div class="col-sm-8 col-lg-8">
+																<input type="text" class="form-control bill-required"
+																	id="inputAddress1" />
+															</div>
+														</div>
+														<div class="form-group stylish-input">
+															<label for="inputPostcode1"
+																class="col-sm-4 col-lg-4 control-label required">郵遞區號</label>
+															<div class="col-sm-8 col-lg-8">
+																<input type="text" class="form-control bill-required"
+																	id="inputPostcode1" />
+															</div>
+														</div>
+
+
+													</div>
+												</div>
+												<div class="space20 clearfix"></div>
+											</form>
+										</div>
+									</div>
+								</div>
+								<!-- 第三列 -->
+								<div class="panel panel-default">
+									<div class="panel-heading">
+										<h4 class="panel-title">
+											<a data-toggle="collapse" data-parent="#checkout-collapse"
+												href="#checkout-collapse3">
+												<span class="step">03</span>
+												運送資訊
+											</a>
+										</h4>
+									</div>
+									<div id="checkout-collapse3" class="panel-collapse collapse">
+										<div class="panel-body">
+											<form class="form-horizontal" role="form">
+												<div class="row">
+													<div class="col-xs-12 col-sm-12 col-md-6">
+														<div class="form-group stylish-input"
+															style="vertical-align: middle;">
+															<input type="checkbox" id="checkShipInfo"
+																style="margin: 5px 0 0 10px;"
+																onclick="shipCheckClick()" />
+															<label for="checkShipInfo" class="control-label"
+																style="display: inline-block;">同帳單資訊</label>
+														</div>
+														<div class="form-group stylish-input">
+															<label for="inputShipName"
+																class="col-sm-4 col-lg-4 control-label required">姓名</label>
+															<div class="col-sm-8 col-lg-8">
+																<input type="text" class="form-control ship-required"
+																	id="inputShipName" />
+															</div>
+														</div>
+														<div class="form-group stylish-input">
+														</div>
+														<div class="form-group stylish-input">
+															<label for="inputShipEmail"
+																class="col-sm-4 col-lg-4 control-label required">E-Mail</label>
+															<div class="col-sm-8 col-lg-8">
+																<input type="email" class="form-control ship-required"
+																	id="inputShipEmail" />
+															</div>
+														</div>
+														<div class="form-group stylish-input">
+															<label for="inputShipPhone"
+																class="col-sm-4 col-lg-4 control-label required">電話</label>
+															<div class="col-sm-8 col-lg-8">
+																<input type="tel" class="form-control ship-required"
+																	id="inputShipPhone" />
+															</div>
+														</div>
+													</div>
+
+													<div class="col-xs-12 col-sm-12 col-md-6">
+														<div class="form-group stylish-input">
+															<label for="inputState2"
+																class="col-sm-4 col-lg-4 control-label required">縣市</label>
+															<div class="col-sm-8 col-lg-8">
+																<select class="form-control inputState2">
+																	<option>請選擇縣市</option>
+																</select>
+															</div>
+														</div>
+														<div class="form-group stylish-input">
+															<label for="inputCountry2"
+																class="col-sm-4 col-lg-4 control-label required">鄉鎮區</label>
+															<div class="col-sm-8 col-lg-8">
+																<select class="form-control inputCountry2">
+																	<option>請選擇鄉鎮區</option>
+																</select>
+															</div>
+														</div>
+														<div class="form-group stylish-input">
+															<label for="inputAddress2"
+																class="col-sm-4 col-lg-4 control-label required">地址</label>
+															<div class="col-sm-8 col-lg-8">
+																<input type="text" class="form-control ship-required"
+																	id="inputAddress2" />
+															</div>
+														</div>
+														<div class="form-group stylish-input">
+															<label for="inputPostcode2"
+																class="col-sm-4 col-lg-4 control-label required">郵遞區號</label>
+															<div class="col-sm-8 col-lg-8">
+																<input type="text" class="form-control ship-required"
+																	id="inputPostcode2" />
+															</div>
+														</div>
+													</div>
+												</div>
+												<div class="space20 clearfix"></div>
+											</form>
+										</div>
+									</div>
+								</div>
+								<!-- 第四列 -->
+								<div class="panel panel-default">
+									<div class="panel-heading">
+										<h4 class="panel-title">
+											<a data-toggle="collapse" data-parent="#checkout-collapse"
+												href="#checkout-collapse4">
+												<span class="step">04</span>
+												運送方式
+											</a>
+										</h4>
+									</div>
+									<div id="checkout-collapse4" class="panel-collapse collapse">
+										<div class="panel-body">
+											<form class="deliveryMethod" role="form">
+												<div class="form-group stylish-input">
+													<input type="radio" id="deliveryMethod1" class="prettyCheckable"
+														name="deliveryMethod" data-label="黑貓宅急便"
+														onchange="checkFreight(0)" />
+													<p>限本島寄送</p>
+												</div>
+												<div class="form-group stylish-input">
+													<input type="radio" id="deliveryMethod3" class="prettyCheckable"
+														name="deliveryMethod" data-label="郵寄"
+														onchange="checkFreight(2)" />
+													<p>可提供外島，寄件時間會比預計出貨日晚2~3天</p>
+												</div>
+												<!-- <div class="space20 clearfix"></div>
+												<button class="btn btn-primary">Continue</button> -->
+											</form>
+										</div>
+									</div>
+								</div>
+								<!-- 第五列 -->
+								<div class="panel panel-default">
+									<div class="panel-heading">
+										<h4 class="panel-title">
+											<a data-toggle="collapse" data-parent="#checkout-collapse"
+												href="#checkout-collapse5">
+												<span class="step">05</span>
+												付款方式
+											</a>
+										</h4>
+									</div>
+									<div id="checkout-collapse5" class="panel-collapse collapse">
+										<div class="panel-body">
+											<form class="paymethod" role="form">
+												<p>郵資皆是另外計算，請務必確認有選擇出貨方式顯示郵資再付款 </p>
+												<div class="form-group stylish-input">
+													<input type="radio" id="paymethod1" class="prettyCheckable"
+														name="paymethod" data-label="ATM轉帳" />
+													<p>匯款帳號：郵局(代號:700)0012345-0123456 戶名：TibaMe</p>
+												</div>
+												<div class="form-group stylish-input">
+													<input type="radio" id="paymethod2" class="prettyCheckable"
+														name="paymethod" data-label="線上刷卡" />
+													<p>填單完成後，系統將引導您至信用卡認證頁面</p>
+												</div>
+												<div class="form-group stylish-input">
+													<input type="radio" id="paymethod3" class="prettyCheckable"
+														name="paymethod" data-label="平台錢包" />
+													<p>平台錢包餘額: <span id="memberWalletAmount">#</span></p>
+												</div>
+												<!-- <div class="space20 clearfix"></div>
+												<button class="btn btn-primary">繼續</button> -->
+											</form>
+										</div>
+									</div>
+								</div>
+								<!-- 第六列 -->
+								<div class="panel panel-default">
+									<div class="panel-heading">
+										<h4 class="panel-title">
+											<a data-toggle="collapse" data-parent="#checkout-collapse"
+												href="#checkout-collapse6">
+												<span class="step">06</span>
+												確認訂單資料
+											</a>
+										</h4>
+									</div>
+									<div id="checkout-collapse6" class="panel-collapse collapse">
+										<div class="panel-body">
+											<div class="row">
+												<div class="col-xs-12 col-sm-6 pull-right center-sm">
+													<table class="shop-summary">
+														<tr>
+															<th>商品總金額:</th>
+															<td id="prodTotal">100</td>
+														</tr>
+														<tr>
+															<th>運費:</th>
+															<td id="freight"></td>
+														</tr>
+														<tr class="total">
+															<th>總金額:</th>
+															<td id="total"></td>
+														</tr>
+														<tr>
+															<th><a href="#" class="btn btn-default btn-round uppercase"
+																	id="checkout_btn">確認結帳</a>
+															</th>
+															<td><a href="#"
+																	class="btn btn-primary btn-round uppercase">繼續購物</a>
+															</td>
+														</tr>
+													</table>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</section>
+
+					</div>
+
+				</div>
+			</div>
+
+		</main>
+		<!-- // SITE MAIN CONTENT -->
+
+		<br>
+		<br>
+		<!-- SITE FOOTER -->
+		<footer class="page-footer">
+
+			<!-- WIDGET AREA -->
+			<div class="widgets">
+
+				<!-- FIRST ROW -->
+
+				<!-- // FIRST ROW -->
+
+				<!-- SECOND ROW -->
+				<div class="section">
+					<div class="container">
+						<div class="row">
+
+							<div class="col-xs-12 col-sm-12 col-md-5">
+								<section class="widget widget-menu">
+									<h5 class="widget-title">Contact info</h5>
+									<div class="widget-content">
+										<ul class="menu iconed-list unstyled">
+											<li><span class="list-icon"><i
+														class="round-icon iconfont-map-marker"></i></span>
+												<div class="list-content">中壢區復興路 46 號緯育 TibaMe 附設中壢職訓中心 9 樓</div>
+											</li>
+											<li><span class="list-icon"><i class="round-icon iconfont-phone"></i></span>
+												<div class="list-content">(03) 425-1108</div>
+											</li>
+											<li><span class="list-icon"><i
+														class="round-icon iconfont-envelope-alt"></i></span>
+												<div class="list-content">tibamecha102g6@gmail.com</div>
+											</li>
+										</ul>
+									</div>
+								</section>
+							</div>
+
+							<div class="col-xs-12 col-sm-12 col-md-6">
+								<section class="widget widget-ads">
+									<div class="widget-content">
+										<div class="center-xs">
+											<div class="ads">
+												<a href="#"> <img src="../../../img/common/demo/images-footer.jpg"
+														alt="" />
+												</a>
+											</div>
+										</div>
+									</div>
+								</section>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- // SECOND ROW -->
+
+			</div>
+			<!-- // WIDGET AREA -->
+
+			<div class="footer-sub">
+				<div class="container">
+					<div class="row">
+						<div class="col-xs-12 col-sm-6">
+							<div class="footer-links center-xs clearfix">
+								<ul class="unstyled">
+									<li><a href="/BuyGo/front_end/pages/guest/selectFirstFAQ.html">FAQ</a></li>
+								</ul>
+							</div>
+							<div class="space10"></div>
+							<div class="copyright center-xs">
+								<p>(c) 2023</p>
+							</div>
+						</div>
+
+						<div class="space40 visible-xs"></div>
+
+
+					</div>
+				</div>
+			</div>
+
+		</footer>
+		<!-- // SITE FOOTER -->
+
+	</div>
+	<!-- // PAGE WRAPPER -->
+
+	<!-- Essential Javascripts -->
+	<script src="../../../../js/common/minified.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+	<!-- // Essential Javascripts -->
+
+	<!-- Particular Page Javascripts -->
+	<script src="../../../../js/common/products.js"></script>
+	<script src="../../../../js/login.js"></script>
+	<!-- // Particular Page Javascripts -->
+
+	<script>
+
+		// 依運送方式代入運費金額
+		function checkFreight(choice) {
+			switch (choice) {
+				case 0: $("#freight").text(100); break;
+				case 1: $("#freight").text(60); break;
+				case 2: $("#freight").text(90);
+			}
+			checkOrderTotal();
+		}
+
+		// 代入訂單總額
+		function checkOrderTotal() {
+			if ($("#freight").text() != "0" && $("#prodTotal").text() != "0") {
+				$("#total").text(parseInt($("#prodTotal").text()) + parseInt($("#freight").text()) + "元");
+			}
+		}
+
+
+		// 地址下拉選單
+		const data = {
+			宜蘭縣: [
+				'宜蘭市', '頭城鎮', '礁溪鄉', '壯圍鄉', '員山鄉',
+				'羅東鎮', '三星鄉', '大同鄉', '五結鄉', '冬山鄉',
+				'蘇澳鎮', '南澳鄉', '釣魚臺列嶼'
+			],
+			基隆市: [
+				'仁愛區', '信義區', '中正區', '中山區', '安樂區',
+				'暖暖區', '七堵區'
+			],
+			臺北市: [
+				'中正區', '大同區', '中山區', '松山區', '大安區',
+				'萬華區', '信義區', '士林區', '北投區', '內湖區',
+				'南港區', '文山區'
+			],
+			新北市: [
+				'萬里區', '金山區', '板橋區', '汐止區', '深坑區',
+				'石碇區', '瑞芳區', '平溪區', '雙溪區', '貢寮區',
+				'新店區', '坪林區', '烏來區', '永和區', '中和區',
+				'土城區', '三峽區', '樹林區', '鶯歌區', '三重區',
+				'新莊區', '泰山區', '林口區', '蘆洲區', '五股區',
+				'八里區', '淡水區', '三芝區', '石門區'
+			],
+			桃園市: [
+				'中壢區', '平鎮區', '龍潭區', '楊梅區', '新屋區',
+				'觀音區', '桃園區', '龜山區', '八德區', '大溪區',
+				'復興區', '大園區', '蘆竹區'
+			],
+			新竹縣: [
+				'竹北市', '湖口鄉', '新豐鄉', '新埔鎮', '關西鎮',
+				'芎林鄉', '寶山鄉', '竹東鎮', '五峰鄉', '橫山鄉',
+				'尖石鄉', '北埔鄉', '峨眉鄉'
+			],
+			新竹市: [
+				'東區', '北區', '香山區'
+			],
+			苗栗縣: [
+				'竹南鎮', '頭份市', '三灣鄉', '南庄鄉', '獅潭鄉',
+				'後龍鎮', '通霄鎮', '苑裡鎮', '苗栗市', '造橋鄉',
+				'頭屋鄉', '公館鄉', '大湖鄉', '泰安鄉', '銅鑼鄉',
+				'三義鄉', '西湖鄉', '卓蘭鎮'
+			],
+			臺中市: [
+				'中區', '東區', '南區', '西區', '北區', '北屯區',
+				'西屯區', '南屯區', '太平區', '大里區', '霧峰區',
+				'烏日區', '豐原區', '后里區', '石岡區', '東勢區',
+				'和平區', '新社區', '潭子區', '大雅區', '神岡區',
+				'大肚區', '沙鹿區', '龍井區', '梧棲區', '清水區',
+				'大甲區', '外埔區', '大安區'
+			],
+			彰化縣: [
+				'彰化市', '芬園鄉', '花壇鄉', '秀水鄉', '鹿港鎮',
+				'福興鄉', '線西鄉', '和美鎮', '伸港鄉', '員林市',
+				'社頭鄉', '永靖鄉', '埔心鄉', '溪湖鎮', '大村鄉',
+				'埔鹽鄉', '田中鎮', '北斗鎮', '田尾鄉', '埤頭鄉',
+				'溪州鄉', '竹塘鄉', '二林鎮', '大城鄉', '芳苑鄉',
+				'二水鄉'
+			],
+			南投縣: [
+				'南投市', '中寮鄉', '草屯鎮', '國姓鄉', '埔里鎮',
+				'仁愛鄉', '名間鄉', '集集鎮', '水里鄉', '魚池鄉',
+				'信義鄉', '竹山鎮', '鹿谷鄉'
+			],
+			雲林縣: [
+				'斗南鎮', '大埤鄉', '虎尾鎮', '土庫鎮', '褒忠鄉',
+				'東勢鄉', '臺西鄉', '崙背鄉', '麥寮鄉', '斗六市',
+				'林內鄉', '古坑鄉', '莿桐鄉', '西螺鎮', '二崙鄉',
+				'北港鎮', '水林鄉', '口湖鄉', '四湖鄉', '元長鄉'
+			],
+			嘉義市: [
+				'東區', '西區'
+			],
+			嘉義縣: [
+				'番路鄉', '梅山鄉', '竹崎鄉', '阿里山鄉', '中埔鄉',
+				'大埔鄉', '水上鄉', '鹿草鄉', '太保市', '朴子市',
+				'東石鄉', '六腳鄉', '新港鄉', '民雄鄉', '大林鎮',
+				'溪口鄉', '義竹鄉', '布袋鎮'
+			],
+			臺南市: [
+				'中西區', '東區', '南區', '北區', '安平區',
+				'安南區', '永康區', '歸仁區', '新化區', '左鎮區',
+				'玉井區', '楠西區', '南化區', '仁德區', '關廟區',
+				'龍崎區', '官田區', '麻豆區', '佳里區', '西港區',
+				'七股區', '將軍區', '學甲區', '北門區', '新營區',
+				'後壁區', '白河區', '東山區', '六甲區', '下營區',
+				'柳營區', '鹽水區', '善化區', '大內區', '山上區',
+				'新市區', '安定區'
+			],
+			高雄市: [
+				'新興區', '前金區', '苓雅區', '鹽埕區', '鼓山區',
+				'旗津區', '前鎮區', '三民區', '楠梓區', '小港區',
+				'左營區', '仁武區', '大社區', '東沙群島', '南沙群島',
+				'岡山區', '路竹區', '阿蓮區', '田寮區', '燕巢區',
+				'橋頭區', '梓官區', '彌陀區', '永安區', '湖內區',
+				'鳳山區', '大寮區', '林園區', '鳥松區', '大樹區',
+				'旗山區', '美濃區', '六龜區', '內門區', '杉林區',
+				'甲仙區', '桃源區', '那瑪夏區', '茂林區', '茄萣區'
+			],
+			屏東縣: [
+				'屏東市', '三地門鄉', '霧臺鄉', '瑪家鄉', '九如鄉',
+				'里港鄉', '高樹鄉', '鹽埔鄉', '長治鄉', '麟洛鄉',
+				'竹田鄉', '內埔鄉', '萬丹鄉', '潮州鎮', '泰武鄉',
+				'來義鄉', '萬巒鄉', '崁頂鄉', '新埤鄉', '南州鄉',
+				'林邊鄉', '東港鎮', '琉球鄉', '佳冬鄉', '新園鄉',
+				'枋寮鄉', '枋山鄉', '春日鄉', '獅子鄉', '車城鄉',
+				'牡丹鄉', '恆春鎮', '滿州鄉'
+			],
+			臺東縣: [
+				'臺東市', '綠島鄉', '蘭嶼鄉', '延平鄉', '卑南鄉',
+				'鹿野鄉', '關山鎮', '海端鄉', '池上鄉', '東河鄉',
+				'成功鎮', '長濱鄉', '太麻里鄉', '金峰鄉', '大武鄉',
+				'達仁鄉'
+			],
+			花蓮縣: [
+				'花蓮市', '新城鄉', '秀林鄉', '吉安鄉', '壽豐鄉',
+				'鳳林鎮', '光復鄉', '豐濱鄉', '瑞穗鄉', '萬榮鄉',
+				'玉里鎮', '卓溪鄉', '富里鄉'
+			],
+			金門縣: [
+				'金沙鎮', '金湖鎮', '金寧鄉', '金城鎮', '烈嶼鄉',
+				'烏坵鄉'
+			],
+			連江縣: [
+				'南竿鄉', '北竿鄉', '莒光鄉', '東引鄉'
+			],
+			澎湖縣: [
+				'馬公市', '西嶼鄉', '望安鄉', '七美鄉', '白沙鄉',
+				'湖西鄉'
+			]
+		};
+
+		// .inputCountry 鄉鎮區
+		// .inputState 縣市
+		// 先代入縣市資訊
+		for (let city of Object.keys(data)) {
+			const option1 = $('<option>');
+			option1.text(city);
+			option1.val(city);
+			$(".inputState1").append(option1);
+
+			const option2 = $('<option>');
+			option2.text(city);
+			option2.val(city);
+			$(".inputState2").append(option2);
+		}
+		// 依照縣市產生鄉鎮
+		$(".inputState1").on('change', function () {
+			console.log(this);
+			const selectedCity = $(this).val();
+			$(".inputCountry1").empty();
+			$(".inputCountry1").html(`<option>請選擇鄉鎮區</option>`);
+			const countries = data[selectedCity];
+
+			for (let country of countries) {
+				const option = $('<option>');
+				option.text(country);
+				option.val(country);
+				$('.inputCountry1').append(option);
+			}
+		});
+
+		// 依照縣市產生鄉鎮
+		$(".inputState2").on('change', function () {
+			console.log(this);
+			const selectedCity = $(this).val();
+			$(".inputCountry2").empty();
+			$(".inputCountry2").html(`<option>請選擇鄉鎮區</option>`);
+			const countries = data[selectedCity];
+
+			for (let country of countries) {
+				const option = $('<option>');
+				option.text(country);
+				option.val(country);
+				$('.inputCountry2').append(option);
+			}
+		});
+
+
+		let buyerNo;
+		checkLoginStatusShowMemberAcct().then(response => {
+			console.log(response[0]);
+			buyerNo = response[0];
+		})
+
+		let cartData = JSON.parse(sessionStorage.getItem("cart_data"));
+		console.log(cartData);
+
+
+		$("#prodTotal").text(cartData.cartSubTTL);
+		// $("#discount").text(cartData.opaDiscountAmo);
+
+		let itemName = "";
+
+
+		// 將購物車資料代入結帳表單的商品資訊
+		processCartData(cartData);
+		async function processCartData(cartData) {
+			for (let prod of cartData.paProds) {
+				prodNo = prod.paProdNo;
+				var base64Data = await getProdPicBase64(prodNo);
+				itemName = itemName + prod.paProdName + " ";
+				let img_url = "../../../../../../../../img/common/Image_not_available.png";
+				// if (data.prpicsList.length !== 0) {
+				// 	img_url = data.prpicsList[0].opaProdPicture;
+				// }
+
+
+				let prod_str = `
+                <div class="product">
+                    <div class="product-img">
+                        <img src="${base64Data}">
+                    </div>
+                    <div class="product-content">
+                        <h3>
+                            ${prod.paProdName}
+                        </h3>
+                        <p class="product-text genre" style="margin: 10px 0 10px 0;">${"商品"}</p>
+                        <div style="margin-right: 10px;">
+                            <span class="product-text price">$${prod.paProdPrice}</span>
+                            <h3 class="pull-right"><small>×${prod.paOrdQty}</small></h3>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+				$(".products-table").append(prod_str);
+			}
+		}
+
+		// 載入商品圖片
+		async function getProdPicBase64(prodNo) {
+			try {
+				const base64_Str = await fetch('/BuyGo/needLoginApi/getProdPic?prodNo=' + prodNo)
+					.then(response => response.text()); // await 關鍵字會等待 Promise 完成並返回其解析值
+				// console.log(base64_Str);
+				return base64_Str;
+			} catch (error) {
+				console.log(error);
+			}
+		}
+		//載入會員資料
+		function getBillInfo() {
+			fetch("/BuyGo/needLoginApi/front_end/member/acc/MemberEdit", {
+				method: "POST",
+				headers: { "Content-Type": "application/json" },
+				body: JSON.stringify({
+					action: "show"
+				})
+			})
+				.then(resp => resp.json())
+				.then(data => {
+					console.log(data);
+					$("#inputBillName").val(data.memberName);
+					$("#inputBillEmail").val(data.memberEmail);
+					$("#inputBillPhone").val(data.memberPhone);
+					// $("#inputBillAddress").val(data.memberAdd);
+					$("#memberWalletAmount").text("$ " + data.memberWalletAmount);
+				});
+		}
+		getBillInfo();
+
+		//運送資訊同帳單資訊
+		function shipCheckClick() {
+			if (document.querySelector("#checkShipInfo").checked) {
+				$("#inputShipName").val($("#inputBillName").val());
+				$("#inputShipEmail").val($("#inputBillEmail").val());
+				$("#inputShipPhone").val($("#inputBillPhone").val());
+				// $("#inputState2").val($("#inputState1").val());
+				// $("#inputCountry2").val($("#inputCountry1").val());
+				$("#inputAddress2").val($("#inputAddress1").val());
+				$("#inputPostcode2").val($("#inputPostcode1").val());
+
+				// 设置所需的縣市和鄉鎮
+				const selectedCity = $("select.inputState1").val();
+				const selectedCountry = $("select.inputCountry1").val();
+
+				// 设置縣市選項
+				$("select.inputState2").val(selectedCity);
+				// 觸發縣市選項的 change 事件，以便更新鄉鎮選項
+				$("select.inputState2").trigger('change');
+
+				// 延遲一點時間再設定鄉鎮選項，以確保鄉鎮選項已經被更新
+				setTimeout(function () {
+					$(".inputCountry2").val(selectedCountry);
+				}, 100);
+			} else {
+				$("#inputShipName").val("");
+				$("#inputShipEmail").val("");
+				$("#inputShipPhone").val("");
+				$("#inputState2").val("");
+				$("#inputCountry2").val("");
+				$("#inputAddress2").val("");
+				$("#inputPostcode2").val("");
+			}
+		}
+
+		// 讓電話號碼只能輸入數字
+		$("#inputBillPhone").on('input', function (event) {
+			let inputValue = this.value;
+			let numericValue = inputValue.replace(/[^0-9]/g, ''); // 移除非数字字符
+			this.value = numericValue;
+			if (this.value.length > 10) {
+				alert("電話號碼最多10碼");
+				this.value = this.value.slice(0, 10); // 如果長度超過10, 擷取前10個字元
+			}
+		})
+		$("#inputShipPhone").on('input', function (event) {
+			let inputValue = this.value;
+			let numericValue = inputValue.replace(/[^0-9]/g, ''); // 移除非数字字符
+			this.value = numericValue;
+			if (this.value.length > 10) {
+				alert("電話號碼最多10碼");
+				this.value = this.value.slice(0, 10); // 如果長度超過10, 擷取前10個字元
+			}
+		})
+
+		// 判斷必填欄位
+		function checkAllData() {
+			let msg = "";
+			let billRequired_els = document.querySelectorAll(".bill-required");
+			let shipRequired_els = document.querySelectorAll(".ship-required");
+			for (let billRequired_el of billRequired_els) {
+				if (billRequired_el.value === "" ||
+					$(".inputState1").val() == '請選擇縣市' ||
+					$(".inputCountry1").val() == '請選擇鄉鎮區'
+				) {
+					msg += "帳單資訊未填寫完整\n";
+					break;
+				}
+			}
+			for (let shipRequired_el of shipRequired_els) {
+				if (shipRequired_el.value === "" ||
+					$(".inputState2").val() == '請選擇縣市' ||
+					$(".inputCountry2").val() == '請選擇鄉鎮區'
+				) {
+					msg += "運送資訊未填寫完整\n";
+					break;
+				}
+			}
+			if ($('input[name=deliveryMethod]:checked').length === 0) {
+				msg += "未選擇運送方式\n";
+			}
+			if ($('input[name=paymethod]:checked').length === 0) {
+				msg += "未選擇付款方式";
+			}
+			if (msg !== "") {
+				Swal.fire(msg);
+				return false;
+			} else {
+				return true;
+			}
+		}
+
+		// 如果是選擇信用卡付款 按下結帳，產生訂單
+
+		$('#checkout_btn').click(function () {
+			if (checkAllData()) {
+				const paTotalAmount = parseInt($("#prodTotal").text());
+			const paRecName = $(inputShipName).val();
+			const paSendAddress = $("#inputPostcode2").val() + $("select.inputState2").val() + $("select.inputCountry2").val() + $("#inputAddress2").val();
+			const paRecTel = $(inputShipPhone).val();
+			const paDeliverMethod = $("form.deliveryMethod").find("input[name='deliveryMethod']:checked").attr("data-label");
+			let paSoDetails = [];
+			for (let prod of cartData.paProds) {
+				delete prod.paProdName; // 先移除paProdName屬性
+				paSoDetails.push(prod);
+			}
+
+			let paSoData = {
+				action: "aaa",
+				paSo: {
+					paTotalAmount: paTotalAmount,
+					paRecName: paRecName,
+					paSendAddress: paSendAddress,
+					paRecTel: paRecTel,
+					paDeliverMethod: paDeliverMethod
+				},
+				paSoDetails: paSoDetails
+			}
+
+			console.log(paSoData);
+
+			fetch('/BuyGo/needLoginApi/newOrder', {
+				method: 'POST',
+				body: JSON.stringify(paSoData),
+				headers: {
+					'Content-Type': 'application/json;charset=utf-8'
+				}
+			})
+				.then(response => response.json())
+				.then(data => {
+					newPaSoNo = data;
+					alert('訂單已產生，訂單ID=' + data + " 進行付款作業");
+					cart = []; // 清空購物車
+					if ($('input[name=paymethod]:checked').attr("id") === "paymethod1") { // 如果是選擇信用卡付款
+						EcPay(); // 進行綠界支付
+					} else if ($('input[name=paymethod]:checked').attr("id") === "paymethod2") { // 如果是選擇信用卡付款
+						EcPay(); // 進行綠界支付
+					} else if ($('input[name=paymethod]:checked').attr("id") === "paymethod3") {
+						WalletPay(); // 進行錢包支付
+					}
+				})
+				.catch(error => {
+					console.error('錯誤：', error);
+				});
+			}
+
+		});
+
+
+		// 綠界支付
+		const full = location.protocol + '//' + location.host;
+		let clientBackURL = full + "/BuyGo/front_end/pages/member/pa/order/ListOrders.html";
+		function EcPay() {
+			let AioCheckOutALL = {
+				TotalAmount: parseInt($("#prodTotal").text()),
+				TradeDesc: "交易描述",
+				ItemName: "商品名稱",
+				ClientBackURL: clientBackURL,
+				CustomField1: "paCheckout", // 傳到後端的action
+				CustomField2: newPaSoNo, // 付款成功後要更新的paSoNo
+
+			}
+
+			console.log(AioCheckOutALL);
+
+			fetch('/BuyGo/ecpay/checkout', {
+				method: 'POST',
+				body: JSON.stringify(AioCheckOutALL),
+				headers: {
+					'Content-Type': 'application/json;charset=utf-8'
+				}
+			})
+				.then(response => response.json())
+				.then(data => {
+					console.log(data);
+					window.location.href = data; //開啟綠界付款網址
+				})
+				.catch(error => {
+					alert("付款發生錯誤");
+					console.error('付款錯誤：', error);
+				});
+		}
+
+		function WalletPay() {
+			let Data = {
+				newStatus: 1, // 將狀態改為1:已付款
+				buyerNo: buyerNo,
+				refundToBuyer: parseInt($("#prodTotal").text()) + parseInt($("#freight").text()), // 訂單總額
+				paSoNo: newPaSoNo
+			}
+			console.log(Data);
+			fetch('/BuyGo/needLoginApi/UpdateOrder', {
+				method: 'POST',
+				body: JSON.stringify(Data),
+				headers: {
+					'Content-Type': 'application/json;charset=utf-8'
+				}
+			})
+				.then(response => {
+					Swal.fire(
+						'付款成功!',
+						'已從錢包付款!',
+						'success'
+					).then((result) => {
+						if (result.isConfirmed) {
+							window.location.href = "ListOrders.html"
+						}
+					})
+				})
+				.catch(error => {
+					alert("付款發生錯誤");
+					console.error('付款錯誤：', error);
+				});
+		}
+
+
+	</script>
+
+</body>
+
+</html>

@@ -1,10 +1,44 @@
 <!DOCTYPE html>
-<html lang="en">
+<html class="noIE" lang="zh-Hant"><!--<![endif]-->
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <meta charset="UTF-8" />
+	<title>GFashion - Responsive e-commerce HTML Template</title>
+	<meta name="description" content="" />
+	<meta name="keywords" content="" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<!-- Favorite Icons -->
+	<link rel="icon" href="../../img/common/favicon/favicon.html" type="image/x-icon" />
+	<link rel="../../apple-touch-icon-precomposed" sizes="144x144"
+		href="../../img/common/favicon/apple-touch-icon-144x144-precomposed.html">
+	<link rel="apple-touch-icon-precomposed" sizes="72x72"
+		href="../../img/common/favicon/apple-touch-icon-72x72-precomposed.html">
+	<link rel="apple-touch-icon-precomposed" href="../../img/common/favicon/apple-touch-icon-precomposed.html">
+	<!-- // Favorite Icons -->
+
+	<!--<link href='http://fonts.useso.com/css?family=Open+Sans:300,400,600,700' rel='stylesheet' type='text/css'>-->
+
+	<!-- GENERAL CSS FILES -->
+	<link rel="stylesheet" href="../../css/common/minified.css">
+	<!-- // GENERAL CSS FILES -->
+
+	<!--[if IE 8]>
+		<script src="js/respond.min.js"></script>
+		<script src="js/selectivizr-min.js"></script>
+	<![endif]-->
+	<!--
+	<script src="js/jquery.min.js"></script>
+	-->
+	<script>window.jQuery || document.write('<script src="js/common/jquery.min.js"><\/script>');</script>
+	<script src="../../js/common/modernizr.min.js"></script>
+	<!-- PARTICULAR PAGES CSS FILES -->
+	<link rel="stylesheet" href="../../css/common/owl.carousel.css">
+	<link rel="stylesheet" href="../../css/common/owl.theme.css">
+	<link href="../../css/common/flexslider.css" rel="stylesheet" />
+	<!-- // PARTICULAR PAGES CSS FILES -->
+	<link rel="stylesheet" href="../../css/common/responsive.css">
+
     <style>
         * {
             box-sizing: border-box;
@@ -27,10 +61,10 @@
         ul.list>li>a.link_title {
             display: block;
             width: 100%;
-            color: white;
-            background-color: #dd2836;
-            box-shadow: 2px 2px 8px 0 rgba(56, 55, 53, 0.33);
-            border-radius: 26px;
+            color: rgb(31, 7, 7);
+            background-color: #f09743;
+            box-shadow: 2px 2px 8px 3px rgba(252, 193, 74, 0.756);
+            border-radius: 15px;
             padding: 8px 40px;
             text-decoration: none;
             font-size: 24px;
@@ -73,16 +107,211 @@
         ul.list>li.-on>a.link_title button.switch_btn span.-minus {
             display: inline-block
         }
+        #select {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-right: 10px;
+            font-size: 16px;
+        }
+
+        #selectall {
+            padding: 10px 20px;
+            background-color: #ffcc00;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        #selectall:hover {
+            background-color: #855c10;
+        }
+        .logo img {
+			max-width: 200px;
+			max-height: 150px;
+		}
+
+		.user-menu a img {
+			max-width: 20px;
+			max-height: 20px;
+		}
+
+		a {
+			color: #ef7700;
+			font-weight: bold;
+			font-size: 25px;
+		}
+
+		a:hover {
+			color: #0150ed;
+		}
     </style>
 </head>
 
 <body>
+    <!-- PAGE WRAPPER -->
+	<div id="page-wrapper">
+
+		<!-- SITE HEADER -->
+		<header id="site-header" role="banner">
+			<!-- HEADER TOP -->
+			<div class="header-top">
+				<div class="container">
+					<div class="row">
+						<div class="col-xs-12 col-sm-6 col-md-7">
+							<!-- CONTACT INFO -->
+							<div class="contact-info">
+								<i class="iconfont-headphones round-icon"></i>
+								<strong>(03)425-1108</strong>
+								<span>(Mon- Fri: 09.00 - 21.00)</span>
+							</div>
+							<!-- // CONTACT INFO -->
+						</div>
+						<div class="col-xs-12 col-sm-6 col-md-5">
+							<ul class="actions unstyled clearfix">
+								<li>
+									<!-- SEARCH BOX -->
+									<div class="search-box">
+										<form action="#" method="post">
+											<div class="input-iconed prepend">
+												<button class="input-icon"><i class="iconfont-search"></i></button>
+												<label for="input-search" class="placeholder">Search here…</label>
+												<input type="text" name="q" id="input-search"
+													class="round-input full-width" required />
+											</div>
+										</form>
+									</div>
+									<!-- // SEARCH BOX -->
+								</li>
+								<li data-toggle="sub-header" data-target="#sub-social">
+									<!-- SOCIAL ICONS -->
+									<a href="javascript:void(0);" id="social-icons">
+										<i class="iconfont-share round-icon"></i>
+									</a>
+
+									<div id="sub-social" class="sub-header">
+										<ul class="social-list unstyled text-center">
+											<li><a href="#"><i class="iconfont-facebook round-icon"></i></a></li>
+											<li><a href="#"><i class="iconfont-twitter round-icon"></i></a></li>
+											<li><a href="#"><i class="iconfont-google-plus round-icon"></i></a></li>
+											<li><a href="#"><i class="iconfont-pinterest round-icon"></i></a></li>
+											<li><a href="#"><i class="iconfont-rss round-icon"></i></a></li>
+										</ul>
+									</div>
+									<!-- // SOCIAL ICONS -->
+								</li>
+								<li data-toggle="sub-header" data-target="#sub-cart">
+									<!-- SHOPPING CART -->
+									<a href="javascript:void(0);" id="total-cart">
+										<i class="iconfont-shopping-cart round-icon"></i>
+									</a>
+
+									<div id="sub-cart" class="sub-header">
+										<div class="cart-header">
+											<span>Your cart is currently empty.</span>
+											<small><a href="../../pages/member/cart.html">(See All)</a></small>
+										</div>
+										<ul class="cart-items product-medialist unstyled clearfix"></ul>
+										<div class="cart-footer">
+											<div class="cart-total clearfix">
+												<span class="pull-left uppercase">Total</span>
+												<span class="pull-right total">$ 0</span>
+											</div>
+											<div class="text-right">
+												<a href="../../pages/member/cart.html"
+													class="btn btn-default btn-round view-cart">View Cart</a>
+											</div>
+										</div>
+									</div>
+									<!-- // SHOPPING CART -->
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+
+				<!-- ADD TO CART MESSAGE -->
+				<div class="cart-notification">
+					<ul class="unstyled"></ul>
+				</div>
+				<!-- // ADD TO CART MESSAGE -->
+			</div>
+			<!-- // HEADER TOP -->
+			<!-- MAIN HEADER -->
+			<div class="main-header-wrapper">
+				<div class="container">
+					<div class="main-header">
+						<!-- CURRENCY / LANGUAGE / USER MENU -->
+						<div class="actions">
+							<div class="center-xs">
+
+							</div>
+							<div class="clearfix"></div><br>
+							<!-- USER RELATED MENU -->
+							<nav id="tiny-menu" class="clearfix">
+								<ul class="user-menu">
+									<li><a href="/BuyGo/pages/member/myaccount.html" class="personal">個人資料<img
+												src="https://drive.google.com/uc?id=1EkcTLzseH_atgAiJ78ymmJoyuVUasGb7"></a></li>
+									<!-- <li><a href="pages/member/opa/cart/cart.html" class="paymoney">結帳<img
+												src="../front_end/img/common/paymoney.png"></a></li> -->
+									<li id="logInAndLogOut"><a href="/BuyGo/pages/member/login.html" class="loginOut">登入<img
+												src="https://drive.google.com/uc?id=1uViDGF7OBfvCpNZp8pEcKFm5CmtAE8Pg"></a></li>
+								</ul><br>
+							</nav>
+							<!-- // USER RELATED MENU -->
+						</div>
+						<!-- // CURRENCY / LANGUAGE / USER MENU -->
+						<!-- SITE LOGO -->
+						<div class="logo-wrapper">
+							<a href="index-2.html" class="logo">
+								<img src="https://drive.google.com/uc?id=1fJM8iEd6uvE037YCUduSNE2Enm_2OUmW" />
+							</a>
+						</div>
+						<!-- // SITE LOGO -->
+						<!-- SITE NAVIGATION MENU -->
+						<nav id="site-menu" role="navigation">
+							<ul class="main-menu hidden-sm hidden-xs">
+								<li class="active">
+									<a href="index.html">首頁</a>
+								</li>
+								<li>
+									<a href="/BuyGo/front_end/pages/guest/pa/prods/prods.html">一般賣場</a>
+								</li>
+								<li>
+									<a href="/BuyGo/src/main/webapp/front_end/pages/guest/opa/prods/prods.html">官方賣場</a>
+								</li>
+								<li>
+									<a href="../../pages/components.html">揪團商場</a>
+								</li>
+								<li>
+									<a href="../../pages/components.html">論壇</a>
+								</li>
+							</ul>
+
+							<!-- MOBILE MENU -->
+							<div id="mobile-menu" class="dl-menuwrapper visible-xs visible-sm">
+								<button class="dl-trigger"><i class="iconfont-reorder round-icon"></i></button>
+
+							</div>
+							<!-- // MOBILE MENU -->
+
+						</nav>
+						<!-- // SITE NAVIGATION MENU -->
+					</div>
+				</div>
+			</div>
+			<!-- // MAIN HEADER -->
+		</header>
+		<!-- // SITE HEADER -->
     <!-- 前台顯示搜尋 -->
-    <a>搜尋FAQ:</a><input type="text" id="select" placeholder="請輸入關鍵字..."><br>
+    <a>搜尋Q&A:</a>
+    <input type="text" id="select" placeholder="請輸入關鍵字...">
     <button type="button" id="selectall">搜尋</button>
     <ul class="list" id="faqList">
         <li id="li">
-            <a class="link_title" href="#" id="a1">
+            <!-- <a class="link_title" href="#" id="a1">
                 <button type="button" class="switch_btn">
                     <span class="-plus">+</span><span class="-minus">-</span>
                 </button>
@@ -92,9 +321,106 @@
             </a>
             <div class="inner_block" id="div1">
                 尚無內容
-            </div>
+            </div> -->
         </li>
     </ul>
+    <!-- SITE FOOTER -->
+		<footer class="page-footer">
+
+			<!-- WIDGET AREA -->
+			<div class="widgets">
+
+				<!-- FIRST ROW -->
+
+				<!-- // FIRST ROW -->
+
+				<!-- SECOND ROW -->
+				<div class="section">
+					<div class="container">
+						<div class="row">
+
+							<div class="col-xs-12 col-sm-12 col-md-5">
+								<section class="widget widget-menu">
+									<h5 class="widget-title">Contact info</h5>
+									<div class="widget-content">
+										<ul class="menu iconed-list unstyled">
+											<li><span class="list-icon"><i
+														class="round-icon iconfont-map-marker"></i></span>
+												<div class="list-content">中壢區復興路 46 號緯育 TibaMe 附設中壢職訓中心 9 樓</div>
+											</li>
+											<li><span class="list-icon"><i class="round-icon iconfont-phone"></i></span>
+												<div class="list-content">(03) 425-1108</div>
+											</li>
+											<li><span class="list-icon"><i
+														class="round-icon iconfont-envelope-alt"></i></span>
+												<div class="list-content">tibamecha102g6@gmail.com</div>
+											</li>
+										</ul>
+									</div>
+								</section>
+							</div>
+
+							<div class="col-xs-12 col-sm-12 col-md-6">
+								<section class="widget widget-ads">
+									<div class="widget-content">
+										<div class="center-xs">
+											<div class="ads">
+												<a href="#"> <img src="../../../img/common/demo/images-footer.jpg"
+														alt="" />
+												</a>
+											</div>
+										</div>
+									</div>
+								</section>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- // SECOND ROW -->
+
+			</div>
+			<!-- // WIDGET AREA -->
+
+			<div class="footer-sub">
+				<div class="container">
+					<div class="row">
+						<div class="col-xs-12 col-sm-6">
+							<div class="footer-links center-xs clearfix">
+								<ul class="unstyled">
+									<li><a href="#">FAQ</a></li>
+								</ul>
+							</div>
+							<div class="space10"></div>
+							<div class="copyright center-xs">
+								<p>(c) 2023</p>
+							</div>
+						</div>
+
+						<div class="space40 visible-xs"></div>
+
+
+					</div>
+				</div>
+			</div>
+
+		</footer>
+		<!-- // SITE FOOTER -->
+
+	</div>
+	<!-- // PAGE WRAPPER -->
+
+	<!-- Essential Javascripts -->
+	<script src="../../js/common/minified.js"></script>
+	<!-- // Essential Javascripts -->
+
+	<!-- Particular Page Javascripts -->
+	<script src="../../js/common/owl.carousel.js"></script>
+	<script src="../../js/common/jquery.flexslider-min.js"></script>
+	<!-- // Particular Page Javascripts -->
+	<script src="../../js/login.js"></script>
+	<script>
+		checkLoginStatusShowMemberAcct(); // 檢查客戶帳號是否登入，修改頁面右上方Log In/Log Out按鈕，顯示登入者帳號名稱
+	</script>
     <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
     <script>
         $("a.link_title").on("click", function (e) {
@@ -106,9 +432,52 @@
         const select_el = document.getElementById("select");
         const faqList = document.getElementById("faqList");
 
+        window.onload = function () {
+            fetch("/BuyGo/api/front_end/guest/faq/SelectAll", {
+                method: "POST",
+                headers: { "Content-Type": "application/json;charset=utf-8" },
+            })
+                .then(resp => resp.json())
+                .then(body => {
+                    if (body.length == 0) {
+                        alert("查無資料");
+                    } else {
+                        body.forEach(element => {
+
+                            const li = document.createElement("li");
+                            const a = document.createElement("a");
+                            const switchButton = document.createElement("button");
+                            const FAQlist = document.createElement("div");
+                            const innerBlock = document.createElement("div");
+
+                            // Set content for the elements
+                            a.className = "link_title";
+                            switchButton.className = "switch_btn";
+                            FAQlist.textContent = element.faqTitle;
+                            innerBlock.textContent = element.faqContent;
+                            innerBlock.classList.add("inner_block");
+                            a.onclick = function (e) {
+                                e.preventDefault();
+                                $(this).closest("li").toggleClass("-on");
+                                $(this).closest("li").find(".inner_block").slideToggle(100);
+                            };
+
+                            a.appendChild(switchButton);
+                            a.appendChild(FAQlist);
+                            li.appendChild(a);
+                            li.appendChild(innerBlock);
+                            faqList.appendChild(li);
+
+                        });
+                    }
+
+                });
+
+        }
+
         document.getElementById("selectall").addEventListener("click", () => {
             faqList.innerHTML = "";
-            fetch("/BuyGo/front_end/guest/faq/SelectById", {
+            fetch("/BuyGo/api/front_end/guest/faq/SelectById", {
                 method: "POST",
                 headers: { "Content-Type": "application/json;charset=utf-8" },
                 body: JSON.stringify({
@@ -139,18 +508,18 @@
                                 $(this).closest("li").toggleClass("-on");
                                 $(this).closest("li").find(".inner_block").slideToggle(100);
                             };
-                            
+
                             a.appendChild(switchButton);
                             a.appendChild(FAQlist);
                             li.appendChild(a);
                             li.appendChild(innerBlock);
                             faqList.appendChild(li);
-                            
+
                         });
                     }
-                    
+
                 });
-            });
+        });
 
     </script>
 </body>
