@@ -1,6 +1,7 @@
 package web.back_end.opa.prod.entity;
 
 import java.io.Serializable;
+import java.util.List;
 
 import lombok.Data;
 
@@ -12,4 +13,5 @@ public class ProdCore implements Serializable{
 	private String action;
 	private Integer limit;
 	private Integer offset;
+	private List<Integer> opaPrcatsNoList;
 }

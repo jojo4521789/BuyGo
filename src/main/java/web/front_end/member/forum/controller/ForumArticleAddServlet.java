@@ -31,10 +31,6 @@ public class ForumArticleAddServlet extends HttpServlet {
 		Integer memberNo = (Integer)(session.getAttribute("memberNo"));
 		//System.out.print("memberNo : " + memberNo);
 		
-		//測試用"登入功能加進來"(記得刪)
-//		if(memberNo == null) {
-//			memberNo = 1;
-//		}
 		
 		if (forumArticle == null) {
 			forumArticle = new ForumArticle();

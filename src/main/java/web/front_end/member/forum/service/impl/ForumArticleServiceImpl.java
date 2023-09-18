@@ -208,8 +208,20 @@ public class ForumArticleServiceImpl implements ForumArticleService {
 	        articleInfo.setMembers(members);
 
 	        // 留言文章(By文章編號)載入
+//	        List<ArticleMsg> lstArticleMsgs = articleMsgDao.selectByArticleNo(articleNo);
+//	        articleInfo.setLstMsg(lstArticleMsgs);
+	        
 	        List<ArticleMsg> lstArticleMsgs = articleMsgDao.selectByArticleNo(articleNo);
+	        for (ArticleMsg articleMsg : lstArticleMsgs) {
+	            Member matchingMember = findMatchingMember(members, articleMsg.getMember()); // 使用 getMemberNo()
+	            if (matchingMember != null) {
+	                matchingMember.setMemberAcct(matchingMember.getMemberAcct());
+	            }
+	            
+	        }
 	        articleInfo.setLstMsg(lstArticleMsgs);
+
+
 	        
 	        // 收藏會員(By文章編號)載入
 //	        List<ArticleCollList> lstCollLists = articleCollListDao.selectByMemberNo(articleNo);

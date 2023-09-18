@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>Document</title>
+    <title>BuyGo - 優惠券管理</title>
 
     <link href="../../../css/common/all.css" rel="stylesheet" type="text/css">
     <link href="../../../js/common/bstable/css/bootstrap.min.css" rel="stylesheet" type="text/css">
@@ -58,7 +58,7 @@
 <body>
     <p class="p_but">
         <i class="add_i"></i><a href="#" class="add_a" onClick="openAddCoupon()">新增</a>
-        <i class="del_i"></i><a href="#" class="del_a">删除</a>
+        <!-- <i class="del_i"></i><a href="#" class="del_a">删除</a> -->
         <span style="position: absolute; right: 5px; text-align: right; white-space: nowrap;">
             <label for="sOpaCouponName" class="find_labela">優惠券: </label>
             <input type="text" name="sOpaCouponName" id="sOpaCouponName" class="find_input" style="width: 80px;">
@@ -151,6 +151,7 @@
                             p_opaDiscountAmo.textContent = opaDiscountAmo.value.trim();
                             p_opaMinAmount.textContent = opaMinAmount.value.trim();
                             p_opaExpDate.textContent = new Date(opaExpDate.value);
+                            location.reload();
                         } else {
                             msg.className = 'error';
                             msg.textContent = '編號' + opaCouponNo + '更新失敗';
@@ -212,13 +213,13 @@
                         contentType: "application/x-www-form-urlencoded",
                         queryParams: null,
                         columns: [
-                            {
-                                checkbox: "true",
-                                field: 'check',
-                                align: 'center',
-                                valign: 'middle'
-                            }
-                            ,
+                            // {
+                            //     checkbox: "true",
+                            //     field: 'check',
+                            //     align: 'center',
+                            //     valign: 'middle'
+                            // }
+                            // ,
                             {
                                 title: '優惠券編號',
                                 field: 'opaCouponNo',
@@ -390,13 +391,13 @@
                             contentType: "application/x-www-form-urlencoded",
                             queryParams: null,
                             columns: [
-                                {
-                                    checkbox: "true",
-                                    field: 'check',
-                                    align: 'center',
-                                    valign: 'middle'
-                                }
-                                ,
+                                // {
+                                //     checkbox: "true",
+                                //     field: 'check',
+                                //     align: 'center',
+                                //     valign: 'middle'
+                                // }
+                                // ,
                                 {
                                     title: '優惠券編號',
                                     field: 'opaCouponNo',

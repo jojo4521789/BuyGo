@@ -37,14 +37,14 @@ public class ArticleMsgDaoImpl implements ArticleMsgDao {
 
 	@Override
 	public List<ArticleMsg> selectAll() {
-		final String hql = "FROM ArticleMsg ORDER BY messageNumber";
+		final String hql = "FROM ArticleMsg ORDER BY messageTime DESC";
 		return getSession().createQuery(hql, ArticleMsg.class).getResultList();
 	}
 
 	@Override
 	// 針對文章編號做查詢的動作進行降冪(只"狀態是0"的留言才會回傳list出去)
 	public List<ArticleMsg> selectByArticleNo(Integer articleNo) {
-		final String hql = "FROM ArticleMsg WHERE articleNo = :articleNo AND messageStatus = 0 ORDER BY messageNumber";
+		final String hql = "FROM ArticleMsg WHERE articleNo = :articleNo AND messageStatus = 0 ORDER BY messageTime DESC";
 		return getSession().createQuery(hql, ArticleMsg.class).setParameter("articleNo", articleNo).getResultList();
 	}
 

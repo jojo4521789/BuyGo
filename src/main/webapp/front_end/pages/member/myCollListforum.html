@@ -7,7 +7,8 @@
 
 <head>
 	<meta charset="UTF-8" />
-	<title>GFashion - Responsive e-commerce HTML Template</title>
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.0/dist/sweetalert2.all.min.js"></script>
+	<title>BuyGo - 我的帳戶 - 我的收藏文章</title>
 	<style>
 		/* Reset CSS */
 		body,
@@ -312,7 +313,7 @@
 			max-height: 20px;
 		}
 
-		ul.user-menu > li > a {
+		ul.user-menu>li>a {
 			color: #ef7700;
 			font-weight: bold;
 			font-size: 25px;
@@ -365,7 +366,7 @@
 									<a href="javascript:void(0);" id="social-icons">
 										<i class="iconfont-share round-icon"></i>
 									</a>
-	
+
 									<div id="sub-social" class="sub-header">
 										<ul class="social-list unstyled text-center">
 											<li><a href="#"><i class="iconfont-facebook round-icon"></i></a></li>
@@ -382,11 +383,12 @@
 									<a href="javascript:void(0);" id="total-cart">
 										<i class="iconfont-shopping-cart round-icon"></i>
 									</a>
-	
+
 									<div id="sub-cart" class="sub-header">
 										<div class="cart-header">
 											<span>Your cart is currently empty.</span>
-											<small><a href="/BuyGo/front_end/pages/member/opa/cart/cart.html">(See All)</a></small>
+											<small><a href="/BuyGo/front_end/pages/member/opa/cart/cart.html">(See
+													All)</a></small>
 										</div>
 										<!-- <ul class="cart-items product-medialist unstyled clearfix"></ul> -->
 										<ul class="s-cart-items product-medialist unstyled clearfix"></ul>
@@ -411,7 +413,7 @@
 						</div>
 					</div>
 				</div>
-	
+
 				<!-- ADD TO CART MESSAGE -->
 				<div class="cart-notification">
 					<ul class="unstyled"></ul>
@@ -426,7 +428,7 @@
 						<!-- CURRENCY / LANGUAGE / USER MENU -->
 						<div class="actions">
 							<div class="center-xs">
-	
+
 							</div>
 							<div class="clearfix"></div><br>
 							<!-- USER RELATED MENU -->
@@ -465,20 +467,20 @@
 									<a href="/BuyGo/front_end/pages/guest/opa/prods/prods.html">官方賣場</a>
 								</li>
 								<li>
-									<a href="/BuyGo/front_end/pages/guest/gpa/prods/prods.html">揪團商場</a>
+									<a href="/BuyGo/front_end/pages/guest/gpa/prods/prods.html">揪團賣場</a>
 								</li>
 								<li>
 									<a href="/BuyGo/front_end/pages/Articles.html">論壇</a>
 								</li>
 							</ul>
-	
+
 							<!-- MOBILE MENU -->
 							<div id="mobile-menu" class="dl-menuwrapper visible-xs visible-sm">
 								<button class="dl-trigger"><i class="iconfont-reorder round-icon"></i></button>
-	
+
 							</div>
 							<!-- // MOBILE MENU -->
-	
+
 						</nav>
 						<!-- // SITE NAVIGATION MENU -->
 					</div>
@@ -512,13 +514,14 @@
 						<aside class="col-xs-12 col-sm-4 col-md-3">
 							<section class="side-section">
 								<h3 class="uppercase text-bold"><span class="text-xs">我的帳戶</span></h3>
-								
+
 								<ul class="nav nav-tabs nav-stacked">
 									<li><a href="/BuyGo/front_end/pages/member/EditMember.html">個人資料</a></li>
 									<li><a href="/BuyGo/front_end/pages/member/pa/order/ListOrders.html">訂單追蹤</a></li>
-									<li><a href="/BuyGo/front_end/pages/member/pa/req/MemberAllPaReq.html">一般代購委託單查詢</a></li>
+									<li><a href="/BuyGo/front_end/pages/member/pa/req/MemberAllPaReq.html">一般代購委託單查詢</a>
+									</li>
 									<li><a href="/BuyGo/front_end/pages/member/opa/add_request.html">官方平台委託單申請</a></li>
-									<li><a href="/BuyGo/front_end/pages/member/opa/request.html">官方平台委託單查詢</a></li>
+									<li><a href="/BuyGo/front_end/pages/member/opa/request.html">官方平台委託單瀏覽</a></li>
 									<li><a href="/BuyGo/front_end/pages/member/mycoupon.html">優惠券</a></li>
 									<li><a href="/BuyGo/front_end/pages/member/wallet.html">平台錢包</a></li>
 									<li><a href="/BuyGo/front_end/pages/member/chatroom.html">聊天室</a></li>
@@ -580,7 +583,7 @@
 												<!-- 新增删除按钮列 -->
 												<div id="deleteModal" class="modal">
 													<div class="modal-content">
-														<p>確定要刪除這篇文章嗎？</p>
+														<p>確定要移除這篇文章嗎？</p>
 														<button id="confirmDeleteBtn"><i
 																class="fas fa-check"></i></button>
 														<button id="cancelDeleteBtn"><i
@@ -647,7 +650,8 @@
 									<div class="widget-content">
 										<div class="center-xs">
 											<div class="ads">
-												<a href="#"> <img src="../../../img/common/demo/images-footer.jpg"
+												<a href="#"> <img
+														src="/BuyGo/front_end/img/common/demo/images-footer.jpg"
 														alt="" />
 												</a>
 											</div>
@@ -806,14 +810,10 @@
 
 				modal.hide();
 				deleteArticle(articleNo);
-
 				// 從表格中刪除對應行
 				const row = $(this).closest("tr");
 				row.remove();
-
-				// 呼叫函式 fetchForumArticles，將當前畫面動態刷新
-				fetchForumArticles();
-
+				location.reload();
 			});
 
 			// 取消刪除按鈕點擊事件

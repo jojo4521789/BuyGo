@@ -1,15 +1,21 @@
 const full = location.protocol + '//' + location.host;
+let opaPrcatsNoList = [];
 
-function loadPrcats() {
+function loadPrcats(opaPrcatsNoList) {
     $("#category-list").html("");
     fetch("/BuyGo/api/opa/prcats/manage", { headers: { "Content-Type": "application/json; charset=utf-8", } })
         .then(resp => resp.json())
         .then(datas => {
             for (let data of datas) {
+                let checkFlag = "";
+                if (opaPrcatsNoList && opaPrcatsNoList.length > 0 && opaPrcatsNoList.includes(parseInt(data.opaPrcatsNo))) {
+                    checkFlag = "checked";
+                }
                 let prcats_li = `
                     <li>
-                        <input type="checkbox" id="check-${data.opaPrcatsNo}" class="prettyCheckable"
-                            data-label="${data.opaPrcatsName}" data-labelPosition="right" value="${data.opaPrcatsName}" />
+                        <input type="checkbox" id="check-${data.opaPrcatsNo}" class="check-prcats"
+                            data-label="${data.opaPrcatsName}" data-labelPosition="right" value="${data.opaPrcatsName}" onclick="checkPrcats()" ${checkFlag}/>
+                        <label for="check-${data.opaPrcatsNo}">${data.opaPrcatsName}</label>
                     </li>`;
                 $("#category-list").append(prcats_li);
             }
@@ -193,6 +199,7 @@ function loadAllPages() {
 }
 loadAllPages();
 
+//建立分頁
 function createPaginator(nowPageNo) {
     let page_li = "";
     if (totalPages <= 8) {
@@ -276,6 +283,7 @@ function createPaginator(nowPageNo) {
     $("#page_" + nowPageNo).addClass("pageSelected");
 }
 
+//載入商品(不分類)
 function loadProds(displayItemQty, offset) {
     fetch("/BuyGo/api/opa/prod", {
         method: "POST",
@@ -288,70 +296,7 @@ function loadProds(displayItemQty, offset) {
     })
         .then(resp => resp.json())
         .then(datas => {
-            $(".products-layout").html("");
-            for (let data of datas) {
-                let prpics_url = "../../../../img/common/Image_not_available.png";
-                if (data.prpicsList.length !== 0) {
-                    prpics_url = data.prpicsList[0].opaProdPicture;
-                }
-                let prod_div = `
-                    <div class="product" data-product-id="${data.opaProdNo}"
-                        data-category="${data.prcats.opaPrcatsName}" data-brand="brand1"
-                        data-price="${data.opaProdPrice}" data-colors="red|blue|black|white" data-size="S|M|L">
-                        <div class="entry-media">
-                            <img data-src="${prpics_url}"
-                                alt="" class="lazyLoad thumb" />
-                            <div class="hover">
-                                <a href="${full}/BuyGo/front_end/pages/guest/opa/prods/viewProduct.html?prodId=${data.opaProdNo}" class="entry-url"></a>
-                                <ul class="icons unstyled">
-                                    <li>
-                                        <div class="circle ribbon ribbon-sale">Sale</div>
-                                    </li>
-                                    <li>
-                                        <a href="${prpics_url}" class="circle" data-toggle="lightbox">
-                                            <i class="iconfont-search"></i>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#" class="circle add-to-cart" onclick="addToCart(${data.opaProdNo});">
-                                            <i class="iconfont-shopping-cart"></i>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="entry-main">
-                            <h5 class="entry-title">
-                                <a href="${full}/BuyGo/front_end/pages/guest/opa/prods/viewProduct.html?prodId=${data.opaProdNo}">${data.opaProdName}</a>
-                            </h5>
-                            <div class="entry-description visible-list">
-                                <p>${data.opaProdContent}</p>
-                            </div>
-                            <div class="entry-price">
-                                <strong class="price">$ ${data.opaProdPrice}</strong>
-                                <a href="#"
-                                    class="btn btn-round btn-default add-to-cart visible-list" onclick="addToCart(${data.opaProdNo});">加入購物車</a>
-                            </div>
-                        </div>
-                    </div>
-                `;
-                $(".products-layout").append(prod_div);
-            }
-            removeJS();
-            setTimeout(() => {
-                [
-                    '../../../../js/common/minified.js',
-                    '../../../../js/common/jquery.nouislider.js',
-                    '../../../../js/common/jquery.isotope.min.js',
-                    'js/products.js'
-                ].forEach(function (src) {
-                    const script = document.createElement('script');
-                    script.src = src;
-                    script.async = false;
-                    script.classList.add("commonJS");
-                    document.head.appendChild(script);
-                });
-            }, 500);
+            loadDatas(datas);
         });
 }
 
@@ -368,12 +313,14 @@ function changePage(pageEl) {
     createPaginator(pageNo);
     let displayItemQty = $("#displayItemQty").find(":selected").val();
     let offset = (pageNo - 1) * displayItemQty;
-    loadPrcats();
-    if (document.querySelector("#input-search").value === "") {
+    if (opaPrcatsNoList && opaPrcatsNoList.length > 0) {
+        loadPrcatsProds(displayItemQty, offset);
+    } else if (document.querySelector("#input-search").value === "") {
         loadProds(displayItemQty, offset);
     } else {
         loadSearchProds(displayItemQty, offset);
     }
+    loadPrcats(opaPrcatsNoList);
 }
 
 function previewPage() {
@@ -383,12 +330,14 @@ function previewPage() {
         createPaginator(new_pageNo);
         let displayItemQty = $("#displayItemQty").find(":selected").val();
         let offset = (new_pageNo - 1) * displayItemQty;
-        loadPrcats();
-        if (document.querySelector("#input-search").value === "") {
+        if (opaPrcatsNoList && opaPrcatsNoList.length > 0) {
+            loadPrcatsProds(displayItemQty, offset);
+        } else if (document.querySelector("#input-search").value === "") {
             loadProds(displayItemQty, offset);
         } else {
             loadSearchProds(displayItemQty, offset);
         }
+        loadPrcats(opaPrcatsNoList);
     }
 }
 
@@ -399,12 +348,14 @@ function nextPage() {
         createPaginator(new_pageNo);
         let displayItemQty = $("#displayItemQty").find(":selected").val();
         let offset = (new_pageNo - 1) * displayItemQty;
-        loadPrcats();
-        if (document.querySelector("#input-search").value === "") {
+        if (opaPrcatsNoList && opaPrcatsNoList.length > 0) {
+            loadPrcatsProds(displayItemQty, offset);
+        } else if (document.querySelector("#input-search").value === "") {
             loadProds(displayItemQty, offset);
         } else {
             loadSearchProds(displayItemQty, offset);
         }
+        loadPrcats(opaPrcatsNoList);
     }
 }
 
@@ -427,12 +378,14 @@ $("#displayItemQty").on("change", function () {
     let new_pageNo = Math.ceil(prodNo / parseInt(displayItemQty));
     let offset = (new_pageNo - 1) * displayItemQty;
     createPaginator(new_pageNo);
-    loadPrcats();
-    if (document.querySelector("#input-search").value === "") {
+    if (opaPrcatsNoList && opaPrcatsNoList.length > 0) {
+        loadPrcatsProds(displayItemQty, offset);
+    } else if (document.querySelector("#input-search").value === "") {
         loadProds(displayItemQty, offset);
     } else {
         loadSearchProds(displayItemQty, offset);
     }
+    loadPrcats(opaPrcatsNoList);
     oldDisplayItemQty = displayItemQty;
 });
 
@@ -445,6 +398,7 @@ function searchBtnClick() {
     }
 }
 
+//載入搜尋的商品分頁標籤
 function loadSearchPages(opaProdName) {
     fetch("/BuyGo/api/opa/prod", {
         method: "POST",
@@ -465,6 +419,7 @@ function loadSearchPages(opaProdName) {
         });
 }
 
+//載入搜尋的商品
 function loadSearchProds(displayItemQty, offset) {
     let opaProdName = document.querySelector("#input-search").value;
     fetch("/BuyGo/api/opa/prod", {
@@ -479,69 +434,128 @@ function loadSearchProds(displayItemQty, offset) {
     })
         .then(resp => resp.json())
         .then(datas => {
-            $(".products-layout").html("");
-            for (let data of datas) {
-                let prpics_url = "../../../../img/common/Image_not_available.png";
-                if (data.prpicsList.length !== 0) {
-                    prpics_url = data.prpicsList[0].opaProdPicture;
-                }
-                let prod_div = `
-                    <div class="product" data-product-id="${data.opaProdNo}"
-                        data-category="${data.prcats.opaPrcatsName}" data-brand="brand1"
-                        data-price="${data.opaProdPrice}" data-colors="red|blue|black|white" data-size="S|M|L">
-                        <div class="entry-media">
-                            <img data-src="${prpics_url}"
-                                alt="" class="lazyLoad thumb" />
-                            <div class="hover">
-                                <a href="${full}/BuyGo/front_end/pages/guest/opa/prods/viewProduct.html?prodId=${data.opaProdNo}" class="entry-url"></a>
-                                <ul class="icons unstyled">
-                                    <li>
-                                        <div class="circle ribbon ribbon-sale">Sale</div>
-                                    </li>
-                                    <li>
-                                        <a href="${prpics_url}" class="circle" data-toggle="lightbox">
-                                            <i class="iconfont-search"></i>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#" class="circle add-to-cart" onclick="addToCart(${data.opaProdNo});">
-                                            <i class="iconfont-shopping-cart"></i>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="entry-main">
-                            <h5 class="entry-title">
-                                <a href="${full}/BuyGo/front_end/pages/guest/opa/prods/viewProduct.html?prodId=${data.opaProdNo}">${data.opaProdName}</a>
-                            </h5>
-                            <div class="entry-description visible-list">
-                                <p>${data.opaProdContent}</p>
-                            </div>
-                            <div class="entry-price">
-                                <strong class="price">$ ${data.opaProdPrice}</strong>
-                                <a href="#"
-                                    class="btn btn-round btn-default add-to-cart visible-list" onclick="addToCart(${data.opaProdNo});">加入購物車</a>
-                            </div>
-                        </div>
+            loadDatas(datas);
+        });
+}
+
+function loadDatas(datas) {
+    $(".products-layout").html("");
+    for (let data of datas) {
+        let prpics_url = "../../../../img/common/Image_not_available.png";
+        if (data.prpicsList.length !== 0) {
+            prpics_url = data.prpicsList[0].opaProdPicture;
+        }
+        let prod_div = `
+            <div class="product" data-product-id="${data.opaProdNo}"
+                data-category="${data.prcats.opaPrcatsName}" data-brand="brand1"
+                data-price="${data.opaProdPrice}" data-colors="red|blue|black|white" data-size="S|M|L">
+                <div class="entry-media">
+                    <img data-src="${prpics_url}"
+                        alt="" class="lazyLoad thumb" />
+                    <div class="hover">
+                        <a href="${full}/BuyGo/front_end/pages/guest/opa/prods/viewProduct.html?prodId=${data.opaProdNo}" class="entry-url"></a>
+                        <ul class="icons unstyled">
+                            <li>
+                                <div class="circle ribbon ribbon-sale">Sale</div>
+                            </li>
+                            <li>
+                                <a href="${prpics_url}" class="circle" data-toggle="lightbox">
+                                    <i class="iconfont-search"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" class="circle add-to-cart" onclick="addToCart(${data.opaProdNo});">
+                                    <i class="iconfont-shopping-cart"></i>
+                                </a>
+                            </li>
+                        </ul>
                     </div>
-                `;
-                $(".products-layout").append(prod_div);
-            }
-            removeJS();
-            setTimeout(() => {
-                [
-                    '../../../../js/common/minified.js',
-                    '../../../../js/common/jquery.nouislider.js',
-                    '../../../../js/common/jquery.isotope.min.js',
-                    'js/products.js'
-                ].forEach(function (src) {
-                    const script = document.createElement('script');
-                    script.src = src;
-                    script.async = false;
-                    script.classList.add("commonJS");
-                    document.head.appendChild(script);
-                });
-            }, 500);
+                </div>
+                <div class="entry-main">
+                    <h5 class="entry-title">
+                        <a href="${full}/BuyGo/front_end/pages/guest/opa/prods/viewProduct.html?prodId=${data.opaProdNo}">${data.opaProdName}</a>
+                    </h5>
+                    <div class="entry-description visible-list">
+                        <p>${data.opaProdContent}</p>
+                    </div>
+                    <div class="entry-price">
+                        <strong class="price">$ ${data.opaProdPrice}</strong>
+                        <a href="#"
+                            class="btn btn-round btn-default add-to-cart visible-list" onclick="addToCart(${data.opaProdNo});">加入購物車</a>
+                    </div>
+                </div>
+            </div>
+        `;
+        $(".products-layout").append(prod_div);
+    }
+    removeJS();
+    setTimeout(() => {
+        [
+            '../../../../js/common/minified.js',
+            '../../../../js/common/jquery.nouislider.js',
+            '../../../../js/common/jquery.isotope.min.js',
+            'js/products.js'
+        ].forEach(function (src) {
+            const script = document.createElement('script');
+            script.src = src;
+            script.async = false;
+            script.classList.add("commonJS");
+            document.head.appendChild(script);
+        });
+    }, 500);
+}
+
+// 商品分類篩選
+function checkPrcats() {
+    opaPrcatsNoList = [];
+    const checkPrcats_els = document.querySelectorAll(".check-prcats:checked");
+    if (checkPrcats_els.length > 0) {
+        for (let checkPrcats_el of checkPrcats_els) {
+            opaPrcatsNoList.push(parseInt(checkPrcats_el.id.substring(6)));
+        }
+        //載入分類的商品分頁標籤
+        fetch("/BuyGo/api/opa/prod", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                action: "getProdTotalQtySelectByOpaPrcatsNo",
+                opaPrcatsNoList: opaPrcatsNoList
+            })
+        })
+            .then(resp => resp.json())
+            .then(data => {
+                prodTotalQty = data;
+                let displayItemQty = $("#displayItemQty").find(":selected").val();
+                totalPages = Math.ceil(parseInt(prodTotalQty) / parseInt(displayItemQty));
+                createPaginator(1);
+                loadPrcatsProds(displayItemQty, 0);
+                loadPrcats(opaPrcatsNoList);
+            });
+    } else {
+        // 沒有勾選分類就載入所有商品
+        loadAllPages();
+    }
+}
+
+//載入有分類的商品
+function loadPrcatsProds(displayItemQty, offset) {
+    opaPrcatsNoList = [];
+    const checkPrcats_els = document.querySelectorAll(".check-prcats:checked");
+    for (let checkPrcats_el of checkPrcats_els) {
+        opaPrcatsNoList.push(parseInt(checkPrcats_el.id.substring(6)));
+    }
+    fetch("/BuyGo/api/opa/prod", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+            action: "findByOpaPrcatsNoWithLimit",
+            opaPrcatsNoList: opaPrcatsNoList,
+            limit: displayItemQty,
+            offset: offset
+        })
+    })
+        .then(resp => resp.json())
+        .then(datas => {
+            loadDatas(datas);
         });
 }
