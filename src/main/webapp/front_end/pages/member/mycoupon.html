@@ -176,6 +176,64 @@
 		a:hover {
 			color: #0150ed;
 		}
+
+		.cart-entry-title {
+			overflow: hidden;
+			white-space: nowrap;
+			text-overflow: ellipsis;
+		}
+
+		.cart-entry-title>a {
+			font-size: 12px;
+		}
+
+		.cart-footer .s-cart-total {
+			background: #fff;
+			font-size: 12px;
+			font-weight: 700;
+			padding: 1em;
+			color: #1f1f1f;
+		}
+
+		.product-medialist .item .s-close {
+			background: #1f1f1f;
+			opacity: 1;
+			color: #FFF;
+			text-shadow: none;
+			width: 16px;
+			height: 16px;
+			font-size: 14px;
+			text-align: center;
+			margin: 0 0 4px 4px;
+			-webkit-transition: all .1s ease;
+			-moz-transition: all .1s ease;
+			-o-transition: all .1s ease;
+			-ms-transition: all .1s ease;
+			transition: all .1s ease;
+		}
+
+		button.s-close {
+			padding: 0;
+			cursor: pointer;
+			background: 0 0;
+			border: 0;
+			/* -webkit-appearance: none; */
+		}
+
+		.s-close {
+			float: right;
+			font-size: 21px;
+			font-weight: 700;
+			line-height: 1;
+			color: #000;
+			text-shadow: 0 1px 0 #fff;
+			opacity: .2;
+			filter: alpha(opacity=20);
+		}
+
+		.-none {
+			display: none;
+		}
 	</style>
 </head>
 
@@ -220,7 +278,7 @@
 									<a href="javascript:void(0);" id="social-icons">
 										<i class="iconfont-share round-icon"></i>
 									</a>
-	
+
 									<div id="sub-social" class="sub-header">
 										<ul class="social-list unstyled text-center">
 											<li><a href="#"><i class="iconfont-facebook round-icon"></i></a></li>
@@ -237,11 +295,12 @@
 									<a href="javascript:void(0);" id="total-cart">
 										<i class="iconfont-shopping-cart round-icon"></i>
 									</a>
-	
+
 									<div id="sub-cart" class="sub-header">
 										<div class="cart-header">
 											<span>Your cart is currently empty.</span>
-											<small><a href="/BuyGo/front_end/pages/member/opa/cart/cart.html">(See All)</a></small>
+											<small><a href="/BuyGo/front_end/pages/member/opa/cart/cart.html">(See
+													All)</a></small>
 										</div>
 										<!-- <ul class="cart-items product-medialist unstyled clearfix"></ul> -->
 										<ul class="s-cart-items product-medialist unstyled clearfix"></ul>
@@ -266,7 +325,7 @@
 						</div>
 					</div>
 				</div>
-	
+
 				<!-- ADD TO CART MESSAGE -->
 				<div class="cart-notification">
 					<ul class="unstyled"></ul>
@@ -281,7 +340,7 @@
 						<!-- CURRENCY / LANGUAGE / USER MENU -->
 						<div class="actions">
 							<div class="center-xs">
-	
+
 							</div>
 							<div class="clearfix"></div><br>
 							<!-- USER RELATED MENU -->
@@ -326,14 +385,14 @@
 									<a href="/BuyGo/front_end/pages/Articles.html">論壇</a>
 								</li>
 							</ul>
-	
+
 							<!-- MOBILE MENU -->
 							<div id="mobile-menu" class="dl-menuwrapper visible-xs visible-sm">
 								<button class="dl-trigger"><i class="iconfont-reorder round-icon"></i></button>
-	
+
 							</div>
 							<!-- // MOBILE MENU -->
-	
+
 						</nav>
 						<!-- // SITE NAVIGATION MENU -->
 					</div>
@@ -453,7 +512,8 @@
 									<div class="widget-content">
 										<div class="center-xs">
 											<div class="ads">
-												<a href="#"> <img src="/BuyGo/front_end/img/common/demo/images-footer.jpg"
+												<a href="#"> <img
+														src="/BuyGo/front_end/img/common/demo/images-footer.jpg"
 														alt="" />
 												</a>
 											</div>
@@ -612,6 +672,8 @@
 			$("#unusedBtn").removeClass("btn-success").addClass("btn-primary");
 		}
 	</script>
+
+	<script src="opa/cart/js/opaAddToCart.js"></script>
 </body>
 
 </html>
