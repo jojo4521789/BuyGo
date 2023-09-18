@@ -7,6 +7,7 @@
 
 <head>
 	<meta charset="UTF-8" />
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.0/dist/sweetalert2.all.min.js"></script>
 	<title>BuyGo - 我的帳戶 - 我的文章</title>
 	<style>
 		/* Reset CSS */
@@ -311,7 +312,7 @@
 			max-height: 20px;
 		}
 
-		ul.user-menu > li > a {
+		ul.user-menu>li>a {
 			color: #ef7700;
 			font-weight: bold;
 			font-size: 25px;
@@ -364,7 +365,7 @@
 									<a href="javascript:void(0);" id="social-icons">
 										<i class="iconfont-share round-icon"></i>
 									</a>
-	
+
 									<div id="sub-social" class="sub-header">
 										<ul class="social-list unstyled text-center">
 											<li><a href="#"><i class="iconfont-facebook round-icon"></i></a></li>
@@ -381,11 +382,12 @@
 									<a href="javascript:void(0);" id="total-cart">
 										<i class="iconfont-shopping-cart round-icon"></i>
 									</a>
-	
+
 									<div id="sub-cart" class="sub-header">
 										<div class="cart-header">
 											<span>Your cart is currently empty.</span>
-											<small><a href="/BuyGo/front_end/pages/member/opa/cart/cart.html">(See All)</a></small>
+											<small><a href="/BuyGo/front_end/pages/member/opa/cart/cart.html">(See
+													All)</a></small>
 										</div>
 										<!-- <ul class="cart-items product-medialist unstyled clearfix"></ul> -->
 										<ul class="s-cart-items product-medialist unstyled clearfix"></ul>
@@ -410,7 +412,7 @@
 						</div>
 					</div>
 				</div>
-	
+
 				<!-- ADD TO CART MESSAGE -->
 				<div class="cart-notification">
 					<ul class="unstyled"></ul>
@@ -425,7 +427,7 @@
 						<!-- CURRENCY / LANGUAGE / USER MENU -->
 						<div class="actions">
 							<div class="center-xs">
-	
+
 							</div>
 							<div class="clearfix"></div><br>
 							<!-- USER RELATED MENU -->
@@ -470,14 +472,14 @@
 									<a href="/BuyGo/front_end/pages/Articles.html">論壇</a>
 								</li>
 							</ul>
-	
+
 							<!-- MOBILE MENU -->
 							<div id="mobile-menu" class="dl-menuwrapper visible-xs visible-sm">
 								<button class="dl-trigger"><i class="iconfont-reorder round-icon"></i></button>
-	
+
 							</div>
 							<!-- // MOBILE MENU -->
-	
+
 						</nav>
 						<!-- // SITE NAVIGATION MENU -->
 					</div>
@@ -511,11 +513,12 @@
 						<aside class="col-xs-12 col-sm-4 col-md-3">
 							<section class="side-section">
 								<h3 class="uppercase text-bold"><span class="text-xs">我的帳戶</span></h3>
-								
+
 								<ul class="nav nav-tabs nav-stacked">
 									<li><a href="/BuyGo/front_end/pages/member/EditMember.html">個人資料</a></li>
 									<li><a href="/BuyGo/front_end/pages/member/pa/order/ListOrders.html">訂單追蹤</a></li>
-									<li><a href="/BuyGo/front_end/pages/member/pa/req/MemberAllPaReq.html">一般代購委託單查詢</a></li>
+									<li><a href="/BuyGo/front_end/pages/member/pa/req/MemberAllPaReq.html">一般代購委託單查詢</a>
+									</li>
 									<li><a href="/BuyGo/front_end/pages/member/opa/add_request.html">官方平台委託單申請</a></li>
 									<li><a href="/BuyGo/front_end/pages/member/opa/request.html">官方平台委託單瀏覽</a></li>
 									<li><a href="/BuyGo/front_end/pages/member/mycoupon.html">優惠券</a></li>
@@ -549,8 +552,7 @@
 						<div class="m-t-lg clearfix">
 							<div class="row">
 								<div class="col-xs-12 col-sm-6" style="width: 74%;">
-									<h3 class="uppercase text-bold"><span class="text-xs">我的文章 <i
-												class="fas fa-newspaper"></i></span></h3>
+									<h3 class="uppercase text-bold"><span class="text-xs">我的文章 </span></h3>
 									<!--我的文章列表-->
 
 									<table style="width: 100%;">
@@ -647,7 +649,8 @@
 									<div class="widget-content">
 										<div class="center-xs">
 											<div class="ads">
-												<a href="#"> <img src="/BuyGo/front_end/img/common/demo/images-footer.jpg"
+												<a href="#"> <img
+														src="/BuyGo/front_end/img/common/demo/images-footer.jpg"
 														alt="" />
 												</a>
 											</div>
@@ -707,7 +710,7 @@
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<script src="https://kit.fontawesome.com/f8d426f7f0.js" crossorigin="anonymous"></script>
 
-	<script src="/BuyGo/front_end/js/login.js"></script>
+	<script src="../js/login.js"></script>
 	<script>
 		checkLoginStatusShowMemberAcct(); // 檢查客戶帳號是否登入，修改頁面右上方Log In/Log Out按鈕，顯示登入者帳號名稱
 		const ForumArticle_el = $("#articleList");
@@ -722,11 +725,9 @@
 			})
 				.then(response => {
 					if (response.status === 401) { // 客戶未登入，執行頁面重定向到登入頁
-						alert('帳號未登入，將導轉至登入頁面');
-						window.location.href = '/BuyGo/front_end/pages/member/login.html'; // 登入頁面url
+						notLoggedInAction();
 					} else if (response.ok) { // 通常 200
-						// 請求成功，顯示燈箱
-						//notLoggedInAction();
+
 						return response.json();
 					} else {
 						alert("錯誤狀態:" + response.status);
@@ -791,6 +792,7 @@
 					// 從表格中刪除對應行
 					const row = $(this).closest("tr");
 					row.remove();
+					location.reload();
 				});
 
 				// 取消刪除按鈕點擊事件

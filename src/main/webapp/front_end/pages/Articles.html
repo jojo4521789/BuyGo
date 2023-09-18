@@ -7,10 +7,11 @@
 
 <head>
 	<meta charset="UTF-8" />
-    <title>BuyGo - 論壇</title>
-    <meta name="description" content="" />
-    <meta name="keywords" content="" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.0/dist/sweetalert2.all.min.js"></script>
+	<title>BuyGo - 論壇</title>
+	<meta name="description" content="" />
+	<meta name="keywords" content="" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 	<style>
 		.logo img {
@@ -137,7 +138,7 @@
 
 		/* 收藏按鈕 */
 		.button.fa-regular.fa-star {
-			color: #000000;
+			color: orangered;
 			/* 收藏按鈕的顏色 */
 		}
 
@@ -145,7 +146,7 @@
 		.button.comment {
 			background-color: transparent;
 			/* 留言按鈕的背景颜色 */
-			color: #000000;
+			color: blue;
 			/* 留言按鈕的文字颜色 */
 			padding: 5px 15px;
 			/* 增加水平内边距，使按钮更大 */
@@ -263,6 +264,12 @@
 			overflow-y: auto;
 			/* 添加垂直滚动条 */
 		}
+
+		.article-date,
+		.article-na {
+			display: inline;
+			margin-right: 20px;
+		}
 	</style>
 	<meta charset="UTF-8" />
 	<title>GFashion - Responsive e-commerce HTML Template</title>
@@ -362,7 +369,8 @@
 									<div id="sub-cart" class="sub-header">
 										<div class="cart-header">
 											<span>Your cart is currently empty.</span>
-											<small><a href="/BuyGo/front_end/pages/member/opa/cart/cart.html">(See All)</a></small>
+											<small><a href="/BuyGo/front_end/pages/member/opa/cart/cart.html">(See
+													All)</a></small>
 										</div>
 										<!-- <ul class="cart-items product-medialist unstyled clearfix"></ul> -->
 										<ul class="s-cart-items product-medialist unstyled clearfix"></ul>
@@ -465,16 +473,16 @@
 		<!-- // SITE HEADER -->
 
 		<!-- BREADCRUMB -->
-        <div class="breadcrumb-container">
-            <div class="container">
-                <div class="relative">
-                    <ul class="bc push-up unstyled clearfix">
-                        <li><a href="/BuyGo/front_end/index.html">首頁</a></li>
-                        <li class="active">論壇</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
+		<div class="breadcrumb-container">
+			<div class="container">
+				<div class="relative">
+					<ul class="bc push-up unstyled clearfix">
+						<li><a href="/BuyGo/front_end/index.html">首頁</a></li>
+						<li class="active">論壇</li>
+					</ul>
+				</div>
+			</div>
+		</div>
 		<!-- // BREADCRUMB -->
 
 		<!-- SITE MAIN CONTENT -->
@@ -623,7 +631,7 @@
 	<!-- Essential Javascripts -->
 	<script src="../js/common/minified.js"></script>
 	<!-- // Essential Javascripts -->
-    <script src="/BuyGo/front_end/js/login.js"></script>
+	<script src="../js/login.js"></script>
 	<script>
 		checkLoginStatusShowMemberAcct(); // 檢查客戶帳號是否登入，修改頁面右上方Log In/Log Out按鈕，顯示登入者帳號名稱
 		//==========================將資料庫所有論壇文章(狀態0),顯示出來==================================
@@ -654,17 +662,19 @@
 					articlePublish,
 					articleUpdate,
 					articleLike,
-					articleDislike
+					articleDislike,
+					memberAcct
 				} = forum;
 				// IstMsg.forEach(perIstMsg => {
 				// 	const { content } = perIstMsg;
 				// })
-				const IstMsg = forum.lstMsg;
+
 				//const IstMsgContent = IstMsg.map(msg => msg.content,msg => msg.member).join(', ');//留言內容相應數據的陣列
 				// const IstMsgmessageTime = IstMsg.map(msg => msg.messageTime).join('');//留言會員編號相應數據的陣列
 				// const IstMsgmessageTime_el = new Date(IstMsgmessageTime).toLocaleString();
 				//const IstMsgmessageTime = IstMsg.map(msg => new Date(msg.messageTime).toLocaleString()).join('');
 
+				const IstMsg = forum.lstMsg;
 				const IstMsgContent =
 					IstMsg.map(msg =>
 						` 
@@ -673,6 +683,25 @@
 					<p>${new Date(msg.messageTime).toLocaleString()}</p>
 					`
 					).join('<br>');
+
+
+
+					const members = forum.members;
+					const membersContent =
+					members.map(msg =>
+						` 
+						<p>留言者：${msg.memberNo}</p>
+					<p>${msg.memberAcct}</p>
+					`
+					).join('<br>');
+					console.log(membersContent);
+
+
+
+
+
+
+
 
 
 				// console.log(IstMsgmember);
@@ -686,18 +715,19 @@
 		<h2 id = "idxx" class="article-no hidden">${articleNo}</h2>
       	<h2 class="article-title">${articleTitle}</h2>
       	<p class="article-date">發布日期：${formattedPublishDate}</p>
+		<p class="article-na">發文者：${memberAcct}</p>
       	<p class="article-content">${articleContent}</p>
       	<div class="buttons">
         <button class="button fa-regular fa-thumbs-up hidden">${articleLike !== undefined ? articleLike : ""}</button>
         <button class="button fa-regular fa-thumbs-down hidden">${articleDislike !== undefined ? articleDislike : ""}</button>
-        <button class="button fa-regular fa-star" style="color: #000000;"></button>
+        <button class="button fa-regular fa-star">收藏</button>
 		<button class="button comment" id="commentButton1"><i class="fas fa-comment"></i> 留言</button>
 
         <button class="button report"><i class="fas fa-flag"></i> 檢舉</button>
       	</div>
      	 <div class="comment-box">
         	<input id="commentText" class="st02" data-view="na03" type="text" placeholder="留言..."></input>
-			<button id="submitComment" class="button post-comment" type="submit"><i class="fas fa-paper-plane"></i></button>
+			<button id="submitComment" class="button post-comment"><i class="fas fa-paper-plane"></i></button>
 
      		 </div>
 			  <div class="comment_el" id="#articleMsgList" style="display: none;">
@@ -740,52 +770,54 @@
 								articleNo: articleNo
 							})
 						})
-							.then(response => {
-								if (response.status === 401) { // 客戶未登入，執行頁面重定向到登入頁
-									alert('帳號未登入，將導轉至登入頁面');
-									window.location.href = '/BuyGo/front_end/pages/member/login.html'; // 登入頁面url
-								} else if (response.ok) { // 通常 200
-									// 請求成功，顯示燈箱
-									//notLoggedInAction();
-									return response.json();
-								} else {
-									alert("錯誤狀態:" + response.status);
-									return;
+							.then(data => {
+								// 在這裡處理後端返回的數據
+								console.log(data);
+								if (data) {
+									// 添加 SweetAlert 成功消息
+									Swal.fire({
+										icon: 'success',
+										title: '成功',
+										text: '文章已成功收藏',
+									});
+
 								}
 							})
-							.then(data => processForumArticles(data))
-							.catch(error => console.log(data));
-
+							.catch(error => {
+								console.error("錯誤:", error);
+								// 添加 SweetAlert 错误消息
+								Swal.fire({
+									icon: 'error',
+									title: '錯誤',
+									text: '已收藏過文章',
+								});
+							});
 					}
-					$(document).ready(() => {
-						fetchForumArticles();
-					});
 
-
-					// 調用文章收藏函數
+					// 调用文章收藏函数
 					articleCollLis(articleNo);
-
-					if (this.style.color === "black") {
-						this.style.color = "#0000FF"; // 更改為藍色（或您喜歡的顏色）
-					} else {
-						this.style.color = "black"; // 變回黑色
-					}
 				});
 			});
+
+
 
 			//=========================留言新增(按鈕)=======================================================================
 
 
 			// 提交评论按钮的点击事件处理程序
-			$(".button.post-comment").on('click', function () {
+			$(".post-comment").on('click', function () {
 				const commentText = $(this).closest(".article-item").find("#commentText").val(); // 获取输入框中的文本
 				const articleNo = $(this).closest(".article-item").find(".article-no").text(); // 获取文章编号
 				console.log("留言文字: " + commentText);
 				console.log("文章編號: " + articleNo);
 
 				if (commentText === "") {
-					// 如果评论文本为空，显示燈箱提示
-					$("#commentAlert").show();
+					// 如果评论文本为空，显示SweetAlert提示
+					Swal.fire({
+						icon: 'error',
+						title: '錯誤',
+						text: '請輸入留言',
+					});
 					return;
 				}
 
@@ -806,12 +838,9 @@
 					//後端回傳到前端
 					.then(response => {
 						if (response.status === 401) { // 客戶未登入，執行頁面重定向到登入頁
-							alert('帳號未登入，將導轉至登入頁面');
-							window.location.href = '/BuyGo/front_end/pages/member/login.html'; // 登入頁面url
+							notLoggedInAction();
 						} else if (response.ok) { // 通常 200
 							$(this).closest(".article-item").find("#commentText").val("");
-							// 請求成功，顯示燈箱
-							notLoggedInAction();
 							return response.json();
 						} else {
 							alert("錯誤狀態:" + response.status);
@@ -819,9 +848,16 @@
 						}
 					})
 					.then(data => {
+
 						// 在這裡處理後端返回的數據
 						console.log(data);
-						location.reload();
+						if (data) {
+							Swal.fire({
+								icon: 'success',
+								title: '成功',
+								text: '留言新增成功',
+							});
+						}
 
 					})
 					.catch(error => {
@@ -829,6 +865,7 @@
 					});
 
 			});
+			//location.reload();
 
 			// 关闭燈箱提示的按钮点击事件
 			$("#closeCommentAlert").on('click', function () {
@@ -856,6 +893,7 @@
 					articleMsgList.show();
 				} else {
 					articleMsgList.hide();
+
 				}
 			});
 
@@ -891,11 +929,9 @@
 							//後端回傳到前端
 							.then(response => {
 								if (response.status === 401) { // 客戶未登入，執行頁面重定向到登入頁
-									alert('帳號未登入，將導轉至登入頁面');
-									window.location.href = '/BuyGo/front_end/pages/member/login.html'; // 登入頁面url
-								} else if (response.ok) { // 通常 200
-									// 請求成功，顯示燈箱
 									notLoggedInAction();
+								} else if (response.ok) { // 通常 200
+
 									return response.json();
 								} else {
 									alert("錯誤狀態:" + response.status);
@@ -903,8 +939,19 @@
 								}
 							})
 							.then(data => {
+
 								// 在這裡處理後端返回的數據
 								console.log(data);
+								if (data) {
+
+									Swal.fire({
+										icon: 'success',
+										title: '成功',
+										text: '檢舉已成功提交',
+									});
+
+								}
+
 							})
 							.catch(error => {
 								console.error("錯誤:", error);

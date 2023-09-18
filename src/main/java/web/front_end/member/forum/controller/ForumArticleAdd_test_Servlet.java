@@ -23,10 +23,7 @@ public class ForumArticleAdd_test_Servlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		Integer memberNo = (Integer) (session.getAttribute("memberNo"));
 
-		// 測試用"登入功能加進來"(記得刪)
-		if (memberNo == null) {
-			memberNo = 2;
-		}
+		
 		
 //		ForumArticle articleMsg = json2Pojo(request, ForumArticle.class);
 //		Integer articleNo = articleMsg.getArticleNo();

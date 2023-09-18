@@ -28,10 +28,6 @@ public class ForumArticleLoadByMemberNoServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		Integer memberNo = (Integer) (session.getAttribute("memberNo"));
 		
-		//測試用"登入功能加進來"(記得刪)
-		if(memberNo == null) {
-			memberNo = 2;
-		}
 		
 		List<ForumArticle> forumArticleslList = SERVICE.loadForumArticleBymemberNo(memberNo);
 		System.out.println("memberNo：" + memberNo);
